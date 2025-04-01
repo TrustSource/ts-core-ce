@@ -1,20 +1,20 @@
 [![Gitter](https://badges.gitter.im/TrustSource/community.svg)](https://gitter.im/TrustSource/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 # ts-core - the heart of TrustSource
-Core of TrustSource, managing most of the service functionality, especially flow logic. See https://support.trustsource.io for more details.
+This is the core of TrustSource, which is organising most of the service functionality, especially UI and flow logic. See https://support.trustsource.io for more details.  
 
 ## About
-TrustSource is an open source solution for implementing an [OpenChain](https://www.openchianproject.org) compliant open source compliance process. It currently is availabe as source code (this repo) for an on-premises setup as self managed installation or as [managed service](https://app.trustsource.io). In a few weeks we also will provide a hosted version as an AWS marketplace offering. Learn more about the different options [here](https://www.trustsource.io/editions). It is also possible to obtain a support contract or [request consulting](https://www.eacg.de/contact).
+TrustSource is an open source solution for managing Software Supply Chain Security and Software Compliance like [OpenChain](https://www.openchianproject.org) compliant processes. It currently is availabe as source code (this repo) for an on-premises setup as self managed installation or as [managed service](https://app.trustsource.io). We plan to also provide a hosted version as an AWS or Azure marketplace offering. Learn more about the different options [here](https://www.trustsource.io/editions). It is also possible to obtain a support contract or [request consulting](https://www.eacg.de/contact).
 
 Trainings and further materials can be found at the publicly accessible [TrustSource Knowledgebase](https://support.trustsource.io). 
 
 To become part of the TrustSource eco-system feel free to reach out to the TrustSource Team at ecosys @ trustsource.io.
 
 ## Getting started
-For over 10 years meanwhile we are involved with the topic of opne source compliance. Since then a lot has changed and we learned a lot. However, the complexity remains high. To simplfy the entry, we have provided some materials to support your compliance endeavour. We would suggest the following sequence:
+For over 10 years meanwhile we are involved with the topics of open source compliance, software security and test automation. Since then the landscape has evolved and we have made many experiences. However, the complexity remains high. To simplfy the entry, we have provided some materials to support your compliance endeavour. We would suggest the following sequence:
   1. [Learn about OS compliance](https://www.slideshare.net/JanThielscher/open-source-governance-erfahrungen) - (a presentation held by [Jan](https://www.linkedin.com/in/jthielscher/) to the opensource workgroup of the Bitkom 2018)
-  2. Setup TrustSource (next topic)
-  3. Integrate TrustSource with your [CI/CD chain](https://support.trustsource.io/integrations) 
+  2. Setup TrustSource (see below)
+  3. Integrate TrustSource with your [CI/CD chain](https://trustsource.github.io/ts-scan) 
 
 
 ## Setup of TrustSource
