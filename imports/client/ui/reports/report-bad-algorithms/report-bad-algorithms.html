@@ -1,0 +1,144 @@
+<template name="reportBadAlgorithms">
+
+  {{#pageHeader}}
+    <div class="reports-header">
+      <div class="reports-header-left">
+        <h2 class="font-light m-b-xs">All bad crypto overview</h2>
+        <small>Overview of crypto policy violations</small>
+      </div>
+      <div class="reports-header-actions">
+        <select class="form-control current-project select2">
+          <option value="ALL" selected="{{isActivePortfolio}}">Whole portfolio</option>
+          {{#each projectList}}
+            <option value="{{_id}}" selected="{{isActiveProject}}">{{name}}</option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+  {{/pageHeader}}
+
+  <div class="content">
+    {{#if getPortfolioReport}}
+      <div class="text-right inner-b-10">
+        <button class="btn btn-primary btn-xs export-as-pdf" type="button">
+          <span class="fa fa-file-pdf-o" aria-hidden="true"></span> Export as PDF
+        </button>
+      </div>
+      {{#with stats}}
+        <div class="row">
+          <div class="col-sm-2">
+            <div class="panel panel-default text-center">
+              <p class="h2"><strong>{{modules}}</strong></p>
+              <p class="h5">modules</p>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="panel panel-default text-center">
+              <p class="h2"><strong>{{componentWithAlgorithms}}</strong></p>
+              <p class="h5">components with algorithms</p>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="panel panel-default text-center">
+              <p class="h2"><strong>{{detectedAlgorithms}}</strong></p>
+              <p class="h5">detected algorithms</p>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="panel panel-info text-center">
+              <p class="h2"><strong>{{managedAlgorithms}}</strong></p>
+              <p class="h5">managed algorithms</p>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="panel panel-info text-center">
+              <p class="h2"><strong>{{inUseAlgorithms}}</strong></p>
+              <p class="h5">algorithms in use</p>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="panel panel-success text-center">
+              <p class="h2"><strong>{{coverage}}%</strong></p>
+              <p class="h5">coverage</p>
+            </div>
+          </div>
+        </div>
+      {{/with}}
+      {{#with getPortfolioReportStatus}}
+        {{#if modules.length}}
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h5>Used modules</h5>
+            </div>
+            <div class="panel-body">
+              {{#each modules}}
+                {{> moduleAnalysisMetaLink module=this}}
+              {{/each}}
+            </div>
+          </div>
+        {{/if}}
+      {{/with}}
+      <div class="ts-panel obligation-list">
+        {{#each (getPortfolioReportStatus.list)}}
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-sm-4 text-left">
+                <h5 style="word-wrap: break-word;" class="m-b-sm">{{project.name}}</h5>
+                <div style="font-size: 0.7em;">
+                  <p class="m-b-xs">
+                    <a href="{{pathFor route=actionRoute.route data=actionRoute.params query=actionRoute.query}}"
+                       target="_blank">
+                      <span class="fa fa-external-link"></span> View components and modules
+                    </a>
+                  </p>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div>
+                  <p class="m-b-sm">
+                    <a href class="send_alert"
+                       target="_blank">
+                      <span class="fa fa-bell-o"></span> Send alert to project manager
+                    </a>
+                  </p>
+                  <p class="m-b-sm">
+                    {{> algorithmsIssuesLink description=getProblemDescription projectId=projectId repository=getRepository githubLink=githubLink}}
+                  </p>
+                </div>
+              </div>
+              <div class="col-sm-5">
+                {{#each algorithms}}
+                  <span class="label label-default">{{#if isDenied}}
+                    <div class="label label-danger blacklisted-algorithm-label" title="Algorithm is Blacklisted by Company policy">B</div>
+                  {{/if}} {{this}}</span>
+                {{/each}}
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    {{/if}}
+    {{#if selectProject}}
+      {{#panel}}
+        <div class="text-info">
+          <i class="fa fa-check-circle-o"></i> Please select the project to run a report on the upper right
+        </div>
+      {{/panel}}
+    {{/if}}
+    {{#if requestInProgress}}
+      {{#panel}}
+        <div class="text-primary">
+          <i class="fa fa-spinner fa-spin"></i> Loading report data for project {{getProjectName}}, please wait...
+        </div>
+      {{/panel}}
+    {{/if}}
+    {{#if noDataInProject}}
+      <div class="text-right inner-b-10">
+        <button class="btn btn-primary btn-xs export-as-pdf" type="button">
+          <span class="fa fa-file-pdf-o" aria-hidden="true"></span> Export as PDF
+        </button>
+      </div>
+      {{> reactiveTableNoData}}
+    {{/if}}
+  </div>
+</template>

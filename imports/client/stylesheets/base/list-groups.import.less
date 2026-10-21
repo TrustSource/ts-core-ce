@@ -1,0 +1,23 @@
+// Stacked list rows (dashboard history panel): full-width rows split by a hairline
+.list {
+  .list-item-container {
+    float: left;
+  }
+
+  .list-item {
+    position: relative;
+    float: left;
+    width: 100%;
+    overflow-x: hidden;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid @ts-border;
+  }
+}
+
+// No divider above the first row
+.list-item-container {
+  div:first-child {
+    border-top: none;
+  }
+}

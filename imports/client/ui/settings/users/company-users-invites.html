@@ -1,0 +1,30 @@
+<template name="companyUsersInvite">
+  {{#panel title="Invite your colleagues"}}
+    <form class="form-horizontal invite">
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="invite-name">Name:</label>
+        <div class="col-sm-4 controls {{nameErrorClass}}">
+          <input type="text" name="name" id="invite-name" placeholder="your colleague's name" class="form-control"
+                 aria-invalid="{{nameInvalid}}" aria-describedby="invite-name-error"/>
+          <span class="help-block" id="invite-name-error">{{nameError}}</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="email">E-Mail:</label>
+        <div class="col-sm-4 controls">
+          <input type="email" name="email" placeholder="e.g. your-mail@example.com" class="form-control"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-4">
+          <button type="submit" class="btn btn-primary invite"><span
+              class="fa fa-envelope-o"></span>
+            Invite
+          </button>
+        </div>
+      </div>
+    </form>
+  {{/panel}}
+</template>

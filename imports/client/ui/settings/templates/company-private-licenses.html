@@ -1,0 +1,87 @@
+<template name="companyPrivateLicenses">
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">Private Licenses</h2>
+        <small>Configure Private Licenses for your company</small>
+      </div>
+      <div class="settings-header-actions">
+        {{> companyPrivateLicensesCreate}}
+        {{> companyPrivateLicensesUsage}}
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content">
+    {{#if isInRole 'account_admin,manager,compliance_manager' companyId}}
+      {{#panel title="Information about Private Licenses"}}
+        <p>
+          <i class="fa fa-info-circle"></i> In this section you may define licenses your organization created by yourself.
+          Components associated with this license key will not be evaluated for legal check and receive green status from legal perspective.
+        </p>
+        <p>
+          <b>PLEASE NOTE:</b> This does not refrain from composing your packages carefully.
+          In case you are not sure about the contents of your package, you should assess it separately.
+        </p>
+      {{/panel}}
+      {{#panel title="Default Root-Component License"}}
+        <p>
+          <i class="fa fa-info-circle"></i> This license is applied automatically to the root component of newly scanned modules
+          that have no license selected yet. Users may override it per-module from the dependency view or scan detail.
+        </p>
+        <div class="form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="defaultRootComponentLicense">Default license</label>
+            <div class="col-sm-5">
+              <select class="form-control" id="defaultRootComponentLicense">
+                <option value="">- none -</option>
+                {{#each getPrivateLicenses}}
+                  <option value="{{this.key}}" selected="{{isDefaultRootLicense this.key}}">{{this.key}}{{#if this.description}} - {{this.description}}{{/if}}</option>
+                {{/each}}
+              </select>
+            </div>
+            <div class="col-sm-5">
+              {{#unless getPrivateLicensesTotal}}
+                <p class="form-control-static text-muted"><i>Define a private license below to enable this option.</i></p>
+              {{/unless}}
+            </div>
+          </div>
+        </div>
+      {{/panel}}
+      {{#panel title="Private Licenses"}}
+        <div class="form-horizontal">
+          {{#each getPrivateLicenses}}
+            <div class="form-group">
+
+              <label class="col-sm-1 control-label">Key&nbsp;{{this.index}}:</label>
+
+              <div class="col-sm-3 controls">
+                <p class="form-control-static">{{this.key}}</p>
+              </div>
+              <div class="col-sm-3 controls">
+                <p class="form-control-static"><i>{{this.description}}</i></p>
+              </div>
+              <div class="col-sm-5 controls">
+                <button class="btn btn-info btn-sm copy-license-key inner-r-10 vat" type="button" data-clipboard-text="{{this.key}}">
+                  <span class="fa fa-clipboard"></span>
+                </button>
+                <button class="btn btn-danger2 btn-sm delete-license inner-r-10 vat" type="button">
+                  <span class="fa fa-trash-o"></span>
+                  Delete
+                </button>
+                {{#if this.author}}
+                  <div class="inline-block">
+                    <span class="label label-default label-lg">Created {{getTime this.created}}</span> <br>
+                    <span class="label label-default label-lg">by {{this.author}}</span>
+                  </div>
+                {{/if}}
+              </div>
+            </div>
+          {{/each}}
+          {{#unless getPrivateLicensesTotal}}
+            {{> reactiveTableNoData}}
+          {{/unless}}
+        </div>
+      {{/panel}}
+    {{/if}}
+  </div>
+</template>

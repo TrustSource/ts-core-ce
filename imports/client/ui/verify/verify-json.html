@@ -1,0 +1,49 @@
+<template name="verifyJson">
+  {{> pageHeader desc=pageDescription title="Verification" }}
+  <div class="content">
+    <div class="panel">
+      <form id="verifyForm" class="panel-body">
+        <div class="form-group">
+          <textarea rows="12" name="inputBody" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary" type="submit">Verify</button>
+        </div>
+      </form>
+    </div>
+    {{#if requestInProgress}}
+        <div style="min-height: 200px">
+          {{>loadingSplash}}
+        </div>
+    {{else}}
+      {{#if checkResults}}
+        {{#with checkResults}}
+          {{#unless error}}
+            {{#if isOK}}
+              <div class="alert alert-success inner-b-20">
+                <p><i class="fa fa-info-circle"></i> <strong>Verified successfully</strong></p>
+                <p>
+                  {{message}}
+                </p>
+              </div>
+            {{else}}
+              <div class="alert alert-warning inner-b-20">
+                <p><i class="fa fa-warning"></i> <strong>Verification error</strong></p>
+                <p>
+                  {{message}}
+                </p>
+              </div>
+            {{/if}}
+          {{else}}
+            <div class="alert alert-danger inner-b-20">
+              <p><i class="fa fa-warning"></i> <strong>Error</strong></p>
+              <p>
+                {{error}}
+              </p>
+            </div>
+          {{/unless}}
+        {{/with}}
+      {{/if}}
+    {{/if}}
+  </div>
+</template>

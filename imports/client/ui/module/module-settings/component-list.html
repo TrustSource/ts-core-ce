@@ -1,0 +1,96 @@
+<template name="componentlist">
+  <!--{{> Template.contentBlock}}-->
+
+  <div class="ts-panel">
+    <div class="panel-heading">
+      {{> panelTools }}
+      {{title}}
+
+      {{#if tooltip}}
+        <a role="button" data-toggle="popover" data-placement="top" data-container="body" data-html="true"
+           data-title={{tooltip.title}} data-content={{tooltip.content}} >
+          <i class="fa fa-question-circle"></i>
+        </a>
+      {{/if}}
+    </div>
+    <div class="panel-body">
+      {{#unless readonly}}
+        {{#autoForm schema=this.schema id=this.id type="normal" doc=getDataForForm}}
+          <div class="row">
+            <fieldset>
+              <div class="col-sm-4">{{> afQuickField name='key' placeholder='mvn:groupId:artifact'}}</div>
+              <div class="col-sm-2">{{> afQuickField name='version' placeholder='1.0.*'}}</div>
+              <div class="col-sm-6">{{> afQuickField name='comment' placeholder='your comment'}}</div>
+            </fieldset>
+          </div>
+          <div class="text-danger" id="form-messages">{{getErrorMsg}}</div>
+          <button type="submit" class="btn btn-primary">{{getSubmitLabel}}</button>
+          {{#if getCancelRequired}}
+            <button id="cancel" class="btn btn-default">Cancel</button>
+            <button id="delete" class="btn btn-danger2">
+              {{#if isInRole 'compliance_manager' companyId}}
+                {{#if isNotApproved}}
+                  Reject
+                {{else}}
+                  Remove
+                {{/if}}
+              {{else}}
+                Remove
+              {{/if}}
+            </button>
+            {{#if isInRole 'compliance_manager' companyId}}
+              {{#if isNotApproved}}
+                <button type="button" class="btn btn-success approve-item">Approve</button>
+              {{/if}}
+            {{/if}}
+          {{/if}}
+          {{#if getComponents}}
+            <div class="pull-right">
+              <small>Select a table row to edit component</small>
+            </div>
+          {{/if}}
+        {{/autoForm}}
+      {{/unless}}
+      <div class="row">&nbsp;</div>
+      {{#if getComponents}}
+        <div class="table-responsive ">
+          <table class="table table-condensed table-striped {{this.id}}">
+            <thead>
+            <tr>
+              <th>Key</th>
+              <th>Version</th>
+              <th>Comment</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each getComponents}}
+              <tr class="clickable-row select-component {{isNotApproved}} {{isFromProject}} {{isFromUser}} {{isFromCompany}}"
+                  id="select-{{index}}">
+                <td>{{key}}</td>
+                <td>{{version}}</td>
+                <td>{{comment}}
+                  {{#if isFromProject}}
+                    <a href="{{pathFor route='projectSettings' data=getProjectOptions}}"
+                       target="_blank" class="label label-info pull-right">in Project</a>
+                  {{/if}}
+                  {{#if isFromUser}}
+                    <a href="{{pathFor route='profileLists'}}" target="_blank"
+                       class="label label-info pull-right">in User</a>
+                  {{/if}}
+                  {{#if isFromCompany}}
+                    <a href="{{pathFor route='companyComponentLists'}}" target="_blank"
+                       class="label label-info pull-right">in Company</a>
+                  {{/if}}
+                  {{#if isNotApproved}}
+                    <span class="label label-danger pull-right">Not approved</span>
+                  {{/if}}
+                </td>
+              </tr>
+            {{/each}}
+            </tbody>
+          </table>
+        </div>
+      {{/if}}
+    </div>
+  </div>
+</template>

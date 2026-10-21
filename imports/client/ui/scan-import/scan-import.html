@@ -1,0 +1,99 @@
+<template name="scanImport">
+  {{#pageHeader}}
+    <div class="v3-header">
+      <div class="v3-header-left">
+        <h2 class="font-light m-b-none">Import Scans</h2>
+        <small class="text-muted">Upload an SPDX or CycloneDX scan file into a project</small>
+      </div>
+    </div>
+  {{/pageHeader}}
+
+  <div class="content scanImportContent">
+    <div class="ts-panel">
+      <div class="panel-body">
+        <form id="scanImportForm" enctype="multipart/form-data" method="post" autocomplete="off">
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">Project *</span>
+                  <select id="currentProject" class="form-control select2" name="currentProject">
+                    <option value="__NEW__" selected>+ Create new project</option>
+                    {{#each projects}}
+                      <option value="{{_id}}">{{name}}</option>
+                    {{/each}}
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="checkbox">
+            <span class="ios-toggle-label  ios-toggle-label-dark">SPDX</span>
+            <label style="padding-left: 0px;">
+              <input type="checkbox" id="changeType" name="changeType" value="true"
+                     class="ios-toggle always-on" checked="{{isTypeCyclonedx}}">
+              <span for="changeType" class="checkbox-label" data-off="" data-on=""
+                    style="margin-bottom: 0px;"></span>
+            </label>
+            <span class="ios-toggle-label  ios-toggle-label-dark">CycloneDX</span>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-xs-12">
+              <label for="file">File</label>
+              <div class="input-group input-group-file">
+                <span class="input-group-btn">
+                  <span class="btn btn-default btn-file">
+                    Browse...
+                    <input type="file" name="file" id="file" accept="{{fileAccept}}">
+                  </span>
+                </span>
+                <input type="text" name="filename" readonly="readonly" placeholder="file name" class="form-control">
+              </div>
+            </div>
+            <div class="form-group col-xs-12">
+              {{#if isTypeCyclonedx}}
+                <span class="help-block small">Specify the CycloneDX JSON file (*.json, *.cdx.json)</span>
+              {{else}}
+                <span class="help-block small">Specify the SPDX file (*.rdf, *.xml, *.json)</span>
+              {{/if}}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">Module name</span>
+                  <input type="text" id="moduleName" name="moduleName" class="form-control"
+                         placeholder="defaults to the file name" maxlength="255" autocomplete="off">
+                </div>
+                <span class="help-block small">
+                  The module the imported components are attached to. Prefilled from the file name -
+                  change it to the component's own name so a later scan or SARIF upload for that
+                  name lands on the same module.
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              {{#if loading}}
+                <button type="button" disabled="disabled" class="btn btn-primary">
+                  <i class="fa fa-spinner fa-spin"></i> Import
+                </button>
+              {{else}}
+                <button type="submit" class="btn btn-primary">
+                  <span class="fa fa-upload"></span> Import
+                </button>
+              {{/if}}
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>

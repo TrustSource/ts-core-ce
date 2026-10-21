@@ -1,0 +1,78 @@
+<template name="componentLakeManager">
+
+  {{> componentLakeHeader}}
+
+  <div class="content component-lake-content">
+
+    <form id="componentLakeManagerForm" class="component-lake-search-form">
+      <div class="component-lake-search-left">
+        <span class="component-lake-bar-icon"><i class="fa fa-filter"></i></span>
+        <div class="form-group">
+          <input type="text" id="componentLakeManagerName" name="name" class="form-control component-lake-manager-input"
+                 placeholder="Name" aria-label="Name" value="{{criterion 'name'}}" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <input type="text" id="componentLakeManagerKey" name="key" class="form-control component-lake-manager-input"
+                 placeholder="Key" aria-label="Key" value="{{criterion 'key'}}" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <select id="componentLakeManagerLanguage" name="language" class="form-control component-lake-criteria-select"
+                  aria-label="Language">
+            <option value="">Any</option>
+            {{#each allowedLanguages}}
+              <option value="{{this}}" selected="{{isSelected 'language' this}}">{{this}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <div class="form-group">
+          <select id="componentLakeManagerRemoved" name="removed" class="form-control component-lake-criteria-select"
+                  aria-label="Status">
+            <option value="">Active</option>
+            <option value="true" selected="{{isSelected 'removed' 'true'}}">Removed</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">
+          <i class="fa fa-search"></i> {{__ 'SearchAction'}}
+        </button>
+        <button type="button" class="btn btn-default component-lake-reset">
+          <i class="fa fa-trash"></i> {{__ 'ResetAction'}}
+        </button>
+      </div>
+      <div class="component-lake-search-right">
+        <span class="component-lake-bar-icon"><i class="fa fa-sort"></i></span>
+        <div class="form-group">
+          <select id="componentLakeManagerSort" name="sort" class="form-control component-lake-sort-select"
+                  aria-label="Sort by">
+            <option value="name" selected="{{isSortedBy 'name'}}">Name</option>
+            <option value="key" selected="{{isSortedBy 'key'}}">Key</option>
+            <option value="language" selected="{{isSortedBy 'language'}}">Language</option>
+            <option value="description" selected="{{isSortedBy 'description'}}">Description</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select id="componentLakeManagerOrder" name="order" class="form-control component-lake-order-select"
+                  aria-label="Sort order">
+            <option value="1" selected="{{isOrderedBy '1'}}">Asc</option>
+            <option value="-1" selected="{{isOrderedBy '-1'}}">Desc</option>
+          </select>
+        </div>
+      </div>
+    </form>
+
+    <div class="component-lake-search-body">
+      {{#if isLoading}}
+        {{> asyncSearchLoading phase=searchPhase}}
+      {{else}}
+        {{#if isError}}
+          {{> asyncSearchError error=searchError}}
+        {{else}}
+          {{#if isReady}}
+            {{> componentLakeResults rows=searchRows}}
+          {{else}}
+            {{> componentLakeSearchPrompt text=(__ 'ComponentManagerSearchPrompt')}}
+          {{/if}}
+        {{/if}}
+      {{/if}}
+    </div>
+  </div>
+</template>

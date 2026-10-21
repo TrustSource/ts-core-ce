@@ -1,0 +1,32 @@
+// Progress bars: flat light track by default, coloured fills inside `.full`
+.progress {
+  display: flex;
+  margin-bottom: 10px;
+  border-radius: 2px;
+}
+
+.progress-bar {
+  color: @ts-text;
+  text-align: center;
+  background-color: @ts-canvas;
+}
+
+// Slim 10px variant (track and fill)
+.progress-small {
+  &,
+  .progress-bar {
+    height: 10px;
+  }
+}
+
+// `.full` wrapper: solid status colours with white labels
+.full {
+  .progress-bar-success { background-color: @color-ok; }
+  .progress-bar-info { background-color: @ts-blue; }
+  .progress-bar-warning { background-color: @color-warnings; }
+  .progress-bar-danger { background-color: @color-violations; }
+
+  .progress-bar {
+    color: @color-white;
+  }
+}

@@ -1,0 +1,89 @@
+<template name="approvesChanges">
+  {{#if counterComponentsTotal}}
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="panel panel-default text-center">
+          <p class="h2"><strong>{{counterComponentsTotal}}</strong></p>
+          <p class="h5">{{__ 'differentComponents'}}</p>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="panel panel-default text-center">
+          <p class="h2"><strong>{{counterModules}}</strong></p>
+          <p class="h5">{{__ 'modules'}}</p>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="panel panel-default text-center">
+          <p class="h2"><strong>{{counterModified}}</strong></p>
+          <p class="h5">{{__ 'modifiedAppearances'}}</p>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="panel panel-default text-center">
+          <p class="h2"><strong>{{counterUndocumentedChanges}}</strong></p>
+          <p class="h5">{{__ 'undocumentedChanges'}}</p>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+  {{#if getProjectComponents}}
+    <div class="ts-panel obligation-list">
+      {{#each getProjectComponents}}
+        <div class="panel-body {{status}}">
+          <div class="row">
+            <div class="col-sm-4 text-left">
+              <h5 style="word-wrap: break-word;">{{key}} ({{versions}})</h5>
+              <small>{{getPluralized 'appearance' countPath}}</small>
+            </div>
+            <div class="col-sm-8">
+              <div style="font-size: 0.7em;margin-top:5px;">
+                {{#each paths}}
+                  <p style="font-weight: bold">
+                    <a href="{{pathFor route=actionRoute.route data=actionRoute.params query=actionRoute.query}}"
+                       target="_blank">
+                      {{path}}
+                      <span class="fa fa-external-link inner-l-5"></span>
+                    </a>
+                  </p>
+                  <p>
+                    {{#if changesUrl}}
+                      {{__ 'ListOfChangesCanBeFound'}} <a class="highlight" target="_blank" href="{{changesUrl}}">{{__ 'here'}}</a>
+                    {{else}}
+                      {{__ 'ChangesUrlHasNotBeenProvided'}}
+                    {{/if}}
+                  </p>
+                  <p class="m-b-md">
+                    {{#if changesText}}
+                      {{__ 'ModificationNotice'}} {{changesText}}
+                    {{else}}
+                      {{__ 'ModificationNoticeHasNot'}}
+                    {{/if}}
+                  </p>
+                {{/each}}
+              </div>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  {{else}}
+    {{#unless noDataInProject}}
+      {{#panel}}
+        <div class="text-primary">
+          <i class="fa fa-spinner fa-spin"></i> {{__ 'LoadingReportData'}}
+        </div>
+      {{/panel}}
+    {{/unless}}
+  {{/if}}
+  {{#if requestInProgress}}
+    {{#panel}}
+        <div class="text-primary">
+          <i class="fa fa-spinner fa-spin"></i> {{__ 'LoadingReportData'}}
+        </div>
+    {{/panel}}
+  {{/if}}
+  {{#if noDataInProject}}
+    {{> reactiveTableNoData}}
+  {{/if}}
+</template>

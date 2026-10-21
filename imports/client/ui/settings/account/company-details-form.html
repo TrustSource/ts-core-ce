@@ -1,0 +1,55 @@
+<template name="companyDetailsForm">
+  {{#panel title="Company details"}}
+    <form class="form-horizontal company-details">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="companyLogoUrl">Company logo url</label>
+            <div class="col-sm-8 controls">
+              <input type="text" id="companyLogoUrl" name="logoUrl" placeholder="https://" class="form-control" value="{{logoUrl}}"/>
+              <small>
+                A PNG or JPEG image. We recommend a logo around 75px wide in horizontal orientation.
+              </small>
+            </div>
+            {{#if logoBase64}}
+              <div class="col-sm-2">
+                <img src="{{logoBase64}}" alt="{{name}}" style="max-width: 75px">
+              </div>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="col-sm-4 control-label" for="companyName">Company name*</label>
+            <div class="col-sm-8 controls">
+              <input type="text" id="companyName" name="companyName" placeholder="Name" class="form-control" value="{{name}}"/>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="col-sm-4 control-label" for="companyEmail">Company email</label>
+            <div class="col-sm-8 controls">
+              <input type="text" id="companyEmail" name="companyEmail" placeholder="Email" class="form-control" value="{{email}}"/>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-8">
+              <button type="submit" class="btn btn-sm btn-primary">
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  {{/panel}}
+</template>

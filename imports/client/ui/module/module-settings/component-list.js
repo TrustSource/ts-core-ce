@@ -1,0 +1,179 @@
+import {Meteor} from 'meteor/meteor';
+import {Template} from 'meteor/templating';
+import {Session} from 'meteor/session';
+import {Router} from 'meteor/vlasky:galvanized-iron-router';
+import {Roles} from 'meteor/alanning:roles';
+import {AutoForm} from 'meteor/aldeed:autoform';
+import {$} from 'meteor/jquery';
+import _ from 'underscore';
+import {ListHelper} from '/imports/client/ui/lib/ListHelper';
+import Projects from '/imports/lib/collections/projects';
+
+const FROM_UPPER = 'from-upper'
+
+Template.componentlist.onRendered(function () {
+  let context = Template.currentData();
+  if(!context || context && !context.id){
+    context = Template.parentData();
+  }
+  const company = Session.get('company')
+  const project = Projects.findOne(Router.current().params.projectId);
+  let requireWhitelist = company && company.requireWhitelist || project && project.requireWhitelist;
+  if (context) {
+    ListHelper.clearSession(context.id);
+    AutoForm.addHooks(context.id, {
+      onSubmit: ListHelper.getOnSubmitHook(['key', 'version'], true, context.userUpdate, requireWhitelist),
+      onError: ListHelper.getOnErrorHook()
+    }, true);
+  }
+});
+
+Template.componentlist.onDestroyed(function () {
+  const context = Template.currentData();
+  if (context) {
+    ListHelper.clearSession(context.id);
+  }
+});
+
+Template.componentlist.helpers({
+  getDataForForm: function () {
+    const selectedIndex = ListHelper.getSelectedIndex(this.id, this.data);
+    // Copy: `index` is form-only and must not be written onto the stored entry.
+    const data = Object.assign({}, this.data && this.data[selectedIndex] || {},
+      {index: selectedIndex});
+    return data;
+  },
+
+  getComponents: function () {
+    const seen = new Set();
+    return _.filter(_.map(this.data || [], function (o, i) {
+      // Copy: `index` is display-only and must not be written onto the stored entry.
+      return ListHelper.withDisplayIndex(o, i);
+    }), function (o) {
+      if (o._id && seen.has(o._id)) return false;
+      if (o._id) seen.add(o._id);
+      return true;
+    });
+  },
+
+  getErrorMsg: function () {
+    return Session.get(this.id + 'ErrorMsg');
+  },
+
+  getSubmitLabel: function () {
+    return ListHelper.getSelectedIndex(this.id, this.data) >= 0 ? 'Update' : 'Add';
+  },
+
+  getCancelRequired: function () {
+    return ListHelper.getSelectedIndex(this.id, this.data) >= 0;
+  },
+
+  isFromProject: function () {
+    return this.projectItem ? FROM_UPPER : ''
+  },
+
+  isFromUser: function () {
+    return this.userItem ? FROM_UPPER : ''
+  },
+
+  isFromCompany: function () {
+    return this.companyItem ? FROM_UPPER : ''
+  },
+
+  isNotApproved: function () {
+    if(this.collection){
+      const selectedIndex = ListHelper.getSelectedIndex(this.id, this.data);
+      // Copy: `index` is form-only and must not be written onto the stored entry.
+      const data = Object.assign({}, this.data && this.data[selectedIndex] || {},
+        {index: selectedIndex});
+      return data.approved === false;
+    }else{
+      return (this.approved === false)  ? 'not-approved' : ''
+    }
+  },
+
+  getProjectOptions: function () {
+    return {
+      projectId: Router.current().params.projectId
+    };
+  },
+
+  companyId: function () {
+    let user = Meteor.user();
+    return user && user.profile && user.profile.companyId
+  }
+});
+Template.componentlist.events({
+  // "this" points to table row data, context is archived with Template.currentData();
+  'click .select-component:not(.from-upper)': function (event) {
+    event.preventDefault();
+    $(event.currentTarget).addClass('highlight').siblings().removeClass('highlight');
+    const context = Template.currentData();
+    const valContext = AutoForm.getValidationContext(context.id);
+    if (valContext && !valContext.isValid()) {
+      AutoForm.resetForm(context.id);
+    }
+    Session.set(context.id + 'SelIdx', this.index);
+    Session.set(context.id + 'ErrorMsg', undefined);
+  },
+  'click #cancel': function (event) {
+    event.preventDefault();
+    $('table.' + this.id + ' tbody tr').removeClass('highlight');
+    ListHelper.clearSession(this.id);
+  },
+  'click .approve-item': function (event) {
+    event.preventDefault();
+    $('.highlight').removeClass('highlight');
+    const self = this;
+    if (self.data instanceof Array) {
+      const index = ListHelper.getSelectedIndex(self.id, self.data);
+      const originalData = _.reject(self.data, function (elem) {
+        return elem.projectItem === true || elem.companyItem === true;
+      }) || [];
+      self.data[index].approved = true;
+      const dataWithout = ListHelper.forStorage(_.reject(self.data, function (elem) {
+        return elem.projectItem === true || elem.companyItem === true;
+      }) || []);
+      if (self.userUpdate) {
+        Meteor.callAsync('updateUserConfig', self.attribute, dataWithout).catch(function (error) {
+          console.log(error);
+        })
+      } else {
+        Meteor.callAsync('updateCollection', self.collection._name, self.docId, self.attribute, dataWithout, true, originalData);
+      }
+    }
+    ListHelper.clearSession(self.id);
+  },
+  'click #delete': function (event) {
+    event.preventDefault();
+    $('.highlight').removeClass('highlight');
+    const self = this;
+    if (self.data instanceof Array) {
+      const index = ListHelper.getSelectedIndex(self.id, self.data);
+      const element = self.data[index];
+      const originalData = _.reject(self.data, function (elem) {
+        return elem.projectItem === true || elem.companyItem === true;
+      }) || [];
+      self.data.splice(index, 1);
+      const dataWithout = ListHelper.forStorage(_.reject(self.data, function (elem) {
+        return elem.projectItem === true || elem.companyItem === true;
+      }) || []);
+      if (self.userUpdate) {
+        Meteor.callAsync('updateUserConfig', self.attribute, dataWithout).catch(function (error) {
+          console.log(error);
+        })
+      } else {
+        const user = Meteor.user();
+        const company = Session.get('company');
+        const project = Projects.findOne(Router.current().params.projectId);
+        let requireWhitelist = company && company.requireWhitelist || project && project.requireWhitelist;
+        Meteor.callAsync('updateCollection', self.collection._name, self.docId, self.attribute, dataWithout, true, originalData);
+        if(element.approved === false && requireWhitelist && Roles.userIsInRole(user._id, 'compliance_manager', user.profile.companyId)){
+          Meteor.callAsync('notifyAboutWhiteListedReject',user,element,element.comment,
+            self.collection._name,self.collection.findOne(self.docId).name);
+        }
+      }
+    }
+    ListHelper.clearSession(self.id);
+  }
+});

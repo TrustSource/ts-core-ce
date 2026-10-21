@@ -1,0 +1,39 @@
+<template name="infrastructureComponentsList">
+
+  {{#pageHeader}}
+    <div class="infrastructure-header">
+      <div class="infrastructure-header-left">
+        <h2 class="font-light m-b-xs">
+          Infrastructure components {{#if session 'infrastructureModuleListFilter'}}
+          <small class="text-danger">filtered</small>{{/if}}
+        </h2>
+        <small>{{#if countComponents}}{{countComponents}} components currently managed by the system{{else}}Infrastructure components managed by the system{{/if}}</small>
+      </div>
+      <div class="infrastructure-header-actions">
+        {{#if isInRole 'company_component_manager' companyId}}
+          {{> infrastructureManagementComponentCreate}}
+          <a href="{{pathFor route='infrastructureManagementModules'}}" class="btn btn-default btn-xs">
+            <span class="fa fa-external-link" aria-hidden="true"></span>
+            View used as Modules
+          </a>
+        {{/if}}
+      </div>
+    </div>
+  {{/pageHeader}}
+
+  <div class="content infrastructure-content">
+    {{> componentListFilter type="infrastructureСomponents"}}
+    <div class="panel panel-default">
+      <div class="panel-body">
+        {{#if isLoading}}
+          <div class="text-center inner-t-20 inner-b-20">
+            <div class="loading-spinner loading-spinner-sm"></div>
+            <p class="text-muted m-t-sm">Loading components...</p>
+          </div>
+        {{else}}
+          {{> reactiveTable settings=reactiveTableSettings}}
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,154 @@
+// Small shared helpers: colour mixins, brand colours on Bootstrap's
+// contextual classes, form validation states, list groups and misc utilities.
+
+// Colour mixins (used by the button styles)
+.bg-transparent(@color; @alpha: 1) {
+  background: rgba(red(@color), green(@color), blue(@color), @alpha);
+}
+
+.color-transparent(@color; @alpha: 1) {
+  color: rgba(red(@color), green(@color), blue(@color), @alpha);
+}
+
+// Entry animation timing; the animation name comes from the animate.css class
+.ts-stagger-item { animation-duration: 500ms; animation-fill-mode: both; }
+
+.transition {
+  transition: all 0.5s;
+}
+
+// Brand colours for Bootstrap's contextual text classes
+.text-primary { color: @ts-navy; }
+.text-info { color: @ts-blue; }
+.text-success { color: @ts-teal; }
+.text-warning { color: @ts-amber; }
+.text-danger { color: @ts-red; }
+.text-danger-i { color: @ts-red !important; }
+
+.border-right {
+  border-right: 1px solid @ts-border;
+}
+
+// Sparkline tooltip sizing
+.jqstooltip { box-sizing: content-box; }
+
+// Form validation states: flat inputs, darker brand colour for border and text
+.ts-validation-state(@state; @tone) {
+  .has-@{state} {
+    .form-control {
+      border-color: darken(@tone, 10%) !important;
+      box-shadow: none;
+    }
+
+    .help-block,
+    .control-label,
+    .radio,
+    .checkbox,
+    .radio-inline,
+    .checkbox-inline,
+    &.radio label,
+    &.checkbox label,
+    &.radio-inline label,
+    &.checkbox-inline label {
+      color: darken(@tone, 10%);
+    }
+  }
+}
+
+.ts-validation-state(error; @ts-red);
+.ts-validation-state(warning; @ts-amber);
+.ts-validation-state(success; @ts-teal);
+
+// Inputs and add-ons share the light border
+.form-control {
+  border-color: @ts-border !important;
+}
+
+.input-group-addon {
+  border-color: @ts-border !important;
+  background: lighten(@ts-canvas, 3%);
+}
+
+// Labels and badges
+.label-success {
+  color: @color-white !important;
+  background-color: @ts-teal;
+}
+
+.badge {
+  &.badge-primary { background-color: @ts-navy; }
+  &.badge-success { background-color: @ts-teal; }
+}
+
+// List groups
+a.list-group-item.active {
+  &,
+  &:hover,
+  &:focus {
+    color: @color-white !important;
+    border-color: @ts-navy;
+    background-color: @ts-navy;
+  }
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  margin-bottom: -1px;
+  padding: 10px 15px;
+  border: 1px solid @ts-border;
+  background-color: inherit;
+
+  &.active {
+    color: @color-white;
+
+    .pointer:hover {
+      color: @color-white;
+    }
+  }
+}
+
+// Compact minor headings
+h5,
+h6 {
+  margin: 5px 0;
+}
+
+// Page title band at the top of each page
+.ts-page-header {
+  min-width: 320px;
+  padding: 15px 25px 0;
+
+  h2 {
+    margin-top: 0;
+  }
+
+  .ts-panel {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 768px) { padding: 15px 15px 0; }
+}
+
+// Bootstrap component tweaks
+.dropdown-menu {
+  border-radius: 3px;
+  font-size: 13px;
+}
+
+.pagination > .active {
+  > a,
+  > span {
+    &,
+    &:hover,
+    &:focus {
+      z-index: 2;
+      color: @color-white;
+      border-color: darken(@ts-blue, 5%);
+      background-color: @ts-blue;
+      cursor: default;
+    }
+  }
+}
+
+.table > thead > tr > th { border-bottom: none; }

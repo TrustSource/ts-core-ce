@@ -1,0 +1,70 @@
+<template name="companyPoliciesList">
+
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">Policies</h2>
+        <small>Please select policy type</small>
+      </div>
+    </div>
+  {{/pageHeader}}
+
+  <div class="content">
+    <div class="row">
+      <div class="col-md-4 col-sm-6">
+        <div class="panel panel-default">
+          <a href="{{pathFor route='policyList'}}">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="fa fa-gavel ts-big-icon"></span>
+                </div>
+                <div class="col-md-12">
+                  <h4 style="margin: 10px 0 20px">
+                    Opensource policy
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6">
+        <div class="panel panel-default">
+          <a href="{{pathFor route='companyCryptoAlgorithms'}}">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="fa fa-key ts-big-icon"></span>
+                </div>
+                <div class="col-md-12">
+                  <h4 style="margin: 10px 0 20px">
+                    Crypto algorithms
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6">
+        <div class="panel panel-default">
+          <a href="{{pathFor route='companyEndoflife'}}">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="fa fa-hourglass-empty ts-big-icon"></span>
+                </div>
+                <div class="col-md-12">
+                  <h4 style="margin: 10px 0 20px">
+                    Component end-of-life
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

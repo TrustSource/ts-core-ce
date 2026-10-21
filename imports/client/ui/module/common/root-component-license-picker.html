@@ -1,0 +1,18 @@
+<template name="rootComponentLicensePicker">
+  {{#if isInRole 'compliance_manager,manager' companyId}}
+    {{#if shouldRender}}
+      {{#if useDlLayout}}
+        <dt class="root-license-picker-dt">Select license</dt>
+        <dd>
+          {{> licenseCatalogSelect selectId=selectId value=currentLicense includeEdgeCases=true includeNoneOption=true}}
+          <p class="text-muted root-license-picker-hint">Selection is saved per module and re-applied on the next analysis run.</p>
+        </dd>
+      {{else}}
+        <div class="root-license-picker" data-module-id="{{moduleId}}" data-root-key="{{rootKey}}">
+          {{> licenseCatalogSelect selectId=selectId value=currentLicense includeEdgeCases=true includeNoneOption=true}}
+          <p class="text-muted root-license-picker-hint">Selection is saved per module and re-applied on the next analysis run.</p>
+        </div>
+      {{/if}}
+    {{/if}}
+  {{/if}}
+</template>

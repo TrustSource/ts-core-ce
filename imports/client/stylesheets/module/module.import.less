@@ -1,0 +1,715 @@
+
+// Dependency list next to its aside: the list takes the remaining width.
+.ecs-dependencies-box {
+  .ecs-dependencies-with-details {
+    flex: 1 1 0%;
+    width: auto;
+    margin-right: 8px;
+  }
+}
+
+.module-footer {
+  padding: 0 5px;
+
+  .fa.warnings {
+    color: @color-warnings;
+  }
+
+  div.row {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  div.row div {
+    padding-left: 1px;
+    padding-right: 1px;
+  }
+}
+
+.module-details {
+  h4 {
+    margin-bottom: 5px;
+  }
+
+  .module-description {
+    height: 65px;
+    margin-top: 15px;
+    overflow: auto;
+  }
+}
+
+.module-stat {
+  padding: 8px 0px;
+  text-align: center;
+
+  font-size: 9px;
+  font-weight: 500;
+
+  .module-stat-label {
+    display: inline-block;
+    color: lighten(@ts-text, 20%);
+    text-transform: uppercase;
+  }
+  .module-stat-value {
+    color: rgb(4, 15, 24);
+    display: inline;
+  }
+}
+
+.inner-b-50 {
+  padding-bottom: 50px;
+}
+
+.inner-lr-40 {
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+}
+
+.noUi-value-horizontal {
+  margin-left: -35px;
+  padding-top: 20px;
+}
+
+.noUi-value {
+  width: 70px;
+}
+
+.noUi-value-horizontal {
+  transform: none !important;
+}
+
+// Room for the value tooltip above the handle, so it does not cover the field's
+// label (e.g. "Warning threshold" on the end-of-life tab).
+.noUi-horizontal:has(.noUi-tooltip) {
+  margin-top: 42px;
+}
+
+.no-bottom-errors .has-error {
+  .help-block {
+    display: none;
+  }
+}
+
+.ecsbars-box {
+  min-height: 75px;
+}
+
+#releases {
+  .reactive-table-row-click();
+}
+
+// =============================================================================
+// Module detail header - extends shared header pattern from tables-modern
+// =============================================================================
+
+.module-header-meta {
+  margin-top: 2px;
+}
+
+// Settings button warning state (incomplete settings)
+.module-header-actions .module-settings-warning {
+  background: fade(#f0ad4e, 70%) !important;
+  border-color: fade(#f0ad4e, 90%) !important;
+  color: #fff !important;
+
+  &:hover, &:focus {
+    background: fade(#f0ad4e, 90%) !important;
+    border-color: #f0ad4e !important;
+  }
+}
+
+// --- Analysis execution dropdown ---
+.module-analysis-line {
+  margin-bottom: 4px;
+  position: relative;
+}
+
+.module-execution-dropdown {
+  display: inline;
+  position: static;
+
+  &:hover > .dropdown-menu {
+    display: block;
+  }
+
+  .module-execution-toggle {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dashed currentColor;
+    padding-bottom: 1px;
+    cursor: pointer;
+
+    &:hover, &:focus {
+      text-decoration: none;
+      opacity: 0.8;
+    }
+
+    .caret {
+      margin-left: 3px;
+    }
+  }
+
+  .dropdown-menu {
+    min-width: 220px;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+}
+
+.module-analysis-filter-badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: fade(@color-white, 15%);
+  border: 1px solid fade(@color-white, 25%);
+  color: @color-white;
+  font-size: 11px;
+  vertical-align: middle;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  .fa {
+    margin-right: 3px;
+    opacity: 0.7;
+  }
+
+  .fa-times {
+    opacity: 0.5;
+    margin-right: 0;
+  }
+
+  &:hover, &:focus {
+    background: fade(@color-white, 25%);
+    border-color: fade(@color-white, 40%);
+    color: @color-white;
+    text-decoration: none;
+
+    .fa-times {
+      opacity: 1;
+    }
+  }
+}
+
+.module-analysis-action-icon {
+  display: inline-block;
+  color: @color-white;
+  margin-left: 4px;
+  font-size: 12px;
+  padding: 2px 5px;
+  border-radius: 4px;
+  background: fade(@color-white, 10%);
+  border: 1px solid fade(@color-white, 15%);
+  transition: all 0.15s ease;
+
+  &:hover, &:focus {
+    background: fade(@color-white, 22%);
+    border-color: fade(@color-white, 40%);
+    color: @color-white;
+    text-decoration: none;
+  }
+}
+
+// --- Stats dropdown (hover-open) ---
+.module-stats-dropdown {
+  display: inline-block;
+}
+
+.module-stats-dropdown-content {
+  min-width: 400px;
+  padding: 14px 16px;
+  border-radius: 6px;
+  box-shadow: 0 4px 16px fade(@color-black, 15%);
+
+  > label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .ecsbars {
+    min-width: 360px;
+  }
+}
+
+// --- Aside panel (right side) - scan-detail style heading ---
+.ecs-dependencies-aside {
+  border-radius: 8px;
+  overflow: hidden;
+  background: @color-white;
+
+  > .panel-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 600;
+    color: @ts-navy;
+    letter-spacing: 0.3px;
+    padding: 0 11px;
+    height: 50px;
+    border-bottom: 2px solid @ts-teal;
+    flex-shrink: 0;
+  }
+}
+
+// --- Root component license picker (inline aside layout) ---
+.root-license-picker {
+  .select2-container,
+  .license-catalog-select {
+    width: 100% !important;
+    min-width: 0;
+  }
+
+  .root-license-picker-hint {
+    margin: 6px 0 0 0;
+    font-size: 12px;
+  }
+}
+
+// --- Shared license catalogue select (root picker + manual resolution) ---
+// The aside is ~300-400px wide, so the closed field shows the key only and the
+// dropdown is capped and allowed to wrap rather than running off the viewport.
+.license-catalog-dropdown {
+  max-width: 420px;
+
+  .select2-results__option {
+    white-space: normal;
+  }
+}
+
+.license-catalog-option {
+  display: block;
+
+  .license-catalog-option-hint {
+    display: block;
+    font-size: 11px;
+    line-height: 1.3;
+    color: @color-text-secondary;
+  }
+}
+
+// Its own class rather than Bootstrap's .text-muted (#777, 3.2:1): this text
+// carries the scope of the change and the policy caveat, so it has to be
+// readable, and it needs a hook the dark theme can override. Top level, because
+// licenseCatalogSelect uses it for its empty-catalogue message and that renders
+// inside the root picker too.
+.license-resolve-hint {
+  margin: 6px 0 0 0;
+  font-size: 12px;
+  line-height: 1.4;
+  color: @color-text-secondary;
+}
+
+// --- Manual license resolution ---
+.component-license-resolve {
+  .select2-container,
+  .license-catalog-select {
+    width: 100% !important;
+    min-width: 0;
+  }
+
+  // `.aside-section-title .section-expand` is `position: absolute; right: 0`
+  // with `padding: 5px 10px`, so it is out of flow and owns the right edge of
+  // every heading. A `pull-right` button floats to that same edge and ends up
+  // UNDERNEATH the caret's hit area, so clicking undo collapses the section
+  // instead. The other buttons in this aside that use `pull-right` sit in
+  // headings that have no caret, which is why this only bites here. Clear the
+  // caret's full width (10 + ~10 + 10) plus a little breathing room.
+  > .aside-section-title > .clear-component-license {
+    margin-right: 34px;
+  }
+
+  label {
+    margin-bottom: 3px;
+    font-weight: 600;
+  }
+
+  .license-resolve-policy {
+    margin: 8px 0 0 0;
+  }
+}
+
+.root-license-picker-dt {
+  white-space: normal !important;
+  text-transform: lowercase;
+}
+
+dd .root-license-picker-hint {
+  margin: 4px 0 0 0;
+  font-size: 12px;
+}
+
+// --- Aside head: white bg, green border, status dot ---
+.module-aside-head {
+  background: #fff !important;
+  border: none !important;
+  border-bottom: 2px solid @ts-teal !important;
+  height: 60px !important;
+  padding: 0 11px !important;
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+
+  h5 {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: @ts-navy;
+    letter-spacing: 0.3px;
+  }
+
+  .ecs-aside-head-actions {
+    position: static;
+    width: auto;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+.module-aside-status-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+
+  &:not([class*="bg-"]),
+  &.bg- {
+    background-color: @ts-border;
+  }
+
+  &.dep-status-dot {
+    margin: 0 3px 0 2px;
+    align-self: center;
+  }
+}
+
+// --- Nav icons start below the heading ---
+.ecs-dependencies-aside .ecs-aside-nav {
+  padding-top: 60px;
+}
+
+// --- Module header actions: overflow dropdown for narrow screens ---
+.module-header-actions {
+  flex-wrap: wrap;
+}
+
+// By default all inline actions visible, overflow dropdown hidden
+.module-actions-overflow {
+  display: none;
+}
+
+@media (max-width: 1920px) {
+  .module-action-inline {
+    display: none !important;
+  }
+  .module-actions-overflow {
+    display: inline-block;
+  }
+}
+
+// Normalize sub-template buttons inside overflow dropdown as list items
+.module-actions-overflow .dropdown-menu > li {
+  border: none !important;
+  box-shadow: none !important;
+  line-height: normal;
+}
+
+.module-actions-overflow .dropdown-menu {
+  > li > .btn,
+  > li > a.btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    border-radius: 0;
+    color: #333;
+    font-size: 13px;
+    font-weight: normal;
+    padding: 5px 20px;
+    white-space: nowrap;
+
+    &:hover, &:focus {
+      background: #f5f5f5;
+      color: #333;
+    }
+  }
+}
+
+// --- Dependencies heading: search on left, title on right ---
+.module-deps-heading {
+  .module-deps-heading-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    .sorting,
+    .expand-all,
+    .collapse-all {
+      padding: 6px 10px;
+      font-size: 14px;
+    }
+  }
+
+  .module-deps-search {
+    width: 180px;
+
+    .input-group-addon {
+      background: transparent;
+      border: none;
+      padding: 4px 6px 4px 2px;
+      font-size: 12px;
+      color: #555;
+    }
+
+    .form-control {
+      font-size: 12px;
+      border-radius: 4px !important;
+      height: 28px;
+    }
+  }
+}
+
+// --- Dependency list items ---
+.ecs-dependencies .ecs-dependency {
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-bottom: none;
+  border-left: 3px solid transparent;
+  border-radius: 0;
+  margin-bottom: 0;
+  transition: all 0.15s ease;
+  background: transparent;
+
+  &:nth-child(even) {
+    background-color: fade(@color-black, 1.5%);
+  }
+
+  &:hover {
+    background-color: @color-table-hover;
+    border-left-color: @ts-teal;
+  }
+
+  &.dependency-active {
+    background-color: fade(@ts-teal, 8%);
+    border-left-color: @ts-teal;
+    color: @ts-navy;
+
+    .truncate,
+    .dep-name-text {
+      font-weight: 600;
+    }
+  }
+
+  &.dependency-root {
+    background: transparent;
+    color: inherit;
+
+    &:nth-child(even) {
+      background-color: fade(@color-black, 1.5%);
+    }
+
+    .dep-name-text {
+      font-weight: 600;
+    }
+  }
+
+  .dep-checkbox {
+    flex-shrink: 0;
+    margin: 0 6px 0 0;
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+
+  .dependency-status {
+    flex-shrink: 0;
+    white-space: nowrap;
+    margin-left: 0;
+  }
+
+  .dependency-name {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    position: static;
+    top: auto;
+  }
+
+  .dep-name-line {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 6px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .dep-root-icon {
+    flex-shrink: 0;
+  }
+
+  .dep-name-text {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .dep-version {
+    opacity: 0.6;
+    font-size: 12px;
+  }
+
+  .dep-licenses {
+    flex-shrink: 1;
+    min-width: 0;
+    max-width: 40%;
+    margin-left: auto;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 3px;
+    overflow: hidden;
+
+    .tree-builder-licenses {
+      flex-shrink: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 11px;
+    }
+  }
+}
+
+.dependency-label.disabled,
+.dependency-label.ok {
+  display: none;
+}
+
+// --- Pagination toggle: full (≥1500px) / compact (<1500px) ---
+// Scoped to module detail views (dependencies, legal, etc.)
+.ecs-dependencies-box,
+.ecs-licenses {
+  > .pagination-compact,
+  .intro-dependency-pages > .pagination-compact {
+    display: none;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  @media (max-width: 1920px) {
+    > .pagination-full,
+    .intro-dependency-pages > .pagination-full {
+      display: none;
+    }
+    > .pagination-compact,
+    .intro-dependency-pages > .pagination-compact {
+      display: flex;
+    }
+  }
+}
+
+// --- Quality: clickable rows + table padding ---
+.ecs-tests {
+  .reactive-table-row-click();
+
+  .reactive-table tbody tr .col-actions .btn,
+  .reactive-table tbody tr .col-actions-small .btn {
+    margin-top: -5px;
+    margin-bottom: -5px;
+  }
+}
+
+// --- Quality title left-aligned with margin + content padding ---
+.ecs-tests > .panel-heading {
+  justify-content: flex-start;
+  margin-bottom: 8px;
+}
+
+.ecs-tests {
+  padding-left: 12px;
+  padding-right: 12px;
+
+  > .panel-heading {
+    margin-left: -12px;
+    margin-right: -12px;
+  }
+}
+
+// --- Tree view: full-width items ---
+.ecs-tree .ecs-dependency {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+// --- Filter type dropdown (replaces cycling button) ---
+.filter-type-dropdown {
+  &:hover > .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-menu > li.active > a {
+    background: fade(@ts-teal, 8%);
+    color: @ts-navy;
+    font-weight: 500;
+  }
+
+  .dropdown-menu .fa {
+    width: 16px;
+    text-align: center;
+  }
+}
+
+// --- License detail header search input ---
+.license-detail-header-actions {
+  .input-group {
+    width: 220px;
+
+    .input-group-addon {
+      background: fade(@color-white, 12%);
+      border: 1px solid fade(@color-white, 25%);
+      border-right: none;
+      color: @color-white;
+      border-radius: 6px 0 0 6px;
+    }
+
+    .form-control {
+      background: fade(@color-white, 12%);
+      border: 1px solid fade(@color-white, 25%);
+      color: @color-white;
+      font-size: 12px;
+      border-radius: 0 6px 6px 0;
+
+      &::placeholder {
+        color: fade(@color-white, 55%);
+      }
+    }
+  }
+}
+
+// --- Tabs bar below header ---
+.module-tabs-bar {
+  padding: 0 15px;
+  margin-top: 6px;
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+
+  > .nav-tabs-scrollable {
+    flex: 1 1 0%;
+    min-width: 0;
+  }
+}

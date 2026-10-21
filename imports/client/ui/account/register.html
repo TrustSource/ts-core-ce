@@ -1,0 +1,68 @@
+<template name="register">
+  <div class="login-container">
+    <div class="login_bg"></div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="text-center m-b-md">
+          <h3>
+            <a href="{{pathFor route='login'}}">
+              <img src="/logo.png" alt="{{app 'name'}}" style="max-height: 47px; margin-left: 19px; margin-bottom: 10px;">
+            </a>
+          </h3>
+          <h4>{{__ 'Registration'}}</h4>
+          <h5>
+            <small class="text-danger-i">{{__ 'PasswordMustBeAtLeast'}} <strong>{{__ '12Characters'}}</strong>
+              {{__ 'includingOneCapitalLetter'}}</small>
+          </h5>
+        </div>
+        <div class="ts-panel">
+          <div class="panel-body">
+            <form id="registerForm" class="errors-below">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="email">{{__ 'EmailAddress'}}</label>
+                    <input type="text" placeholder="example@gmail.com"
+                           value="" id="email" class="form-control" name="email">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="email_repeat">{{__ 'RepeatEmail'}}</label>
+                    <input type="text" placeholder="example@gmail.com"
+                           value="" id="email_repeat" class="form-control" name="email_repeat">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="password">{{__ 'Password'}}</label>
+                    <input type="password" value="" id="password" class="form-control" name="password">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="password_repeat">{{__ 'RepeatPassword'}}</label>
+                    <input type="password" value="" id="password_repeat" class="form-control"
+                           name="password_repeat">
+                  </div>
+                </div>
+                <div class="col-md-12 text-danger" id="form-messages">{{errorMsg}}</div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <div class="text-center">
+                      <button class="btn btn-primary btn-block" type="submit">{{__ 'Register'}}</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <a class="highlight" href="{{pathFor route='login'}}">{{__ 'AlreadyHaveAccountSignInHere'}}</a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{> blankLayoutFooter}}
+  </div>
+</template>

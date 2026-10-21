@@ -1,0 +1,19 @@
+<template name="projectVersion">
+  <div class="dropdown version-dropdown">
+    <a href="#" class="version-dropdown-toggle dropdown-toggle" data-toggle="dropdown">
+      {{currentVersionLabel}} <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li class="{{#unless currentApprove}}active{{/unless}}">
+        <a href="#" class="change-version" data-value="">Current state</a>
+      </li>
+      {{#each approvedVersions}}
+        <li class="{{#if isCurrentApprove _id}}active{{/if}}">
+          <a href="#" class="change-version" data-value="{{_id}}">
+            {{dateFormat date=approved dflt='-- --'}} - {{name}}
+          </a>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</template>

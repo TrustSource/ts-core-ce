@@ -1,0 +1,145 @@
+<template name="csafDetailsAffected">
+  <form class="form-horizontal relative" role="form" id="csafDetailsAffected">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="pull-right panel-right-actions">
+          <div class="btn-group btn-group-justified" role="group" style="width: 200px;">
+            <a href class="btn btn-default discard_changes" type="button" disabled="{{isEditDisabled}}" title="Discard changes"> <i class="fa fa-repeat"></i> Discard </a>
+            {{#if isLoading}}
+              <a href class="btn btn-default" type="button" disabled="disabled" title="Save changes"> <i class="fa fa-spinner fa-spin"></i> Save </a>
+            {{else}}
+              <a href class="btn btn-default save_changes" type="button" disabled="{{isEditDisabled}}" title="Save changes"> <i class="fa fa-floppy-disk"></i> Save </a>
+            {{/if}}
+          </div>
+        </div>
+        <h5>Affected</h5>
+      </div>
+      <div class="panel-body scrollable_middle">
+        {{#if hasData}}
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="panel panel-default">
+                <div class="panel-heading collapse-action pointer">
+                  <h3 class="panel-title">
+                    <span class="collapse-action-target">List of branches</span>
+                  </h3>
+                </div>
+                <div class="panel-body">
+                  <span class="help-block small csaf_product_tree">
+                    <button class="btn btn-xs btn-primary pull-right add_item" disabled="{{isEditDisabled}}" type="button" data-path="product_tree.branches" data-default-item="branches">
+                      <span class="fa fa-plus" aria-hidden="true"></span>
+                    </button>
+                    Contains branch elements as children of the current element.
+                  </span>
+                  {{#each (getValue 'product_tree.branches')}}
+                    <span class="help-block small csaf_product_tree remove-btn-over-panel">
+                      <button class="btn btn-warning btn-xs pull-right remove_item" disabled="{{isEditDisabled}}" type="button" data-path="product_tree.branches" data-index="{{index}}">
+                        <span class="fa fa-times" aria-hidden="true"></span>
+                      </button>
+                    </span>
+                    {{> csafProductTreeBranch data=this index=@index root=getRoot}}
+                  {{/each}}
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 csaf_product_tree">
+              <div class="panel panel-default">
+                <div class="panel-heading collapse-action pointer">
+                  <h3 class="panel-title">
+                    <span class="collapse-action-target">List of full product names</span>
+                  </h3>
+                </div>
+                <div class="panel-body hidden">
+                  <span class="help-block small">
+                    <button class="btn btn-xs btn-primary pull-right add_item" disabled="{{isEditDisabled}}" type="button" data-path="product_tree.full_product_names" data-default-item="full_product_names">
+                      <span class="fa fa-plus" aria-hidden="true"></span>
+                    </button>
+                    Contains a list of full product names.
+                  </span>
+                  {{#each (getValue 'product_tree.full_product_names')}}
+                    <span class="help-block small remove-btn-over-panel">
+                      <button class="btn btn-warning btn-xs pull-right remove_item" disabled="{{isEditDisabled}}" type="button" data-path="product_tree.full_product_names" data-index="{{@index}}">
+                        <span class="fa fa-times" aria-hidden="true"></span>
+                      </button>
+                    </span>
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        <div class="col-xs-12">
+                          <pre>{{metaStr this}}</pre>
+                        </div>
+                      </div>
+                    </div>
+                  {{/each}}
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 csaf_product_tree">
+              <div class="panel panel-default">
+                <div class="panel-heading collapse-action pointer">
+                  <h3 class="panel-title">
+                    <span class="collapse-action-target">List of product groups</span>
+                  </h3>
+                </div>
+                <div class="panel-body hidden">
+                  <span class="help-block small">
+                    <button class="btn btn-xs btn-primary pull-right add_item" disabled="{{isEditDisabled}}" type="button" data-path="product_tree.product_groups" data-default-item="product_groups">
+                      <span class="fa fa-plus" aria-hidden="true"></span>
+                    </button>
+                    Contains a list of product groups.
+                  </span>
+                  {{#each (getValue 'product_tree.product_groups')}}
+                    <span class="help-block small remove-btn-over-panel">
+                      <button class="btn btn-warning btn-xs pull-right remove_item" disabled="{{isEditDisabled}}" type="button" data-path="product_tree.product_groups" data-index="{{@index}}">
+                        <span class="fa fa-times" aria-hidden="true"></span>
+                      </button>
+                    </span>
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        <div class="col-xs-12">
+                          <pre>{{metaStr this}}</pre>
+                        </div>
+                      </div>
+                    </div>
+                  {{/each}}
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 csaf_product_tree">
+              <div class="panel panel-default">
+                <div class="panel-heading collapse-action pointer">
+                  <h3 class="panel-title">
+                    <span class="collapse-action-target">List of relationships</span>
+                  </h3>
+                </div>
+                <div class="panel-body hidden">
+                  <span class="help-block small">
+                    <button class="btn btn-xs btn-primary pull-right add_item" disabled="{{isEditDisabled}}" type="button" data-path="product_tree.relationships" data-default-item="relationships">
+                      <span class="fa fa-plus" aria-hidden="true"></span>
+                    </button>
+                    Contains a list of relationships.
+                  </span>
+                  {{#each (getValue 'product_tree.relationships')}}
+                    <span class="help-block small remove-btn-over-panel">
+                      <button class="btn btn-warning btn-xs pull-right remove_item" disabled="{{isEditDisabled}}" type="button" data-path="product_tree.relationships" data-index="{{@index}}">
+                        <span class="fa fa-times" aria-hidden="true"></span>
+                      </button>
+                    </span>
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        <div class="col-xs-12">
+                          <pre>{{metaStr this}}</pre>
+                        </div>
+                      </div>
+                    </div>
+                  {{/each}}
+                </div>
+              </div>
+            </div>
+          </div>
+        {{else}}
+          {{>loadingSplash}}
+        {{/if}}
+      </div>
+    </div>
+  </form>
+</template>

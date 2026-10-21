@@ -1,0 +1,28 @@
+<template name="companyApiReleases">
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">Release keys</h2>
+        <small>Configure api keys for company releases</small>
+      </div>
+      <div class="settings-header-actions">
+        {{#if isInRole 'account_admin,manager,compliance_manager' companyId}}
+          {{#if haveFiles}}
+            <a class="btn btn-primary btn-xs create-public-release-key">
+              <span class="fa fa-plus-circle" aria-hidden="true"></span> Create New
+            </a>
+          {{else}}
+            <a class="btn btn-primary btn-xs disabled" disabled="disabled">
+              <span class="fa fa-plus-circle" aria-hidden="true"></span> Create New
+            </a>
+          {{/if}}
+        {{/if}}
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content">
+    {{#if isInRole 'account_admin,manager,compliance_manager' companyId}}
+      {{> companyPublicRelease}}
+    {{/if}}
+  </div>
+</template>

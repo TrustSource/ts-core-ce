@@ -1,0 +1,20 @@
+<template name="componentListSorting">
+  <div id="componentListSorting">
+    <div class="form-group form-group-sm">
+      <h5 class="inner-r-10"><span class="fa fa-sort"></span></h5>
+    </div>
+    <div class="form-group form-group-sm" style="width:120px;">
+      <select class="form-control w-100" name="sort">
+        {{#each availableSorting}}
+          <option value="{{key}}" label="{{label}}">{{label}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="form-group form-group-sm" style="width:80px;">
+      <select class="form-control w-100" name="order">
+        <option value="1" label="Asc">Asc</option>
+        <option value="-1" label="Desc">Desc</option>
+      </select>
+    </div>
+  </div>
+</template>

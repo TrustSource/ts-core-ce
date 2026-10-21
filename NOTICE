@@ -1,0 +1,54 @@
+TrustSource Community Edition
+Copyright 2015-2026 EACG GmbH (Enterprise Architecture Consulting Group)
+
+This program is free software: you can redistribute it and/or modify it
+under the terms of the GNU Affero General Public License as published by the
+Free Software Foundation, version 3 (see LICENSE).
+
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+details.
+
+"TrustSource" and the TrustSource logo are trademarks of EACG GmbH. As an
+additional term under section 7(e) of the license, no rights are granted to
+use them, except to describe the origin of the software.
+
+Third-party software
+--------------------
+
+This product includes or bundles software developed by third parties. Each
+part stays under its own license, as stated in its source files, in its
+LICENSE file, or below.
+
+- Meteor packages vendored or forked under packages/ (MIT unless their own
+  files say otherwise), including aldeed:simple-schema, aldeed:collection2,
+  aslagle:reactive-table, meteorhacks:search-source, natestrauser:select2
+  (Select2, MIT), fourq:typeahead (typeahead.js, MIT, Twitter, Inc.),
+  universe:i18n (MIT, Vazco) and the Meteor force-ssl and
+  standard-minifier-js packages (MIT, Meteor Software).
+- Bootstrap 3 (MIT, Twitter, Inc. and The Bootstrap Authors).
+- bootstrap-treeview (Apache-2.0, Jonathan Miles).
+- bootstrap-datepicker (Apache-2.0).
+- Swagger UI (Apache-2.0, SmartBear Software), in public/swagger-latest/.
+- ae-cvss-calculator (Apache-2.0, metaeffekt GmbH).
+- jquery-validation (MIT), iCheck (MIT), jQuery Sparklines (New BSD, Splunk Inc.).
+- Font Awesome Free (icons CC BY 4.0, fonts SIL OFL 1.1, code MIT, Fonticons, Inc.).
+- Open Sans (SIL OFL 1.1, The Open Sans Project Authors), in public/fonts/open-sans/.
+
+Data
+----
+
+- CWE catalog (imports/server/cwe/): Common Weakness Enumeration (CWE).
+  Copyright The MITRE Corporation. CWE is a trademark of The MITRE
+  Corporation. Reproduced under the CWE Terms of Use.
+- SPDX License List data (imports/server/licenses/, imports/server/scan/):
+  Copyright The Linux Foundation and its contributors, SPDX License List
+  (https://spdx.org/licenses/).
+
+Logos of package managers, scanners and integrations under public/images/,
+public/scanners/ and public/integrations/ are trademarks of their respective
+owners and are used only to identify the corresponding tools.
+
+npm dependencies installed from package.json and workers/package.json are
+under their own licenses, as listed in their packages.

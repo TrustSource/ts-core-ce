@@ -1,0 +1,16 @@
+<template name="stateFilter">
+  <div class="sm-flexible-btns btn-group btn-group-sm {{optionClass}}" data-toggle="buttons">
+    <label class="btn btn-success {{activeList showOks}}" style="width: 45px">
+      <input type="checkbox" autocomplete="off" checked={{showOks}} class="showOks">
+      <span class="{{activeTab showOks}}">OK</span>
+    </label>
+    <label class="btn btn-warning {{activeList showWarnings}}" style="width: 70px">
+      <input type="checkbox" autocomplete="off" checked={{showWarnings}} class="showWarnings">
+      <span class="{{activeTab showWarnings}}">Warnings</span>
+    </label>
+    <label class="btn btn-danger2 {{activeList showViolations}}" style="width: 70px">
+      <input type="checkbox" autocomplete="off" checked={{showViolations}} class="showViolations">
+      <span class="{{activeTab showViolations}}">Violations</span>
+    </label>
+  </div>
+</template>

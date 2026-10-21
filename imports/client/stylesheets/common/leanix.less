@@ -1,0 +1,86 @@
+.integration-icon {
+  display: inline-block;
+  width: 0.8em;
+  height: 0.8em;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  top: 2px;
+  left: 0;
+  vertical-align: baseline;
+  &.leanix {
+    background-image: url('../images/leanix.png');
+  }
+  &.leanix-disabled {
+    background-image: url('../images/leanix-disabled.png');
+  }
+  &.jira {
+    background-image: url('../images/jira.png');
+  }
+  &.jira-disabled {
+    background-image: url('../images/jira-disabled.png');
+  }
+  &.jira-highlighted {
+    background-image: url('../images/jira-highlighted.png');
+  }
+  &.issue-highlighted {
+    background-image: url('../images/issue-highlighted.png');
+  }
+  &.tfs {
+    background-image: url('../images/tfs.png');
+  }
+  &.tfs-disabled {
+    background-image: url('../images/tfs-disabled.png');
+  }
+  &.tfs-highlighted {
+    background-image: url('../images/tfs-highlighted.png');
+  }
+  &.github {
+    background-image: url('../images/github.png');
+  }
+  &.github-disabled {
+    background-image: url('../images/github-disabled.png');
+  }
+  &.github-highlighted {
+    background-image: url('../images/github-highlighted.png');
+  }
+  &.copy {
+    cursor: pointer;
+    .fa {
+      font-size: 1em;
+      color: #000;
+    }
+  }
+  &.integration-lg {
+    width: 1.3em;
+    height: 1.3em;
+  }
+  .fa {
+    position: absolute;
+    right: 4px;
+    bottom: 3px;
+    font-size: 0.6em;
+    color: #fff;
+  }
+}
+
+// These integration controls intentionally carry no href (an empty href reloaded
+// the whole SPA on click, which swallowed the copy/create-issue action). They are
+// marked role="button" tabindex="0" instead - see common/keyboard-activate.js for
+// the Enter/Space half - so restore the pointer cursor the browser used to give
+// them while they were still links.
+a.copy-information,
+a.copy-issue-details,
+a.show-jira-modal,
+a.show-tfs-modal,
+a.show-github-modal,
+a.remove-jira,
+a.remove-tfs,
+a.remove-github {
+  cursor: pointer;
+}
+
+@media (max-width: 767px) {
+
+}

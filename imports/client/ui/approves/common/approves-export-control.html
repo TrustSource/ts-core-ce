@@ -1,0 +1,49 @@
+<template name="approvesExportControl">
+  {{#if getExportControl}}
+    <div class="ts-panel obligation-list">
+      <div class="panel-body">
+        {{#if reportExportControlAlgorithms}}
+          <div class="ts-panel {{#if collapsed}}panel-collapse{{/if}}">
+            <div class="panel-heading">
+              {{> panelTools }}
+              {{__ 'ListOfAlgorithmsAsDetected'}}
+            </div>
+
+            <div class="panel-body {{#if collapsed}}collapsed{{/if}}" style="{{#if collapsed}}display:none{{/if}}">
+              {{#if reportExportControlAlgorithms}}
+                {{#each reportExportControlAlgorithms}}
+                  <span class="label label-default inner-b-5 inline-block">{{#if isDenied}}<div class="label label-danger blacklisted-algorithm-label" title="{{__ 'AlgorithmIsBlacklisted'}}">{{__ 'B'}}</div>{{/if}} {{algorithm}} [{{strength}}]</span>
+                {{/each}}
+              {{/if}}
+            </div>
+          </div>
+        {{else}}
+          <div class="ts-panel {{#if collapsed}}panel-collapse{{/if}}">
+            <div class="panel-heading">
+              {{> panelTools }}
+              {{__ 'ListOfAlgorithmsAsDetected'}}
+            </div>
+
+            <div class="panel-body {{#if collapsed}}collapsed{{/if}}" style="{{#if collapsed}}display:none{{/if}}">
+              <p>
+                {{__ 'NoCryptoAlgorithmsOrComponents'}}
+              </p>
+            </div>
+          </div>
+        {{/if}}
+        {{> algorithmsList
+          title="Applied regulations"
+          id="approveCmpAlgorithms"
+          data=getExportControl
+          docId=currentModule._id
+          collection=getModules
+          attribute="algorithmsConfig"
+          readonly=true
+          collapsed=false
+        }}
+      </div>
+    </div>
+  {{else}}
+    {{> reactiveTableNoData}}
+  {{/if}}
+</template>

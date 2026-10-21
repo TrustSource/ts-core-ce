@@ -1,0 +1,33 @@
+<template name="projectSettingsIssue">
+  <div id="issue" class="tab-pane">
+    <div class="panel-body">
+      {{#if issueManagerJira}}
+        {{> projectSettingsIssueNotification}}
+      {{else if issueManagerTfs}}
+        {{> projectSettingsIssueNotification}}
+      {{else if issueManagerGithub}}
+        {{> projectSettingsIssueNotification}}
+      {{/if}}
+      {{#with hasFieldRight 'project.issue.switch' currentProject}}
+        {{#if read}}
+          <center>
+            <div class="w-200px m-b-md">
+              <select id="issueManager" name="issueManager" class="form-control select2">
+                <option value="tfs" label="TFS" checked="{{isChecked 'tfs'}}">TFS</option>
+                <option value="jira" label="Jira" checked="{{isChecked 'jira'}}">Jira</option>
+                <option value="github" label="GitHub issues" checked="{{isChecked 'github'}}">GitHub issues</option>
+              </select>
+            </div>
+          </center>
+        {{/if}}
+      {{/with}}
+      {{#if issueManagerJira}}
+        {{> projectSettingsJira }}
+      {{else if issueManagerTfs}}
+        {{> projectSettingsTfs }}
+      {{else if issueManagerGithub}}
+        {{> projectSettingsGithub }}
+      {{/if}}
+    </div>
+  </div>
+</template>

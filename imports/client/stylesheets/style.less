@@ -1,0 +1,82 @@
+// TrustSource CE stylesheet entry point. Order matters: later imports override
+// earlier ones, and themes/dark.import.less comes last.
+
+// Design tokens
+@import "base/tokens.import.less";
+
+// Self-hosted Open Sans
+@import "base/fonts.import.less";
+
+// Centralized variables (semantic aliases, z-index scale)
+@import "globals/variables.import.less";
+
+// Import all styles
+@import "base/spacing.import.less";
+@import "base/notices.import.less";
+@import "base/dialogs.import.less";
+@import "base/progress.import.less";
+@import "base/sign-in.import.less";
+@import "base/dropdowns.import.less";
+@import "base/buttons.import.less";
+@import "base/typography.import.less";
+@import "globals/file_button.import.less";
+@import "base/checkboxes.import.less";
+@import "base/shell-layout.import.less";
+@import "globals/flex-fill.import.less";
+@import "globals/tables-modern.import.less";
+@import "base/list-groups.import.less";
+@import "base/panels.import.less";
+@import "base/tabs.import.less";
+@import "base/tooltips.import.less";
+@import "globals/shell.import.less";
+@import "globals/splash.import.less";
+@import "globals/async-state.import.less";
+@import "globals/forms.import.less";
+@import "globals/toastr.import.less";
+@import "globals/select2.import.less";
+@import "base/helpers.import.less";
+@import "globals/modules.import.less";
+
+// Layout overrides (must come after base/shell-layout.import.less)
+@import "layouts/layout.less";
+
+// Common UI building blocks
+@import "common/context.less";
+@import "common/leanix.less";
+@import "common/guide.less";
+@import "common/jira.less";
+@import "common/timeline.less";
+@import "common/navigation.less";
+@import "common/scanners.less";
+@import "common/typeahead.less";
+@import "common/questionnaire.less";
+
+
+// TrustSource-Styles (split from monolithic ecs.import.less)
+@import "ecs/status-colors.import.less";
+@import "ecs/json-viewer.import.less";
+@import "ecs/utilities.import.less";
+@import "ecs/charts.import.less";
+@import "ecs/features.import.less";
+@import "ecs/flex-fill-overrides.import.less";
+@import "ecs/page-overrides.import.less";
+
+@import "scans/scan.less";
+@import "check/check.less";
+@import "code-tests/tests.less";
+@import "lists/list-filter-bar.less";
+@import "reports/reports-list.less";
+
+// Component / dashboard / license pages
+@import "component/component.less";
+@import "component/component-lake.less";
+@import "component/component-detail.less";
+@import "dashboard/dashboard-overview.less";
+@import "license/license.less";
+
+@import "module/module.import.less";
+@import "module/module-detail-component.less";
+@import "module/module-detail-licenses.less";
+@import "module/module-list.less";
+
+@import "themes/dark.import.less";

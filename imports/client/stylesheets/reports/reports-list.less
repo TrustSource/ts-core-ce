@@ -1,0 +1,114 @@
+// Remove panel chrome from report list page (but keep for stat cards)
+.content > .row > [class*="col-"] > .panel.panel-default:not(.text-center) {
+  border: none;
+  box-shadow: none;
+}
+
+// Reports list pages (SBOM, Notice) - v3-design table pattern
+.sbom-list,
+.notice-list {
+  .reactive-table-row-click();
+
+  .reactive-table tbody tr .col-actions .btn {
+    margin-top: -5px;
+    margin-bottom: -5px;
+  }
+}
+
+// Flex-fill scrollable table chain
+body.flex-fill-page .sbom-list,
+body.flex-fill-page .notice-list {
+  flex: 1 1 0%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+
+  > .panel {
+    border: none;
+    box-shadow: none;
+    flex: 1 1 0%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+
+    > .panel-body {
+      flex: 1 1 0%;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      .reactive-table-scroll();
+    }
+  }
+}
+
+// Vulnerability report: CVSS vs EPSS scatter chart header -
+// rendered once, shared above the by-path/by-cve tabs. Width 100% of
+// container, height fixed and never grows with point count - required for
+// legibility at both very few and very many findings. Single breakpoint at
+// 768px, matching the rest of the app.
+.vuln-risk-overview {
+  padding-bottom: 15px;
+}
+
+.vuln-risk-overview-chart {
+  position: relative;
+  height: 360px;
+}
+
+@media (max-width: 768px) {
+  .vuln-risk-overview-chart {
+    height: 260px;
+  }
+}
+
+// Bare .text-muted contrast is borderline in dark mode outside .alert
+// contexts; @color-text-secondary is already cross-theme-safe (see
+// globals/variables.import.less). The chart canvas itself needs no
+// dark-theme-specific styling - it already inherits a light backdrop from the
+// existing generic dark-theme canvas rule (themes/dark.import.less).
+.vuln-risk-overview-disclaimer {
+  color: @color-text-secondary;
+}
+
+// Clicking a point in the CVSS vs EPSS scatter scrolls the findings list below
+// to that finding and flashes its row. The flash is a keyframe
+// animation rather than a class-toggled transition so it fades itself out: a
+// transition declared on the highlight class alone would snap back the instant
+// reportVulnerabilityFindingScroll.js removes it.
+//
+// Tinted with a full-bleed INSET box-shadow rather than background-color: the
+// row's own background is themed (.theme-dark .ts-panel .panel-body), and
+// animating that property would replace it for the duration of the flash and
+// expose whatever sits behind the row. An inset shadow paints over the
+// background and under the content, so this one rule is correct in both themes.
+@keyframes vuln-finding-flash {
+  from {
+    box-shadow: inset 0 0 0 2000px fade(@ts-teal, 14%), inset 3px 0 0 @ts-teal;
+  }
+  to {
+    box-shadow: inset 0 0 0 2000px fade(@ts-teal, 0%), inset 3px 0 0 fade(@ts-teal, 0%);
+  }
+}
+
+// Duration matches HIGHLIGHT_MS in reportVulnerabilityFindingScroll.js.
+.vuln-finding-highlight {
+  animation: vuln-finding-flash 2.4s ease-out;
+}
+
+// The point of the flash is "your row is here", which a static tint still makes
+// - it just stops being an animation and gets removed on the same timer.
+@media (prefers-reduced-motion: reduce) {
+  .vuln-finding-highlight {
+    animation: none;
+    box-shadow: inset 0 0 0 2000px fade(@ts-teal, 14%), inset 3px 0 0 @ts-teal;
+  }
+}
+
+// Sits between the chart and the EPSS disclaimer - same secondary colour as the
+// disclaimer, tighter margins so the two read as one caption block.
+.vuln-risk-overview-hint {
+  color: @color-text-secondary;
+  margin: 8px 0 4px;
+}

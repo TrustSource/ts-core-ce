@@ -1,0 +1,19 @@
+<template name="testsStateFilter">
+  <div class="btn-group {{optionClass}} search-by-type" data-toggle="buttons">
+    <label class="btn btn-success {{activeList showOks}}">
+      <input type="checkbox" autocomplete="off" checked={{showOks}} class="showOks">
+      <span class="fa fa-check-circle filter-icon"></span>
+      <span class="{{activeTab showOks}} filter-label">{{__ 'Passed'}}</span>
+    </label>
+    <label class="btn btn-warning {{activeList showWarnings}}">
+      <input type="checkbox" autocomplete="off" checked={{showWarnings}} class="showWarnings">
+      <span class="fa fa-exclamation-triangle filter-icon"></span>
+      <span class="{{activeTab showWarnings}} filter-label">{{__ 'Unfinished'}}</span>
+    </label>
+    <label class="btn btn-danger {{activeList showDangers}}">
+      <input type="checkbox" autocomplete="off" checked={{showDangers}} class="showDangers">
+      <span class="fa fa-times-circle filter-icon"></span>
+      <span class="{{activeTab showDangers}} filter-label">{{__ 'Failed'}}/{{__ 'Findings'}}</span>
+    </label>
+  </div>
+</template>

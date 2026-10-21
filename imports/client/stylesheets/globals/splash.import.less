@@ -1,0 +1,76 @@
+// =============================================================================
+// Splash - Loading screen
+// =============================================================================
+
+.splash {
+  position: absolute;
+  z-index: @z-splash;
+  background: white;
+  color: gray;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* Once app has loaded, keep splash hidden even if layout re-renders */
+body.app-loaded #splash {
+  display: none !important;
+}
+
+.ts-splash-title {
+  text-align: center;
+  max-width: 500px;
+  margin: 15% auto;
+  padding: 20px;
+}
+
+.ts-splash-title.splash-title-mini {
+  text-align: center;
+  margin: 5% auto;
+  padding: 10px;
+}
+
+.ts-splash-title h1 {
+  font-size: @preloader-title-size;
+  line-height: @preloader-title-line-height;
+}
+
+.route-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  width: 100%;
+}
+
+.loading-spinner,
+.route-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e0e0e0;
+  border-top-color: @ts-teal;
+  border-radius: 50%;
+  animation: loading-spinner-spin 0.8s linear infinite;
+  display: inline-block;
+}
+
+.loading-spinner-sm {
+  width: 24px;
+  height: 24px;
+  border-width: 2px;
+}
+
+.loading-spinner-lg {
+  width: 64px;
+  height: 64px;
+  border-width: 4px;
+}
+
+@keyframes loading-spinner-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes route-loading-spin {
+  to { transform: rotate(360deg); }
+}

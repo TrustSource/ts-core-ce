@@ -1,0 +1,134 @@
+// Panels: the `.ts-panel` card used by the `panel` template and most pages,
+// plus the compact page header that wraps one.
+
+// Card shell: frameless, with a white body and an optional heading and footer.
+.ts-panel {
+  margin-bottom: 25px;
+  border: none;
+  box-shadow: none;
+
+  > .panel-heading {
+    padding: 10px 4px;
+    border: 1px solid transparent;
+    color: inherit;
+    font-weight: 600;
+    transition: all .3s;
+
+    // A heading with collapse/close tools gets a teal underline instead.
+    &:has(.ts-panel-tools) {
+      border: none;
+      border-bottom: 1px solid @ts-teal;
+    }
+
+    // Filter bars sit flush against the top of the card.
+    &.no-top {
+      padding-top: 0;
+    }
+  }
+
+  .ts-panel-built.panel-heading {
+    border-bottom: none;
+  }
+
+  > .panel-footer {
+    background: @ts-surface;
+    border: 1px solid @ts-border;
+    border-top: none;
+    color: inherit;
+    font-size: 90%;
+  }
+
+  // Boxed heading: the `built` panel option, and any collapsed panel.
+  &.panel-collapse > .panel-heading,
+  .ts-panel-built {
+    padding: 10px;
+    background: @color-white;
+    border: 1px solid @ts-border;
+    border-radius: 2px;
+  }
+
+  .panel-body,
+  .panel-compact {
+    position: relative;
+    background: @color-white;
+    border-radius: 2px;
+  }
+
+  .panel-body {
+    padding: 20px;
+    border: none;
+    box-shadow: none;
+  }
+
+  // Dense bordered box used by the component selector.
+  .panel-compact {
+    padding: 5px;
+    border: 1px solid @ts-border;
+  }
+}
+
+// A collapsed panel's body draws no frame.
+.panel-collapse {
+  .panel-body {
+    border: none;
+  }
+}
+
+// Alerts placed directly inside a card lose their margin and rounding.
+.ts-panel .alert {
+  margin-bottom: 0;
+  border: 1px solid @ts-border;
+  border-radius: 0;
+}
+
+// Collapse / close icons floated into the card heading.
+.ts-panel-tools {
+  position: relative;
+  display: inline-block;
+  float: right;
+  margin-top: 0;
+  padding: 0;
+
+  a {
+    margin-left: 5px;
+    color: lighten(@ts-text, 20%);
+    cursor: pointer;
+  }
+}
+
+// Compact page header (toggled from the page header): tighter body, no side
+// or top frame, and a small uppercase title.
+.ts-header-compact {
+  padding: 0 !important;
+
+  .ts-panel {
+    margin-bottom: 0;
+  }
+
+  .panel-body {
+    padding: 15px 25px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-radius: 0;
+  }
+}
+
+// Section titles inside any panel body.
+.panel-body h4,
+.panel-body h5 {
+  font-weight: 600;
+}
+
+.ts-header-compact .panel-body {
+  h2 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  small {
+    color: lighten(@ts-text, 10%);
+  }
+}

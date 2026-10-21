@@ -1,0 +1,111 @@
+<template name="approvesList">
+
+  {{#pageHeader}}
+    <div class="approves-header">
+      <div class="approves-header-left">
+        <h2 class="font-light m-b-xs">
+          {{__ 'YourApprovals'}}
+        </h2>
+        <small>Approval requests and release drafts for your projects</small>
+      </div>
+      <div class="approves-header-actions">
+        {{> approvesCreate}}
+        {{> approvesStateFilter sessionVar="approvesListFilter"}}
+      </div>
+    </div>
+  {{/pageHeader}}
+
+  <div class="content approves-list">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="approves-view-type-filter" style="display:none">
+          <div class="input-group">
+            <span class="input-group-addon"><span class="fa fa-user"></span></span>
+            <select class="form-control view_type" name="viewType">
+              <option label="My requests" value="My" selected="{{isActiveType 'My'}}">{{__ 'MyRequests'}}</option>
+              <option label="Unassigned" value="Unassigned" selected="{{isActiveType 'Unassigned'}}">{{__ 'Unassigned'}}</option>
+              <option class="All requests" value="" selected="{{isActiveType ''}}">{{__ 'AllRequests'}}</option>
+            </select>
+          </div>
+        </div>
+        {{> reactiveTable settings=reactiveTableSettings}}
+      </div>
+    </div>
+  </div>
+</template>
+<template name="reactiveTableApprovesListAssignment">
+  {{#if isInRole 'compliance_manager' companyId}}
+    {{#if assignmentName}}
+      <a sort="{{assignmentName}}" class="remove_assignment">{{assignmentName}} <span class="fa fa-times"></span></a>
+    {{else}}
+      <a class="highlight add_assignment">{{__ 'assignToMe'}}</a>
+    {{/if}}
+  {{else}}
+    {{assignmentName}}
+  {{/if}}
+</template>
+
+<template name="reactiveTableApprovesListActions">
+  {{#if isInRole 'compliance_manager' companyId}}
+    {{#unless draft}}
+      {{#if approved}}
+        <span class="inline-block label-success btn-sm" style="line-height: 1em;">
+          <i class="fa fa-check-circle"></i> <span style="width: 115px" class="truncate text-left"><small>{{__ 'by'}} {{closedByName}}</small></span>
+          <br class="hidden-xs hidden-sm">
+          <small class="inline-block text-center hidden-xs hidden-sm">{{dateFormat date=approved dflt='-- --'}}</small>
+        </span>
+      {{else}}
+        {{#if rejected}}
+          <span class="inline-block label-danger btn-sm" style="line-height: 1em;" title="{{rejectedReason}}">
+            <i class="fa fa-ban"></i> <span style="width: 115px" class="truncate text-left"><small>{{__ 'by'}} {{closedByName}}</small></span>
+            <br class="hidden-xs hidden-sm">
+            <small class="inline-block text-center hidden-xs hidden-sm">{{dateFormat date=rejected dflt='-- --'}}</small>
+          </span>
+        {{else}}
+          <button
+              class="btn btn-success btn-sm approve" type="button"><i class="fa fa-check-circle"></i><span class="hidden-xs hidden-sm"> {{__ 'Approve'}}</span>
+          </button>
+          <button class="btn btn-danger2 btn-sm reject" type="button"><i class="fa fa-ban"></i><span class="hidden-xs hidden-sm"> {{__ 'Reject'}}</span></button>
+        {{/if}}
+      {{/if}}
+    {{else}}
+      <button class="btn btn-danger2 btn-sm remove" type="button">
+        <i class="fa fa-hourglass-start"></i><span class="hidden-xs hidden-sm"> {{__ 'RemoveDRAFT'}}</span>
+      </button>
+    {{/unless}}
+  {{else}}
+    {{#unless draft}}
+      {{#if approved}}
+        <span class="inline-block label-success btn-sm" style="line-height: 1em;">
+          <i class="fa fa-check-circle"></i> <span style="width: 115px" class="truncate text-left"><small>{{__ 'by'}} {{closedByName}}</small></span>
+          <br>
+          <small class="inline-block text-center">{{dateFormat date=approved dflt='-- --'}}</small>
+        </span>
+      {{else}}
+        {{#if rejected}}
+          <span class="inline-block label-danger btn-sm" style="line-height: 1em;" title="{{rejectedReason}}">
+            <i class="fa fa-ban"></i> <span style="width: 115px" class="truncate text-left"><small>{{__ 'by'}} {{closedByName}}</small></span>
+            <br>
+            <small class="inline-block text-center">{{dateFormat date=rejected dflt='-- --'}}</small>
+          </span>
+        {{/if}}
+      {{/if}}
+    {{else}}
+      <button class="btn btn-danger2 btn-sm remove" type="button">
+        <i class="fa fa-hourglass-start"></i><span class="hidden-xs hidden-sm"> {{__ 'RemoveDRAFT'}}</span>
+      </button>
+    {{/unless}}
+  {{/if}}
+</template>
+
+<template name="reactiveTableApprovesListProject">
+  {{#if moduleId}}
+    <a href="{{pathFor route='moduleDependencies' data=getModuleOptions}}" target="_blank" class="highlight">
+      <span sort="{{getModuleLabel}}">{{getModuleLabel}}</span>
+    </a>
+  {{else}}
+    <a href="{{pathFor route='projectModules' data=getProjectOptions}}" target="_blank" class="highlight">
+      <span sort="{{getProjectLabel}}">{{getProjectLabel}}</span>
+    </a>
+  {{/if}}
+</template>

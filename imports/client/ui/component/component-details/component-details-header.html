@@ -1,0 +1,38 @@
+<template name="componentDetailsHeader">
+  {{#pageHeader}}
+    <div class="approves-detail-header">
+      <div class="approves-detail-header-left">
+        <h2 class="font-light m-b-none">{{{getPkgMgrIcon getKey true}}} {{getName}}</h2>
+        {{#if getDescription}}
+          <small class="text-muted">{{getDescription}}</small>
+        {{else}}
+          <small class="text-muted">Component Details</small>
+        {{/if}}
+      </div>
+      <div class="approves-detail-header-actions">
+        {{#if isRemoved}}
+          <button class="btn btn-default" id="component-soft-delete-undo">
+            <i class="fa fa-repeat"></i> {{__ 'RevertDelete'}}
+          </button>
+        {{else}}
+          <button class="btn btn-default" id="component-soft-delete">
+            <i class="fa fa-times"></i> {{__ 'SoftDelete'}}
+          </button>
+        {{/if}}
+      </div>
+    </div>
+  {{/pageHeader}}
+  {{#if isInRole 'company_component_manager' companyId}}
+    <div class="approves-detail-tabs">
+      <ul class="nav nav-tabs">
+        <li class="{{activeTab 'criticalComponentsComponentDetailsEdit'}}">
+          <a href="{{pathFor route='criticalComponentsComponentDetailsEdit' data=routeParams}}"><i class="fa fa-info-circle"></i> {{__ 'Info'}}</a>
+        </li>
+        <li class="{{activeTab 'criticalComponentsComponentDetailsLogs'}}">
+          <a href="{{pathFor route='criticalComponentsComponentDetailsLogs' data=routeParams}}"><i class="fa fa-list"></i> {{__ 'Logs'}}</a>
+        </li>
+      </ul>
+    </div>
+  {{/if}}
+</template>
+

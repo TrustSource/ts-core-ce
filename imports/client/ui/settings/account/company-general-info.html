@@ -1,0 +1,16 @@
+<template name='companyGeneralInfo'>
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">General info</h2>
+        <small>Configure common company settings</small>
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content">
+    {{#if isInRole 'account_admin' companyId}}
+      {{> companyDetailsForm}}
+      {{> companyGeneralSettingsForm}}
+    {{/if}}
+  </div>
+</template>

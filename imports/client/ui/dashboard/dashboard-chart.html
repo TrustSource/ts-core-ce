@@ -1,0 +1,45 @@
+<template name="dashboardChart">
+  <div class="row">
+    <div class="{{class}}">
+      <div class="ts-panel">
+        <div class="panel-heading">
+          {{> panelTools }}
+          {{__ "LicensesInsideComponentVersions"}}
+          {{#if projects}}
+            <select id="currentProject"
+                    class="form-control change-view"
+                    name="currentProject">
+              <option value="">
+                --{{__ 'AllProjects'}}--
+              </option>
+              {{#each projects}}
+                <option value="{{_id}}" selected="{{isCurrentProject _id}}">
+                  {{name}}
+                </option>
+              {{/each}}
+            </select>
+          {{/if}}
+        </div>
+        <div class="panel-body">
+          <div class="doughnut-chart" style="margin-bottom: 10px">
+            <canvas id="applied-license-chart" height="150"></canvas>
+          </div>
+          {{#unless projects}}
+            {{__ 'NoProjectsAvailable'}}
+          {{/unless}}
+        </div>
+      </div>
+    </div>
+    <div class="{{class}}">
+      {{#panel title=(__ "ModulesOverview")}}
+
+        <div class="bar-chart">
+          <canvas id="modules-overview-chart"></canvas>
+        </div>
+        <div style="padding-bottom: 10px"></div>
+        <!--<div class="col-xs-3 bar-legend" id="modules-overview-chart-legend"></div>-->
+
+      {{/panel}}
+    </div>
+  </div>
+</template>

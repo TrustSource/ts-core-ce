@@ -1,0 +1,19 @@
+<template name="scanList">
+
+  {{> pageHeader
+    title="Scans"
+    desc="This are transferred module-scans for your company (queries are limited to 200 items)"
+  }}
+
+  <div class="content">
+    <div class="row scans">
+      <div class="col-lg-12 ts-stagger-item fadeIn">
+        <div class="ts-panel">
+          <div class="panel-body">
+            {{> reactiveTableServerSide filters=filters sortings=sortings fields=fields method=method options=options}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

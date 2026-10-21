@@ -1,0 +1,71 @@
+<template name="componentLinkWithModule">
+    {{#unless hasModuleLink}}
+      <a class="btn btn-default {{size}} link-with-module" title="Link with Module or Release">
+        <span class="fa fa-link" aria-hidden="true"></span> <span class="btn-label">Link</span></a>
+    {{/unless}}
+
+    <!-- Modal -->
+    <div class="modal fade" id="componentLinkWithModuleModal" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="ts-accent-line"></div>
+          <div class="modal-header text-center">
+            <i class="fa fa-link ts-big-icon text-success"></i>
+            <br/>
+            <h4 class="modal-title">Link Component</h4>
+          </div>
+          <div class="modal-body" style="min-height: 150px; position: relative;">
+            {{#if loading}}
+              <div class="text-center" style="padding: 30px 0;">
+                <i class="fa fa-spinner fa-spin fa-2x text-muted"></i>
+                <p class="text-muted" style="margin-top: 10px;">Loading...</p>
+              </div>
+            {{else}}
+              <div class="form-group">
+                <label>Link type</label>
+                <select id="linkTypeSelect" class="form-control">
+                  <option value="module">Module</option>
+                  <option value="release">Release</option>
+                </select>
+              </div>
+              {{#if isModuleType}}
+                <div class="form-group">
+                  <label>Select module</label>
+                  <select id="linkModuleSelect" class="form-control link-module-select2">
+                    <option value="">Select module</option>
+                    {{#each modulesGrouped}}
+                      <optgroup label="{{projectName}}">
+                        {{#each modules}}
+                          <option value="{{_id}}">{{name}}</option>
+                        {{/each}}
+                      </optgroup>
+                    {{/each}}
+                  </select>
+                </div>
+              {{else}}
+                <div class="form-group">
+                  <label>Select release</label>
+                  <select id="linkReleaseSelect" class="form-control link-release-select2">
+                    <option value="">Select release</option>
+                    {{#each releasesGrouped}}
+                      <optgroup label="{{projectName}}">
+                        {{#each releases}}
+                          <option value="{{_id}}">{{name}}{{#if version}} v{{version}}{{/if}}</option>
+                        {{/each}}
+                      </optgroup>
+                    {{/each}}
+                  </select>
+                </div>
+              {{/if}}
+            {{/if}}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary confirm-link-module">
+              <span class="fa fa-link"></span> Link
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+</template>

@@ -1,0 +1,45 @@
+<template name="componentLinkWithRelease">
+    {{#unless hasLink}}
+      <a class="btn btn-default {{size}} link-with-release" data-toggle="modal"
+         data-target="#componentLinkWithReleaseModal" title="Link with Release">
+        <span class="fa fa-copy" aria-hidden="true"></span> <span class="btn-label">Link</span></a>
+    {{else}}
+      {{#with hasLink}}
+        <a class="btn btn-default {{../size}}" target="_blank"
+           href="{{pathFor route='releasesDetailsOverview' data=getRouteOptions}}"
+           title="View linked Release">
+          <span class="fa fa-eye" aria-hidden="true"></span> <span class="btn-label">Release</span></a>
+        <button class="btn btn-danger {{../size}} remove-link-release">
+          <span class="fa fa-trash-o"></span>
+        </button>
+      {{/with}}
+    {{/unless}}
+
+    <!-- Modal: componentLinkWithReleaseModal -->
+    <div class="modal fade" id="componentLinkWithReleaseModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="ts-accent-line"></div>
+          <div class="modal-header text-center">
+            <i class="fa fa-copy ts-big-icon text-success"></i>
+            <br/>
+            <h4 class="modal-title">Link with Release</h4>
+            <br/>
+            {{#if loading}}
+              {{>loadingSplash}}
+            {{/if}}
+          </div>
+          <div class="modal-body">
+            {{> reactiveTable settings=reactiveTableSettings}}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</template>
+
+<template name="reactiveTableScansLinkRelease">
+  <button class="btn btn-primary btn-sm link-with"><span class="fa fa-link" aria-hidden="true"></span> Link</button>
+</template>

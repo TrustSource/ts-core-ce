@@ -1,0 +1,100 @@
+<template name="componentSelector">
+  <div>
+    {{#unless isComponentSelected}}
+      {{> componentSelectorFilter type="components"}}
+      <div class="row scans">
+        <div class="col-lg-12 ecs-components">
+          <div class="ts-panel">
+            {{#each components}}
+              {{> componentSelectorEntity}}
+            {{/each}}
+            {{#if noResults components}}
+              <div class="panel-compact">
+                <div class="text-info text-center">
+                  <i class="fa fa-exclamation-circle"></i> No results found, to find some component you should
+                  <a href class="highlight scroll-to">
+                    <i class="fa fa-arrow-up"></i> change filter
+                  </a>
+                  <p>OR</p>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 col-md-offset-3">
+                    <h5 class="m-b-md">Create a component to be researched</h5>
+                    <div>
+                      <div class="form-group">
+                        <label for="pkgType">Package type *</label>
+                        <select id="pkgType" required="required" class="form-control" name="pkgType">
+                          <option value="" label=""></option>
+                          {{#each pkgTypes}}
+                            <option value="{{this}}" label="{{this}}">{{this}}</option>
+                          {{/each}}
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="pkgName">Name *</label>
+                        <input id="pkgName" type="text" required="required" value="" name="pkgName" class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label for="pkgVersion">Version *</label>
+                        <input id="pkgVersion" type="text" required="required" value="" name="pkgVersion" class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label for="pkgRepo">Repo</label>
+                        <input id="pkgRepo" type="text" value="" name="pkgRepo" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {{/if}}
+            {{#if hasMore components}}
+              <div class="panel-compact">
+                <div class="text-primary text-center">
+                  <i class="fa fa-exclamation-circle"></i> This list has more items, to find some component you should
+                  <a href class="highlight scroll-to">
+                    <i class="fa fa-arrow-up"></i> change filter
+                  </a>
+                </div>
+              </div>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    {{else}}
+      {{> componentSelectorVersionFilter type="versions"}}
+      {{#unless isVersionSelected}}
+        <div class="row scans">
+          <div class="col-lg-12 ecs-components">
+            <div class="ts-panel">
+              {{#each selectedVersions}}
+                {{> componentSelectorVersionEntity}}
+              {{/each}}
+              {{#unless selectedVersions}}
+                <div class="panel-compact">
+                  <div class="text-info text-center">
+                    <i class="fa fa-exclamation-circle"></i> No versions found, to find some version you should
+                    <a href class="highlight scroll-to">
+                      <i class="fa fa-arrow-up"></i> change filter
+                    </a>
+                    <p>OR</p>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                      <h5 class="m-b-md">Create a version to be researched</h5>
+                      <div>
+                        <div class="form-group">
+                          <label for="pkgVersion">Version name *</label>
+                          <input id="pkgVersion" type="text" required="required" value="" name="pkgVersion" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {{/unless}}
+            </div>
+          </div>
+        </div>
+      {{/unless}}
+    {{/unless}}
+  </div>
+</template>

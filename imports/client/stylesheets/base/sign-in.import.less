@@ -1,0 +1,113 @@
+// Sign-in screens rendered in the blank layout: login, register, sign-up,
+// e-mail verification, password reset and the "creating workspace" screen.
+
+body.blank {
+  background-color: @ts-canvas;
+}
+
+// Centred account card. Register keeps the wide card; single-column forms
+// (sign in, password reset) add `.login-container-narrow`.
+.login-container {
+  max-width: 560px;
+  margin: auto;
+  padding-top: 6%;
+
+  &.login-container-narrow {
+    max-width: 420px;
+  }
+}
+
+// The copyright line is wider than the narrow card, so on screens wide enough
+// the footer reaches past the card on both sides instead of wrapping.
+@media (min-width: 600px) {
+  .login-container.login-container-narrow .blank-layout-footer {
+    margin-right: -75px;
+    margin-left: -75px;
+  }
+}
+
+// Large decorative icon in empty states and confirmation modals.
+.ts-big-icon {
+  font-size: 120px;
+}
+
+// Validation messages are pinned under their field, so showing one does not
+// shift the rest of the form.
+.errors-below {
+  .form-group {
+    position: relative;
+    margin-bottom: 5px;
+    padding-bottom: 18px;
+  }
+
+  label span.error {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 0.8em;
+  }
+}
+
+// Full-page artwork behind the account card, washed out by a light overlay.
+.login_bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background: url('/images/login-bg.svg') no-repeat center top;
+  background-size: 100% auto;
+
+  &:after {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: rgba(244, 244, 244, 0.9);
+  }
+}
+
+// Phones: keep a small gutter around the card.
+@media (max-width: 420px) {
+  .login-container {
+    margin: auto 10px;
+  }
+}
+
+// "Creating your workspace" screen: a card with a spinner, centred in the viewport.
+.creating-workspace-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.creating-workspace-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 460px;
+  padding: 40px 32px;
+  background: @color-white;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.creating-workspace-spinner {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto;
+  border: 4px solid #e0e0e0;
+  border-top-color: @ts-teal;
+  border-radius: 50%;
+  animation: loading-spinner-spin 0.8s linear infinite;
+}

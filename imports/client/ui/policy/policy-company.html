@@ -1,0 +1,26 @@
+<template name="openSourcePolicy">
+  {{> pageHeader desc="Last active policy updates for company" title="Open source policy" }}
+  <div class="content">
+    {{#if name}}
+      <div class="panel">
+        <div class="panel-body ">
+          <h3>{{name}}
+            <small class="pull-right" style="padding-top: 4px">Active from: {{getDateFormat activeFromDate true}}</small></h3>
+          <p>{{description}}</p>
+          {{#if getFile}}
+            <a href="{{getFile}}" target="_blank" class="highlight view-file" download>View policy file</a>
+          {{/if}}
+          <p class="text-right"><small>Updated: {{getDateFormat updatedDate}}</small></p>
+        </div>
+      </div>
+    {{else}}
+      <div class="alert alert-warning inner-b-20">
+        <p><i class="fa fa-warning"></i> <strong>Your company does not yet have an active open source policy</strong></p>
+        <p>
+          Please contact your <a class="highlight" href="mailto:{{complianceManagerEmail}}">Compliance manager</a> or
+          the <a class="highlight" href="mailto:{{accountAdminEmail}}">Account administrators</a> for more information
+        </p>
+      </div>
+    {{/if}}
+  </div>
+</template>

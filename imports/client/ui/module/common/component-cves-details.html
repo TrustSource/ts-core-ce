@@ -1,0 +1,246 @@
+<template name="componentCvesDetails">
+  <div class="inner-b-5">
+    {{#if hasVulns}}
+      <div class="pull-right">
+        {{#unless mappedVulns}}
+          {{#if requestInProgress}}
+            <button class="btn btn-xs btn-default">
+              <i class="fa fa-spinner fa-spin"></i>
+              Loading...
+            </button>
+          {{else}}
+            <button class="get_details btn btn-xs btn-default" type="button">
+              <i class="fa fa-info-circle"></i>
+              Get details
+            </button>
+          {{/if}}
+        {{else}}
+          <button class="less_details btn btn-xs btn-default" type="button">
+            <i class="fa fa-times"></i>
+            Less details
+          </button>
+        {{/unless}}
+        <div class="clearfix relative inline-block" style="width: auto" title="Select minimum level of confidence">
+          <button type="button" class="btn btn-default btn-xs btn-block dropdown-toggle"
+                  data-toggle="dropdown" style="width: auto">
+            <div class="text-left">
+              <i class="fa fa-signal" aria-hidden="true"></i> {{confidenceCurrent}}
+            </div>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-right w-100">
+            {{#each confidenceVariants}}
+              <li>
+                <a class="change_confidence truncate" data-value="{{value}}" href title="{{label}}">
+                  {{label}}
+                </a>
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
+    {{> companyManualVulnerabilitiesCreate version=version}}
+  </div>
+  {{#if hasVulns}}
+    <div>
+      {{> cvesBumpHints vulns=getVulns confidence=confidenceMinScore }}
+    </div>
+    {{#unless mappedVulns}}
+      {{#each getVulns}}
+        <div class="inner-b-5">
+          {{#if isCveWhiteListedAnywhere}}
+            {{> cveImpactInfo vuln=vuln.name }}
+            <button class="btn btn-xs btn-default pull-right remove_cve_whitelist" type="button" title="Vulnerability is muted">
+              <span class="fa fa-bell-slash-o"></span>
+            </button>
+          {{else}}
+            {{> cveImpactInfo vuln=vuln.name }}
+            <div class="pull-right relative inline-block" style="width: auto" title="Vulnerability notification enabled">
+              <button type="button" class="btn btn-default btn-xs btn-block dropdown-toggle"
+                      data-toggle="dropdown" style="width: auto">
+                <div class="text-left">
+                  <span class="fa fa-bell-o"></span>
+                </div>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li>
+                  <a class="add_cve_whitelist_fast" data-value="1" href title="False positive, not applicable to us">
+                    False positive, not applicable to us
+                  </a>
+                </li>
+                <li>
+                  <a class="add_cve_whitelist_fast" data-value="2" href title="Vulnerable code not in use">
+                    Vulnerable code not in use
+                  </a>
+                </li>
+                <li>
+                  <a class="add_cve_whitelist_fast" data-value="3" href title="Risk is tolerable, won't fix">
+                    Risk is tolerable, won't fix
+                  </a>
+                </li>
+                <li>
+                  <a class="add_cve_whitelist_fast" data-value="4" href title="Fix is about to be implemented">
+                    Fix is about to be implemented
+                  </a>
+                </li>
+                <li>
+                  <a class="add_cve_whitelist_fast" data-value="5" href title="Fix has been provided">
+                    Fix has been provided
+                  </a>
+                </li>
+                <li>
+                  <a class="add_cve_whitelist">
+                    Other
+                  </a>
+                </li>
+              </ul>
+            </div>
+          {{/if}}
+          <a target="_blank" href="{{getLink module=module}}">
+            {{#if getCisa}}
+              {{#with getCisa}}
+                <span class="inline-block m-r-xs cisa-icon fa fa-user-secret text-violations" title="CISA Exploit alert! Added: {{dateAdded}}, Required action: {{requiredAction}}"></span>
+              {{/with}}
+            {{/if}}
+            <label class="label confidence-label confidence-label-{{getConfidenceClass}} inner-t-1"
+                   title="Confidence level {{getConfidenceLevel}} ({{getConfidenceScore}}/5) based on {{getConfidenceVendor}}:{{getConfidenceProduct}}">
+              <i class="fa fa-signal confidence-cols" aria-hidden="true"></i>
+            </label>
+            {{#if isCveWhiteListedAnywhere}}
+              {{{cvssLabelCompact getScore 'grey' getScore}}}
+            {{else}}
+              {{{cvssLabelCompact getScore getCVSSColor getScore}}}
+            {{/if}}
+            <span class="inline-block m-l-xs">{{getName}}</span>
+            {{#if getLink}}
+              <span class="fa fa-external-link icon-inner-top"></span>
+            {{/if}}
+          </a>
+          {{#if getEnvironmental}}
+            <p class="inner-b-5">Base score {{{cvssLabelCompact getBaseScore 'grey' getBaseScore}}} was modified by Environmental settings</p>
+          {{/if}}
+          {{#if isCveWhiteListedAnywhere}}
+            {{#with isCveWhiteListedAnywhere}}
+              <p class="inner-b-5"><b>CVE is muted</b>: {{comment}}</p>
+            {{/with}}
+          {{else}}
+            <p class="inner-b-0">{{getDescription}}</p>
+          {{/if}}
+        </div>
+      {{/each}}
+    {{else}}
+      {{#each mappedVulns}}
+        <div class="inner-b-5">
+          {{#if isCveWhiteListedAnywhere}}
+            {{> cveImpactInfo vuln=vuln.name }}
+            <button class="btn btn-xs btn-default pull-right remove_cve_whitelist" type="button" title="Vulnerability is muted">
+              <span class="fa fa-bell-slash-o"></span>
+            </button>
+          {{else}}
+            {{> cveImpactInfo vuln=vuln.name }}
+            <div class="pull-right relative inline-block" style="width: auto" title="Vulnerability notification enabled">
+              <button type="button" class="btn btn-default btn-xs btn-block dropdown-toggle"
+                      data-toggle="dropdown" style="width: auto">
+                <div class="text-left">
+                  <span class="fa fa-bell-o"></span>
+                </div>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li>
+                  <a class="add_cve_whitelist_fast" data-value="1" href title="False positive, not applicable to us">
+                    False positive, not applicable to us
+                  </a>
+                </li>
+                <li>
+                  <a class="add_cve_whitelist_fast" data-value="2" href title="Vulnerable code not in use">
+                    Vulnerable code not in use
+                  </a>
+                </li>
+                <li>
+                  <a class="add_cve_whitelist_fast" data-value="3" href title="Risk is tolerable, won't fix">
+                    Risk is tolerable, won't fix
+                  </a>
+                </li>
+                <li>
+                  <a class="add_cve_whitelist_fast" data-value="4" href title="Fix is about to be implemented">
+                    Fix is about to be implemented
+                  </a>
+                </li>
+                <li>
+                  <a class="add_cve_whitelist_fast" data-value="5" href title="Fix has been provided">
+                    Fix has been provided
+                  </a>
+                </li>
+                <li>
+                  <a class="add_cve_whitelist">
+                    Other
+                  </a>
+                </li>
+              </ul>
+            </div>
+          {{/if}}
+          <a target="_blank" href="{{getLink}}">
+            {{#if getCisa}}
+              {{#with getCisa}}
+                <span class="inline-block m-r-xs cisa-icon fa fa-user-secret text-violations" title="CISA Exploit alert! Added: {{dateAdded}}, Required action: {{requiredAction}}"></span>
+              {{/with}}
+            {{/if}}
+            <label class="label confidence-label confidence-label-{{getConfidenceClass}} inner-t-1"
+                   title="Confidence level {{getConfidenceLevel}} ({{getConfidenceScore}}/5) based on {{getConfidenceVendor}}:{{getConfidenceProduct}}">
+              <i class="fa fa-signal confidence-cols" aria-hidden="true"></i>
+            </label>
+            {{#if isCveWhiteListedAnywhere}}
+              {{{cvssLabelCompact getScore 'grey' getScore}}}
+            {{else}}
+              {{{cvssLabelCompact getScore getCVSSColor getScore}}}
+            {{/if}}
+            <span class="inline-block m-l-xs">{{getName}}</span>
+            {{#if getLink}}
+              <span class="fa fa-external-link icon-inner-top"></span>
+            {{/if}}
+          </a>
+          {{#if getEnvironmental}}
+            <p class="inner-b-5">Base score {{{cvssLabelCompact getBaseScore 'grey' getBaseScore}}} was modified by Environmental settings</p>
+          {{/if}}
+          {{#if isCveWhiteListedAnywhere}}
+            {{#with isCveWhiteListedAnywhere}}
+              <p class="inner-b-5"><b>CVE is muted</b>: {{comment}}</p>
+            {{/with}}
+          {{else}}
+            {{#if getLastModified}}
+              <p class="inner-b-0" title="Last modified">
+                <span class="fa fa-clock-o"></span> {{{dateFromNow getLastModified}}}
+              </p>
+            {{/if}}
+            <p class="inner-b-0">
+              {{#if getWeakness}}
+                <span title="Weakness"><a href="{{getWeaknessUrl}}" target="_blank" title="{{ getWeakness }}">{{ getWeakness }} <span class="fa fa-external-link"></span></a></span> -
+              {{/if}}
+              {{#if getVector}}
+                , <span class="truncate" title="Overall Score (vectoral): {{ getVector }}">{{ getVector }}</span>
+              {{/if}}
+              {{#if getExploitscore}}
+                , <span title="Exploit score: {{ getExploitscore }}">Exploit: {{ getExploitscore }}</span>
+              {{/if}}
+              {{#if getImpactscore}}
+                , <span title="Impact score: {{ getImpactscore }}">Impact: {{ getImpactscore }}</span>
+              {{/if}}
+            </p>
+            <p class="inner-b-0">{{getDescription}}</p>
+          {{/if}}
+        </div>
+      {{/each}}
+    {{/unless}}
+    {{#if confidenceFiltered}}
+      <div class="aside-section">
+        <h6 class="aside-section-title bot-warnings">
+          <span class="fa fa-exclamation-circle"></span>
+          <span>Notice</span>
+        </h6>
+        <div class="aside-section-content">
+          Some vulnerabilities are hidden via <i class="fa fa-signal" aria-hidden="true"></i> Confidence filter
+        </div>
+      </div>
+    {{/if}}
+  {{/if}}
+</template>

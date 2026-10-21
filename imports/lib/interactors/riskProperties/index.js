@@ -1,0 +1,12 @@
+export {default as RiskPropertiesCreate} from './create'
+export {default as RiskPropertiesUpdate} from './update'
+export {default as RiskPropertiesRemove} from './remove'
+export {default as RiskPropertiesFind} from './find'
+export {default as RiskPropertiesFindOne} from './findOne'
+export {default as RiskPropertiesFindOneById} from './findOneById'
+export {default as RiskPropertiesCountermeasuresFind} from './countermeasuresFind'
+export {default as RiskPropertiesGetPortfolio} from './getPortfolio'
+export {default as RiskPropertiesFilter} from './filter'
+export {default as RiskPropertiesReconcileFromSarif} from './reconcileFromSarif'
+export {default as RiskPropertiesReconcileLicenseRisk} from './reconcileLicenseRisk'
+

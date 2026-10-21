@@ -1,0 +1,297 @@
+<template name="moduleSettingsLegal">
+  <div id="legal" class="tab-pane">
+    <div class="panel-body no-bottom-errors">
+      <div class="clearfix">
+        <div class="pull-right actions actions-wizard" style="position:relative">
+          {{#if historyView}}
+            {{#if hasAccessRight 'module.legal.settings' 'w' currentModule}}
+              <a href class="btn btn-default btn-xs close-history">
+                <span class="fa fa-times"></span> Close history
+              </a>
+            {{/if}}
+          {{else}}
+            {{#if hasAccessRight 'module.legal.settings' 'w' currentModule}}
+              <a href class="btn btn-default btn-xs view-history">
+                <span class="fa fa-repeat"></span> View history
+              </a>
+            {{/if}}
+            {{#if hasAccessRight 'module.legal.wizard' 'x' currentModule}}
+              <a href class="btn btn-default btn-xs view-wizard {{wizardBtnClass true}}">
+                <span class="fa fa-magic"></span> Start wizard
+              </a>
+              <a href class="btn btn-default btn-xs view-all {{wizardBtnClass }}">
+                <span class="fa fa-list"></span> View all
+              </a>
+            {{/if}}
+            <div class="inline-block relative">
+              {{#if hasAccessRight 'module.legal.import_template' 'x' currentModule}}
+                {{#if getLegalTemplatesSettings.length}}
+                  <button type="button" class="btn btn-default btn-xs dropdown-toggle"
+                          data-toggle="dropdown">
+                    <span class="fa fa-copy"></span> Import settings from Template <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    {{#each getLegalTemplatesSettings}}
+                      <li><a class="copy-legal-template-settings" id="{{_id}}">{{name}}</a></li>
+                    {{/each}}
+                  </ul>
+                {{/if}}
+              {{/if}}
+            </div>
+            <div class="inline-block relative">
+              {{#if hasAccessRight 'module.legal.import_project' 'x' currentModule}}
+                {{#if getLegalSettings.length}}
+                  <button type="button" class="btn btn-default btn-xs dropdown-toggle"
+                          data-toggle="dropdown">
+                    <span class="fa fa-copy"></span> Import settings from Module <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <input type="text" class="drop-filter form-control import_filter" placeholder="Search by name"
+                             value="{{getImportFilter}}"/>
+                    </li>
+                    {{#each filterList getLegalSettings getImportFilter}}
+                      <li><a class="copy-legal-settings" id="{{_id}}">{{name}}</a></li>
+                    {{/each}}
+                  </ul>
+                {{/if}}
+              {{/if}}
+            </div>
+            <div class="inline-block relative">
+            {{#if hasAccessRight 'module.legal.propagate' 'x' currentModule}}
+              {{#unless wizardView}}
+                {{#if otherModules.length}}
+                  <button type="button" class="btn btn-default btn-xs dropdown-toggle"
+                          data-toggle="dropdown">
+                    <span class="fa fa-share"></span> Propagate settings to...<span
+                          class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-right">
+                    <li>
+                      <input type="text" class="drop-filter form-control module_filter" placeholder="Search by name"
+                             value="{{getModuleFilter}}"/>
+                    </li>
+                    {{#if isInRole 'portfolio_manager' companyId}}
+                      <li><a class="propagate-all-legal-settings">All {{otherModules.length}} modules</a></li>
+                    {{/if}}
+                    <li><a class="propagate-all-my-legal-settings">All my {{myModulesCount}} modules</a></li>
+                    {{#if isInRole 'portfolio_manager' companyId}}
+                      <li><a class="propagate-project-legal-settings">All {{projectModulesCount}} project modules</a>
+                      </li>
+                    {{/if}}
+                    <li><a class="propagate-my-project-legal-settings">All my {{myProjectModulesCount}} project
+                      modules</a></li>
+                    {{#each filterList otherModules getModuleFilter}}
+                      <li><a class="propagate-legal-settings" id="{{_id}}">{{name}}</a></li>
+                    {{/each}}
+                  </ul>
+                {{/if}}
+              {{/unless}}
+            {{/if}}
+          </div>
+          {{/if}}
+        </div>
+      </div>
+      {{#if hasAccessRight 'module.legal.project' 'r' currentModule}}
+        {{#if getProject}}
+          {{#if getProjectRequirements}}
+            <div class="inner-t-10">
+              {{#unless noProjectRequirements}}
+                {{> legalRequirementsDescription requirements=getProjectRequirements projectId=this.projectId}}
+              {{else}}
+                {{> legalRequirementsDescription requirements=getProjectRequirements projectId=this.projectId moduleError=true}}
+              {{/unless}}
+            </div>
+          {{/if}}
+        {{/if}}
+      {{/if}}
+      {{#if hasAccessRight 'module.legal.settings' 'w' currentModule}}
+        {{#if historyView}}
+          {{#each historyRequirements}}
+            {{> legalRequirementsHistoryEntry requirements=requirements details=this moduleId=moduleId}}
+          {{/each}}
+          {{#unless historyRequirements.length}}
+            {{> reactiveTableNoData}}
+          {{/unless}}
+        {{else}}
+          {{#if wizardView}}
+            <h3>Legal settings wizard</h3>
+            {{> wizard id="legalWizard" steps=stepsQuestionnaire clearOnDestroy=true nextButton='Next' backButton='Back'
+                    confirmButton='Finish' stepsTemplate='questionnaireSteps'}}
+          {{else}}
+            {{# autoForm
+                    id="updateModuleFormRequirements"
+                    docId=this._id
+                    collection=getModules
+                    schema=getRequirementsSchema
+                    doc=getRequirements
+                    type="normal"
+            }}
+              <div class="row">
+                <div class="col-md-6">
+                  <h3>Trade Secret Aspects</h3>
+                  <div class="row">
+                    <div class="col-md-12">{{> afQuickField name='TS' }}</div>
+                    <div class="col-md-12 inner-b-20">
+                      <i>
+                        Some licenses force you to open source or at least publish your derivative works. This might be a
+                        threat to your trade secrets or intellectual property. If you <strong>switch on</strong> Trade
+                        secret protection, licenses requiring you to release or publish your work will be flagged as
+                        violations, if switched off, the obligations will only shown as warnings unless satisfied
+                      </i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <h3>Licensing Strategy</h3>
+                  <div class="row">
+                    <div class="col-md-12">{{> afQuickField name='LS' }}</div>
+                    <div class="col-md-12 inner-b-20">
+                      <i>
+                        There are several licenses, which do not allow you to sublicense the components. Thus you must
+                        make sure, the OS components are named (e.g. Bill of materials) and provided aside your privately
+                        licensed code. However, in case you are planning to provide this module as open source or operate
+                        it as part of a service that is not licensed at all, you <strong>may skip</strong> these warnings.
+                      </i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <h3>Distribution of the module</h3>
+                  <div class="row">
+                    <div class="col-md-12">{{> afQuickField name='D' }}</div>
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Update</button>
+            {{/ autoForm}}
+          {{/if}}
+        {{/if}}
+      {{else}}
+        {{# autoForm
+                id="updateModuleFormRequirementsDisplay"
+                docId=this._id
+                collection=getModules
+                schema=getRequirementsSchema
+                doc=getRequirements
+                type="normal"
+        }}
+          <div class="row">
+            <div class="col-md-6">
+              <h3>Trade Secret Aspects</h3>
+              <div class="row">
+                <div class="col-md-12">
+                  {{#with hasFieldRight 'module.legal.settings' currentModule}}
+                    {{#if read}}
+                      {{> afQuickField name='TS' disabled=disabled}}
+                    {{/if}}
+                  {{/with}}
+                </div>
+                <div class="col-md-12 inner-b-20">
+                  <i>
+                    Some licenses force you to open source or at least publish your derivative works. This might be a
+                    threat to your trade secrets or intellectual property. If you <strong>switch on</strong> Trade
+                    secret protection, licenses requiring you to release or publish your work will be flagged as
+                    violations, if switched off, the obligations will only shown as warnings unless satisfied
+                  </i>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <h3>Licensing Strategy</h3>
+              <div class="row">
+                <div class="col-md-12">
+                  {{#with hasFieldRight 'module.legal.settings' currentModule}}
+                    {{#if read}}
+                      {{> afQuickField name='LS' disabled=disabled}}
+                    {{/if}}
+                  {{/with}}
+                </div>
+                <div class="col-md-12 inner-b-20">
+                  <i>
+                    There are several licenses, which do not allow you to sublicense the components. Thus you must
+                    make sure, the OS components are named (e.g. Bill of materials) and provided aside your privately
+                    licensed code. However, in case you are planning to provide this module as open source or operate
+                    it as part of a service that is not licensed at all, you <strong>may skip</strong> these warnings.
+                  </i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <h3>Distribution of the module</h3>
+              <div class="row">
+                <div class="col-md-12">
+                  {{#with hasFieldRight 'module.legal.settings' currentModule}}
+                    {{#if read}}
+                      {{> afQuickField name='D' disabled=disabled}}
+                    {{/if}}
+                  {{/with}}
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/ autoForm}}
+      {{/if}}
+    </div>
+  </div>
+</template>
+
+<template name="moduleQuestionnaireStepOne">
+  {{# autoForm id="questionnaire-step-one-form" type="normal"
+               docId=this._id
+               collection=getModules
+               doc=step.data
+               schema=step.schema
+  }}
+    <div class="row">
+      <div class="col-md-12">{{> afQuickField name='TS' }}</div>
+      <div class="col-md-12 inner-b-20">
+        <i>
+          Some licenses force you to open source or at least publish your derivative works. This might be a threat to
+          your trade secrets or intellectual property. If you <strong>switch on</strong> Trade secret protection,
+          licenses requiring you to release or publish your work will be flagged as violations, if switched off, the
+          obligations will only shown as warnings unless satisfied
+        </i>
+      </div>
+    </div>
+    {{> questionnaireButtons}}
+  {{/ autoForm}}
+</template>
+<template name="moduleQuestionnaireStepTwo">
+  {{# autoForm id="questionnaire-step-two-form" type="normal"
+               docId=this._id
+               collection=getModules
+               doc=step.data
+               schema=step.schema
+  }}
+    <div class="row">
+      <div class="col-md-12">{{> afQuickField name='LS' }}</div>
+      <div class="col-md-12 inner-b-20">
+        <i>
+          There are several licenses, which do not allow you to sublicense the components. Thus you must make sure, the
+          OS components are named (e.g. Bill of materials) and provided aside your privately licensed code. However, in
+          case you are planning to provide this module as open source or operate it as part of a service that is not
+          licensed at all, you <strong>may skip</strong> these warnings.
+        </i>
+      </div>
+    </div>
+    {{> questionnaireButtons}}
+  {{/ autoForm}}
+</template>
+<template name="moduleQuestionnaireStepThree">
+  {{# autoForm id="questionnaire-step-three-form" type="normal"
+               docId=this._id
+               collection=getModules
+               doc=step.data
+               schema=step.schema
+  }}
+    <div class="row">
+      <div class="col-md-12">{{> afQuickField name='D' }}</div>
+    </div>
+    {{> questionnaireButtons}}
+  {{/ autoForm}}
+</template>

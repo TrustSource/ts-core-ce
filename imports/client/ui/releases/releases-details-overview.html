@@ -1,0 +1,59 @@
+<template name="releasesDetailsOverview">
+  <div>
+    {{#if _id}}
+      {{#if stats.notice}}
+        <h3>Overview</h3>
+        <div class="row inner-b-25">
+          <div class="col-sm-3">
+            <div class="panel panel-default text-center">
+              <p class="h2"><strong>{{modules.length}}</strong></p>
+              <p class="h5">Modules</p>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="panel panel-default text-center">
+              <p class="h2"><strong>{{stats.notice.components}}</strong></p>
+              <p class="h5">Components</p>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="panel panel-default text-center">
+              <p class="h2"><strong>{{stats.changes.modified}}</strong></p>
+              <p class="h5">Component status changes</p>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="panel panel-default text-center">
+              <p class="h2"><strong>{{stats.versioning.totalProblems}}</strong></p>
+              <p class="h5">Components outdated</p>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="panel panel-default text-center">
+              <p class="h2"><strong>{{stats.notice.completedActivity}}/{{stats.notice.totalActivity}}</strong></p>
+              <p class="h5">Legal actions resolved</p>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="panel panel-default text-center">
+              <p class="h2"><strong>{{stats.vulnerability.mutedVulnerability}}/{{stats.vulnerability.vulnerability}}</strong></p>
+              <p class="h5">Vulnerabilities resolved </p>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <a href="{{pathFor route='noticeFileDetails' data=getNoticeOptions}}" target="_blank">
+              <div class="panel panel-default text-center">
+                <p class="h2"><strong>{{stats.notice.completed}}%</strong></p>
+                <p class="h5">Notice file completed</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      {{/if}}
+      <h3>Modules</h3>
+      {{> reactiveTable settings=reactiveTableModules}}
+    {{else}}
+      {{>loadingSplash}}
+    {{/if}}
+  </div>
+</template>

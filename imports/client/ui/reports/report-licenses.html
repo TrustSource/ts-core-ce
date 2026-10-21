@@ -1,0 +1,157 @@
+<template name="reportLicenses">
+
+  {{#pageHeader}}
+    <div class="reports-header">
+      <div class="reports-header-left">
+        <h2 class="font-light m-b-xs">Licenses overview</h2>
+        <small>List of all licenses used in project</small>
+      </div>
+      <div class="reports-header-actions">
+        <select class="form-control current-project select2">
+          {{#each projectList}}
+            <option value="{{_id}}" selected="{{isActiveProject}}">{{name}}</option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+  {{/pageHeader}}
+
+  <div class="content">
+    {{#if getProjectLicensesStatus}}
+      <div class="text-right inner-b-10">
+        <button class="btn btn-primary btn-xs export-as-pdf" type="button">
+          <span class="fa fa-file-pdf-o" aria-hidden="true"></span> Export as PDF
+        </button>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="panel panel-success text-center">
+            <p class="h2"><strong>{{counterLicenses}}</strong></p>
+            <p class="h5">licenses</p>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="panel panel-default text-center">
+            <p class="h2"><strong>{{counterComponents}}</strong></p>
+            <p class="h5">components</p>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="panel panel-danger text-center">
+            <p class="h2"><strong>{{counterObligations}}</strong></p>
+            <p class="h5">obligations</p>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h5>Project Goals</h5>
+        </div>
+        <div class="panel-body">
+          {{#if haveDescription currentProject.description}}
+            <p>{{currentProject.description}}</p>
+          {{else}}
+            <p>No project goal was provided.</p>
+          {{/if}}
+        </div>
+      </div>
+      {{#with getProjectLicensesStatus}}
+        {{#if modules.length}}
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h5>Used modules</h5>
+            </div>
+            <div class="panel-body">
+              {{#each modules}}
+                {{> moduleAnalysisMetaLink module=this}}
+              {{/each}}
+            </div>
+          </div>
+        {{/if}}
+      {{/with}}
+      {{> legalRequirementsDescription requirements=getRequirements projectId=currentProject._id}}
+    {{/if}}
+    {{#if getProjectLicenses}}
+      <div class="ts-panel obligation-list">
+        {{#each getProjectLicenses}}
+          <div class="panel-body {{status}}">
+            <div class="row">
+              <div class="col-sm-4 text-left">
+                {{{ecsLabel status label}}}
+                <h5>{{name}}</h5>
+                <small>Used in {{getPluralized 'module' countModules}} by {{getPluralized 'component' components}}</small>
+                {{#each statusByModule}}
+                  <p class="inner-b-0 inner-t-5">
+                    <a href="{{pathFor route=actionRoute.route data=actionRoute.params query=actionRoute.query}}"
+                       target="_blank">
+                      {{module.name}}
+                      <span class="fa fa-external-link inner-l-5"></span>
+                    </a>
+                  </p>
+                {{/each}}
+              </div>
+              <div class="col-sm-8">
+                <table class="table-clear">
+                  {{#if reason}}
+                    <tr>
+                      <td style="width:140px;">
+                        {{{ecsLabel 'warnings' 'Warning'}}}
+                      </td>
+                      <td>{{reason}}</td>
+                    </tr>
+                  {{/if}}
+                  {{#each violations}}
+                    <tr>
+                      <td style="width:140px;">
+                        {{{ecsLabel 'violations' 'Violation'}}}
+                      </td>
+                      <td>{{describeViolations}}</td>
+                    </tr>
+                  {{/each}}
+                  {{#each getDeadlyObligations}}
+                    <tr>
+                      <td style="width:140px;">
+                        {{{ecsLabel 'violations' 'Obligation'}}}
+                      </td>
+                      <td>{{describeDeadlyObligations}}</td>
+                    </tr>
+                  {{/each}}
+                  {{#each obligations}}
+                    <tr>
+                      <td style="width:140px;">
+                        {{{ecsLabel 'warnings' 'Obligation'}}}
+                      </td>
+                      <td>{{describeObligations}}</td>
+                    </tr>
+                  {{/each}}
+                </table>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    {{/if}}
+    {{#if selectProject}}
+      {{#panel}}
+        <div class="text-info">
+          <i class="fa fa-check-circle-o"></i> Please select the project to run a report on the upper right
+        </div>
+      {{/panel}}
+    {{/if}}
+    {{#if requestInProgress}}
+      {{#panel}}
+        <div class="text-primary">
+          <i class="fa fa-spinner fa-spin"></i> Loading report data for project {{getProjectName}}, please wait...
+        </div>
+      {{/panel}}
+    {{/if}}
+    {{#if noDataInProject}}
+      <div class="text-right inner-b-10">
+        <button class="btn btn-primary btn-xs export-as-pdf" type="button">
+          <span class="fa fa-file-pdf-o" aria-hidden="true"></span> Export as PDF
+        </button>
+      </div>
+      {{> reactiveTableNoData}}
+    {{/if}}
+  </div>
+</template>

@@ -1,0 +1,62 @@
+<template name="legalRequirementsDescriptionDetails">
+  {{#if requirements.CA}}
+    <p>
+      This project will {{#if compare requirements.CA 'CA_none'}}<b>[not]</b>{{/if}} commercialize
+      {{#if compare requirements.CA 'CA_usage'}}<b>by charging a usage fee</b>{{/if}}
+      {{#if compare requirements.CA 'CA_license'}}<b>by charging a license fee</b>{{/if}}
+      {{#if compare requirements.CA 'CA_support'}}<b>by charging a support fee</b>{{/if}}
+      {{#if compare requirements.CA 'CA_other'}}<b>by charging some fee to its users</b>{{/if}}
+    </p>
+  {{/if}}
+  {{#if requirements.OM}}
+    <p>
+      {{#if compare requirements.OM 'OM_SaaS'}}Solution will be operated in a <b>Software as a Service-Mode</b>{{/if}}
+      {{#if compare requirements.OM 'OM_mop'}}We plan to operate it on our customer’s location(s) as a <b>managed service</b>{{/if}}
+      {{#if compare requirements.OM 'OM_sw'}}It will follow a <b>traditional software-distribution model</b>{{/if}}
+      {{#if compare requirements.OM 'OM_dis'}}The solution will be part of an <b>appliance / distributed embedded</b> in a device or hardware{{/if}}
+    </p>
+  {{/if}}
+  {{#if requirements.IP_protect}}
+    <p>
+      Specific needs for the protection of intellectual property
+      {{#if compare requirements.IP_protect 'IP_protect_n'}}<b>were not given</b>{{/if}}
+      {{#if compare requirements.IP_protect 'IP_protect_y'}}<b>have been requested</b>{{/if}}
+      {{#if compare requirements.IP_enforce 'IP_enforce_1'}}<b>as well as an explicit protection of being subject to patent claims from contributors is requested</b>{{/if}}
+      {{#if compare requirements.IP_enforce 'IP_enforce_2'}}<b>as well as an explicit protection of being subject to patent claims from contributors is requested</b>{{/if}}
+      {{#if compare requirements.IP_enforce 'IP_enforce_3'}}<b>as well as an explicit protection of being subject to patent claims from contributors is requested</b>{{/if}}.
+    </p>
+  {{/if}}
+  {{#if requirements.IP_enforce}}
+    <p>
+      On the other hand
+      {{#if compare requirements.IP_enforce 'IP_enforce_1'}}<b>no specific requirements have been requested to enforce our own claims</b>{{/if}}
+      {{#if compare requirements.IP_enforce 'IP_enforce_2'}}<b>the projects seeks the opportunity to enforce our own claims where necessary</b>{{/if}}
+      {{#if compare requirements.IP_enforce 'IP_enforce_3'}}<b>the projects seeks the opportunity to enforce our own claims where necessary</b>{{/if}}.
+    </p>
+  {{/if}}
+  {{#if requirements.TS}}
+    <p>
+      Concerning trade secrets, specific protection
+      {{#if compare requirements.TS 'TS_y'}}<b>is requested</b>{{/if}}
+      {{#if compare requirements.TS 'TS_n'}}<b>is not required</b>{{/if}}.
+    </p>
+  {{/if}}
+  {{#if requirements.LS}}
+    <p>
+      It is planned to provide the project
+      {{#if compare requirements.LS 'LS_os'}}<b>as open source</b>{{/if}}
+      {{#if compare requirements.LS 'LS_pl'}}<b>under a proprietary license</b>{{/if}}.
+    </p>
+  {{/if}}
+  {{#if requirements.D}}
+    <p>
+      The modules of this project will be distributed as follows:
+      {{#if compare requirements.D 'D_op'}}<b>on premises</b>{{/if}}
+      {{#if compare requirements.D 'D_ipoa'}}<b>integral part of appliance</b>{{/if}}
+      {{#if compare requirements.D 'D_xa'}}<b>exchangeable addon</b>{{/if}}
+      {{#if compare requirements.D 'D_cslib'}}<b>cs library</b>{{/if}}
+      {{#if compare requirements.D 'D_sslib'}}<b>ss library in web sol</b>{{/if}}
+      {{#if compare requirements.D 'D_never'}}<b>no distrib at all</b>{{/if}}
+    </p>
+  {{/if}}
+</template>

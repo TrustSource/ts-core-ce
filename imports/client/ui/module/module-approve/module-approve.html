@@ -1,0 +1,209 @@
+<template name="moduleApprove">
+  {{#pageHeader}}
+    <div class="approves-header">
+      <div class="approves-header-left">
+        <h2 class="font-light m-b-xs">
+          <span class="truncate max-w-80" title="{{name}}">{{name}}</span>
+        </h2>
+        <small>Initiate Approval</small>
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content wizard-content">
+    <div class="wizard">
+      <div class="steps">
+        <ul>
+          <li class="wizardStep {{isCurrentApproveStepClass 1}} go_to_step" data-step="1">
+            <span class="badge {{isCurrentApproveStepIconClass 1}}">1</span>
+            Settings
+            <span class="chevron"></span>
+          </li>
+          <li class="wizardStep {{isCurrentApproveStepClass 3}} go_to_step" data-step="3">
+            <span class="badge {{isCurrentApproveStepIconClass 3}}">2</span>
+            Select analysis
+            <span class="chevron"></span>
+          </li>
+          <li class="wizardStep {{isCurrentApproveStepClass 4}} go_to_step" data-step="4">
+            <span class="badge {{isCurrentApproveStepIconClass 4}}">3</span>
+            Confirm statuses
+            <span class="chevron"></span>
+          </li>
+          <li class="wizardStep {{isCurrentApproveStepClass 5}} go_to_step" data-step="5">
+            <span class="badge {{isCurrentApproveStepIconClass 5}}">4</span>
+            Finalization
+            <span class="chevron"></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="content pinner-t-5">
+    <div class="row">
+      <div class="col-lg-12 ts-stagger-item fadeIn">
+        <form id="createApproveForm" class="ts-panel">
+          {{#if isCurrentApproveStep 1}}
+            <div class="panel-body">
+              <h3>Prepare Approval</h3>
+              {{#with approveData}}
+                <div class="form">
+                  <div class="form-group inner-b-5">
+                    <label class="control-label checkbox-inline" for="approve_draft">
+                      <input type="checkbox" id="approve_draft" name="approve_draft" class="i-checks check-loose" checked={{getDraft}}>
+                      <strong>Dry run</strong>
+                    </label>
+                    <span class="help-block small">Allows you to run a test. The request will not be pushed to the Compliance Managers but you will be able to see the results</span>
+                  </div>
+                  <div class="form-group inner-b-5">
+                    <label class="control-label" for="approve_name">Approve name or product name *</label>
+                    <input type="text" name="approve_name" class="form-control"
+                           placeholder="Name" value="{{getName}}" required>
+                    <span class="help-block small">A name you may want to use to identify the approval</span>
+                  </div>
+                  <div class="form-group inner-b-5">
+                    <label class="control-label" for="approve_name">Semantic version</label>
+                    <input type="text" name="approve_version" class="form-control"
+                           placeholder="*.*.*" value="{{getVersion}}">
+                    <span class="help-block small">Give a version number. NOTE: This is just the version of the approval. It must not comply with the release of your solution</span>
+                  </div>
+                  <div class="form-group inner-b-5">
+                    <label class="control-label" for="approve_purl">Packageurl</label>
+                    <input type="text" name="approve_purl" class="form-control"
+                           placeholder="scheme:type/namespace/name@version?qualifiers#subpath" value="{{getPurl}}" >
+                    <span class="help-block small">Define valid purl that can be used for public vex api</span>
+                  </div>
+                  <div class="form-group inner-b-5">
+                    <label class="control-label" for="approve_description">Approve description</label>
+                    <textarea name="approve_description" class="form-control"
+                              placeholder="Description" value="{{getDescription}}"></textarea>
+                    <span class="help-block small">Can be used to deliver a message or comment to the compliance manager</span>
+                  </div>
+                </div>
+              {{/with}}
+            </div>
+          {{/if}}
+          {{#if isCurrentApproveStep 2}}
+            <div class="panel-body">
+              <h3>Pick the combination of modules to approve</h3>
+              {{#staggering child="modules"}}
+
+                {{#if hasModules}}
+                  {{> reactiveTable settings=reactiveTableStep2}}
+                {{else}}
+                  {{> reactiveTableNoData}}
+                {{/if}}
+
+              {{/staggering}}
+            </div>
+          {{/if}}
+          {{#if isCurrentApproveStep 3}}
+            <div class="panel-body">
+              <h3>Select your module analysis for approval</h3>
+              {{#staggering child="modules"}}
+
+                {{#if hasModules}}
+                  {{> reactiveTable settings=reactiveTableStep3}}
+                {{else}}
+                  {{> reactiveTableNoData}}
+                {{/if}}
+
+              {{/staggering}}
+            </div>
+          {{/if}}
+          {{#if isCurrentApproveStep 4}}
+            <div class="panel-body">
+              <h3>Confirm your module selection to send for approval</h3>
+              {{#staggering child="modules"}}
+
+                {{#if hasModules}}
+                  {{> reactiveTable settings=reactiveTableStep4}}
+                {{else}}
+                  {{> reactiveTableNoData}}
+                {{/if}}
+
+              {{/staggering}}
+            </div>
+          {{/if}}
+          <div class="panel-footer text-right">
+            {{#if canGoPrev}}
+              <button type="button" class="btn btn-default go_prev">Back</button>
+            {{else}}
+              <a class="btn btn-default" href="{{pathFor route='moduleDependencies' data=getModuleOptions}}">Return to
+                module</a>
+            {{/if}}
+            {{#if canGoNext}}
+              <button type="submit" class="btn btn-primary go_next">Next</button>
+            {{/if}}
+          </div>
+        </form>
+      </div>
+    </div>
+    {{#if isLoading}}
+      <div class="splash-holder">
+        <div class="ts-accent-line"></div>
+        <div class="ts-splash-title">
+          <h1>Loading ...</h1>
+          <div class="loading-spinner"></div>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+</template>
+
+<template name="reactiveTableModuleAnalysis">
+  <div class="module_analysis" style="z-index: 99;">
+    {{#unless isInfrastructureModule}}
+      {{#if moduleAnalysis.length}}
+        <div class="input-group input-group-sm">
+          <select value="" class="form-control module_analysis_list" name="moduleAnalysis">
+            {{#each moduleAnalysis}}
+              <option value="{{_id}}" selected="{{isCurrentAnalysis _id}}">
+                {{dateFormat date=date dflt='-- --'}}
+                {{#if release}}
+                  - {{release}}
+                {{/if}}
+              </option>
+            {{/each}}
+          </select>
+          {{#if getCurrentAnalysisFilterValue}}
+            <span class="input-group-addon">
+              <span class="truncate" style="max-width: 100px">
+                <span class="fa {{getCurrentAnalysisFilterType}}"></span>
+                <span title="{{getCurrentAnalysisFilterValue}}">{{getCurrentAnalysisFilterValue}}</span>
+              </span>
+            </span>
+          {{/if}}
+          <span class="input-group-btn">
+          <button class="btn btn-default view-analysis-filter" type="button" title="Find by branch or tag">
+            <span class="fa fa-search"></span>
+          </button>
+        </span>
+        </div>
+        {{#if viewAnalysisFilter}}
+          <div class="analysis-filter-drop-container">
+            <div class="analysis-filter-drop">
+              <select value="" class="form-control select2 change_filter" name="moduleAnalysisFilter">
+                <option></option>
+                <optgroup label="Branch">
+                  {{#each moduleAnalysisBranches}}
+                    <option value="branch##{{this}}" selected="{{isCurrentAnalysisFilter this}}">
+                      {{this}}
+                    </option>
+                  {{/each}}
+                </optgroup>
+                <optgroup label="Tag">
+                  {{#each moduleAnalysisTags}}
+                    <option value="tag##{{this}}" selected="{{isCurrentAnalysisFilter this}}">
+                      {{this}}
+                    </option>
+                  {{/each}}
+                </optgroup>
+              </select>
+            </div>
+          </div>
+        {{/if}}
+      {{/if}}
+    {{else}}
+      <span>Version: </span>{{version}}
+    {{/unless}}
+  </div>
+</template>

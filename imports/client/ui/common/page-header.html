@@ -1,0 +1,25 @@
+<template name="pageHeader">
+
+  <div class="ts-page-header transition {{#if small}} ts-header-compact {{/if}}">
+    <div class="ts-panel top-full-panel {{headerClass}}">
+      <div class="panel-body {{bodyClass}}">
+      <!--{{#unless small}}-->
+        <!--<a class="small-header-action">-->
+        <!--<div class="ts-clip-header">-->
+        <!--<i class="fa fa-arrow-up"></i>-->
+        <!--</div>-->
+        <!--</a>-->
+          <!--{{/unless}}-->
+
+        {{> Template.contentBlock}}
+        {{#if title}}
+          <h2 class="font-light m-b-xs">
+            {{title}}
+          </h2>
+        {{/if}}
+        <small>{{desc}}</small>
+      </div>
+    </div>
+  </div>
+
+</template>

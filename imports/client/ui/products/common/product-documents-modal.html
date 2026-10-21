@@ -1,0 +1,55 @@
+<template name="productDocumentsModal">
+  <!-- Modal: productDocumentsModal -->
+  <div class="modal fade" id="productDocumentsModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="ts-accent-line"></div>
+        <div class="modal-header text-center">
+          <h4 class="modal-title">Upload product document</h4>
+        </div>
+        <form id="productDocumentsForm" enctype="multipart/form-data" method="post">
+          <div class="modal-body">
+            <div class="row">
+              <div class="form-group col-sm-12">
+                <label for="documentType">Document type *</label>
+                <select class="form-control" name="documentType" id="documentType" required>
+                  {{#each documentTypes}}
+                    <option value="{{value}}" label="{{label}}">{{label}}</option>
+                  {{/each}}
+                </select>
+              </div>
+              <div class="form-group col-xs-12">
+                <label for="file">File *</label>
+                <div class="input-group input-group-file">
+                  <span class="input-group-btn">
+                      <span class="btn btn-default btn-file">
+                        Browse...
+                        <input type="file" name="file" id="file"
+                               accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.rtf,.odt,.odp,.ods">
+                      </span>
+                    </span>
+                  <input type="text" name="filename" readonly="readonly" placeholder="file name" class="form-control">
+                </div>
+              </div>
+              <div class="form-group col-xs-12">
+                <span class="help-block small">Specify the document file (*.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.rtf,.odt,.odp,.ods)</span>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            {{#if loading}}
+              <button type="button" disabled="disabled" class="btn btn-primary">
+                <i class="fa fa-spinner fa-spin"></i> Upload
+              </button>
+            {{else}}
+              <button type="submit" class="btn btn-primary">
+                Upload
+              </button>
+            {{/if}}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>

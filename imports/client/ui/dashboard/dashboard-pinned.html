@@ -1,0 +1,16 @@
+<template name="dashboardPinned">
+  {{#panel title="Focussed projects" titleBadge=getPinnedProjects.length collapsed=isEmpty}}
+    {{#if getPinnedProjects.length}}
+      <div class="pinned-widget-box">
+        {{#each getPinnedProjects}}
+          {{> project}}
+        {{/each}}
+      </div>
+    {{else}}
+      <div class="alert alert-info">
+        <p><i class="fa fa-info-circle"></i> <strong>{{__ 'Note'}}</strong></p>
+        <p>{{__ 'YouHaveNotPinnedAnyProject'}}</p>
+      </div>
+    {{/if}}
+  {{/panel}}
+</template>

@@ -1,0 +1,215 @@
+/* Flex-fill utilities for "top area + scrollable bottom" layout pattern.
+ *
+ * Eliminates JS-based dynamic height calculations ($(window).height() - offset).
+ *
+ * Activation: add 'flex-fill-page' class to <body> in onRendered/onDestroyed.
+ * Follows existing body-class pattern: hide-sidebar, fixed-navbar.
+ *
+ * Usage (generic utility classes):
+ *   .flex-fill-container  - flex column, children stack vertically
+ *   .flex-fill            - grows to fill remaining space
+ *   .flex-fill-scroll     - grows + overflow-y: auto
+ *   .flex-fill-row        - flex row for side-by-side columns
+ */
+
+.flex-fill-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.flex-fill {
+  flex: 1 1 0%;
+  min-height: 0;
+}
+
+.flex-fill-scroll {
+  flex: 1 1 0%;
+  min-height: 0;
+  overflow-y: auto;
+  .styled-scrollbar();
+}
+
+.flex-fill-row {
+  display: flex;
+  flex-direction: row;
+  min-height: 0;
+}
+
+/* Layout chain: body.flex-fill-page activates flex on content-area → .content → .ts-panel */
+
+body.flex-fill-page {
+
+  .content-area {
+    display: flex;
+    flex-direction: column;
+    overflow-y: hidden;
+  }
+
+  .content-area > .content {
+    flex: 1 1 0%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .content-area > .content > .ts-panel[role="tabpanel"] {
+    flex: 1 1 0%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+
+    /* substateLayout tab content: form or div wrapping .panel > .scrollable_middle */
+    > form,
+    > div:not(.ecs-dependencies-box) {
+      flex: 1 1 0%;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    > form > .panel,
+    > div > .panel {
+      flex: 1 1 0%;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+
+      > .panel-heading {
+        flex-shrink: 0;
+      }
+
+      > .panel-body {
+        flex: 1 1 0%;
+        min-height: 0;
+        overflow-y: auto;
+      }
+    }
+  }
+
+  /* Layout template: .content wraps rows/panels that need to flex-fill */
+  .content-area > .content > .row {
+    flex: 1 1 0%;
+    min-height: 0;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .content-area > .content > .row > [class*="col-"] {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .content-area > .content > .row > [class*="col-"] > .panel {
+    flex: 1 1 0%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .content-area > .content > .row > [class*="col-"] > .panel > .panel-body {
+    flex: 1 1 0%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* autoForm wrapping .ts-panel and .ecs-dependencies-box */
+  .content-area > .content > form,
+  .content-area > .content > [data-meteor-autoform] {
+    flex: 1 1 0%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Panels that should fill remaining space */
+  .content-area > .content > .panel {
+    flex: 1 1 0%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .content-area > .content > .panel > .panel-body {
+    flex: 1 1 0%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Form panels with scrollable content (csaf-create) */
+  .content-area > .content > form > .panel {
+    flex: 1 1 0%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+
+    > .panel-body {
+      flex: 1 1 0%;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    > .panel-heading {
+      flex-shrink: 0;
+    }
+  }
+
+  /* Messages page: .content > .mail-style > .row > col > .panel > .panel-body */
+  .content-area > .content > .mail-style {
+    flex: 1 1 0%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+
+    > .row {
+      flex: 1 1 0%;
+      min-height: 0;
+      display: flex;
+      flex-direction: row;
+    }
+
+    > .row > [class*="col-"] {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      width: 100%;
+    }
+
+    > .row > [class*="col-"] > .panel {
+      flex: 1 1 0%;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 0;
+
+      > .panel-body {
+        flex: 1 1 0%;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        .reactive-table-scroll();
+      }
+    }
+  }
+
+  /* scrollable_middle and scrollable_middle_right: fill remaining space */
+  .scrollable_middle {
+    flex: 1 1 0%;
+    min-height: 0;
+    overflow-y: auto;
+    height: auto !important;
+  }
+
+  .scrollable_middle_right {
+    flex: 1 1 0%;
+    min-height: 0;
+    overflow-y: auto;
+    height: auto !important;
+  }
+}

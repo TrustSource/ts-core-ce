@@ -1,0 +1,13 @@
+<template name="updates">
+  {{#pageHeader title="Updates" desc="List of available updates."}}
+  {{/pageHeader}}
+  <div class="content">
+    {{#if listAvailable}}
+      {{#each getList}}
+        {{> updatesItem}}
+      {{/each}}
+    {{else}}
+      {{> reactiveTableNoData}}
+    {{/if}}
+  </div>
+</template>

@@ -1,0 +1,104 @@
+<template name="obligationList">
+  {{#if hasProjectObligations}}
+    <div class="text-right inner-b-10">
+      <button class="btn btn-primary btn-xs export-as-pdf" type="button">
+        <span class="fa fa-file-pdf-o" aria-hidden="true"></span> Export as PDF
+      </button>
+    </div>
+    <div class="panel panel-default inner-0">
+      <div class="panel-heading">
+        <h5>
+          Detected obligations
+        </h5>
+      </div>
+    </div>
+    <div class="ts-panel obligation-list">
+      {{#each getProjectObligations}}
+        <div class="panel-body {{getObligationStatus key}}">
+          <div class="clearfix">
+            <div class="pull-left text-left" style="min-width:40px">
+              <h5>{{count}}</h5>
+              {{#unless modalView}}
+                <p class="check-status {{getObligationStatus key}} pointer">
+                  {{#unless isUnknown}}
+                    <span class="fa fa-check-square-o unmark-complete-project-obligations"></span>
+                    <span class="fa fa-square-o mark-complete-project-obligations"></span>
+                  {{/unless}}
+                </p>
+              {{/unless}}
+            </div>
+            <div class="pull-left" style="max-width:{{#unless modalView}}50{{else}}90{{/unless}}%;{{#if modalView}}width:100%{{/if}}">
+              <div style="position: relative; top: -5px; right: -10px;">
+                <button class="btn btn-default btn-sm pull-right copy-obligation-text" type="button" data-clipboard-text="{{getObligationEntries}}">
+                  <i class="fa fa-copy"></i>
+                </button>
+              </div>
+              <h5>{{getObligationDescription key}}</h5>
+              <h6>{{getObligationSuggestion key}}</h6>
+            </div>
+            {{#unless modalView}}
+              <div class="pull-right obligation-comment-holder">
+                <textarea class="obligation-comment form-control" placeholder="Comment" value="{{getObligationComment key}}" name="obligation-comment"></textarea>
+              </div>
+            {{/unless}}
+          </div>
+          <hr style="margin:0">
+          <div class="clearfix">
+            <div style="margin:5px 0;">
+              This is introduced by:
+            </div>
+            {{#unless hideMore key}}
+              {{#with getFirstComponent}}
+                <div style="margin:5px 0;">
+                  <span class="fa fa-puzzle-piece"></span>
+                  <a href="{{pathFor route=actionRoute.route data=actionRoute.params query=actionRoute.query}}" target="_blank">
+                    <strong class="truncate" style="max-width:60%">{{componentKey}}</strong>
+                    at {{path}}
+                    <span class="fa fa-external-link"></span>
+                  </a>
+                </div>
+              {{/with}}
+              {{#if moreThanOne}}
+                <div class="show-more">
+                  <button class="btn btn-block btn-sm btn-default"> Show full list of {{components.length}} components</button>
+                </div>
+              {{/if}}
+            {{else}}
+              {{#each components}}
+                <div style="margin:5px 0;">
+                  <span class="fa fa-puzzle-piece"></span>
+                  <a href="{{pathFor route=actionRoute.route data=actionRoute.params query=actionRoute.query}}" target="_blank">
+                    <strong class="truncate" style="max-width:60%">{{componentKey}}</strong>
+                    at {{path}}
+                    <span class="fa fa-external-link"></span>
+                  </a>
+                </div>
+              {{/each}}
+              <div class="show-less">
+                <button class="btn btn-block btn-sm btn-default"> Hide full list </button>
+              </div>
+            {{/unless}}
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  {{/if}}
+  {{#if requestInProgress}}
+    {{#panel}}
+      <div class="text-primary">
+        <i class="fa fa-spinner fa-spin"></i> Loading obligations data for project {{getProjectName}}
+        {{#if getModuleName}}
+          module {{getModuleName}}
+        {{/if}}, please wait...
+      </div>
+    {{/panel}}
+  {{/if}}
+  {{#if noDataInProject}}
+    <div class="text-right inner-b-10">
+      <button class="btn btn-primary btn-xs export-as-pdf" type="button">
+        <span class="fa fa-file-pdf-o" aria-hidden="true"></span> Export as PDF
+      </button>
+    </div>
+    {{> reactiveTableNoData}}
+  {{/if}}
+</template>

@@ -1,0 +1,11 @@
+<template name="tagInput">
+  <div class="tag-input-container" style="display:flex;flex-wrap:wrap;align-items:center;border:1px solid #ccc;border-radius:4px;padding:4px;min-height:34px;background:#fff;">
+    {{#each tags}}
+      <span class="tag-input-tag" style="display:inline-flex;align-items:center;background:#e0e0e0;border-radius:3px;padding:2px 6px;margin:2px;font-size:13px;">
+        {{this}} <a class="tag-input-remove" data-tag="{{this}}" style="margin-left:4px;cursor:pointer;color:#888;text-decoration:none;">&times;</a>
+      </span>
+    {{/each}}
+    <input type="text" class="tag-input-field" placeholder="{{placeholder}}" style="border:none;outline:none;flex:1;min-width:80px;padding:4px;" />
+    <input type="hidden" name="{{name}}" value="{{hiddenValue}}" />
+  </div>
+</template>

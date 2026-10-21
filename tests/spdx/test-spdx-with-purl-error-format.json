@@ -1,0 +1,28 @@
+{
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "spdxVersion": "SPDX-2.3",
+  "creationInfo": {
+    "created": "2024-10-24T10:00:00Z",
+    "creators": [
+      "Tool: test-generator-1.0"
+    ],
+    "licenseListVersion": "3.22"
+  },
+  "dataLicense": "CC0-1.0",
+  "documentNamespace": "https://example.org/test-spdx-with-purl-error-format",
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-Package",
+      "name": "test-spdx-app",
+      "versionInfo": "1.0.0",
+      "downloadLocation": "https://example.org/test-spdx-app-1.0.0.tar.gz",
+      "licenseDeclared": "MIT",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/test-spdx-app@1.0.0"
+        }
+      ]
+    }
+  ]

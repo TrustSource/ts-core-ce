@@ -1,0 +1,59 @@
+<template name="companyPrivateLicensesUsage">
+  {{#if isInRole 'compliance_manager' companyId}}
+    <a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#usagePrivateLicense">
+      <span class="fa fa-chart-bar" aria-hidden="true"></span> Usage stats</a>
+
+    <!-- Modal: usagePrivateLicenses -->
+    <div class="modal fade" id="usagePrivateLicense" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="ts-accent-line"></div>
+          <div class="modal-header text-center">
+            <i class="fa fa-chart-bar ts-big-icon text-success"></i>
+            <br/>
+            <h4 class="modal-title">Private licenses usage stats</h4>
+            <br/>
+            <br/>
+            <div class="{{usagePrivateLicenseMsgType}}"
+                 id="form-messages">{{usagePrivateLicenseMsg}}</div>
+          </div>
+          <form id="usagePrivateLicenseForm">
+            <div class="modal-body">
+              {{#if usageStatsTotal}}
+                <table class="table table-condensed table-striped">
+                  <thead>
+                  <tr>
+                    <th>
+                      Name
+                    </th>
+                    <th>
+                      Analysis count
+                    </th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {{#each usageStats}}
+                    <tr class="inner-t-10">
+                      <td>
+                        {{key}}
+                      </td>
+                      <td>
+                        {{analysisCount}}
+                      </td>
+                    </tr>
+                  {{/each}}
+                  </tbody>
+                </table>
+              {{else}}
+                {{> reactiveTableNoData}}
+              {{/if}}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+</template>

@@ -1,0 +1,83 @@
+<template name="csafDetails">
+  {{# pageHeader}}
+    <div class="approves-detail-header">
+      <div class="approves-detail-header-left">
+        <h2 class="font-light m-b-none">
+          {{#if publishedFileName}}
+            {{publishedFileName}}
+          {{else}}
+            {{name}}
+          {{/if}}
+        </h2>
+        <small class="text-muted">created: {{dateFormat submitted 'lll'}} {{#if publishedFileName}} (original file name: {{name}}) {{/if}}</small>
+      </div>
+      <div class="approves-detail-header-actions">
+        {{#if published}}
+          <div class="dropdown">
+            <span class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-cloud-upload"></i> Published <span class="caret"></span>
+            </span>
+            <ul class="dropdown-menu dropdown-menu-right approves-detail-dropdown">
+              <li><span><strong>by:</strong> {{publishedByName}}</span></li>
+              <li><span><strong>Date:</strong> {{dateFormat date=published dflt='-- --'}}</span></li>
+            </ul>
+          </div>
+          {{#if isInRole 'company_security_manager' companyId}}
+            <button class="btn btn-default csaf_upload" type="button">
+              <i class="fa fa-cloud-upload"></i> Publish updated version
+            </button>
+          {{/if}}
+        {{else}}
+          {{#if removed}}
+            <div class="dropdown">
+              <span class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-trash"></i> Removed <span class="caret"></span>
+              </span>
+              <ul class="dropdown-menu dropdown-menu-right approves-detail-dropdown">
+                {{#if removedReason}}
+                  <li><span><strong>Reason:</strong> {{removedReason}}</span></li>
+                {{/if}}
+                <li><span><strong>by:</strong> {{removedByName}}</span></li>
+                <li><span><strong>Date:</strong> {{dateFormat date=removed dflt='-- --'}}</span></li>
+              </ul>
+            </div>
+          {{else}}
+            {{#if isInRole 'company_security_manager' companyId}}
+              <button class="btn btn-success csaf_upload" type="button" disabled="{{isDisabledPublish}}">
+                <i class="fa fa-cloud-upload"></i> Publish
+              </button>
+              <button class="btn btn-danger2 csaf_remove" type="button">
+                <i class="fa fa-trash"></i> Remove
+              </button>
+            {{/if}}
+          {{/if}}
+        {{/if}}
+      </div>
+    </div>
+    {{> CSAFRemoveModal}}
+  {{/pageHeader}}
+  <div class="approves-detail-tabs">
+    <ul class="nav nav-tabs">
+      <li class="{{activeTab 'csafDetailsMeta'}}">
+        <a href="{{pathFor route='csafDetailsMeta' data=getRouteOptions}}" title="Meta information">
+          <span class="fa fa-info"></span> Meta information</a>
+      </li>
+      <li class="{{activeTab 'csafDetailsAffected'}}">
+        <a href="{{pathFor route='csafDetailsAffected' data=getRouteOptions}}" title="Affected">
+          <span class="fa fa-file-shield"></span> Affected</a>
+      </li>
+      <li class="{{activeTab 'csafDetailsRemediations'}}">
+        <a href="{{pathFor route='csafDetailsRemediations' data=getRouteOptions}}" title="Remediation">
+          <span class="fa fa-check"></span> Remediation</a>
+      </li>
+      <li class="{{activeTab 'csafDetailsHistory'}}">
+        <a href="{{pathFor route='csafDetailsHistory' data=getRouteOptions}}" title="History">
+          <span class="fa fa-clock-o"></span> History</a>
+      </li>
+      <li class="{{activeTab 'csafDetailsJson'}}">
+        <a href="{{pathFor route='csafDetailsJson' data=getRouteOptions}}" title="JSON">
+          <span class="fa fa-code"></span> JSON</a>
+      </li>
+    </ul>
+  </div>
+</template>

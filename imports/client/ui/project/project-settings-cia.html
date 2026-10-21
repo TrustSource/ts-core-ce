@@ -1,0 +1,89 @@
+<template name="projectSettingsCIA">
+  <div id="risk" class="tab-pane">
+    <div class="panel-body no-bottom-errors">
+      <div class="clearfix">
+        <div class="pull-right actions actions-wizard" style="position:relative">
+          {{#if hasAccessRight 'project.cia.import' 'w' currentProject}}
+            {{#if getCIASuggestions.length}}
+              <button type="button" class="btn btn-default btn-xs dropdown-toggle"
+                      data-toggle="dropdown">
+                <span class="fa fa-copy"></span> Import CIA requirements from...<span
+                class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                {{#each getCIASuggestions}}
+                  <li><a class="copy-cia-settings" id="{{_id}}">{{name}}</a></li>
+                {{/each}}
+              </ul>
+            {{/if}}
+          {{/if}}
+        </div>
+      </div>
+      {{#if hasAccessRight 'project.cia.settings' 'w' currentProject}}
+        {{# autoForm
+          id="updateProjectFormCIARequirements"
+          docId=this._id
+          collection=getProjects
+          schema=getRequirementsSchema
+          doc=getRequirements
+          type="normal"
+        }}
+          <h3>CIA requirements</h3>
+          <p>
+            Here you may define the security requirements on project level.
+            This should be the minimum required.
+            These requirements will be forwarded as a minimum to all modules.
+            You may increase the requirements on module level, if required.
+            To learn more about these requirements see <a href="" target="_blank" class="highlight">article</a>
+          </p>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-12">{{> afQuickField name='CR' }}</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-12">{{> afQuickField name='IR' }}</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-12">{{> afQuickField name='AR' }}</div>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Update</button>
+        {{/ autoForm}}
+      {{else}}
+        {{# autoForm
+          id="updateProjectFormCIARequirementsDisplay"
+          docId=this._id
+          collection=getProjects
+          schema=getRequirementsSchema
+          doc=getRequirements
+          type="normal"
+        }}
+          <h3>CIA requirements</h3>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-12">{{> afQuickField name='CR' disabled=true}}</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-12">{{> afQuickField name='IR' disabled=true }}</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-12">{{> afQuickField name='AR' disabled=true }}</div>
+              </div>
+            </div>
+          </div>
+        {{/ autoForm}}
+      {{/if}}
+    </div>
+  </div>
+</template>

@@ -1,0 +1,1558 @@
+// =============================================================================
+// Modern Table Styles
+// Upgrades .reactive-table and Bootstrap .table instances globally
+// =============================================================================
+
+// --- Table base ---
+.reactive-table,
+.table {
+  width: 100%;
+
+  // Header
+  > thead > tr > th {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: @color-text-secondary;
+    border-bottom: 2px solid @ts-teal !important;
+    border-top: none;
+    padding: 10px 16px;
+    white-space: nowrap;
+
+    &.sortable {
+      cursor: pointer;
+      transition: color 0.15s ease;
+
+      &:hover {
+        color: @ts-teal;
+      }
+    }
+  }
+
+  // Body rows
+  > tbody > tr {
+    transition: background-color 0.15s ease;
+
+    > td {
+      padding: 12px 16px;
+      border-top: none;
+      border-bottom: 1px solid @ts-border;
+      vertical-align: middle;
+    }
+
+    &:hover {
+      background-color: @color-table-hover;
+    }
+
+    &:last-child > td {
+      border-bottom: none;
+    }
+  }
+
+  // Date columns - ensure single-line
+  > tbody > tr > td.col-date {
+    white-space: nowrap;
+  }
+
+  // Active/selected/highlighted row
+  > tbody > tr.active > td,
+  > tbody > tr.selected > td,
+  > tbody > tr.highlight > td {
+    background-color: fade(@ts-teal, 6%) !important;
+
+    &:first-child {
+      border-left: 3px solid @ts-teal;
+      padding-left: 13px;
+    }
+  }
+
+  // Inherited items from higher levels - not editable
+  > tbody > tr.from-upper {
+    cursor: default;
+    opacity: 0.7;
+  }
+
+  // Remove striped background (clean look)
+  &.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: transparent;
+  }
+
+  // Badges inside tables - match tree view badge style
+  .badge {
+    background: @ts-teal;
+    color: @color-white;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 8px;
+  }
+
+  .label {
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 3px 10px;
+  }
+
+  // "in Company" / "in Project" source labels - compact inline style
+  a.label.label-info.pull-right {
+    float: none !important;
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 1px 6px;
+    border-radius: 8px;
+    margin-left: 6px;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+  .progress {
+    margin: 0;
+  }
+}
+
+// Date column width - needs to fit "Mar 10, 2026" on one line
+.col-date {
+  min-width: 120px;
+}
+
+// --- v3-design clickable row mixin ---
+// Use inside a page wrapper (e.g. `.scans { .reactive-table-row-click(); }`) to
+// mark reactive-table rows as clickable with the standard teal hover.
+.reactive-table-row-click() {
+  .reactive-table tbody tr {
+    cursor: pointer;
+
+    &:hover {
+      background-color: @color-table-hover;
+    }
+  }
+}
+
+// --- Client-side reactiveTable scroll mixin ---
+// Use inside page-specific selectors (e.g. .tests, .check) to make only the
+// table body scroll while filter and pagination stay fixed.
+.reactive-table-scroll() {
+  overflow: hidden;
+
+  > .clearfix {
+    flex-shrink: 0;
+  }
+
+  > .reactive-table-body {
+    flex: 1 1 0%;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  > .reactive-table-navigation {
+    flex-shrink: 0;
+  }
+}
+
+// --- Reactive table navigation (rows per page, page nav) ---
+// Styled to visually match server-side pagination (border-top separator,
+// 3-column flex layout: rows-per-page left, page nav center/right, page count right).
+.reactive-table-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 13px;
+  color: @color-text-secondary;
+  border-top: 1px solid @ts-border;
+  margin-top: 4px;
+
+  .rows-per-page {
+    margin: 0;
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin: 0;
+      font-weight: normal;
+    }
+
+    .form-control {
+      width: 48px;
+      text-align: center;
+      padding: 4px 6px;
+      font-size: 13px;
+      border-radius: 6px;
+      border: 1px solid @ts-border;
+      height: auto;
+      min-height: 28px;
+    }
+  }
+
+  .page-number {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin: 0;
+      font-weight: normal;
+    }
+
+    .form-control {
+      width: 44px;
+      text-align: center;
+      padding: 4px 6px;
+      font-size: 13px;
+      border-radius: 6px;
+      border: 1px solid @ts-border;
+      height: auto;
+      min-height: 28px;
+    }
+  }
+
+  .previous-page,
+  .next-page {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: 1px solid @ts-border;
+    color: @ts-text;
+    font-size: 14px;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background-color: fade(@ts-teal, 6%);
+      border-color: @ts-teal;
+      color: @ts-teal;
+    }
+  }
+}
+
+// --- Reactive table filter/options bar ---
+.reactive-table-options {
+  margin-bottom: 0;
+  padding: 0;
+  width: 100%;
+  float: none;
+}
+
+.reactive-table-options .reactive-table-filter {
+  width: 100%;
+  margin-bottom: 12px;
+  float: none;
+
+  .input-group {
+    .input-group-addon {
+      background: transparent;
+      border: none;
+      color: @ts-text;
+      padding-right: 10px;
+    }
+
+    .form-control {
+      border-radius: 8px !important;
+      border: 1px solid @ts-border;
+      padding: 8px 14px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+      &:focus {
+        border-color: @ts-teal;
+        box-shadow: 0 0 0 3px fade(@ts-teal, 10%);
+        outline: none;
+      }
+    }
+  }
+}
+
+// The reactive-table template renders a .clearfix > .reactive-table-options
+// wrapper even when filter/columns are hidden. Collapse it.
+.reactiveTableServerSide .reactive-table-options {
+  &.col-sm-8 {
+    padding: 0;
+    margin: 0;
+    height: 0;
+    overflow: hidden;
+  }
+}
+
+// --- Server-side reactive table scroll wrapper ---
+.reactiveTableServerSide > .table-responsive {
+  overflow-x: auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+// --- Horizontal scroll wrapper for wide client-side reactive tables ---
+// Wrap {{> reactiveTable}} in <div class="reactive-table-scroll-x"> so tables
+// with many columns scroll inside the panel instead of running off-screen.
+// Scroll is applied to the inner .reactive-table-body (table only) so the
+// filter/options row above it keeps flowing beside floated toolbars
+// (.pull-left buttons) instead of being pushed below them.
+.reactive-table-scroll-x {
+  .reactive-table-body {
+    // clear the floated toolbar so the table starts below it at full width
+    // (overflow alone creates a BFC that would narrow beside the float)
+    clear: both;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+// --- Server-side reactive table (reactiveTableServerSide) ---
+.reactiveTableServerSide {
+
+  // Filter bar - flex layout for better wrapping on small screens
+  > .clearfix.m-b-md {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px !important;
+
+    // Override float-based layout
+    > .pull-left,
+    > .pull-right {
+      float: none !important;
+    }
+
+    // Filter input takes available space
+    > .pull-left.form-inline {
+      flex: 1 1 300px;
+      min-width: 0;
+
+      .form-group:last-child {
+        flex: 1;
+        width: auto !important;
+        min-width: 200px;
+      }
+    }
+
+    // Sorting stays on the right
+    > .pull-right.form-inline {
+      flex: 0 0 auto;
+      margin-left: auto;
+    }
+
+    .search-field {
+      border-radius: 8px !important;
+      border: 1px solid @ts-border;
+      padding: 8px 14px;
+      font-size: 14px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+      &:focus {
+        border-color: @ts-teal;
+        box-shadow: 0 0 0 3px fade(@ts-teal, 10%);
+        outline: none;
+      }
+    }
+
+    // Input group with Advanced button
+    .input-group {
+      .form-control {
+        border-radius: 8px 0 0 8px;
+      }
+      .input-group-btn .btn {
+        border-radius: 0 8px 8px 0;
+        border-left: none;
+        height: 100%;
+      }
+    }
+
+    // Sort dropdown
+    .sort-field {
+      border-radius: 8px;
+      border: 1px solid @ts-border;
+      padding: 6px 12px;
+      font-size: 14px;
+
+      &:focus {
+        border-color: @ts-teal;
+        box-shadow: 0 0 0 3px fade(@ts-teal, 10%);
+      }
+    }
+
+    // Sort order toggle
+    .toggle-order {
+      border-radius: 8px;
+    }
+  }
+
+  // --- Full pill-button pagination (≥ 1500px) ---
+  // Uses original float/clearfix positioning: info left, nav center, size right.
+  > .pagination-full {
+    > .pull-left.pinner-t-8 {
+      font-size: 13px;
+      color: @color-text-secondary;
+    }
+  }
+
+  // --- Compact text-input pagination (< 1500px) ---
+  > .pagination-compact {
+    display: none; // hidden by default, shown below 1500px
+  }
+
+  // Toggle: show compact below 1500px, hide full
+  @media (max-width: 1499px) {
+    > .pagination-full {
+      display: none;
+    }
+    > .pagination-compact {
+      display: flex;
+    }
+  }
+}
+
+// --- Compact pagination styles ---
+.pagination-compact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 13px;
+  color: @color-text-secondary;
+  border-top: 1px solid @ts-border;
+  margin-top: 4px;
+
+  .pagination-compact-rows,
+  .pagination-compact-pages {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .form-control {
+    width: 48px;
+    text-align: center;
+    padding: 4px 6px;
+    font-size: 13px;
+    border-radius: 6px;
+    border: 1px solid @ts-border;
+    height: auto;
+    min-height: 28px;
+  }
+
+  .compact-prev,
+  .compact-next {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: 1px solid @ts-border;
+    color: @ts-text;
+    font-size: 14px;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background-color: fade(@ts-teal, 6%);
+      border-color: @ts-teal;
+      color: @ts-teal;
+    }
+  }
+}
+
+// --- Pagination toggle for direct ts-panel children ---
+.ts-panel, .panel-body {
+  > .pagination-compact {
+    display: none;
+  }
+
+  @media (max-width: 1499px) {
+    > .pagination-full {
+      display: none;
+    }
+    > .pagination-compact {
+      display: flex;
+    }
+  }
+}
+
+// --- Sticky pagination at bottom of panel ---
+.ts-panel > .panel-body > .reactiveTableServerSide {
+  > .pagination-full {
+    bottom: -20px;
+    z-index: 2;
+    background: @color-white;
+    border-top: 1px solid @ts-border;
+    padding: 10px 0;
+    margin: 0 -20px -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  > .pagination-compact {
+    z-index: 2;
+    background: @color-white;
+    margin: 0 -20px -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+// --- Pagination ---
+// Allow pill buttons to wrap on narrow screens
+.pagination {
+  flex-wrap: wrap;
+}
+
+// Use higher specificity to override various.import.less @ts-blue
+.pagination > li > a,
+.pagination > li > span {
+  border-radius: 6px !important;
+  margin: 0 2px;
+  border: 1px solid @ts-border;
+  color: @ts-text;
+  font-size: 13px;
+  padding: 6px 12px;
+  transition: all 0.15s ease;
+
+  &:hover,
+  &:focus {
+    background-color: fade(@ts-teal, 6%);
+    border-color: @ts-teal;
+    color: @ts-teal;
+  }
+}
+
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  background-color: @ts-teal !important;
+  border-color: @ts-teal !important;
+  color: @color-white !important;
+}
+
+.pagination > .disabled > a,
+.pagination > .disabled > span {
+  opacity: 0.4;
+}
+
+// Page size selector - same size as page number pills
+.pagination.toggle-size > li > a {
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+// --- Action buttons inside tables ---
+.reactive-table td,
+.table td {
+  .btn-xs,
+  .btn-sm {
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 12px;
+    border: 1px solid @ts-border;
+    transition: all 0.15s ease;
+  }
+
+  // Outline style for primary view/action buttons
+  .btn-primary {
+    background-color: transparent;
+    border-color: @ts-teal;
+    color: @ts-teal;
+
+    &:hover,
+    &:focus {
+      background-color: @ts-teal;
+      border-color: @ts-teal;
+      color: @color-white;
+    }
+  }
+
+  .btn-default {
+    &:hover,
+    &:focus {
+      border-color: @ts-teal;
+      color: @ts-teal;
+    }
+  }
+}
+
+// --- General button polish ---
+.btn {
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+.btn-primary {
+  box-shadow: 0 1px 2px fade(@ts-teal, 15%);
+}
+
+// --- Panel body containing tables: clean container ---
+.ts-panel > .panel-body {
+  > .reactive-table,
+  > .reactiveTableServerSide > .reactive-table,
+  > .table {
+    margin-bottom: 0;
+  }
+}
+
+// =============================================================================
+// Modern form controls - fresher inputs, input-groups, selects
+// =============================================================================
+
+.form-control {
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  height: auto;
+  min-height: 36px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:focus {
+    border-color: @ts-teal !important;
+    box-shadow: 0 0 0 3px fade(@ts-teal, 10%);
+  }
+}
+
+input[type="date"].form-control,
+input[type="datetime-local"].form-control,
+input[type="time"].form-control,
+input[type="month"].form-control,
+input[type="week"].form-control,
+input[type="number"].form-control,
+input[type="color"].form-control {
+  height: 36px;
+  width: 100%;
+}
+
+
+// Inline forms in content - keep compact original Bootstrap height
+.form-inline .form-control {
+  min-height: auto;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 13px;
+  border-radius: 4px;
+}
+
+// Inline selects - override select.form-control specificity to match inputs
+.form-inline select.form-control {
+  min-height: auto;
+  height: 34px;
+  padding: 6px 12px;
+  padding-right: 28px;
+  font-size: 13px;
+  border-radius: 4px;
+}
+
+// Small form groups - compact sizing for both inputs and selects
+.form-inline .form-group-sm .form-control,
+.form-inline .form-group-sm select.form-control {
+  min-height: auto;
+  height: 30px;
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+.form-inline .form-group-sm select.form-control {
+  padding-right: 28px;
+  line-height: normal;
+}
+
+.input-group {
+  .form-control {
+    border-radius: 6px 0 0 6px;
+
+    &:focus {
+      z-index: 3;
+    }
+  }
+
+  .input-group-addon {
+    border-radius: 0 6px 6px 0;
+    border-color: @ts-border;
+    background: @ts-surface;
+    font-size: 14px;
+    padding: 8px 12px;
+
+    &:first-child {
+      border-radius: 6px 0 0 6px;
+    }
+  }
+
+  .input-group-btn {
+    .btn {
+      border-radius: 0 6px 6px 0;
+      min-height: 36px;
+    }
+    &:first-child .btn {
+      border-radius: 6px 0 0 6px;
+    }
+  }
+}
+
+// Select elements
+select.form-control {
+  padding-right: 28px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+}
+
+// =============================================================================
+// Reusable page header flex pattern (title left, actions right)
+// New pages should use .v3-header / .v3-header-left / .v3-header-actions directly
+// =============================================================================
+
+// --- Shared class definitions ---
+.v3-header() {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.v3-header-left() {
+  flex: 1;
+  min-width: 0;
+}
+
+// Shared class selectors (use these in new templates)
+.v3-header {
+  .v3-header();
+}
+
+.v3-header-left {
+  .v3-header-left();
+}
+
+// Backward-compat: existing page-specific selectors
+.tests-header,
+.check-header,
+.scan-detail-header,
+.messages-header,
+.projects-header,
+.modules-header,
+.reports-header,
+.csaf-header,
+.releases-header,
+.approves-header,
+.risks-header,
+.components-header,
+.vulnerability-lake-header,
+.infrastructure-header,
+.cots-header,
+.licenses-header,
+.policy-header,
+.copyright-header,
+.documents-header,
+.logs-header,
+.logins-header,
+.legal-header,
+.integrations-header,
+.settings-header,
+.module-header,
+.license-detail-header {
+  .v3-header();
+}
+
+.tests-header-left,
+.check-header-left,
+.scan-detail-header-left,
+.messages-header-left,
+.projects-header-left,
+.modules-header-left,
+.reports-header-left,
+.csaf-header-left,
+.releases-header-left,
+.approves-header-left,
+.risks-header-left,
+.components-header-left,
+.vulnerability-lake-header-left,
+.infrastructure-header-left,
+.cots-header-left,
+.licenses-header-left,
+.policy-header-left,
+.copyright-header-left,
+.documents-header-left,
+.logs-header-left,
+.logins-header-left,
+.legal-header-left,
+.integrations-header-left,
+.settings-header-left,
+.module-header-left,
+.license-detail-header-left {
+  .v3-header-left();
+}
+
+.v3-header-actions,
+.tests-header-actions,
+.check-header-actions,
+.messages-header-actions,
+.projects-header-actions,
+.modules-header-actions,
+.reports-header-actions,
+.csaf-header-actions,
+.releases-header-actions,
+.approves-header-actions,
+.risks-header-actions,
+.components-header-actions,
+.vulnerability-lake-header-actions,
+.infrastructure-header-actions,
+.cots-header-actions,
+.licenses-header-actions,
+.policy-header-actions,
+.copyright-header-actions,
+.logs-header-actions,
+.logins-header-actions,
+.legal-header-actions,
+.settings-header-actions,
+.module-header-actions,
+.license-detail-header-actions,
+.approves-detail-header-actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 8px;
+  margin-top: 4px;
+
+  // Ghost buttons on dark navy header
+  > .btn,
+  > a.btn,
+  > .dropdown > .btn,
+  > span > .btn,
+  > span > a.btn {
+    border-radius: 6px;
+    background: fade(@color-white, 12%);
+    border: 1px solid fade(@color-white, 25%);
+    color: @color-white;
+    font-size: 12px;
+    padding: 5px 12px;
+    transition: all 0.15s ease;
+
+    &:hover,
+    &:focus {
+      background: fade(@color-white, 22%);
+      border-color: fade(@color-white, 40%);
+      color: @color-white;
+    }
+
+    .fa {
+      margin-right: 3px;
+    }
+  }
+
+  // Segmented button group
+  .btn-group .btn {
+    border-radius: 0;
+    background: fade(@color-white, 12%);
+    border: 1px solid fade(@color-white, 25%);
+    color: @color-white;
+    font-size: 12px;
+    padding: 5px 12px;
+    transition: all 0.15s ease;
+
+    &:first-child {
+      border-radius: 4px 0 0 4px;
+    }
+    &:last-child {
+      border-radius: 0 4px 4px 0;
+    }
+
+    &:hover,
+    &:focus {
+      background: fade(@color-white, 22%);
+      border-color: fade(@color-white, 40%);
+      color: @color-white;
+    }
+
+    &.active-tab,
+    &.active {
+      background: @ts-teal;
+      border-color: @ts-teal;
+      color: @color-white;
+    }
+
+    .fa {
+      margin-right: 3px;
+    }
+  }
+
+  // Hover-open dropdowns in header actions
+  > .dropdown:hover > .dropdown-menu,
+  > .dropdown:hover > .btn + .dropdown-menu {
+    display: block;
+  }
+
+  // State filter buttons - keep their semantic colors
+  .btn-group .btn.btn-success.active {
+    background: @ts-teal;
+    border-color: @ts-teal;
+  }
+  .btn-group .btn.btn-warning.active {
+    background: @ts-amber;
+    border-color: @ts-amber;
+  }
+  .btn-group .btn.btn-danger.active,
+  .btn-group .btn.btn-danger2.active {
+    background: @ts-red-dark;
+    border-color: @ts-red-dark;
+  }
+  .btn-group .btn.btn-default.active {
+    background: fade(@color-white, 45%);
+    border-color: fade(@color-white, 50%);
+    color: @color-white;
+  }
+
+  // Select dropdowns inside header (project/module pickers)
+  // Native select + select2 container
+  > select.form-control,
+  > .form-control {
+    border-radius: 6px;
+    background: fade(@color-white, 12%);
+    border: 1px solid fade(@color-white, 25%);
+    color: @color-white;
+    font-size: 12px;
+    padding: 5px 12px;
+    min-height: auto;
+    height: auto;
+    width: auto;
+    min-width: 220px;
+    max-width: 300px;
+    transition: all 0.15s ease;
+    // Override the select arrow for light-on-dark
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+
+    &:focus {
+      background: fade(@color-white, 22%);
+      border-color: fade(@color-white, 40%);
+      color: @color-white;
+      box-shadow: none;
+    }
+
+    option, optgroup {
+      color: #333;
+      background: @color-white;
+    }
+  }
+
+  // Select2 container inside header actions
+  .select2-container {
+    width: 250px !important;
+    min-width: 220px;
+
+    .select2-choice {
+      border-radius: 6px;
+      background: fade(@color-white, 12%);
+      border: 1px solid fade(@color-white, 25%);
+      color: @color-white;
+      font-size: 12px;
+      padding: 3px 12px;
+      height: auto;
+      line-height: 1.6;
+
+      .select2-chosen {
+        color: @color-white;
+      }
+
+      .select2-arrow {
+        background: transparent;
+        border-left: none;
+
+        b {
+          background-position: 0 3px;
+          // White caret
+          filter: brightness(0) invert(1);
+        }
+      }
+    }
+  }
+}
+
+// --- State filter buttons - wider + icon-only on narrow screens ---
+.search-by-type .btn {
+  min-width: 100px;
+}
+
+.search-by-type .filter-check {
+  display: none;
+  font-size: 10px;
+  margin-right: 3px;
+}
+
+.search-by-type .btn.active .filter-check {
+  display: inline;
+}
+
+.search-by-type .filter-icon {
+  display: none;
+  margin-right: 0;
+}
+
+@media (max-width: 1500px) {
+  .search-by-type .btn {
+    min-width: 36px;
+  }
+  .search-by-type .filter-label {
+    display: none;
+  }
+  .search-by-type .filter-icon {
+    display: inline;
+  }
+  .search-by-type .filter-check {
+    display: none !important;
+  }
+}
+
+// --- Projects / modules table - clickable rows + compact action buttons ---
+.projects-panel,
+.modules-panel {
+  .reactive-table-row-click();
+
+  .col-actions .btn {
+    margin-top: -5px;
+    margin-bottom: -5px;
+  }
+}
+
+// --- Projects page - filter bar + white panel (flex-fill) ---
+.projects-panel,
+.modules-panel {
+  flex: 1 1 0%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0!important;
+
+  > .panel-body {
+    > .list-filter-bar {
+      flex-shrink: 0;
+      background: transparent;
+      border-bottom: none;
+      padding: 0 0 8px;
+    }
+
+    flex: 1 1 0%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+
+    > .table-responsive {
+      flex: 1 1 0%;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      .reactive-table-scroll();
+    }
+
+    > .modules {
+      flex: 1 1 0%;
+      min-height: 0;
+      overflow-y: auto;
+    }
+  }
+}
+
+// --- Version picker in header description line ---
+.version-dropdown {
+  display: inline;
+  position: static;
+
+  .version-dropdown-toggle {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dashed currentColor;
+    padding-bottom: 1px;
+    cursor: pointer;
+
+    &:hover, &:focus {
+      text-decoration: none;
+      opacity: 0.8;
+    }
+
+    .caret {
+      margin-left: 3px;
+    }
+  }
+
+  .dropdown-menu {
+    min-width: 260px;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  &:hover > .dropdown-menu {
+    display: block;
+  }
+}
+
+// Select2 inside filter bar - match other inputs
+.projects-tags-filter {
+  .select2-container {
+    flex: 1 1 0%;
+    min-width: 0;
+  }
+
+  .select2-container .select2-choice,
+  .select2-container--default .select2-selection--multiple {
+    font-size: 12px;
+    min-height: 30px;
+    border-radius: 4px !important;
+    border-color: #ccc;
+  }
+}
+
+// View toggle labels - hidden by default, shown on wide screens
+.projects-view-label {
+  display: none;
+  margin-left: 4px;
+}
+
+@media (min-width: 1500px) {
+  .projects-view-label {
+    display: inline;
+  }
+}
+
+// =============================================================================
+// Page header - edge-to-edge on content canvas, visually refreshed
+// =============================================================================
+
+// .ts-page-header:
+// solid dark background, white text, compact, flush edge-to-edge.
+// Negative margins cancel out both .content-area padding-top:15px and
+// .ts-page-header's own default padding from various.import.less (15px 25px 0).
+.ts-page-header {
+  background: @ts-navy;
+  // Pull flush to content-area edges: -(content-area padding-top) -(content padding sides)
+  margin: 0;
+  padding: 18px 40px;
+  min-height: 44px;
+  min-width: auto;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  @media (max-width: 768px) {
+    margin: -15px -15px 0 -15px;
+    padding: 18px 25px;
+  }
+
+  h2, h2.font-light {
+    font-size: 15px;
+    font-weight: 600;
+    color: @color-white;
+    margin: 4px 0 0;
+    line-height: 1.4;
+  }
+
+  small {
+    font-size: 12px;
+    color: fade(@color-white, 65%);
+    line-height: 1.3;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  // Strip the panel chrome - header IS the panel now
+  .ts-panel {
+    margin-bottom: 0;
+  }
+  .ts-panel.top-full-panel > .panel-body {
+    border: none;
+    background: transparent;
+    padding: 0;
+  }
+}
+
+// Remove grey border on panels inside .content - table rows provide structure
+.content > .row .ts-panel > .panel-body {
+  border: none;
+}
+
+// =============================================================================
+// Dropdown menus anchored in the page header
+// =============================================================================
+//
+// `.ts-page-header` and `.v3-header-actions` paint their contents for the DARK
+// navy header: white headings, `fade(@color-white, 65%)` sub-labels and ghost
+// buttons filled with translucent white. A dropdown MENU anchored in the header
+// opens BELOW it on a WHITE surface, and both of those rules reach inside one by
+// plain descendant match - so in light mode the menu's own text and buttons are
+// painted white on white and simply vanish.
+//
+// Found on a page header whose Download menu's format hints were invisible while
+// being present, correctly sized and `visibility: visible` (measured before this
+// fix on the menu's `rgb(255, 255, 255)` surface: small  color  rgba(255, 255, 255, 0.65)).
+//
+// Dark mode is untouched by design: `themes/dark.import.less` is imported last
+// and repaints these menus for its own background, so it still wins.
+.ts-page-header .dropdown-menu {
+
+  // Beats `.ts-page-header small` (0,0,2,0) on specificity alone.
+  small,
+  .text-muted {
+    color: @color-text-secondary;
+  }
+
+  // The `li` is deliberate. `.<page>-header-actions .btn-group .btn` matches these
+  // buttons at (0,3,0) and a same-specificity later rule was measured NOT to win
+  // here, so this adds the menu row's own element to reach (0,3,1) and win on
+  // specificity instead of on import order. Scoped to `.btn-default` so a semantic
+  // button inside a menu (e.g. the primary "View generated model") keeps its own
+  // colours.
+  li .btn-default {
+    background: @color-white;
+    border-color: #ccc;
+    color: @ts-text;
+
+    &:hover,
+    &:focus {
+      background: #ebebeb;
+      border-color: #adadad;
+      color: @ts-text;
+    }
+  }
+}
+
+// =============================================================================
+// Products page - v3 design: header flex, panel borders, tree highlight
+// =============================================================================
+
+.products-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.products-header-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.products-header-actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 8px;
+  margin-top: 4px;
+
+  > .btn,
+  > a.btn,
+  > .dropdown > .btn {
+    border-radius: 6px;
+    background: fade(@color-white, 12%);
+    border: 1px solid fade(@color-white, 25%);
+    color: @color-white;
+    font-size: 12px;
+    padding: 5px 12px;
+    transition: all 0.15s ease;
+
+    &:hover,
+    &:focus {
+      background: fade(@color-white, 22%);
+      border-color: fade(@color-white, 40%);
+      color: @color-white;
+    }
+
+    .fa {
+      margin-right: 3px;
+    }
+  }
+
+  > .dropdown:hover > .dropdown-menu {
+    display: block;
+  }
+}
+
+// Stats dropdown content
+.products-stats-dropdown {
+  padding: 15px;
+  min-width: 200px;
+
+  .products-stats-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 0;
+
+    .products-stats-value {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .products-stats-label {
+      font-size: 13px;
+      color: @color-text-secondary;
+    }
+  }
+}
+
+// Green bottom border on panel headings
+.product-panel-heading {
+  border-bottom: 2px solid @ts-teal !important;
+}
+
+// Remove panel chrome on product panels
+.product-tree-panel,
+.product-edit-panel {
+  border: none;
+  box-shadow: none;
+}
+
+.product-tree-panel > .panel-body {
+  padding: 0;
+}
+
+// Remove panel chrome on integration cards
+.integrations-content .panel.panel-default {
+  border: none;
+  box-shadow: none;
+}
+
+// Tree heading buttons - icon-only on narrow screens
+@media (max-width: 1499px) {
+  .product-tree-btn-label {
+    display: none;
+  }
+}
+
+// Tree item styles - flat list matching scan-details tree
+.product-tree {
+  margin: 0;
+  padding: 0;
+
+  .product-tree-item {
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    padding: 8px 12px;
+    font-size: 13px;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background-color: @color-table-hover;
+      border-left-color: @ts-teal;
+    }
+
+    // Selected node
+    &.active {
+      background-color: fade(@ts-teal, 8%) !important;
+      color: @ts-navy !important;
+      border-left-color: @ts-teal;
+      font-weight: 500;
+
+      &:hover {
+        background-color: fade(@ts-teal, 12%) !important;
+      }
+    }
+
+    // +/- icons - muted, teal on hover
+    .fa-plus,
+    .fa-minus {
+      color: #9ca3af;
+      font-size: 11px;
+      transition: color 0.15s ease;
+    }
+
+    &:hover .fa-plus,
+    &:hover .fa-minus {
+      color: @ts-teal;
+    }
+
+    // Type label - match scan tree badge style
+    .label {
+      background: @ts-teal;
+      color: @color-white;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 2px 8px;
+    }
+
+    // Retired entries - orange background + line-through
+    .product-retired {
+      text-decoration: line-through;
+      background-color: rgba(255, 152, 0, 0.1);
+      border-radius: 4px;
+      padding: 2px 6px;
+      margin: -2px -6px;
+    }
+  }
+
+  // Alternating subtle stripes for readability
+  .product-tree-item:nth-child(even):not(.active):not(:hover) {
+    background-color: fade(@color-black, 1.5%);
+  }
+}
+
+// --- Logs lists (audit logs, logins history, no-logins): shared chrome ---
+body.flex-fill-page .logs-content > .panel {
+  border: none;
+  box-shadow: none;
+
+  > .panel-body {
+    padding: 20px;
+    .reactive-table-scroll();
+  }
+}
+
+// Log rows are not clickable, so give them a subtle hover for readability
+// WITHOUT the pointer cursor used by clickable list pages.
+.logs-content .reactive-table tbody tr:hover {
+  background-color: @color-table-hover;
+}
+
+// --- Settings list pages: v3-design table ---
+body.flex-fill-page .content > .panel.panel-default {
+  border: none;
+  box-shadow: none;
+
+  > .panel-body {
+    padding: 20px;
+    .reactive-table-scroll();
+  }
+}
+
+.content > .panel.panel-default {
+  .reactive-table-row-click();
+
+  .reactive-table tbody tr .col-actions .btn {
+    margin-top: -5px;
+    margin-bottom: -5px;
+  }
+}
+
+// --- Copyright & Trademarks intro block ---
+.copyright-intro {
+  display: flex;
+  gap: 16px;
+  padding: 16px 20px;
+  margin-bottom: 15px;
+  background: fade(@ts-teal, 6%);
+  border-left: 3px solid @ts-teal;
+  border-radius: 4px;
+  color: #555;
+  font-size: 13px;
+  line-height: 1.6;
+
+  p {
+    margin-bottom: 6px;
+  }
+}
+
+.copyright-intro-icon {
+  flex-shrink: 0;
+  font-size: 18px;
+  color: @ts-teal;
+  margin-top: 2px;
+}
+
+// Generic empty-state widget for pages with no data yet.
+// Use to introduce users to what a page will show once data exists.
+.page-empty-state {
+  max-width: 560px;
+  margin: 40px auto;
+  padding: 40px 32px;
+  background: #fff;
+  border: 1px solid #e6e8eb;
+  border-radius: 10px;
+  text-align: center;
+
+  .page-empty-state-icon {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: rgba(42, 148, 162, 0.08);
+    color: #2a94a2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 44px;
+  }
+
+  .page-empty-state-title {
+    margin: 0 0 10px;
+    font-weight: 300;
+    color: #333;
+  }
+
+  .page-empty-state-text {
+    margin: 0 auto 24px;
+    max-width: 420px;
+    color: @color-text-secondary;
+    line-height: 1.5;
+  }
+
+  .page-empty-state-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    border-top: 1px solid #f0f1f3;
+
+    > li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 4px;
+      border-bottom: 1px solid #f0f1f3;
+
+      > .fa {
+        flex: 0 0 32px;
+        width: 32px;
+        height: 32px;
+        line-height: 32px;
+        text-align: center;
+        border-radius: 8px;
+        background: rgba(42, 148, 162, 0.08);
+        color: #2a94a2;
+        font-size: 14px;
+      }
+
+      > div {
+        flex: 1;
+        min-width: 0;
+
+        > strong {
+          display: block;
+          color: #333;
+          margin-bottom: 2px;
+        }
+
+        > small {
+          display: block;
+          color: @color-text-secondary;
+          font-size: 12px;
+          line-height: 1.45;
+        }
+      }
+    }
+  }
+}
+
+// --- Reactive tables inside dialogs ---
+// The table in .reactive-table-body is floated, and the plain block around it does
+// not contain the float: it ends up 0px high, the white .modal-body ends below the
+// filter row and the rows render on the grey footer. flow-root contains the float.
+.modal .reactive-table-body {
+  display: flow-root;
+}
+
+// Risk lists: the name keeps a readable width, the table scrolls sideways
+// (.reactive-table-scroll-x) to reach the remaining columns at laptop widths.
+.col-risk-name {
+  min-width: 200px;
+}

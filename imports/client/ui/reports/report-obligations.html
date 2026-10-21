@@ -1,0 +1,92 @@
+<template name="reportObligations">
+
+  {{#pageHeader}}
+    <div class="reports-header">
+      <div class="reports-header-left">
+        <h2 class="font-light m-b-xs">Obligations report</h2>
+        <small>Status of all project obligations</small>
+      </div>
+      <div class="reports-header-actions">
+        <select class="form-control current-project select2">
+          {{#each projectList}}
+            <optgroup label="{{name}}">
+              <option value="{{_id}}" selected="{{isActiveProject}}">All module of {{name}}</option>
+              {{#each listModules}}
+                <option value="{{../_id}}_m_{{_id}}" selected="{{isActiveModule}}">{{name}}</option>
+              {{/each}}
+            </optgroup>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+  {{/pageHeader}}
+
+  <div class="content">
+    {{> legalRequirementsDescription requirements=getRequirements projectId=projectId moduleId=moduleId}}
+    {{#if projectView}}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h5>
+            Overview of modules
+          </h5>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            {{#each projectModules}}
+              <div class="col-md-3">
+                <div class="alert {{approvalAlertClass}} inner-b-20" style="height: 150px;">
+                  <div>
+                    <a href="{{pathFor route='reportObligations' query=getModuleQuery}}" class="go_to_module">
+                      <p class="h4 truncate">
+                        {{name}}
+                        {{#if getRelease.name}}
+                          <sup><small>{{getRelease.name}}</small></sup>
+                        {{/if}}
+                      </p>
+                      <p style="height: 80px;overflow-y:auto">{{getComment getRelease.comment}}</p>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    {{/if}}
+    {{>obligationList}}
+    {{#if selectProject}}
+      {{#panel}}
+        <div class="text-info">
+          <i class="fa fa-check-circle-o"></i> Please select the project to run a report on the upper right
+        </div>
+      {{/panel}}
+    {{/if}}
+    {{#if isInRole 'compliance_manager' companyId}}
+      {{#with getRelease}}
+        {{#if initiated}}
+          <div class="panel {{approvalClass}} inner-b-20">
+            <div class="panel-heading">
+              <h5>
+                Approve the release
+              </h5>
+            </div>
+            <div class="panel-body">
+              <div class="form-group">
+                <input style="width: 600px" type="text" class="approve-name form-control" placeholder="Release name" value="{{name}}" name="release-name">
+              </div>
+              <div class="form-group">
+                <textarea style="width: 600px" class="approve-comment form-control" placeholder="Comment" value="{{comment}}" name="release-comment"></textarea>
+              </div>
+              <button class="btn btn-success approve-project">
+                Approve
+              </button>
+              <button class="btn btn-danger2 not-approve-project">
+                Reject
+              </button>
+            </div>
+          </div>
+        {{/if}}
+      {{/with}}
+    {{/if}}
+  </div>
+</template>

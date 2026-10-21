@@ -1,0 +1,262 @@
+<template name="noticeFileDetails">
+  {{# pageHeader}}
+    <div class="approves-detail-header">
+      <div class="approves-detail-header-left">
+        <h2 class="font-light m-b-none">
+          {{getName}} <sup><small>{{release}}</small></sup>
+          <small class="text-muted">Notice file version {{version}}</small>
+        </h2>
+        {{#if getDescription}}
+          <small class="text-muted">{{getDescription}}</small>
+        {{/if}}
+      </div>
+      <div class="approves-detail-header-actions">
+        {{#with noticeFileDetails}}
+          {{#if hasUnknownLicenseComponents}}
+            <div class="dropdown">
+              <a class="btn btn-warning">
+                <span class="fa fa-exclamation-triangle"></span> Notice <span class="caret"></span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right notice-warning-dropdown">
+                <div class="notice-warning-content">
+                  <h6>License for these components could not be matched correctly:</h6>
+                  <ul>
+                    {{#each unknownLicenseComponents}}
+                      <li title="{{componentKey}} ({{version}}) - {{path}}">
+                        <div class="truncate">
+                          {{componentKey}} ({{version}}) - <small>{{path}}</small>
+                        </div>
+                      </li>
+                    {{/each}}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          {{/if}}
+        {{/with}}
+        {{#with noticeFile}}
+          <button class="btn btn-primary export_as_pdf_report" type="button">
+            <span class="fa fa-file-pdf-o"></span> PDF
+          </button>
+          <button class="btn btn-primary export_as_txt_report" type="button">
+            <span class="fa fa-file-text-o"></span> TXT
+          </button>
+          {{> noticeFileDetailsBinary binaryLinks=binaryLinks approved=disabled size='btn-xs'}}
+          {{#unless disabled}}
+            <a class="btn btn-default open-notice-version-modal">
+              <span class="fa fa-plus"></span> Version
+            </a>
+            <button class="btn btn-default freeze_version" type="button">
+              <span class="fa fa-snowflake-o"></span> Freeze
+            </button>
+          {{else}}
+            <span class="btn btn-default disabled">
+              <span class="fa fa-snowflake-o"></span> Frozen: {{{dateFromNow disabled}}}
+            </span>
+          {{/unless}}
+        {{/with}}
+      </div>
+    </div>
+  {{/pageHeader}}
+  {{> noticeFileDetailsVersion noticeFile=noticeFile updateNoticeFile=updateNoticeFile}}
+  {{#if missingData}}
+    <div class="content pinner-b-0 pinner-t-5" style="margin-bottom: -15px;">
+      <div class="alert alert-danger inner-b-0">
+        <p>
+          <i class="fa fa-exclamation-circle"></i> DEPRECATED <br>
+          Project or module was removed so this notice file is deprecated
+        </p>
+      </div>
+
+    </div>
+  {{/if}}
+  {{#with noticeFileDetails}}
+    <div class="row notice-detail-columns">
+      <div class="col-md-8">
+        <div class="notice-view-left">
+            {{#if licenses.length}}
+              {{#each licenses}}
+                <div class="panel panel-clear-style panel-{{getOptimizedKey}} panel_with_license inner-b-0" data-license-key="{{getOptimizedKey}}">
+                  <div class="panel-heading expand_table pointer">
+                    <div>
+                      <div class="pull-left expand-table" style="width: 35px;">
+                        <i class="fa fa-fw fa-chevron-right show_hide "></i>
+                      </div>
+                      <div class="licenseName">
+                        {{#unless isUnknown}}
+                          <h4>{{name}}</h4>
+                        {{else}}
+                          <h4>License not detected</h4>
+                        {{/unless}}
+                      </div>
+                    </div>
+                  </div>
+                  {{#if showDetails}}
+                    <div class="panel-body collapsed">
+                      <div class="clearfix">
+                        <div class="pull-right">
+                          <div class="">
+                            <label>
+                              <input type="checkbox" class="on_update_complete" value="true" disabled={{reportDisabled}}
+                                {{isCompleted}}>
+                              cleared
+                            </label>
+                          </div>
+                        </div>
+                        <h4>License text</h4>
+                        <pre style="white-space: pre-wrap; height: 100%; max-height: 300px">{{#if text}}{{text}}{{else}}No license text provided{{/if}}</pre>
+                      </div>
+                      <h4>This license applies to the following components:</h4>
+                      <div class="license-table-collapse pinner-l-20">
+                        {{#each components}}
+                          <div class="panel-body panel-body-thin-border panel-{{getOptimizedKey}} panel_with_component collapsed" data-component-key="{{getOptimizedKey}}">
+                            <div class="pull-right">
+                              <div class="">
+                                <label>
+                                  <input type="checkbox" class="on_update_complete" value="true" disabled={{reportDisabled}}
+                                    {{isCompleted}}>
+                                  cleared
+                                </label>
+                              </div>
+                            </div>
+                            <h5 class="truncate" title="{{name}}" style="vertical-align: middle;max-width:70%; display: inline-block"><a href="{{pathFor route='componentSearch' data=getSearchParams}}" target="_blank"><i class="fa fa-external-link pinner-r-3"></i></a>{{componentName}}</h5>
+                            <span class="version">[{{version}}]</span>
+                            <p>{{description}}</p>
+                            {{> noticeFileDetailsComponent noticeFile=getNoticeFile component=this updateFunction=updateNoticeFile uuid=getUUID reportDisabled=reportDisabled}}
+                          </div>
+                        {{/each}}
+                      </div>
+                    </div>
+                  {{/if}}
+                </div>
+              {{/each}}
+            {{else}}
+              {{> reactiveTableNoData}}
+            {{/if}}
+          </div>
+      </div>
+      <div class="col-md-4">
+        <div class="notice-view-right">
+          <div class="notice-view-right-stats">
+            <div class="sbom-stats-row">
+              <div class="sbom-stats-left">
+                <h3 class="inner-t-0 inner-b-0">TODOs Navigator</h3>
+                <button class="btn btn-default btn-xs change_view">
+                  {{#if showAll}}
+                    <span class="fa fa-circle-o"></span> ToDo's
+                  {{else}}
+                    <span class="fa fa-list-ul"></span> Show all
+                  {{/if}}
+                </button>
+                <div class="sbom-stats-counters">
+                  <div class="sbom-stats-counter">
+                    <p class="todo-counters-number"><strong>{{components}}</strong></p>
+                    <p class="todo-counters-text"><small>components</small></p>
+                  </div>
+                  <div class="sbom-stats-counter">
+                    <p class="todo-counters-number"><strong>{{obligations}}</strong></p>
+                    <p class="todo-counters-text"><small>obligations</small></p>
+                  </div>
+                  <div class="sbom-stats-counter">
+                    <p class="todo-counters-number"><strong>{{todosRemaining}}</strong></p>
+                    <p class="todo-counters-text"><small>remaining</small></p>
+                  </div>
+                </div>
+              </div>
+              <div class="sbom-stats-chart">
+                <div id="chart-progress-modules"></div>
+                <small class="text-muted">{{completed}}%</small>
+              </div>
+            </div>
+          </div>
+            <div class="notice-view-right-scroll">
+              {{#if writtenOffer}}
+                <div class="panel panel-clear-style panel-writtenOffer panel_with_license inner-b-0">
+                  <div class="panel-heading">
+                    <div class="pull-right">
+                      <div class="inner-l-5">
+                        {{> noticeFileDetailsOffer writtenOffer=writtenOffer updateNoticeFile=updateNoticeFile noticeFile=this}}
+                      </div>
+                    </div>
+                    <div class="hover-highlight" style="max-width: 90%;">
+                      <div class="tree-title-line">
+                        <label title="Cleared" class="w100 inner-b-0 pinner-l-3">
+                          <input type="checkbox" class="on_writtenOfferEnabled" value="true" disabled={{reportDisabled}}
+                            {{isWrittenOfferEnabled}}>
+                          <span class="label-text-span fix-top-3"><span class="fa fa-file-text notice-icon-holder"></span> Written Offer</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {{/if}}
+              {{#each licenses}}
+                <div class="panel panel-clear-style panel-{{getOptimizedKey}} {{visibilityClass}} panel_with_license inner-b-0" data-license-key="{{getOptimizedKey}}">
+                  <div class="panel-heading">
+                    <div class="pull-right">
+                      <div class="inner-l-5 inner-t-5">
+                        <a title="Scroll to" href class="scroll_to_section hover-highlight fa fa-link"></a>
+                      </div>
+                    </div>
+                    <div class="expand_tree hover-highlight" style="max-width: 90%;">
+                      {{#unless isUnknown}}
+                        <h5 class="truncate"><span class="fa fa-folder show_hide notice-icon-holder"></span> <span>{{name}}</span></h5>
+                      {{else}}
+                        <h5 class="truncate"><span class="fa fa-folder show_hide notice-icon-holder"></span> <span>License not detected</span> </h5>
+                      {{/unless}}
+                    </div>
+                  </div>
+                  {{#if showDetailsTree}}
+                    <div class="panel-body collapsed pinner-l-30">
+                      <div class="clearfix hover-highlight">
+                        <div class="tree-title-line">
+                          <div class="inner-r-5">
+                            <label title="Cleared" class="w100">
+                              <input type="checkbox" class="on_update_complete" value="true" disabled={{reportDisabled}}
+                                {{isCompleted}}>
+                              <span class="label-text-span fix-top-3"><span class="fa fa-gavel notice-icon-holder"></span> License text</span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      {{#each components}}
+                        <div class="clearfix panel_with_component {{visibilityClass}}" data-component-key="{{getOptimizedKey}}">
+                          <div class="tree-title-line hover-highlight">
+                            <div class="inner-r-5">
+                              <label title="Cleared" class="w100 inner-0">
+                                <input type="checkbox" class="on_update_complete" value="true" disabled={{reportDisabled}}
+                                  {{isCompleted}}>
+                                <span class="label-text-span truncate" title="{{name}}">
+                                <span class="fa fa-puzzle-piece notice-icon-holder"></span>  {{name}}</span>
+                              </label>
+                            </div>
+                          </div>
+                          {{#if actionsRequired}}
+                            <div class="inner-b-10">
+                              {{#each actionsRequired}}
+                                <div class="w100 pinner-l-15">
+                                  <span class="fa fa-exclamation-circle notice-icon-holder"></span> <span>{{key}}</span>
+                                </div>
+                              {{/each}}
+                            </div>
+                          {{/if}}
+                        </div>
+                      {{/each}}
+                    </div>
+                  {{/if}}
+                </div>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+      </div>
+  {{else}}
+    <div class="splash-holder">
+      <div class="ts-accent-line"></div>
+      <div class="ts-splash-title">
+        <h1>Loading ...</h1>
+        <div class="loading-spinner"></div>
+      </div>
+    </div>
+  {{/with}}
+</template>

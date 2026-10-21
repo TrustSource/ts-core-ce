@@ -1,0 +1,100 @@
+<template name="companyUsers">
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">User management</h2>
+        <small>Configure Users settings of your company</small>
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content">
+    {{#if isInRole 'account_admin' companyId}}
+      {{#panel title="Your company users"}}
+        <div class="row">
+          <div class="col-sm-3 col-xs-5">
+            <span class="hidden-xs">User name (login)</span>
+            <small class="visible-xs-inline-block">Login</small>
+          </div>
+          <div class="col-xs-2 hidden-xs">Name</div>
+          <div class="col-xs-6 hidden-xs">Roles</div>
+          <div class="col-xs-1 col-sm-1 text-center">
+            <span class="hidden-sm">Actions</span>
+          </div>
+        </div>
+        <hr>
+        <div style="max-height: 400px; overflow-y:auto; overflow-x: hidden">
+          {{#each getCompanyUsers}}
+            <form class="form-horizontal user">
+              <div class="row pinner-b-10">
+                <div class="col-sm-3 col-xs-5 truncate" title="{{getLogin}}">
+                  {{#if moreThanOneEmail}}
+                    <div class="input-group">
+                    <span class="input-group-btn">
+                        <button title="Resend invitation" type="button"
+                                class="btn btn-sm btn-default resend" {{resendButtonDisabledAttr}}><i
+                            class="fa fa-refresh {{resendButtonIconClass}}"></i></button>
+                    </span>
+                      <select class="form-control input-sm comp-edit-license">
+                        {{#each getUserEmails}}
+                          <option
+                              value="{{address}}" {{isVarifiedDisabledAttr}}>{{address}}</option>
+                        {{/each}}
+                      </select>
+                    </div>
+                  {{else}}
+                    <button title="Resend invitation" type="button"
+                            class="btn btn-sm btn-default resend" {{resendButtonDisabledAttr}}><i
+                        class="fa fa-refresh {{resendButtonIconClass}}"></i>
+                    </button>
+                    <strong>{{getLogin}}</strong>
+                  {{/if}}
+                </div>
+                <div class="col-xs-2 text-left hidden-xs">{{getName}}
+                  {{#if isSuspended}}
+                    <br/><span class="label label-danger">Suspended</span>
+                  {{/if}}
+                  {{#if mismatchedEmail}}
+                    <br/><i class="text-danger" title="Correspondence email is not matching login"><i class="fa fa-exclamation-triangle"></i> {{mismatchedEmail}}</i>
+                  {{/if}}
+                </div>
+                <div class="col-xs-6 text-left">
+                  <select name="roles" multiple="multiple" required="required" disabled="{{isCurrentUser}}"
+                          placeholder="Select roles" class="form-control on_update_field select2">
+                    {{#each getRolesSchema}}
+                      <option label="{{label}}" value="{{key}}" selected="{{isSelectedValue key}}">{{label}}</option>
+                    {{/each}}
+                  </select>
+                </div>
+                <div class="col-xs-1 col-sm-1 text-center">
+                  {{#if isSuspended}}
+                    <button type="button" title="Reactivate user" class="btn btn-xs btn-default reactivate" disabled="{{isCurrentUser}}">
+                      <i class="fa fa-unlock"></i>
+                    </button>
+                  {{else}}
+                    <button type="button" title="Suspend user (blocks sign-in until reactivated)" class="btn btn-xs btn-default suspend" disabled="{{isCurrentUser}}">
+                      <i class="fa fa-ban"></i>
+                    </button>
+                  {{/if}}
+                  {{#if has2fa}}
+                    <button type="button" title="Reset two-factor authentication" class="btn btn-xs btn-default reset-2fa" disabled="{{isCurrentUser}}">
+                      <i class="fa fa-mobile"></i>
+                    </button>
+                  {{/if}}
+                  <button type="button" title="Remove user" class="btn btn-xs btn-danger2 remove" disabled="{{isCurrentUser}}">
+                    <i class="fa fa-trash-o"></i>
+                  </button>
+                  <button type="button" title="Remove the user with RTBF" class="btn btn-xs btn-danger2 remove-rtbf" disabled="{{isCurrentUser}}">
+                    <span>RTBF</span>
+                    <i class="fa fa-user-times"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          {{/each}}
+        </div>
+      {{/panel}}
+      {{> companyUsersImport}}
+      {{> companyUsersInvite}}
+    {{/if}}
+  </div>
+</template>

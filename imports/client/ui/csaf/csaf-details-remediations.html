@@ -1,0 +1,50 @@
+<template name="csafDetailsRemediations">
+  <form class="form-horizontal relative" role="form" id="csafDetailsRemediations">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="pull-right panel-right-actions">
+          <div class="btn-group btn-group-justified" role="group" style="width: 200px">
+            <a href class="btn btn-default discard_changes" type="button" disabled="{{isEditDisabled}}"
+               title="Discard changes">
+              <i class="fa fa-repeat"></i> Discard
+            </a>
+            {{#if isLoading}}
+              <a href class="btn btn-default" type="button" disabled="disabled" title="Save changes">
+                <i class="fa fa-spinner fa-spin"></i> Save
+              </a>
+            {{else}}
+              <a href class="btn btn-default save_changes" type="button" disabled="{{isEditDisabled}}"
+                 title="Save changes">
+                <i class="fa fa-floppy-disk"></i> Save
+              </a>
+            {{/if}}
+          </div>
+        </div>
+        <h5>Remediation</h5>
+      </div>
+      <div class="panel-body scrollable_middle">
+        {{#if hasData}}
+          <div class="col-xs-12">
+            <span class="help-block small csaf_vulnerabilities">
+              <button class="btn btn-xs btn-primary pull-right add_item" disabled="{{isEditDisabled}}" type="button" data-path="vulnerabilities" data-default-item="vulnerabilities">
+                <span class="fa fa-plus" aria-hidden="true"></span>
+              </button>
+              Represents a list of all relevant vulnerability information items.
+            </span>
+            {{#each (getValue 'vulnerabilities')}}
+              <span class="help-block small csaf_vulnerabilities remove-btn-over-panel">
+                <button class="btn btn-warning btn-xs pull-right remove_item" disabled="{{isEditDisabled}}" type="button" data-path="vulnerabilities" data-index="{{@index}}">
+                  <span class="fa fa-times" aria-hidden="true"></span>
+                </button>
+              </span>
+              {{> csafVulnerability data=this index=@index root=getRoot}}
+            {{/each}}
+          </div>
+        {{else}}
+          {{>loadingSplash}}
+        {{/if}}
+      </div>
+    </div>
+  </form>
+</template>
+

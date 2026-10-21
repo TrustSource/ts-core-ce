@@ -1,0 +1,16 @@
+<template name="cvesBumpHints">
+  {{#if mappedHints}}
+    {{#each mappedHints}}
+      <div class="inner-b-5">
+        <label class="label confidence-label confidence-label-{{getConfidenceClass}} inner-t-1"
+               title="Confidence level {{getConfidenceLevel}} ({{getConfidenceScore}}/5) based on {{getConfidenceVendor}}:{{getConfidenceProduct}}:{{getConfidencePlatform}}">
+          <i class="fa fa-signal confidence-cols" aria-hidden="true"></i>
+        </label>
+        <span class="inline-block bump-icon fa fa-level-up inner-r-5" title="Bump hints"></span>
+        {{#each bump_hints}}
+          <span class="label label-default inner-r-5">{{this}}</span>
+        {{/each}}
+      </div>
+    {{/each}}
+  {{/if}}
+</template>

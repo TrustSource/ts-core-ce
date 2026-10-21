@@ -1,0 +1,10 @@
+<template name="projectSettingsWebhooks">
+  <div id="webhooks" class="tab-pane">
+    <div class="panel-body">
+      <div class="pull-left">
+        {{> companyWebhooksCreate size='btn' projectId=projectId}}
+      </div>
+      {{> reactiveTable settings=reactiveTableSettings}}
+    </div>
+  </div>
+</template>

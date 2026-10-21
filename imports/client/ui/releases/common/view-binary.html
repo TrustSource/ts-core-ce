@@ -1,0 +1,25 @@
+<template name="viewBinary">
+    <a class="btn btn-primary {{size}} pull-left m-r-xs" data-toggle="modal" data-target="#binaryLinks" title="View Binary links">
+      <span class="fa fa-link" aria-hidden="true"></span> Binary links</a>
+
+    <!-- Modal: binaryLinks -->
+    <div class="modal fade" id="binaryLinks" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="ts-accent-line"></div>
+          <div class="modal-header text-center">
+            <i class="fa fa-link ts-big-icon text-success"></i>
+            <br/>
+            <h4 class="modal-title">Binary links</h4>
+            <br/>
+          </div>
+          <div class="modal-body">
+            {{> reactiveTable settings=reactiveTableSettings}}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</template>

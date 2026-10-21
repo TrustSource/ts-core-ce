@@ -1,0 +1,24 @@
+<template name="wizard">
+  <div class="wizard">
+    {{#if stepsTemplate}}
+      {{> Template.dynamic template=stepsTemplate data=stepsTemplateData}}
+    {{else}}
+      <div class="steps">
+        <ul>
+          {{#each wizardSteps}}
+            <li class="wizardStep {{stepClass}}" data-id="{{id}}">
+              <span class="badge">{{stepNumber}}</span> {{title}}
+              <span class="chevron"></span>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    {{/if}}
+
+    <div class="wizard-content">
+      {{#with activeStep}}
+        {{> Template.dynamic template=template data=stepContext}}
+      {{/with}}
+    </div>
+  </div>
+</template>

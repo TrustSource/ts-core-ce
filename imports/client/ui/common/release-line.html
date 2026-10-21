@@ -1,0 +1,21 @@
+<template name="releaseLine">
+  <div class="approval-release">
+    <div class="pull-right"><span class="fa fa-clock-o"></span> {{{dateFromNow release.created}}}</div>
+    <a href="{{pathFor route='approvesDetails' data=getApproveOptions}}" target="_blank" class="highlight">
+      <span class="fa fa-code-fork"></span>
+      <b>{{release.name}}</b>
+      <span class="fa fa-external-link"></span>
+    </a> /
+    {{#if release.initiator}}
+      <span class="fa fa-plus-circle"></span> created by <b>{{release.initiatorName}}</b> /
+    {{/if}}
+    {{#if release.assignment}}
+      <span class="fa fa-check-square-o"></span> assigned to <b>{{release.assignmentName}}</b> <a href class="highlight remove_assignment"><span class="fa fa-times"></span></a> /
+    {{else}}
+      <a href class="highlight add_assignment"><span class="fa fa-check-square-o"></span> assign to me</a> /
+    {{/if}}
+    {{#if release.noticeFileId}}
+      <a href="{{pathFor route='noticeFileDetails' data=getNoticeOptions}}" target="_blank" class="highlight"><span class="fa fa-external-link"></span> Notice file</a>
+    {{/if}}
+  </div>
+</template>

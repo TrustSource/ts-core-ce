@@ -1,0 +1,12 @@
+eslint.config.mjs
+# Analysis and webhook services, run by the app in worker threads (see workers/entry.js)
+/workers/
+pentest
+# jest specs (run via `npm test`) - meteor test mode would eagerly load them
+# and crash on jest globals like beforeAll
+test_api
+defenseControls
+# Local copy of the online help (separate repo), never part of the app
+/ohelp/
+# Container build scripts and MongoDB init scripts, never part of the app
+/docker/

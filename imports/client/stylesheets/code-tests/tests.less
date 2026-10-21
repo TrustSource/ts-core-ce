@@ -1,0 +1,128 @@
+// =============================================================================
+// Tests page - flex-fill layout (body.flex-fill-page)
+// =============================================================================
+// Chain: .content-area > .content > .row.tests > col > .ts-panel > .panel-body
+
+.row.tests {
+  .reactive-table-row-click();
+}
+
+body.flex-fill-page .row.tests {
+  flex: 1 1 0%;
+  min-height: 0;
+
+  > [class*="col-"] {
+    flex: 1 1 0%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  > [class*="col-"] > .ts-panel {
+    flex: 1 1 0%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+
+    > .panel-body {
+      flex: 1 1 0%;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      .reactive-table-scroll();
+    }
+  }
+}
+
+// CWE badges - the weaknesses a SARIF document reports, shown on
+// the findings list, in its header strip and in the tests list column. Muted
+// teal so they read as metadata beside the rule id rather than competing with
+// the violation/warning/note status colours.
+@cwe-badge-fg: #2a94a2;
+@cwe-badge-bg: rgba(42, 148, 162, 0.09);
+@cwe-badge-border: rgba(42, 148, 162, 0.28);
+
+.test-cwe-badge {
+  display: inline-block;
+  padding: 1px 7px;
+  margin: 0 3px 2px 0;
+  border: 1px solid @cwe-badge-border;
+  border-radius: 10px;
+  background-color: @cwe-badge-bg;
+  color: @cwe-badge-fg;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 16px;
+  white-space: nowrap;
+  vertical-align: middle;
+
+  &:hover,
+  &:focus {
+    background-color: fade(@cwe-badge-fg, 18%);
+    color: darken(@cwe-badge-fg, 12%);
+    text-decoration: none;
+  }
+}
+
+.test-cwe-badge-sm {
+  padding: 0 6px;
+  font-size: 10px;
+  line-height: 15px;
+}
+
+.test-cwe-badge-count {
+  margin-left: 3px;
+  padding-left: 4px;
+  border-left: 1px solid @cwe-badge-border;
+  font-weight: 400;
+  opacity: 0.85;
+}
+
+// A weakness somebody here assigned to a rule the tool left unclassified.
+// Dashed rather than a second colour: it is the same kind of fact
+// as the badges beside it, but asserted by a person, and that difference has to
+// survive a glance - a mistaken assignment is worse than an empty field.
+.test-cwe-badge-assigned {
+  border-style: dashed;
+}
+
+// Rules that fired and carry no weakness at all. Muted, because it is a prompt
+// rather than a problem.
+.test-cwe-unclassified {
+  margin-left: 6px;
+  color: @color-text-secondary;
+  font-size: 11px;
+  font-style: italic;
+  cursor: help;
+}
+
+// Sits between the tool heading and the findings list, so the whole document's
+// weaknesses are readable without expanding a single group.
+.test-cwe-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 15px;
+  border-bottom: 1px solid @ts-border;
+}
+
+.test-cwe-summary-label {
+  margin-right: 8px;
+  color: @color-text-secondary;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+// An empty CWEs column cell on an older imported document: it recorded no
+// weakness map at all, which is not the same fact as carrying no weaknesses.
+// The cell stays a muted "-" because there is nothing to show, and the dotted
+// underline is the cue that hovering explains which empty this is.
+.test-cwes-unrecorded {
+  border-bottom: 1px dotted @color-text-secondary;
+  cursor: help;
+}

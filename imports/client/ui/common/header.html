@@ -1,0 +1,39 @@
+<template name="header">
+  <div id="header">
+    <div class="ts-accent-line"></div>
+    <div id="logo" class="light-version">
+      <a href="{{pathFor route='landing'}}">
+        <img src="/logo.png" alt="{{app 'name'}}" class="trust_logo">
+      </a>
+    </div>
+    <nav role="navigation">
+      <div class="header-link hide-menu"><i class="fa fa-bars"></i></div>
+      <!-- Breadcrumb -->
+      <div class="breadcrumb-box intro-breadcrumb">
+        {{> breadcrumb}}
+      </div>
+      <div class="small-logo">
+        <strong class="text-primary" title="{{app 'title'}}">{{app 'name'}}</strong>
+      </div>
+      <div class="navbar-right">
+        {{#if isSuperUser}}
+          <div class="header-superuser-warning">
+            <span title="ATTENTION!">
+              <i class="fa fa-solid fa-triangle-exclamation navbar-attention-hover text-danger-i"></i>
+              <span class="navbar-attention text-danger-i">
+                ATTENTION! You are using all roles. This is<br>not intended for production use.
+              </span>
+            </span>
+          </div>
+        {{/if}}
+        <a href="{{pathFor route='settings'}}" class="header-user-link" title="Profile">
+          <span class="header-user-text">
+            <span class="header-user-name" title="{{userDisplayName}}">{{userDisplayName}}</span>
+            <span class="header-user-role" title="{{userRoles}}">{{userRoles}}</span>
+          </span>
+          <i class="fa fa-regular fa-circle-user header-user-icon"></i>
+        </a>
+      </div>
+    </nav>
+  </div>
+</template>

@@ -1,0 +1,89 @@
+<template name="companyFoss">
+  {{#panel title="FOSS liaison"}}
+    <form class="form-horizontal foss">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="col-sm-4 control-label" for="fossName">Name of contact*</label>
+            <div class="col-sm-8 controls">
+              <input type="text" name="fossName" placeholder="Name of contact" class="form-control"
+                     value="{{foss.name}}"/>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="col-sm-4 control-label" for="fossCompanyName">Name of company*</label>
+            <div class="col-sm-8 controls">
+              <input type="text" name="fossCompanyName" placeholder="Name of company" class="form-control"
+                     value="{{foss.company}}"/>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="col-sm-4 control-label" for="fossZIP">Postal code (ZIP)*</label>
+            <div class="col-sm-8 controls">
+              <input type="text" name="fossZIP" placeholder="Postal code" class="form-control" value="{{foss.zip}}"/>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="col-sm-4 control-label" for="fossEmail">Mail address*</label>
+            <div class="col-sm-8 controls">
+              <input type="email" name="fossEmail" placeholder="Mail address" class="form-control"
+                     value="{{foss.email}}"/>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="col-sm-4 control-label" for="fossAddress">Postal address*</label>
+            <div class="col-sm-8 controls">
+              <input type="text" name="fossAddress" placeholder="Postal address" class="form-control"
+                     value="{{foss.address}}"/>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="col-sm-4 control-label" for="fossPhone">Phone number*</label>
+            <div class="col-sm-8 controls">
+              <input type="text" name="fossPhone" placeholder="Phone number" class="form-control"
+                     value="{{foss.phone}}"/>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="col-sm-4 control-label" for="name">Country (country code)*</label>
+            <div class="col-sm-8 controls">
+              <input type="text" name="fossCountry" placeholder="Country code" class="form-control"
+                     value="{{foss.country}}"/>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="col-sm-4 control-label" for="fossUrl">Webpage*</label>
+            <div class="col-sm-8 controls">
+              <input type="text" name="fossUrl" placeholder="Webpage" class="form-control" value="{{foss.url}}"/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-8">
+              <button type="submit" class="btn  btn-sm btn-primary">
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  {{/panel}}
+</template>

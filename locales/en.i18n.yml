@@ -1,0 +1,422 @@
+_locale: en
+CompanyPortfolioView: Company portfolio view
+SignIn: Sign in
+Login: Login
+Username: Username
+Password: Password
+IForgotMyPassword: I forgot my password
+NoAccountYetGetOneForFree: No account yet? Get one for free
+GitHub: GitHub
+ThankYou: Thank You!
+ResetPasswordInstruction: An e-mail with reset password instruction has been sent to your e-mail address. Please check your e-mail and follow the provided instructions! If you do not receive any e-mail within 5 minutes, please try again or check your SPAM folder.
+here: here
+UsernameAndPasswordMismatch: Username/password combination not valid. Please try again
+AccountSuspended: Your account has been suspended. Please contact your account administrator to restore access.
+Registration: Registration
+EmailAddress: Email Address
+RepeatEmail: Repeat Email
+RepeatPassword: Repeat Password
+Register: Register
+AlreadyHaveAccountSignInHere: Already have account? Sign in here
+PasswordMustBeAtLeast: Password must be at least
+12Characters: 12 characters
+includingOneCapitalLetter: including one capital letter, one special character and one number.
+YourTextDoesNotMatchRequirements: Your text does not match requirements
+RegistrationError: Registration error
+AConfirmationEmailHasBeenSent: A confirmation e-mail has been sent to your e-mail address. Please check your e-mail and confirm your subscription, then your account will be activated! If you do not see the e-mail in your inbox, please check your SPAM folder.
+SettingUpYourWorkspace: Setting up your workspace
+SettingUpYourWorkspaceSub: We're getting your account ready. This usually takes a few seconds.
+SettingUpYourWorkspaceSlow: This is taking longer than expected. Please refresh, or
+TrustSourceAPI: TrustSource-API
+baseUrl: base url
+ThisAPIWillBeDeprecated: This API will be deprecated. Please migrate to the new API.
+ViewLatestVersion: View latest version
+NewPassword: New Password
+RepeatNewPassword: Repeat new Password
+DoNotWantToChangeYourPassword: Do not want to change your password? Press here
+SignUp: Sign Up
+Name: Name
+CreateAccount: Create Account
+DoNotWantAcceptInvitation: Do not want accept invitation? Cancel here
+VerifyEMail: Verify E-Mail
+ThankYouForSigningUpTo: Thank you for signing up to
+ToFinishTheRegistration: To finish the registration and login to the application, enter your password and press
+Accept: Accept
+DoNotWantVerifyEmail: Do not want verify email? Cancel here
+ViewV1Documentation: View v1 documentation
+StatusChanges: Status changes
+ExportControl: Export control
+License: License
+Licenses: Licenses
+licenses: licenses
+Overview: Overview
+Modules: Modules
+modules: modules
+ComponentStatusChanges: Component status changes
+SWTestsPassed: SW-Tests passed
+VulnerabilitiesResolved: Vulnerabilities resolved
+LegalActionsTaken: Legal actions taken
+ComponentsOutdated: Components outdated
+NoticeFileCompleted: Notice file completed
+Quality: Quality
+Versioning: Versioning
+Viability: Viability
+Vulnerabilities: Vulnerabilities
+Approve: Approve
+Reject: Reject
+CreateApprovalRequest: Create approval request
+RemoveDRAFT: Remove DRAFT
+by: by
+SWQuality: SW-Quality
+YourApprovals: Your approvals
+DryRun: Dry-run
+assignToMe: assign to me
+View: View
+Check: Check
+Component: Component
+Components: Components
+components: components
+Project: Project
+SelectProject: Select project
+NoProjectsAvailable: No projects available
+Module: Module
+module: module
+SelectModule: Select module
+NoModulesAvailableOrSelectProject: No modules available or select project first
+Version: Version
+SelectVersion: Select version
+SelectComponentToViewVersions: Select component to view versions
+CheckComponent: Check component
+SorryThis: Sorry, this
+project: project
+canNotBeSelectedSettingsAreIncomplete: can not be selected, because settings are incomplete.
+PleaseCompleteLegalRequirementsFirst: Please complete legal requirements first
+PleaseSelectThe: Please select the
+toPerformTheAssessment: to perform the assessment
+LoadingResultsForRequest: Loading results for request, please wait...
+NoVulnerabilitiesKnown: No vulnerabilities known
+ComponentWas: Component was
+not: not
+modified: modified
+ComponentWasModified: Component was modified
+SorryDetailedInformationNotAvailable: Sorry, detailed information not available.
+InCaseYouNeedInformationUrgently: In case you need information urgently, please
+ReportAnIssue: report an issue
+ThankYouForYourPatience: Thank you for your patience
+noRecordsFound: no records found
+noComponentsFound: no components found
+SelectLicense: Select license
+NoLicensesAvailable: No licenses available
+CheckLicense: Check license
+Legal: Legal
+ImportTest: Import test
+YouMayAddTestResultsIn: You may add Test Results in
+SARIF: SARIF
+FormatFrom3rdPartTest: -format from 3rd part test tools using API or manual Upload.
+ReadMore: Read more ...
+Uploading: Uploading...
+Browse: Browse...
+SpecifyTheSARIFFile: Specify the SARIF file
+Close: Close
+Import: Import
+TestDetails: Test details
+TestDetailsDescription: Detailed view of test results grouped by rule
+NoResultsAvailable: No results available.
+Tests: Tests
+TheseAreTransferredModuleTests: These are transferred module-tests for your company
+ModuleTestsDescription: Review and manage security and compliance tests across your modules
+Passed: Passed
+Unfinished: Unfinished
+Failed: Failed
+Findings: Findings
+ManageBinaryLinks: Manage binary links
+BinaryLinks: Binary links
+Link: Link
+Comment: Comment
+AddLink: Add link
+Remove: Remove
+differentComponents: different components
+modifiedAppearances: modified appearances
+undocumentedChanges: undocumented changes
+ListOfChangesCanBeFound: List of changes can be found
+ChangesUrlHasNotBeenProvided: Changes url has not been provided
+ModificationNotice: 'Modification notice:'
+ModificationNoticeHasNot: Modification notice has not been provided
+LoadingReportData: Loading report data, please wait...
+SorryButNoChangesWhereFound: Sorry, but no changes where found.
+ListOfAlgorithmsAsDetected: List of Algorithms as detected
+AlgorithmIsBlacklisted: Algorithm is Blacklisted by Company policy
+B: B
+NoCryptoAlgorithmsOrComponents: No crypto algorithms or components containing crypto algorithms identified
+SorryButForTheProjectNoExport: Sorry, but for the project no export control settings where found.
+LicenseDistributionAcross: License distribution across components
+HoverTheDiagramForDetails: Hover the diagram for details
+uniqueObligations: unique obligations
+LicenseOk: License Ok
+WithObligationsWwarnings: With obligations/warnings
+CausingViolations: Causing violations
+Violations: Violations
+UsedIn: Used in
+CausingObligations: Causing obligations
+NoFurtherObligations: No further obligations
+SorryButNoLicensesWhereFound: Sorry, but  no licenses where found.
+Open: Open
+Approved: Approved
+Rejected: Rejected
+Draft: Draft
+MyRequests: My requests
+Unassigned: Unassigned
+AllRequests: All requests
+SorryButForTheProjectNoChanged: Sorry, but for the project no changed components where found.
+SorryButForTheProjectNoTests: Sorry, but for the project no tests where found.
+SorryButForTheProjectNoCapabilities: Sorry, but for the project no capabilities where found.
+affectedComponents: affected components
+SorryButNoVersioningInformation: Sorry, but no versioning information where found.
+componentsWithoutInformation: components without information
+CommitsDuringLastYear: 'Commits during last year:'
+SorryButNoViabilityInformation: Sorry, but no viability information where found.
+uniqueVulnerabilities: unique vulnerabilities
+resolvedVulnerabilities: resolved vulnerabilities
+vulnerableComponents: vulnerable components
+SorryButNoVulnerabilities: Sorry, but no vulnerabilities where found.
+CriticalComponents: Critical Components
+ComponentsThatHaveVersions: Components that have versions
+withoutLicenses: without licenses
+OR: OR
+or: or
+withLicenseWithoutKey: with license without key
+upTo50Of: up to 50 of
+areShown: are shown
+Maven: Maven
+Nuget: Nuget
+Npm: Npm
+Pypi: Pypi
+Deb: Deb
+CocoaPods: CocoaPods
+Apk: Apk
+Cargo: Cargo
+Dart: Dart
+Go: Go
+NoFilter: No filter
+Loading: Loading ...
+Information: Information
+Key: Key
+purlPackageURL: purl (package URL)
+Private: Private
+Versions: Versions
+FilterVersions: Filter versions
+ClearFilter: Clear filter
+VersionsMatching: "{$matched} of {$total} versions"
+ReleaseDate: 'Release date:'
+NA: N.A.
+purl: purl
+Checksum: Checksum
+checksum: checksum
+Copyright: Copyright
+copyright: copyright
+NoVersionsFound: No versions found
+LoadingVulnerabilities: Loading vulnerabilities ...
+Maintainer: Maintainer
+MavenCoordinates: Maven coordinates
+SourceArchive: Source archive
+FileSize: Size
+Sources: Sources
+Javadoc: Javadoc
+Signed: Signed
+SorryComponentDetailsAreNotAvailable: Sorry component details aren't available any more
+SorryComponentIsNotAvailable: Sorry Component isn't available any more
+Edit: Edit
+YouAreNotAllowedTo: You are not allowed to
+editThisTypeOfComponents: edit this type of components
+Homepage: Homepage
+unknown: unknown
+Repository: Repository
+Language: Language
+CryptoAlgorithms: Crypto algorithms
+LastUpdate: Last Update
+Ver: Ver.
+Verified: Verified
+Url: Url
+KeyMissing: Key missing
+KeyAndNameMissing: Key and Name missing
+AllOrSomeVersionsForThisComponentAreBlacklisted: All or some versions for this component are Blacklisted in Company
+LoadingMoreComponents: Loading more components
+ComponentsLake: Components lake
+filtered: filtered
+componentsCurrentlyManagedBySystem: components currently managed by the system
+SearchInProgress: Searching...
+SearchStillRunning: Still searching - this is taking longer than usual
+SearchVerySlow: The service is slow to respond. You can keep waiting or start over.
+SearchFailed: Search failed
+SearchFailedGeneric: The search could not be completed. Please try again.
+SearchTimedOut: The search took too long and was stopped. Please try again.
+SearchRetry: Retry
+SearchBackToStart: Back to start
+ComponentManagerSearch: Component manager search
+ComponentManagerSearchHint: Full component database with extended criteria
+ComponentManagerSearchDescription: Search the full component database with extended criteria
+SearchPromptTitle: Start a search
+ComponentManagerSearchPrompt: Set your criteria in the fields above and run a search across the full component database.
+SearchByName: Search by name
+SearchAction: Search
+ResetAction: Reset
+BackAction: Back
+NoResultsFound: No results found, to find some component you should
+changeFilter: change filter
+ThisListHasMoreItems: This list has more items, to find some component you should
+Category: Category
+Issues: Issues
+ReleaseNotes: Release notes
+SponsoringOrganisation: Sponsoring organisation
+url: url
+address: address
+DeclaredLicenses: Declared licenses
+EffectiveLicenses: Effective licenses
+ConcludedLicenses: Concluded licenses
+DeclaredCopyright: Declared copyright
+ShortDescription: Short description
+Description: Description
+CreateVersions: Create versions
+SetToSelected: Set to selected
+AddBinaryLink: Add binary link
+EnterPublishingComment: Enter publishing comment
+AddLicense: Add license
+EnterCopyrightTextForComponent: 'Enter copyright text for component : Copyright (c) <year> <copyright holders>'
+AddNewCPE: Add new CPE
+AddCPE: Add CPE
+ListOfCPE: List of  CPE
+cpe23: 'cpe:2.3:'
+EnterCPEComment: Enter CPE comment
+microsoftInternetExplorer8: 'a:microsoft:internet_explorer:8.0.6001:beta::::::'
+LastVisit: LastVisit
+Status: Status
+Info: Info
+PYPIInfo: PYPI Info
+GithubInfo: Github Info
+MavenCentralInfo: Maven Central Info
+Maven2VersionsInfo: Maven2-versions Info
+NugetInfo: Nuget Info
+NpmReleasesInfo: Npm-releases Info
+Crawlers: Crawlers
+AddComponent: Add component
+SpecifyTheVersionsOfTheComponent: Specify the versions of the component, separated by comma
+SpecifyTheNameOfTheNewComponent: Specify the name of the new component
+SpecifyTheKeyOfTheNewComponent: Specify the key of the new component, e.g. npm:lodash
+SpecifyTheHomepage: Specify the homepage of the component
+SpecifyTheRepository: Specify the repository of the component
+CreateComponent: Create component
+EnterHomepage: 'Enter homepage: http://project.home.com/homepage'
+EnterRepository: 'Enter repository: git://project.home.com/repo'
+EnterIssuesPage: 'Enter issues page: http://project.home.com/issues'
+EnterReleaseNotesPage: 'Enter release notes page: http://project.home.com/notes'
+EnterSponsoringOrganisation: Enter sponsoring organisation company, e.g. Mozilla
+EnterLinkToASponsoringOrganisationHomepage: 'Enter link to a sponsoring organisation homepage, e.g. https://www.mozilla.org'
+EnterSponsoringOrganisationAddress: 'Enter sponsoring organisation contact address, e.g. Somewhere City, 6328 OldTownBoulevard, Cleveland 3'
+EnterDeclaredCopyrightHere: Enter declared copyright here
+EnterComponentShortDescriptionHere: Enter component short description here
+EnterComponentDescriptionHere: Enter component description here
+EnterACommentConcerning: Enter a comment concerning the component here
+EnterCommaSeparatedVersions: 'Enter comma separated versions : 1.0.1,2.0.1'
+EnterUrlForLicenseText: 'Enter url for license text: http://project.repo.com/license.md'
+RevertDelete: Revert-delete
+SoftDelete: Soft-delete
+CPE: CPE
+Logs: Logs
+Logentries: Logentries
+Date: Date
+Person: Person
+Message: Message
+gotoHomepage: goto homepage
+gotoRepository: goto repository
+CopyrightTrademarks: Copyright & Trademarks
+AimsToSimplify: aims to simplify a compliant use of Open Source. Therefor we have put together many new and existing tools.
+TheFollowingIsAListOfTools: The following is a list of tools and information we assembled to create the usage experience. EACG is neither owner nor somehow related to any of these brands  and / or trademarks..
+TheUseOfTheLogoTrademark: The use of the logo/trademark is just to help you to identify what to expect and does not indicate that the original owner endorses TrustSource.
+ViewUsedAsModules: View used as Modules
+ActivityLog: Activity log
+ViewAllLogs: View all logs
+Note: 'Note:'
+NoIncomingApproval: No incoming approval requests were found
+LicensesInsideComponentVersions: Licenses inside component versions
+AllProjects: All projects
+ModulesOverview: Modules overview
+YouHaveNotPinnedAnyProject: You have not pinned any project yet
+BackToAll: Back to all
+ViewType: View type
+ComponentsSummary: Components - Summary
+LicensesSummary: Licenses - Summary
+ComponentsVulnerability: Components - Vulnerability
+ComponentsLegal: Components - Legal
+ComponentsViability: Components - Viability
+ComponentsVersioning: Components - Versioning
+ComponentsIntegrity: Components - Integrity
+VulnerabilityAnnouncements: Vulnerability announcements (last 8 days)
+PLEASENOTENotAllOfTheseVulnerabilities: 'PLEASE NOTE: Not all of these vulnerabilities have already been confirmed.'
+ThusTheyMayNotYetAppear: Thus they may not yet appear in your data. It is just a heads-up notice.
+LoadDemoProject: Load demo project
+RemoveDemoProject: Remove demo data
+NewCompany: New company
+CompleteCompanySettings: Finish company setup
+TakeTour: Take tour
+WelcomeTo: Welcome to
+WelcomeToDashboardDesc: Manage your open source compliance, track vulnerabilities, and monitor your software supply chain. Take a quick tour to get started.
+PLEASENOTE: PLEASE NOTE
+NoWidgetsAreAvailable: No widgets are available for your role
+Week: Week
+Month: Month
+CurrentModulesCompliance: Current modules compliance
+UniqueComponents: Unique Components
+Warnings: Warnings
+OK: OK
+TwoFactorAuthentication: Two-Factor Authentication
+TwoFactorCode: Authentication Code
+EnterCodeFromAuthenticatorApp: Enter the 6-digit code from your authenticator app
+InvalidTwoFactorCode: Invalid authentication code. Please try again.
+TwoFactorEnabled: Two-factor authentication is enabled
+TwoFactorDisabled: Two-factor authentication is not enabled
+Enable2fa: Enable Two-Factor Authentication
+Disable2fa: Disable Two-Factor Authentication
+ScanQrCode: Scan this QR code with your authenticator app
+ManualEntryKey: Or enter this key manually
+VerifyAndEnable: Verify & Enable
+TwoFactorSetupComplete: Two-factor authentication has been enabled successfully.
+Back: Back
+
+# Crypto asset settings (CycloneDX 1.7 / CBOM)
+Add: Add
+Save: Save
+AssetType: Asset type
+Details: Details
+InUse: In use
+Origin: Origin
+State: State
+Format: Format
+Mode: Mode
+Size: Size (bits)
+AlgorithmEvaluation: Algorithm evaluation
+EditCryptoAsset: Edit crypto asset
+AddAlgorithm: Add algorithm
+Primitive: Primitive
+ParameterSetIdentifier: Parameter Set Identifier
+EllipticCurve: Elliptic Curve
+Padding: Padding
+CryptographicFunctions: Cryptographic functions
+ExecutionEnvironment: Execution Environment
+ImplementationPlatform: Implementation platform
+CertificationLevel: Certification Level
+ClassicalSecurityLevel: Classical security level
+NistQsl: NIST QSL
+SubjectName: Subject name
+IssuerName: Issuer name
+NotValidBefore: Not valid before
+NotValidAfter: Not valid after
+CertificateFormat: Certificate format
+FileExtension: File extension
+SerialNumber: Serial number
+ProtocolType: Protocol type
+MaterialType: Material type
+CryptoAlgorithmAdded: Algorithm settings added
+CryptoAlgorithmUpdated: Algorithm settings updated
+CryptoAlgorithmRequired: Algorithm is required
+CryptoCreateError: Could not create algorithm settings
+CryptoUpdateError: Could not update algorithm settings

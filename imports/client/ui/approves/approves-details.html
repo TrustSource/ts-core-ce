@@ -1,0 +1,136 @@
+<template name="approvesDetails">
+  {{# pageHeader}}
+
+    <div class="approves-detail-header">
+      <div class="approves-detail-header-left">
+        <h2 class="font-light m-b-none">{{name}}</h2>
+        {{#if getApprovePurl}}
+          <small class="text-muted">{{getApprovePurl}}</small>
+        {{/if}}
+        {{#if getApproveDescription}}
+          <small class="text-muted">{{getApproveDescription}}</small>
+        {{/if}}
+      </div>
+      <div class="approves-detail-header-actions">
+        {{> approvesBinary projectId=projectId moduleId=moduleId binaryLinks=binaryLinks approved=approved size='btn-xs'}}
+        {{#if isInRole 'compliance_manager' companyId}}
+          {{#unless draft}}
+            {{#if approved}}
+              <div class="dropdown">
+                <span class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-check-circle"></i> {{__ 'Approved'}} <span class="caret"></span>
+                </span>
+                <ul class="dropdown-menu dropdown-menu-right approves-detail-dropdown">
+                  <li><span><strong>{{__ 'by'}}:</strong> {{closedByName}}</span></li>
+                  <li><span><strong>{{__ 'Date'}}:</strong> {{dateFormat date=approved dflt='-- --'}}</span></li>
+                </ul>
+              </div>
+            {{else}}
+              {{#if rejected}}
+                <div class="dropdown">
+                  <span class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-ban"></i> {{__ 'Rejected'}} <span class="caret"></span>
+                  </span>
+                  <ul class="dropdown-menu dropdown-menu-right approves-detail-dropdown">
+                    <li><span><strong>{{__ 'by'}}:</strong> {{closedByName}}</span></li>
+                    <li><span><strong>{{__ 'Date'}}:</strong> {{dateFormat date=rejected dflt='-- --'}}</span></li>
+                    {{#if rejectedReason}}
+                      <li><span><strong>{{__ 'Reason'}}:</strong> {{rejectedReason}}</span></li>
+                    {{/if}}
+                  </ul>
+                </div>
+              {{else}}
+                <button class="btn btn-success approve" type="button"><i class="fa fa-check-circle"></i> {{__ 'Approve'}}</button>
+                <button class="btn btn-danger2 reject" type="button"><i class="fa fa-ban"></i> {{__ 'Reject'}}</button>
+              {{/if}}
+            {{/if}}
+          {{else}}
+            <button class="btn btn-success create" type="button">
+              <i class="fa fa-check-circle-o"></i> {{__ 'CreateApprovalRequest'}}
+            </button>
+            <button class="btn btn-danger2 remove" type="button">
+              <i class="fa fa-hourglass-start"></i> {{__ 'RemoveDRAFT'}}
+            </button>
+          {{/unless}}
+        {{else}}
+          {{#unless draft}}
+            {{#if approved}}
+              <div class="dropdown">
+                <span class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-check-circle"></i> {{__ 'Approved'}} <span class="caret"></span>
+                </span>
+                <ul class="dropdown-menu dropdown-menu-right approves-detail-dropdown">
+                  <li><span><strong>{{__ 'by'}}:</strong> {{closedByName}}</span></li>
+                  <li><span><strong>{{__ 'Date'}}:</strong> {{dateFormat date=approved dflt='-- --'}}</span></li>
+                </ul>
+              </div>
+            {{else}}
+              {{#if rejected}}
+                <div class="dropdown">
+                  <span class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-ban"></i> {{__ 'Rejected'}} <span class="caret"></span>
+                  </span>
+                  <ul class="dropdown-menu dropdown-menu-right approves-detail-dropdown">
+                    <li><span><strong>{{__ 'by'}}:</strong> {{closedByName}}</span></li>
+                    <li><span><strong>{{__ 'Date'}}:</strong> {{dateFormat date=rejected dflt='-- --'}}</span></li>
+                    {{#if rejectedReason}}
+                      <li><span><strong>{{__ 'Reason'}}:</strong> {{rejectedReason}}</span></li>
+                    {{/if}}
+                  </ul>
+                </div>
+              {{/if}}
+            {{/if}}
+          {{else}}
+            <button class="btn btn-danger2 remove" type="button">
+              <i class="fa fa-hourglass-start"></i> {{__ 'RemoveDRAFT'}}
+            </button>
+          {{/unless}}
+        {{/if}}
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="approves-detail-tabs">
+    <div class="nav-tabs-scrollable">
+      <button class="nav-tabs-arrow nav-tabs-arrow-left" type="button"><i class="fa fa-chevron-left"></i></button>
+      <button class="nav-tabs-arrow nav-tabs-arrow-right" type="button"><i class="fa fa-chevron-right"></i></button>
+    <ul class="nav nav-tabs">
+      <li class="{{activeTab 'approvesDetailsOverview'}}">
+        <a href="{{pathFor route='approvesDetailsOverview' data=getRouteOptions}}" title="Overview">
+          <span class="fa fa-info"></span> {{__ 'Overview'}}</a>
+      </li>
+      <li class="{{activeTab 'approvesDetailsVulnerabilities'}}">
+        <a href="{{pathFor route='approvesDetailsVulnerabilities' data=getRouteOptions}}" title="Vulnerabilities">
+          <span class="fa fa-shield-halved"></span> {{__ 'Vulnerabilities'}}</a>
+      </li>
+      <li class="{{activeTab 'approvesDetailsLicenses'}}">
+        <a href="{{pathFor route='approvesDetailsLicenses' data=getRouteOptions}}" title="Licenses">
+          <span class="fa fa-gavel"></span> {{__ 'Licenses'}}</a>
+      </li>
+      <li class="{{activeTab 'approvesDetailsVersioning'}}">
+        <a href="{{pathFor route='approvesDetailsVersioning' data=getRouteOptions}}" title="Versioning">
+          <span class="fa fa-heartbeat"></span> {{__ 'Versioning'}}</a>
+      </li>
+      <li class="{{activeTab 'approvesDetailsViability'}}">
+        <a href="{{pathFor route='approvesDetailsViability' data=getRouteOptions}}" title="Viability">
+          <span class="fa fa-hourglass-half"></span> {{__ 'Viability'}}</a>
+      </li>
+      <li class="{{activeTab 'approvesDetailsChanges'}}">
+        <a href="{{pathFor route='approvesDetailsChanges' data=getRouteOptions}}" title="Status changes">
+          <span class="fa fa-list"></span> {{__ 'StatusChanges'}}</a>
+      </li>
+      <li class="{{activeTab 'approvesDetailsExportControl'}}">
+        <a href="{{pathFor route='approvesDetailsExportControl' data=getRouteOptions}}" title="Export control">
+          <span class="fa fa-lock"></span> {{__ 'ExportControl'}}</a>
+      </li>
+      <li class="{{activeTab 'approvesDetailsCapabilities'}}">
+        <a href="{{pathFor route='approvesDetailsCapabilities' data=getRouteOptions}}" title="{{__ 'Capabilities'}}">
+          <span class="fa fa-tags"></span> {{__ 'Capabilities'}}</a>
+      </li>
+      <li class="{{activeTab 'approvesDetailsTests'}}">
+        <a href="{{pathFor route='approvesDetailsTests' data=getRouteOptions}}" title="Quality">
+          <span class="fa fa-play-circle"></span> {{__ 'SWQuality'}}</a>
+      </li>
+    </ul>
+    </div>
+  </div>
+</template>

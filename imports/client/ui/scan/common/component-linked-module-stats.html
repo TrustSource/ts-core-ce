@@ -1,0 +1,67 @@
+<template name="componentLinkedModuleStats">
+  <div class="linked-module-stats">
+    <div class="linked-module-header">
+      <div class="linked-module-header-left">
+        {{#if module}}
+          <a href="{{pathFor route='moduleDetail' data=getModuleRouteOptions}}" class="linked-module-name" target="_blank" title="Open module">
+            <span class="fa fa-cube"></span> {{module.name}}
+            {{#if module.version}}<span class="text-muted">v{{module.version}}</span>{{/if}}
+            <span class="fa fa-external-link linked-module-ext"></span>
+          </a>
+        {{/if}}
+        {{#if approve}}
+          <a href="{{pathFor route='releasesDetailsOverview' data=getReleaseRouteOptions}}" class="linked-module-name" target="_blank" title="View release">
+            <span class="fa fa-tag"></span> {{approve.name}}
+            {{#if approve.version}}<span class="text-muted">v{{approve.version}}</span>{{/if}}
+            <span class="fa fa-external-link linked-module-ext"></span>
+          </a>
+        {{/if}}
+      </div>
+      <button class="btn btn-default btn-xs remove-link-module" title="Remove link">
+        <span class="fa fa-trash-o"></span>
+      </button>
+    </div>
+    {{#with normalizedStats}}
+      <div class="linked-module-counters">
+        <div class="linked-module-counter">
+          <strong>{{components}}</strong> <span>Components</span>
+        </div>
+        <div class="linked-module-counter">
+          <strong>{{licenses}}</strong> <span>Licenses</span>
+        </div>
+      </div>
+      <table class="linked-module-stats-table">
+        <tbody>
+          {{#each rows}}
+            <tr>
+              <td class="stats-label">{{label}}</td>
+              <td class="stats-values">
+                {{#if na}}
+                  <span class="label label-default label-xs">n/a</span>
+                {{else}}
+                  {{#if warnings}}
+                    <span class="label label-warning label-xs">{{warnings}} warnings</span>
+                  {{/if}}
+                  {{#if violations}}
+                    <span class="label label-danger label-xs">{{violations}} violations</span>
+                  {{/if}}
+                  {{#unless warnings}}{{#unless violations}}
+                    <span class="label label-success label-xs">ok</span>
+                  {{/unless}}{{/unless}}
+                {{/if}}
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    {{else}}
+      <p class="text-muted linked-module-na">n/a</p>
+    {{/with}}
+    <div class="linked-module-meta">
+      {{#if getProjectLabel}}
+        <span class="text-muted"><span class="fa fa-folder-o"></span> {{getProjectLabel}}</span>
+      {{/if}}
+      <span class="text-muted"><span class="fa fa-clock-o"></span> Linked {{dateFormat linkedAt 'fromNow'}}</span>
+    </div>
+  </div>
+</template>

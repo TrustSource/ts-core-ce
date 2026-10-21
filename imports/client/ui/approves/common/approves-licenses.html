@@ -1,0 +1,268 @@
+<template name="approvesLicenses">
+  <div class="row">
+    {{#if getProjectLicensesStatus}}
+      <div class="col-md-5">
+        <h4>{{__ 'LicenseDistributionAcross'}} <small>({{__ 'HoverTheDiagramForDetails'}})</small></h4>
+        <div class="doughnut-chart" style="margin-bottom: 10px">
+          <canvas id="applied-license-chart" height="150"></canvas>
+        </div>
+      </div>
+      <div class="col-md-7">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="panel panel-success text-center">
+                <p class="h2"><strong>{{counterLicenses}}</strong></p>
+                <p class="h5">{{__ 'licenses'}}</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="panel panel-danger text-center">
+                <p class="h2"><strong>{{counterObligations}}</strong></p>
+                <p class="h5">{{__ 'uniqueObligations'}}</p>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              {{> legalRequirementsDescription requirements=getRequirements projectId=projectId moduleId=getModuleId}}
+            </div>
+          </div>
+      </div>
+    {{/if}}
+  </div>
+  {{#if getProjectLicenses}}
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="panel panel-default text-center">
+          <p class="h2"><strong>{{getProjectLicensesOkCount}} ({{getPercent getProjectLicensesOkCount}}%)</strong></p>
+          <p class="h5">{{__ 'LicenseOk'}}</p>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="panel panel-default text-center">
+          <p class="h2"><strong>{{getProjectLicensesWarningsCount}} ({{getPercent getProjectLicensesWarningsCount}}%)</strong></p>
+          <p class="h5">{{__ 'WithObligationsWwarnings'}}</p>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="panel panel-default text-center">
+          <p class="h2"><strong>{{getProjectLicensesViolationsCount}} ({{getPercent getProjectLicensesViolationsCount}}%)</strong></p>
+          <p class="h5">{{__ 'CausingViolations'}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="ts-panel obligation-list">
+      {{#if getProjectLicensesViolationsCount}}
+        <div class="panel">
+          <div class="panel-heading violations section-expand pointer">
+            <h4>{{__ 'Violations'}} ({{getProjectLicensesViolationsCount}}) <span class="fa fa-chevron-up pull-right"></span></h4>
+          </div>
+          <div class="panel-body">
+            {{#each getProjectLicensesViolationsStatus}}
+              <div class="panel-body {{status}}">
+                <div class="row">
+                  <div class="col-sm-4 text-left">
+                    {{{ecsLabel status label}}}
+                    <h5>{{name}}</h5>
+                    <small>{{__ 'UsedIn'}} {{getPluralized 'module' countModules}} {{__ 'by'}} {{getPluralized 'component' components}}</small>
+                    {{#each statusByModule}}
+                      <p class="inner-b-0 inner-t-5">
+                        <a href="{{pathFor route=actionRoute.route data=actionRoute.params query=actionRoute.query}}"
+                           target="_blank">
+                          {{module.name}}
+                          <span class="fa fa-external-link inner-l-5"></span>
+                        </a>
+                      </p>
+                    {{/each}}
+                  </div>
+                  <div class="col-sm-8">
+                    <table class="table-clear">
+                      {{#if reason}}
+                        <tr>
+                          <td style="width:140px;">
+                            {{{ecsLabel 'warnings' 'Warning'}}}
+                          </td>
+                          <td>{{reason}}</td>
+                        </tr>
+                      {{/if}}
+                      {{#each violations}}
+                        <tr>
+                          <td style="width:140px;">
+                            {{{ecsLabel 'violations' 'Violation'}}}
+                          </td>
+                          <td>{{describeViolations}}</td>
+                        </tr>
+                      {{/each}}
+                      {{#each getDeadlyObligations}}
+                        <tr>
+                          <td style="width:140px;">
+                            {{{ecsLabel 'violations' 'Obligation'}}}
+                          </td>
+                          <td>{{describeDeadlyObligations}}</td>
+                        </tr>
+                      {{/each}}
+                      {{#each obligations}}
+                        <tr>
+                          <td style="width:140px;">
+                            {{{ecsLabel 'warnings' 'Obligation'}}}
+                          </td>
+                          <td>{{describeObligations}}</td>
+                        </tr>
+                      {{/each}}
+                    </table>
+                  </div>
+                </div>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+      {{/if}}
+      {{#if getProjectLicensesWarningsCount}}
+        <div class="panel">
+          <div class="panel-heading warnings section-expand pointer">
+            <h4>{{__ 'CausingObligations'}} ({{getProjectLicensesWarningsCount}}) <span class="fa fa-chevron-up pull-right"></span></h4>
+          </div>
+          <div class="panel-body">
+            {{#each getProjectLicensesWarningsStatus}}
+              <div class="panel-body {{status}}">
+                <div class="row">
+                  <div class="col-sm-4 text-left">
+                    {{{ecsLabel status label}}}
+                    <h5>{{name}}</h5>
+                    <small>{{__ 'UsedIn'}} {{getPluralized 'module' countModules}} {{__ 'by'}} {{getPluralized 'component' components}}</small>
+                    {{#each statusByModule}}
+                      <p class="inner-b-0 inner-t-5">
+                        <a href="{{pathFor route=actionRoute.route data=actionRoute.params query=actionRoute.query}}"
+                           target="_blank">
+                          {{module.name}}
+                          <span class="fa fa-external-link inner-l-5"></span>
+                        </a>
+                      </p>
+                    {{/each}}
+                  </div>
+                  <div class="col-sm-8">
+                    <table class="table-clear">
+                      {{#if reason}}
+                        <tr>
+                          <td style="width:140px;">
+                            {{{ecsLabel 'warnings' 'Warning'}}}
+                          </td>
+                          <td>{{reason}}</td>
+                        </tr>
+                      {{/if}}
+                      {{#each violations}}
+                        <tr>
+                          <td style="width:140px;">
+                            {{{ecsLabel 'violations' 'Violation'}}}
+                          </td>
+                          <td>{{describeViolations}}</td>
+                        </tr>
+                      {{/each}}
+                      {{#each getDeadlyObligations}}
+                        <tr>
+                          <td style="width:140px;">
+                            {{{ecsLabel 'violations' 'Obligation'}}}
+                          </td>
+                          <td>{{describeDeadlyObligations}}</td>
+                        </tr>
+                      {{/each}}
+                      {{#each obligations}}
+                        <tr>
+                          <td style="width:140px;">
+                            {{{ecsLabel 'warnings' 'Obligation'}}}
+                          </td>
+                          <td>{{describeObligations}}</td>
+                        </tr>
+                      {{/each}}
+                    </table>
+                  </div>
+                </div>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+      {{/if}}
+      {{#if getProjectLicensesOkCount}}
+        <div class="panel">
+          <div class="panel-heading ok section-expand pointer">
+            <h4>{{__ 'NoFurtherObligations'}} ({{getProjectLicensesOkCount}}) <span class="fa fa-chevron-down pull-right"></span></h4>
+          </div>
+          <div class="panel-body" style="display: none">
+            {{#each getProjectLicensesOkStatus}}
+              <div class="panel-body {{status}}">
+                <div class="row">
+                  <div class="col-sm-4 text-left">
+                    {{{ecsLabel status label}}}
+                    <h5>{{name}}</h5>
+                    <small>{{__ 'UsedIn'}} {{getPluralized 'module' countModules}} {{__ 'by'}} {{getPluralized 'component' components}}</small>
+                    {{#each statusByModule}}
+                      <p class="inner-b-0 inner-t-5">
+                        <a href="{{pathFor route=actionRoute.route data=actionRoute.params query=actionRoute.query}}"
+                           target="_blank">
+                          {{module.name}}
+                          <span class="fa fa-external-link inner-l-5"></span>
+                        </a>
+                      </p>
+                    {{/each}}
+                  </div>
+                  <div class="col-sm-8">
+                    <table class="table-clear">
+                      {{#if reason}}
+                        <tr>
+                          <td style="width:140px;">
+                            {{{ecsLabel 'warnings' 'Warning'}}}
+                          </td>
+                          <td>{{reason}}</td>
+                        </tr>
+                      {{/if}}
+                      {{#each violations}}
+                        <tr>
+                          <td style="width:140px;">
+                            {{{ecsLabel 'violations' 'Violation'}}}
+                          </td>
+                          <td>{{describeViolations}}</td>
+                        </tr>
+                      {{/each}}
+                      {{#each getDeadlyObligations}}
+                        <tr>
+                          <td style="width:140px;">
+                            {{{ecsLabel 'violations' 'Obligation'}}}
+                          </td>
+                          <td>{{describeDeadlyObligations}}</td>
+                        </tr>
+                      {{/each}}
+                      {{#each obligations}}
+                        <tr>
+                          <td style="width:140px;">
+                            {{{ecsLabel 'warnings' 'Obligation'}}}
+                          </td>
+                          <td>{{describeObligations}}</td>
+                        </tr>
+                      {{/each}}
+                    </table>
+                  </div>
+                </div>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+      {{/if}}
+    </div>
+  {{else}}
+    {{#unless noDataInProject}}
+      {{#panel}}
+        <div class="text-primary">
+          <i class="fa fa-spinner fa-spin"></i> {{__ 'LoadingReportData'}}
+        </div>
+      {{/panel}}
+    {{/unless}}
+  {{/if}}
+  {{#if requestInProgress}}
+    {{#panel}}
+      <div class="text-primary">
+        <i class="fa fa-spinner fa-spin"></i> {{__ 'LoadingReportData'}}
+      </div>
+    {{/panel}}
+  {{/if}}
+  {{#if noDataInProject}}
+    {{> reactiveTableNoData}}
+  {{/if}}
+</template>

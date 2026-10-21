@@ -1,0 +1,24 @@
+<template name="approvesStateFilter">
+  <div class="btn-group btn-group-sm {{optionClass}} search-by-type" data-toggle="buttons">
+    <label class="btn btn-warning {{activeList showWarnings}}">
+      <input type="checkbox" autocomplete="off" checked={{showWarnings}} class="showWarnings">
+      <span class="fa fa-folder-open filter-icon"></span>
+      <span class="{{activeTab showWarnings}} filter-label">{{__ 'Open'}}</span>
+    </label>
+    <label class="btn btn-success {{activeList showOks}}">
+      <input type="checkbox" autocomplete="off" checked={{showOks}} class="showOks">
+      <span class="fa fa-check-circle filter-icon"></span>
+      <span class="{{activeTab showOks}} filter-label">{{__ 'Approved'}}</span>
+    </label>
+    <label class="btn btn-danger2 {{activeList showViolations}}">
+      <input type="checkbox" autocomplete="off" checked={{showViolations}} class="showViolations">
+      <span class="fa fa-ban filter-icon"></span>
+      <span class="{{activeTab showViolations}} filter-label">{{__ 'Rejected'}}</span>
+    </label>
+    <label class="btn btn-default {{activeList showDrafts}}">
+      <input type="checkbox" autocomplete="off" checked={{showDrafts}} class="showDrafts">
+      <span class="fa fa-hourglass-start filter-icon"></span>
+      <span class="{{activeTab showDrafts}} filter-label">{{__ 'Draft'}}</span>
+    </label>
+  </div>
+</template>

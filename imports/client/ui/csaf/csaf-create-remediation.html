@@ -1,0 +1,57 @@
+<template name="csafCreateRemediation">
+  {{#if hasData}}
+    <div class="panel panel-default csaf-remediation">
+      <div class="panel-body">
+        <div class="col-xs-12">
+          <div class="form-group inner-b-5i">
+            <label for="remediation_category">Category of the remediation *</label>
+            <select id="remediation_category" name="remediation_category"
+                    data-path="category" required
+                    class="form-control" disabled="{{isEditDisabled}}">
+              <option value="mitigation" selected="{{isSelected (getValue 'category') 'mitigation'}}">mitigation</option>
+              <option value="no_fix_planned" selected="{{isSelected (getValue 'category') 'no_fix_planned'}}">no_fix_planned</option>
+              <option value="none_available" selected="{{isSelected (getValue 'category') 'none_available'}}">none_available</option>
+              <option value="vendor_fix" selected="{{isSelected (getValue 'category') 'vendor_fix'}}">vendor_fix</option>
+              <option value="workaround" selected="{{isSelected (getValue 'category') 'workaround'}}">workaround</option>
+            </select>
+            <span class="help-block small">Specifies the category which this remediation belongs to.</span>
+          </div>
+          <div class="form-group inner-b-5i">
+            <label for="remediation_details">Details of the remediation *</label>
+            <input type="text" value="{{getValue 'details'}}" id="remediation_details"
+                   data-path="details"
+                   name="remediation_details"
+                   class="form-control" disabled="{{isEditDisabled}}" minlength="1" required>
+            <span class="help-block small">Contains a thorough human-readable discussion of the remediation.</span>
+          </div>
+          <div class="form-group inner-b-5i">
+            <label for="remediation_restart_required_category">Category of restart</label>
+            <select id="remediation_restart_required_category" name="remediation_restart_required_category"
+                    data-path="restart_required.category"
+                    class="form-control" disabled="{{isEditDisabled}}">
+              <option value="" selected="{{isSelected (getValue 'restart_required.category') ''}}"></option>
+              <option value="connected" selected="{{isSelected (getValue 'restart_required.category') 'connected'}}">connected</option>
+              <option value="dependencies" selected="{{isSelected (getValue 'restart_required.category') 'dependencies'}}">dependencies</option>
+              <option value="machine" selected="{{isSelected (getValue 'restart_required.category') 'machine'}}">machine</option>
+              <option value="none" selected="{{isSelected (getValue 'restart_required.category') 'none'}}">none</option>
+              <option value="parent" selected="{{isSelected (getValue 'restart_required.category') 'parent'}}">parent</option>
+              <option value="service" selected="{{isSelected (getValue 'restart_required.category') 'service'}}">service</option>
+              <option value="system" selected="{{isSelected (getValue 'restart_required.category') 'system'}}">system</option>
+              <option value="vulnerable_component" selected="{{isSelected (getValue 'restart_required.category') 'vulnerable_component'}}">vulnerable_component</option>
+              <option value="zone" selected="{{isSelected (getValue 'restart_required.category') 'zone'}}">zone</option>
+            </select>
+            <span class="help-block small">Specifies what category of restart is required by this remediation to become effective.</span>
+          </div>
+          <div class="form-group inner-b-5i">
+            <label for="remediation_restart_required_details">Additional restart information</label>
+            <input type="text" value="{{getValue 'restart_required.details'}}" id="remediation_restart_required_details"
+                   data-path="restart_required.details"
+                   name="remediation_restart_required_details"
+                   class="form-control" disabled="{{isEditDisabled}}" required>
+            <span class="help-block small">Provides additional information for the restart. This can include details on procedures, scope or impact.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+</template>

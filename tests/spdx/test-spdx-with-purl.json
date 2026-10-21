@@ -1,0 +1,108 @@
+{
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "spdxVersion": "SPDX-2.3",
+  "creationInfo": {
+    "created": "2024-10-24T10:00:00Z",
+    "creators": [
+      "Tool: test-generator-1.0",
+      "Organization: TrustSource ()"
+    ],
+    "licenseListVersion": "3.22"
+  },
+  "name": "test-spdx-with-purl",
+  "dataLicense": "CC0-1.0",
+  "documentNamespace": "https://example.org/test-spdx-with-purl-1.0",
+  "documentDescribes": [
+    "SPDXRef-Package"
+  ],
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-Package",
+      "name": "test-spdx-app",
+      "versionInfo": "1.0.0",
+      "downloadLocation": "https://example.org/test-spdx-app-1.0.0.tar.gz",
+      "licenseDeclared": "MIT",
+      "licenseConcluded": "MIT",
+      "copyrightText": "Copyright 2024 Test",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/test-spdx-app@1.0.0"
+        }
+      ],
+      "packages": [
+        {
+          "SPDXID": "SPDXRef-lodash",
+          "name": "lodash",
+          "versionInfo": "4.17.21",
+          "downloadLocation": "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz",
+          "licenseDeclared": "MIT",
+          "licenseConcluded": "MIT",
+          "copyrightText": "Copyright JS Foundation and other contributors",
+          "externalRefs": [
+            {
+              "referenceCategory": "PACKAGE-MANAGER",
+              "referenceType": "purl",
+              "referenceLocator": "pkg:npm/lodash@4.17.21"
+            }
+          ]
+        },
+        {
+          "SPDXID": "SPDXRef-jena",
+          "name": "apache-jena",
+          "versionInfo": "3.12.0",
+          "downloadLocation": "https://search.maven.org/remotecontent?filepath=org/apache/jena/apache-jena/3.12.0/apache-jena-3.12.0.tar.gz",
+          "licenseDeclared": "Apache-2.0",
+          "licenseConcluded": "Apache-2.0",
+          "copyrightText": "Copyright Apache Software Foundation",
+          "externalRefs": [
+            {
+              "referenceCategory": "PACKAGE-MANAGER",
+              "referenceType": "purl",
+              "referenceLocator": "pkg:maven/org.apache.jena/apache-jena@3.12.0"
+            }
+          ]
+        },
+        {
+          "SPDXID": "SPDXRef-express",
+          "name": "express",
+          "versionInfo": "4.18.2",
+          "downloadLocation": "https://registry.npmjs.org/express/-/express-4.18.2.tgz",
+          "licenseDeclared": "MIT",
+          "licenseConcluded": "MIT",
+          "copyrightText": "Copyright (c) 2009-2014 TJ Holowaychuk",
+          "externalRefs": [
+            {
+              "referenceCategory": "PACKAGE-MANAGER",
+              "referenceType": "purl",
+              "referenceLocator": "pkg:npm/express@4.18.2"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-Package"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-lodash"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-jena"
+    },
+    {
+      "spdxElementId": "SPDXRef-Package",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-express"
+    }
+  ]
+}

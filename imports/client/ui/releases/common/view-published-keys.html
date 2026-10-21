@@ -1,0 +1,79 @@
+<template name="viewPublishedKeys">
+    <a class="btn btn-primary {{size}} pull-left m-r-xs view-published-vex" data-toggle="modal" data-target="#viewPublishedKeys" title="View Published keys">
+      <span class="fa fa-key" aria-hidden="true"></span> Published keys</a>
+
+    <!-- Modal: viewPublishedKeys -->
+    <div class="modal fade" id="viewPublishedKeys" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="ts-accent-line"></div>
+          <div class="modal-header text-center">
+            <i class="fa fa-key ts-big-icon text-success"></i>
+            <br/>
+            <h4 class="modal-title">Published keys</h4>
+            <br/>
+            {{#if loading}}
+              {{>loadingSplash}}
+            {{/if}}
+          </div>
+          <div class="modal-body">
+            {{> reactiveTable settings=reactiveTableSettings}}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary create-new-key">Create new key</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</template>
+<template name="reactiveTableKeyStatus">
+  {{#if getStatusUnpublished}}
+    <i class="fa fa-times"></i>
+  {{else}}
+    {{#if getStatusPublished}}
+      <i class="fa fa-check-circle-o"></i>
+    {{/if}}
+  {{/if}}
+</template>
+<template name="reactiveTableKeyCopy">
+  {{#if getStatusPublished}}
+    <p class="form-control-static">{{maskedKey}}</p>
+  {{else}}
+    <p class="form-control-static">Key available after publish</p>
+  {{/if}}
+</template>
+<template name="reactiveTableVexKeyActions">
+  {{#if getStatusPublished}}
+    <button class="btn btn-info btn-sm copy-public-key inner-r-10" type="button">
+      <span class="fa fa-clipboard"></span>
+    </button>
+  {{else}}
+    <button class="btn btn-info btn-sm inner-r-10" type="button" disabled="disabled">
+      <span class="fa fa-clipboard"></span>
+    </button>
+  {{/if}}
+  {{#unless getStatusPublished}}
+    <button class="btn btn-primary btn-sm publish-public-key inner-r-10" type="button">
+      <span class="fa fa-unlock"></span>
+      Publish
+    </button>
+  {{/unless}}
+  {{#if getStatusUnpublished}}
+    <button class="btn btn-primary btn-sm publish-public-key inner-r-10" type="button">
+      <span class="fa fa-unlock"></span>
+      Publish
+    </button>
+  {{/if}}
+  {{#unless getStatusUnpublished}}
+    <button class="btn btn-danger2 btn-sm delete-public-key inner-r-10" type="button">
+      {{#if requests.length}}
+        <span class="fa fa-lock"></span>
+        Unpublish
+      {{else}}
+        <span class="fa fa-trash-o"></span>
+        Delete
+      {{/if}}
+    </button>
+  {{/unless}}
+</template>

@@ -1,0 +1,29 @@
+Dockerfile
+*.md
+*.iml
+*.log
+**/node_modules
+**/.meteor/local
+**/.sonar
+**/.idea
+**/.git
+.git
+.github
+awscf
+# Secrets and local credentials must never enter image layers
+.env*
+**/.env*
+.test-cred
+*.pem
+*.key
+# Local-only test/tooling data not needed for the build
+pentest
+test_api
+.claude
+.superpowers
+docs
+package-lock.json
+# Local file storage from development runs
+.app.storage
+# Local copy of the online help (separate repo)
+ohelp

@@ -1,0 +1,151 @@
+<template name="cotsComponentCommercialTerms">
+  {{#if managerUser}}
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Right to re-sell</label>
+          <div>
+            <div class="radio-inline">
+              <label>
+                <input type="radio" name="commercialTerms.RS" value="unlimited"
+                       checked="{{equals commercialTerms.RS 'unlimited'}}">
+                unlimited
+              </label>
+            </div>
+            <div class="radio-inline">
+              <label>
+                <input type="radio" name="commercialTerms.RS" value="limited"
+                       checked="{{equals commercialTerms.RS 'limited'}}">
+                limited
+              </label>
+            </div>
+            <div class="radio-inline">
+              <label>
+                <input type="radio" name="commercialTerms.RS" value="no"
+                       checked="{{equals commercialTerms.RS 'no'}}">
+                no
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Right to distribute</label>
+          <div>
+            <div class="radio-inline">
+              <label>
+                <input type="radio" name="commercialTerms.D" value="unlimited"
+                       checked="{{equals commercialTerms.D 'unlimited'}}">
+                unlimited
+              </label>
+            </div>
+            <div class="radio-inline">
+              <label>
+                <input type="radio" name="commercialTerms.D" value="limited"
+                       checked="{{equals commercialTerms.D 'limited'}}">
+                limited
+              </label>
+            </div>
+            <div class="radio-inline">
+              <label>
+                <input type="radio" name="commercialTerms.D" value="no"
+                       checked="{{equals commercialTerms.D 'no'}}">
+                no
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Right to host/operate as SaaS</label>
+          <div>
+            <div class="radio-inline">
+              <label>
+                <input type="radio" name="commercialTerms.SA" value="unlimited"
+                       checked="{{equals commercialTerms.SA 'unlimited'}}">
+                unlimited
+              </label>
+            </div>
+            <div class="radio-inline">
+              <label>
+                <input type="radio" name="commercialTerms.SA" value="limited"
+                       checked="{{equals commercialTerms.SA 'limited'}}">
+                limited
+              </label>
+            </div>
+            <div class="radio-inline">
+              <label>
+                <input type="radio" name="commercialTerms.SA" value="no"
+                       checked="{{equals commercialTerms.SA 'no'}}">
+                no
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Right to modify</label>
+          <div>
+            <div class="radio-inline">
+              <label>
+                <input type="radio" name="commercialTerms.M" value="unlimited"
+                       checked="{{equals commercialTerms.M 'unlimited'}}">
+                unlimited
+              </label>
+            </div>
+            <div class="radio-inline">
+              <label>
+                <input type="radio" name="commercialTerms.M" value="limited"
+                       checked="{{equals commercialTerms.M 'limited'}}">
+                limited
+              </label>
+            </div>
+            <div class="radio-inline">
+              <label>
+                <input type="radio" name="commercialTerms.M" value="no"
+                       checked="{{equals commercialTerms.M 'no'}}">
+                no
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{else}}
+    {{#if commercialTerms.RS}}
+      <p>
+        Right to re-sell
+        {{#if compare commercialTerms.RS 'unlimited'}}<b>unlimited</b>{{/if}}
+        {{#if compare commercialTerms.RS 'limited'}}<b>limited</b>{{/if}}
+        {{#if compare commercialTerms.RS 'no'}}<b>no</b>{{/if}}.
+      </p>
+    {{/if}}
+    {{#if commercialTerms.D}}
+      <p>
+        Right to distribute
+        {{#if compare commercialTerms.D 'unlimited'}}<b>unlimited</b>{{/if}}
+        {{#if compare commercialTerms.D 'limited'}}<b>limited</b>{{/if}}
+        {{#if compare commercialTerms.D 'no'}}<b>no</b>{{/if}}.
+      </p>
+    {{/if}}
+    {{#if commercialTerms.SA}}
+      <p>
+        Right to host/operate as SaaS
+        {{#if compare commercialTerms.SA 'unlimited'}}<b>unlimited</b>{{/if}}
+        {{#if compare commercialTerms.SA 'limited'}}<b>limited</b>{{/if}}
+        {{#if compare commercialTerms.SA 'no'}}<b>no</b>{{/if}}.
+      </p>
+    {{/if}}
+    {{#if commercialTerms.M}}
+      <p>
+        Right to modify
+        {{#if compare commercialTerms.M 'unlimited'}}<b>unlimited</b>{{/if}}
+        {{#if compare commercialTerms.M 'limited'}}<b>limited</b>{{/if}}
+        {{#if compare commercialTerms.M 'no'}}<b>no</b>{{/if}}.
+      </p>
+    {{/if}}
+  {{/if}}
+</template>

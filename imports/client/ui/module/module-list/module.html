@@ -1,0 +1,130 @@
+<template name="module">
+  <div class="col-lg-4 col-md-4 col-sm-6 module-details">
+    <div class="ts-panel {{getStatistics.getState}}">
+      <div class="panel-body {{classUnless 'attention' settingsValid}}">
+        {{#if getStatistics.getState}}
+          <div class="ribbon-wrapper">
+            <div class="ribbon {{getStatistics.getState}}">{{ecsText getStatistics.getState }}</div>
+          </div>
+        {{/if}}
+        <div class="row vertical-align">
+          <div class="col-md-12">
+            {{#if properties.architectureType}}
+              <span class="label label-default pull-left"
+                    style="position: absolute;top: -18px;left:14px;">{{getArchitectureType
+                  properties.architectureType}}</span>
+            {{/if}}
+            <h4 class="pull-left card-name-line">
+              {{>projectApprovedStatus moduleId=_id projectId=projectId class="size-md"}}
+              <span class="card-name truncate" title="{{name}}">
+                {{#if isLinkedProject}}<span class="fa fa-link"></span>{{/if}} {{name}}
+              </span>
+              {{>leanixLink leanix=leanix}}
+              {{#if archived}}<span class="fa fa-archive" title="Archived"></span>{{/if}}
+            </h4>
+          </div>
+        </div>
+        <div>
+          {{>followAction type='module' item=this}}
+          <a class="btn btn-xs module-settings {{classUnless 'btn-danger2' settingsValid}} {{classIf
+              'btn-primary' settingsValid}}">
+            <span class="fa fa-cogs" aria-hidden="true"></span>
+            Settings
+          </a>
+          {{#if isInRole 'manager,compliance_manager' companyId}}
+            {{#unless isInfrastructureModule}}
+              <button class="btn btn-primary btn-xs module-analyze" {{analyseButtonDisabledAttr}}>
+                <span class="fa fa-play" aria-hidden="true"></span>
+                {{analyseButtonText}} {{>analysisRequired item=this}}
+              </button>
+            {{else}}
+              {{#if isInfrastructureTemplate}}
+                <label class="label label-default"> <i class="fa fa-info-circle"></i> <small>Infrastructure Module</small></label>
+              {{else}}
+                <label class="label label-default"> <i class="fa fa-info-circle"></i> <small>COTS Module</small></label>
+              {{/if}}
+            {{/unless}}
+          {{/if}}
+        </div>
+        {{#unless isInfrastructureModule}}
+          <div class="row module-description">
+            <div class="col-md-12">
+              {{#if settingsValid}}
+                <p>{{description}}</p>
+              {{else}}
+                <p>Please complete module <a href="{{pathFor route='moduleSettings'}}" class="module-settings">
+                  <strong>settings</strong></a> (legal & architecture)</p>
+              {{/if}}
+            </div>
+          </div>
+          {{> ecsbars}}
+        {{else}}
+          <div style="height: 151px;overflow-y: auto;margin-top: 15px;">
+            {{#if settingsValid}}
+              <p>{{description}}</p>
+            {{else}}
+              <p>Please complete module settings (legal & architecture)</p>
+            {{/if}}
+          </div>
+        {{/unless}}
+      </div>
+      <div class="panel-footer module-footer">
+        <div class="row">
+          {{#unless isInfrastructureModule}}
+            <div class="col-md-4 col-sm-4 border-right">
+              <div class="module-stat">
+                <a href="{{pathFor route='moduleDetail' hash='#moduleLicenses'}}" class="module-stat-label">
+                  Licenses: <span class="module-stat-value">{{statistics.licenses}}</span>
+                </a>
+                <br>
+                <a href="{{pathFor route='moduleDetail' hash='#moduleComponents'}}"
+                   class="module-stat-label">
+                  Components: <span class="module-stat-value">{{statistics.components}}</span>
+                </a>
+
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-4 border-right">
+              <div class="module-stat">
+                {{#if lastAnalysisWarnings}}
+                  <i class="fa fa-exclamation fa-2x warnings"></i>
+                {{/if}}
+                <a href="{{pathFor route='moduleDetail' hash='#moduleScan'}}" class="module-stat-label">Last
+                  Analysis:<br>
+                  <span class="module-stat-value">{{dateFormat analyzed 'll' '-- --'}}</span>
+                </a>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <div class="module-stat">
+                {{#if lastScanWarnings}}
+                  <i class="fa fa-exclamation fa-2x warnings"></i>
+                {{/if}}
+                <a href="{{pathFor route='moduleDetail' hash='#moduleScan'}}" class="module-stat-label">Last
+                  Scan:<br>
+                  <span class="module-stat-value">{{dateFormat scanned 'll' '-- --'}}</span>
+                </a>
+              </div>
+            </div>
+          {{else}}
+            <div class="col-md-6 col-sm-6 border-right">
+              <div class="module-stat">
+                <a href="{{pathFor route='moduleDetail' hash='#moduleLicenses'}}" class="module-stat-label">
+                  License: <span class="module-stat-value">{{#if catalogLicense}}{{catalogLicense}}{{else}}{{crawlerInfo.info.license}}{{/if}}</span>
+                </a>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <div class="module-stat">
+                <a class="module-stat-label">Last Visit:
+                  <span class="module-stat-value">{{dateFormat crawlerInfo.lastVisit 'll' '-- --'}}</span>
+                </a>
+              </div>
+            </div>
+          {{/unless}}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</template>

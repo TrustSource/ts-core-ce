@@ -1,0 +1,16 @@
+<template name="csafScores">
+  {{#if hasData}}
+    <div class="relative csaf-scores">
+      <div class="form-group inner-b-5i">
+        <label for="cvss_v2">CVSS 2.0</label>
+        <pre>{{metaStr (getValue 'cvss_v2')}}</pre>
+        <span class="help-block small">JSON Schema for Common Vulnerability Scoring System version 2.0</span>
+      </div>
+      <div class="form-group inner-b-5i">
+        <label for="cvss_v3">CVSS 3.0 or 3.1</label>
+        <pre>{{metaStr (getValue 'cvss_v3')}}</pre>
+        <span class="help-block small">JSON Schema for Common Vulnerability Scoring System version 3.0 or 3.1</span>
+      </div>
+    </div>
+  {{/if}}
+</template>

@@ -1,0 +1,15 @@
+<template name="projectApprovedStatus">
+  {{#unless isUnassigned}}
+    {{#if hasApproves}}
+      <span class="relative project-approved-status {{class}}" title="Project has approved versions">
+        <span class="fa fa-certificate project-approved-status-circle"></span>
+        <span class="fa fa-check project-approved-status-check"></span>
+      </span>
+    {{else}}
+      <span class="relative project-approved-status-disabled {{class}}" title="Project has no approved versions">
+        <span class="fa fa-certificate project-approved-status-circle"></span>
+        <span class="fa fa-check project-approved-status-check"></span>
+      </span>
+    {{/if}}
+  {{/unless}}
+</template>

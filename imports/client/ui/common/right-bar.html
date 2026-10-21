@@ -1,0 +1,66 @@
+<template name="rightBar">
+  <aside id="right-bar">
+    <ul class="right-bar-nav">
+      <li class="intro-guide {{#if guidePanelOpen}}active{{/if}}">
+        <a href class="right-bar-link toggle-guide-panel" title="Guide for this screen"
+           aria-controls="guide-panel" aria-expanded="{{#if guidePanelOpen}}true{{else}}false{{/if}}">
+          <i class="fa fa-regular fa-compass"></i>
+        </a>
+      </li>
+
+      <li class="intro-support">
+        <a href="{{app 'helpUrl'}}" target="_blank" rel="noopener noreferrer" class="right-bar-link" title="Help">
+          <i class="fa fa-regular fa-circle-question"></i>
+        </a>
+      </li>
+
+      <li class="intro-documentation {{isActiveRoute regex='^apiDocLatest'}}">
+        <a href="{{pathFor route='apiDocLatest'}}" class="right-bar-link" title="API documentation">
+          <i class="fa fa-regular fa-file-lines"></i>
+        </a>
+      </li>
+
+      <li class="intro-updates {{isActiveRoute regex='^updates'}}">
+        {{#if haveNewUpdates}}
+          <a href="{{pathFor route='updates'}}" class="right-bar-link" title="Unread updates available">
+            <i class="fa fa-regular fa-bell"></i>
+            <span class="notification-dot"></span>
+          </a>
+        {{else}}
+          <a href="{{pathFor route='updates'}}" class="right-bar-link" title="Updates">
+            <i class="fa fa-regular fa-bell"></i>
+          </a>
+        {{/if}}
+      </li>
+
+      <li class="intro-messages {{isActiveRoute regex='^messages'}}">
+        {{#if haveNewMessages}}
+          <a href="{{pathFor route='messagesFolder' folder='inbox'}}" class="right-bar-link" title="Unread messages available">
+            <i class="fa fa-regular fa-envelope-open"></i>
+          </a>
+        {{else}}
+          <a href="{{pathFor route='messagesFolder' folder='inbox'}}" class="right-bar-link" title="Messages">
+            <i class="fa fa-regular fa-envelope"></i>
+          </a>
+        {{/if}}
+      </li>
+
+      <li class="right-bar-spacer"></li>
+
+      {{#if accountAdminEmail}}
+        <li>
+          <a href="mailto:{{accountAdminEmail}}" class="right-bar-link" title="Contact Account Admin">
+            <i class="fa fa-regular fa-paper-plane"></i>
+          </a>
+        </li>
+      {{/if}}
+
+      <li class="intro-signout">
+        <a id="logoutRightBar" class="right-bar-link" title="Logout">
+          <i class="fa fa-solid fa-arrow-right-from-bracket"></i>
+        </a>
+      </li>
+    </ul>
+
+  </aside>
+</template>

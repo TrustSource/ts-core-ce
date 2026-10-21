@@ -1,0 +1,86 @@
+<template name="reportDependent">
+
+  {{#pageHeader}}
+    <div class="reports-header">
+      <div class="reports-header-left">
+        <h2 class="font-light m-b-xs">Dependent projects</h2>
+        <small>List of all projects dependent on selected</small>
+      </div>
+      <div class="reports-header-actions">
+        <select class="form-control current-project select2">
+          {{#each projectList}}
+            <option value="{{_id}}" selected="{{isActiveProject}}">{{name}}</option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+  {{/pageHeader}}
+
+  <div class="content">
+    {{#if getProjectDependent}}
+      <div class="text-right inner-b-10">
+        <button class="btn btn-primary btn-xs export-as-pdf" type="button">
+          <span class="fa fa-file-pdf-o" aria-hidden="true"></span> Export as PDF
+        </button>
+      </div>
+      <div class="ts-panel obligation-list">
+        {{#each getProjectDependent}}
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-sm-6 text-left">
+                <h4 style="word-wrap: break-word;">
+                  <a href="{{pathFor route=actionRoute.route data=actionRoute.params}}"
+                     target="_blank">
+                    {{name}}
+                    <span class="fa fa-external-link inner-l-5"></span>
+                  </a>
+                </h4>
+                <p>
+                  {{description}}
+                </p>
+              </div>
+              <div class="col-sm-6">
+                <div>
+                  {{#with relatedUsers.defaultProjectManager.profile}}
+                    <p>
+                      Project manager: {{name}}
+                      <a href="mailto:{{email}}" target="_blank">{{email}} <span class="fa fa-external-link inner-l-5"></span></a>
+                    </p>
+                  {{/with}}
+                  {{#with relatedUsers.defaultComplianceManager.profile}}
+                    <p>
+                      Compliance manager: {{name}}
+                      <a href="mailto:{{email}}" target="_blank">{{email}} <span class="fa fa-external-link inner-l-5"></span></a>
+                    </p>
+                  {{/with}}
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    {{/if}}
+    {{#if selectProject}}
+      {{#panel}}
+        <div class="text-info">
+          <i class="fa fa-check-circle-o"></i> Please select the project to run a report on the upper right
+        </div>
+      {{/panel}}
+    {{/if}}
+    {{#if requestInProgress}}
+      {{#panel}}
+        <div class="text-primary">
+          <i class="fa fa-spinner fa-spin"></i> Loading report data for project {{getProjectName}}, please wait...
+        </div>
+      {{/panel}}
+    {{/if}}
+    {{#if noDataInProject}}
+      <div class="text-right inner-b-10">
+        <button class="btn btn-primary btn-xs export-as-pdf" type="button">
+          <span class="fa fa-file-pdf-o" aria-hidden="true"></span> Export as PDF
+        </button>
+      </div>
+      {{> reactiveTableNoData}}
+    {{/if}}
+  </div>
+</template>

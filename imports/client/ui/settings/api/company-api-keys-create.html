@@ -1,0 +1,54 @@
+<template name="companyApiKeysCreate">
+  {{#if isInRole 'account_admin' companyId}}
+    <a href="#" class="btn btn-primary btn-xs showCreateApiKey">
+      <span class="fa fa-plus-circle" aria-hidden="true"></span> Create key</a>
+
+    <!-- Modal: createModal -->
+    <div class="modal fade" id="createModal" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="ts-accent-line"></div>
+          <div class="modal-header text-center">
+            <i class="fa fa-key ts-big-icon text-success"></i>
+            <br/>
+            <h4 class="modal-title">Create key</h4>
+            <br/>
+            <br/>
+            <div class="{{createModalMsgType}}"
+                 id="form-messages">{{createModalMsg}}</div>
+          </div>
+          <form id="createModalForm">
+            <div class="modal-body">
+              <div class="row">
+                <div class="form-group col-xs-12">
+                  <label for="nameModal">Name *</label>
+                  <input type="text" value="" id="nameModal" class="form-control"
+                         name="nameModal">
+                </div>
+                <div class="form-group col-xs-12">
+                  <label for="scopeModal">Scopes</label>
+                  <select class="form-control select2" multiple="multiple" name="scopeModal">
+                    {{#each apiKeyScopes}}
+                      <option value="{{this}}" selected="{{isSelectedScope ../scope}}">{{this}}</option>
+                    {{/each}}
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close
+              </button>
+              {{#if apiKeyCreateInProgress}}
+                <button type="button" class="btn btn-primary" disabled="disabled">
+                  <i class="fa fa-spinner fa-spin"></i> Create
+                </button>
+              {{else}}
+                <button type="submit" class="btn btn-primary">Create</button>
+              {{/if}}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+</template>

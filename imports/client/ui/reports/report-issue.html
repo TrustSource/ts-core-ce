@@ -1,0 +1,46 @@
+<template name="reportIssue">
+  {{#pageHeader}}
+    <div class="reports-header">
+      <div class="reports-header-left">
+        <h2 class="font-light m-b-xs">Issue report</h2>
+        <small>Status of all tasks</small>
+      </div>
+      <div class="reports-header-actions">
+        {{#if issueManagers}}
+          <select id="issueManager" name="issueManager" class="form-control select2">
+            <option value="tfs" label="TFS" checked="{{isChecked 'tfs'}}">TFS</option>
+            <option value="jira" label="Jira" checked="{{isChecked 'jira'}}">Jira</option>
+            <option value="github" label="GitHub issues" checked="{{isChecked 'github'}}">GitHub issues</option>
+          </select>
+        {{/if}}
+        <select class="form-control current-project select2">
+          {{#each projectList}}
+            <option value="{{_id}}" selected="{{isActiveProject}}">{{name}}</option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+  {{/pageHeader}}
+
+  {{#if issueManagerJira}}
+    {{> reportJira }}
+  {{/if}}
+  {{#if issueManagerTfs}}
+    {{> reportTfs }}
+  {{/if}}
+  {{#if issueManagerGithub}}
+    {{> reportGithub }}
+  {{/if}}
+  {{#if issueManagerNotConfigured}}
+    <div class="content">
+      {{#panel}}
+        <div class="text-warning">
+          <i class="fa fa-exclamation-circle"></i> Sorry, but for the selected project {{getProjectName}} integration are not configured.
+          <a href="{{pathFor route='companyIntegrations'}}">
+            <i class="fa fa-cog"></i> Setup integration
+          </a>
+        </div>
+      {{/panel}}
+    </div>
+  {{/if}}
+</template>

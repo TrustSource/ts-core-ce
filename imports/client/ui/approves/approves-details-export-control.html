@@ -1,0 +1,10 @@
+<template name="approvesDetailsExportControl">
+  <div>
+    {{#if _id}}
+      <h3>{{__ 'ExportControl'}}</h3>
+      {{> approvesExportControl}}
+    {{else}}
+      {{>loadingSplash}}
+    {{/if}}
+  </div>
+</template>

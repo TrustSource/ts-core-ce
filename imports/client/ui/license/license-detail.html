@@ -1,0 +1,66 @@
+<template name="licenseDetailNotFound">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Sorry License isn't available any more</div>
+  </div>
+</template>
+
+<template name="licenseDetail">
+  {{#pageHeader}}
+    <div class="license-detail-header">
+      <div class="license-detail-header-left">
+        <h2 class="font-light m-b-none">
+          {{> highlight text=getName query=query}} [{{> highlight text=getKey query=query}}]
+        </h2>
+        <small class="text-muted">License Details</small>
+      </div>
+      <div class="license-detail-header-actions">
+        <div class="licenses-search">
+          <i class="fa fa-search licenses-search-icon"></i>
+          <input type="text" placeholder="Search in license text..." class="form-control input-sm" name="search"
+                 value="{{session 'licenseListFilter'}}">
+        </div>
+        {{#if isInRole 'company_component_manager' companyId}}
+          <a class="btn btn-default" href="{{pathFor 'licenseEdit' key=getKey}}">
+            <i class="fa fa-pencil"></i> Edit
+          </a>
+        {{/if}}
+      </div>
+    </div>
+  {{/pageHeader}}
+
+  <div class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="ts-panel">
+          <div class="panel-heading">
+            <div class="panel-title">
+              License text
+            </div>
+          </div>
+          <div class="panel-body">
+            {{#if hasText}}
+              <p class="license-text">{{> highlight text=getText query=query}}</p>
+            {{else}}
+              <p class="text-muted license-text-missing">
+                The text of this license is not stored in {{app 'name'}}.
+                {{#if getUrl}}
+                  You can read it at <a href="{{getUrl}}" target="_blank" rel="noopener noreferrer">{{getUrl}}</a>.
+                {{/if}}
+              </p>
+            {{/if}}
+          </div>
+          {{#if hasCreatedOrUpdate}}
+            <div class="panel-footer">
+              {{#if getCreated}}
+                <span class="m-r-md"><strong>created: </strong>{{dateFormat getCreated 'll'}}</span>
+              {{/if}}
+              {{#if updated}}
+                <strong>updated: </strong>{{dateFormat updated 'll'}}
+              {{/if}}
+            </div>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

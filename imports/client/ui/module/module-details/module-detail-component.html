@@ -1,0 +1,59 @@
+<template name="moduleComponent">
+
+  <div class="panel-body collapsed side-border-panel">
+
+    <table class="table-header table table-condensed context-component">
+      <tr>
+        <td class="componentName">
+          <!--pathFor helper needs an object with _id property therefore data=data() -->
+          <a href="{{pathFor route=actionRoute.route data=actionRoute.params query=actionRoute.query}}">
+            <h4 class="truncate" title="{{getName}}" style="vertical-align: middle;max-width:50%; display: inline-block">{{getName}}</h4>
+            <span class="version">({{getCountVersions}} in {{getCountAppearances}})</span>
+          </a>
+
+        </td>
+        <td width="200">
+          {{#if notOk}}
+            {{> jiraLink jira=hasJiraConnection description=getProblemDescription details=componentDetails module=module }}
+            {{> tfsLink tfs=hasTfsConnection description=getProblemDescription details=componentDetails module=module}}
+            {{> copyIssueDetails description=getProblemDescription}}
+          {{/if}}
+        </td>
+      </tr>
+    </table>
+
+    <div>
+      {{#if getDescription}}
+        <div class="row">
+          <div class="col-xs-12">
+            <p class="">{{getDescription}}</p>
+          </div>
+        </div>
+      {{/if}}
+      <div class="path-list" style="width: 100%">
+        {{#each getVersions}}
+          <div class="" style="padding:5px">
+            <div class="componentName">
+              <h4>v{{getVersion}}</h4> <span class="version">(in {{getCountAppearancesByVersion data}}
+              )</span>
+            </div>
+          </div>
+          {{#if getComponentPath data}}
+            <div style="padding:5px 5px 5px 30px">
+              {{#each getComponentPath data}}
+                <div>
+                  <div class="panel-title">
+                    <div class="componentName">
+                      <h6>{{{formatPath path}}}</h6>
+                    </div>
+                  </div>
+                </div>
+              {{/each}}
+            </div>
+          {{/if}}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+
+</template>

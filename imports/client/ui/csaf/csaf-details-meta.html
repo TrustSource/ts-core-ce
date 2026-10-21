@@ -1,0 +1,521 @@
+<template name="csafDetailsMeta">
+  <form class="form-horizontal relative" role="form" id="csafDetailsMeta">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="pull-right panel-right-actions">
+          <div class="btn-group btn-group-justified" role="group" style="width: 200px">
+            <a href class="btn btn-default discard_changes" type="button" disabled="{{isEditDisabled}}"
+               title="Discard changes">
+              <i class="fa fa-repeat"></i> Discard
+            </a>
+            {{#if isLoading}}
+              <a href class="btn btn-default" type="button" disabled="disabled" title="Save changes">
+                <i class="fa fa-spinner fa-spin"></i> Save
+              </a>
+            {{else}}
+              <a href class="btn btn-default save_changes" type="button" disabled="{{isEditDisabled}}"
+                 title="Save changes">
+                <i class="fa fa-floppy-disk"></i> Save
+              </a>
+            {{/if}}
+          </div>
+        </div>
+        <h5>Meta information</h5>
+      </div>
+      <div class="panel-body scrollable_middle">
+        {{#if hasData}}
+          <div>
+            <div class="col-xs-12">
+              <div class="form-group inner-b-5i">
+                <label for="title">Title of this document *</label>
+                <input type="text" data-path="document.title" value="{{getValue 'document.title'}}" id="title"
+                       name="title" class="form-control" minlength="1" required disabled="{{isEditDisabled}}">
+                <span class="help-block small">This SHOULD be a canonical name for the document, and sufficiently unique to distinguish it from similar documents.</span>
+              </div>
+              <div class="form-group inner-b-5i">
+                <label for="csaf_version">CSAF version *</label>
+                <select id="csaf_version" data-path="document.csaf_version" name="csaf_version" class="form-control"
+                        required disabled="{{isEditDisabled}}">
+                  <option value="2.0" selected="{{isSelected (getValue 'document.csaf_version') '2.0'}}">2.0</option>
+                </select>
+                <span class="help-block small">Gives the version of the CSAF specification which the document was generated for.</span>
+              </div>
+              <div class="form-group inner-b-5i">
+                <label for="category">Document category *</label>
+                <select id="category" data-path="document.category" name="category" class="form-control" required
+                        disabled="{{isEditDisabled}}">
+                  <option value="csaf_informational_advisory"
+                          selected="{{isSelected (getValue 'document.category') 'csaf_base'}}">Informational Advisory
+                  </option>
+                  <option value="csaf_security_advisory"
+                          selected="{{isSelected (getValue 'document.category') 'csaf_security_advisory'}}">Security
+                    Advisory
+                  </option>
+                  <option value="csaf_vex" selected="{{isSelected (getValue 'document.category') 'csaf_vex'}}">VEX
+                  </option>
+                  <option value="csaf_security_incident"
+                          selected="{{isSelected (getValue 'document.category') 'csaf_security_incident'}}">Security
+                    Incident
+                  </option>
+                </select>
+                <span class="help-block small">Defines a short canonical name, chosen by the document producer, which will inform the end user as to the category of document.</span>
+              </div>
+              <div class="form-group inner-b-5i">
+                <label for="lang">Document language</label>
+                <input type="text" data-path="document.lang" value="{{getValue 'document.lang'}}" id="lang" name="lang"
+                       class="form-control" disabled="{{isEditDisabled}}">
+                <span class="help-block small">Identifies the language used by this document, corresponding to IETF BCP 47 / RFC 5646.</span>
+              </div>
+              <div class="form-group inner-b-5i">
+                <label for="source_lang">Source language</label>
+                <input type="text" data-path="document.source_lang" value="{{getValue 'document.source_lang'}}"
+                       id="source_lang" name="source_lang" class="form-control" disabled="{{isEditDisabled}}">
+                <span class="help-block small">If this copy of the document is a translation then the value of this property describes from which language this document was translated.</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="panel panel-default">
+                  <div class="panel-heading collapse-action pointer">
+                    <h3 class="panel-title">
+                      <span class="collapse-action-target">Document acknowledgments</span>
+                    </h3>
+                  </div>
+                  <div class="panel-body hidden">
+                    <span class="help-block small">Contains a list of acknowledgment elements associated with the whole document.
+                      <button class="btn btn-xs btn-primary pull-right add_item" disabled="{{isEditDisabled}}"
+                              type="button"
+                              data-path="document.acknowledgments" data-default-item="acknowledgments"><span
+                        class="fa fa-plus" aria-hidden="true"></span></button>
+                    </span>
+                    {{#each (getValue 'document.acknowledgments')}}
+                      <span class="help-block small remove-btn-over-panel">
+                        <button class="btn btn-warning btn-xs pull-right remove_item" disabled="{{isEditDisabled}}"
+                                type="button"
+                                data-path="document.acknowledgments" data-index="{{@index}}">
+                          <span class="fa fa-times" aria-hidden="true"></span>
+                        </button>
+                      </span>
+                      {{> csafAcknowledgment data=this index=@index root=getRoot}}
+                    {{/each}}
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading collapse-action pointer">
+                    <h3 class="panel-title">
+                      <span class="collapse-action-target">Aggregate severity</span>
+                    </h3>
+                  </div>
+                  <div class="panel-body hidden">
+                        <span class="help-block small">
+                          Is a vehicle that is provided by the document producer to convey the urgency and criticality with which the one or more vulnerabilities reported should be addressed. It is a document-level metric and applied to the document as a whole - not any specific vulnerability. The range of values in this field is defined according to the document producer's policies and procedures.
+                        </span>
+                    <div class="col-xs-12">
+                      <div class="form-group inner-b-5i">
+                        <label for="aggregate_severity_namespace">Namespace of aggregate severity</label>
+                        <input type="text" value="{{getValue 'document.aggregate_severity.namespace'}}"
+                               data-path="document.aggregate_severity.namespace"
+                               id="aggregate_severity_namespace" name="aggregate_severity_namespace"
+                               class="form-control" disabled="{{isEditDisabled}}">
+                        <span class="help-block small">Points to the namespace so referenced.</span>
+                      </div>
+                      <div class="form-group inner-b-5i">
+                        <label for="aggregate_severity_text">Text of aggregate severity</label>
+                        <input type="text" value="{{getValue 'document.aggregate_severity.text'}}"
+                               data-path="document.aggregate_severity.text"
+                               id="aggregate_severity_text" name="aggregate_severity_text"
+                               class="form-control" disabled="{{isEditDisabled}}" minlength="1">
+                        <span class="help-block small">Provides a severity which is independent of - and in addition to - any other standard metric for determining the impact or severity of a given vulnerability (such as CVSS).</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading collapse-action pointer">
+                    <h3 class="panel-title">
+                      <span class="collapse-action-target">Rules for sharing document</span>
+                    </h3>
+                  </div>
+                  <div class="panel-body hidden">
+                        <span class="help-block small">
+                          Describe any constraints on how this document might be shared.
+                        </span>
+                    <div class="col-xs-12">
+                      <div class="form-group inner-b-5i">
+                        <label for="distribution_text">Textual description</label>
+                        <input type="text" value="{{getValue 'document.distribution.text'}}"
+                               data-path="document.distribution.text"
+                               id="distribution_text" name="distribution_text"
+                               class="form-control" disabled="{{isEditDisabled}}">
+                        <span
+                          class="help-block small">Provides a textual description of additional constraints.</span>
+                      </div>
+                      <div class="form-group inner-b-5i">
+                        <label for="distribution_tlp_label">Label of TLP</label>
+                        <select id="distribution_tlp_label" name="distribution_tlp_label" class="form-control"
+                                data-path="document.distribution.tlp.label"
+                                disabled="{{isEditDisabled}}">
+                          <option value="AMBER" selected="{{isSelected (getValue 'document.distribution.tlp.label') 'AMBER'}}">AMBER
+                          </option>
+                          <option value="GREEN" selected="{{isSelected (getValue 'document.distribution.tlp.label') 'GREEN'}}">GREEN
+                          </option>
+                          <option value="RED" selected="{{isSelected (getValue 'document.distribution.tlp.label') 'RED'}}">RED</option>
+                          <option value="WHITE" selected="{{isSelected (getValue 'document.distribution.tlp.label') 'WHITE'}}">WHITE
+                          </option>
+                        </select>
+                        <span class="help-block small">Provides the TLP label of the document.</span>
+                      </div>
+                      <div class="form-group inner-b-5i">
+                        <label for="distribution_tlp_url">URL of TLP version</label>
+                        <input type="text" value="{{getValue 'document.distribution.tlp.url'}}"
+                               data-path="document.distribution.tlp.url"
+                               id="distribution_tlp_url" name="distribution_tlp_url"
+                               class="form-control" disabled="{{isEditDisabled}}">
+                        <span class="help-block small">Provides a URL where to find the textual description of the TLP version which is used in this document. Default is the URL to the definition by FIRST.</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading collapse-action pointer">
+                    <h3 class="panel-title">
+                      <span class="collapse-action-target">Document notes</span>
+                    </h3>
+                  </div>
+                  <div class="panel-body hidden">
+                    <span class="help-block small">Holds notes associated with the whole document.
+                      <button class="btn btn-xs btn-primary pull-right add_item" disabled="{{isEditDisabled}}" type="button"
+                              data-path="document.notes" data-default-item="notes">
+                        <span class="fa fa-plus" aria-hidden="true"></span>
+                      </button>
+                    </span>
+                    {{#each (getValue 'document.notes')}}
+                      <span class="help-block small remove-btn-over-panel">
+                        <button class="btn btn-warning btn-xs pull-right remove_item" disabled="{{isEditDisabled}}"
+                                type="button" data-path="document.notes" data-index="{{@index}}">
+                          <span class="fa fa-times" aria-hidden="true"></span>
+                        </button>
+                      </span>
+                      <div class="panel panel-default">
+                        <div class="panel-body">
+                          <div class="col-xs-12">
+                            <div class="form-group inner-b-5i">
+                              <label for="notes_category_{{@index}}">Note category *</label>
+                              <select id="notes_category_{{@index}}" name="notes_category_{{@index}}"
+                                      data-path="document.notes.{{@index}}.category"
+                                      class="form-control" disabled="{{isEditDisabled}}">
+                                <option value="description" selected="{{isSelected category 'description'}}">
+                                  description
+                                </option>
+                                <option value="details" selected="{{isSelected category 'details'}}">details</option>
+                                <option value="faq" selected="{{isSelected category 'faq'}}">faq</option>
+                                <option value="general" selected="{{isSelected category 'general'}}">general</option>
+                                <option value="legal_disclaimer"
+                                        selected="{{isSelected category 'legal_disclaimer'}}">legal_disclaimer
+                                </option>
+                                <option value="other" selected="{{isSelected category 'other'}}">other</option>
+                                <option value="summary" selected="{{isSelected category 'summary'}}">summary</option>
+                              </select>
+                              <span
+                                class="help-block small">Contains the information of what kind of note this is.</span>
+                            </div>
+                            <div class="form-group inner-b-5i">
+                              <label for="notes_text_{{@index}}">Note content *</label>
+                              <input type="text" value="{{text}}" id="notes_text_{{@index}}"
+                                     data-path="document.notes.{{@index}}.text"
+                                     name="notes_text_{{@index}}" class="form-control" disabled="{{isEditDisabled}}" minlength="1">
+                              <span class="help-block small">Holds the content of the note. Content varies depending on type.</span>
+                            </div>
+                            <div class="form-group inner-b-5i">
+                              <label for="notes_title_{{@index}}">Title of note</label>
+                              <input type="text" value="{{title}}" id="notes_title_{{@index}}"
+                                     data-path="document.notes.{{@index}}.title"
+                                     name="notes_title_{{@index}}" class="form-control" disabled="{{isEditDisabled}}" minlength="1">
+                              <span class="help-block small">Provides a concise description of what is contained in the text of the note.</span>
+                            </div>
+                            <div class="form-group inner-b-5i">
+                              <label for="notes_audience_{{@index}}">Audience of note</label>
+                              <input type="text" value="{{audience}}" id="notes_audience_{{@index}}"
+                                     data-path="document.notes.{{@index}}.audience"
+                                     name="notes_audience_{{@index}}" class="form-control" disabled="{{isEditDisabled}}" minlength="1">
+                              <span class="help-block small">Indicates who is intended to read it.</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    {{/each}}
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading collapse-action pointer">
+                    <h3 class="panel-title">
+                      <span class="collapse-action-target">Publisher</span>
+                    </h3>
+                  </div>
+                  <div class="panel-body hidden">
+                    <span class="help-block small">Provides information about the publisher of the document.</span>
+                    <div class="col-xs-12">
+                      <div class="form-group inner-b-5i">
+                        <label for="publisher_category">Category of publisher *</label>
+                        <select id="publisher_category" name="publisher_category" class="form-control"
+                                data-path="document.publisher.category"
+                                disabled="{{isEditDisabled}}">
+                          <option value="coordinator" selected="{{isSelected (getValue 'document.publisher.category') 'coordinator'}}">coordinator
+                          </option>
+                          <option value="discoverer" selected="{{isSelected (getValue 'document.publisher.category') 'discoverer'}}">discoverer
+                          </option>
+                          <option value="other" selected="{{isSelected (getValue 'document.publisher.category') 'other'}}">other</option>
+                          <option value="translator" selected="{{isSelected (getValue 'document.publisher.category') 'translator'}}">translator
+                          </option>
+                          <option value="user" selected="{{isSelected (getValue 'document.publisher.category') 'user'}}">user</option>
+                          <option value="vendor" selected="{{isSelected (getValue 'document.publisher.category') 'vendor'}}">vendor</option>
+                        </select>
+                        <span class="help-block small">Provides information about the category of publisher releasing the document.</span>
+                      </div>
+                      <div class="form-group inner-b-5i">
+                        <label for="publisher_contact_details">Contact details</label>
+                        <input type="text" value="{{getValue 'document.publisher.contact_details'}}" id="publisher_contact_details"
+                               data-path="document.publisher.contact_details"
+                               name="publisher_contact_details" class="form-control" disabled="{{isEditDisabled}}" minlength="1">
+                        <span class="help-block small">Information on how to contact the publisher, possibly including details such as web sites, email addresses, phone numbers, and postal mail addresses.</span>
+                      </div>
+                      <div class="form-group inner-b-5i">
+                        <label for="publisher_issuing_authority">Issuing authority</label>
+                        <input type="text" value="{{getValue 'document.publisher.issuing_authority'}}" id="publisher_issuing_authority"
+                               data-path="document.publisher.issuing_authority"
+                               name="publisher_issuing_authority" class="form-control" disabled="{{isEditDisabled}}" minlength="1">
+                        <span class="help-block small">Provides information about the authority of the issuing party to release the document, in particular, the party's constituency and responsibilities or other obligations.</span>
+                      </div>
+                      <div class="form-group inner-b-5i">
+                        <label for="publisher_name">Name of publisher *</label>
+                        <input type="text" value="{{getValue 'document.publisher.name'}}" id="publisher_name" name="publisher_name"
+                               data-path="document.publisher.name"
+                               class="form-control" disabled="{{isEditDisabled}}" minlength="1">
+                        <span class="help-block small">Contains the name of the issuing party.</span>
+                      </div>
+                      <div class="form-group inner-b-5i">
+                        <label for="publisher_namespace">Namespace of publisher *</label>
+                        <input type="text" value="{{getValue 'document.publisher.namespace'}}" id="publisher_namespace" name="publisher_namespace"
+                               data-path="document.publisher.namespace"
+                               class="form-control" disabled="{{isEditDisabled}}">
+                        <span class="help-block small">Contains a URL which is under control of the issuing party and can be used as a globally unique identifier for that issuing party.</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading collapse-action pointer">
+                    <h3 class="panel-title">
+                      <span class="collapse-action-target">Document references</span>
+                    </h3>
+                  </div>
+                  <div class="panel-body hidden">
+                    <span class="help-block small">Holds a list of references associated with the whole document.
+                      <button class="btn btn-xs btn-primary pull-right add_item" disabled="{{isEditDisabled}}" type="button"
+                              data-path="document.references" data-default-item="references">
+                        <span class="fa fa-plus" aria-hidden="true"></span>
+                      </button>
+                    </span>
+                    {{#each (getValue 'document.references')}}
+                      <span class="help-block small remove-btn-over-panel">
+                        <button class="btn btn-warning btn-xs pull-right remove_item" disabled="{{isEditDisabled}}"
+                                type="button" data-path="document.references" data-index="{{@index}}">
+                          <span class="fa fa-times" aria-hidden="true"></span>
+                        </button>
+                      </span>
+                      <div class="panel panel-default">
+                        <div class="panel-body">
+                          <div class="col-xs-12">
+                            <div class="form-group inner-b-5i">
+                              <label for="references_category_{{@index}}">Category of reference</label>
+                              <select id="references_category_{{@index}}" name="references_category_{{@index}}"
+                                      data-path="document.references.{{@index}}.category"
+                                      class="form-control" disabled="{{isEditDisabled}}">
+                                <option value="external" selected="{{isSelected category 'external'}}">external
+                                </option>
+                                <option value="self" selected="{{isSelected category 'self'}}">self</option>
+                              </select>
+                              <span class="help-block small">Indicates whether the reference points to the same document or vulnerability in focus (depending on scope) or to an external resource.</span>
+                            </div>
+                            <div class="form-group inner-b-5i">
+                              <label for="references_summary_{{@index}}">Summary of the reference *</label>
+                              <input type="text" value="{{summary}}" id="references_summary_{{@index}}"
+                                     data-path="document.references.{{@index}}.summary"
+                                     name="references_summary_{{@index}}"
+                                     class="form-control" disabled="{{isEditDisabled}}" minlength="1" required>
+                              <span class="help-block small">Indicates what this reference refers to.</span>
+                            </div>
+                            <div class="form-group inner-b-5i">
+                              <label for="references_url_{{@index}}">URL of reference *</label>
+                              <input type="text" value="{{url}}" id="references_url_{{@index}}"
+                                     data-path="document.references.{{@index}}.url"
+                                     name="references_url_{{@index}}"
+                                     class="form-control" disabled="{{isEditDisabled}}" minlength="1" required>
+                              <span class="help-block small">Provides the URL for the reference.</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    {{/each}}
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading collapse-action pointer">
+                    <h3 class="panel-title">
+                      <span class="collapse-action-target">Tracking</span>
+                    </h3>
+                  </div>
+                  <div class="panel-body hidden">
+                    <span class="help-block small">Is a container designated to hold all management attributes necessary to track a CSAF document as a whole.</span>
+                    <div class="col-xs-12">
+                      <div class="form-group inner-b-5i">
+                        <label for="tracking_id">Unique identifier for the document *</label>
+                        <input type="text" value="{{getValue 'document.tracking.id'}}" id="tracking_id" name="tracking_id" required
+                               data-path="document.tracking.id"
+                               class="form-control" disabled="{{isPublished}}" minlength="1">
+                        <span class="help-block small">The ID is a simple label that provides for a wide range of numbering values, types, and schemes. Its value SHOULD be assigned and maintained by the original document issuing authority.</span>
+                      </div>
+                      <div class="form-group inner-b-5i">
+                        <label for="tracking_initial_release_date">Initial release date *</label>
+                        <input type="text" value="{{getValue 'document.tracking.initial_release_date'}}" id="tracking_initial_release_date"
+                               name="tracking_initial_release_date" required data-path="document.tracking.initial_release_date"
+                               class="form-control" disabled="{{isEditDisabled}}">
+                        <span class="help-block small">The date when this document was first published.</span>
+                      </div>
+                      <div class="form-group inner-b-5i">
+                        <label for="tracking_current_release_date">Current release date *</label>
+                        <input type="text" value="{{getValue 'document.tracking.current_release_date'}}" id="tracking_current_release_date"
+                               name="tracking_current_release_date" required data-path="document.tracking.current_release_date"
+                               class="form-control" disabled="{{isEditDisabled}}">
+                        <span class="help-block small">The date when the current revision of this document was released.</span>
+                      </div>
+                      <div class="form-group inner-b-5i">
+                        <label for="tracking_status">Document status *</label>
+                        <select id="tracking_status" name="tracking_status" class="form-control"
+                                disabled="{{isEditDisabled}}" data-path="document.tracking.status">
+                          <option value="draft" selected="{{isSelected (getValue 'document.tracking.status') 'draft'}}">draft</option>
+                          <option value="final" selected="{{isSelected (getValue 'document.tracking.status') 'final'}}">final</option>
+                          <option value="interim" selected="{{isSelected (getValue 'document.tracking.status') 'interim'}}">interim</option>
+                        </select>
+                        <span class="help-block small">Defines the draft status of the document.</span>
+                      </div>
+                      <div class="form-group inner-b-5i">
+                        <label for="tracking_version">Version *</label>
+                        <input type="text" value="{{getValue 'document.tracking.version'}}" id="tracking_version" name="tracking_version"
+                               required data-path="document.tracking.version"
+                               class="form-control" disabled="{{isEditDisabled}}">
+                        <span class="help-block small">Specifies a version string to denote clearly the evolution of the content of the document. Format must be either integer or semantic versioning.</span>
+                      </div>
+                      <div class="form-group inner-b-5i">
+                        <label for="tracking_generator_date">Date of document generation</label>
+                        <input type="text" value="{{getValue 'document.tracking.generator.date'}}" id="tracking_generator_date"
+                               name="tracking_generator_date" data-path="document.tracking.generator.date"
+                               class="form-control" disabled="{{isEditDisabled}}">
+                        <span class="help-block small">Is a container to hold all elements related to the generation of the document. These items will reference when the document was actually created, including the date it was generated and the entity that generated it.</span>
+                      </div>
+                      <div class="form-group inner-b-5i">
+                        <label for="tracking_generator_engine_name">Engine name *</label>
+                        <input type="text" value="{{getValue 'document.tracking.generator.engine.name'}}"
+                               id="tracking_generator_engine_name" name="tracking_generator_engine_name"
+                               data-path="document.tracking.generator.engine.name"
+                               class="form-control" disabled="{{isEditDisabled}}" minlength="1" required>
+                        <span class="help-block small">Represents the name of the engine that generated the CSAF document.</span>
+                      </div>
+                      <div class="form-group inner-b-5i">
+                        <label for="tracking_generator_engine_version">Engine version *</label>
+                        <input type="text" value="{{getValue 'document.tracking.generator.engine.version'}}"
+                               id="tracking_generator_engine_version" name="tracking_generator_engine_version"
+                               data-path="document.tracking.generator.engine.version"
+                               class="form-control" disabled="{{isEditDisabled}}" minlength="1" required>
+                        <span class="help-block small">Contains the version of the engine that generated the CSAF document.</span>
+                      </div>
+                      <div class="form-group inner-b-5i">
+                        <label for="tracking_aliases" class="block">Aliases
+                          <button class="btn btn-xs btn-primary pull-right add_item" disabled="{{isEditDisabled}}"
+                                  data-path="document.tracking.aliases" data-default-item="aliases"
+                                  type="button"><span class="fa fa-plus" aria-hidden="true"></span></button>
+                        </label>
+                        {{#each (getValue 'document.tracking.aliases')}}
+                          <div class="input-group inner-b-10">
+                            <input type="text" value="{{this}}" id="aliases_title_{{@index}}"
+                                   name="aliases_title_{{@index}}" data-path="document.tracking.aliases.{{@index}}"
+                                   class="form-control inner-b-10" disabled="{{isEditDisabled}}">
+                            <span class="input-group-btn">
+                              <button class="btn btn-warning pull-right remove_item" type="button"
+                                      disabled="{{isEditDisabled}}" data-path="document.tracking.aliases" data-index="{{@index}}">
+                                <span class="fa fa-times" aria-hidden="true"></span>
+                              </button>
+                            </span>
+                          </div>
+                        {{/each}}
+                        <span
+                          class="help-block small">Contains a list of alternate names for the same document.</span>
+                      </div>
+                      <div class="form-group inner-b-5i">
+                        <label for="tracking_revision_history" class="block">Revisions
+                          <button class="btn btn-xs btn-primary pull-right add_item" disabled="{{isEditDisabled}}"
+                                  data-path="document.tracking.revision_history" data-default-item="revision_history"
+                                  type="button"><span class="fa fa-plus" aria-hidden="true"></span></button>
+                        </label>
+                        {{#each (getValue 'document.tracking.revision_history') }}
+                          <span class="help-block small remove-btn-over-panel">
+                            <button class="btn btn-warning btn-xs pull-right remove_item" disabled="{{isEditDisabled}}"
+                                    type="button" data-path="document.tracking.revision_history" data-index="{{@index}}">
+                              <span class="fa fa-times" aria-hidden="true"></span>
+                            </button>
+                          </span>
+                          <div class="panel panel-default">
+                            <div class="panel-body">
+                              <div class="col-xs-12">
+                                <div class="form-group inner-b-5i">
+                                  <label for="revision_history_date_{{@index}}">Date of the revision *</label>
+                                  <input type="text" value="{{date}}" id="revision_history_date_{{@index}}"
+                                         name="revision_history_date_{{@index}}" data-path="document.tracking.revision_history.{{@index}}.date"
+                                         class="form-control" disabled="{{isEditDisabled}}" minlength="1" required>
+                                  <span class="help-block small">The date of the revision entry.</span>
+                                </div>
+                                <div class="form-group inner-b-5i">
+                                  <label for="revision_history_legacy_version_{{@index}}">Legacy version of the
+                                    revision</label>
+                                  <input type="text" value="{{legacy_version}}"
+                                         data-path="document.tracking.revision_history.{{@index}}.legacy_version"
+                                         id="revision_history_legacy_version_{{@index}}"
+                                         name="revision_history_legacy_version_{{@index}}"
+                                         class="form-control" disabled="{{isEditDisabled}}" minlength="1">
+                                  <span class="help-block small">Contains the version string used in an existing document with the same content.</span>
+                                </div>
+                                <div class="form-group inner-b-5i">
+                                  <label for="revision_history_number_{{@index}}">Version *</label>
+                                  <input type="text" value="{{number}}" id="revision_history_number_{{@index}}"
+                                         data-path="document.tracking.revision_history.{{@index}}.number"
+                                         name="revision_history_number_{{@index}}"
+                                         class="form-control" disabled="{{isEditDisabled}}" required>
+                                  <span class="help-block small">Specifies a version string to denote clearly the evolution of the content of the document. Format must be either integer or semantic versioning.</span>
+                                </div>
+                                <div class="form-group inner-b-5i">
+                                  <label for="revision_history_summary_{{@index}}">Summary of the revision *</label>
+                                  <input type="text" value="{{summary}}" id="revision_history_summary_{{@index}}"
+                                         data-path="document.tracking.revision_history.{{@index}}.summary"
+                                         name="revision_history_summary_{{@index}}"
+                                         class="form-control" disabled="{{isEditDisabled}}" minlength="1" required>
+                                  <span class="help-block small">Holds a single non-empty string representing a short description of the changes.</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        {{/each}}
+                        <span class="help-block small">Holds one revision item for each version of the CSAF document, including the initial one.</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {{else}}
+          {{>loadingSplash}}
+        {{/if}}
+      </div>
+    </div>
+  </form>
+</template>

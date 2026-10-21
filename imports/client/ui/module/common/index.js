@@ -1,0 +1,25 @@
+import './component-create.html';
+import './component-multy-license.html';
+import './module-create.html';
+import './module-freeze.html';
+import './project-version.html';
+import './component-typeahead.html';
+import './version-typeahead.html';
+import './module-resolve-by-notice.html';
+import './component-cves-details.html';
+import './root-component-license-picker.html';
+import './license-catalog-select.html';
+import './component-license-resolve.html';
+
+import './component-create';
+import './component-multy-license';
+import './module-create';
+import './module-freeze';
+import './project-version';
+import './component-typeahead';
+import './version-typeahead';
+import './module-resolve-by-notice';
+import './component-cves-details';
+import './root-component-license-picker';
+import './license-catalog-select';
+import './component-license-resolve';

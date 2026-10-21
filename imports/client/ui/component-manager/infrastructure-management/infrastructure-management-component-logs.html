@@ -1,0 +1,41 @@
+<template name="infrastructureManagementComponentsLogs">
+
+  {{> infrastructureManagementComponentsHeader}}
+
+  <div class="content component-detail">
+    {{#if isInRole 'company_component_manager' companyId}}
+      <div class="panel">
+        <div class="panel-heading">
+          <h4 class="inner-b-0">Logentries</h4>
+        </div>
+        <div class="panel-body">
+          {{#if getComponentLogs}}
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th class="col-md-1">Date</th>
+                <th class="col-md-1">Person</th>
+                <th class="col-md-1">Version</th>
+                <th class="col-md-9">Message</th>
+              </tr>
+              </thead>
+              <tbody>
+              {{#each getComponentLogs}}
+                <tr>
+                  <td class="col-md-1">{{dateFormat getDate 'fromNow'}}</td>
+                  <td class="col-md-1">{{createdBy}}</td>
+                  <td class="col-md-1">{{version}}</td>
+                  <td class="col-md-9" style="word-break: break-all;">{{text}}</td>
+                </tr>
+              {{/each}}
+              </tbody>
+            </table>
+          {{else}}
+            {{> reactiveTableNoData}}
+          {{/if}}
+        </div>
+      </div>
+    {{/if}}
+  </div>
+</template>
+

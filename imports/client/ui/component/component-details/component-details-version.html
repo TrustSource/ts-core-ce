@@ -1,0 +1,177 @@
+<template name="componentDetailsVersion">
+  <tr class="inner-t-10">
+    <td width="20">
+      <label>
+        <input type="checkbox" value="{{getVersion}}" name="versions" style="vertical-align: bottom;">
+      </label>
+    </td>
+    <td width="200">
+      <span class="label label-success label-block label-lg inner-b-5 label-version">{{getVersion}}</span><br>
+      <span>
+        {{#if getReleaseDate}}
+          {{__ 'ReleaseDate'}} {{dateFormat getReleaseDate 'll'}}
+        {{else}}{{__ 'ReleaseDate'}} {{__ 'NA'}}{{/if}}
+      </span>
+    </td>
+    <td class="pinner-0i">
+      {{#if getPackageUrl}}
+        <p class="pinner-t-5 pinner-l-5 pinner-b-0 m-b-none"><b>{{__ 'purl'}}</b>: {{getPackageUrl}}</p>
+      {{/if}}
+      <table class="table table-condensed inner-0">
+        <thead>
+        <tr>
+          <th width="36" title="{{__ 'Verified'}}">{{__ 'Ver'}}</th>
+          <th>{{__ 'License'}}</th>
+          <th width="200">{{__ 'Url'}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#if getLicensesClean}}
+          {{#each getLicensesClean}}
+            <tr>
+              {{#if isVersionEditable}}
+                {{#if getKey}}
+                  <td>
+                    <div class="text-center comp-edit-lic-verified checkbox-{{getQosStr}}"></div>
+                  </td>
+                {{else}}
+                  <td></td>
+                {{/if}}
+                <td>
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-addon">
+                      {{getLicenseIndex @index}}
+                    </span>
+                    <select class="form-control comp-edit-license">
+                      {{#each getAllLicenses getKey}}
+                        <option value="{{key}}" selected="{{selected}}" title="{{name}}">{{name}}</option>
+                      {{/each}}
+                    </select>
+                    <div class="input-group-btn comp-remove-license">
+                      <button class="btn btn-danger2"><i class="fa fa-trash-o"></i></button>
+                    </div>
+                  </div>
+                </td>
+                {{#if getKey}}
+                  <td>
+                    <input type="text" class="form-control input-sm license_url" title="{{getUrl}}"
+                           placeholder="{{__ 'EnterUrlForLicenseText'}}"
+                           value="{{getUrl}}">
+                  </td>
+                {{else}}
+                  <td></td>
+                {{/if}}
+              {{else}}
+                <td>
+                  {{#if getKey}}
+                    <div class="text-center checkbox-{{getQosStr}}"></div>
+                  {{/if}}
+                </td>
+                <td>
+                  {{#if getKey}}
+                    <a href="{{pathFor 'licenseDetail' key=getKey }}">{{getName}}</a>
+                  {{else}}
+                    {{#if getName}}
+                      {{getName}}&nbsp;&nbsp;<span class="text-danger">{{__ 'KeyMissing'}}</span>
+                    {{else}}
+                      <span class="text-danger">{{__ 'KeyAndNameMissing'}}</span>
+                    {{/if}}
+                  {{/if}}
+                </td>
+                <td>
+                  {{#if getUrl}}
+                    <a target='_blank' title="{{getUrl}}" href="{{getUrl}}" class="text-center">
+                      <i class="fa fa-external-link"></i>
+                    </a>
+                  {{else}}
+                    {{__ 'NA'}}
+                  {{/if}}
+                </td>
+              {{/if}}
+            </tr>
+          {{/each}}
+        {{else}}
+          <tr>
+            <td colspan="3"><span class="text-danger">{{__ 'KeyAndNameMissing'}}</span></td>
+          </tr>
+        {{/if}}
+        {{#if isVersionEditable}}
+          <tr>
+            <td colspan="3">
+              <div class="input-group w100 input-group-sm">
+                <span class="input-group-addon">
+                  {{__ 'AddLicense'}}
+                </span>
+                <select class="form-control comp-edit-license" value="undefined">
+                  {{#each getAllLicenses}}
+                    <option value="{{key}}" selected="{{selected}}" title="{{name}}">{{name}}</option>
+                  {{/each}}
+                </select>
+              </div>
+            </td>
+          </tr>
+        {{/if}}
+        </tbody>
+      </table>
+      {{#if isVersionEditable}}
+        <textarea class="form-control input-sm inner-b-5 copyright_text" title="{{getCopyright}}"
+          placeholder="{{__ 'EnterCopyrightTextForComponent'}}"
+          value="{{getCopyright}}"></textarea>
+      {{else}}
+        {{#if getCopyright}}
+          <table class="table table-condensed inner-0">
+            <thead>
+            <tr>
+              <th colspan="2">{{__ 'Copyright'}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>{{getCopyright}}</td>
+            </tr>
+            </tbody>
+          </table>
+        {{/if}}
+      {{/if}}
+      {{#if getChecksums}}
+        <table class="table table-condensed inner-0">
+          <thead>
+          <tr>
+            <th width="36" title="{{__ 'Verified'}}">{{__ 'Ver'}}</th>
+            <th>{{__ 'Checksum'}}</th>
+          </tr>
+          </thead>
+          <tbody>
+          {{#each getChecksums}}
+            <tr>
+              <td>
+                <div class="text-center comp-edit-chksum-verified checkbox-{{getQosStr}}"></div>
+              </td>
+              <td>{{getChecksum}}</td>
+            </tr>
+          {{/each}}
+          </tbody>
+        </table>
+      {{/if}}
+    </td>
+    <td width="50">
+      {{#if isInRole 'company_component_manager' companyId}}
+        <button class="btn btn-primary comp-edit-version inner-b-5" type="button">
+          <i class="fa fa-pencil"></i>
+        </button>
+        <button class="btn btn-danger2 comp-remove-version" type="button">
+          <i class="fa fa-trash-o"></i>
+        </button>
+      {{/if}}
+    </td>
+  </tr>
+  {{#if hasVuln}}
+    <tr class="comp-vulnerability">
+      <td class="border-top-none" colspan="2">
+      </td>
+      <td class="border-top-none pinner-0i">
+        {{> cvesDetails vulns=getVuln}}
+      </td>
+    </tr>
+  {{/if}}
+</template>

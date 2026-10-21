@@ -1,0 +1,175 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:7c899532-8fb1-449c-944f-c42ee0f49e3c",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2025-03-25T10:00:00Z",
+    "tools": [
+      {
+        "vendor": "CycloneDX",
+        "name": "test-generator",
+        "version": "1.0.0"
+      }
+    ],
+    "component": {
+      "type": "application",
+      "bom-ref": "pkg:npm/pkg-types-test@1.0.0",
+      "name": "pkg-types-test",
+      "version": "1.0.0",
+      "purl": "pkg:npm/pkg-types-test@1.0.0"
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "pkg:golang/github.com/gin-gonic/gin@1.9.1",
+      "name": "gin",
+      "version": "1.9.1",
+      "description": "Go HTTP web framework",
+      "purl": "pkg:golang/github.com/gin-gonic/gin@1.9.1",
+      "licenses": [{"license": {"id": "MIT"}}]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:cargo/serde@1.0.193",
+      "name": "serde",
+      "version": "1.0.193",
+      "description": "Rust serialization framework",
+      "purl": "pkg:cargo/serde@1.0.193",
+      "licenses": [{"license": {"id": "MIT"}}]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:cocoapods/Alamofire@5.8.1",
+      "name": "Alamofire",
+      "version": "5.8.1",
+      "description": "HTTP Networking in Swift",
+      "purl": "pkg:cocoapods/Alamofire@5.8.1",
+      "licenses": [{"license": {"id": "MIT"}}]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:gem/rails@7.1.2",
+      "name": "rails",
+      "version": "7.1.2",
+      "description": "Full-stack web framework",
+      "purl": "pkg:gem/rails@7.1.2",
+      "licenses": [{"license": {"id": "MIT"}}]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:conda/numpy@1.26.2",
+      "name": "numpy",
+      "version": "1.26.2",
+      "description": "NumPy array computing",
+      "purl": "pkg:conda/numpy@1.26.2",
+      "licenses": [{"license": {"id": "BSD-3-Clause"}}]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:hex/phoenix@1.7.10",
+      "name": "phoenix",
+      "version": "1.7.10",
+      "description": "Elixir web framework",
+      "purl": "pkg:hex/phoenix@1.7.10",
+      "licenses": [{"license": {"id": "MIT"}}]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:cran/ggplot2@3.4.4",
+      "name": "ggplot2",
+      "version": "3.4.4",
+      "description": "R data visualization",
+      "purl": "pkg:cran/ggplot2@3.4.4",
+      "licenses": [{"license": {"id": "MIT"}}]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:github/actions/checkout@4.1.1",
+      "name": "checkout",
+      "version": "4.1.1",
+      "description": "GitHub Actions checkout",
+      "purl": "pkg:github/actions/checkout@4.1.1",
+      "licenses": [{"license": {"id": "MIT"}}]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:generic/openssl@3.2.0",
+      "name": "openssl",
+      "version": "3.2.0",
+      "description": "Generic package — OpenSSL",
+      "purl": "pkg:generic/openssl@3.2.0",
+      "licenses": [{"license": {"id": "Apache-2.0"}}]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:gitlab/gitlab-org/gitlab-runner@16.7.0",
+      "name": "gitlab-runner",
+      "version": "16.7.0",
+      "description": "GitLab CI runner",
+      "purl": "pkg:gitlab/gitlab-org/gitlab-runner@16.7.0",
+      "licenses": [{"license": {"id": "MIT"}}]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:oci/alpine@3.19",
+      "name": "alpine",
+      "version": "3.19",
+      "description": "OCI container image",
+      "purl": "pkg:oci/alpine@3.19",
+      "licenses": [{"license": {"id": "MIT"}}]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:rpm/fedora/curl@8.5.0",
+      "name": "curl",
+      "version": "8.5.0",
+      "description": "RPM package",
+      "purl": "pkg:rpm/fedora/curl@8.5.0",
+      "licenses": [{"license": {"id": "MIT"}}]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:swift/apple/swift-nio@2.62.0",
+      "name": "swift-nio",
+      "version": "2.62.0",
+      "description": "Swift networking framework",
+      "purl": "pkg:swift/apple/swift-nio@2.62.0",
+      "licenses": [{"license": {"id": "Apache-2.0"}}]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:npm/pkg-types-test@1.0.0",
+      "dependsOn": [
+        "pkg:golang/github.com/gin-gonic/gin@1.9.1",
+        "pkg:cargo/serde@1.0.193",
+        "pkg:cocoapods/Alamofire@5.8.1",
+        "pkg:gem/rails@7.1.2",
+        "pkg:conda/numpy@1.26.2",
+        "pkg:hex/phoenix@1.7.10",
+        "pkg:cran/ggplot2@3.4.4",
+        "pkg:github/actions/checkout@4.1.1",
+        "pkg:generic/openssl@3.2.0",
+        "pkg:gitlab/gitlab-org/gitlab-runner@16.7.0",
+        "pkg:oci/alpine@3.19",
+        "pkg:rpm/fedora/curl@8.5.0",
+        "pkg:swift/apple/swift-nio@2.62.0"
+      ]
+    },
+    {"ref": "pkg:golang/github.com/gin-gonic/gin@1.9.1", "dependsOn": []},
+    {"ref": "pkg:cargo/serde@1.0.193", "dependsOn": []},
+    {"ref": "pkg:cocoapods/Alamofire@5.8.1", "dependsOn": []},
+    {"ref": "pkg:gem/rails@7.1.2", "dependsOn": []},
+    {"ref": "pkg:conda/numpy@1.26.2", "dependsOn": []},
+    {"ref": "pkg:hex/phoenix@1.7.10", "dependsOn": []},
+    {"ref": "pkg:cran/ggplot2@3.4.4", "dependsOn": []},
+    {"ref": "pkg:github/actions/checkout@4.1.1", "dependsOn": []},
+    {"ref": "pkg:generic/openssl@3.2.0", "dependsOn": []},
+    {"ref": "pkg:gitlab/gitlab-org/gitlab-runner@16.7.0", "dependsOn": []},
+    {"ref": "pkg:oci/alpine@3.19", "dependsOn": []},
+    {"ref": "pkg:rpm/fedora/curl@8.5.0", "dependsOn": []},
+    {"ref": "pkg:swift/apple/swift-nio@2.62.0", "dependsOn": []}
+  ]
+}

@@ -1,0 +1,78 @@
+<template name="releasesList">
+
+  {{# pageHeader}}
+    <div class="releases-header">
+      <div class="releases-header-left">
+        <h2 class="font-light m-b-xs">Releases</h2>
+        <small>List of approved module releases</small>
+      </div>
+      <div class="releases-header-actions">
+        <select class="form-control current-project select2">
+          <option value="">All company projects</option>
+          {{#each projectList}}
+            <optgroup label="{{name}}">
+              <option value="{{_id}}" selected="{{isActiveProject}}">All module of {{name}}</option>
+              {{#each listModules}}
+                <option value="{{../_id}}_m_{{_id}}" selected="{{isActiveModule}}">{{name}}</option>
+              {{/each}}
+            </optgroup>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+  {{/pageHeader}}
+
+  <div class="content releases-list">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="table-responsive">
+          {{> reactiveTable settings=reactiveTableSettings}}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="reactiveTableReleasesLinkRelease">
+  <a class="btn btn-default btn-sm showReleaseLink" data-toggle="modal" data-target=".{{_id}}" title="Link module">
+    <span class="fa fa-link" aria-hidden="true"></span><span class="hidden-xs hidden-sm"> Link</span></a>
+  {{#if modalVisible }}
+    <!-- Modal: releaseLink -->
+    <div class="modal fade {{_id}}" id="releaseLink" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="ts-accent-line"></div>
+          <div class="modal-header text-center">
+            <i class="fa fa-link ts-big-icon text-success"></i>
+            <br/>
+            <h4 class="modal-title">Link release </h4>
+          </div>
+          <form id="releaseLinkForm" class="releaseLinkForm">
+            <div class="modal-body">
+              <div class="row">
+                <div class="form-group col-xs-12">
+                  <label for="selectedProject">Project, that contains selected release</label>
+                  <select class="form-control" name="selectedProject">
+                    {{#each projectList}}
+                      <option value="{{_id}}">{{name}}</option>
+                    {{/each}}
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close
+              </button>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+</template>
+
+
+<template name="reactiveTableDateCell">
+  <span sort="{{sort}}" title="{{title}}">{{text}}</span>
+</template>

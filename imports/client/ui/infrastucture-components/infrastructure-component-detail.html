@@ -1,0 +1,223 @@
+<template name="infrastructureComponentDetailsNotFound">
+  <div class="content component-detail">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Sorry Component isn't available any more</div>
+    </div>
+  </div>
+</template>
+
+<template name="infrastructureComponentDetails">
+  {{#if this}}
+
+  {{# pageHeader}}
+    <div class="approves-detail-header">
+      <div class="approves-detail-header-left">
+        <h2 class="font-light m-b-none">{{{getPkgMgrIcon getKey true}}} {{getName}}</h2>
+        <small class="text-muted">{{#if getDescription}}{{getDescription}}{{else}}Infrastructure Component Details{{/if}}</small>
+      </div>
+      <div class="approves-detail-header-actions">
+        {{#if isInRole 'company_component_manager' companyId}}
+          <a href="{{pathFor route='infrastructureManagementComponentsEdit'}}" class="btn btn-default">
+            <i class="fa fa-pencil"></i> Edit
+          </a>
+        {{/if}}
+      </div>
+    </div>
+  {{/pageHeader}}
+
+  <div class="content component-detail">
+
+    <div class="panel" id="info-panel">
+      <div class="panel-heading">
+        <h4 class="inner-b-0">Information</h4>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-8">
+            <dl class="dl-horizontal">
+              <dt>Key</dt>
+              <dd>{{getKey}}</dd>
+
+							<dt>purl (package URL)</dt>
+							<dd>{{getPackageUrl}}</dd>
+
+              <dt>Homepage</dt>
+              <dd>
+                {{#if getUrl 'homepage'}}<a target='_blank'
+                                            href="{{getUrl 'homepage'}}">{{getUrl 'homepage'}}</a>
+                {{else}}unknown
+                {{/if}}
+              </dd>
+
+              <dt>Repository</dt>
+              <dd>
+                {{#if getUrl 'repository'}}<a target='_blank'
+                                              href='{{getUrl 'repository'}}'>{{getUrl
+                    'repository'}}</a>
+                {{else}}unknown
+                {{/if}}
+              </dd>
+
+              <dt>Language</dt>
+              <dd>
+                {{getLanguage}}
+              </dd>
+
+              <dt>Last Update</dt>
+              <dd>
+                {{dateFormat getUpdated}} by {{getUpdatedBy}}
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{#if getComment}}
+      <div class="panel" id="comment-panel">
+        <div class="panel-heading">
+          <h4 class="inner-b-0">Comment</h4>
+        </div>
+        <div class="panel-body">
+          <div>{{getComment}}</div>
+        </div>
+      </div>
+    {{/if}}
+
+    {{> componentCommercialTerms component=this.data disabled=true}}
+
+    {{#if getVersions true}}
+      <div class="panel component-version">
+        <div class="panel-heading version-panel-heading">
+          <h4 class="inner-b-0">
+            Versions
+            {{> versionCount filter=versionFilter matched=getVersionsMatching.length total=countVersions}}
+          </h4>
+          {{> versionSearch filter=versionFilter matched=getVersionsMatching.length
+                            total=countVersions}}
+        </div>
+        <div class="panel-body">
+          {{> paginationList collection=getVersionsMatching list=getVersionsFiltered}}
+          <table class="table table-condensed">
+            <tbody>
+              {{#each getVersionsFiltered}}
+                <tr class="inner-t-10">
+                  <td width="200">
+                    <span class="label label-success label-block label-lg inner-b-5 label-version">{{getVersion}}</span><br>
+                    <span>
+                      {{#if getReleaseDate}}
+                        Release date: {{dateFormat getReleaseDate 'll'}}
+                      {{else}}Release date: N.A.{{/if}}
+                    </span>
+                  </td>
+                  <td class="pinner-0i">
+                    {{#if getPackageUrl}}
+                      <p class="pinner-t-5 pinner-l-5 pinner-b-0 m-b-none"><b>purl</b>: {{getPackageUrl}}</p>
+                    {{/if}}
+                    <table class="table table-condensed inner-0">
+                      <thead>
+                      <tr>
+                        <th width="36" title="Verified">Ver.</th>
+                        <th>License</th>
+                        <th width="200">Url</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      {{#if getLicenses}}
+                        {{#each getLicenses}}
+                          <tr>
+                            <td>
+                              {{#if getKey}}
+                                <div class="text-center checkbox-{{getQosStr}}"></div>
+                              {{/if}}
+                            </td>
+                            <td>
+                              {{#if getKey}}
+                                <a href="{{pathFor 'licenseDetail' key=getKey }}">{{getName}}</a>
+                              {{else}}
+                                {{#if getName}}
+                                  {{getName}}&nbsp;&nbsp;<span class="text-danger">Key missing</span>
+                                {{else}}
+                                  <span class="text-danger">Key and Name missing</span>
+                                {{/if}}
+                              {{/if}}
+                            </td>
+                            <td>
+                              {{#if getUrl}}
+                                <a target='_blank' title="{{getUrl}}" href="{{getUrl}}" class="text-center">
+                                  <i class="fa fa-external-link"></i>
+                                </a>
+                              {{else}}
+                                N.A.
+                              {{/if}}
+                            </td>
+                          </tr>
+                        {{/each}}
+                      {{else}}
+                        <tr>
+                          <td colspan="3"><span class="text-danger">Key and Name missing</span></td>
+                        </tr>
+                      {{/if}}
+                      </tbody>
+                    </table>
+                    {{#if getChecksums}}
+                      <table class="table table-condensed inner-0">
+                        <thead>
+                        <tr>
+                          <th width="36" title="Verified">Ver.</th>
+                          <th>Checksum</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#each getChecksums}}
+                          <tr>
+                            <td>
+                              <div class="text-center comp-edit-chksum-verified checkbox-{{getQosStr}}"></div>
+                            </td>
+                            <td>{{getChecksum}}</td>
+                          </tr>
+                        {{/each}}
+                        </tbody>
+                      </table>
+                    {{/if}}
+                    {{#if getCopyright}}
+                      <table class="table table-condensed inner-0">
+                        <thead>
+                          <tr>
+                            <th>Copyright</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>{{getCopyright}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    {{/if}}
+                  </td>
+                </tr>
+                {{#if hasVuln}}
+                  <tr class="comp-vulnerability">
+                    <td class="border-top-none">
+                    </td>
+                    <td class="border-top-none pinner-0i">
+                      {{> cvesDetails vulns=getVuln}}
+                    </td>
+                  </tr>
+                {{/if}}
+              {{/each}}
+            </tbody>
+          </table>
+          {{#unless getVersionsFiltered}}
+            {{> reactiveTableNoData}}
+          {{/unless}}
+          {{> paginationList collection=getVersionsMatching list=getVersionsFiltered}}
+        </div>
+      </div>
+    {{/if}}
+  </div>
+  {{else}}
+    {{> infrastructureComponentDetailsNotFound}}
+  {{/if}}
+</template>
+

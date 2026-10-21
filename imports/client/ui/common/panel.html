@@ -1,0 +1,25 @@
+<template name="panel">
+
+  <div class="ts-panel {{color}} {{panelClass}} {{#if collapsed}}panel-collapse{{/if}}">
+    {{#if title}}
+      <div class="panel-heading {{#if built}} ts-panel-built {{/if}}">
+        {{> panelTools collapsed=collapsed }}
+        {{title}}{{#if titleBadge}} <span class="panel-heading-badge">{{titleBadge}}</span>{{/if}}
+      </div>
+    {{/if}}
+    <div class="panel-body {{bodyClass}}" style="{{#if collapsed}}display:none{{/if}}">
+      {{> Template.contentBlock}}
+    </div>
+    {{#if footer }}
+      <div class="panel-footer" style="{{#if collapsed}}display:none{{/if}}">
+        {{#if footerRight}}
+          <span class="pull-right">
+            {{footerRight}}
+          </span>
+        {{/if}}
+        {{footer}}
+      </div>
+    {{/if}}
+  </div>
+
+</template>

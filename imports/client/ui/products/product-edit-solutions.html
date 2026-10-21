@@ -1,0 +1,24 @@
+<template name="productEditSolutions">
+  <div class="form-group col-sm-12">
+    <div class="pull-left">
+      <a class="btn btn-primary" data-toggle="modal" data-target="#productLinkWithReleaseModal" title="Add solution">
+        <span class="fa fa-plus" aria-hidden="true"></span>
+        Add solution
+      </a>
+      <a class="btn btn-default" data-toggle="modal" data-target="#productSbomModal" title="Generate SBOM">
+        <span class="fa fa-cubes" aria-hidden="true"></span>
+        Generate SBOM
+      </a>
+    </div>
+    {{> productLinkWithRelease}}
+    {{> productSbomModal}}
+    <form autocomplete="off">
+      {{> reactiveTable settings=reactiveTableSettings}}
+    </form>
+  </div>
+</template>
+
+<template name="reactiveTableProductsSolutionsActions">
+  <button class="btn btn-warning btn-sm unlink-with" type="button"><span class="fa fa-times" aria-hidden="true"></span></button>
+</template>
+

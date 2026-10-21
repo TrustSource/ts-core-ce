@@ -1,0 +1,19 @@
+<template name="reactiveTableNoData">
+  <div class="text-center" style="padding: 40px 20px; color: #999;">
+    <i class="fa fa-inbox" style="font-size: 48px; display: block; margin-bottom: 12px;"></i>
+    <p><strong>No data found</strong></p>
+    <p><small>No information found to present in this list</small></p>
+  </div>
+</template>
+
+<!-- A statistics cell with nothing behind it. A three-segment bar drawn from an
+     all-zero total renders as a row of "0"s, which reads as a measured result
+     ("nothing is wrong") rather than the truth ("nothing was measured"). The
+     dash is the same one a column uses for a known absence, so the
+     stat columns line up. -->
+<template name="reactiveTableNoStats">
+  <span class="text-muted" title="No data available">
+    <span aria-hidden="true">-</span>
+    <span class="sr-only">No data available</span>
+  </span>
+</template>

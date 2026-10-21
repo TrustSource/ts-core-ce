@@ -1,0 +1,13 @@
+<template name="pinAction">
+  {{#if isPinned}}
+    <button type="button" class="btn btn-default btn-sm unpin-item" title="Unpin from Dashboard">
+      <span class="fas fa-thumbtack" style="color:#2a94a2"></span>
+      {{#unless iconOnly}}Unpin{{/unless}}
+    </button>
+  {{else}}
+    <button type="button" class="btn btn-default btn-sm pin-item" title="Pin to Dashboard">
+      <span class="fas fa-thumbtack" style="opacity:0.35;transform:rotate(45deg);display:inline-block"></span>
+      {{#unless iconOnly}}Pin{{/unless}}
+    </button>
+  {{/if}}
+</template>

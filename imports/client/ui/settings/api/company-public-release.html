@@ -1,0 +1,259 @@
+<template name="companyPublicRelease">
+  {{#if isInRole 'account_admin,manager,compliance_manager' companyId}}
+    {{#panel title="public-Release Keys"}}
+      <div class="form-horizontal">
+        <!-- Modal: companyPublicVex -->
+        <div class="modal fade" id="companyPublicVex" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="ts-accent-line"></div>
+              <div class="modal-header text-center">
+                <i class="fa fa-eye ts-big-icon text-success"></i>
+                <br/>
+                <h4 class="modal-title">Preview CSAF</h4>
+                <br/>
+              </div>
+              <form id="companyPublicReleaseForm">
+                <div class="modal-body">
+                  {{#if previewData}}
+                    <pre style="max-height: 300px;overflow: auto">{{previewData}}</pre>
+                  {{else}}
+                    <div class="text-center pinner-t-10 pinner-b-10">
+                      <div class="loading-spinner loading-spinner-lg"></div>
+                    </div>
+                  {{/if}}
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- Modal: companyPublicSbom -->
+        <div class="modal fade" id="companyPublicSbom" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="ts-accent-line"></div>
+              <div class="modal-header text-center">
+                <i class="fa fa-eye ts-big-icon text-success"></i>
+                <br/>
+                <h4 class="modal-title">Preview SBOM</h4>
+                <br/>
+              </div>
+              <form id="companyPublicReleaseForm">
+                <div class="modal-body">
+                  {{#if previewData}}
+                    <pre style="max-height: 300px;overflow: auto">{{previewData}}</pre>
+                  {{else}}
+                    <div class="text-center" style="padding: 10px 0">
+                      <div class="loading-spinner loading-spinner-lg"></div>
+                    </div>
+                  {{/if}}
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- Modal: companyPublicNotice -->
+        <div class="modal fade" id="companyPublicNotice" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="ts-accent-line"></div>
+              <div class="modal-header text-center">
+                <i class="fa fa-eye ts-big-icon text-success"></i>
+                <br/>
+                <h4 class="modal-title">Preview Notice</h4>
+                <br/>
+              </div>
+              <form id="companyPublicReleaseForm">
+                <div class="modal-body">
+                  {{#if previewData}}
+                    <pre style="max-height: 300px;overflow: auto">{{previewData}}</pre>
+                  {{else}}
+                    <div class="text-center" style="padding: 10px 0">
+                      <div class="loading-spinner loading-spinner-lg"></div>
+                    </div>
+                  {{/if}}
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- Modal: qrPreview -->
+        <div class="modal fade" id="qrPreview" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="ts-accent-line"></div>
+              <div class="modal-header text-center">
+                <i class="fa fa-qrcode ts-big-icon text-success"></i>
+                <br/>
+                <h4 class="modal-title">Url and QR code</h4>
+                <br/>
+              </div>
+              <form id="qrPreviewForm">
+                <div class="modal-body text-center">
+                  {{#if qrData}}
+                    {{> qrCode link=qrData}}
+                  {{else}}
+                    <div class="pinner-b-10 pinner-t-10">
+                      <div class="loading-spinner loading-spinner-lg"></div>
+                    </div>
+                  {{/if}}
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        {{#each getApiKeys}}
+          <div class="form-group">
+
+            <label class="col-sm-1 control-label">Key&nbsp;{{this.index}}:</label>
+
+            <div class="col-sm-2 controls">
+              {{#if this.published}}
+                <p class="form-control-static">{{this.maskedKey}}</p>
+              {{else}}
+                <p class="form-control-static">Key available after publish</p>
+              {{/if}}
+            </div>
+            <div class="col-sm-3 controls">
+              <select class="form-control public-release-file" disabled="{{this.published}}">
+                {{#each files}}
+                  <option value="{{_id}}" selected="{{isActive}}" title="{{getName}} - v.{{version}} from {{dateFormat approved 'll'}}">{{getName}} - v.{{version}} from {{dateFormat approved 'll'}}</option>
+                {{/each}}
+              </select>
+            </div>
+            <div class="col-sm-2 controls">
+              <select class="form-control public-release-scope select2" disabled="{{this.published}}" multiple="multiple" name="public-release-scope">
+                {{#each apiKeyScopes}}
+                  <option value="{{this}}" selected="{{isSelectedScope ../scope}}">{{this}}</option>
+                {{/each}}
+              </select>
+            </div>
+            <div class="col-sm-4 controls">
+              {{#if this.published}}
+                <button class="btn btn-info btn-sm copy-public-release-key inner-r-10" type="button">
+                  <span class="fa fa-clipboard"></span>
+                </button>
+              {{else}}
+                <button class="btn btn-info btn-sm inner-r-10" type="button" disabled="disabled">
+                  <span class="fa fa-clipboard"></span>
+                </button>
+              {{/if}}
+              <div class="relative inline-block inner-r-10" style="width: auto" title="Preview">
+                <button type="button" class="btn btn-default btn-sm dropdown-toggle"
+                        data-toggle="dropdown" style="width: auto">
+                  <span class="text-left">
+                    <span class="fa fa-eye"></span> <span class="caret"></span>
+                  </span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-left">
+                  <li>
+                    <a class="preview-public-sbom" data-toggle="modal" data-target="#companyPublicSbom" title="SBOM">
+                      SBOM
+                    </a>
+                  </li>
+                  <li>
+                    <a class="preview-public-notice" data-toggle="modal" data-target="#companyPublicNotice" title="Notice">
+                      Notice
+                    </a>
+                  </li>
+                  <li>
+                    <a class="preview-public-vex" data-toggle="modal" data-target="#companyPublicVex" title="CSAF">
+                      CSAF
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              {{#if this.published}}
+                <div class="relative inline-block inner-r-10" style="width: auto" title="View url and QR code">
+                  <button type="button" class="btn btn-default btn-sm dropdown-toggle"
+                          data-toggle="dropdown" style="width: auto">
+                    <span class="text-left">
+                      <span class="fa fa-qrcode"></span> <span class="caret"></span>
+                    </span>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-left">
+                    <li>
+                      <a class="qr-public-sbom" data-toggle="modal" data-target="#qrPreview" title="SBOM">
+                        SBOM
+                      </a>
+                    </li>
+                    <li>
+                      <a class="qr-public-notice" data-toggle="modal" data-target="#qrPreview" title="Notice">
+                        Notice
+                      </a>
+                    </li>
+                    <li>
+                      <a class="qr-public-vex" data-toggle="modal" data-target="#qrPreview" title="CSAF">
+                        CSAF
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              {{else}}
+                <div class="relative inline-block inner-r-10" style="width: auto" title="View url and QR code">
+                  <button type="button" class="btn btn-default btn-sm dropdown-toggle"
+                          disabled="disabled" style="width: auto">
+                    <span class="text-left">
+                      <span class="fa fa-qrcode"></span> <span class="caret"></span>
+                    </span>
+                  </button>
+                </div>
+              {{/if}}
+              {{#unless this.published}}
+                <button class="btn btn-primary btn-sm publish-public-release-key inner-r-10" type="button">
+                  <span class="fa fa-unlock"></span>
+                  Publish
+                </button>
+              {{/unless}}
+              {{#if this.unpublished}}
+                <button class="btn btn-primary btn-sm publish-public-release-key inner-r-10" type="button">
+                  <span class="fa fa-unlock"></span>
+                  Publish
+                </button>
+              {{/if}}
+              {{#unless this.unpublished}}
+                <button class="btn btn-danger2 btn-sm delete-public-release-key inner-r-10" type="button">
+                  {{#if requests.length}}
+                    <span class="fa fa-lock"></span>
+                    Unpublish
+                  {{else}}
+                    <span class="fa fa-trash-o"></span>
+                    Delete
+                  {{/if}}
+                </button>
+              {{/unless}}
+              {{#if this.published}}
+                <div class="label label-success label-lg">Requested: {{requestCount this}}</div>
+              {{/if}}
+            </div>
+          </div>
+        {{/each}}
+        {{#unless haveFiles}}
+          <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-10">
+              <div class="alert alert-warning">
+                <p>
+                  <strong>PLEASE NOTE: </strong>
+                  No approved releases available to start publish
+                </p>
+              </div>
+            </div>
+          </div>
+        {{/unless}}
+      </div>
+    {{/panel}}
+  {{/if}}
+</template>

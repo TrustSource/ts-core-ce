@@ -1,0 +1,41 @@
+<template name="componentDetailsLogs">
+
+  {{> componentDetailsHeader}}
+
+  <div class="content component-detail">
+    {{#if isInRole 'company_component_manager' companyId}}
+      <div class="panel">
+        <div class="panel-heading">
+          <h4 class="inner-b-0">{{__ 'Logentries'}}</h4>
+        </div>
+        <div class="panel-body">
+          {{#if getComponentLogs}}
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th class="col-md-1">{{__ 'Date'}}</th>
+                <th class="col-md-1">{{__ 'Person'}}</th>
+                <th class="col-md-1">{{__ 'Version'}}</th>
+                <th class="col-md-9">{{__ 'Message'}}</th>
+              </tr>
+              </thead>
+              <tbody>
+              {{#each getComponentLogs}}
+                <tr>
+                  <td class="col-md-1">{{dateFormat getDate 'fromNow'}}</td>
+                  <td class="col-md-1">{{createdBy}} {{#if this.companyId}}<strong>{{this.companyId}}</strong>{{/if}}</td>
+                  <td class="col-md-1">{{version}}</td>
+                  <td class="col-md-9" style="word-break: break-all;">{{text}}</td>
+                </tr>
+              {{/each}}
+              </tbody>
+            </table>
+          {{else}}
+            {{> reactiveTableNoData}}
+          {{/if}}
+        </div>
+      </div>
+    {{/if}}
+  </div>
+</template>
+

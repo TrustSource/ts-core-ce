@@ -1,0 +1,15 @@
+<template name='companyFossSettings'>
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">FOSS liaison</h2>
+        <small>Configure FOSS liaison settings</small>
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content">
+    {{#if isInRole 'account_admin' companyId}}
+      {{> companyFoss}}
+    {{/if}}
+  </div>
+</template>

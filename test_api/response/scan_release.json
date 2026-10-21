@@ -1,0 +1,1008 @@
+{
+  "project": "TEST_RELEASE",
+  "module": "TEST_RELEASE",
+  "moduleId": "TEST_RELEASE",
+  "demo": true,
+  "dependencies": [
+    {
+      "name": "ecs-demo4angular",
+      "key": "npm:ecs-demo4angular",
+      "description": "TrustSource demo for Angular 4 with @angular/cli",
+      "private": false,
+      "licenses": [
+        {
+          "name": "MIT"
+        }
+      ],
+      "repoUrl": null,
+      "dependencies": [
+        {
+          "name": "@angular/animations",
+          "key": "npm:@angular/animations",
+          "description": "Angular - animations integration with web-animationss",
+          "private": false,
+          "licenses": [
+            {
+              "name": "MIT"
+            }
+          ],
+          "homepageUrl": "https://github.com/angular/angular#readme",
+          "repoUrl": "https://github.com/angular/angular.git",
+          "dependencies": [],
+          "versions": [
+            "4.0.1"
+          ]
+        },
+        {
+          "name": "@angular/common",
+          "key": "npm:@angular/common",
+          "description": "Angular - commonly needed directives and services",
+          "private": false,
+          "licenses": [
+            {
+              "name": "MIT"
+            }
+          ],
+          "homepageUrl": "https://github.com/angular/angular#readme",
+          "repoUrl": "https://github.com/angular/angular.git",
+          "dependencies": [],
+          "versions": [
+            "4.0.1"
+          ]
+        },
+        {
+          "name": "@angular/compiler",
+          "key": "npm:@angular/compiler",
+          "description": "Angular - the compiler library",
+          "private": false,
+          "licenses": [
+            {
+              "name": "MIT"
+            }
+          ],
+          "homepageUrl": "https://github.com/angular/angular#readme",
+          "repoUrl": "https://github.com/angular/angular.git",
+          "dependencies": [],
+          "versions": [
+            "4.0.1"
+          ]
+        },
+        {
+          "name": "@angular/core",
+          "key": "npm:@angular/core",
+          "description": "Angular - the core framework",
+          "private": false,
+          "licenses": [
+            {
+              "name": "MIT"
+            }
+          ],
+          "homepageUrl": "https://github.com/angular/angular#readme",
+          "repoUrl": "https://github.com/angular/angular.git",
+          "dependencies": [],
+          "versions": [
+            "4.0.1"
+          ]
+        },
+        {
+          "name": "@angular/forms",
+          "key": "npm:@angular/forms",
+          "description": "Angular - directives and services for creating forms",
+          "private": false,
+          "licenses": [
+            {
+              "name": "MIT"
+            }
+          ],
+          "homepageUrl": "https://github.com/angular/angular#readme",
+          "repoUrl": "https://github.com/angular/angular.git",
+          "dependencies": [],
+          "versions": [
+            "4.0.1"
+          ]
+        },
+        {
+          "name": "@angular/http",
+          "key": "npm:@angular/http",
+          "description": "Angular - the http service",
+          "private": false,
+          "licenses": [
+            {
+              "name": "MIT"
+            }
+          ],
+          "homepageUrl": "https://github.com/angular/angular#readme",
+          "repoUrl": "https://github.com/angular/angular.git",
+          "dependencies": [],
+          "versions": [
+            "4.0.1"
+          ]
+        },
+        {
+          "name": "@angular/platform-browser",
+          "key": "npm:@angular/platform-browser",
+          "description": "Angular - library for using Angular in a web browser",
+          "private": false,
+          "licenses": [
+            {
+              "name": "MIT"
+            }
+          ],
+          "homepageUrl": "https://github.com/angular/angular#readme",
+          "repoUrl": "https://github.com/angular/angular.git",
+          "dependencies": [],
+          "versions": [
+            "4.0.1"
+          ]
+        },
+        {
+          "name": "@angular/platform-browser-dynamic",
+          "key": "npm:@angular/platform-browser-dynamic",
+          "description": "Angular - library for using Angular in a web browser with JIT compilation",
+          "private": false,
+          "licenses": [
+            {
+              "name": "MIT"
+            }
+          ],
+          "homepageUrl": "https://github.com/angular/angular#readme",
+          "repoUrl": "https://github.com/angular/angular.git",
+          "dependencies": [],
+          "versions": [
+            "4.0.1"
+          ]
+        },
+        {
+          "name": "@angular/router",
+          "key": "npm:@angular/router",
+          "description": "Angular - the routing library",
+          "private": false,
+          "licenses": [
+            {
+              "name": "MIT"
+            }
+          ],
+          "homepageUrl": "https://github.com/angular/angular/blob/master/modules/%40angular/router/README.md",
+          "repoUrl": "https://github.com/angular/angular.git",
+          "dependencies": [],
+          "versions": [
+            "4.0.1"
+          ]
+        },
+        {
+          "name": "@angular/upgrade",
+          "key": "npm:@angular/upgrade",
+          "description": "Angular - the library for easing update from v1 to v2",
+          "private": false,
+          "licenses": [
+            {
+              "name": "MIT"
+            }
+          ],
+          "homepageUrl": "https://github.com/angular/angular#readme",
+          "repoUrl": "https://github.com/angular/angular.git",
+          "dependencies": [],
+          "versions": [
+            "4.0.1"
+          ]
+        },
+        {
+          "name": "angular-calendar",
+          "key": "npm:angular-calendar",
+          "description": "A calendar component for angular 4.0+ that can display events on a month, week or day view",
+          "private": false,
+          "licenses": [
+            {
+              "name": "MIT"
+            }
+          ],
+          "homepageUrl": "https://github.com/mattlewis92/angular-calendar#readme",
+          "repoUrl": "https://github.com/mattlewis92/angular-calendar.git",
+          "dependencies": [
+            {
+              "name": "angular-draggable-droppable",
+              "key": "npm:angular-draggable-droppable",
+              "description": "Drag and drop for angular 4.0+",
+              "private": false,
+              "licenses": [
+                {
+                  "name": "MIT"
+                }
+              ],
+              "homepageUrl": "https://github.com/mattlewis92/angular-draggable-droppable#readme",
+              "repoUrl": "https://github.com/mattlewis92/angular-draggable-droppable.git",
+              "dependencies": [],
+              "versions": [
+                "1.0.1"
+              ]
+            },
+            {
+              "name": "angular-resizable-element",
+              "key": "npm:angular-resizable-element",
+              "description": "An angular 4.0+ directive that allows an element to be dragged and resized",
+              "private": false,
+              "licenses": [
+                {
+                  "name": "MIT"
+                }
+              ],
+              "homepageUrl": "https://github.com/mattlewis92/angular-resizable-element#readme",
+              "repoUrl": "https://github.com/mattlewis92/angular-resizable-element.git",
+              "dependencies": [],
+              "versions": [
+                "1.1.0"
+              ]
+            },
+            {
+              "name": "calendar-utils",
+              "key": "npm:calendar-utils",
+              "description": "Utility functions to generate views for calendars",
+              "private": false,
+              "licenses": [
+                {
+                  "name": "MIT"
+                }
+              ],
+              "homepageUrl": "https://github.com/mattlewis92/calendar-utils#readme",
+              "repoUrl": "https://github.com/mattlewis92/calendar-utils.git",
+              "dependencies": [],
+              "versions": [
+                "0.0.43"
+              ]
+            },
+            {
+              "name": "date-fns",
+              "key": "npm:date-fns",
+              "description": "Modern JavaScript date utility library",
+              "private": false,
+              "licenses": [
+                {
+                  "name": "MIT"
+                }
+              ],
+              "homepageUrl": "https://github.com/date-fns/date-fns#readme",
+              "repoUrl": "https://github.com/date-fns/date-fns.git",
+              "dependencies": [],
+              "versions": [
+                "1.28.4"
+              ]
+            },
+            {
+              "name": "positioning",
+              "key": "npm:positioning",
+              "description": "The ng-bootstrap Positioning class as a standalone module",
+              "private": false,
+              "licenses": [
+                {
+                  "name": "MIT"
+                }
+              ],
+              "homepageUrl": "https://github.com/mattlewis92/positioning#readme",
+              "repoUrl": "https://github.com/mattlewis92/positioning.git",
+              "dependencies": [],
+              "versions": [
+                "1.1.0"
+              ]
+            }
+          ],
+          "versions": [
+            "0.11.0"
+          ]
+        },
+        {
+          "name": "angular-chart.js",
+          "key": "npm:angular-chart.js",
+          "description": "An angular.js wrapper for Chart.js",
+          "private": false,
+          "licenses": [
+            {
+              "name": "BSD-2-Clause"
+            }
+          ],
+          "homepageUrl": "http://jtblin.github.io/angular-chart.js/",
+          "repoUrl": "git://github.com/jtblin/angular-chart.js.git",
+          "dependencies": [
+            {
+              "name": "angular",
+              "key": "npm:angular",
+              "description": "HTML enhanced for web apps",
+              "private": false,
+              "licenses": [
+                {
+                  "name": "MIT"
+                }
+              ],
+              "homepageUrl": "http://angularjs.org",
+              "repoUrl": "https://github.com/angular/angular.js.git",
+              "dependencies": [],
+              "versions": [
+                "1.6.4"
+              ]
+            },
+            {
+              "name": "chart.js",
+              "key": "npm:chart.js",
+              "description": "Simple HTML5 charts using the canvas element.",
+              "private": false,
+              "licenses": [
+                {
+                  "name": "MIT"
+                }
+              ],
+              "homepageUrl": "http://www.chartjs.org",
+              "repoUrl": "https://github.com/chartjs/Chart.js.git",
+              "dependencies": [
+                {
+                  "name": "chartjs-color",
+                  "key": "npm:chartjs-color",
+                  "description": "Color conversion and manipulation with CSS string support",
+                  "private": false,
+                  "licenses": [
+                    {
+                      "name": "MIT"
+                    }
+                  ],
+                  "homepageUrl": "https://github.com/chartjs/chartjs-color#readme",
+                  "repoUrl": "https://github.com/chartjs/chartjs-color.git",
+                  "dependencies": [],
+                  "versions": [
+                    "2.1.0"
+                  ]
+                },
+                {
+                  "name": "moment",
+                  "key": "npm:moment",
+                  "description": "Parse, validate, manipulate, and display dates",
+                  "private": false,
+                  "licenses": [
+                    {
+                      "name": "MIT"
+                    }
+                  ],
+                  "homepageUrl": "http://momentjs.com",
+                  "repoUrl": "https://github.com/moment/moment.git",
+                  "dependencies": [],
+                  "versions": [
+                    "2.18.1"
+                  ]
+                }
+              ],
+              "versions": [
+                "2.3.0"
+              ]
+            }
+          ],
+          "versions": [
+            "1.1.1"
+          ]
+        },
+        {
+          "name": "angular-intro.js",
+          "key": "npm:angular-intro.js",
+          "description": "Angular directive to wrap intro.js",
+          "private": false,
+          "licenses": [
+            {
+              "name": "AGPL-3.0"
+            }
+          ],
+          "homepageUrl": "https://github.com/mendhak/angular-intro.js",
+          "repoUrl": "git://github.com/mendhak/angular-intro.js.git",
+          "dependencies": [],
+          "versions": [
+            "3.1.3"
+          ]
+        },
+        {
+          "name": "angular2-datatable",
+          "key": "npm:angular2-datatable",
+          "description": "DataTable component for Angular2 framework",
+          "private": false,
+          "licenses": [
+            {
+              "name": "MIT"
+            }
+          ],
+          "homepageUrl": "https://github.com/mariuszfoltak/angular2-datatable#readme",
+          "repoUrl": "https://github.com/mariuszfoltak/angular2-datatable.git",
+          "dependencies": [
+            {
+              "name": "lodash",
+              "key": "npm:lodash",
+              "description": "Lodash modular utilities.",
+              "private": false,
+              "licenses": [
+                {
+                  "name": "MIT"
+                }
+              ],
+              "homepageUrl": "https://lodash.com/",
+              "repoUrl": "https://github.com/lodash/lodash.git",
+              "dependencies": [],
+              "versions": [
+                "4.17.4"
+              ]
+            }
+          ],
+          "versions": [
+            "0.6.0"
+          ]
+        },
+        {
+          "name": "angular2-ladda",
+          "key": "npm:angular2-ladda",
+          "description": "Angular Ladda module",
+          "private": false,
+          "licenses": [
+            {
+              "name": "MIT"
+            }
+          ],
+          "homepageUrl": "https://github.com/moff/angular2-ladda#readme",
+          "repoUrl": "https://github.com/moff/angular2-ladda.git",
+          "dependencies": [
+            {
+              "name": "ladda",
+              "key": "npm:ladda",
+              "description": "Buttons with built-in loading indicators",
+              "private": false,
+              "licenses": [
+                {
+                  "name": "MIT",
+                  "url": "https://github.com/hakimel/Ladda/blob/master/LICENSE"
+                }
+              ],
+              "homepageUrl": "http://lab.hakim.se/ladda",
+              "repoUrl": "git://github.com/hakimel/Ladda.git",
+              "dependencies": [
+                {
+                  "name": "spin.js",
+                  "key": "npm:spin.js",
+                  "description": "An animated CSS3 loading spinner with VML fallback for IE.",
+                  "private": false,
+                  "licenses": [
+                    {
+                      "name": "MIT"
+                    }
+                  ],
+                  "homepageUrl": "https://github.com/fgnass/spin.js#readme",
+                  "repoUrl": "git://github.com/fgnass/spin.js.git",
+                  "dependencies": [],
+                  "versions": [
+                    "2.3.2"
+                  ]
+                }
+              ],
+              "versions": [
+                "1.0.0"
+              ]
+            }
+          ],
+          "versions": [
+            "1.2.0"
+          ]
+        },
+        {
+          "name": "angular2-text-mask",
+          "key": "npm:angular2-text-mask",
+          "description": "Angular 2 directive for input text masking",
+          "private": false,
+          "licenses": [
+            {
+              "name": "Unlicense"
+            }
+          ],
+          "homepageUrl": "https://github.com/text-mask/text-mask/tree/master/angular2/#readme",
+          "repoUrl": "https://github.com/text-mask/text-mask.git",
+          "dependencies": [
+            {
+              "name": "text-mask-core",
+              "key": "npm:text-mask-core",
+              "description": "Core of https://github.com/text-mask/text-mask",
+              "private": false,
+              "licenses": [
+                {
+                  "name": "Unlicense"
+                }
+              ],
+              "homepageUrl": "https://github.com/text-mask/text-mask/core/#readme",
+              "repoUrl": "https://github.com/text-mask/text-mask.git",
+              "dependencies": [],
+              "versions": [
+                "5.0.1"
+              ]
+            }
+          ],
+          "versions": [
+            "8.0.0"
+          ]
+        },
+        {
+          "name": "angular2-toaster",
+          "key": "npm:angular2-toaster",
+          "description": "An Angular 2 Toaster Notification library based on AngularJS-Toaster",
+          "private": false,
+          "licenses": [
+            {
+              "name": "MIT"
+            }
+          ],
+          "homepageUrl": "https://github.com/stabzs/Angular2-Toaster#readme",
+          "repoUrl": "https://github.com/stabzs/Angular2-Toaster.git",
+          "dependencies": [],
+          "versions": [
+            "3.0.1"
+          ]
+        },
+        {
+          "name": "chart.js",
+          "key": "npm:chart.js",
+          "description": "Simple HTML5 charts using the canvas element.",
+          "private": false,
+          "licenses": [
+            {
+              "name": "MIT"
+            }
+          ],
+          "homepageUrl": "http://www.chartjs.org",
+          "repoUrl": "https://github.com/chartjs/Chart.js.git",
+          "dependencies": [
+            {
+              "name": "chartjs-color",
+              "key": "npm:chartjs-color",
+              "description": "Color conversion and manipulation with CSS string support",
+              "private": false,
+              "licenses": [
+                {
+                  "name": "MIT"
+                }
+              ],
+              "homepageUrl": "https://github.com/chartjs/chartjs-color#readme",
+              "repoUrl": "https://github.com/chartjs/chartjs-color.git",
+              "dependencies": [
+                {
+                  "name": "chartjs-color-string",
+                  "key": "npm:chartjs-color-string",
+                  "description": "Parser and generator for CSS color strings",
+                  "private": false,
+                  "licenses": [
+                    {
+                      "name": "MIT"
+                    }
+                  ],
+                  "homepageUrl": "https://github.com/harthur/color-string#readme",
+                  "repoUrl": "ssh://git@github.com/harthur/color-string.git",
+                  "dependencies": [
+                    {
+                      "name": "color-name",
+                      "key": "npm:color-name",
+                      "description": "A list of color names and its values",
+                      "private": false,
+                      "licenses": [
+                        {
+                          "name": "MIT"
+                        }
+                      ],
+                      "homepageUrl": "https://github.com/dfcreative/color-name",
+                      "repoUrl": "ssh://git@github.com/dfcreative/color-name.git",
+                      "dependencies": [],
+                      "versions": [
+                        "1.1.2"
+                      ]
+                    }
+                  ],
+                  "versions": [
+                    "0.4.0"
+                  ]
+                },
+                {
+                  "name": "color-convert",
+                  "key": "npm:color-convert",
+                  "description": "Plain color conversion functions",
+                  "private": false,
+                  "licenses": [],
+                  "homepageUrl": "https://github.com/harthur/color-convert#readme",
+                  "repoUrl": "ssh://git@github.com/harthur/color-convert.git",
+                  "dependencies": [],
+                  "versions": [
+                    "0.5.3"
+                  ]
+                }
+              ],
+              "versions": [
+                "2.1.0"
+              ]
+            },
+            {
+              "name": "moment",
+              "key": "npm:moment",
+              "description": "Parse, validate, manipulate, and display dates",
+              "private": false,
+              "licenses": [
+                {
+                  "name": "MIT"
+                }
+              ],
+              "homepageUrl": "http://momentjs.com",
+              "repoUrl": "https://github.com/moment/moment.git",
+              "dependencies": [],
+              "versions": [
+                "2.18.1"
+              ]
+            }
+          ],
+          "versions": [
+            "2.5.0"
+          ]
+        },
+        {
+          "name": "core-js",
+          "key": "npm:core-js",
+          "description": "Standard library",
+          "private": false,
+          "licenses": [
+            {
+              "name": "MIT"
+            }
+          ],
+          "homepageUrl": "https://github.com/zloirock/core-js#readme",
+          "repoUrl": "https://github.com/zloirock/core-js.git",
+          "dependencies": [],
+          "versions": [
+            "2.4.1"
+          ]
+        },
+        {
+          "name": "dragula",
+          "key": "npm:dragula",
+          "description": "Drag and drop so simple it hurts",
+          "private": false,
+          "licenses": [
+            {
+              "name": "MIT"
+            }
+          ],
+          "homepageUrl": "https://github.com/bevacqua/dragula",
+          "repoUrl": "https://github.com/bevacqua/dragula.git",
+          "dependencies": [
+            {
+              "name": "contra",
+              "key": "npm:contra",
+              "description": "Asynchronous flow control with a functional taste to it",
+              "private": false,
+              "licenses": [
+                {
+                  "name": "MIT"
+                }
+              ],
+              "homepageUrl": "https://github.com/bevacqua/contra",
+              "repoUrl": "git://github.com/bevacqua/contra.git",
+              "dependencies": [
+                {
+                  "name": "atoa",
+                  "key": "npm:atoa",
+                  "description": "Creates a true array based on `arraylike`, starting at `startIndex`.",
+                  "private": false,
+                  "licenses": [
+                    {
+                      "name": "MIT"
+                    }
+                  ],
+                  "homepageUrl": "https://github.com/bevacqua/atoa#readme",
+                  "repoUrl": "https://github.com/bevacqua/atoa.git",
+                  "dependencies": [],
+                  "versions": [
+                    "1.0.0"
+                  ]
+                },
+                {
+                  "name": "ticky",
+                  "key": "npm:ticky",
+                  "description": "Run a callback as soon as possible",
+                  "private": false,
+                  "licenses": [
+                    {
+                      "name": "MIT"
+                    }
+                  ],
+                  "homepageUrl": "https://github.com/bevacqua/ticky#readme",
+                  "repoUrl": "https://github.com/bevacqua/ticky.git",
+                  "dependencies": [],
+                  "versions": [
+                    "1.0.1"
+                  ]
+                }
+              ],
+              "versions": [
+                "1.9.4"
+              ]
+            },
+            {
+              "name": "crossvent",
+              "key": "npm:crossvent",
+              "description": "Cross-platform browser event handling",
+              "private": false,
+              "licenses": [
+                {
+                  "name": "MIT"
+                }
+              ],
+              "homepageUrl": "https://github.com/bevacqua/crossvent",
+              "repoUrl": "git://github.com/bevacqua/crossvent.git",
+              "dependencies": [
+                {
+                  "name": "custom-event",
+                  "key": "npm:custom-event",
+                  "description": "Cross-browser `CustomEvent` constructor",
+                  "private": false,
+                  "licenses": [
+                    {
+                      "name": "MIT"
+                    }
+                  ],
+                  "homepageUrl": "https://github.com/webmodules/custom-event",
+                  "repoUrl": "git://github.com/webmodules/custom-event.git",
+                  "dependencies": [],
+                  "versions": [
+                    "1.0.0"
+                  ]
+                }
+              ],
+              "versions": [
+                "1.5.4"
+              ]
+            }
+          ],
+          "versions": [
+            "3.7.2"
+          ]
+        },
+        {
+          "name": "format-as-currency",
+          "key": "npm:format-as-currency",
+          "description": "Angular directive to format an input as a currency as the user types",
+          "private": false,
+          "licenses": [
+            {
+              "name": "CC-BY-4.0"
+            }
+          ],
+          "homepageUrl": "https://github.com/bcherny/format-as-currency",
+          "repoUrl": "https://github.com/bcherny/format-as-currency.git",
+          "dependencies": [],
+          "versions": [
+            "3.1.3"
+          ]
+        },
+        {
+          "name": "jslicense-wtfpl",
+          "key": "npm:jslicense-wtfpl",
+          "description": "the Do What the Fuck You Want To Public License in jslicense format",
+          "private": false,
+          "licenses": [
+            {
+              "name": "Apache-2.0"
+            }
+          ],
+          "homepageUrl": "https://jslicense.github.io",
+          "repoUrl": "https://github.com/jslicense/jslicense-wtfpl.git",
+          "dependencies": [],
+          "versions": [
+            "0.1.1"
+          ]
+        },
+        {
+          "name": "moment",
+          "key": "npm:moment",
+          "description": "Parse, validate, manipulate, and display dates",
+          "private": false,
+          "licenses": [
+            {
+              "name": "MIT"
+            }
+          ],
+          "homepageUrl": "http://momentjs.com",
+          "repoUrl": "https://github.com/moment/moment.git",
+          "dependencies": [],
+          "versions": [
+            "2.18.1"
+          ]
+        },
+        {
+          "name": "ng2-bootstrap",
+          "key": "npm:ng2-bootstrap",
+          "description": "Native Angular Bootstrap Components",
+          "private": false,
+          "licenses": [
+            {
+              "name": "MIT"
+            }
+          ],
+          "homepageUrl": "https://github.com/valor-software/ng2-bootstrap#readme",
+          "repoUrl": "ssh://git@github.com/valor-software/ng2-bootstrap.git",
+          "dependencies": [
+            {
+              "name": "moment",
+              "key": "npm:moment",
+              "description": "Parse, validate, manipulate, and display dates",
+              "private": false,
+              "licenses": [
+                {
+                  "name": "MIT"
+                }
+              ],
+              "homepageUrl": "http://momentjs.com",
+              "repoUrl": "https://github.com/moment/moment.git",
+              "dependencies": [],
+              "versions": [
+                "2.18.1"
+              ]
+            }
+          ],
+          "versions": [
+            "1.6.1"
+          ]
+        },
+        {
+          "name": "ng2-charts",
+          "key": "npm:ng2-charts",
+          "description": "Reactive, responsive, beautiful charts for Angular2 based on Chart.js",
+          "private": false,
+          "licenses": [
+            {
+              "name": "MIT"
+            }
+          ],
+          "homepageUrl": "https://github.com/valor-software/ng2-charts#readme",
+          "repoUrl": "ssh://git@github.com/valor-software/ng2-charts.git",
+          "dependencies": [
+            {
+              "name": "chart.js",
+              "key": "npm:chart.js",
+              "description": "Simple HTML5 charts using the canvas element.",
+              "private": false,
+              "licenses": [
+                {
+                  "name": "MIT"
+                }
+              ],
+              "homepageUrl": "http://www.chartjs.org",
+              "repoUrl": "https://github.com/chartjs/Chart.js.git",
+              "dependencies": [],
+              "versions": [
+                "2.5.0"
+              ]
+            }
+          ],
+          "versions": [
+            "1.5.0"
+          ]
+        },
+        {
+          "name": "ng2-dragula",
+          "key": "npm:ng2-dragula",
+          "description": "Simple drag and drop with dragula",
+          "private": false,
+          "licenses": [
+            {
+              "name": "MIT"
+            }
+          ],
+          "homepageUrl": "https://github.com/valor-software/ng2-dragula#readme",
+          "repoUrl": "https://github.com/valor-software/ng2-dragula.git",
+          "dependencies": [
+            {
+              "name": "dragula",
+              "key": "npm:dragula",
+              "description": "Drag and drop so simple it hurts",
+              "private": false,
+              "licenses": [
+                {
+                  "name": "MIT"
+                }
+              ],
+              "homepageUrl": "https://github.com/bevacqua/dragula",
+              "repoUrl": "https://github.com/bevacqua/dragula.git",
+              "dependencies": [],
+              "versions": [
+                "3.7.2"
+              ]
+            }
+          ],
+          "versions": [
+            "1.3.0"
+          ]
+        },
+        {
+          "name": "ng2-select",
+          "key": "npm:ng2-select",
+          "description": "Angular2 based replacement for select boxes",
+          "private": false,
+          "licenses": [
+            {
+              "name": "MIT"
+            }
+          ],
+          "homepageUrl": "https://github.com/valor-software/ng2-select#readme",
+          "repoUrl": "ssh://git@github.com/valor-software/ng2-select.git",
+          "dependencies": [],
+          "versions": [
+            "1.2.0"
+          ]
+        },
+        {
+          "name": "rxjs",
+          "key": "npm:rxjs",
+          "description": "Reactive Extensions for modern JavaScript",
+          "private": false,
+          "licenses": [
+            {
+              "name": "Apache-2.0"
+            }
+          ],
+          "homepageUrl": "https://github.com/ReactiveX/RxJS",
+          "repoUrl": "ssh://git@github.com/ReactiveX/RxJS.git",
+          "dependencies": [
+            {
+              "name": "symbol-observable",
+              "key": "npm:symbol-observable",
+              "description": "Symbol.observable ponyfill",
+              "private": false,
+              "licenses": [
+                {
+                  "name": "MIT"
+                }
+              ],
+              "homepageUrl": "https://github.com/blesh/symbol-observable#readme",
+              "repoUrl": "https://github.com/blesh/symbol-observable.git",
+              "dependencies": [],
+              "versions": [
+                "1.0.4"
+              ]
+            }
+          ],
+          "versions": [
+            "5.2.0"
+          ]
+        },
+        {
+          "name": "ts-helpers",
+          "key": "npm:ts-helpers",
+          "description": "Typescript helpers for compiling typescript while specifying ",
+          "private": false,
+          "licenses": [
+            {
+              "name": "MIT"
+            }
+          ],
+          "homepageUrl": "https://github.com/ngParty/ts-helpers#readme",
+          "repoUrl": "https://github.com/ngParty/ts-helpers.git",
+          "dependencies": [],
+          "versions": [
+            "1.1.2"
+          ]
+        },
+        {
+          "name": "zone.js",
+          "key": "npm:zone.js",
+          "description": "Zones for JavaScript",
+          "private": false,
+          "licenses": [
+            {
+              "name": "MIT"
+            }
+          ],
+          "homepageUrl": "https://github.com/angular/zone.js#readme",
+          "repoUrl": "git://github.com/angular/zone.js.git",
+          "dependencies": [],
+          "versions": [
+            "0.8.5"
+          ]
+        }
+      ],
+      "versions": [
+        "1.8.1"
+      ]
+    }
+  ]
+}

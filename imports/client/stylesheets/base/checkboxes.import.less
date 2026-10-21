@@ -1,0 +1,49 @@
+// iCheck "square green" skin: 22px sprite-based checkbox and radio
+@check-sprite-step: 24px;
+
+.icheckbox_square-green,
+.iradio_square-green {
+  display: inline-block;
+  vertical-align: middle;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: url(/iCheck/green.png) no-repeat;
+  cursor: pointer;
+}
+
+// Sprite offsets: checkbox states occupy frames 0-4, radio states frames 5-9
+.icheckbox_square-green {
+  background-position: 0 0;
+
+  &.hover { background-position: (-1 * @check-sprite-step) 0; }
+  &.checked { background-position: (-2 * @check-sprite-step) 0; }
+  &.disabled {
+    background-position: (-3 * @check-sprite-step) 0;
+    cursor: default;
+  }
+  &.checked.disabled { background-position: (-4 * @check-sprite-step) 0; }
+}
+
+.iradio_square-green {
+  background-position: (-5 * @check-sprite-step) 0;
+
+  &.hover { background-position: (-6 * @check-sprite-step) 0; }
+  &.checked { background-position: (-7 * @check-sprite-step) 0; }
+  &.disabled {
+    background-position: (-8 * @check-sprite-step) 0;
+    cursor: default;
+  }
+  &.checked.disabled { background-position: (-9 * @check-sprite-step) 0; }
+}
+
+// Sharper sprite on high-density screens
+@media (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
+  .icheckbox_square-green,
+  .iradio_square-green {
+    background-image: url(/iCheck/green@2x.png);
+    background-size: (10 * @check-sprite-step) @check-sprite-step;
+  }
+}

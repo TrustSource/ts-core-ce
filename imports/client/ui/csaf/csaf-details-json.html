@@ -1,0 +1,50 @@
+<template name="csafDetailsJson">
+  <div class="relative json_view">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="pull-right panel-right-actions">
+          <div class="btn-group btn-group-justified" role="group" style="width: 200px">
+            <a href class="btn btn-default change_view_type" type="button" disabled="{{isEditDisabled}}"
+               title="Change view type">
+              {{#unless isEditView}}
+                <i class="fa fa-pencil"></i> Edit
+              {{else}}
+                <i class="fa fa-eye"></i> View
+              {{/unless}}
+            </a>
+            {{#if isLoading}}
+              <a href class="btn btn-default" type="button" disabled="disabled" title="Save changes">
+                <i class="fa fa-spinner fa-spin"></i> Save
+              </a>
+            {{else}}
+              {{#unless isEditView}}
+                <a href class="btn btn-default" type="button" disabled="disabled" title="Save changes">
+                  <i class="fa fa-floppy-disk"></i> Save
+                </a>
+              {{else}}
+                <a href class="btn btn-default save_changes" type="button" disabled="{{isEditDisabled}}"
+                   title="Save changes">
+                  <i class="fa fa-floppy-disk"></i> Save
+                </a>
+              {{/unless}}
+            {{/if}}
+          </div>
+        </div>
+        <h5>JSON</h5>
+      </div>
+      <div class="panel-body pinner-0i scrollable_middle">
+        {{#if _id}}
+          {{#if data}}
+            {{#unless isEditView}}
+              <pre>{{prettyJsonStr data}}</pre>
+            {{else}}
+              <textarea class="form-control editable-json" name="updatedData">{{prettyJsonStr data}}</textarea>
+            {{/unless}}
+          {{/if}}
+        {{else}}
+          {{>loadingSplash}}
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</template>

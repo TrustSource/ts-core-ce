@@ -1,0 +1,6 @@
+matchID;Name;Email;Company;Roles
+ID180611001;Some User;super@duper.com;YourCompName;developer
+ID180611002;Some Multyrole;some.user@wherever.com;YourCompName;manager developer
+ID180611003;A Compliance Manager;may.be@ormaybenot.com;YourCompanyName;compliance_manager
+ID180611004;ExistingUserToDelete;existingusermail@yourcompany.com;YourCompanyName;
+ID180611005;ExistingUserToChangeRoleToManager;existingnormalusermail@company.com;YourCompanyName;manager

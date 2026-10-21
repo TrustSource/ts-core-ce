@@ -1,0 +1,16 @@
+<template name="policyDetails">
+  {{> pageHeader desc="Policy details" title=name }}
+  <div class="content">
+    <div class="panel">
+      <div class="panel-body ">
+        <div class="form">
+          <h3>Update policy information</h3>
+          {{> quickForm schema=getSchema id="updatePolicyForm" doc=this type=disableOnConfirmations meteormethod="_updatePolicy" fields=fields}}
+          <br>
+          <h3>Notified users</h3>
+          {{> reactiveTable settings=reactiveTableSettings}}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

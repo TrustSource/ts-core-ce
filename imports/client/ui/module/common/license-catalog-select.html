@@ -1,0 +1,39 @@
+<template name="licenseCatalogSelect">
+  {{#if catalogueEmpty}}
+    <p class="license-resolve-hint">The license catalogue is empty, so no license can be selected. Ask an administrator to load the license list.</p>
+  {{else}}
+    <select class="form-control select2 license-catalog-select" id="{{selectId}}" {{disabledAttr}}>
+      {{#if catalogueLoading}}
+        <option value="">Loading licenses…</option>
+      {{else}}
+        {{#if includeNoneOption}}
+          <option value="">- none -</option>
+        {{else}}
+          <option value=""></option>
+        {{/if}}
+        {{#if showEdgeCases}}
+          <optgroup label="Special cases - use only when no named license applies">
+            {{#each edgeCaseOptions}}
+              <option value="{{key}}" selected="{{isCurrent key}}" data-hint="{{hint}}">{{key}}</option>
+            {{/each}}
+          </optgroup>
+        {{/if}}
+        {{#if hasPrivateLicenses}}
+          <optgroup label="Private licenses">
+            {{#each privateLicenseOptions}}
+              <option value="{{key}}" selected="{{isCurrent key}}" data-hint="{{description}}">{{key}}</option>
+            {{/each}}
+          </optgroup>
+        {{/if}}
+        <optgroup label="Standard licenses">
+          {{#each publicLicenseOptions}}
+            <option value="{{key}}" selected="{{isCurrent key}}" data-hint="{{name}}">{{key}}</option>
+          {{/each}}
+        </optgroup>
+      {{/if}}
+    </select>
+    {{#with edgeCaseExplanation}}
+      <p class="license-resolve-hint license-catalog-explanation">{{this}}</p>
+    {{/with}}
+  {{/if}}
+</template>

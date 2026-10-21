@@ -1,0 +1,73 @@
+<template name="csafProductTreeBranch">
+  {{#if hasData}}
+    <div class="panel panel-default csaf-branch">
+      <div class="panel-body">
+        <div class="col-xs-12">
+          <div class="form-group inner-b-5i">
+            <label for="branches_name_{{index}}">Name of the branch *</label>
+            <input type="text" value="{{getValue 'name'}}" id="branches_name_{{index}}" data-path="name" name="branches_name_{{index}}" class="form-control" disabled="{{isEditDisabled}}" minlength="1" />
+            <span class="help-block small">Contains the canonical descriptor or 'friendly name' of the branch.</span>
+          </div>
+          <div class="form-group inner-b-5i">
+            <label for="branches_category_{{index}}">Category of the branch *</label>
+            <select id="branches_category_{{index}}" name="branches_category_{{index}}" data-path="category" class="form-control" disabled="{{isEditDisabled}}">
+              <option value="architecture" selected="{{isSelected (getValue 'category') 'architecture'}}">
+                architecture
+              </option>
+              <option value="host_name" selected="{{isSelected (getValue 'category') 'host_name'}}">host_name </option>
+              <option value="language" selected="{{isSelected (getValue 'category') 'language'}}">language</option>
+              <option value="legacy" selected="{{isSelected (getValue 'category') 'legacy'}}">legacy</option>
+              <option value="patch_level" selected="{{isSelected (getValue 'category') 'patch_level'}}">patch_level </option>
+              <option value="product_family" selected="{{isSelected (getValue 'category') 'product_family'}}">
+                product_family
+              </option>
+              <option value="product_name" selected="{{isSelected (getValue 'category') 'product_name'}}">
+                product_name
+              </option>
+              <option value="product_version" selected="{{isSelected (getValue 'category') 'product_version'}}">
+                product_version
+              </option>
+              <option value="product_version_range" selected="{{isSelected (getValue 'category') 'product_version_range'}}">product_version_range </option>
+              <option value="service_pack" selected="{{isSelected (getValue 'category') 'service_pack'}}">
+                service_pack
+              </option>
+              <option value="specification" selected="{{isSelected (getValue 'category') 'specification'}}">
+                specification
+              </option>
+              <option value="vendor" selected="{{isSelected (getValue 'category') 'vendor'}}">vendor</option>
+            </select>
+            <span class="help-block small">Describes the characteristics of the labeled branch.</span>
+          </div>
+          {{#unless hasBranches}}
+            <div class="form-group inner-b-5i">
+              <label for="branches_product_name_{{index}}">Textual description of the product</label>
+              <input type="text" value="{{getValue 'product.name'}}" id="branches_product_name_{{index}}" data-path="product.name" name="branches_product_name_{{index}}" class="form-control" disabled="{{isEditDisabled}}" minlength="1" />
+              <span class="help-block small">The value should be the product’s full canonical name, including version number and other attributes, as it would be used in a human-friendly document.</span>
+            </div>
+            <div class="form-group inner-b-5i">
+              <label for="branches_product_id_{{index}}">Reference token for product instance</label>
+              <input type="text" value="{{getValue 'product.product_id'}}" id="branches_product_id_{{index}}" data-path="product.product_id" name="branches_product_id_{{index}}" class="form-control" disabled="{{isEditDisabled}}" minlength="1" />
+              <span class="help-block small">Token required to identify a full_product_name so that it can be referred to from other parts in the document. There is no predefined or required format for the product_id as long as it uniquely identifies a product in the context of the current document.</span>
+            </div>
+          {{/unless}}
+          <div class="form-group inner-b-5i">
+            <span class="help-block small">
+              <button class="btn btn-xs btn-primary pull-right add_branch_item" disabled="{{isEditDisabled}}" type="button" data-path="branches" data-default-item="branches">
+                <span class="fa fa-plus" aria-hidden="true"></span>
+              </button>
+              Branches
+            </span>
+            {{#each getValue 'branches'}}
+              <span class="help-block small remove-btn-over-panel">
+                <button class="btn btn-warning btn-xs pull-right remove_branch_item" disabled="{{isEditDisabled}}" type="button" data-path="branches" data-index="{{index}}">
+                  <span class="fa fa-times" aria-hidden="true"></span>
+                </button>
+              </span>
+              {{> csafProductTreeBranch data=this index=@index root=../root}}
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+</template>

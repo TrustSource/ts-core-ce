@@ -1,0 +1,725 @@
+// Utility classes: spacing, sizing, display, typography, avatars, form helpers
+// Extracted from ecs.import.less
+
+//
+// Styles kept from the earlier layout; check whether they are still needed
+//
+/* resize avatar in navbar */
+.avatar {
+  width: 50px;
+  height: 50px;
+  vertical-align: text-top;
+}
+
+div.checkbox-CLARIFICATION_NEEDED:before {
+  content: "\f12a";
+  font-family: FontAwesome;
+  color: red;
+}
+
+div.checkbox-PACKAGE_META:before {
+  content: "\f046";
+  font-family: FontAwesome;
+  color: orange;
+}
+
+div.checkbox-REPO_CRAWLER:before {
+  content: "\f046";
+  font-family: FontAwesome;
+  color: green;
+}
+
+div.checkbox-HUMAN:before {
+  content: "\f046\f046";
+  font-family: FontAwesome;
+  color: green;
+}
+
+div.checkbox-NOT_CHECKED:before {
+  content: "\f096";
+  font-family: FontAwesome;
+  color: red;
+}
+
+/* allow 5px space between buttons in a button group */
+.btn-blocks .btn {
+  margin-right: 5px;
+}
+
+/* ecs-bar */
+.ecs-label {
+  min-width: 120px;
+  margin-top: 0.3em;
+  display: inline-block;
+  text-align: center;
+  height: 1.6em;
+  padding-top: 0.3em;
+}
+.large-label .cvss-label{
+  min-width: 120px;
+  margin-top: 0.3em;
+  display: inline-block;
+  text-align: center;
+  height: 1.6em;
+  padding-top: 0.3em;
+}
+
+/* state-filter */
+.i-checks + .ecs-label {
+  margin-left: 2px;
+}
+
+.popover {
+  max-width: 100%; /* Max Width of the popover (depending on the container!) */
+}
+
+/*corner ribbon*/
+.ribbon-wrapper {
+  width: 85px;
+  height: 88px;
+  overflow: hidden;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  z-index: 1;
+}
+
+.ribbon {
+  font: bold 15px Sans-Serif;
+  text-align: center;
+  text-shadow: rgba(255, 255, 255, 0.5) 0px 1px 0px;
+  transform: rotate(45deg);
+  position: relative;
+  padding: 7px 0;
+  left: -5px;
+  top: 15px;
+  width: 120px;
+  background-color: #aaa;
+  color: #fff;
+  box-shadow: 0px 0px 3px fade(@color-black, 30%);
+}
+
+.ribbon:before,
+.ribbon:after {
+  content: "";
+  border-top: 3px solid #aaa;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  position: absolute;
+  bottom: -3px;
+}
+
+.ribbon:before {
+  left: 0;
+}
+
+.ribbon:after {
+  right: 0;
+}
+
+.form-horizontal .checkbox-inline {
+  padding-top: 0;
+}
+
+@media (max-width: 1500px) {
+  .input-group-sm > .form-control,
+  .input-group-sm > .input-group-addon,
+  .input-group-sm > .input-group-btn > .btn,
+  .btn-sm, .btn-group-sm > .btn {
+    font-size: 10px;
+  }
+}
+
+.truncate {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: top;
+  white-space: nowrap
+}
+.vat {
+  vertical-align: top;
+}
+
+.inner-0 {
+  margin: 0 !important;
+}
+.inner-b-20 {
+  margin-bottom: 20px !important;
+}
+.inner-b-40 {
+  margin-bottom: 40px !important;
+}
+
+.inner-t-1 {
+  margin-top: 1px !important;
+}
+
+.inner-t-5 {
+  margin-top: 5px !important;
+}
+
+.inner-t-8 {
+  margin-top: 8px !important;
+}
+
+.inner-t-10 {
+  margin-top: 10px !important;
+}
+
+.inner-t-15 {
+  margin-top: 15px !important;
+}
+
+.inner-t-20 {
+  margin-top: 20px !important;
+}
+
+.inner-t-40 {
+  margin-top:40px !important;
+}
+
+.inner-t-25 {
+  margin-top:25px !important;
+}
+
+.inner-tb-0 {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.inner-t-0 {
+  margin-top: 0 !important;
+}
+
+.inner-tb-5 {
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+}
+
+.inner-b-5 {
+  margin-bottom: 5px;
+}
+.inner-b-5i {
+  margin-bottom: 5px!important;
+}
+
+.inner-b-10 {
+  margin-bottom: 10px;
+}
+.inner-b-8 {
+  margin-bottom: 8px!important;
+}
+.inner-r-5 {
+  margin-right: 5px;
+}
+.inner-r-10i {
+  margin-right: 10px!important;
+}
+.inner-r-0 {
+  margin-right: 0!important;
+}
+
+.inner-r-10 {
+  margin-right: 10px;
+}
+
+.inner-l-1 {
+  margin-left: 1px;
+}
+.inner-l-2 {
+  margin-left: 2px;
+}
+
+.inner-l-5 {
+  margin-left: 5px;
+}
+
+.inner-l-21 {
+  margin-left: 21px;
+}
+
+.inner-l-10 {
+  margin-left: 10px;
+}
+
+.inner-l-16 {
+  margin-left: 16px;
+}
+
+.inner-l-20 {
+  margin-left: 20px;
+}
+
+.inner-l-21 {
+  margin-left: 21px;
+}
+
+.inner-b-0 {
+  margin-bottom: 0;
+}
+
+.pinner-l-5{
+  padding-left: 5px;
+}
+
+.pinner-l-10{
+  padding-left: 10px!important;
+}
+
+.pinner-l-3{
+  padding-left: 3px;
+}
+
+.pinner-l-0{
+  padding-left: 0;
+}
+
+.pinner-r-20{
+  padding-right: 20px!important;
+}
+
+.pinner-r-10{
+  padding-right: 10px!important;
+}
+
+.pinner-r-40{
+  padding-right: 40px;
+}
+
+.pinner-r-0 {
+  padding-right: 0!important;
+}
+
+.pinner-r-3 {
+  padding-right: 3px;
+}
+
+.pinner-l-20{
+  padding-left: 20px!important;
+}
+
+.pinner-l-15{
+  padding-left: 15px;
+}
+
+.pinner-l-30{
+  padding-left: 30px;
+}
+
+.pinner-b-0 {
+  padding-bottom: 0;
+}
+
+.pinner-b-10 {
+  padding-bottom: 10px;
+}
+.pinner-b-10i {
+  padding-bottom: 10px!important;
+}
+.pinner-b-20i {
+  padding-bottom: 20px!important;
+}
+.pinner-0i{
+  padding: 0!important;
+}
+.pinner-5i{
+  padding: 5px!important;
+}
+
+.pinner-t-0 {
+  padding-top: 0 !important;
+}
+
+.pinner-t-2 {
+  padding-top: 2px !important;
+}
+
+.pinner-t-5 {
+  padding-top: 5px !important;
+}
+
+.pinner-t-10 {
+  padding-top: 10px;
+}
+
+.pinner-t-30 {
+  padding-top: 30px;
+}
+
+.pinner-l-40 {
+  padding-left: 40px;
+}
+
+.pinner-l-45 {
+  padding-left: 45px;
+}
+
+.pinner-t-8 {
+  padding-top: 8px;
+}
+
+.pinner-t-4 {
+  padding-top: 4px;
+}
+
+.pinner-20 {
+  padding: 20px;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.autoform-array-item {
+  .form-group {
+    display: inline-block;
+    width: 30%;
+    margin-bottom: 0;
+  }
+  label {
+    margin-right: 5px;
+  }
+  input {
+    width: 70%;
+    display: inline-block;
+  }
+  .help-block {
+    margin: 0;
+  }
+}
+
+.action-in-progress{
+  position: relative;
+}
+.action-in-progress:before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 120%;
+  background: rgba(255,255,255,0.5) url('/images/loading-bars.svg') center center no-repeat ;
+  left: 0;
+  top: -10%;
+  z-index: 2;
+  cursor: progress;
+}
+.ts-big-icon{
+  font-size: 6em;
+  text-align: center;
+  color: @ts-teal;
+  width: 100%;
+  padding: 10px 0;
+  min-height: 100px;
+  background-size: auto 90%;
+  float: left;
+}
+.reactive-table .message{
+  word-break: break-all;
+  word-break: break-word;
+}
+
+/* Long unbroken values (checksums, tarball URLs) that must not overflow their box */
+.break-all{
+  word-break: break-all;
+}
+
+/* Emails */
+.unread{
+  background: fade(@color-black, 10%);
+  font-weight: 700;
+}
+.square-20{
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  .fa{
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    text-align: center;
+    display: inline-block;
+  }
+}
+.col-30{
+  width: 30px;
+}
+.col-40{
+  width: 40px;
+}
+.col-50{
+  width: 50px;
+}
+.col-60{
+  width: 60px;
+}
+.col-70{
+  width: 70px;
+}
+.col-100{
+  width: 100px;
+}
+.col-80{
+  width: 80px;
+}
+.col-120{
+  width: 120px;
+  white-space: nowrap;
+}
+.col-170{
+  width: 170px;
+}
+.col-180{
+  width: 180px;
+}
+.col-200{
+  width: 200px;
+}
+.col-240{
+  width: 240px;
+}
+.col-300{
+  width: 300px;
+}
+.col-330{
+  width: 330px;
+}
+.col-m-200{
+  min-width: 200px;
+}
+.col-state{
+  width: 80px;
+}
+.col-marked{
+  width: 30px;
+}
+.col-trash{
+  width: 30px;
+}
+.mail-style {
+  .reactive-table-row-click();
+}
+.col-type{
+  width: 30px;
+}
+.col-tool{
+  width: 150px;
+}
+.col-date{
+  width: 110px;
+  white-space: nowrap;
+}
+.col-flex{
+  width: auto;
+}
+.col-sender{
+  width: 180px;
+}
+.col-actions{
+  width: 170px;
+  white-space: nowrap;
+}
+.col-actions-fixed{
+  width: 170px!important;
+  white-space: nowrap;
+}
+.col-key{
+  width: 60px;
+}
+.col-url{
+  width: 380px;
+}
+.col-actions-big{
+  width: 250px;
+  white-space: nowrap;
+}
+.col-actions-small{
+  width: 90px;
+}
+
+.pinner-tb-10{
+  padding-top:10px!important;
+  padding-bottom:10px!important;
+}
+
+.w100{
+  width: 100%
+}
+.w100i{
+  width: 100%!important;
+}
+
+.label-block{
+  display: inline-block;
+  width: 100%;
+}
+
+.border-top-none {
+  border-top: none!important;
+}
+
+.label-version{
+  text-align: left;
+  font-size: 1em;
+  // .label-block above stretches a label to its column; a version pill should be
+  // as wide as the version, not as wide as the cell it happens to sit in.
+  width: auto;
+}
+
+.max-w-80{
+  max-width: 80%;
+}
+
+.max-w-70{
+  max-width: 70%;
+}
+
+.max-w-30{
+  max-width: 30%;
+}
+
+.max-w-400px{
+  max-width: 400px;
+}
+
+.max-w-900px{
+  max-width: 900px;
+}
+
+.w-70{
+  width: 70%;
+}
+
+.w-50{
+  width: 50%;
+}
+
+.w-30{
+  width: 30%;
+}
+
+.w-20px{
+  width: 20px;
+}
+.mw-35px{
+  min-width: 35px;
+}
+
+.table-layout-fixed{
+  width:100%;
+  table-layout:fixed;
+}
+
+.inline-block{
+  display: inline-block;
+}
+
+.w-100 {
+  width: 100% !important;
+}
+.w-90 {
+  width: 90% !important;
+}
+.w-80 {
+  width: 80% !important;
+}
+.w-100px {
+  width: 100px !important;
+}
+.w-150px {
+  width: 150px !important;
+}
+.w-200px {
+  width: 200px !important;
+}
+.w-400px {
+  width: 400px !important;
+}
+.w-450px {
+  width: 450px !important;
+}
+.w-11px {
+  width: 11px !important;
+}
+.w-18px {
+  width: 18px !important;
+}
+.w-30px {
+  width: 30px !important;
+}
+
+/* Prevent page jump when modal open */
+body.modal-open {
+  overflow: visible !important;
+  position: static !important;
+  height: auto !important;
+  padding-right: 0 !important;
+}
+.modal {
+  overflow-y: auto !important;
+  position: fixed !important;
+  top: 0; /* Adjust as needed */
+  height: auto;
+}
+.fw4{
+  font-weight: 400;
+}
+.fw6{
+  font-weight: 600;
+}
+.border-only-left{
+  border-bottom: none!important;
+  border-top: none!important;
+  border-right: none!important;
+}
+.actions-on-top{
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+.text-left-i{
+  text-align: left!important;
+}
+.text-crossed{
+  text-decoration: line-through;
+}
+.list-group > .border-only-left:last-child{
+  border-bottom: 1px solid @ts-border!important;
+  border-top: none!important;
+  border-right: none!important;
+}
+.links-offest-top > .btn{
+  margin-top: 3px;
+}
+
+.d-flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+
+.styled-checkbox{
+  width: 20px;
+  height: 20px;
+  background-color: #4a8090;
+  border-color: #4a8090;
+  color: #FFFFFF;
+  accent-color: #4a8090;
+}
+.grid-with-check{
+  display: grid;
+  grid-template-columns: 30px auto;
+  grid-template-rows: auto;
+  grid-template-areas: "check-list "
+}
+.grid-with-check .check-list{
+  grid-area: check-list;
+}
+
+.pagination-like-btn{
+  font-size: 14px;
+}

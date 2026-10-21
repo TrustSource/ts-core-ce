@@ -1,0 +1,48 @@
+<template name="componentListFilter">
+  <div id="componentListFilter" class="panel-heading actions no-top clearfix">
+    <div class="pull-left form-inline list_filter">
+      <div class="form-group form-group-sm">
+        <h5 class="inner-r-5"><strong class="fa fa-filter"></strong></h5>
+      </div>
+      <div class="form-group form-group-sm" style="width:300px;">
+        <input type="text" placeholder="By name" class="form-control w-100"
+               value="{{searchSource}}" name="name">
+      </div>
+      {{#if filterableByCategory}}
+        <div class="form-group form-group-sm" style="width:200px;">
+          <input type="text" placeholder="By category" class="form-control w-100"
+                 value="{{searchCategory}}" name="category">
+        </div>
+      {{/if}}
+      {{#if isInRole 'company_component_manager' companyId}}
+        <div class="form-group form-group-sm">
+          <h5 class="inner-r-5 inner-l-10"><b>CM only:</b></h5>
+        </div>
+        <div class="form-group form-group-sm" style="width:130px;">
+          <select class="form-control w-100" name="language">
+            <option value="" label="Any">Any</option>
+            {{#each allowedLanguages}}
+              <option value="{{this}}" label="{{this}}">{{this}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <div class="form-group form-group-sm" style="width:200px;">
+          <input type="text" placeholder="By key" class="form-control w-100"
+                 value="{{searchKey}}" name="key">
+        </div>
+        <div class="form-group form-group-sm" style="width:100px;">
+          <select class="form-control w-100" name="removed">
+            <option value="" label="Active">Active</option>
+            <option value="true" label="Inactive">Removed</option>
+          </select>
+        </div>
+      {{/if}}
+      <button class="btn btn-default btn-sm reset_filter" title="Reset filters">
+        <i class="fa fa-trash"></i>
+      </button>
+    </div>
+    <div class="pull-right form-inline">
+      {{> componentListSorting type=type}}
+    </div>
+  </div>
+</template>

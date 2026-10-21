@@ -1,0 +1,208 @@
+html {
+  box-sizing: border-box;
+  overflow: -moz-scrollbars-vertical;
+  overflow-y: scroll;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  background: #fafafa;
+  padding-bottom: 40px;
+}
+
+.swagger-ui .opblock.opblock-options,
+.swagger-ui .auth-wrapper,
+.swagger-ui .topbar {
+  display: none;
+}
+
+.swagger-ui .info {
+  margin: 20px 0;
+}
+#swagger-ui{
+  background: #fff;
+  border: 1px solid #e0e1e3;
+  border-radius: 2px;
+  position: relative;
+}
+.swagger-ui .wrapper{
+  max-width: 1920px;
+}
+.response-col_links,
+.info .main .link{
+  display: none;
+}
+
+/* ===========================================================================
+   Dark theme — activated by ?theme=dark (see <script> in index.html).
+   Palette mirrors the parent app's dark theme (themes/dark.import.less).
+   =========================================================================== */
+html.theme-dark body {
+  background: #15171a;
+}
+html.theme-dark #swagger-ui {
+  background: #1a1d21;
+  border-color: #35373b;
+}
+
+/* Text & headings */
+html.theme-dark .swagger-ui,
+html.theme-dark .swagger-ui .info .title,
+html.theme-dark .swagger-ui .info li,
+html.theme-dark .swagger-ui .info p,
+html.theme-dark .swagger-ui .info table,
+html.theme-dark .swagger-ui label,
+html.theme-dark .swagger-ui .opblock-tag,
+html.theme-dark .swagger-ui .opblock .opblock-summary-operation-id,
+html.theme-dark .swagger-ui .opblock .opblock-summary-path,
+html.theme-dark .swagger-ui .opblock .opblock-summary-path__deprecated,
+html.theme-dark .swagger-ui .opblock .opblock-summary-description,
+html.theme-dark .swagger-ui .opblock-description-wrapper p,
+html.theme-dark .swagger-ui .opblock-external-docs-wrapper p,
+html.theme-dark .swagger-ui .opblock-title_normal p,
+html.theme-dark .swagger-ui .parameter__name,
+html.theme-dark .swagger-ui .parameter__type,
+html.theme-dark .swagger-ui .parameter__in,
+html.theme-dark .swagger-ui table thead tr td,
+html.theme-dark .swagger-ui table thead tr th,
+html.theme-dark .swagger-ui .response-col_status,
+html.theme-dark .swagger-ui .response-col_description,
+html.theme-dark .swagger-ui .responses-inner h4,
+html.theme-dark .swagger-ui .responses-inner h5,
+html.theme-dark .swagger-ui .model-title,
+html.theme-dark .swagger-ui .model,
+html.theme-dark .swagger-ui .tab li,
+html.theme-dark .swagger-ui .opblock-section-header h4,
+html.theme-dark .swagger-ui .opblock-section-header > label,
+html.theme-dark .swagger-ui .btn {
+  color: #c6d2d3;
+}
+
+/* Icons — arrows / toggles default to dark grey, invisible on dark bg */
+html.theme-dark .swagger-ui svg:not(:root) {
+  fill: #c6d2d3;
+}
+
+/* Links / accent */
+html.theme-dark .swagger-ui .info a,
+html.theme-dark .swagger-ui a.nostyle,
+html.theme-dark .swagger-ui .opblock-summary-path a {
+  color: #60BFAD;
+}
+
+/* Operation blocks */
+html.theme-dark .swagger-ui .opblock {
+  background: #23262b;
+  border-color: #35373b;
+  box-shadow: none;
+}
+html.theme-dark .swagger-ui .opblock .opblock-section-header {
+  background: #1a1d21;
+  box-shadow: none;
+}
+html.theme-dark .swagger-ui .opblock .opblock-summary {
+  border-color: #35373b;
+}
+html.theme-dark .swagger-ui .opblock-tag {
+  border-bottom-color: #35373b;
+}
+
+/* Servers / scheme container */
+html.theme-dark .swagger-ui .scheme-container {
+  background: #1a1d21;
+  box-shadow: none;
+}
+
+/* Tables */
+html.theme-dark .swagger-ui table thead tr td,
+html.theme-dark .swagger-ui table thead tr th {
+  border-bottom-color: #35373b;
+}
+
+/* Models */
+html.theme-dark .swagger-ui section.models {
+  border-color: #35373b;
+}
+html.theme-dark .swagger-ui section.models.is-open h4 {
+  border-bottom-color: #35373b;
+}
+html.theme-dark .swagger-ui section.models .model-container {
+  background: #23262b;
+}
+html.theme-dark .swagger-ui .model .property.primitive,
+html.theme-dark .swagger-ui .prop-type {
+  color: #9aa0a6;
+}
+
+/* Inputs / selects / textareas */
+html.theme-dark .swagger-ui input[type=text],
+html.theme-dark .swagger-ui input[type=password],
+html.theme-dark .swagger-ui input[type=search],
+html.theme-dark .swagger-ui input[type=email],
+html.theme-dark .swagger-ui input[type=file],
+html.theme-dark .swagger-ui textarea,
+html.theme-dark .swagger-ui select {
+  background: #15171a;
+  color: #c6d2d3;
+  border-color: #35373b;
+}
+
+/* Code / highlight / markdown */
+html.theme-dark .swagger-ui .highlight-code,
+html.theme-dark .swagger-ui .microlight {
+  background: #0d0f11;
+}
+html.theme-dark .swagger-ui .microlight,
+html.theme-dark .swagger-ui .microlight code {
+  color: #c6d2d3 !important;
+}
+html.theme-dark .swagger-ui .markdown p,
+html.theme-dark .swagger-ui .markdown li,
+html.theme-dark .swagger-ui .renderedMarkdown p,
+html.theme-dark .swagger-ui .renderedMarkdown li {
+  color: #c6d2d3;
+}
+html.theme-dark .swagger-ui .markdown code,
+html.theme-dark .swagger-ui .renderedMarkdown code {
+  background: #0d0f11;
+  color: #e0a85b;
+}
+
+/* Buttons */
+html.theme-dark .swagger-ui .btn {
+  background: transparent;
+  border-color: #35373b;
+}
+html.theme-dark .swagger-ui .btn:hover {
+  background: #23262b;
+}
+html.theme-dark .swagger-ui .btn.authorize,
+html.theme-dark .swagger-ui .btn.execute {
+  background: #60BFAD;
+  border-color: #60BFAD;
+  color: #0d0f11;
+}
+html.theme-dark .swagger-ui .btn.authorize svg,
+html.theme-dark .swagger-ui .btn.execute svg {
+  fill: #0d0f11;
+}
+
+/* Dialogs */
+html.theme-dark .swagger-ui .dialog-ux .modal-ux {
+  background: #1a1d21;
+  border-color: #35373b;
+}
+html.theme-dark .swagger-ui .dialog-ux .modal-ux-header h3,
+html.theme-dark .swagger-ui .dialog-ux .modal-ux-content h4,
+html.theme-dark .swagger-ui .dialog-ux .modal-ux-content p {
+  color: #c6d2d3;
+}
+
+
+

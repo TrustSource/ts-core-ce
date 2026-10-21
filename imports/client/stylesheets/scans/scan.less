@@ -1,0 +1,729 @@
+// =============================================================================
+// Scan-specific styles
+// =============================================================================
+
+// =============================================================================
+// Flex-fill layout for scan pages (body.flex-fill-page)
+// =============================================================================
+
+// --- Scan list: only the table scrolls ---
+// Chain: .content-area > .content > .row.scans > col > .ts-panel > .panel-body > .reactiveTableServerSide
+body.flex-fill-page {
+  // The .ts-page-header must not grow
+  .ts-page-header {
+    flex-shrink: 0;
+  }
+
+  // Scan list flex chain
+  .scans {
+    flex: 1 1 0%;
+    min-height: 0;
+
+    .reactive-table-row-click();
+
+    > [class*="col-"] {
+      flex: 1 1 0%;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    > [class*="col-"] > .ts-panel {
+      flex: 1 1 0%;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 0;
+
+      > .panel-body {
+        flex: 1 1 0%;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+    }
+  }
+
+  // Inside reactiveTableServerSide: filter fixed, table scrolls, pagination fixed
+  .reactiveTableServerSide {
+    flex: 1 1 0%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+
+    // Filter bar - stays at top
+    > .clearfix.m-b-md {
+      flex-shrink: 0;
+    }
+
+    // The table-responsive wrapper - scrollable table area
+    > .table-responsive {
+      flex: 1 1 0%;
+      min-height: 0;
+      overflow-y: auto;
+      width: 100%;
+    }
+
+    // Pagination - stays at bottom
+    > .clearfix:last-of-type {
+      flex-shrink: 0;
+    }
+  }
+
+  // --- Scan detail flex chain ---
+  // Chain: .content-area > .scanDetail > .scanContent > .row > columns
+  .scanDetail {
+    flex: 1 1 0%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .scanContent {
+    flex: 1 1 0%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    // Dendrogram ts-panel - fills space, panel-body scrolls
+    > .ts-panel {
+      flex: 1 1 0%;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+
+      > .panel-body {
+        flex: 1 1 0%;
+        min-height: 0;
+        overflow: auto;
+      }
+    }
+
+    // Main row with tree + sidebar
+    > .row[data-sticky-container] {
+      flex: 1 1 0%;
+      min-height: 0;
+      display: flex;
+      flex-direction: row;
+
+      // Tree column
+      > .col-md-7 {
+        flex: 1 1 0%;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+
+        > .ts-panel {
+          flex: 1 1 0%;
+          min-height: 0;
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 0;
+
+          > .panel-heading {
+            flex-shrink: 0;
+          }
+
+          > .panel-heading ~ div {
+            flex: 1 1 0%;
+            min-height: 0;
+            overflow-y: auto;
+          }
+        }
+      }
+
+      // Sidebar column - fixed height, scrolls internally if needed
+      > .col-md-5.scanDetailSideInfo {
+        flex: 0 0 auto;
+        min-height: 0;
+        overflow-y: auto;
+      }
+    }
+  }
+}
+
+// =============================================================================
+// Scan detail header actions
+// =============================================================================
+
+.scan-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  flex-shrink: 0;
+
+  // Buttons on dark navy header - ghost/outline style (exclude modal buttons)
+  > .btn,
+  > .scan-notices-wrapper .btn,
+  > a.btn {
+    border-radius: 6px;
+    background: fade(@color-white, 12%);
+    border: 1px solid fade(@color-white, 25%);
+    color: @color-white;
+    font-size: 12px;
+    padding: 5px 12px;
+    transition: all 0.15s ease;
+
+    &:hover,
+    &:focus {
+      background: fade(@color-white, 22%);
+      border-color: fade(@color-white, 40%);
+      color: @color-white;
+    }
+
+    .fa {
+      margin-right: 3px;
+    }
+  }
+
+  // Notices button + popover (hover)
+  .scan-notices-wrapper {
+    position: relative;
+
+    &:hover .scan-notices-popover {
+      display: block;
+    }
+  }
+
+  .scan-notices-popover {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    width: 360px;
+    background: @color-white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px fade(@color-black, 15%);
+    padding: 16px;
+    z-index: 20;
+    color: @ts-text;
+    font-size: 13px;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      right: 16px;
+      width: 12px;
+      height: 12px;
+      background: @color-white;
+      transform: rotate(45deg);
+      box-shadow: -2px -2px 4px fade(@color-black, 5%);
+    }
+
+    h6 {
+      font-weight: 600;
+      color: @ts-navy;
+      margin: 0 0 8px;
+      font-size: 12px;
+    }
+
+    ul {
+      padding-left: 18px;
+      margin: 0 0 10px;
+
+      li {
+        margin-bottom: 4px;
+        line-height: 1.4;
+      }
+    }
+  }
+
+  // Warning button (Re-Process) - stand out a bit more
+  > .btn.btn-warning,
+  > a.btn.btn-warning {
+    background: fade(@ts-amber, 20%);
+    border-color: fade(@ts-amber, 40%);
+    color: @ts-amber;
+
+    &:hover,
+    &:focus {
+      background: fade(@ts-amber, 30%);
+      border-color: fade(@ts-amber, 55%);
+      color: @ts-amber;
+    }
+  }
+}
+
+// =============================================================================
+// Scan detail header text
+// =============================================================================
+
+.scanDetail {
+  .ts-page-header {
+    h2.font-light {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 0 !important;
+      margin-top: 4px;
+
+      // Branch/tag/link badges - light pills on dark bg
+      > span {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: fade(@color-white, 15%);
+        border-radius: 20px;
+        padding: 2px 10px;
+        font-size: 12px;
+        font-weight: 400;
+        color: fade(@color-white, 85%);
+        white-space: nowrap;
+        vertical-align: middle;
+        // Long values (e.g. image digests) crop to the title column instead of
+        // running under the action buttons
+        max-width: 100%;
+        min-width: 0;
+
+        small {
+          font-size: 12px;
+          color: inherit;
+          min-width: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .fa {
+          font-size: 11px;
+          flex-shrink: 0;
+        }
+      }
+    }
+
+    // Submitted date line - single line, light on dark
+    p {
+      font-size: 12px;
+      color: fade(@color-white, 55%);
+      margin-bottom: 0;
+      white-space: nowrap;
+    }
+  }
+}
+
+// =============================================================================
+// Scan detail sidebar
+// =============================================================================
+
+.scanDetailSideInfo {
+  container-type: inline-size;
+  container-name: scan-sidebar;
+
+  .ts-panel {
+    border-radius: 8px;
+    overflow: hidden;
+
+    > .panel-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 600;
+      color: @ts-navy;
+      letter-spacing: 0.3px;
+      padding: 0 11px;
+      height: 50px;
+      border-bottom: 2px solid @ts-teal;
+
+      .scan-side-actions {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .btn {
+        padding: 4px 8px;
+        font-size: 12px;
+        border-radius: 4px;
+        border-color: darken(@ts-border, 5%);
+        float: none !important;
+      }
+
+      .btn-label {
+        display: none;
+      }
+
+      @media (min-width: 1600px) {
+        .btn-label {
+          display: inline;
+        }
+      }
+    }
+
+  }
+
+  .dl-horizontal {
+    dt {
+      width: 140px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      color: @color-text-secondary;
+      font-weight: 600;
+      padding-top: 2px;
+    }
+    dd {
+      margin-left: 150px;
+      word-wrap: break-word;
+      font-size: 14px;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+  }
+
+  @container scan-sidebar (max-width: 300px) {
+    .dl-horizontal {
+      dt {
+        width: auto !important;
+        float: none !important;
+        text-align: left !important;
+        padding-bottom: 2px;
+        font-weight: 700 !important;
+      }
+      dd {
+        margin-left: 0 !important;
+        margin-bottom: 14px;
+      }
+    }
+  }
+
+  // Breadcrumb in scan aside
+  .scan-aside-breadcrumb {
+    background: fade(@ts-teal, 6%);
+    border-radius: 0;
+    padding: 8px 14px;
+    font-size: 12px;
+    margin-bottom: 12px;
+    border: none;
+    color: @ts-text;
+
+    > li {
+      color: @ts-text;
+
+      + li:before {
+        color: #999;
+      }
+    }
+  }
+}
+
+// --- Scan list actions ---
+
+// --- Dependencies panel ---
+.scanContent .ts-panel,
+.ecs-dependencies-with-details.ts-panel,
+.ecs-licenses.ts-panel,
+.ecs-tests.ts-panel {
+    border-radius: 8px;
+    overflow: hidden;
+    background: @color-white;
+
+    > .panel-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 600;
+      color: @ts-navy;
+      padding: 10px 11px;
+      letter-spacing: 0.3px;
+      border-bottom: 2px solid @ts-teal;
+
+      .scan-panel-actions {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        .btn-label {
+          display: none;
+        }
+
+        @media (min-width: 1600px) {
+          .btn-label {
+            display: inline;
+          }
+        }
+
+        .btn-group .btn {
+          padding: 4px 8px;
+          font-size: 12px;
+          border-radius: 0;
+          border-color: darken(@ts-border, 5%);
+
+          &:first-child {
+            border-radius: 4px 0 0 4px;
+          }
+          &:last-child {
+            border-radius: 0 4px 4px 0;
+          }
+          &.active {
+            background: @ts-teal;
+            border-color: @ts-teal;
+            color: @color-white;
+          }
+        }
+      }
+    }
+
+}
+
+// =============================================================================
+// Tree view modernization
+// =============================================================================
+
+#tree {
+  .list-group-item {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .list-group-item,
+  .node-tree {
+    border: none;
+    border-left: 3px solid transparent;
+    border-radius: 0;
+    padding: 8px 12px;
+    margin-bottom: 0;
+    transition: all 0.15s ease;
+    font-size: 13px;
+
+    &:not(.node-disabled):hover {
+      background-color: @color-table-hover;
+      border-left-color: @ts-teal;
+    }
+
+    // Selected node
+    &.node-selected {
+      background-color: fade(@ts-teal, 8%) !important;
+      color: @ts-navy !important;
+      border-left-color: @ts-teal;
+      font-weight: 500;
+    }
+
+    // Indent spacers - fixed size flex items
+    .indent {
+      flex-shrink: 0;
+    }
+
+    // Expand/collapse icon
+    .icon.expand-icon,
+    .icon.node-icon,
+    .glyphicon {
+      flex-shrink: 0;
+      color: #9ca3af;
+      font-size: 11px;
+      transition: color 0.15s ease;
+    }
+
+    &:hover .icon.expand-icon,
+    &:hover .glyphicon {
+      color: @ts-teal;
+    }
+
+    // Badge (dependency count) - pinned right
+    .badge {
+      background: @ts-teal;
+      color: @color-white;
+      border-radius: 12px;
+      font-size: 11px;
+      padding: 2px 8px;
+      font-weight: 500;
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+
+    // Linked / root node
+    &.dependency-root {
+      background: @ts-navy;
+      color: @color-white;
+      border-left-color: @ts-navy;
+      border-radius: 4px;
+      margin-bottom: 2px;
+    }
+
+    &.dependency-active {
+      background: fade(@ts-teal, 10%);
+      color: @ts-teal;
+      border-left-color: @ts-teal;
+    }
+  }
+
+  // Alternating subtle stripes for readability
+  .list-group-item:nth-child(even):not(.node-selected):not(.dependency-root):not(:hover) {
+    background-color: fade(@color-black, 1.5%);
+  }
+}
+
+// =============================================================================
+// Linked Module Stats Panel
+// =============================================================================
+
+.linked-module-stats {
+  background: @color-white;
+  border: 1px solid @ts-border;
+  border-left: 3px solid @ts-teal;
+  border-radius: 6px;
+  padding: 14px 16px;
+  margin: 4px 0;
+  box-shadow: 0 1px 3px fade(@color-black, 8%);
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 2px 6px fade(@color-black, 12%);
+  }
+
+  .linked-module-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 10px;
+
+    .linked-module-header-left {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .linked-module-name {
+      font-weight: 600;
+      font-size: 14px;
+      color: @ts-navy;
+
+      .fa-cube,
+      .fa-tag {
+        color: @ts-teal;
+        margin-right: 4px;
+      }
+
+      .linked-module-ext {
+        font-size: 10px;
+        margin-left: 4px;
+        opacity: 0.4;
+      }
+
+      &:hover {
+        color: @ts-teal;
+
+        .linked-module-ext {
+          opacity: 1;
+        }
+      }
+    }
+
+    > .btn {
+      flex-shrink: 0;
+      opacity: 0.4;
+      transition: opacity 0.15s ease;
+    }
+  }
+
+  &:hover .linked-module-header > .btn {
+    opacity: 0.7;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .linked-module-counters {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid fade(@color-black, 6%);
+
+    .linked-module-counter {
+      font-size: 11px;
+      color: @color-text-secondary;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+
+      strong {
+        font-size: 18px;
+        color: @ts-navy;
+        margin-right: 3px;
+        font-weight: 700;
+      }
+    }
+  }
+
+  .linked-module-stats-table {
+    width: 100%;
+    font-size: 12px;
+
+    td {
+      padding: 4px 0;
+    }
+
+    .stats-label {
+      color: @color-text-secondary;
+      font-weight: 500;
+      width: 90px;
+    }
+
+    .stats-values {
+      text-align: right;
+
+      .label-xs {
+        font-size: 10px;
+        padding: 2px 6px;
+        margin-left: 2px;
+        border-radius: 3px;
+      }
+    }
+  }
+
+  .linked-module-na {
+    background: #e9ecef;
+    border-radius: 4px;
+    padding: 8px 12px;
+    text-align: center;
+    margin: 0;
+  }
+
+  .linked-module-meta {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid fade(@color-black, 6%);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 11px;
+
+    .fa {
+      margin-right: 3px;
+    }
+  }
+}
+
+// Aside details name row - name left, link button right
+.aside-details-name-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+
+  .aside-details-name-left {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    min-width: 0;
+    flex: 1;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .aside-details-name-right {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}

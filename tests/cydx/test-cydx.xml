@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bom xmlns="http://cyclonedx.org/schema/bom/1.6" serialNumber="urn:uuid:6b788421-7eb0-448b-833e-b32dd0f39d2b" version="1">
+  <metadata>
+    <timestamp>2024-10-24T09:18:52.455Z</timestamp>
+    <tools>
+      <tool>
+        <vendor>CycloneDX</vendor>
+        <name>Node.js module</name>
+        <version>3.6.0</version>
+      </tool>
+    </tools>
+    <component type="application" bom-ref="pkg:npm/ts-node-client@3.4.1">
+      <name>ts-node-client</name>
+      <version>3.4.1</version>
+      <purl>pkg:npm/ts-node-client@3.4.1</purl>
+      <licenses>
+        <license>
+          <id>Apache-2.0</id>
+        </license>
+      </licenses>
+    </component>
+  </metadata>
+  <components>
+    <component type="library" bom-ref="pkg:npm/ansi-regex@5.0.1">
+      <name>ansi-regex</name>
+      <version>5.0.1</version>
+      <description>Regular expression for matching ANSI escape codes</description>
+      <purl>pkg:npm/ansi-regex@5.0.1</purl>
+      <licenses>
+        <license>
+          <id>MIT</id>
+        </license>
+      </licenses>
+      <externalReferences>
+        <reference type="website">
+          <url>https://github.com/chalk/ansi-regex</url>
+        </reference>
+        <reference type="vcs">
+          <url>https://github.com/chalk/ansi-regex.git</url>
+        </reference>
+      </externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:npm/commander@9.5.0">
+      <name>commander</name>
+      <version>9.5.0</version>
+      <description>The complete solution for node.js command-line programs</description>
+      <purl>pkg:npm/commander@9.5.0</purl>
+      <licenses>
+        <license>
+          <id>MIT</id>
+        </license>
+      </licenses>
+    </component>
+    <component type="library" bom-ref="pkg:maven/org.apache.commons/commons-lang3@3.12.0">
+      <name>commons-lang3</name>
+      <version>3.12.0</version>
+      <description>Apache Commons Lang — namespaced Maven package</description>
+      <purl>pkg:maven/org.apache.commons/commons-lang3@3.12.0</purl>
+      <licenses>
+        <license>
+          <id>Apache-2.0</id>
+        </license>
+      </licenses>
+    </component>
+  </components>
+  <dependencies>
+    <dependency ref="pkg:npm/ts-node-client@3.4.1">
+      <dependency ref="pkg:npm/ansi-regex@5.0.1"/>
+      <dependency ref="pkg:npm/commander@9.5.0"/>
+      <dependency ref="pkg:maven/org.apache.commons/commons-lang3@3.12.0"/>
+    </dependency>
+    <dependency ref="pkg:npm/ansi-regex@5.0.1"/>
+    <dependency ref="pkg:npm/commander@9.5.0"/>
+    <dependency ref="pkg:maven/org.apache.commons/commons-lang3@3.12.0"/>
+  </dependencies>
+</bom>

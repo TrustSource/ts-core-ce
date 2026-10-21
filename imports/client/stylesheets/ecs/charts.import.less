@@ -1,0 +1,165 @@
+// D3 charts, score widgets, CVSS labels, donut charts
+// Extracted from ecs.import.less
+
+.cvss-label{
+  color: #ffffff;
+  &.red {
+    background-color: @color-violations;
+  }
+  &.orange {
+    background-color: #f35f34;
+  }
+  &.yellow {
+    background-color: @color-warnings;
+    color: #000000;
+  }
+  &.green-yellow {
+    background-color: #94a776;
+  }
+  &.green {
+    background-color: @color-ok;
+  }
+  &.grey {
+    background-color: grey;
+  }
+}
+.cvss-text{
+  color: #ffffff;
+  &.red {
+    color: @color-violations;
+  }
+  &.orange {
+    color: #f35f34;
+  }
+  &.yellow {
+    color: @color-warnings;
+  }
+  &.green-yellow {
+    color: #94a776;
+  }
+  &.green {
+    color: @color-ok;
+  }
+  &.grey {
+    color: grey;
+  }
+}
+.cvss-label-compact{
+  display: inline-block;
+  width: 36px;
+}
+.label-fw {
+  width: 100%;
+  display: inline-block;
+}
+
+circle.node {
+  cursor: pointer;
+  stroke: #000;
+  stroke-width: .5px;
+}
+
+circle.node.directory {
+  stroke: #ddd;
+  stroke-width: 2px;
+}
+
+circle.node.collapsed {
+  stroke: #000;
+}
+
+.nodetext {
+  fill: #333;
+  stroke: #000;
+  stroke-width: .1px;
+  font-weight: bold;
+  //text-shadow: 0 0 0.2em white;
+}
+
+line.link {
+  fill: none;
+  stroke: #666;
+  stroke-width: 1.5px;
+}
+
+.confidence-label {
+  border-radius: 50%;
+  text-align: center;
+  padding: 0;
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  line-height: 13px;
+  margin-right: 3px;
+  position: relative;
+  vertical-align: middle;
+  color: #0A0A0A;
+}
+.confidence-label:after{
+  position: absolute;
+  z-index: 1;
+  background: #FFFFFF;
+  display: block;
+  width: 0;
+  right: -2px;
+  top: 0;
+  height: 120%;
+  content: ' ';
+}
+.confidence-label-5:after{
+  width: 15px;
+}
+.confidence-label-4:after{
+  width: 11px;
+}
+.confidence-label-3:after{
+  width: 8px;
+}
+.confidence-label-2:after{
+  width: 5px;
+}
+.confidence-label-1:after{
+  width: 0;
+}
+.confidence-cols{
+  font-size: 15px;
+  position: absolute;
+  left: 0;
+  top: 2px;
+  z-index: 0;
+}
+
+.sbom-stats-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.sbom-stats-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.sbom-stats-counters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 15px;
+  margin-top: 8px;
+}
+
+.sbom-stats-counter {
+  text-align: center;
+}
+
+.sbom-stats-chart {
+  flex-shrink: 0;
+  text-align: center;
+  min-width: 90px;
+}
+
+.current-graph-breadcrumbs{
+  position: absolute;
+  top: 10px;
+  width: auto;
+  left: 10px;
+}

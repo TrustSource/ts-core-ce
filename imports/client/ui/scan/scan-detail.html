@@ -1,0 +1,237 @@
+<template name="scanDetail">
+<div class="scanDetail">
+  {{#if scan._id}}
+    {{# pageHeader}}
+      <div class="scan-detail-header">
+        <div class="scan-detail-header-left">
+          <h2 class="font-light m-b-xs">
+            {{#if scan.project}}{{scan.project}} - {{/if}}{{scan.module}}
+            {{#if scan.branch}}
+              <span title="{{scan.branch}}"><small class="fa fa-code-fork"></small> <small>{{scan.branch}}</small></span>
+            {{/if}}
+            {{#if scan.tag}}
+              <span title="{{scan.tag}}"><small class="fa fa-tag"></small> <small>{{scan.tag}}</small></span>
+            {{/if}}
+            {{#if scan.binaryLinks.length}}
+              <span title="{{binaryLinksTitle}}"><small class="fa fa-link"></small> <small>{{binaryLinksLabel}}</small></span>
+            {{/if}}
+          </h2>
+          <p>submitted {{dateFormat scan.submitted 'lll'}} by {{scan.user}}</p>
+        </div>
+        <div class="scan-detail-actions">
+          {{> scanDetailBinary scanId=scan._id binaryLinks=scan.binaryLinks size='btn-xs'}}
+          {{> scanDetailAnalysisLink scanId=scan._id moduleId=scan.moduleId size='btn-xs'}}
+          {{#if scan.contentNotices}}
+            <div class="scan-notices-wrapper">
+              <a class="btn btn-xs show_notice_details">
+                <span class="fa fa-exclamation-triangle"></span>
+                Notices <span class="caret"></span>
+              </a>
+              <div class="scan-notices-popover">
+                <h6>Scan validation found Unknown licenses:</h6>
+                <ul>
+                  {{#each scan.contentNotices.notices}}
+                    <li>{{details}}</li>
+                  {{/each}}
+                </ul>
+                <h6>Ensure these licenses do not impact your company</h6>
+              </div>
+            </div>
+          {{/if}}
+          {{#if isInRole 'manager,compliance_manager' companyId}}
+            <a class="btn btn-warning btn-xs scan-reprocess">
+              <span class="fa fa-repeat"></span>
+              Re-Process
+            </a>
+          {{/if}}
+        </div>
+      </div>
+    {{/pageHeader}}
+    {{#if scan.dependencies}}
+      {{> scanContent data=scan}}
+    {{else}}
+      <div class="content relative">
+        {{> reactiveTableNoData}}
+      </div>
+    {{/if}}
+  {{else}}
+    <div class="content relative">
+      {{> reactiveTableNoData}}
+    </div>
+  {{/if}}
+</div>
+</template>
+
+<template name="scanContent">
+  <div class="content relative scanContent">
+    {{#if isGraphView}}
+      <div class="ts-panel">
+        <div class="panel-heading">
+          <div class="scan-panel-actions">
+            <div class="btn-group btn-group-sm" role="group">
+              <a href class="btn btn-xs btn-default change-presentation-table" type="button" title="List view">
+                <i class="fa fa-list-ul"></i> <span class="btn-label">List</span>
+              </a>
+              <a href class="btn btn-xs btn-default change-presentation-graph active" type="button" title="Diagram view">
+                <i class="fa fa-diagram-project"></i> <span class="btn-label">Diagram</span>
+              </a>
+            </div>
+          </div>
+          <span>Dependencies</span>
+        </div>
+        <div class="panel-body">
+          {{> dendrogramChart nodes=dendrogramData}}
+        </div>
+      </div>
+    {{else}}
+      <div class="row" data-sticky-container>
+        <div class="col-md-7">
+          <div class="ts-panel">
+            <div class="panel-heading">
+              <div class="scan-panel-actions">
+                <div class="btn-group btn-group-sm" role="group">
+                  <a href class="btn btn-xs btn-default change-presentation-table active" type="button" title="List view">
+                    <i class="fa fa-list-ul"></i> <span class="btn-label">List</span>
+                  </a>
+                  <a href class="btn btn-xs btn-default change-presentation-graph" type="button" title="Diagram view">
+                    <i class="fa fa-diagram-project"></i> <span class="btn-label">Diagram</span>
+                  </a>
+                </div>
+                <div class="btn-group btn-group-sm actions" role="group">
+                  <a class="btn btn-xs btn-default expand-all" title="Expand all">
+                    <span class="fa fa-fw fa-expand" aria-hidden="true"></span> <span class="btn-label">Expand</span>
+                  </a>
+                  <a class="btn btn-xs btn-default collapse-all hidden" title="Collapse all">
+                    <span class="fa fa-fw fa-compress" aria-hidden="true"></span> <span class="btn-label">Collapse</span>
+                  </a>
+                </div>
+                <div class="btn-group btn-group-sm actions-linked" role="group">
+                  <a class="btn btn-xs btn-default show-linked hidden" title="Show linked modules">
+                    <span class="fa fa-fw fa-eye" aria-hidden="true"></span> <span class="btn-label">Show linked</span>
+                  </a>
+                  <a class="btn btn-xs btn-default hide-linked" title="Hide linked modules">
+                    <span class="fa fa-fw fa-eye-slash" aria-hidden="true"></span> <span class="btn-label">Hide linked</span>
+                  </a>
+                </div>
+              </div>
+              <span>Dependencies</span>
+            </div>
+            <div>
+              <div id="tree"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5 scanDetailSideInfo" data-margin-top="65">
+          {{#with component}}
+            {{> scanDetailSideInfo}}
+          {{/with}}
+        </div>
+      </div>
+    {{/if}}
+  </div>
+</template>
+
+<template name="scanDetailSideInfo">
+  <div class="ts-panel">
+    <div class="panel-heading">
+      <span>Reported properties</span>
+      <div class="scan-side-actions">
+        {{#if parentPath}}
+          {{> componentLinkWithModule moduleId=getScanModuleId linkedModules=getScanLinkedModules component=this size='btn-xs'}}
+        {{/if}}
+        {{#if component._id}}
+          <a class="btn btn-default btn-xs" target="_blank"
+             href="{{pathFor route='componentDetail' data=getLakeOptions}}"
+             title="View in Component lake">
+            <span class="fa fa-external-link" aria-hidden="true"></span> <span class="btn-label">Lake</span>
+          </a>
+        {{else}}
+          <a class="btn btn-default btn-xs" target="_blank"
+             href="{{pathFor route='componentSearch' data=getLakeOptions}}"
+             title="View in Component lake">
+            <span class="fa fa-external-link" aria-hidden="true"></span> <span class="btn-label">Lake</span>
+          </a>
+        {{/if}}
+      </div>
+    </div>
+    <div class="panel-body">
+      {{#if parentPath}}
+        <ol class="breadcrumb scan-aside-breadcrumb">
+          {{#each getBreadcrumbs}}
+            <li class="">
+              <span>{{this}}</span>
+            </li>
+          {{/each}}
+        </ol>
+      {{/if}}
+      <dl class="dl-horizontal">
+        {{#with getModuleLinkForComponent}}
+          {{> componentLinkedModuleStats}}
+        {{/with}}
+        <dt>purl</dt>
+        <dd> {{purl}}</dd>
+
+        <dt>name</dt>
+        <dd>{{name}}</dd>
+
+        <dt>key</dt>
+        <dd> {{key}}</dd>
+
+        <dt>versions</dt>
+        <dd>{{versionsStr versions}}</dd>
+
+        <dt>private</dt>
+        <dd>{{checkIcon private}}</dd>
+
+        <dt>description</dt>
+        <dd>{{description}}</dd>
+
+        <dt>home</dt>
+        <dd>{{homepageUrl}}</dd>
+
+        <dt>repo</dt>
+        <dd>{{repoUrl}}</dd>
+
+        <dt>scanned licenses</dt>
+        <dd>
+          <ul class="pinner-l-20 inner-b-0">
+            {{#each licensesListHtml scannedLicenses}}
+              <li>{{name}}</li>
+            {{/each}}
+          </ul>
+        </dd>
+        <dt>parsed licenses</dt>
+        <dd>
+          <ul class="pinner-l-20 inner-b-0">
+            {{#each licensesListHtml licenses}}
+              <li>{{name}} {{#if scannedLicense}}<span class="fa fa-exclamation-triangle warnings" title="{{scannedLicense}}"></span>{{/if}}</li>
+            {{/each}}
+          </ul>
+        </dd>
+
+        {{#if isSingleRootComponentScan}}
+          {{> rootComponentLicensePicker moduleId=scanRootModuleId rootKey=scanRootKey layout='dl'}}
+        {{/if}}
+
+        <dt>checksum</dt>
+        <dd>{{checksum}}</dd>
+        <dt>meta</dt>
+        <dd>
+          {{#if meta}}
+            <pre>{{metaStr meta}}</pre>
+          {{/if}}
+        </dd>
+        <dt>crypto algorithms</dt>
+        <dd>
+          <ul class="pinner-l-20 inner-b-0">
+            {{#each cryptoAlgorithmsListHtml crypto_algorithms}}
+              <li>{{#if isDenied}}
+                <div class="label label-danger blacklisted-algorithm-label" title="Algorithm is Blacklisted by Company policy">B</div>
+              {{/if}} {{algorithm}} {{strength}}</li>
+            {{/each}}
+          </ul>
+        </dd>
+      </dl>
+    </div>
+  </div>
+</template>

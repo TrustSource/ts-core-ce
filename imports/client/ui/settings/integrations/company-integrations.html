@@ -1,0 +1,124 @@
+<template name="companyIntegrations">
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">Integrations</h2>
+        <small>Configure integrations settings of your company</small>
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content integrations-content">
+    {{#if isInRole 'account_admin' companyId}}
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+          <a href="{{pathFor route='companyIntegrationsGithub'}}" class="grey-filter">
+            <div class="panel panel-default">
+              <div class="panel-body text-center">
+                <div class="row">
+                  <div class="col-md-12 scanner-logo-holder">
+                    <img src="/integrations/github.png" class="scanner-logo" alt="">
+                  </div>
+                  <div class="col-md-12">
+                    <h4>
+                      Github
+                    </h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+          <a href="{{pathFor route='companyIntegrationsJira'}}" class="grey-filter">
+            <div class="panel panel-default">
+              <div class="panel-body text-center">
+                <div class="row">
+                  <div class="col-md-12 scanner-logo-holder">
+                    <img src="/integrations/jira.png" class="scanner-logo" alt="">
+                  </div>
+                  <div class="col-md-12">
+                    <h4>
+                      Jira
+                    </h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+          <a href="{{pathFor route='companyIntegrationsTfs'}}" class="grey-filter">
+            <div class="panel panel-default">
+              <div class="panel-body text-center">
+                <div class="row">
+                  <div class="col-md-12 scanner-logo-holder">
+                    <img src="/integrations/tfs.png" class="scanner-logo" alt="">
+                  </div>
+                  <div class="col-md-12">
+                    <h4>
+                      TFS
+                    </h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+          <a href="{{pathFor route='companyIntegrationsScanoss'}}" class="grey-filter">
+            <div class="panel panel-default">
+              <div class="panel-body text-center">
+                <div class="row">
+                  <div class="col-md-12 scanner-logo-holder">
+                    <img src="/integrations/scanoss.jpg" class="scanner-logo" alt="">
+                  </div>
+                  <div class="col-md-12">
+                    <h4>
+                      SCANOSS
+                    </h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+          <a href="{{pathFor route='companyWebhooks'}}" class="grey-filter">
+            <div class="panel panel-default">
+              <div class="panel-body text-center">
+                <div class="row">
+                  <div class="col-md-12 scanner-logo-holder">
+                    <img src="/integrations/webhook.jpg" class="scanner-logo" alt="">
+                  </div>
+                  <div class="col-md-12">
+                    <h4>
+                      Webhooks and Channels
+                    </h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+          <a href="{{pathFor route='companyIntegrationsLeanix'}}" class="grey-filter">
+            <div class="panel panel-default">
+              <div class="panel-body text-center">
+                <div class="row">
+                  <div class="col-md-12 scanner-logo-holder">
+                    <img src="/integrations/leanix.png" class="scanner-logo" alt="">
+                  </div>
+                  <div class="col-md-12">
+                    <h4>
+                      LeanIX
+                    </h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+</template>

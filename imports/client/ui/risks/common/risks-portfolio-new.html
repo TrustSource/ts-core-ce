@@ -1,0 +1,45 @@
+<template name="risksPortfolioNew">
+  <div class="row pinner-b-20i">
+    <div class="col-md-12">
+      <div class="pinner-tb-20 reactive-table-slim-filter">
+        <h3 class="h3 inner-t-0">New risks (added in last 14 days)</h3>
+        {{#with getStats}}
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="panel panel-danger text-center">
+                <p class="h2"><strong>{{risks}}</strong></p>
+                <p class="h5">total</p>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="panel panel-danger text-center">
+                <p class="h2"><strong>{{new}}</strong></p>
+                <p class="h5">added last 7 days</p>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="panel panel-danger text-center">
+                <p class="h2"><strong>{{opened}}</strong></p>
+                <p class="h5">in progress</p>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="panel panel-success text-center">
+                <p class="h2"><strong>{{resolved}}</strong></p>
+                <p class="h5">resolved</p>
+              </div>
+            </div>
+          </div>
+        {{/with}}
+        {{> riskSettingsList
+          title="Risks"
+          id=getViewType
+          data=getReportData
+          docId=getDocId
+          filterSessionVar="risksListFilterNew"
+          readonly=true
+        }}
+      </div>
+    </div>
+  </div>
+</template>

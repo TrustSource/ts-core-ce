@@ -1,0 +1,41 @@
+<template name="productEditPhotos">
+  <form id="productEditPhotosForm" method="post">
+    <div class="form-groups">
+      <div class="form-group col-sm-12">
+        <div class="row">
+          <div class="col-sm-6">
+            {{#if loading}}
+              <div class="input-group input-group-file">
+                <span class="input-group-btn">
+                  <span class="btn btn-primary btn-file disabled" disabled>
+                    <i class="fa fa-spinner fa-spin"></i> Updating product
+                  </span>
+                </span>
+              </div>
+            {{else}}
+              <div class="input-group input-group-file">
+                <span class="input-group-btn">
+                  <span class="btn btn-primary btn-file">
+                    <i class="fa fa-plus"></i> Upload additional pictures or illustrations
+                    <input type="file" name="file" id="file" accept=".jpg,.jpeg,.png,.webp,.gif,.avif,.svg,.heic,.heif">
+                  </span>
+                </span>
+              </div>
+            {{/if}}
+          </div>
+          {{#if (documents.photos)}}
+            <div class="col-sm-6">
+              <button class="btn btn-warning pull-right remove_picture">
+                <i class="fa fa-times"></i>
+                Remove picture
+              </button>
+            </div>
+          {{/if}}
+        </div>
+      </div>
+      <div class="form-group col-sm-12">
+        {{> fanGallery images=getMappedPhotos}}
+      </div>
+    </div>
+  </form>
+</template>

@@ -1,0 +1,192 @@
+<template name="reactiveTableServerSide">
+  <div class="relative reactiveTableServerSide">
+    <div class="clearfix m-b-md">
+      {{#if hasFilter}}
+        <div class="pull-left form-inline">
+          <div class="form-group">
+            <h5 class="inner-r-10"><strong class="fa fa-filter"></strong></h5>
+          </div>
+          <div class="form-group" style="width:607px;">
+            <div class="input-group w-100">
+              <input type="text" placeholder="Filter" class="form-control search-field"
+                     value="{{search}}" name="tableFilter">
+              {{#if hasAdvanced}}
+                <span class="input-group-btn">
+                  <a class="btn btn-default" data-toggle="modal" data-target="#{{modalId}}">
+                    Advanced
+                    {{#if activeFilters}}
+                      <span class="label label-primary">{{activeFilters}}</span>
+                    {{/if}}
+                  </a>
+                </span>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+        {{#if hasAdvanced}}
+          <!-- Modal: filterOptions -->
+          <div class="modal fade" id="{{modalId}}" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="ts-accent-line"></div>
+              <div class="modal-header text-center">
+                <i class="fa fa-filter ts-big-icon text-success"></i>
+                <br/>
+                <h4 class="modal-title">Advanced filters</h4>
+                <br/>
+              </div>
+              <form id="{{formId}}">
+                <div class="modal-body">
+                  <div class="row">
+                    {{#each filters}}
+                      <div class="form-group col-xs-12">
+                        <label for="{{key}}">{{label}}</label>
+                        {{#if isSelect}}
+                          <select id="{{key}}" class="form-control" name="{{key}}">
+                            <option value="" selected="{{allSelected}}">All</option>
+                            {{#each options}}
+                              <option value="{{optionValue}}" selected="{{isSelected}}">{{label}}</option>
+                            {{/each}}
+                          </select>
+                        {{else}}
+                          <input type="{{type}}" value="{{value}}" id="{{key}}"
+                                 class="form-control" name="{{key}}" required="{{required}}">
+                        {{/if}}
+                        {{#if description}}
+                          <span class="help-block small">{{description}}</span>
+                        {{/if}}
+                      </div>
+                    {{/each}}
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-default modal-clear-filters">Clear</button>
+                  <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        {{/if}}
+      {{/if}}
+      {{#if hasSorting}}
+        <div class="pull-right form-inline">
+          <div class="form-group">
+            <h5 class="inner-r-10"><strong>Sorting</strong></h5>
+          </div>
+          <div class="form-group" style="width:150px;">
+            <select class="form-control w-100 sort-field" name="sort">
+              {{#each availableSorting}}
+                <option value="{{key}}" label="{{label}}" selected="{{isCurrentSort key}}">{{label}}</option>
+              {{/each}}
+            </select>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-default toggle-order" title="Change sorting order">
+              {{#if isCurrentOrder 1}}
+                <span class="fa fa-sort-alpha-asc"></span>
+              {{else}}
+                <span class="fa fa-sort-alpha-desc"></span>
+              {{/if}}
+            </button>
+          </div>
+        </div>
+      {{/if}}
+    </div>
+    {{#if loading}}
+      {{>loadingSplash}}
+    {{/if}}
+    <div class="table-responsive">
+      {{> reactiveTable settings=reactiveTableSettings}}
+    </div>
+    {{#unless paginationDisabled}}
+      <!-- Full pill-button pagination (visible ≥ 1500px) -->
+      <div class="clearfix pagination-full">
+        <div class="pull-right">
+          <ul class="pagination toggle-size inner-0">
+            {{#each sizeList}}
+              <li class="{{isCurrentSize}}"><a href="#" data-size="{{this}}" class="size">{{this}}</a></li>
+            {{/each}}
+          </ul>
+        </div>
+        <div class="pull-left pinner-t-8">
+          Showing {{pageSizeOrTotal}} of {{getPluralized 'item' total}} on page {{currentPage}}
+        </div>
+        <div class="text-center">
+          <nav aria-label="Page navigation">
+            <ul class="pagination toggle-page inner-0">
+              <li>
+                <a href aria-label="First" class="{{hasFirst}}">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li>
+                <a href aria-label="Previous" class="{{hasPrev}}">
+                  <span aria-hidden="true">&lsaquo;</span>
+                </a>
+              </li>
+              {{#each availablePages}}
+                <li class="{{isCurrent}}"><a href="#" data-page="{{this}}" class="page">{{this}}</a></li>
+              {{/each}}
+              <li>
+                <a href aria-label="Next" class="{{hasNext}}">
+                  <span aria-hidden="true">&rsaquo;</span>
+                </a>
+              </li>
+              <li>
+                <a href aria-label="Last" class="{{hasLast}}">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <!-- Compact text-input pagination (visible < 1500px) -->
+      <div class="pagination-compact">
+        <div class="pagination-compact-rows">
+          <span>Show</span>
+          <input class="form-control compact-size-input" type="text" value="{{size}}">
+          <span>of {{getPluralized 'item' total}}</span>
+        </div>
+        <div class="pagination-compact-pages">
+          {{#if hasPrevCompact}}
+            <i class="compact-prev fa fa-caret-left"></i>
+          {{/if}}
+          <span>Page</span>
+          <input class="form-control compact-page-input" type="text" value="{{currentPage}}">
+          <span>of {{pages}}</span>
+          {{#if hasNextCompact}}
+            <i class="compact-next fa fa-caret-right"></i>
+          {{/if}}
+        </div>
+      </div>
+    {{/unless}}
+  </div>
+</template>
+<template name="reactiveTableServerSideNoData">
+  {{#if hasError}}
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title">Sorry, detailed information not available.</h3>
+      </div>
+      <div class="panel-body">
+        <p>
+          {{hasError}} In case you need information urgently,
+          please <a href="{{app 'supportUrl'}}" target="_blank" rel="noopener noreferrer" class="highlight">report an issue</a>.
+          Thank you for your patience.
+        </p>
+      </div>
+    </div>
+  {{else}}
+    {{#if requestInProgress}}
+      <!-- No indicator here: reactiveTableServerSide renders ONE centred spinner over the
+           whole table area while a request is in flight. This block only holds the height
+           open so that spinner stays centred and the layout does not jump. -->
+      <div class="reactive-table-loading-spacer"></div>
+    {{else}}
+      {{> reactiveTableNoData}}
+    {{/if}}
+  {{/if}}
+</template>

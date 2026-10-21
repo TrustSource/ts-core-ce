@@ -1,0 +1,41 @@
+<template name="infrastructureManagementComponentsHeader">
+  {{# pageHeader}}
+    <div class="approves-detail-header">
+      <div class="approves-detail-header-left">
+        <h2 class="font-light m-b-none">{{{getPkgMgrIcon getKey true}}} {{getName}}</h2>
+        <small class="text-muted">{{getDescription}}</small>
+      </div>
+      <div class="approves-detail-header-actions">
+        {{#if isRemoved}}
+          <button class="btn btn-default" id="component-soft-delete-undo">
+            <i class="fa fa-repeat"></i> Revert-delete
+          </button>
+        {{else}}
+          <button class="btn btn-default" id="component-soft-delete">
+            <i class="fa fa-times"></i> Soft-delete
+          </button>
+        {{/if}}
+        <button class="btn btn-danger" id="component-delete">
+          <i class="fa fa-trash-o"></i> Delete
+        </button>
+      </div>
+    </div>
+  {{/pageHeader}}
+  {{#if isInRole 'company_component_manager' companyId}}
+    <div class="approves-detail-tabs">
+      <ul class="nav nav-tabs">
+        <li class="{{activeTab 'infrastructureManagementComponentsEdit'}}">
+          <a href="{{pathFor route='infrastructureManagementComponentsEdit' data=routeParams}}">
+            <i class="fa fa-info-circle"></i> Info
+          </a>
+        </li>
+        <li class="{{activeTab 'infrastructureManagementComponentsLogs'}}">
+          <a href="{{pathFor route='infrastructureManagementComponentsLogs' data=routeParams}}">
+            <i class="fa fa-list"></i> Logs
+          </a>
+        </li>
+      </ul>
+    </div>
+  {{/if}}
+</template>
+

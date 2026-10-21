@@ -1,0 +1,103 @@
+<template name="risks">
+
+  {{# pageHeader}}
+    <div class="risks-header">
+      <div class="risks-header-left">
+        <h2 class="font-light m-b-xs">Risk management</h2>
+        <small>List of all risks by project or module</small>
+      </div>
+      <div class="risks-header-actions">
+        <select class="form-control current-project select2">
+          <option value="">Select report target</option>
+          {{#each projectList}}
+            <optgroup label="{{name}}">
+              <option value="{{_id}}" selected="{{isActiveProject}}">All module of {{name}}</option>
+              {{#each listModules}}
+                <option value="{{../_id}}_m_{{_id}}" selected="{{isActiveModule}}">{{name}}</option>
+              {{/each}}
+            </optgroup>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="approves-detail-tabs">
+    <ul class="nav nav-tabs">
+      <li>
+        <a title="Risk management overview" href="{{pathFor route='risksOverview' query=getRiskQueryParams}}">
+          <span class="fa fa-chart-area"></span> Overview</a>
+      </li>
+      <li class="active">
+        <a title="Risks management" href>
+          <span class="fa fa-list-ul"></span> Risks</a>
+      </li>
+      <li>
+        <a title="Risk management tasks" href="{{pathFor route='risksTasks' query=getRiskQueryParams}}">
+          <span class="fa fa-check-square"></span> Tasks</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="content">
+    {{#unless selectProject}}
+      {{#panel}}
+        <div class="text-info">
+          <i class="fa fa-check-circle-o"></i> Please select the project to run a report on the upper right
+        </div>
+      {{/panel}}
+    {{else}}
+      <div class="ts-panel">
+        <div class="panel-body pinner-tb-20 reactive-table-slim-filter">
+          {{#unless editId}}
+            <h3 class="h3 inner-t-0">Risks</h3>
+            {{#with getStats}}
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="panel panel-warning text-center">
+                    <p class="h2"><strong>{{risks}}</strong></p>
+                    <p class="h5">total</p>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="panel panel-danger text-center">
+                    <p class="h2"><strong>{{new}}</strong></p>
+                    <p class="h5">added last 7 days</p>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="panel panel-danger text-center">
+                    <p class="h2"><strong>{{opened}}</strong></p>
+                    <p class="h5">in progress</p>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="panel panel-success text-center">
+                    <p class="h2"><strong>{{resolved}}</strong></p>
+                    <p class="h5">resolved</p>
+                  </div>
+                </div>
+              </div>
+            {{/with}}
+            {{> riskSettingsList
+              title="Risks"
+              id=getViewType
+              data=getReportData
+              docId=getDocId
+              filterSessionVar="risksListFilter"
+              readonly=false
+            }}
+          {{else}}
+            {{> RiskEdit id=getViewType data=editDetails}}
+          {{/unless}}
+        </div>
+      </div>
+    {{/unless}}
+    {{#if requestInProgress}}
+      {{#panel}}
+        <div class="text-primary">
+          <i class="fa fa-spinner fa-spin"></i> Loading report data for project {{getProjectName}}, please wait...
+        </div>
+      {{/panel}}
+    {{/if}}
+  </div>
+</template>

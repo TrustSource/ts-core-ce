@@ -1,0 +1,17 @@
+// Active nav item gets the canvas tint
+.nav > li.active {
+  background: @ts-canvas;
+}
+
+// Navbar links keep their own colour and no underline when hovered or open
+.navbar-nav {
+  > li > a:hover,
+  > li > a:focus,
+  .open > a,
+  .open > a:hover,
+  .open > a:focus {
+    color: inherit;
+    background: transparent;
+    border-bottom: none;
+  }
+}

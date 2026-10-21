@@ -1,0 +1,805 @@
+<template name="moduleDependenciesAside">
+  {{#if component}}
+    {{#with component}}
+      <div class="ecs-dependencies-aside intro-dependency-aside" >
+        <div class="panel-heading">
+          <span>Component Details</span>
+        </div>
+        <div class="ecs-aside-content">
+
+          {{#if getStatusDetails}}
+            {{#with getStatusDetails}}
+              <div class="aside-section aside-section-inner" data-id="aside-manual">
+                <h6 class="aside-section-title bot-{{status}}">
+                  <span class="fa fa-pencil-square-o"></span>
+                  <span>{{title}}</span>
+                </h6>
+                <div class="aside-section-content">
+                  {{description}}
+                </div>
+              </div>
+            {{/with}}
+          {{/if}}
+
+          {{#with getLinkedModule}}
+            {{> componentLinkedModuleStats}}
+          {{/with}}
+
+          <div class="aside-section aside-section-inner" data-id="aside-details">
+            <h6 class="aside-section-title bot-grey">
+              <span class="fa fa-info-circle"></span> <span>Details</span> <span class="fa fa-caret-down pull-right section-expand"></span>
+            </h6>
+            <div class="aside-section-content">
+              <p class="truncate" style="max-width: 80%" title="{{getKey}}"><strong>{{getKey}}</strong></p>
+              <a href="{{pathFor route='moduleComponentDetail' data=getModuleComponentOptions}}" target="_blank">
+                <span class="fa fa-external-link"></span>
+              </a>
+              <p>{{getDescription}}</p>
+            </div>
+          </div>
+
+          {{#unless rootPickerOwnsComponent}}
+            {{#with licenseResolutionContext}}
+              <div class="aside-section aside-section-inner component-license-resolve" data-id="aside-legal">
+                {{> componentLicenseResolve}}
+              </div>
+            {{/with}}
+          {{/unless}}
+
+          {{#if rootPickerOwnsComponent}}
+            <div class="aside-section aside-section-inner" data-id="aside-legal">
+              <h6 class="aside-section-title bot-grey">
+                <span class="fa fa-gavel"></span> <span>Select license</span> <span class="fa fa-caret-down pull-right section-expand"></span>
+              </h6>
+              <div class="aside-section-content">
+                {{> rootComponentLicensePicker moduleId=getModuleId rootKey=rootComponentKey}}
+              </div>
+            </div>
+          {{/if}}
+
+          {{#with getEndoflife}}
+            <div class="aside-section aside-section-inner" data-id="aside-endoflife">
+              <h6 class="aside-section-title bot-{{endoflifeStatus}}">
+                <span class="fa {{endoflifeIcon}}"></span> <span>End-of-life</span> <span class="fa fa-caret-down pull-right section-expand"></span>
+              </h6>
+              <div class="aside-section-content">
+                {{#if isDisabled endoflifeStatus}}
+                  <span class="viability-inline-block">
+                    End-of-life analysis is disabled. You may enable it using settings
+                    <a href="{{pathFor route='moduleSettings' data=getModuleOptions}}" class="highlight">here</a> in End-of-life view.
+                  </span>
+                {{else}}
+                  {{#if isNotStatusOk endoflifeMessage}}
+                    {{#unless isForcedStatusOk ../label}}
+                      <button class="btn btn-xs btn-default pull-right set-status-to-ok" type="button" title="Set component to OK">
+                        <span class="fa fa-bell-o"></span>
+                      </button>
+                    {{else}}
+                      <button class="btn btn-xs btn-default pull-right reset-component-status" type="button" title="Reset component status">
+                        <span class="fa fa-bell-slash-o"></span>
+                      </button>
+                    {{/unless}}
+                  {{/if}}
+                  <span>{{endoflifeMessage}}</span>
+                {{/if}}
+              </div>
+            </div>
+          {{/with}}
+
+          {{#with getVersioning}}
+            <div class="aside-section aside-section-inner" data-id="aside-versioning">
+              <h6 class="aside-section-title bot-{{versioningStatus}}">
+                <span class="fa {{versioningIcon}}"></span> <span>Versioning</span> <span class="fa fa-caret-down pull-right section-expand"></span>
+              </h6>
+              <div class="aside-section-content">
+                {{#if isDisabled versioningStatus}}
+                  <span class="viability-inline-block">
+                    Versioning analysis is disabled. You may enable it using settings
+                    <a href="{{pathFor route='moduleSettings' data=getModuleOptions}}" class="highlight">here</a> in Versioning view.
+                  </span>
+                {{else}}
+                  {{#if isNotStatusOk versioningMessage}}
+                    {{#unless isForcedStatusOk ../label}}
+                      <button class="btn btn-xs btn-default pull-right set-status-to-ok" type="button" title="Set component to OK">
+                        <span class="fa fa-bell-o"></span>
+                      </button>
+                    {{else}}
+                      <button class="btn btn-xs btn-default pull-right reset-component-status" type="button" title="Reset component status">
+                        <span class="fa fa-bell-slash-o"></span>
+                      </button>
+                    {{/unless}}
+                  {{/if}}
+                  <span>{{versioningMessage}}</span>
+                {{/if}}
+              </div>
+            </div>
+          {{/with}}
+
+          {{#if getAlgorithms}}
+            <div class="aside-section aside-section-inner" data-id="aside-algorithms">
+              <h6 class="aside-section-title bot-{{encryptionStatus}}">
+                <span class="fas fa-key"></span> <span>Crypto algorithms</span> <span class="fa fa-caret-down pull-right section-expand"></span>
+              </h6>
+              <div class="aside-section-content">
+                {{#each getAlgorithms}}
+                  <span class="label label-default inline-block inner-b-5">{{#if isDenied}}
+                    <div class="label label-danger blacklisted-algorithm-label" title="Algorithm is Blacklisted by Company policy">B</div>
+                  {{/if}} {{algorithm}} [{{strength}}]</span>
+                {{/each}}
+              </div>
+            </div>
+          {{/if}}
+
+          {{#if getAiModels}}
+            <div class="aside-section aside-section-inner" data-id="aside-aimodels">
+              <h6 class="aside-section-title">
+                <span class="fas fa-robot"></span> <span>AI / ML models</span> <span class="fa fa-caret-down pull-right section-expand"></span>
+              </h6>
+              <div class="aside-section-content">
+                {{#each getAiModels}}
+                  <span class="label label-default inline-block inner-b-5">{{name}}{{#if version}} [{{version}}]{{/if}}{{#if provider}} · {{provider}}{{/if}}{{#if task}} · {{task}}{{/if}}</span>
+                {{/each}}
+              </div>
+            </div>
+          {{/if}}
+
+          {{#with getEncryption}}
+            <div class="aside-section aside-section-inner" data-id="aside-encryption">
+              <h6 class="aside-section-title bot-{{encryptionStatus}}">
+                <span class="fas fa-person-military-pointing"></span> <span>Export control</span> <span class="fa fa-caret-down pull-right section-expand"></span>
+              </h6>
+              <div class="aside-section-content">
+                {{#if isDisabled encryptionStatus}}
+                  <span class="viability-inline-block">
+                    Encryption analysis is disabled. You may enable it using settings
+                    <a href="{{pathFor route='moduleSettings' data=getModuleOptions}}" class="highlight">here</a> in Encryption view.
+                  </span>
+                {{else}}
+                  {{#if isNotStatusOk encryptionMessage}}
+                    {{#unless isForcedStatusOk ../label}}
+                      <button class="btn btn-xs btn-default pull-right set-export-status-to-ok" type="button" title="Set component to OK">
+                        <span class="fa fa-bell-o"></span>
+                      </button>
+                    {{else}}
+                      <button class="btn btn-xs btn-default pull-right reset-component-status" type="button" title="Reset component status">
+                        <span class="fa fa-bell-slash-o"></span>
+                      </button>
+                    {{/unless}}
+                  {{/if}}
+                  <span>{{encryptionMessage}}</span>
+                {{/if}}
+              </div>
+            </div>
+          {{/with}}
+
+          {{#each getVersions}}
+            <div class="aside-section aside-section-inner" data-id="aside-version">
+              <!--TODO detect version status-->
+              <h6 class="aside-section-title bot-grey">
+                <span class="fa fa-code-fork" title="Version"></span> <span>{{getVersion}}</span> <span class="fa fa-caret-down pull-right section-expand"></span>
+              </h6>
+              <div class="aside-section-content aside-section-clear">
+                {{#if getComponentPath data}}
+                  {{#if getVulnerabilities}}
+                    <div class="aside-section-inner">
+                        <div class="aside-section" data-id="aside-vulnerabilities">
+                          <h6 class="aside-section-title bot-grey">
+                            <span class="fa fa-shield-halved"></span> <span>Vulnerabilities</span> <span class="fa fa-caret-down pull-right section-expand"></span>
+                          </h6>
+                          <div class="aside-section-content">
+                            {{> componentCvesDetails vulns=getVulnerabilities version=this module=getModule3 project=getProject company=getCompany}}
+                          </div>
+                        </div>
+                    </div>
+                  {{else}}
+                    <div class="aside-section aside-section-inner" data-id="aside-vulnerabilities">
+                      <h6 class="aside-section-title bot-ok">
+                        <span class="fa fa-shield-halved"></span> <span>Vulnerabilities</span> <span class="fa fa-caret-down pull-right section-expand"></span>
+                      </h6>
+                      <div class="aside-section-content">
+                        <div class="inner-b-10">
+                          {{> companyManualVulnerabilitiesCreate size='btn-xs' version=this}}
+                        </div>
+                        <div>
+                          <span>No vulnerabilities known</span>
+                        </div>
+                      </div>
+                    </div>
+                  {{/if}}
+
+                  <div>
+                    {{#each getComponentPath data}}
+                      {{#if getVersionLicenses}}
+                        {{#if moreThanOneLicense getVersionLicenses}}
+                          <div class="aside-section aside-section-inner" data-id="aside-legal">
+                            <h6 class="aside-section-title bot-grey">
+                              <span class="w-30px inline-block text-center">
+                                <i class="multy-gavel">
+                                  <i class="fa fa-gavel gavel-1"></i>
+                                  <i class="fa fa-gavel gavel-2"></i>
+                                </i>
+                              </span> <span>Multi - license</span> <span class="fa fa-caret-down pull-right section-expand"></span>
+                            </h6>
+                            <div class="aside-section-content">
+                              <div class="inner-b-10">
+                                <p class="inner-b-0 inner-t-5">
+                                  {{>componentMultyLicense licenses=getVersionLicenses version=getVersionDetails path=getPathDetails}}
+                                </p>
+                              </div>
+                              <div>
+                                <p>Component include two or more licenses. In this case, you must choose exactly one license to apply.
+                                  Each license defines its own rules, obligations, and usage rights - selecting the right one is essential for compliance.</p>
+                              </div>
+                            </div>
+                          </div>
+                        {{/if}}
+                      {{/if}}
+                      <div class="aside-section" data-id="aside-path">
+                        <!--TODO detect path status-->
+                        <h6 class="aside-section-title bot-grey">
+                          <span class="fa fa-folder-open"></span>
+                          <span class="truncate" title="{{pathLocation path}}" style="max-width:60%">{{{formatPath path}}}</span>
+                          <button class="btn btn-default btn-xs copy-path-details inner-l-10"
+                                  style="top: -4px;position: relative;" type="button" data-clipboard-text="{{pathLocation path}}">
+                            <span class="fa fa-clipboard"></span>
+                          </button>
+                          <span class="fa fa-caret-down pull-right section-expand"></span>
+                        </h6>
+                        <div class="aside-section-content">
+                          <div class="aside-section-inner">
+                            {{#if getVersionLicenses}}
+                              {{#with getSelectedLicense getVersionLicenses}}
+                                <div class="aside-section" data-id="aside-legal">
+                                  <h6 class="aside-section-title bot-{{licenseStatus.computedStatus.status}}">
+                                    <span class="fa fa-gavel"></span>
+                                    <span class="truncate" title="{{getName}}" style="width:80%">{{getName}}</span>
+                                    <span class="fa fa-caret-down pull-right section-expand"></span>
+                                  </h6>
+                                  <div class="aside-section-content">
+                                    {{#if isAndLicensesCase getName}}
+                                      <div class="aside-section">
+                                        <h6 class="aside-section-title bot-ok">
+                                          <span class="fa fa-pencil-square-o"></span>
+                                          <span>More than one license applied:</span>
+                                        </h6>
+                                        <div class="aside-section-content">
+                                          {{#each isAndLicensesCase getName}}
+                                            {{#with getLicense this}}
+                                              <span class="block">[{{key}}] {{name}}</span>
+                                            {{/with}}
+                                          {{/each}}
+                                        </div>
+                                      </div>
+                                    {{/if}}
+                                    {{#if isPrivateLicense licenseStatus.computedStatus}}
+                                      <div class="aside-section">
+                                        <h6 class="aside-section-title bot-ok">
+                                          <span class="fa fa-pencil-square-o"></span>
+                                          <span>Private license</span>
+                                        </h6>
+                                        <div class="aside-section-content">
+                                          This component is associated with a private license, thus it is assumed as private property and therefor OK.
+                                        </div>
+                                      </div>
+                                    {{else}}
+                                      {{#if isWhiteListed licenseStatus.computedStatus}}
+                                        <div class="aside-section">
+                                          <h6 class="aside-section-title bot-ok">
+                                            <span class="fa fa-pencil-square-o"></span>
+                                            <span>Whitelisted</span>
+                                          </h6>
+                                          <div class="aside-section-content">
+                                            {{licenseStatus.computedStatus.label}}
+                                          </div>
+                                        </div>
+                                      {{/if}}
+                                      {{#if isBlackListed licenseStatus.computedStatus}}
+                                        <div class="aside-section">
+                                          <h6 class="aside-section-title bot-violations">
+                                            <span class="fa fa-pencil-square-o"></span>
+                                            <span>Blacklisted</span>
+                                          </h6>
+                                          <div class="aside-section-content">
+                                            {{licenseStatus.computedStatus.label}}
+                                          </div>
+                                        </div>
+                                      {{/if}}
+                                      {{#if licenseStatus.violations}}
+                                        {{#each describeViolations licenseStatus.violations}}
+                                          {{#if isLegalRuleResolvedAnywhere}}
+                                            <div class="aside-section">
+                                              <h6 class="aside-section-title bot-ok">
+                                                <span class="fa fa-exclamation-triangle"></span>
+                                                <span>{{getType.text}}</span>
+                                                {{#if isLegalRuleResolvable}}
+                                                  <button class="btn btn-xs btn-default pull-right rfix-top-3 remove_legal_rule_resolved" type="button" title="Legal problem is resolved">
+                                                    <span class="fa fa-bell-slash-o"></span>
+                                                  </button>
+                                                {{else}}
+                                                  <button class="btn btn-xs btn-default pull-right rfix-top-3" type="button" disabled="disabled" title="This can't be manualy resolved">
+                                                    <span class="fa fa-bell-slash-o"></span>
+                                                  </button>
+                                                {{/if}}
+                                              </h6>
+                                              <div class="aside-section-content">
+                                                {{message}}
+                                              </div>
+                                            </div>
+                                            {{#with isLegalRuleResolvedAnywhere}}
+                                              <p class="inner-t-5 inner-b-5"><b>Resolved{{#if type}} in {{type}}{{/if}}</b>: {{comment}}</p>
+                                            {{/with}}
+                                          {{else}}
+                                            <div class="aside-section">
+                                              <h6 class="aside-section-title bot-{{getType.key}}">
+                                                <span class="fa fa-exclamation-triangle"></span>
+                                                <span>{{getType.text}}</span>
+                                                {{#if isLegalRuleResolvable}}
+                                                  <button class="btn btn-xs btn-default pull-right rfix-top-3 add_legal_rule_resolved" type="button" title="Accept risk of problem">
+                                                    <span class="fa fa-bell-o"></span>
+                                                  </button>
+                                                {{else}}
+                                                  <button class="btn btn-xs btn-default pull-right rfix-top-3" type="button" disabled="disabled" title="This can't be manualy resolved">
+                                                    <span class="fa fa-bell-o"></span>
+                                                  </button>
+                                                {{/if}}
+                                              </h6>
+                                              <div class="aside-section-content">
+                                                {{message}}
+                                              </div>
+                                            </div>
+                                          {{/if}}
+                                        {{/each}}
+                                      {{/if}}
+                                      {{#if licenseStatus.obligations}}
+                                        {{#each describeObligations licenseStatus.obligations}}
+                                          {{#if isConstraintResolvedAnywhere}}
+                                            <div class="aside-section">
+                                              <h6 class="aside-section-title bot-ok">
+                                                <span class="fa fa-exclamation-circle"></span>
+                                                <span>Obligation</span>
+                                                <button class="btn btn-xs btn-default pull-right rfix-top-3 remove_constraint_resolved" type="button" title="Reopen obligation">
+                                                  <span class="fa fa-bell-slash-o"></span>
+                                                </button>
+                                              </h6>
+                                              <div class="aside-section-content">
+                                                {{description}}
+                                              </div>
+                                            </div>
+                                            {{#with isConstraintResolvedAnywhere}}
+                                              <p class="inner-t-5 inner-b-5"><b>Resolved{{#if type}} in {{type}}{{/if}}</b>: {{comment}}</p>
+                                            {{/with}}
+                                          {{else}}
+                                            <div class="aside-section">
+                                              <h6 class="aside-section-title bot-warnings">
+                                                <span class="fa fa-exclamation-circle"></span>
+                                                <span>Obligation</span>
+                                                <button class="btn btn-xs btn-default pull-right rfix-top-3 add_constraint_resolved" type="button" title="Resolve this obligation">
+                                                  <span class="fa fa-bell-o"></span>
+                                                </button>
+                                              </h6>
+                                              <div class="aside-section-content">
+                                                {{description}}
+                                              </div>
+                                            </div>
+                                          {{/if}}
+                                        {{/each}}
+                                      {{/if}}
+                                      {{#if licenseStatus.reason}}
+                                        <div class="aside-section">
+                                          <h6 class="aside-section-title bot-warnings">
+                                            <span class="fa fa-pencil-square-o"></span>
+                                            <span>Reason</span>
+                                          </h6>
+                                          <div class="aside-section-content">
+                                            {{licenseStatus.reason}}
+                                            {{#if pathResolutionKey}}
+                                              <p class="inner-t-5 inner-b-0">Set manually to {{pathResolutionKey}}.</p>
+                                            {{else}}
+                                              {{#if canSetComponentLicense}}
+                                                <p class="inner-t-5 inner-b-0">
+                                                  <button type="button" class="btn btn-default btn-xs scroll-to"
+                                                          data-target="aside-legal">Set the license for this component</button>
+                                                </p>
+                                              {{/if}}
+                                            {{/if}}
+                                          </div>
+                                        </div>
+                                      {{/if}}
+                                      {{#if isUnknown}}
+                                        <div class="aside-section">
+                                          <h6 class="aside-section-title bot-warnings">
+                                            <span class="fa fa-info-circle"></span>
+                                            <span>Please note</span>
+                                          </h6>
+                                          <div class="aside-section-content">
+                                            {{isUnknown}}
+                                          </div>
+                                        </div>
+                                      {{else}}
+                                        {{#if licenseIsOk licenseStatus}}
+                                          <div class="aside-section">
+                                            <h6 class="aside-section-title bot-ok">
+                                              <span class="fa fa-info-circle"></span>
+                                              <span>Status</span>
+                                            </h6>
+                                            <div class="aside-section-content">
+                                              No legal problems known
+                                            </div>
+                                          </div>
+                                        {{/if}}
+                                        {{#if licenseStatus.resolvedViolations}}
+                                          {{#each describeViolations licenseStatus.resolvedViolations}}
+                                            {{#if isLegalRuleResolvedAnywhere}}
+                                              <div class="aside-section">
+                                                <h6 class="aside-section-title bot-ok">
+                                                  <span class="fa fa-exclamation-triangle"></span>
+                                                  <span>{{getType.text}}</span>
+                                                  {{#if isLegalRuleResolvable}}
+                                                    <button class="btn btn-xs btn-default pull-right rfix-top-3 remove_legal_rule_resolved" type="button" title="Legal problem is resolved">
+                                                      <span class="fa fa-bell-slash-o"></span>
+                                                    </button>
+                                                  {{else}}
+                                                    <button class="btn btn-xs btn-default pull-right rfix-top-3" type="button" disabled="disabled" title="This can't be manualy resolved">
+                                                      <span class="fa fa-bell-slash-o"></span>
+                                                    </button>
+                                                  {{/if}}
+                                                </h6>
+                                                <div class="aside-section-content">
+                                                  {{message}}
+                                                </div>
+                                              </div>
+                                              {{#with isLegalRuleResolvedAnywhere}}
+                                                <p class="inner-t-5 inner-b-5"><b>Resolved{{#if type}} in {{type}}{{/if}}</b>: {{comment}}</p>
+                                              {{/with}}
+                                            {{else}}
+                                              <div class="aside-section">
+                                                <h6 class="aside-section-title bot-{{getType.key}}">
+                                                  <span class="fa fa-exclamation-triangle"></span>
+                                                  <span>{{getType.text}}</span>
+                                                  {{#if isLegalRuleResolvable}}
+                                                    <button class="btn btn-xs btn-default pull-right rfix-top-3 add_legal_rule_resolved" type="button" title="Accept risk of problem">
+                                                      <span class="fa fa-bell-o"></span>
+                                                    </button>
+                                                  {{else}}
+                                                    <button class="btn btn-xs btn-default pull-right rfix-top-3" type="button" disabled="disabled" title="This can't be manualy resolved">
+                                                      <span class="fa fa-bell-o"></span>
+                                                    </button>
+                                                  {{/if}}
+                                                </h6>
+                                                <div class="aside-section-content">
+                                                  {{message}}
+                                                </div>
+                                              </div>
+                                            {{/if}}
+                                          {{/each}}
+                                        {{/if}}
+                                        {{#if licenseStatus.resolvedObligations}}
+                                          {{#each describeObligations licenseStatus.resolvedObligations}}
+                                            {{#if isConstraintResolvedAnywhere}}
+                                              <div class="aside-section">
+                                                <h6 class="aside-section-title bot-ok">
+                                                  <span class="fa fa-exclamation-circle"></span>
+                                                  <span>Obligation</span>
+                                                  <button class="btn btn-xs btn-default pull-right rfix-top-3 remove_constraint_resolved" type="button" title="Reopen obligation">
+                                                    <span class="fa fa-bell-slash-o"></span>
+                                                  </button>
+                                                </h6>
+                                                <div class="aside-section-content">
+                                                  {{description}}
+                                                </div>
+                                              </div>
+                                              {{#with isConstraintResolvedAnywhere}}
+                                                <p class="inner-t-5 inner-b-5"><b>Resolved</b>: {{comment}}</p>
+                                              {{/with}}
+                                            {{else}}
+                                              <div class="aside-section">
+                                                <h6 class="aside-section-title bot-warnings">
+                                                  <span class="fa fa-exclamation-circle"></span>
+                                                  <span>Obligation</span>
+                                                  <button class="btn btn-xs btn-default pull-right rfix-top-3 add_constraint_resolved" type="button" title="Resolve this obligation">
+                                                    <span class="fa fa-bell-o"></span>
+                                                  </button>
+                                                </h6>
+                                                <div class="aside-section-content">
+                                                  {{description}}
+                                                </div>
+                                              </div>
+                                            {{/if}}
+                                          {{/each}}
+                                        {{/if}}
+                                      {{/if}}
+                                    {{/if}}
+                                  </div>
+                                </div>
+                              {{/with}}
+                            {{else}}
+                              <div class="aside-section" data-id="aside-legal">
+                                <h6 class="aside-section-title bot-warnings">
+                                  <span class="fa fa-gavel"></span>
+                                  <span>License not detected</span>
+                                  <span class="fa fa-caret-down pull-right section-expand"></span>
+                                </h6>
+                                <div class="aside-section-content">
+                                  <div class="aside-section">
+                                    <h6 class="aside-section-title bot-warnings">
+                                      <span class="fa fa-pencil-square-o"></span>
+                                      <span>Reason</span>
+                                    </h6>
+                                    <div class="aside-section-content">
+                                      <span>No license statement was found for this path.</span>
+                                      {{#if pathResolutionKey}}
+                                        <p class="inner-t-5 inner-b-0">Set manually to {{pathResolutionKey}}.</p>
+                                      {{else}}
+                                        {{#if canSetComponentLicense}}
+                                          <p class="inner-t-5 inner-b-0">
+                                            <button type="button" class="btn btn-default btn-xs scroll-to"
+                                                    data-target="aside-legal">Set the license for this component</button>
+                                          </p>
+                                        {{/if}}
+                                      {{/if}}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            {{/if}}
+                          </div>
+                          {{#if getScanOptions}}
+                            <div class="aside-section-inner">
+                              <div class="aside-section" data-id="aside-legal-settings-used">
+                                <h6 class="aside-section-title bot-grey">
+                                  <span class="fa fa-cogs"></span> <span>Settings used for this analysis</span> <span class="fa fa-caret-down pull-right section-expand"></span>
+                                </h6>
+                                <div class="aside-section-content">
+                                  <p>
+                                    {{#with getScanOptions}}
+                                      Component <strong>{{#if componentModified}}has been modified{{else}}has not been modified{{/if}}</strong> and is <strong>{{#if tightCoupled}}tightly coupled{{else}}loosely coupled{{/if}}</strong>
+                                    {{/with}}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          {{/if}}
+                          <div class="aside-section-inner">
+                            <div class="aside-section" data-id="aside-legal-settings">
+                              <h6 class="aside-section-title bot-grey">
+                                <span class="fa fa-cogs"></span> <span>Settings</span> <span class="fa fa-caret-down pull-right section-expand"></span>
+                              </h6>
+                              <div class="aside-section-content">
+                                <p>
+                                  <label class="checkbox-inline" data-toggle="tooltip" title="{{unchangedInformation.comment}}">
+                                    <input type="checkbox" class="i-checks check-unchanged" checked={{unchangedStatus}}>
+                                    Component was not modified
+                                  </label>
+                                </p>
+                                {{#unless unchangedStatus}}
+                                  <div class="clearfix">
+                                    <div class="form-group">
+																			<span class="display-block">
+																				<span>Changes url</span>
+																				<input class="form-control change-changes-url" value="{{changesUrl}}" name="changesUrl" disabled={{reportDisabled}}>
+																			</span>
+                                    </div>
+                                    <div class="form-group">
+																			<span class="display-block">
+																				<span>Modification notice</span>
+																				<textarea class="form-control change-modification-notice" name="changesText" disabled={{reportDisabled}}>{{changesText}}</textarea>
+																			</span>
+                                    </div>
+                                  </div>
+                                {{/unless}}
+                                <p>
+                                  <label class="checkbox-inline" data-toggle="tooltip" title="{{looseCoupledInformation.comment}}">
+                                    <input type="checkbox" class="i-checks check-loose" checked={{looseCoupledStatus}}>
+                                    Loose coupling architecture
+                                  </label>
+                                </p>
+                                <div class="form-group">
+                                  <span class="display-block">
+                                    <span>Description / purpose</span>
+                                    <textarea class="form-control change-purpose" name="purpose" disabled={{reportDisabled}}>{{purpose}}</textarea>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    {{/each}}
+                  </div>
+                {{/if}}
+              </div>
+            </div>
+            {{#if getLicenses}}
+              {{#with getVersionSelectedLicense getLicenses}}
+                {{#if isCommercial}}
+                  <div class="aside-section" data-id="aside-cots-settings">
+                    <h6 class="aside-section-title bot-grey">
+                      <span class="fa fa-money"></span> <span>Commercial settings</span> <span class="fa fa-caret-down pull-right section-expand"></span>
+                    </h6>
+                    <div class="aside-section-content">
+                      <p>
+                        <label class="checkbox-inline" data-toggle="tooltip" title="{{cotsInformation.comment}}">
+                          <input type="checkbox" class="i-checks check-cots" checked={{cotsComponent}}>
+                          Component is COTS (commercial off the shelf)
+                        </label>
+                      </p>
+                      {{#if cotsComponent}}
+                        {{> cotsComponentCommercialTerms module=getModule version=getVersionData cotsInformation=cotsInformation}}
+                      {{/if}}
+                    </div>
+                  </div>
+                {{/if}}
+              {{/with}}
+            {{/if}}
+          {{/each}}
+
+          <div class="aside-section aside-section-inner" data-id="aside-tasks">
+            <h6 class="aside-section-title bot-grey">
+              <span class="fa fa-check-square-o"></span> <span>Tasks</span> <span class="fa fa-caret-down pull-right section-expand"></span>
+            </h6>
+            <div class="aside-section-content text-center">
+              {{#if notOk}}
+                {{> jiraLink jira=hasJiraConnection description=getProblemDescription details=componentDetails module=module }}
+                {{> tfsLink tfs=hasTfsConnection description=getProblemDescription details=componentDetails module=module}}
+                {{> githubIssuesLink github=hasGithubConnection description=getProblemDescription details=componentDetails module=module}}
+                {{> copyIssueDetails description=getProblemDescription}}
+              {{else}}
+                No problems known, component is Ok
+              {{/if}}
+            </div>
+          </div>
+
+          <div class="aside-section aside-section-inner" data-id="aside-comment">
+            <h6 class="aside-section-title bot-grey">
+              <span class="fa fa-comment-o"></span> <span>Comment</span> <span class="fa fa-caret-down pull-right section-expand"></span>
+            </h6>
+            <div class="aside-section-content">
+              <form class="form" id="saveMessage">
+                <div class="form-group form-group-sm">
+                  <select class="form-control change-message-type" name="type">
+                    <option value="comment" selected>Comment</option>
+                    <option value="status">Set status</option>
+                  </select>
+                </div>
+                {{#if isSetStatus}}
+                  <div class="form-group form-group-sm">
+                    <select class="form-control" name="status">
+                      <!--<option value="whitelisted">Whitelisted</option>-->
+                      <!--<option value="blacklisted">Blacklisted</option>-->
+                      <option value="ok" selected>OK</option>
+                      <option value="warnings">Warning</option>
+                      <option value="violations">Violation</option>
+                    </select>
+                  </div>
+                {{/if}}
+                <div class="form-group form-group-sm">
+                  <textarea class="form-control" placeholder="Comment" name="message"></textarea>
+                </div>
+                <div class="form-group form-group-sm">
+                  <div class="btn-group-sm">
+                    <button class="btn btn-primary" type="submit">
+                      Save
+                    </button>
+                    <button class="btn btn-default reset-component-status" type="button">
+                      Reset component
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="aside-section aside-section-inner" data-id="aside-comments">
+            <h6 class="aside-section-title bot-grey">
+              <span class="fa fa-comments-o"></span> <span>Comments</span> <span class="fa fa-caret-down pull-right section-expand"></span>
+            </h6>
+            <div class="aside-section-content">
+              {{#if getMessages}}
+                <div class="timeline">
+                  <div class="timeline-item">
+                    <div class="timeline-segment">
+                      <div class="timeline-divider"></div>
+                    </div>
+                    <div class="timeline-content"></div>
+                  </div>
+                  {{#each getMessages}}
+                    <div class="timeline-item">
+                      <div class="timeline-segment">
+                        <div class="timeline-media {{messageClass}} circle sq-24" title="{{status}}">
+                          <div class="fa {{messageIcon}} white fa-1p5x"></div>
+                        </div>
+                      </div>
+                      <div class="timeline-content">
+                        <div class="timeline-row">
+                          <span>{{getUserName}}</span> <small>({{{dateFromNow getDate}}})</small>
+                        </div>
+                        <div class="timeline-row">
+                          <h6><strong>{{subject}}</strong></h6>
+                          <p style="word-break: break-all;">
+                            <small>{{message}}</small>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  {{/each}}
+                </div>
+              {{else}}
+                <div class="text-center">
+                  No comments available for this component
+                </div>
+              {{/if}}
+            </div>
+          </div>
+
+          <div class="aside-section aside-section-inner" data-id="aside-logs">
+            <h6 class="aside-section-title bot-grey">
+              <span class="fa fa-history"></span> <span>History (up to 100 last entries)</span> <span class="fa fa-caret-down pull-right section-expand"></span>
+            </h6>
+            <div class="aside-section-content">
+              {{#if showAsideLogs}}
+                {{> moduleDependenciesAsideLogs}}
+              {{else}}
+                <div class="text-center">
+                  <button class="btn btn-default btn-xs show_module_logs"><i class="fa fa-ellipsis m-r-sm"></i> Load 30 days history</button>
+                </div>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+        <div class="ecs-aside-nav">
+          <a class="aside-action inner-b-5 scroll-to" title="Details" data-target="aside-details">
+            <span class="fa fa-info-circle"></span>
+          </a>
+          <a class="aside-action inner-b-5 scroll-to" title="Versioning / End-of-life" data-target="aside-endoflife">
+            <span class="fa fa-hourglass-o"></span>
+          </a>
+          <a class="aside-action inner-b-5 scroll-to" title="Vulnerabilities" data-target="aside-version">
+            <span class="fa fa-shield-halved"></span>
+          </a>
+          <a class="aside-action inner-b-5 scroll-to" title="Encryption" data-target="aside-encryption">
+            <span class="fas fa-person-military-pointing"></span>
+          </a>
+          <a class="aside-action inner-b-5 scroll-to" title="Licenses" data-target="aside-legal">
+            <span class="fa fa-gavel"></span>
+          </a>
+          <a class="aside-action inner-b-5 scroll-to" title="Tasks" data-target="aside-tasks">
+            <span class="fa fa-check-square-o"></span>
+          </a>
+          <a class="aside-action inner-b-5 scroll-to" title="Comment" data-target="aside-comment">
+            <span class="fa fa-comment-o"></span>
+          </a>
+          <a class="aside-action inner-b-5 scroll-to" title="History" data-target="aside-logs">
+            <span class="fa fa-history"></span>
+          </a>
+        </div>
+        <div class="ecs-aside-head module-aside-head">
+          <span class="module-aside-status-dot bg-{{componentStatus}}"></span>
+          <h5 class="truncate" title="{{getName}}">{{getName}}</h5>
+          {{#if getModuleId}}
+            <div class="ecs-aside-head-actions">
+              {{> componentLinkWithModule moduleId=getModuleId linkedModules=getModuleLinkedModules component=getComponentForLinking size='btn-sm'}}
+            </div>
+          {{/if}}
+          {{#if getStatusDetails}}
+            <div class="ecs-aside-head-actions">
+              {{#with getStatusDetails}}
+                <a class="ecs-aside-more status-color {{status}} scroll-to" title="{{description}}" data-target="aside-manual">
+                  <span class="fa fa-hand-paper-o"></span>
+                </a>
+              {{/with}}
+            </div>
+          {{/if}}
+        </div>
+      </div>
+    {{/with}}
+  {{else}}
+    <div class="ecs-dependencies-aside intro-dependency-aside" >
+      <div class="alert alert-info">
+        <p>
+          <strong>Select dependency. </strong><br>
+          Please select dependency from list to view details.
+        </p>
+      </div>
+    </div>
+  {{/if}}
+</template>

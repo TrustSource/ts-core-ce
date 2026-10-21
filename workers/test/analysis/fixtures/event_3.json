@@ -1,0 +1,547 @@
+{
+  "rawData": {
+    "company": {
+      "_id": "COMPANY_ID",
+      "created": "2022-01-19T16:23:21.245Z",
+      "accountType": "free",
+      "requireWhitelist": false,
+      "algorithmsConfig" : [
+        {
+          "key" : "Bcrypt",
+          "strength" : "320",
+          "importStrict" : [
+            "AM",
+            "DE",
+            "NC"
+          ],
+          "importWeak" : [
+            "AL",
+            "BA"
+          ],
+          "importIrrelevant" : [
+            "AL",
+            "BO"
+          ],
+          "exportStrict" : [
+            "AL",
+            "BE",
+            "BM"
+          ],
+          "exportWeak" : [
+            "AU"
+          ],
+          "exportIrrelevant" : [
+
+          ]
+        }
+      ],
+      "licenseConfig": {
+        "whitelist": [
+          {
+            "key" : "Apache-2.0",
+            "comment" : "test"
+          }
+        ]
+      },
+      "componentConfig": {
+        "whitelist": [
+          {
+            "key" : "sysvinit:utils",
+            "version" : "*",
+            "comment" : "test"
+          }
+        ]
+      }
+    },
+    "project": {
+      "_id": "PROJECT_ID",
+      "name": "Project 1",
+      "companyId": "COMPANY_ID",
+      "creationDate": "2022-01-19T17:10:29.582Z",
+      "relatedUsers": {
+        "defaultProjectManager": "USER_ID",
+        "defaultComplianceManager": null,
+        "members": []
+      }
+    },
+    "module": {
+      "_id": "MODULE_ID",
+      "companyId": "COMPANY_ID",
+      "name": "ts-node-client-sample",
+      "moduleIdentifier": "npm:ts-node-client-sample",
+      "projectId": "PROJECT_ID",
+      "confidenceMinScore" : "1",
+      "endoflifePolicy": {
+        "warningThreshold": 12,
+        "violationThreshold": 3,
+        "enabled": true
+      },
+      "viabilityConfig": {
+        "enabled": true,
+        "warningThreshold": 1,
+        "violationThreshold": 1,
+        "minConfidence": 1,
+        "noInfoLevel": 1
+      },
+      "ossfConfig": {
+        "enabled": true,
+        "warningThreshold": 5,
+        "violationThreshold": 2,
+        "noInfoLevel": 1
+      },
+      "versioningConfig": {
+        "jump": true,
+        "warningThreshold": 3,
+        "violationThreshold": 1
+      },
+      "obligationConfig": [
+        {
+          "key":"npm:ts-node-client-sample",
+          "obligationKey":"O00",
+          "comment":"Notice file created"
+        },
+        {
+          "key":"npm:ts-node-client-sample",
+          "obligationKey":"O01",
+          "comment":"Notice file created"
+        }
+      ],
+      "componentConfig" : {
+        "looseCoupled" : [
+          {
+            "key" : "npm:apache-2.0",
+            "version" : "*",
+            "comment" : "added by component checkbox"
+          }
+        ],
+        "licensesSelected" : [
+          {
+            "key" : "npm:apache-2.0",
+            "version" : "1.0.7",
+            "path": "/",
+            "comment" : "added by component checkbox",
+            "license" : "Apache-2.0"
+          },
+          {
+            "key" : "npm:apache-2.0",
+            "comment" : "added by component checkbox",
+            "license" : "Apache-2.0"
+          },
+          {
+            "key" : "npm:bootstrap",
+            "comment" : "added by component checkbox",
+            "license" : "Apache-2.0"
+          }
+        ],
+        "unchanged" : [
+          {
+            "key" : "npm:acorn",
+            "version" : "7.1.1",
+            "path" : "/linebreak:1.0.2/brfs:2.0.2/static-module:3.0.3/acorn-node:1.8.2/acorn:7.1.1",
+            "comment" : "added by component checkbox. By Jan, 9/9/2021"
+          },
+          {
+            "key" : "npm:apache-2.0",
+            "version" : "1.0.7",
+            "comment" : "added by component checkbox. By Jan, 9/9/2021"
+          },
+          {
+            "key" : "npm:pdfmake",
+            "version" : "*",
+            "comment" : "added by component checkbox"
+          }
+        ],
+        "changedStatus" : [
+
+        ],
+        "whitelist" : [
+
+        ],
+        "blacklist" : [
+
+        ]
+      },
+      "properties": {
+        "privacy": "private",
+        "architecture": "sourceCode"
+      },
+      "relatedUsers": {
+        "defaultProjectManager": "USER_ID",
+        "defaultComplianceManager": null
+      },
+      "cveConfig" : {
+        "whitelist" : [
+          {
+            "cveKey" : "CVE-2021-26291",
+            "key" : "mvn:org.apache.maven.wagon:wagon-provider-api",
+            "version" : "1.0-beta-2",
+            "comment" : "test"
+          },
+          {
+            "cveKey" : "CVE-2020-15777",
+            "key" : "mvn:org.apache.maven.wagon:wagon-provider-api",
+            "version" : "1.0-beta-2",
+            "comment" : "test"
+          },
+          {
+            "cveKey" : "CVE-2019-10358",
+            "key" : "mvn:org.apache.maven.wagon:wagon-provider-api",
+            "version" : "1.0-beta-2",
+            "comment" : "test"
+          },
+          {
+            "cveKey" : "CVE-2017-1000397",
+            "key" : "mvn:org.apache.maven.wagon:wagon-provider-api",
+            "version" : "1.0-beta-2",
+            "comment" : "test"
+          },
+          {
+            "cveKey" : "CVE-2019-9843",
+            "key" : "mvn:org.apache.maven.wagon:wagon-provider-api",
+            "comment" : "test"
+          }
+        ]
+      },
+      "environmentalConfig" : {
+        "v2vectorString" : "CDP:ND/TD:ND/CR:ND/IR:ND/AR:ND",
+        "v3vectorString" : "MAV:N/MAC:H/MPR:H/MUI:N/MS:C/MC:N/MI:L/MA:N/CR:M/IR:L/AR:X",
+        "v4vectorString" : "MAV:X/MAC:X/MAT:X/MPR:X/MUI:X/MVC:X/MVI:X/MVA:X/MSC:X/MSI:X/MSA:X"
+      },
+      "scanned": "2022-01-19T17:16:10.354Z"
+    },
+    "scan": {
+      "_id": "SCAN_ID",
+      "project": "ASCAMSO",
+      "module": "ts-node-client-sample",
+      "moduleId": "npm:ts-node-client-sample",
+      "dependencies": [
+        {
+          "name": "ts-node-client-sample",
+          "description": "**[Material Dashboard Angular]** is a free Material Bootstrap Admin with a fresh, new design inspired by Google's Material Design. We are very excited to introduce our take on the material concepts through an easy to use and beautiful set of components. Material Dashboard was built over the popular Bootstrap framework and it comes with a couple of third-party plugins redesigned to fit in with the rest of the elements.",
+          "versions": [
+            "1.0.5"
+          ],
+          "licenses": [
+            {
+              "key": "MIT",
+              "name": "MIT"
+            }
+          ],
+          "dependencies": [
+            {
+              "name": "react",
+              "versions": [
+                "18.3.4"
+              ],
+              "licenses": [
+                "MIT"
+              ],
+              "dependencies": [],
+              "key": "npm:react"
+            },
+            {
+              "name": "bower",
+              "description": "The browser package manager",
+              "versions": [
+                "1.8.7"
+              ],
+              "licenses": [
+                "MIT"
+              ],
+              "dependencies": [],
+              "key": "npm:bower"
+            },
+            {
+              "name": "call-bind-apply-helpers",
+              "versions": [
+                "1.0.2"
+              ],
+              "dependencies": [],
+              "key": "npm:call-bind-apply-helpers"
+            },
+            {
+              "name": "apache-2.0",
+              "description": "Plaintext of The Apache License, Version 2.0 from www.apache.org",
+              "versions": [
+                "1.0.7"
+              ],
+              "homepageUrl": "https://github.com/jslicense/Apache-2.0#readme",
+              "repoUrl": "git+https://github.com/jslicense/Apache-2.0.git",
+              "licenses": [
+                "Apache-2.0", "MIT"
+              ],
+              "dependencies": [],
+              "key": "npm:apache-2.0"
+            },
+            {
+              "name": "Maven Wagon API",
+              "versions": [
+                "1.0-beta-2"
+              ],
+              "licenses": [],
+              "dependencies": [],
+              "key": "mvn:org.apache.maven.wagon:wagon-provider-api",
+              "meta": "meta-test-fields"
+            },
+            {
+              "name": "Apache Maven Site Plugin",
+              "versions": [
+                "3.7.1"
+              ],
+              "licenses": [],
+              "dependencies": [],
+              "key": "maven:org.apache.maven.plugins:maven-site-plugin"
+            },
+            {
+              "name": "sysvinit-utils",
+              "versions": [
+                "2.88dsf-59.10ubuntu1"
+              ],
+              "licenses": [],
+              "dependencies": [],
+              "key": "sysvinit:utils"
+            },
+            {
+              "name": "bootstrap",
+              "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
+              "versions": [
+                "4.5.2"
+              ],
+              "homepageUrl": "https://getbootstrap.com/",
+              "repoUrl": "git+https://github.com/twbs/bootstrap.git",
+              "licenses": [
+                {
+                  "key": "MIT",
+                  "name": "MIT"
+                },
+                {
+                  "key": "Apache-2.0",
+                  "name": "Apache-2.0"
+                }
+              ],
+              "dependencies": [],
+              "key": "npm:bootstrap"
+            },
+            {
+              "name": "Apache HttpClient",
+              "description": "HttpComponents Client",
+              "versions": [
+                "4.5.14"
+              ],
+              "dependencies": [],
+              "key": "maven:org.apache.httpcomponents:httpclient"
+            }
+          ],
+          "key": "npm:ts-node-client-sample"
+        }
+      ],
+      "companyId": "COMPANY_ID",
+      "user": "test@trustrouce.io",
+      "submitted": "2022-01-12T08:24:45.528Z"
+    },
+    "user": {
+      "_id": "USER_ID",
+      "createdAt": "2015-02-05T18:19:03.595Z",
+      "emails": [
+        {
+          "address": "test@trustrouce.io",
+          "verified": true
+        }
+      ],
+      "profile": {
+        "name": "Admin",
+        "companyId": "COMPANY_ID",
+        "email": "test@trustrouce.io",
+        "notifications": [
+          "EVENTS_ALL",
+          "ALARMS_ALL"
+        ],
+        "login": "test@trustrouce.io"
+      },
+      "roles": {
+        "COMPANY_ID": [
+          "developer",
+          "compliance_manager",
+          "portfolio_manager",
+          "manager",
+          "account_admin",
+          "enterprise_admin",
+          "component_manager",
+          "legal_manager",
+          "admin"
+        ]
+      }
+    },
+    "analysis": {
+      "_id": "ANALYSIS_ID",
+      "date": "2021-01-12T18:35:04.561Z",
+      "scanId": "SCAN_ID",
+      "companyId": "COMPANY_ID",
+      "moduleId": "MODULE_ID",
+      "components": [
+        {
+          "key": "npm:ts-node-client-sample",
+          "versions": [
+            {
+              "version": "1.0.5",
+              "paths": [
+                {
+                  "path": "/",
+                  "licenses": [
+                    {
+                      "key": "Apache-2.0",
+                      "status": {
+                        "status": "violations",
+                        "violations": "CA_2",
+                        "obligations": "O00; O01; O42"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "key": "npm:apache-2.0",
+          "versions": [
+            {
+              "version": "1.0.7",
+              "paths": [
+                {
+                  "path": "/apache-2.0:1.0.7",
+                  "licenses": [
+                    {
+                      "key": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0 AND GPL-2.0+ AND GPL-3.0 AND GPL-3.0+ AND LGPL-2.0 AND LGPL-2.0+ AND LGPL-2.1 AND LGPL-2.1+ AND LGPL-3.0 AND LGPL-3.0+ AND MIT",
+                      "status": {
+                        "status": "ok"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "key": "bower:bootstrap",
+          "versions": [
+            {
+              "version": "4.5.2",
+              "paths": [
+                {
+                  "path": "/bootstrap:4.5.2",
+                  "licenses": [
+                    {
+                      "key": "MIT",
+                      "status": {
+                        "status": "ok",
+                        "obligations": "O00; O01"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "status": "ok"
+        }
+      ],
+      "licenses": [
+        {
+          "key": "Apache-2.0",
+          "name": "Apache License 2.0",
+          "components": [
+            {
+              "componentKey": "npm:ts-node-client-sample",
+              "version": "1.0.5",
+              "path": "/",
+              "status": {
+                "status": "violations",
+                "violations": "CA_2",
+                "obligations": "O00; O01; O42"
+              },
+              "requireWhitelist": null,
+              "privateLicense": false
+            }
+          ],
+          "status": "violations"
+        },
+        {
+          "key": "MIT",
+          "name": "MIT License",
+          "components": [
+            {
+              "componentKey": "bower:bootstrap",
+              "version": "4.5.2",
+              "path": "/bootstrap:4.5.2",
+              "status": {
+                "status": "ok",
+                "obligations": "O00; O01"
+              },
+              "requireWhitelist": null,
+              "privateLicense": false
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "key": "unknown",
+          "name": "unknown",
+          "components": [
+            {
+              "componentKey": "npm:apache-2.0",
+              "version": "1.0.7",
+              "path": "/apache-2.0:1.0.7",
+              "status": {
+                "status": "ok"
+              }
+            }
+          ],
+          "status": "warnings"
+        }
+      ],
+      "statistics": {
+        "licenses": 3,
+        "components": 3,
+        "legal": {
+          "warnings": 1,
+          "violations": 1
+        },
+        "vulnerability": {
+          "warnings": 0,
+          "violations": 0
+        },
+        "viability": {
+          "warnings": 0,
+          "violations": 0
+        },
+        "versioning": {
+          "warnings": 0,
+          "violations": 0
+        },
+        "integrity": {
+          "warnings": 0,
+          "violations": 0
+        }
+      },
+      "moduleRequirements": {
+        "CA": "CA_license",
+        "OM": "OM_SaaS",
+        "IP_protect": "IP_protect_y",
+        "IP_enforce": "IP_enforce_3"
+      },
+      "ciaRequirements": null,
+      "viabilityConfig": {},
+      "versioningConfig": {},
+      "release": null,
+      "tag": null,
+      "binaryLinks": [],
+      "branch": null,
+      "demo": null,
+      "latest": true
+    }
+  }
+}

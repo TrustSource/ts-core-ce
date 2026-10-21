@@ -1,0 +1,41 @@
+<template name="moduleDependenciesAsideLogs">
+  {{#if getLogs}}
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-segment">
+          <div class="timeline-divider"></div>
+        </div>
+        <div class="timeline-content"></div>
+      </div>
+      {{#each getLogs}}
+        <div class="timeline-item">
+          <div class="timeline-segment">
+            <div class="timeline-media {{timelineClass}} circle sq-24">
+              <div class="fa {{timelineIcon}} white"></div>
+            </div>
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-row">
+              <span>{{getUserNameLog}}</span> <small>({{{dateFromNow date}}})</small>
+            </div>
+            <div class="timeline-row">
+              <h6><strong>{{getLogType this}}</strong></h6>
+              <p style="word-break: break-all;">
+                <small>{{message}}</small>
+              </p>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  {{else}}
+    <div class="text-center">
+      No history available for this component
+    </div>
+  {{/if}}
+  {{#unless showAllAsideLogs}}
+    <div class="text-center m-t-md">
+      <button class="btn btn-default btn-xs show_all_module_logs"><i class="fa fa-ellipsis m-r-sm"></i> Load all time history</button>
+    </div>
+  {{/unless}}
+</template>

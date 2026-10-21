@@ -1,0 +1,74 @@
+<template name="policyCreate">
+  {{#if isInRole 'compliance_manager' companyId}}
+    <a href="#" class="btn btn-primary btn-xs showCreatePolicy">
+      <span class="fa fa-file-powerpoint-o" aria-hidden="true"></span> Upload new policy</a>
+
+    <!-- Modal: createPolicy -->
+    <div class="modal fade" id="createPolicy" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="ts-accent-line"></div>
+          <div class="modal-header text-center">
+            <i class="fa fa-file-powerpoint-o ts-big-icon text-success"></i>
+            <br/>
+            <h4 class="modal-title">Upload new policy</h4>
+            <br/>
+            <div class="{{createPolicyMsgType}}"
+                 id="form-messages">{{createPolicyMsg}}</div>
+          </div>
+          <form id="createPolicyForm">
+            <div class="modal-body">
+              <div class="row">
+                <div class="form-group col-xs-12">
+                  <label for="policyName">Policy name*</label>
+                  <input type="text" value="" id="policyName" class="form-control"
+                         name="policyName">
+                  <span
+                      class="help-block small">Specify the name and version of the new policy</span>
+                </div>
+                <div class="form-group col-xs-12">
+                  <label for="policyDocument">Document*</label>
+
+                  <div class="input-group input-group-file">
+                            <span class="input-group-btn">
+                              <span class="btn btn-default btn-file">
+                                Browse...
+                                <input type="file" name="policyDocument" id="policyDocument" accept=".pdf,.pptx">
+                              </span>
+                            </span>
+                    <input type="text" name="filename" readonly="readonly" placeholder="policy file" class="form-control">
+                  </div>
+                  <span
+                      class="help-block small">Select file (pdf/pptx and less 20mb) from your device</span>
+                </div>
+                <div class="form-group col-xs-12">
+                  <label for="policyNotify">Notify users</label>
+                  <select multiple="multiple" value="" id="policyNotify" class="form-control select2"
+                          name="policyNotify">
+                    {{#each getRolesSchema}}
+                      <option label="{{label}}" value="{{key}}">{{label}}</option>
+                    {{/each}}
+                  </select>
+                  <span
+                      class="help-block small">Select user roles to be notified about this policy</span>
+                </div>
+                <div class="form-group col-xs-12">
+                  <label for="policyDescription">Summary of changes</label>
+                  <textarea value="" id="policyDescription" class="form-control"
+                            name="policyDescription"></textarea>
+                  <span
+                      class="help-block small">Description of changes in last policy document</span>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close
+              </button>
+              <button type="submit" class="btn btn-primary">Create Policy</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+</template>

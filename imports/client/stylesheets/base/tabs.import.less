@@ -1,0 +1,168 @@
+// Tabs: underline-style Bootstrap 3 `.nav-tabs`, and the horizontally
+// scrolling tab bar driven by common/scrollable-tabs.js.
+
+// Tab bar: flat links with a teal underline on the current and hovered tab.
+.nav-tabs {
+  border-bottom: 1px solid @ts-border;
+
+  > li > a {
+    margin-right: 0;
+    padding: 10px 16px;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: @color-text-secondary;
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  > li.active > a {
+    &,
+    &:hover,
+    &:focus {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid @ts-teal;
+      color: @ts-teal;
+    }
+  }
+
+  > li > a:hover,
+  > li > a:focus {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid fade(@ts-teal, 40%);
+    color: @ts-teal;
+  }
+}
+
+// Panels rendered as tab content sit directly under the tab bar.
+.tab-pane .panel-body {
+  border-top: none;
+}
+
+// Only the selected pane is shown.
+.tab-content {
+  > .tab-pane {
+    display: none;
+  }
+
+  > .active {
+    display: block;
+  }
+}
+
+// Scrolling tab bar for pages with many tabs: the list scrolls sideways with
+// its scrollbar hidden; JS toggles `.can-scroll-left` / `.can-scroll-right`,
+// which reveal a fade and an arrow button on that edge.
+.nav-tabs-scrollable {
+  @arrow-width: 28px;
+
+  position: relative;
+
+  > .nav-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    > li {
+      flex: 0 0 auto;
+      white-space: nowrap;
+    }
+  }
+
+  // Edge fades, hidden until there is more content on that side.
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 40px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  &::before {
+    left: 0;
+    background: linear-gradient(to right, @color-white 0%, transparent 100%);
+  }
+
+  &::after {
+    right: 0;
+    background: linear-gradient(to left, @color-white 0%, transparent 100%);
+  }
+
+  // Arrow buttons, shown only on a scrollable edge.
+  .nav-tabs-arrow {
+    position: absolute;
+    top: 0;
+    bottom: 1px; // stop above the tab bar's bottom border
+    z-index: 2;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: @arrow-width;
+    padding: 0;
+    background: @color-white;
+    border: 1px solid @ts-border;
+    border-bottom: none;
+    color: #888;
+    font-size: 12px;
+    cursor: pointer;
+
+    &:hover {
+      background: #f5f5f5;
+      color: #333;
+    }
+  }
+
+  .nav-tabs-arrow-left {
+    left: 0;
+    border-radius: 4px 0 0 0;
+  }
+
+  .nav-tabs-arrow-right {
+    right: 0;
+    border-radius: 0 4px 0 0;
+  }
+
+  // Left edge scrollable: fade (moved clear of the arrow), arrow, list inset.
+  &.can-scroll-left {
+    &::before {
+      left: @arrow-width;
+      opacity: 1;
+    }
+
+    .nav-tabs-arrow-left {
+      display: flex;
+    }
+
+    > .nav-tabs {
+      padding-left: @arrow-width;
+    }
+  }
+
+  &.can-scroll-right {
+    &::after {
+      opacity: 1;
+    }
+
+    .nav-tabs-arrow-right {
+      display: flex;
+    }
+
+    > .nav-tabs {
+      padding-right: @arrow-width;
+    }
+  }
+}

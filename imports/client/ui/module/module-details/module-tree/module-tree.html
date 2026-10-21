@@ -1,0 +1,67 @@
+<template name="moduleTree">
+  <div class="ecs-tree relative">
+    <div class="intro-dependency-filters">
+      {{>moduleListFilter options=moduleListFilterOptions}}
+    </div>
+    <div class="ecs-dependencies intro-dependency-components">
+      {{#each treeList}}
+        {{>moduleTreeNode component=component children=children}}
+      {{/each}}
+      {{#if treeListError}}
+        <div class="alert alert-info">
+          <p>
+            <strong>{{treeListError.error}}. </strong><br>
+            In case you need information urgently,
+            please <a href="{{app 'supportUrl'}}" target="_blank" rel="noopener noreferrer" class="highlight">report an issue</a>.
+            Thank you for your patience.
+          </p>
+        </div>
+      {{/if}}
+    </div>
+    {{#unless hasResult}}
+      <div class="splash-holder">
+        <div class="ts-accent-line"></div>
+        <div class="ts-splash-title">
+          <h1>Loading ...</h1>
+          <div class="loading-spinner"></div>
+        </div>
+      </div>
+    {{/unless}}
+  </div>
+</template>
+<template name="moduleTreeNode">
+  <div class="ecs-tree-node relative">
+    {{#with component}}
+      <div class="ecs-dependency context-component {{isSelected}} {{getRootClass}}">
+        <label class="dep-checkbox">
+          <input type="checkbox" value="{{getKey}}" name="components">
+        </label>
+        <div class="dependency-name dependency-select">
+          <div class="dep-name-line">
+            {{#if isRoot}}
+              <span class="fa fa-folder-open dep-root-icon" title="Root module"></span>
+            {{/if}}
+            {{#if getHasLinks}}<span class="fa fa-copy" title="{{getLinksTitle}}"></span>{{/if}}
+            {{#if getHasModuleLink}}<span class="fa fa-link" title="{{getModuleLinkTitle}}"></span>{{/if}}
+            <span class="module-aside-status-dot bg-{{status}} dep-status-dot"></span>
+            <span class="dep-name-text">{{getName}} <span class="dep-version">{{getCurrentVersion}}</span></span>
+            <span class="dep-licenses">
+              {{#if getCurrentSPDXisMulty}}
+                <span class="label label-warning tree-builder-licenses" title="Multi-license! Please select">Multi-license</span>
+              {{else}}
+                {{#each getLicenseLabels}}
+                  <span class="label label-default tree-builder-licenses" title="{{this}}">{{this}}</span>
+                {{/each}}
+              {{/if}}
+            </span>
+          </div>
+        </div>
+      </div>
+    {{/with}}
+    {{#each children}}
+      <div style="padding-left: 15px">
+        {{> moduleTreeNode}}
+      </div>
+    {{/each}}
+  </div>
+</template>

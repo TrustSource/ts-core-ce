@@ -1,0 +1,25 @@
+<template name="companyLegalTemplatesDetails">
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">{{getName}}</h2>
+        <small>Rule details</small>
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content">
+    <div class="panel">
+      <div class="panel-body ">
+        <div class="form">
+          <h3>Update template information</h3>
+          {{> quickForm buttonContent="Update template" schema=getSchema id="updateTemplateForm" type="method-update" doc=this meteormethod="_updateCompanyLegalSettingsTemplate" fields=fields}}
+          {{#if isProject}}
+            {{> companyLegalTemplatesDetailsProject}}
+          {{else}}
+            {{> companyLegalTemplatesDetailsModule}}
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

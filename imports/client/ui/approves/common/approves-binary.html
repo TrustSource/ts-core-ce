@@ -1,0 +1,54 @@
+<template name="approvesBinary">
+    <a class="btn btn-primary {{size}} pull-left" data-toggle="modal" data-target="#binaryLinks" title="{{__ 'ManageBinaryLinks'}}">
+      <span class="fa fa-link" aria-hidden="true"></span> {{__ 'ManageBinaryLinks'}}</a>
+
+    <!-- Modal: binaryLinks -->
+    <div class="modal fade" id="binaryLinks" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="ts-accent-line"></div>
+          <div class="modal-header text-center">
+            <i class="fa fa-link ts-big-icon text-success"></i>
+            <br/>
+            <h4 class="modal-title">{{__ 'BinaryLinks'}}</h4>
+            <br/>
+          </div>
+          <div class="modal-body">
+           {{#unless approved}}
+              <form id="addBinaryLinkForm">
+                <div class="row inner-b-10">
+                  <div class="col-md-6">
+                    <label for="binaryName">{{__ 'Link'}}</label>
+                    <input type="text" id="binaryName" name="binaryName" class="form-control"
+                           placeholder="{{__ 'AddBinaryLink'}}">
+                  </div>
+                  <div class="col-md-4">
+                    <label for="binaryComment">{{__ 'Comment'}}</label>
+                    <textarea id="binaryComment" name="binaryComment" class="form-control"
+                              placeholder="{{__ 'EnterPublishingComment'}}" rows="1"></textarea>
+                  </div>
+                  <div class="col-md-2 text-right">
+                    <label for="">&nbsp;</label>
+                    <div>
+                      <button type="submit" class="btn btn-primary">{{__ 'AddLink'}}</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <hr>
+            {{/unless}}
+            {{> reactiveTable settings=reactiveTableSettings}}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">{{__ 'Close'}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</template>
+
+<template name="reactiveTableApprovesBinaryActions">
+  {{#unless isApproved}}
+    <button class="btn btn-danger2 btn-sm remove-link">{{__ 'Remove'}}</button>
+  {{/unless}}
+</template>

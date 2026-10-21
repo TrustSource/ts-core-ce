@@ -1,0 +1,10 @@
+<template name="releasesDetailsExportControl">
+  <div>
+    {{#if _id}}
+      <h3>Export control</h3>
+      {{> approvesExportControl}}
+    {{else}}
+      {{>loadingSplash}}
+    {{/if}}
+  </div>
+</template>

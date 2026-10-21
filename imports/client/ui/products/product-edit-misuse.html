@@ -1,0 +1,25 @@
+<template name="productEditMisuse">
+  <div class="form-group col-sm-12">
+    <p class="alert alert-info inner-b-0">
+      CRA requires product providers to identify potential cases of misuse. You may
+      collect these cases here. It is possible to pull cases from other products
+    </p>
+  </div>
+  <div class="form-group col-sm-12">
+    <div class="pull-left">
+      <a class="btn btn-primary" data-toggle="modal" data-target="#productAddMisuse" title="Add potential misuse case">
+        <span class="fa fa-plus" aria-hidden="true"></span>
+        Add potential misuse case
+      </a>
+    </div>
+    {{> productAddMisuse}}
+    <form autocomplete="off">
+      {{> reactiveTable settings=reactiveTableSettings}}
+    </form>
+  </div>
+</template>
+
+<template name="reactiveTableProductsMisuseActions">
+  <button class="btn btn-warning btn-sm remove-item" type="button"><span class="fa fa-times" aria-hidden="true"></span></button>
+</template>
+

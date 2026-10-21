@@ -1,0 +1,139 @@
+<template name="moduleLicenses">
+  <div class="ts-panel ecs-licenses">
+    {{#unless isInfrastructureModule}}
+      <div class="panel-heading module-deps-heading">
+        <div class="module-deps-heading-left">
+          <div class="input-group input-group-sm module-deps-search">
+            <span class="input-group-addon"><i class="fa fa-filter"></i></span>
+            <input type="text" name="search" class="form-control" value="{{session 'moduleDetailListFilter'}}"
+                   placeholder="Filter">
+          </div>
+          <button class="btn btn-default btn-sm sorting" title="Sort order">
+            {{#if isDescSorting}}
+              <i class="fa fa-sort-alpha-desc"></i>
+            {{else}}
+              <i class="fa fa-sort-alpha-asc"></i>
+            {{/if}}
+          </button>
+          <a class="btn btn-default btn-sm toggle-list-view expand-all" title="Expand all">
+            <span class="fa fa-fw fa-expand" aria-hidden="true"></span>
+          </a>
+          <a class="btn btn-default btn-sm toggle-list-view collapse-all hidden" title="Collapse all">
+            <span class="fa fa-fw fa-compress" aria-hidden="true"></span>
+          </a>
+        </div>
+        <span>Licenses</span>
+      </div>
+      <div class="intro-dependency-filters">
+        {{>moduleListFilter options=moduleListFilterOptions}}
+      </div>
+      {{#each getLicenseList.filtered}}
+        {{> moduleLicense}}
+      {{/each}}
+      {{#if requestInProgress}}
+        {{#panel}}
+          <div class="text-primary">
+            <i class="fa fa-spinner fa-spin"></i> Loading data for module, please wait...
+          </div>
+        {{/panel}}
+      {{else}}
+        {{#unless getLicenseList.filtered}}
+          {{> reactiveTableNoData}}
+        {{/unless}}
+      {{/if}}
+      {{> paginationList collection=getLicenseList.all list=getLicenseList.filtered}}
+    {{else}}
+      {{#unless crawlerInfo}}
+        <div class="alert alert-info">
+          <p>
+            <strong>Sorry, detailed information not available yet. </strong><br>
+            Component has been scheduled for autoscan and
+            information will be provided soon. In case you need information urgently,
+            please <a href="{{app 'supportUrl'}}" target="_blank" rel="noopener noreferrer">report an issue</a>.
+            Thank you for your patience.
+          </p>
+        </div>
+      {{else}}
+        {{#if getDescription}}
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h5>Module description</h5>
+            </div>
+            <div class="panel-body">
+              {{getDescription}}
+            </div>
+          </div>
+        {{/if}}
+        <div class="panel panel-danger">
+          <div class="panel-heading">
+            <h5>Vulnerabilities information</h5>
+          </div>
+          <div class="panel-body">
+            {{#if getVulnerabilityDetails}}
+              {{#each getVulnerabilityDetails}}
+                <div>
+                  <span class="inner-r-10 large-label">{{{cvssLabel vector cvssColor score}}}</span>
+                  <a href="{{link}}" target="_blank" class="inline">
+                    <b>{{name}}</b>
+                    <span class="fa fa-external-link icon-inner-top"></span>
+                  </a>
+                  {{description}}
+                </div>
+              {{/each}}
+            {{else}}
+              <p>No vulnerabilities known</p>
+            {{/if}}
+          </div>
+        </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h5>Viability information</h5>
+          </div>
+          <div class="panel-body">
+            <span title="Stars" data-toggle="tooltip">{{getViabilityDetails.info.stargazers_count}} <i class="fa fa-star"></i></span>&nbsp;&nbsp;&nbsp;
+            <span title="Code forks" data-toggle="tooltip">{{getViabilityDetails.info.forks_count}} <i class="fa fa-code-fork"></i></span>&nbsp;&nbsp;&nbsp;
+            <span title="Open issues & pull requests" data-toggle="tooltip">{{getViabilityDetails.info.open_issues_count}} <i
+                class="fa fa-bug"></i></span>&nbsp;&nbsp;&nbsp;
+            <span title="Last update" data-toggle="tooltip">{{dateFormat getViabilityDetails.info.updated_at 'll'}} <i
+                class="fa fa-pencil"></i></span>&nbsp;&nbsp;&nbsp;
+            <span title="Last visit" data-toggle="tooltip">{{dateFormat getViabilityDetails.lastVisit 'fromNow'}} <i
+                class="fa fa-refresh"></i></span>&nbsp;&nbsp;&nbsp;
+            <span style="display:none"
+                  id="sparkline-{{../data._id}}">Commits during last year:&nbsp;<span></span></span>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h5>License info</h5>
+          </div>
+          <div class="panel-body">
+            <h3 class="text-center">
+              {{getLicenseDetails.name}}
+              <a href="{{getLicenseDetails.url}}" target="_blank">
+                <small><i class="fa fa-external-link"></i></small>
+              </a>
+            </h3>
+            <blockquote style="max-height: 300px;overflow-y: auto;font-size: 0.9em">
+              {{getLicenseDetails.text}}
+            </blockquote>
+          </div>
+        </div>
+      {{/unless}}
+    {{/unless}}
+  </div>
+</template>
+
+<template name="moduleLicensesChart">
+  <div class="ecsbars">
+    <div class="row">
+      <div class="col-lg-12 col-sm-6">
+        {{> ecsbarLine title="Suitability of licenses" data=licenses }}
+      </div>
+      <div class="col-lg-12 col-sm-6">
+        {{#with statistics}}
+          {{> ecsbarLine title="Affected components" data=legal }}
+        {{/with}}
+      </div>
+    </div>
+  </div>
+</template>

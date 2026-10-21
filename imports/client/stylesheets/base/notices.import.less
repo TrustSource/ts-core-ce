@@ -1,0 +1,56 @@
+// SweetAlert confirm dialogs: card shadow, text sizes and flat buttons
+
+// SweetAlert confirm button
+@confirm-button-bg: #34495e;
+@confirm-button-focus-ring: 0 0 2px rgba(128, 179, 235, .5);
+@notice-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.2);
+
+.sweet-alert {
+  padding: 25px;
+  box-shadow: @notice-shadow;
+
+  button {
+    margin: 26px 5px 0;
+    padding: 10px 32px;
+    border: none;
+    border-radius: 5px;
+    font-size: 17px;
+    font-weight: 500;
+    color: @color-white;
+    background-color: @confirm-button-bg;
+    box-shadow: none;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+      box-shadow: @confirm-button-focus-ring, inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+    }
+
+    &:hover { background-color: #a1d9f2; }
+    &:active { background-color: #81ccee; }
+
+    // Secondary (cancel) button in grey
+    &.cancel {
+      background-color: #d0d0d0;
+
+      &:hover { background-color: #c8c8c8; }
+      &:active { background-color: #b6b6b6; }
+    }
+  }
+
+  p {
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  h2 {
+    font-size: 26px;
+  }
+}
+
+// Thin header rule on Bootstrap tables (Bootstrap draws 2px)
+.table {
+  > thead > tr > th {
+    border-bottom: 1px solid #ddd;
+  }
+}

@@ -1,0 +1,45 @@
+<template name="companyPrivateLicensesCreate">
+  {{#if isInRole 'compliance_manager' companyId}}
+    <a href="#" class="btn btn-primary btn-xs showCreatePrivateLicense">
+      <span class="fa fa-plus-circle" aria-hidden="true"></span> Create private license</a>
+
+    <!-- Modal: createPrivateLicenses -->
+    <div class="modal fade" id="createPrivateLicense" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="ts-accent-line"></div>
+          <div class="modal-header text-center">
+            <i class="fa fa-gavel ts-big-icon text-success"></i>
+            <br/>
+            <h4 class="modal-title">Create private license</h4>
+            <br/>
+            <br/>
+            <div class="{{createPrivateLicenseMsgType}}"
+                 id="form-messages">{{createPrivateLicenseMsg}}</div>
+          </div>
+          <form id="createPrivateLicenseForm">
+            <div class="modal-body">
+              <div class="row">
+                <div class="form-group col-xs-12">
+                  <label for="newPrivateLicense">Name*</label>
+                  <input type="text" value="" id="newPrivateLicense" class="form-control"
+                         name="newPrivateLicense">
+                </div>
+                <div class="form-group col-xs-12">
+                  <label for="newPrivateLicenseDescription">Description</label>
+                  <textarea value="" id="newPrivateLicenseDescription" class="form-control"
+                            name="newPrivateLicenseDescription"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close
+              </button>
+              <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+</template>

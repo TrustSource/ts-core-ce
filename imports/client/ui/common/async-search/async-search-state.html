@@ -1,0 +1,32 @@
+<template name="asyncSearchLoading">
+  <div class="async-search-state async-search-loading">
+    <h1 class="async-search-loading-title">{{loadingTitle}}</h1>
+    <div class="loading-spinner"></div>
+    {{#if phaseText}}
+      <p class="async-search-state-text text-muted">{{phaseText}}</p>
+    {{/if}}
+    {{#if showRetry}}
+      <button type="button" class="btn btn-default btn-sm search-retry">
+        {{__ 'SearchRetry'}}
+      </button>
+    {{/if}}
+  </div>
+</template>
+
+<template name="asyncSearchError">
+  <div class="async-search-state async-search-error">
+    <div class="async-search-error-icon">
+      <i class="fa fa-exclamation-triangle"></i>
+    </div>
+    <h3 class="async-search-error-title">{{__ 'SearchFailed'}}</h3>
+    <p class="async-search-state-text text-muted">{{errorText}}</p>
+    <div class="async-search-error-actions">
+      <button type="button" class="btn btn-primary search-retry">
+        {{__ 'SearchRetry'}}
+      </button>
+      <a href="{{pathFor 'componentList'}}" class="btn btn-default">
+        {{__ 'SearchBackToStart'}}
+      </a>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,61 @@
+<template name="moduleDependency">
+  <div class="ecs-dependency context-component {{isSelected}} {{getRootClass}}">
+    <label class="dep-checkbox">
+      <input type="checkbox" value="{{getKey}}" name="components">
+    </label>
+    <div class="dependency-status dependency-select">
+      <div class="label {{licenseStatus}} inner-r-5 dependency-label" title="Licenses - {{licenseStatus}}">
+        {{#if getCurrentSPDXisMulty}}
+          <i class="multy-gavel inner-l-2">
+            <i class="fa fa-gavel gavel-1"></i>
+            <i class="fa fa-gavel gavel-2"></i>
+          </i>
+        {{else}}
+          <span class="fa fa-gavel text-center" style="width: 13px"></span>
+        {{/if}}
+      </div>
+      <div class="label {{vulnerabilityStatus}} inner-r-5 dependency-label" title="Vulnerabilities - {{vulnerabilityStatus}}">
+        <span class="fa fa-shield-halved text-center" style="width: 13px"></span>
+      </div>
+      <div class="label {{viabilityStatus}} inner-r-5 dependency-label" title="Viability - {{viabilityStatus}}">
+        <span class="fa fa-heartbeat text-center" style="width: 13px"></span>
+      </div>
+      <div class="label {{versioningStatus}} inner-r-5 dependency-label" title="Versioning - {{versioningMessage}}">
+        <span class="fa {{versioningIcon}} text-center" style="width: 15px"></span>
+      </div>
+      <div class="label {{encryptionStatus}} inner-r-5 dependency-label" title="Export control - {{encryptionMessage}}">
+        <span class="fas fa-person-military-pointing text-center" style="width: 15px"></span>
+      </div>
+      {{#if showEndoflife endoflifeStatus}}
+        <div class="label {{endoflifeStatus}} inner-r-5 dependency-label" title="End-of-life - {{endoflifeMessage}}">
+          <span class="fas fa-hourglass-end text-center" style="width: 15px"></span>
+        </div>
+      {{/if}}
+    </div>
+    <div class="dependency-name dependency-select">
+      <div class="dep-name-line" title="{{getName}} {{getCurrentVersion}} {{getCurrentSPDX}}">
+        {{#if isRoot}}
+          <span class="fa fa-folder-open dep-root-icon" title="Root module"></span>
+          {{#if isSingleRoot}}
+            <a class="dep-root-set-license" title="Set root component license"
+               data-component-key="{{getKey}}">
+              <span class="fa fa-gavel"></span>
+            </a>
+          {{/if}}
+        {{/if}}
+        <span class="module-aside-status-dot bg-{{status}} dep-status-dot"></span>
+        <span class="dep-name-text">{{getName}} <span class="dep-version">{{getCurrentVersion}}</span></span>
+        <span class="dep-licenses">
+          {{#if getCurrentSPDXisMulty}}
+            <span class="label label-warning tree-builder-licenses" title="Multi-license! Please select">Multi-license</span>
+          {{else}}
+            {{#each getLicenseLabels}}
+              <span class="label label-default tree-builder-licenses" title="{{this}}">{{this}}</span>
+            {{/each}}
+          {{/if}}
+        </span>
+      </div>
+    </div>
+  </div>
+
+</template>

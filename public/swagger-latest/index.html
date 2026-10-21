@@ -1,0 +1,33 @@
+<!-- HTML for static distribution bundle build -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Swagger UI</title>
+    <link rel="stylesheet" type="text/css" href="./swagger-ui.css" />
+    <link rel="stylesheet" type="text/css" href="index.css" />
+    <link rel="icon" type="image/png" href="./favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="./favicon-16x16.png" sizes="16x16" />
+    <script>
+      // The Swagger UI runs in an iframe, a separate document the parent app's
+      // body.theme-dark class cannot reach. The parent passes the active theme
+      // as ?theme=dark|light; mirror it onto <html> before paint (no flash).
+      (function () {
+        try {
+          var t = new URLSearchParams(window.location.search).get('theme');
+          if (t === 'dark') {
+            document.documentElement.classList.add('theme-dark');
+          }
+        } catch (e) { /* no-op */ }
+      })();
+    </script>
+  </head>
+
+  <body>
+    <div id="swagger-ui"></div>
+    <script src="./swagger-ui-bundle.js" charset="UTF-8"> </script>
+    <script src="./swagger-ui-standalone-preset.js" charset="UTF-8"> </script>
+    <script src="./swagger-initializer.js" charset="UTF-8"> </script>
+    <script src='./lib/iframeResizer.contentWindow.min.js' type='text/javascript'></script>
+  </body>
+</html>

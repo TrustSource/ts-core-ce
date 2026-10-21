@@ -1,0 +1,50 @@
+<template name="verifyEmail">
+  <div class="login-container">
+    <div class="login_bg"></div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="text-center m-b-md">
+          <h3>
+            <a href="{{pathFor route='login'}}">
+              <img src="/logo.png" alt="{{app 'name'}}" style="max-height: 47px; margin-left: 19px; margin-bottom: 10px;">
+            </a>
+          </h3>
+          <h4>{{__ 'VerifyEMail'}}</h4>
+          <h5>
+            <small>{{__ 'ThankYouForSigningUpTo'}} {{app 'fullName'}}.
+              {{__ 'ToFinishTheRegistration'}}
+              <strong>{{__ 'Accept'}}</strong>.</small>
+          </h5>
+        </div>
+        <div class="ts-panel">
+          <div class="panel-body">
+            <form id="verifyEmailForm" class="errors-below">
+              <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                  <div class="form-group">
+                    <span class="pull-right">
+                      <a class="highlight" id="resetpwd">{{__ 'IForgotMyPassword'}}</a>
+                    </span>
+                    <label class="control-label" for="password">
+                      {{__ 'Password'}}
+                      <div class="error" id="form-messages">{{errorMsg}}</div>
+                    </label>
+                    <input type="password" placeholder="******" value="" name="password" id="password"
+                           class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <button class="btn btn-primary btn-block">{{__ 'Accept'}}</button>
+                  </div>
+                  <div class="text-center">
+                    <a class="highlight" id="cancel">{{__ 'DoNotWantVerifyEmail'}}</a>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{> blankLayoutFooter}}
+  </div>
+</template>

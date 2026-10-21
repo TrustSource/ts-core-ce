@@ -1,0 +1,19 @@
+<template name="riskTaskList">
+  {{> riskEditTask}}
+  <div class="risk-task-controls">
+    <div class="risk-task-filters">
+      {{> risksTasksStateFilter sessionVar="risksTasksListFilter"}}
+    </div>
+    <div class="reactive-table-scroll-x">
+      {{> reactiveTable settings=reactiveTableSettings}}
+    </div>
+  </div>
+</template>
+
+<template name="reactiveTableTasksListActions">
+  <div class="text-right">
+    <button type="button" class="btn btn-danger btn-xs remove-item">
+      <i class="fa fa-trash-can"></i>
+    </button>
+  </div>
+</template>

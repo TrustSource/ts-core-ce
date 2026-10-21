@@ -1,0 +1,55 @@
+<template name="AiModelsSettingsAddModal">
+  <!-- Modal: AiModelsSettingsAddModal -->
+  <div class="modal fade" id="AiModelsSettingsAddModal" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="ts-accent-line"></div>
+        <div class="modal-header text-center">
+          <h4 class="modal-title">{{#if isEditMode}}Edit AI artifact{{else}}Add AI artifact{{/if}}</h4>
+        </div>
+        <form id="AiModelsSettingsAddForm" method="post">
+          <div class="modal-body">
+            <div class="row">
+              <div class="form-group col-xs-12">
+                <label for="aiName">Name *</label>
+                <input type="text" name="aiName" id="aiName" class="form-control" autocomplete="off" required placeholder="e.g. stable-diffusion-xl-base">
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="aiVersion">Version</label>
+                <input type="text" name="aiVersion" id="aiVersion" class="form-control" placeholder="e.g. 1.0">
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="aiProvider">Provider</label>
+                <input type="text" name="aiProvider" id="aiProvider" class="form-control" placeholder="e.g. Stability AI">
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="aiTask">Task</label>
+                <input type="text" name="aiTask" id="aiTask" class="form-control" placeholder="e.g. text-to-image">
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="aiModelFamily">Model family</label>
+                <input type="text" name="aiModelFamily" id="aiModelFamily" class="form-control" placeholder="e.g. diffusion">
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="aiArchitecture">Architecture</label>
+                <input type="text" name="aiArchitecture" id="aiArchitecture" class="form-control" placeholder="e.g. Stable Diffusion with Refiner">
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="aiPurl">PURL</label>
+                <input type="text" name="aiPurl" id="aiPurl" class="form-control" placeholder="e.g. pkg:huggingface/stabilityai/stable-diffusion-xl-base-1.0">
+              </div>
+              <div class="form-group col-xs-12">
+                <label for="aiComment">Comment</label>
+                <input type="text" name="aiComment" id="aiComment" class="form-control" placeholder="Optional note">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">{{__ 'Cancel'}}</button>
+            <button type="submit" class="btn btn-primary" disabled="{{loading}}">{{__ 'Save'}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>

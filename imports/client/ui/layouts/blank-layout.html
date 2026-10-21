@@ -1,0 +1,18 @@
+<template name="blankLayout">
+
+  <div class="ts-accent-line"></div>
+
+  <!-- Main Wrapper -->
+  {{> yield}}
+
+</template>
+
+<template name="blankLayoutFooter">
+  <div class="row blank-layout-footer">
+    <div class="col-md-12 text-center">
+      {{{app 'footer1'}}}<br/>{{{app 'footer2'}}}<br/>
+      <a href="{{app 'sourceUrl'}}" target="_blank" rel="noopener">Source code (AGPL-3.0)</a>
+    </div>
+  </div>
+</template>
+

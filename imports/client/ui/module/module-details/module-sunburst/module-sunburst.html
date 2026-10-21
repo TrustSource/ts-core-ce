@@ -1,0 +1,17 @@
+<template name="moduleSunburst">
+  <div class="row">
+    <div class="col-md-12">
+      {{#if toManyItemsHint}}
+        <div class="current-graph-breadcrumbs" style="top: 0;left: auto;">
+          <div class="alert alert-warning">
+            Ups... your module has more than 150 root components. <br>
+            This exceeds the amount for a useful representation in a Sunburst diagram.
+          </div>
+        </div>
+      {{/if}}
+      <div class="sunburst-chart clearfix">
+        <canvas id="sunburst-chart" height="500"></canvas>
+      </div>
+    </div>
+  </div>
+</template>

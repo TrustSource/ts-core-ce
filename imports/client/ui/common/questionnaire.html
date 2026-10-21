@@ -1,0 +1,34 @@
+<template name="questionnaireSteps">
+  <div class="steps">
+    <ul>
+      {{#each wizard.steps}}
+        <li class="wizardStep {{activeStepClass id}} {{completeStepClass id}}" data-id="{{id}}">
+          <span class="badge {{badgeStatus id}}">{{stepNumber id}}</span>
+          {{#if xs}}
+            {{#if activeStepClass id}}
+              {{title}}
+            {{/if}}
+          {{else}}
+            {{title}}
+          {{/if}}
+          <span class="chevron"></span>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</template>
+
+<template name="questionnaireButtons">
+  {{#with wizard}}
+    <nav class="wizard-nav">
+      {{#if showBackButton}}
+        <button type="button" class="wizard-back-button btn btn-default">{{backButton}}</button>
+      {{/if}}
+      {{#if isLastStep}}
+        <button type="submit" class="wizard-submit-button btn btn-success">{{confirmButton}}</button>
+      {{else}}
+        <button type="submit" class="wizard-next-button btn btn-primary">{{nextButton}}</button>
+      {{/if}}
+    </nav>
+  {{/with}}
+</template>

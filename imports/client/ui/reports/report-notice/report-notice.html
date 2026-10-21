@@ -1,0 +1,45 @@
+<template name="reportNoticeFiles">
+
+
+  {{#pageHeader}}
+    <div class="reports-header">
+      <div class="reports-header-left">
+        <h2 class="font-light m-b-xs">
+          Notice files
+        </h2>
+        <small>Open source notice files for license compliance and distribution</small>
+      </div>
+      <div class="reports-header-actions">
+        {{> reportNoticeFileCreate}}
+      </div>
+    </div>
+  {{/pageHeader}}
+
+  <div class="content notice-list">
+
+    {{#unless writtenOffer}}
+      <div class="alert alert-warning inner-b-10 inner-t-10">
+        <i class="fa fa-exclamation-triangle"></i>
+        <strong>Written Offer</strong> - The written offer statement has not yet been set up.
+        <a href="/settings/company/general" class="highlight">Configure now <i class="fa fa-cogs"></i></a>
+      </div>
+    {{/unless}}
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+          {{#if subsReady}}
+            {{> reactiveTable settings=reactiveTableSettings}}
+          {{else}}
+            <div class="text-center p-lg">
+              <div class="loading-spinner"></div>
+            </div>
+          {{/if}}
+        </div>
+    </div>
+  </div>
+</template>
+<template name="reactiveTableNoticeFilesActions">
+  <div class="text-right">
+    <a href class="btn btn-danger2 btn-sm delete-notice-file"><i class="fa fa-trash"></i><span class="hidden-xs hidden-sm"> Remove</span></a>
+  </div>
+</template>

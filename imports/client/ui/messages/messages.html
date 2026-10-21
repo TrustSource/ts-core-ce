@@ -1,0 +1,83 @@
+<template name="messages">
+
+  {{#pageHeader}}
+    <div class="messages-header">
+      <div class="messages-header-left">
+        <h2 class="font-light m-b-xs">Messages</h2>
+        <small>All messages available on this page. You may filter them by type</small>
+      </div>
+      <div class="messages-header-actions">
+        <div class="btn-group btn-group-sm" role="group">
+          {{#each messagesFolders}}
+            <a href="{{pathFor route='messagesFolder' folder=value}}" class="btn btn-xs btn-default {{#if activeFolder}}active{{/if}}">
+              <span class="fa {{icon}}"></span> <span class="btn-label">{{label}}</span>
+              {{#if newMessages}}<span class="badge badge-success">{{newMessages}}</span>{{/if}}
+            </a>
+          {{/each}}
+        </div>
+        {{#if hasTypes}}
+          <div class="btn-group btn-group-sm" role="group">
+            {{#each messagesLabels}}
+              {{#if available}}
+                <a title="{{label}}" href="{{pathFor route='messagesFolder' folder=currentFolder query=getQuery}}" class="btn btn-xs btn-default {{#if activeFilter}}active{{/if}}">
+                  <span class="fa {{icon}}"></span>
+                </a>
+              {{/if}}
+            {{/each}}
+          </div>
+        {{/if}}
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content">
+    <div class="mail-style">
+      <div class="row">
+        <div class="col-lg-12 mail-content">
+          <div class="panel">
+            <div class="panel-body">
+              {{#if activeTrash}}
+                <button class="btn btn-default empty-trash-now pull-left" disabled="{{haveNoMessages}}">Empty Trash now</button>
+              {{/if}}
+              {{> reactiveTable settings=reactiveTableSettings}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="reactiveTableMessagesMarked">
+  {{#if isMarked}}
+    <a href="" class="move-to-inbox" title="Move to inbox"> <i class="fa fa-flag"></i> </a>
+  {{else}}
+    <a href="" class="move-to-marked" title="Move to marked"> <i class="fa fa-flag-o"></i> </a>
+  {{/if}}
+</template>
+
+<template name="reactiveTableMessagesTrash">
+  {{#if isTrash}}
+    <a href="" class="move-to-inbox" title="Move to inbox"> <i class="fa fa-undo"></i> </a>
+  {{else}}
+    <a href="" class="move-to-trash" title="Move to trash"> <i class="fa fa-trash"></i> </a>
+  {{/if}}
+</template>
+
+<template name="reactiveTableMessagesMessage">
+  {{#if isUnread}}
+    <span class="mark-as-viewed">
+      {{message}}
+    </span>
+  {{else}}
+    <span class="mark-as-viewed">
+      {{message}}
+    </span>
+  {{/if}}
+  {{#if actionRoute.route}}
+    <a href="{{pathFor route=actionRoute.route data=actionRoute.params query=actionRoute.query}}" target="_blank" class="highlight">See more...</a>
+  {{/if}}
+</template>
+
+<template name="reactiveTableMessagesNoData">
+  {{> reactiveTableNoData}}
+</template>

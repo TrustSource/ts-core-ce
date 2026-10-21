@@ -1,0 +1,5 @@
+export {default as CapabilitiesCreate} from './create'
+export {default as CapabilitiesUpdate} from './update'
+export {default as CapabilitiesRemove} from './remove'
+export {default as CapabilitiesFind} from './find'
+export {default as CapabilitiesFindByProject} from './findByProject'

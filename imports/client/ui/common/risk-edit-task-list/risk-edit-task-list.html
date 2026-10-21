@@ -1,0 +1,21 @@
+<template name="riskEditTaskList">
+  <div class="pull-left">
+    {{> riskAddTask}}
+    {{> riskEditTask}}
+  </div>
+  <div class="reactive-table-scroll-x">
+    {{> reactiveTable settings=reactiveTableSettings}}
+  </div>
+</template>
+
+<template name="reactiveTableTasksActions">
+  <div class="text-right">
+    <button type="button" class="btn btn-danger btn-xs remove-item">
+      <i class="fa fa-trash-can"></i>
+    </button>
+  </div>
+</template>
+
+<template name="reactiveTableExternalTasksActions">
+  {{> riskIssuesLink description=getProblemDescription taskId=_id riskId=riskId projectId=projectId repository=getRepository githubLink=githubLink}}
+</template>

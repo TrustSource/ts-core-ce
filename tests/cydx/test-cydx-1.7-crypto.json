@@ -1,0 +1,153 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.7",
+  "serialNumber": "urn:uuid:9c5b1f2a-7d44-4e10-9b6c-1f0a2c3d4e5f",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-06-01T09:00:00.000Z",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "TrustSource",
+          "version": "2.1.0",
+          "supplier": {"name": "EACG"}
+        }
+      ]
+    },
+    "component": {
+      "type": "application",
+      "bom-ref": "pkg:npm/cydx17-demo-app@1.0.0",
+      "name": "cydx17-demo-app",
+      "version": "1.0.0",
+      "purl": "pkg:npm/cydx17-demo-app@1.0.0",
+      "description": "Root component for the CycloneDX 1.7 manual import test",
+      "group": "acme",
+      "publisher": "Acme Publishing",
+      "author": "Jane Engineer",
+      "copyright": "Copyright (c) 2026 Acme Inc.",
+      "cpe": "cpe:2.3:a:acme:cydx17-demo-app:1.0.0:*:*:*:*:*:*:*",
+      "supplier": {"name": "Acme Inc"},
+      "licenses": [{"license": {"id": "Apache-2.0"}}],
+      "externalReferences": [
+        {"type": "website", "url": "https://acme.test"},
+        {"type": "vcs", "url": "https://git.acme.test/acme/demo-app"},
+        {"type": "distribution", "url": "https://dl.acme.test/demo-app"},
+        {"type": "issue-tracker", "url": "https://git.acme.test/acme/demo-app/issues"},
+        {"type": "mailing-list", "url": "mailto:dev@acme.test"},
+        {"type": "documentation", "url": "https://docs.acme.test/demo-app"}
+      ],
+      "hashes": [
+        {"alg": "SHA-256", "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/left-pad@1.3.0",
+      "name": "left-pad",
+      "version": "1.3.0",
+      "purl": "pkg:npm/left-pad@1.3.0",
+      "description": "String left-pad utility",
+      "licenses": [{"license": {"id": "WTFPL"}}],
+      "externalReferences": [
+        {"type": "vcs", "url": "https://github.com/stevemao/left-pad"}
+      ],
+      "hashes": [
+        {"alg": "SHA-256", "content": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}
+      ]
+    },
+    {
+      "type": "framework",
+      "bom-ref": "pkg:maven/org.springframework/spring-core@6.1.0",
+      "name": "spring-core",
+      "version": "6.1.0",
+      "group": "org.springframework",
+      "purl": "pkg:maven/org.springframework/spring-core@6.1.0",
+      "licenses": [{"license": {"id": "Apache-2.0"}}]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/aes-256-gcm",
+      "name": "AES-256-GCM",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "block-cipher",
+          "parameterSetIdentifier": "256",
+          "mode": "gcm",
+          "padding": "pkcs7",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "x86_64",
+          "certificationLevel": ["fips140-3-l1"],
+          "cryptoFunctions": ["encrypt", "decrypt"],
+          "classicalSecurityLevel": 128,
+          "nistQuantumSecurityLevel": 0
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/acme-tls-cert",
+      "name": "acme.test TLS certificate",
+      "cryptoProperties": {
+        "assetType": "certificate",
+        "certificateProperties": {
+          "subjectName": "CN=acme.test",
+          "issuerName": "CN=Acme Root CA, O=Acme Inc",
+          "notValidBefore": "2026-01-01T00:00:00.000Z",
+          "notValidAfter": "2027-01-01T00:00:00.000Z",
+          "certificateFormat": "X.509",
+          "certificateFileExtension": "pem",
+          "serialNumber": "0A1B2C3D4E5F",
+          "certificateState": [{"state": "active"}]
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/tls-1-3",
+      "name": "TLS 1.3",
+      "cryptoProperties": {
+        "assetType": "protocol",
+        "protocolProperties": {
+          "type": "tls",
+          "version": "1.3",
+          "cipherSuites": [{"name": "TLS_AES_256_GCM_SHA384"}, {"name": "TLS_CHACHA20_POLY1305_SHA256"}]
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/signing-private-key",
+      "name": "Release signing private key",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "private-key",
+          "id": "key-2026-release",
+          "state": "active",
+          "size": 256,
+          "format": "PEM",
+          "creationDate": "2026-01-15T00:00:00.000Z"
+        }
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:npm/cydx17-demo-app@1.0.0",
+      "dependsOn": [
+        "pkg:npm/left-pad@1.3.0",
+        "pkg:maven/org.springframework/spring-core@6.1.0",
+        "crypto/aes-256-gcm",
+        "crypto/acme-tls-cert",
+        "crypto/tls-1-3",
+        "crypto/signing-private-key"
+      ]
+    },
+    {"ref": "pkg:npm/left-pad@1.3.0", "dependsOn": []},
+    {"ref": "pkg:maven/org.springframework/spring-core@6.1.0", "dependsOn": []}
+  ]
+}

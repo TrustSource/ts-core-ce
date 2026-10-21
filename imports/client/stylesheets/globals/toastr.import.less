@@ -1,0 +1,47 @@
+// =============================================================================
+// Toast notifications (toastr) - white cards with a coloured left edge per type.
+// Position and options are set in imports/api/notify.js (always top-center).
+// =============================================================================
+
+@toast-text: #6a6c6f;
+@toast-shadow: 0 0 1px fade(@color-black, 10%), 0 2px 4px fade(@color-black, 20%);
+@toast-edge-width: 6px;
+
+#toast-container {
+  &.toast-top-center > div {
+    margin: 10px auto 0;
+  }
+
+  // Remove toastr's per-type icon background images.
+  > .toast-info,
+  > .toast-error,
+  > .toast-warning,
+  > .toast-success {
+    background-image: none !important;
+  }
+
+  > div {
+    padding: 20px !important;
+    background: @color-white;
+    color: @toast-text !important;
+    box-shadow: @toast-shadow;
+    opacity: 1;
+
+    // Keep the resting shadow on hover instead of toastr's heavier one.
+    &:hover {
+      box-shadow: @toast-shadow;
+    }
+  }
+}
+
+.toast-edge(@type, @color) {
+  .toast-@{type} {
+    background: @color-white;
+    border-left: @toast-edge-width solid @color;
+  }
+}
+
+.toast-edge(info, #3498db);
+.toast-edge(success, #62cb31);
+.toast-edge(warning, #ffb606);
+.toast-edge(error, #e74c3c);

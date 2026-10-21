@@ -1,0 +1,188 @@
+<template name="legalDetails">
+  {{#with legal}}
+    <h5 class="aside-section-title bot-{{status}}">
+      <span class="fa fa-gavel"></span>
+      <span class="truncate" title="{{licenseName}}" style="width:80%">{{licenseName}}</span>
+    </h5>
+    {{#if isPrivateLicense computedStatus}}
+      <div class="aside-section">
+        <h6 class="aside-section-title bot-ok">
+          <span class="fa fa-pencil-square-o"></span>
+          <span>Private license</span>
+        </h6>
+        <div class="aside-section-content">
+          This component is associated with a private license, thus it is assumed as private property and therefor OK.
+        </div>
+      </div>
+    {{else}}
+      {{#if isWhiteListed computedStatus}}
+        <div class="aside-section">
+          <h6 class="aside-section-title bot-ok">
+            <span class="fa fa-pencil-square-o"></span>
+            <span>Whitelisted</span>
+          </h6>
+          <div class="aside-section-content">
+            {{computedStatus.label}}
+          </div>
+        </div>
+      {{/if}}
+      {{#if isBlackListed computedStatus}}
+        <div class="aside-section">
+          <h6 class="aside-section-title bot-violations">
+            <span class="fa fa-pencil-square-o"></span>
+            <span>Blacklisted</span>
+          </h6>
+          <div class="aside-section-content">
+            {{computedStatus.label}}
+          </div>
+        </div>
+      {{/if}}
+      {{#if violations}}
+        {{#each describeViolations violations}}
+          <div class="aside-section">
+              {{#if isLegalRuleResolvable}}
+                {{#if isLegalRuleResolvedAnywhere}}
+                  <h6 class="aside-section-title bot-ok">
+                    <span class="fa fa-exclamation-triangle"></span>
+                    <span>{{getType.text}}</span>
+                    <button class="btn btn-xs btn-default pull-right rfix-top-3 remove_legal_rule_resolved" type="button" title="Legal problem is resolved">
+                      <span class="fa fa-bell-slash-o"></span>
+                    </button>
+                  </h6>
+                {{else}}
+                  <h6 class="aside-section-title bot-{{getType.key}}">
+                    <span class="fa fa-exclamation-triangle"></span>
+                    <span>{{getType.text}}</span>
+                    <button class="btn btn-xs btn-default pull-right rfix-top-3 add_legal_rule_resolved" type="button" title="Accept risk of problem">
+                      <span class="fa fa-bell-o"></span>
+                    </button>
+                  </h6>
+                {{/if}}
+              {{else}}
+                <h6 class="aside-section-title bot-{{getType.key}}">
+                  <span class="fa fa-exclamation-triangle"></span>
+                  <span>{{getType.text}}</span>
+                  <button class="btn btn-xs btn-default pull-right rfix-top-3" type="button" disabled="disabled" title="This can't be manualy resolved">
+                    <span class="fa fa-bell-o"></span>
+                  </button>
+                </h6>
+              {{/if}}
+            <div class="aside-section-content">
+              {{message}}
+            </div>
+          </div>
+        {{/each}}
+      {{/if}}
+      {{#if obligations}}
+        {{#each describeObligations obligations}}
+          <div class="aside-section">
+              {{#if isConstraintResolvedAnywhere}}
+                <h6 class="aside-section-title bot-ok">
+                  <span class="fa fa-exclamation-circle"></span>
+                  <span>Obligation</span>
+                  <button class="btn btn-xs btn-default pull-right rfix-top-3 remove_constraint_resolved" type="button" title="Reopen obligation">
+                    <span class="fa fa-bell-slash-o"></span>
+                  </button>
+                </h6>
+              {{else}}
+                <h6 class="aside-section-title bot-warnings">
+                  <span class="fa fa-exclamation-circle"></span>
+                  <span>Obligation</span>
+                  <button class="btn btn-xs btn-default pull-right rfix-top-3 add_constraint_resolved" type="button" title="Resolve this obligation">
+                    <span class="fa fa-bell-o"></span>
+                  </button>
+                </h6>
+              {{/if}}
+            <div class="aside-section-content">
+              {{description}}
+            </div>
+          </div>
+        {{/each}}
+      {{/if}}
+      {{#if reason}}
+        <div class="aside-section">
+          <h6 class="aside-section-title bot-warnings">
+            <span class="fa fa-pencil-square-o"></span>
+            <span>Reason</span>
+          </h6>
+          <div class="aside-section-content">
+            {{reason}}
+          </div>
+        </div>
+      {{/if}}
+      {{#if resolvedViolations}}
+        {{#each describeViolations resolvedViolations}}
+          <div class="aside-section">
+            {{#if isLegalRuleResolvable}}
+              {{#if isLegalRuleResolvedAnywhere}}
+                <h6 class="aside-section-title bot-ok">
+                  <span class="fa fa-exclamation-triangle"></span>
+                  <span>{{getType.text}}</span>
+                  <button class="btn btn-xs btn-default pull-right rfix-top-3 remove_legal_rule_resolved" type="button" title="Legal problem is resolved">
+                    <span class="fa fa-bell-slash-o"></span>
+                  </button>
+                </h6>
+              {{else}}
+                <h6 class="aside-section-title bot-{{getType.key}}">
+                  <span class="fa fa-exclamation-triangle"></span>
+                  <span>{{getType.text}}</span>
+                  <button class="btn btn-xs btn-default pull-right rfix-top-3 add_legal_rule_resolved" type="button" title="Accept risk of problem">
+                    <span class="fa fa-bell-o"></span>
+                  </button>
+                </h6>
+              {{/if}}
+            {{else}}
+              <h6 class="aside-section-title bot-{{getType.key}}">
+                <span class="fa fa-exclamation-triangle"></span>
+                <span>{{getType.text}}</span>
+                <button class="btn btn-xs btn-default pull-right rfix-top-3" type="button" disabled="disabled" title="This can't be manualy resolved">
+                  <span class="fa fa-bell-o"></span>
+                </button>
+              </h6>
+            {{/if}}
+            <div class="aside-section-content">
+              {{message}}
+            </div>
+          </div>
+        {{/each}}
+      {{/if}}
+      {{#if resolvedObligations}}
+        {{#each describeObligations resolvedObligations}}
+          <div class="aside-section">
+            {{#if isConstraintResolvedAnywhere}}
+              <h6 class="aside-section-title bot-ok">
+                <span class="fa fa-exclamation-circle"></span>
+                <span>Obligation</span>
+                <button class="btn btn-xs btn-default pull-right rfix-top-3 remove_constraint_resolved" type="button" title="Reopen obligation">
+                  <span class="fa fa-bell-slash-o"></span>
+                </button>
+              </h6>
+            {{else}}
+              <h6 class="aside-section-title bot-warnings">
+                <span class="fa fa-exclamation-circle"></span>
+                <span>Obligation</span>
+                <button class="btn btn-xs btn-default pull-right rfix-top-3 add_constraint_resolved" type="button" title="Resolve this obligation">
+                  <span class="fa fa-bell-o"></span>
+                </button>
+              </h6>
+            {{/if}}
+            <div class="aside-section-content">
+              {{description}}
+            </div>
+          </div>
+        {{/each}}
+      {{/if}}
+      {{#if licenseIsOk}}
+        <div class="aside-section">
+          <h6 class="aside-section-title bot-ok">
+            <span class="fa fa-info-circle"></span>
+            <span>Status</span>
+          </h6>
+          <div class="aside-section-content">
+            No legal problems known
+          </div>
+        </div>
+      {{/if}}
+    {{/if}}
+  {{/with}}
+</template>

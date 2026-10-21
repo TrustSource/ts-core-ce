@@ -1,0 +1,116 @@
+<template name="productEditDocuments">
+  <div class="form-groups">
+    <div class="form-group col-sm-12">
+      <p class="alert alert-info inner-b-0">
+        PLEASE NOTE: To replace, just enter a new file and upload again.
+      </p>
+    </div>
+    <div class="form-group col-sm-12">
+      {{> productDocumentsModal}}
+      <div class="row">
+        <div class="col-sm-4">
+          <a class="btn btn-primary" data-toggle="modal" data-target="#productDocumentsModal" title="Add new document">
+            <span class="fa fa-plus" aria-hidden="true"></span>
+            Add new document
+          </a>
+        </div>
+        <div class="form-group col-sm-8 text-right">
+          {{#if loading}}
+            <button type="button" disabled="disabled" class="btn btn-default">
+              <i class="fa fa-spinner fa-spin"></i> Download all
+            </button>
+            {{#if (documents.photos)}}
+              <button type="button" disabled="disabled" class="btn btn-default">
+                <i class="fa fa-spinner fa-spin"></i> incl. Photos
+              </button>
+            {{/if}}
+          {{else}}
+            <button type="button" class="btn btn-default download_documents">
+              <i class="fa fa-download"></i> Download all
+            </button>
+            {{#if (documents.photos)}}
+              <button type="button" class="btn btn-default download_all">
+                <i class="fa fa-download"></i> incl. Photos
+              </button>
+            {{/if}}
+          {{/if}}
+        </div>
+      </div>
+    </div>
+    {{#if (documents.userManual)}}
+      <div class="form-group col-sm-12">
+        <div class="row">
+          <button class="btn btn-warning pull-right remove_document" data-variant="userManual">
+            <i class="fa fa-times"></i>
+          </button>
+          <div class="col-sm-10 pinner-t-8">
+            <strong class="m-r-md">User Manual</strong>
+            <a class="highlight" href="{{documents.userManual.url}}" download target="_blank">
+              Uploaded {{dateFormat documents.userManual.uploaded}} by {{documents.userManual.uploadedByName}}
+            </a>
+          </div>
+        </div>
+      </div>
+    {{/if}}
+    {{#if (documents.secureSetup)}}
+      <div class="form-group col-sm-12">
+        <div class="row">
+          <button class="btn btn-warning pull-right remove_document" data-variant="secureSetup">
+            <i class="fa fa-times"></i>
+          </button>
+          <div class="col-sm-10 pinner-t-8">
+            <strong class="m-r-md">Secure Setup</strong>
+            <a class="highlight" href="{{documents.secureSetup.url}}" download target="_blank">
+              Uploaded {{dateFormat documents.secureSetup.uploaded}} by {{documents.secureSetup.uploadedByName}}
+            </a>
+          </div>
+        </div>
+      </div>
+    {{/if}}
+    {{#if (documents.productDescription)}}
+      <div class="form-group col-sm-12">
+        <div class="row">
+          <button class="btn btn-warning pull-right remove_document" data-variant="productDescription">
+            <i class="fa fa-times"></i>
+          </button>
+          <div class="col-sm-10 pinner-t-8">
+            <strong class="m-r-md">Product Description</strong>
+            <a class="highlight" href="{{documents.productDescription.url}}" download target="_blank">
+              Uploaded {{dateFormat documents.productDescription.uploaded}} by {{documents.productDescription.uploadedByName}}
+            </a>
+          </div>
+        </div>
+      </div>
+    {{/if}}
+    {{#if (documents.sbom)}}
+      <div class="form-group col-sm-12">
+        <div class="row">
+          <button class="btn btn-warning pull-right remove_document" data-variant="sbom">
+            <i class="fa fa-times"></i>
+          </button>
+          <div class="col-sm-10 pinner-t-8">
+            <strong class="m-r-md">SBOM file</strong>
+            <a class="highlight" href="{{documents.sbom.url}}" download target="_blank">
+              Uploaded {{dateFormat documents.sbom.uploaded}} by {{documents.sbom.uploadedByName}}
+            </a>
+          </div>
+        </div>
+      </div>
+    {{/if}}
+    {{#if (documents.cedoc)}}
+      <div class="form-group col-sm-12">
+        <div class="row">
+          <button class="btn btn-warning pull-right remove_document" data-variant="cedoc">
+            <i class="fa fa-times"></i>
+          </button>
+          <div class="col-sm-10 pinner-t-8">
+            <strong class="m-r-md">CE mark declaration</strong>
+            <a class="highlight" href="{{documents.cedoc.url}}" download target="_blank">
+              Uploaded {{dateFormat documents.cedoc.uploaded}} by {{documents.cedoc.uploadedByName}}
+            </a>
+          </div>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+</template>

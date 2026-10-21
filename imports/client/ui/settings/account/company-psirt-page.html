@@ -1,0 +1,15 @@
+<template name='companyPsirtSettings'>
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">PSIRT contacts</h2>
+        <small>Configure PSIRT contact information</small>
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content">
+    {{#if isInRole 'account_admin' companyId}}
+      {{> companyPsirt}}
+    {{/if}}
+  </div>
+</template>

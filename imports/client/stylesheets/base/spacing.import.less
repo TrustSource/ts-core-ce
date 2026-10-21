@@ -1,0 +1,44 @@
+// Spacing utilities: one-sided margin helpers and a padding helper.
+// Scale: none = 0, xs = 5px, sm = 10px, md = 20px, lg = 30px.
+
+@space-xs: 5px;
+@space-sm: 10px;
+@space-md: 20px;
+@space-lg: 30px;
+
+// Roomy padding, wins over component padding
+.p-lg {
+  padding: @space-lg !important;
+}
+
+// Left margin
+.m-l {
+  &-xs { margin-left: @space-xs; }
+  &-sm { margin-left: @space-sm; }
+  &-md { margin-left: @space-md; }
+  &-lg { margin-left: @space-lg; }
+}
+
+// Top margin
+.m-t {
+  &-none { margin-top: 0; }
+  &-xs { margin-top: @space-xs; }
+  &-sm { margin-top: @space-sm; }
+  &-md { margin-top: @space-md; }
+  &-lg { margin-top: @space-lg; }
+}
+
+// Right margin
+.m-r {
+  &-xs { margin-right: @space-xs; }
+  &-sm { margin-right: @space-sm; }
+  &-md { margin-right: @space-md; }
+}
+
+// Bottom margin
+.m-b {
+  &-none { margin-bottom: 0; }
+  &-xs { margin-bottom: @space-xs; }
+  &-sm { margin-bottom: @space-sm; }
+  &-md { margin-bottom: @space-md; }
+}

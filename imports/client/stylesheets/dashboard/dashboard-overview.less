@@ -1,0 +1,259 @@
+.dashboard-welcome {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  margin: 10px 0 15px 0;
+  background: linear-gradient(135deg, fade(@ts-teal, 6%) 0%, fade(@ts-teal, 12%) 100%);
+  border: 1px solid fade(@ts-teal, 20%);
+  border-radius: 8px;
+}
+
+.dashboard-welcome-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: fade(@ts-teal, 15%);
+  color: @ts-teal;
+  font-size: 22px;
+}
+
+.dashboard-welcome-text {
+  flex: 1;
+  min-width: 0;
+
+  h4 {
+    margin: 0 0 4px 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: @ts-text;
+  }
+
+  p {
+    margin: 0;
+    font-size: 13px;
+    color: #6b7a87;
+    line-height: 1.4;
+  }
+}
+
+.dashboard-welcome-actions {
+  flex-shrink: 0;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  .btn-primary {
+    background: @ts-teal;
+    border-color: @ts-teal;
+    color: #fff;
+
+    &:hover {
+      background: darken(@ts-teal, 8%);
+      border-color: darken(@ts-teal, 8%);
+    }
+
+    .fa {
+      margin-right: 4px;
+    }
+  }
+
+  .btn-default {
+    border-color: fade(@ts-teal, 40%);
+    color: @ts-teal;
+
+    &:hover {
+      background: fade(@ts-teal, 8%);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-welcome {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .dashboard-welcome-actions {
+    flex-direction: column;
+    width: 100%;
+
+    .btn {
+      width: 100%;
+    }
+  }
+}
+
+.theme-dark .dashboard-welcome {
+  background: linear-gradient(135deg, fade(@ts-teal, 4%) 0%, fade(@ts-teal, 8%) 100%);
+  border-color: fade(@ts-teal, 15%);
+
+  .dashboard-welcome-text h4 {
+    color: #fff;
+  }
+
+  .dashboard-welcome-text p {
+    color: #b3b3b4;
+  }
+}
+
+#dashboard .ts-panel > .panel-heading {
+  background: transparent;
+  color: @ts-teal;
+  border: none;
+  border-bottom: 1px solid @ts-teal;
+  border-radius: 5px 5px 0 0;
+  padding: 0 12px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 600;
+
+  .panel-heading-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    margin-left: 8px;
+    border-radius: 11px;
+    background: fade(@ts-teal, 15%);
+    color: @ts-teal;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .change-view {
+    order: 1;
+    margin-left: auto;
+    height: 30px;
+    max-width: 50%;
+    font-size: 12px;
+    font-weight: 400;
+    width: auto;
+    border: 1px solid fade(@ts-teal, 40%);
+    background: fade(@ts-teal, 8%);
+    color: @ts-teal;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    option {
+      color: @ts-text;
+      background: #fff;
+    }
+  }
+
+  .ts-panel-tools {
+    float: none;
+    display: flex;
+    align-items: center;
+    order: 2;
+    margin-left: auto;
+
+    a {
+      color: @ts-teal;
+      opacity: 0.8;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  &:has(.change-view) .ts-panel-tools {
+    margin-left: 8px;
+  }
+}
+
+.dashboard-overview {
+
+  table tbody td {
+    vertical-align: middle;
+  }
+
+  table tbody tr {
+    cursor: pointer;
+  }
+
+  .show-more {
+    font-size: x-large;
+  }
+}
+
+.ecs-status-bar {
+  margin-bottom: 20px;
+}
+@media (min-width: 1600px) {
+  .ecs-status-bar {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+}
+@media (min-width: 1900px) {
+  .ecs-status-bar {
+    margin-top: 15px;
+    margin-bottom: 29px;
+  }
+}
+
+.ecs-vulnerability-feed {
+  height: 360px;
+}
+@media (min-width: 1600px) {
+  .ecs-vulnerability-feed {
+    height: 400px;
+  }
+}
+@media (min-width: 1900px) {
+  .ecs-vulnerability-feed {
+    height: 430px;
+  }
+}
+
+.list .ecs-history .list-item {
+  margin-top: 8px;
+  padding-top: 0;
+}
+
+.ecs-history-delta {
+  margin-top: 26px;
+}
+
+.doughnut-chart {
+  padding-left: 0;
+}
+
+.doughnut-legend {
+  li span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+  }
+  ul {
+    list-style-type: none;
+    padding-inline-start: 0px;
+  }
+}
+
+.bar-legend {
+  li span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-left: -50px;
+    margin-right: 5px;
+  }
+  ul {
+    list-style-type: none;
+    padding-inline-start: 0px;
+  }
+}

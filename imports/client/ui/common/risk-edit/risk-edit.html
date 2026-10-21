@@ -1,0 +1,395 @@
+<template name="RiskEdit">
+  <form id="RiskEditForm" method="post">
+    <div class="sticky-risk-actions clearfix">
+      <div class="pull-right">
+        {{#if loading}}
+          <button type="button" disabled="disabled" class="btn btn-primary" tabindex="15">
+            <i class="fa fa-spinner fa-spin"></i> Save
+          </button>
+        {{else}}
+          <button type="submit" class="btn btn-primary" disabled="{{isFormDisabled}}" tabindex="15">
+            <i class="fa fa-floppy-disk"></i> Save
+          </button>
+        {{/if}}
+      </div>
+      <div class="pull-left">
+        {{> InlineItemNavigation fetchTasks='true' listVariable='getRiskSettingsList' itemVariable='editRiskDetails' loadingVariable='loadingInProgress'}}
+        <button type="button" class="btn btn-default back_to_list" tabindex="16"><i class="fa fa-chevron-left inner-r-5"></i> Back to list</button>
+      </div>
+    </div>
+    {{#with data}}
+      {{!-- Deliberately OUTSIDE .relative: a module-level-managed risk viewed from
+            the project register would otherwise render the most important message
+            on the page underneath the isFormDisabled scrim. --}}
+      {{#if sourceRefsAllGone}}
+        <div class="alert alert-info risk-source-gone" role="status">
+          <p class="risk-source-gone-title">
+            <span class="fa fa-info-circle" aria-hidden="true"></span>
+            0 of {{sourceRefsPrevCount}} occurrences still active - ready to close?
+          </p>
+          <p class="risk-source-gone-body">
+            The most recent {{autoTool}} test imported for this module reported no {{autoCwe}} findings.
+            Nothing has been changed for you - the state of this risk is untouched. If you agree
+            it no longer applies, set State to "closed" or "out-of-scope" and press Save.
+          </p>
+          <button type="button" class="btn btn-default btn-sm risk-goto-state">Review state</button>
+        </div>
+      {{/if}}
+      <div class="relative">
+        {{#if isFormDisabled}}
+          <div style="position: absolute;
+                  width: 100%;
+                  height: 100%;
+                  left: 50%;
+                  top: 50%;
+                  transform: translate(-50%, -50%);
+                  text-align: center;
+                  background: rgba(0, 0, 0, 0.3);
+                  padding: 65px 0;
+                  z-index: 3;
+                  color: #fff;
+                  font-size: 2em;">
+            This risk is managed in module level
+          </div>
+        {{/if}}
+        <div class="row pinner-b-20i">
+          <div class="form-group col-xs-4">
+            <label for="addRisk">Name *</label>
+            <input type="text" value="{{name}}" id="addRisk" class="form-control" required
+                   minlength="3" maxlength="200" name="addRisk" disabled="{{isFormDisabled}}" tabindex="1"
+                   placeholder="e.g. SQL injection in login form">
+          </div>
+          <div class="form-group col-xs-8">
+            <label for="origin">Origin</label>
+            <select name="origin" multiple class="form-control select2" disabled="{{isFormDisabled}}" tabindex="2">
+              {{#each originValues}}
+                <option value="{{value}}" selected="{{isSelected 'origin' value}}">
+                  {{label}}
+                </option>
+              {{/each}}
+            </select>
+          </div>
+          {{#with riskProperties}}
+            <div class="col-xs-4">
+              <div class="form-group">
+                <label for="impactClass">Impact class</label>
+                <select name="impactClass" class="form-control select2" disabled="{{isFormDisabled}}" tabindex="6">
+                  {{#each impactClassValues}}
+                    <option value="{{this}}" selected="{{isSelected 'impactClass' this}}">
+                      {{this}}
+                    </option>
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+            <div class="form-group col-xs-4">
+              <label for="generalApproach">Mitigation strategy</label>
+              <select name="generalApproach" class="form-control select2" disabled="{{isFormDisabled}}">
+                {{#each generalApproachValues}}
+                  <option value="{{this}}" selected="{{isSelected 'generalApproach' this}}">
+                    {{this}}
+                  </option>
+                {{/each}}
+              </select>
+            </div>
+            <div class="col-xs-4">
+              <div class="form-group">
+                <label for="state">State</label>
+                <select name="state" class="form-control select2" disabled="{{isFormDisabled}}" tabindex="7">
+                  {{#each stateValues}}
+                    <option value="{{this}}" selected="{{isSelected 'state' this}}">
+                      {{this}}
+                    </option>
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+            {{#if isSarifManaged}}
+              <div class="form-group col-xs-12">
+                <div class="risk-source-strip">
+                  <p class="risk-source-strip-head">
+                    <span class="risk-source-strip-eyebrow">Auto-created</span>
+                    {{#if autoCweLakeUrl}}
+                      <a href="{{autoCweLakeUrl}}" class="test-cwe-badge" target="_blank" rel="noopener noreferrer"
+                         title="{{autoCwe}} - open in Vulnerability Lake">{{autoCwe}}</a>
+                    {{else}}
+                      <span class="test-cwe-badge">{{autoCwe}}</span>
+                    {{/if}}
+                    <span class="risk-source-strip-tool">{{autoTool}}</span>
+                  </p>
+                  <p class="risk-source-strip-counts">
+                    {{sourceRefsSummary}}
+                  </p>
+                  <p class="risk-source-strip-help">
+                    SARIF imports refresh the source references on the Occurrences tab, and your changes
+                    to name, origin, CWEs, state and every other field are kept. Files counts distinct
+                    file paths, so a finding with no recorded path adds none.
+                  </p>
+                  {{#if autoRefreshPaused}}
+                    <p class="risk-source-strip-note">
+                      <span class="fa fa-pause-circle" aria-hidden="true"></span>
+                      Imports no longer refresh this risk while its state is "{{state}}", so the source
+                      references may be out of date. Move it to another state to resume updates.
+                    </p>
+                  {{/if}}
+                </div>
+              </div>
+            {{/if}}
+            {{#if autoLicense}}
+              <div class="form-group col-xs-12">
+                <div class="risk-source-strip">
+                  <p class="risk-source-strip-head">
+                    <span class="risk-source-strip-eyebrow">Auto-created</span>
+                    unmatched license set manually to <span class="risk-source-strip-tool">{{autoLicense}}</span>
+                  </p>
+                </div>
+              </div>
+            {{/if}}
+            <div class="form-group col-xs-12">
+              <ul class="nav nav-tabs" id="risk-edit-tabs" role="tablist">
+                <li class="active"><a data-toggle="tab" href="#RiskEditImpact" id="risk-edit-tab-impact"
+                                      role="tab" aria-controls="RiskEditImpact">Impact</a></li>
+                <li><a data-toggle="tab" href="#RiskEditManagement" id="risk-edit-tab-management"
+                       role="tab" aria-controls="RiskEditManagement">Countermeasures</a></li>
+                <li><a data-toggle="tab" href="#RiskEditReview" id="risk-edit-tab-review"
+                       role="tab" aria-controls="RiskEditReview">Tasks</a></li>
+                <li><a data-toggle="tab" href="#RiskEditThreatModel" id="risk-edit-tab-threatmodel"
+                       role="tab" aria-controls="RiskEditThreatModel">Threat model</a></li>
+                {{#if isSarifManaged}}
+                  <li><a data-toggle="tab" href="#RiskEditSourceRefs" id="risk-edit-tab-sourcerefs"
+                         role="tab" aria-controls="RiskEditSourceRefs">Occurrences ({{sourceRefsShown}})</a></li>
+                {{/if}}
+              </ul>
+            </div>
+            <div class="tab-content pinner-t-10">
+              <div id="RiskEditImpact" class="tab-pane active" role="tabpanel" aria-labelledby="risk-edit-tab-impact">
+                <div class="form-group col-xs-12">
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="form-inline pinner-t-5 pinner-b-10">
+                        <div class="form-group pinner-r-10">
+                          <label class="control-label" for="confidentiality">
+                            <input type="checkbox" id="confidentiality" name="confidentiality" tabindex="3"
+                                   disabled="{{isFormDisabled}}" class="i-checks"
+                                   checked="{{isChecked 'confidentiality'}}">
+                            <strong>Confidentiality</strong>
+                          </label>
+                        </div>
+                        <div class="form-group pinner-r-10">
+                          <label class="control-label" for="integrity">
+                            <input type="checkbox" id="integrity" name="integrity" disabled="{{isFormDisabled}}"
+                                   class="i-checks" checked="{{isChecked 'integrity'}}" tabindex="4">
+                            <strong>Integrity</strong>
+                          </label>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label" for="availability">
+                            <input type="checkbox" id="availability" name="availability"
+                                   disabled="{{isFormDisabled}}"
+                                   class="i-checks" checked="{{isChecked 'availability'}}" tabindex="5">
+                            <strong>Availability</strong>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-12">
+                      <label for="impactDescription">Description of impact</label>
+                      <textarea name="impactDescription" class="form-control" rows="4" tabindex="8" placeholder="describe the impact"
+                                disabled="{{isFormDisabled}}">{{impactDescription}}</textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group col-xs-12">
+                  {{#if simpleImpactView}}
+                    <button type="button" class="btn btn-default switch_impact" tabindex="16"><i class="fa fa-exchange inner-r-5"></i> Simple impact view</button>
+                  {{else}}
+                    <button type="button" class="btn btn-default switch_impact" tabindex="16"><i class="fa fa-exchange inner-r-5"></i> Detailed impact view</button>
+                  {{/if}}
+                </div>
+                {{#if simpleImpactView}}
+                  <div class="form-group col-xs-12">
+                    <div class="form-inline">
+                      <div class="row">
+                        <div class="col-xs-4 pinner-t-8">
+                          <label for="param_BV">Business value (BV)</label>
+                        </div>
+                        <div class="col-xs-3">
+                          <select name="param_BV_enum" class="form-control select2" tabindex="12" disabled="{{isFormDisabled}}">
+                            {{#each valueValues}}
+                              <option value="{{this}}" selected="{{isSelected 'BV_enum' this}}">
+                                {{this}}
+                              </option>
+                            {{/each}}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-xs-12">
+                    <div class="form-inline">
+                      <div class="row">
+                        <div class="col-xs-4 pinner-t-8">
+                          <label for="param_EF">Exposure factor (EF)</label>
+                        </div>
+                        <div class="col-xs-3">
+                          <select name="param_EF_enum" class="form-control select2" tabindex="13" disabled="{{isFormDisabled}}">
+                            {{#each valueValues}}
+                              <option value="{{this}}" selected="{{isSelected 'EF_enum' this}}">
+                                {{this}}
+                              </option>
+                            {{/each}}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-xs-12">
+                    <div class="form-inline">
+                      <div class="row">
+                        <div class="col-xs-4 pinner-t-8">
+                          <label for="param_ARO">Annual rate of occurrence (ARO)</label>
+                        </div>
+                        <div class="col-xs-3">
+                          <select name="param_ARO_enum" class="form-control select2" tabindex="14" disabled="{{isFormDisabled}}">
+                            {{#each annualRateValues}}
+                              <option value="{{value}}" selected="{{isSelected 'ARO_enum' value}}">
+                                {{label}}
+                              </option>
+                            {{/each}}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {{else}}
+                  <div class="form-group col-xs-12">
+                    <div class="form-inline">
+                      <div class="row">
+                        <div class="col-xs-4 pinner-t-8">
+                          <label for="param_BV">Business value (BV) in {{currencyCode}}</label>
+                        </div>
+                        <div class="col-xs-3">
+                          <input type="text" value="{{BV}}" disabled="{{isFormDisabled}}" tabindex="9" placeholder="{{currencyCode}}"
+                                 name="param_BV" class="form-control w-100">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-xs-12">
+                    <div class="form-inline">
+                      <div class="row">
+                        <div class="col-xs-4 pinner-t-8">
+                          <label for="param_EF">Exposure factor (EF) in %</label>
+                        </div>
+                        <div class="col-xs-3">
+                          <input type="number" value="{{EF}}" disabled="{{isFormDisabled}}" tabindex="10" placeholder="%"
+                                 name="param_EF" class="form-control w-100">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-xs-12">
+                    <div class="form-inline">
+                      <div class="row">
+                        <div class="col-xs-5 pinner-t-8">
+                          <label for="param_SLE">Single loss expectancy (SLE = EF * BV)</label>
+                        </div>
+                        <div class="col-xs-2 text-right pinner-t-8">
+                          {{#if paramSLE}}<b>{{formatNumber paramSLE}}</b> {{currencyCode}}{{/if}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-xs-12">
+                    <div class="form-inline">
+                      <div class="row">
+                        <div class="col-xs-4 pinner-t-8">
+                          <label for="param_ARO">Annual rate of occurrence (ARO)</label>
+                        </div>
+                        <div class="col-xs-3">
+                          <input type="number" value="{{ARO}}" disabled="{{isFormDisabled}}" tabindex="11" name="param_ARO"
+                                 class="form-control w-100" placeholder="per year, e.g. 2">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-xs-12">
+                    <div class="form-inline">
+                      <div class="row">
+                        <div class="col-xs-5 pinner-t-8">
+                          <label for="param_ALE">Annual loss expectancy (ALE = SLE * ARO)</label>
+                        </div>
+                        <div class="col-xs-2 text-right">
+                          {{#if paramALE}}<b>{{formatNumber paramALE}}</b> {{currencyCode}}{{/if}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {{/if}}
+              </div>
+              <div id="RiskEditManagement" class="tab-pane" role="tabpanel" aria-labelledby="risk-edit-tab-management">
+                <div class="form-group col-xs-12">
+                  {{> riskEditCountermeasureList
+                    title="Define countermeasures"
+                    id="riskEditCountermeasureSettings"
+                    data=getCountermeasures
+                    readonly=false}}
+                </div>
+              </div>
+              <div id="RiskEditReview" class="tab-pane" role="tabpanel" aria-labelledby="risk-edit-tab-review">
+                <div class="form-group col-xs-12">
+                  {{> riskEditTaskList
+                    title="Define and assign review tasks"
+                    id="riskEditTasksSettings"
+                    countermeasures=getCountermeasures
+                    readonly=false}}
+                </div>
+              </div>
+              <div id="RiskEditThreatModel" class="tab-pane" role="tabpanel"
+                   aria-labelledby="risk-edit-tab-threatmodel">
+                {{> riskThreatModelFields tmc=threatModelContext disabled=isFormDisabled}}
+              </div>
+              {{#if isSarifManaged}}
+                <div id="RiskEditSourceRefs" class="tab-pane" role="tabpanel"
+                     aria-labelledby="risk-edit-tab-sourcerefs">
+                  <div class="form-group col-xs-12 risk-source-refs">
+                    {{#if sourceRefsTruncated}}
+                      <div class="alert alert-warning risk-source-truncated" role="status">
+                        <span class="fa fa-exclamation-triangle" aria-hidden="true"></span>
+                        Showing {{sourceRefsShown}} of {{sourceRefsTotal}} occurrences. This risk stores a
+                        capped list, so the remaining entries are not in the risk register - open the test
+                        on the module's Quality tab to see every finding.
+                      </div>
+                    {{/if}}
+                    {{#if sourceRefsAllGone}}
+                      <p class="risk-source-refs-gone">
+                        No findings are currently recorded. The note at the top of this risk explains what changed.
+                      </p>
+                    {{else}}
+                      {{> reactiveTable settings=sourceRefsTableSettings}}
+                    {{/if}}
+                  </div>
+                </div>
+              {{/if}}
+            </div>
+          {{/with}}
+        </div>
+      </div>
+    {{/with}}
+  </form>
+</template>
+
+<!-- reactiveTable's getField escapes its output, so a cell cannot carry a title
+     attribute without a template of its own. The <td> text stays the complete
+     string so copy-paste and find-in-page still work on a truncated path. -->
+<template name="reactiveTableRiskSourceRule">
+  <span class="risk-source-rule" title="{{ruleId}}">{{ruleId}}</span>
+</template>
+
+<template name="reactiveTableRiskSourceFile">
+  {{#if uri}}
+    <span class="risk-source-file" title="{{uri}}">{{uri}}</span>
+  {{else}}
+    <span class="risk-source-file-empty">{{uriLabel}}</span>
+  {{/if}}
+</template>

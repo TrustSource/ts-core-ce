@@ -1,0 +1,12 @@
+<template name="risksStateFilter">
+  <div class="btn-group {{optionClass}}" data-toggle="buttons">
+    <label class="btn btn-default {{activeList showDrafts}}" style="width: 120px">
+      <input type="checkbox" autocomplete="off" checked={{showDrafts}} class="showDrafts">
+      <span class="{{activeTab showDrafts}}">In progress</span>
+    </label>
+    <label class="btn btn-success {{activeList showOks}}" style="width: 120px">
+      <input type="checkbox" autocomplete="off" checked={{showOks}} class="showOks">
+      <span class="{{activeTab showOks}}">Resolved</span>
+    </label>
+  </div>
+</template>

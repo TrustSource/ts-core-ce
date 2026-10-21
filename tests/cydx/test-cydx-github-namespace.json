@@ -1,0 +1,99 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:a1b2c3d4-0000-4000-8000-000000000001",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-04-21T00:00:00Z",
+    "component": {
+      "type": "application",
+      "name": "github-namespace-test-app",
+      "version": "1.0.0",
+      "purl": "pkg:npm/github-namespace-test-app@1.0.0",
+      "bom-ref": "github-namespace-test-app@1.0.0"
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "freerdp",
+      "version": "2.11.5",
+      "description": "A free Remote Desktop Protocol implementation (github namespace test).",
+      "purl": "pkg:github/freerdp/freerdp@2.11.5",
+      "bom-ref": "github:freerdp:freerdp@2.11.5",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://www.freerdp.com/"
+        },
+        {
+          "type": "vcs",
+          "url": "https://github.com/FreeRDP/FreeRDP.git"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "spring-core",
+      "version": "6.1.2",
+      "description": "Spring Core (maven namespace test).",
+      "purl": "pkg:maven/org.springframework/spring-core@6.1.2",
+      "bom-ref": "maven:org.springframework:spring-core@6.1.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "@angular/core",
+      "version": "17.0.0",
+      "description": "Angular core (scoped npm namespace test).",
+      "purl": "pkg:npm/%40angular/core@17.0.0",
+      "bom-ref": "npm:@angular:core@17.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "lodash",
+      "version": "4.17.21",
+      "description": "Plain npm (no namespace) control case.",
+      "purl": "pkg:npm/lodash@4.17.21",
+      "bom-ref": "lodash@4.17.21",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "github-namespace-test-app@1.0.0",
+      "dependsOn": [
+        "github:freerdp:freerdp@2.11.5",
+        "maven:org.springframework:spring-core@6.1.2",
+        "npm:@angular:core@17.0.0",
+        "lodash@4.17.21"
+      ]
+    }
+  ]
+}

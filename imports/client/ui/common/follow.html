@@ -1,0 +1,19 @@
+<template name="followAction">
+  {{#if isFollowing}}
+    <button type="button" class="btn btn-default btn-sm unfollow-item" title="Following">
+      <span class="fas fa-star" style="color:#2a94a2"></span>
+      {{#unless iconOnly}}Following{{/unless}}
+      {{#if getCounter}}
+        <span class="badge badge-primary">{{getCounter}}</span>
+      {{/if}}
+    </button>
+  {{else}}
+    <button type="button" class="btn btn-default btn-sm follow-item" title="Follow">
+      <span class="far fa-star" style="opacity:0.35"></span>
+      {{#unless iconOnly}}Follow{{/unless}}
+      {{#if getCounter}}
+        <span class="badge badge-default">{{getCounter}}</span>
+      {{/if}}
+    </button>
+  {{/if}}
+</template>

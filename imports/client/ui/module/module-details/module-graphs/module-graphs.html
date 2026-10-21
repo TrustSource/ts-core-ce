@@ -1,0 +1,35 @@
+<template name="moduleGraphs">
+  <div class="ecs-graphs text-center relative">
+    {{#if currentGraphBreadcrumbs}}
+      <div class="current-graph-breadcrumbs">
+        <div class="alert alert-info">
+          {{#with currentGraphBreadcrumbs}}
+            {{key}} ({{version}})
+          {{/with}}
+        </div>
+      </div>
+    {{/if}}
+    {{> moduleSunburst collection=collection}}
+    <div class="row m-t-sm">
+      <div class="col-md-12 text-right">
+        <div class="pinner-5i">
+          <span href title="Border represent dependencies status. Click outside will close hierarchy" class="inner-r-10">
+            <i class="fa fa-info-circle"></i> Border represent dependencies status. Click outside will close hierarchy
+          </span>
+          <a href="{{app 'supportUrl'}}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" title="Report an issue">
+            <i class="fa fa-support"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    {{#if isLoading}}
+      <div class="splash-holder">
+        <div class="ts-accent-line"></div>
+        <div class="ts-splash-title">
+          <h1>Loading ...</h1>
+          <div class="loading-spinner"></div>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+</template>

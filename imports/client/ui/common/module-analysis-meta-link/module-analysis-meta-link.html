@@ -1,0 +1,36 @@
+<template name="moduleAnalysisMetaLink">
+  {{#with module}}
+    <div>
+      <a href="{{pathFor route=actionRoute.route data=actionRoute.params query=actionRoute.query}}"
+         target="_blank">
+        <span class="fa fa-external-link inner-r-5"></span>
+        {{name}}
+        {{#if version}}
+          <span class="inner-l-10">Version: {{version}}</span>
+        {{/if}}
+        {{#if analysis}}
+          {{#with analysis}}
+            {{#if date}}
+              <span class="fa fa-clock-o inner-r-5 inner-l-10" title="Date"></span>
+              <span>{{getDateFormated date}}</span>
+            {{/if}}
+            {{#if branch}}
+              <span class="fa fa-code-fork inner-r-5 inner-l-10" title="Branch"></span>
+              <span>{{branch}}</span>
+            {{/if}}
+            {{#if tag}}
+              <span class="fa fa-tag inner-r-5 inner-l-10" title="Tag"></span>
+              <span>{{tag}}</span>
+            {{/if}}
+            {{#if release}}
+              <span class="fa fa-snowflake-o inner-r-5 inner-l-10" title="Analysis tag"></span>
+              <span>{{release}}</span>
+            {{/if}}
+          {{/with}}
+        {{else}}
+          No analysis available
+        {{/if}}
+      </a>
+    </div>
+  {{/with}}
+</template>

@@ -1,0 +1,71 @@
+<template name="moduleResolveByNotice">
+  {{#if isInRole 'compliance_manager,manager,developer,portfolio_manager' companyId}}
+    {{#if isNoticeAvailable}}
+      {{#with isNoticeAvailable}}
+        <a href="{{pathFor route='noticeFileDetails' data=getNoticeOptions}}" target="_blank"
+           class="btn btn-primary {{getSize}}" title="View Notice file">
+          <span class="fa fa-external-link" aria-hidden="true"></span> View Notice file
+        </a>
+      {{/with}}
+    {{else}}
+      <a class="btn btn-primary {{size}}" data-toggle="modal" data-target="#resolveByNotice" title="View obligations">
+        <span class="fa fa-check-square-o" aria-hidden="true"></span> Resolve via Notice file</a>
+
+      <!-- Modal: resolveByNotice -->
+      <div class="modal fade" id="resolveByNotice" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="ts-accent-line"></div>
+            <div class="modal-header text-center">
+              <i class="fa fa-check-square-o ts-big-icon text-success"></i>
+              <br/>
+              <h4 class="modal-title">Resolve obligation via Notice file</h4>
+              <br/>
+            </div>
+            <form id="resolveByNoticeForm">
+              <div class="modal-body prevent-top-border" style="font-size: 12px">
+                {{#if hasProjectObligations}}
+                  {{#if getAutoResolved}}
+                    <h4>Automatically will be resolved on notice file publication:</h4>
+                    <ul>
+                      {{#each getAutoResolved}}
+                        <li>{{getObligationDescription key}} {{getObligationSuggestion key}}</li>
+                      {{/each}}
+                    </ul>
+                  {{/if}}
+                  {{#if getResolved}}
+                    <h4>Can be resolved inside notice file:</h4>
+                    <ul>
+                      {{#each getResolved}}
+                        <li>{{getObligationDescription key}} {{getObligationSuggestion key}}</li>
+                      {{/each}}
+                    </ul>
+                  {{/if}}
+                  {{#if nothingToResolve}}
+                    <h4>There is no obligation that can be automatically resolved
+                      {{#if hasOtherToResolve}}. But there is still some other important obligations{{/if}}
+                    </h4>
+                  {{/if}}
+                {{else}}
+                  {{#if requestInProgress}}
+                    {{#panel}}
+                      <div class="text-primary">
+                        <i class="fa fa-spinner fa-spin"></i> Loading obligations data, please wait...
+                      </div>
+                    {{/panel}}
+                  {{else}}
+                    <h4>There is no obligation that can be automatically resolved</h4>
+                  {{/if}}
+                {{/if}}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Create Notice file</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    {{/if}}
+  {{/if}}
+</template>

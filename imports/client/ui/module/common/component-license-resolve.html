@@ -1,0 +1,78 @@
+<template name="componentLicenseResolve">
+  <h6 class="aside-section-title bot-{{sectionStatus}}" id="{{headingId}}" tabindex="-1">
+    {{#if isResolved}}
+      <span class="fas fa-user-pen" aria-hidden="true"></span>
+      <span>License set manually</span>
+      {{#if canSetLicense}}
+        {{!-- title and .sr-only carry the SAME text on purpose: NVDA and JAWS
+              suppress a title identical to the accessible name, so this is the
+              configuration that cannot double-announce, and every other
+              icon-only button in this aside has a hover tooltip. --}}
+        <button type="button" class="btn btn-xs btn-default pull-right rfix-top-3 clear-component-license"
+                title="Clear the manually set license">
+          <span class="fa fa-undo" aria-hidden="true"></span>
+          <span class="sr-only">Clear the manually set license</span>
+        </button>
+      {{/if}}
+    {{else}}
+      <span class="fa fa-gavel" aria-hidden="true"></span>
+      {{#if canSetLicense}}
+        <span>Set the license</span>
+      {{else}}
+        <span>License not set</span>
+      {{/if}}
+    {{/if}}
+    <span class="fa fa-caret-down pull-right section-expand" aria-hidden="true"></span>
+  </h6>
+  <div class="aside-section-content">
+    {{#if isResolved}}
+      <p><b>{{manual.license}}</b>{{#if licenseName}} - {{licenseName}}{{/if}}</p>
+      {{!-- Same one-line shape as the resolved-obligation lines elsewhere in this
+            aside (bold label, colon, text, "By <name>, <date>"), so the two read
+            as one family. The label stays "Justification": the obligation wording
+            means "a manager accepted a risk", which is not what this records. --}}
+      <p class="inner-t-5 inner-b-5"><b>Justification</b>: {{manual.justification}} By {{manual.author}}, {{manual.date}}</p>
+      <p class="license-resolve-policy" aria-live="polite">
+        <span class="module-aside-status-dot bg-{{policyStatus}}" aria-hidden="true"></span>
+        Policy status: <b>{{policyWord}}</b>
+      </p>
+      {{#if isPolicyPending}}
+        <p class="license-resolve-hint">The analysis is running. This line updates when it reports back; if it stays Pending, run Analyse in the module header.</p>
+      {{/if}}
+      <p class="license-resolve-hint">Setting a license records which license applies. Whether it is allowed is decided by your company policy - see the sections below this component's paths.</p>
+      {{#if showRiskLine}}
+        {{!-- The risks page renders nothing without both ids ("Please select the
+              project to run a report on the upper right"), so the query is not
+              optional decoration. --}}
+        <p class="license-resolve-hint">A risk entry was created in <a href="{{pathFor route='risks' query=riskQuery}}" target="_blank">Risk management</a>.</p>
+      {{/if}}
+      {{#if isStale}}
+        <div class="aside-section">
+          <h6 class="aside-section-title bot-violations">
+            <span class="fa fa-exclamation-triangle" aria-hidden="true"></span>
+            <span>Not applied</span>
+          </h6>
+          <div class="aside-section-content">
+            The analysis that finished on {{staleDate}} still reports no license for this component. The manual selection was not picked up - run Analyse in the module header, and contact support if it happens again.
+          </div>
+        </div>
+      {{/if}}
+    {{else}}
+      {{#if canSetLicense}}
+        {{#if isReasonState}}
+          <p>The analysis matched a license for this component but was not confident about it. If you know which license applies, pick it and record why.</p>
+        {{else}}
+          <p>The scan could not determine which license applies to this component. Pick the one that applies and record why.</p>
+        {{/if}}
+        <label for="{{selectId}}">License</label>
+        {{> licenseCatalogSelect selectId=selectId value=draftLicense includeEdgeCases=true includeNoneOption=false disabled=isSaving}}
+        {{!-- No apply button: picking a license opens the confirmation straight
+              away, and that dialog is the commit point. --}}
+        <p class="license-resolve-hint">Applies to {{pathCount}} {{pathWord}} of this component in this module. Picking one asks you to confirm.</p>
+      {{else}}
+        <p>The license for this component has to be set by hand. Ask a compliance manager to set it.</p>
+        <button type="button" class="btn btn-default btn-xs scroll-to" data-target="aside-comment">Add a comment</button>
+      {{/if}}
+    {{/if}}
+  </div>
+</template>

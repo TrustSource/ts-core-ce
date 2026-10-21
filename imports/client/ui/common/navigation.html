@@ -1,0 +1,159 @@
+<template name="navigation">
+  <aside id="menu" class="intro-navigation">
+    <div id="navigation">
+      <div class="nav-user">
+        <div class="stats-label text-color">
+          {{#if hasMoreThanOneCompany}}
+            <div class="clearfix relative">
+              <button type="button" class="btn btn-default btn-block dropdown-toggle"
+                      data-toggle="dropdown">
+                <div class="text-left">
+                  {{#with company}}
+                    <span class="truncate w-80" title="{{#if name}}{{name}}{{else}}{{__ 'NewCompany'}}{{/if}}">
+                      {{#if name}}{{name}}{{else}}{{__ 'NewCompany'}}{{/if}}</span>
+                  {{/with}}
+                  &nbsp;<span class="caret pull-right inner-t-8"></span>
+                </div>
+              </button>
+              <ul class="dropdown-menu company-select w-100">
+                {{#each userCompanies}}
+                  {{#unless isCurrentCompany}}
+                    <li>
+                      <a class="change_company truncate" id="{{_id}}" href title="{{name}}">
+                        {{name}}
+                      </a>
+                    </li>
+                  {{/unless}}
+                {{/each}}
+              </ul>
+            </div>
+          {{else}}
+            <div class="nav-user-company text-muted">
+              {{#with company}}
+                {{#if name}}
+                  <span class="truncate" title="{{name}}">{{name}}</span>
+                {{else}}
+                  <span class="truncate" title="{{__ 'NewCompany'}}">{{__ 'NewCompany'}}</span>
+                {{/if}}
+              {{/with}}
+            </div>
+          {{/if}}
+          {{#if isInRole 'account_admin' companyId}}
+            {{#with company}}
+              {{#unless name}}
+                <a class="nav-company-cta" href="{{pathFor route='companyGeneralInfo'}}">
+                  <span class="fa fa-cog"></span>
+                  <span>{{__ 'CompleteCompanySettings'}}</span>
+                </a>
+              {{/unless}}
+            {{/with}}
+          {{/if}}
+        </div>
+      </div>
+      <ul class="nav" id="side-menu">
+        {{#each menuItems}}
+          {{> navigationSidebarItem item=this}}
+        {{/each}}
+      </ul>
+      <div class="nav-footer">
+        <small><strong>{{app 'name'}} {{app 'version'}}</strong></small>
+        <small>{{{app 'copyright'}}} <a href="{{pathFor route='copyrightTrademarks'}}">{{{app 'EACG'}}}</a></small>
+        <small><a href="{{app 'sourceUrl'}}" target="_blank" rel="noopener">Source code (AGPL-3.0)</a></small>
+      </div>
+    </div>
+  </aside>
+</template>
+
+<template name="navigationSidebarItem">
+  {{#if item.roles}}
+    {{#if isInRole item.roles companyId}}
+      <li class="sidebar-item {{item.liClass}}">
+        {{> navigationSidebarItemLink item=item}}
+        {{#if item.subItems}}
+          <ul id="menu_{{item.id}}" class="sidebar-dropdown list-unstyled collapse" data-parent="#side-menu"
+              style="">
+            {{#each item.subItems}}
+              {{> navigationSidebarItem item=this}}
+            {{/each}}
+          </ul>
+        {{/if}}
+      </li>
+    {{/if}}
+  {{else}}
+    <li class="sidebar-item {{item.liClass}}">
+      {{> navigationSidebarItemLink item=item}}
+      {{#if item.subItems}}
+        <ul id="menu_{{item.id}}" class="sidebar-dropdown list-unstyled collapse" data-parent="#side-menu"
+            style="">
+          {{#each item.subItems}}
+            {{> navigationSidebarItem item=this}}
+          {{/each}}
+        </ul>
+      {{/if}}
+    </li>
+  {{/if}}
+</template>
+
+<template name="navigationSidebarItemLink">
+  {{#if item.route}}
+    <a href="{{pathFor route=item.route data=item.routeParams query=item.queryParams}}" class="sidebar-link {{isActiveRoute regex=item.isActiveRouteRegex}}">
+      <span class="sidebar-icon {{item.iconClass}}"></span>
+      <span class="align-middle">
+        {{item.name}}
+        {{#if item.beta}}
+          <span class="badge-beta" title="BETA">B</span>
+        {{/if}}
+      </span>
+    </a>
+  {{else}}
+    {{#if item.link}}
+      <a href="{{item.link}}" target="_blank" class="sidebar-link{{#if item.disabled}}text-muted{{/if}}" aria-expanded="true">
+        <span class="sidebar-icon {{item.iconClass}}"></span> <span class="align-middle">
+          {{item.name}}
+          {{#if item.beta}}
+            <span class="badge-beta" title="BETA">B</span>
+          {{/if}}
+        </span>
+        {{#if item.disabled}}
+          <span class="sidebar-icon-soon fa fa-info-circle" title="{{item.disabled}}"></span>
+        {{/if}}
+      </a>
+    {{else}}
+      <a href="#menu_{{item.id}}" data-toggle="collapse"
+         class="sidebar-link collapsed {{#if item.disabled}}text-muted{{/if}}" aria-expanded="true">
+        <span class="sidebar-icon {{item.iconClass}}"></span> <span class="align-middle">
+          {{item.name}}
+          {{#if item.beta}}
+            <span class="badge-beta" title="BETA">B</span>
+          {{/if}}
+        </span>
+        {{#if item.subItems}}
+          <span class="sidebar-icon-collapsed fa"></span>
+        {{/if}}
+        {{#if item.disabled}}
+          <span class="sidebar-icon-soon fa fa-info-circle" title="{{item.disabled}}"></span>
+        {{/if}}
+      </a>
+    {{/if}}
+  {{/if}}
+</template>
+
+<template name="afSwitch">
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" value="true" {{atts}} class="ios-toggle {{isEditable}}"/>
+      <span for="{{this.atts.id}}" class="checkbox-label" data-off="off" data-on="on" style="margin-bottom: 0!important"></span>
+      <!--<span style="display: inline-block;margin: 9px 0 0 30px;float: left;">{{afFieldLabelText name=this.name}}</span>-->
+    </label>
+  </div>
+</template>
+
+<template name="afEnumSwitch">
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" value="true" {{atts}} class="ios-toggle {{isEditable}}"/>
+      <span for="{{this.atts.id}}" class="checkbox-label" data-off="off" data-on="on"
+            style="margin-bottom: 0!important"></span>
+    </label>
+  </div>
+</template>

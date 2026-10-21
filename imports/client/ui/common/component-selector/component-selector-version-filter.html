@@ -1,0 +1,21 @@
+<template name="componentSelectorVersionFilter">
+  <div id="componentSelectorVersionFilter" class="panel-heading actions no-top clearfix">
+    <div class="pull-left form-inline list_filter">
+      <div class="form-group">
+        <h5 class="inner-r-10"><strong class="fa fa-filter"></strong></h5>
+      </div>
+      <div class="form-group" style="width:180px;">
+        <input type="text" placeholder="By version name" class="form-control w-100"
+               value="{{searchSource}}" name="name">
+      </div>
+      <button class="btn btn-default reset_filter" title="Reset filters">
+        <i class="fa fa-trash"></i>
+      </button>
+    </div>
+    <div class="pull-right form-inline">
+      <button class="btn btn-default reset_component" title="Back to components" type="button">
+        <i class="fa fa-chevron-left"></i> Back to components
+      </button>
+    </div>
+  </div>
+</template>

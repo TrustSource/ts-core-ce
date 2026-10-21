@@ -1,0 +1,30 @@
+<template name="policyList">
+
+
+  {{#pageHeader}}
+    <div class="policy-header">
+      <div class="policy-header-left">
+        <h2 class="font-light m-b-xs">Opensource policy</h2>
+        <small>Manage compliance policies for your organization</small>
+      </div>
+      <div class="policy-header-actions">
+        {{> policyCreate}}
+      </div>
+    </div>
+  {{/pageHeader}}
+
+  <div class="content">
+    <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="table-responsive">
+            {{> reactiveTable settings=reactiveTableSettings}}
+          </div>
+        </div>
+    </div>
+  </div>
+</template>
+<template name="reactiveTablePolicyActions">
+  {{#if possibleRemove}}
+    <a href class="btn btn-danger2 btn-sm delete-policy"><i class="fa fa-trash"></i><span class="hidden-xs hidden-sm"> Remove</span></a>
+  {{/if}}
+</template>

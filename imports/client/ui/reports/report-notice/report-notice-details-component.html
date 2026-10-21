@@ -1,0 +1,223 @@
+<template name="noticeFileDetailsComponent">
+  <div class="component_details">
+    {{#unless showDetails}}
+      <div class="view_component">
+        {{#if hasAction 'Copyright'}}
+          <div>
+            <p>
+              Copyright:
+              {{#if component.copyright}}
+                {{component.copyright}}
+                {{#unless isFrozen}}
+                  <a href class="highlight toggle_view fa fa-pencil inner-l-10"></a>
+                {{/unless}}
+              {{else}}
+                {{#unless isFrozen}}
+                  <a class="highlight toggle_view" href title="Change component information">has not been provided</a>
+                {{else}}
+                  has not been provided
+                {{/unless}}
+              {{/if}}
+            </p>
+          </div>
+        {{/if}}
+        {{#if hasAction 'Modifications,ModifiedSources,ModificationsText'}}
+          <div>
+            This component has{{isModified}} been modified.
+            {{#unless isFrozen}}
+              <a href class="highlight toggle_view fa fa-pencil inner-r-10"></a>
+            {{/unless}}
+            {{#unless isManullyChanged}}
+              {{#if hasAction 'Modifications'}}
+                {{#unless component.changesText}}
+                  {{#if component.changesUrl}}
+                    (list of changes can be found <a class="highlight" target="_blank" href="{{component.changesUrl}}">here</a>)
+                    {{#unless isFrozen}}
+                      <a href class="highlight toggle_view fa fa-pencil inner-l-10"></a>
+                    {{/unless}}
+                  {{else}}
+                    <span>
+                      Changes url:
+                      {{#unless isFrozen}}
+                        <a class="highlight toggle_view" href title="Change component information">has not been provided</a>
+                      {{else}}
+                        has not been provided
+                      {{/unless}}
+                    </span>
+                  {{/if}}
+                {{/unless}}
+              {{/if}}
+              {{#if hasAction 'ModifiedSources'}}
+								{{#if component.changedSourcesUrl}}
+									(changed sources can be found <a class="highlight" target="_blank" href="{{component.changedSourcesUrl}}">here</a>)
+									{{#unless isFrozen}}
+										<a href class="highlight toggle_view fa fa-pencil inner-l-10"></a>
+									{{/unless}}
+								{{else}}
+									<span>
+										Changed sources url:
+										{{#unless isFrozen}}
+											<a class="highlight toggle_view" href title="Change component information">has not been provided</a>
+										{{else}}
+											has not been provided
+										{{/unless}}
+									</span>
+								{{/if}}
+							{{/if}}
+							{{#if hasAction 'ModificationsText'}}
+                {{#unless component.changesUrl}}
+                  {{#if component.changesText}}
+                    (modification notice:  {{component.changesText}})
+                    {{#unless isFrozen}}
+                      <a href class="highlight toggle_view fa fa-pencil inner-l-10"></a>
+                    {{/unless}}
+                  {{else}}
+                    <span>
+                      Modification notice:
+                      {{#unless isFrozen}}
+                        <a class="highlight toggle_view" href title="Change component information">has not been provided</a>
+                      {{else}}
+                        has not been provided
+                      {{/unless}}
+                    </span>
+                  {{/if}}
+                {{/unless}}
+							{{/if}}
+            {{else}}
+              <div class="alert alert-warning">
+                <p>
+                  <strong>PLEASE NOTE: </strong><br>
+                  Settings was changed by compliance. Please verify status to ensure
+                </p>
+              </div>
+            {{/unless}}
+          </div>
+        {{/if}}
+        {{#if hasAction 'Sources'}}
+          <div>
+            {{#if component.sourcesUrl}}
+              <p>
+                You may find the source at
+                <a class="highlight" href="{{component.sourcesUrl}}" target="_blank">{{component.sourcesUrl}}</a>
+                {{#unless isFrozen}}
+                  <a href class="highlight toggle_view fa fa-pencil inner-l-10"></a>
+                {{/unless}}
+              </p>
+            {{else}}
+              <p>
+                Source url:
+                {{#unless isFrozen}}
+                  <a class="highlight toggle_view" href title="Change component information">has not been provided</a>
+                {{else}}
+                  has not been provided
+                {{/unless}}
+              </p>
+            {{/if}}
+          </div>
+        {{/if}}
+        {{#if hasAction 'DistributionRestriction'}}
+          <div>
+            <p>
+              The grant of rights (use, modification, reproduction, etc.) under the license is condition upon compliance with the license obligations
+            </p>
+          </div>
+        {{/if}}
+      </div>
+    {{else}}
+      <div class="edit_component">
+        <div class="row">
+          {{#if hasAction 'Copyright'}}
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="control-label">
+                  Copyright
+                </label>
+                <input class="form-control" value="{{component.copyright}}" name="copyright" disabled={{reportDisabled}}>
+                <!--<div class="input-group-btn">-->
+                  <!--<button class="btn btn-default" title="Publish changes">-->
+                    <!--<i class="fa fa-external-link"></i>-->
+                    <!--<span>Publish</span>-->
+                  <!--</button>-->
+                <!--</div>-->
+              </div>
+            </div>
+          {{/if}}
+          {{#if hasAction 'ModificationsText,ModifiedSources,Modifications'}}
+            <div class="col-md-12">
+              <div class="form-group inner-b-8">
+                <label class="control-label">
+                  <input type="checkbox" {{isUnchanged}} name="unchanged" disabled={{reportDisabled}}>
+                  <span> component is not modified</span>
+                </label>
+              </div>
+            </div>
+          {{/if}}
+          {{#unless isManullyChanged}}
+            {{#if hasAction 'Modifications'}}
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="display-block">
+                    <span  class="control-label">Changes url</span>
+                    <input class="form-control" value="{{component.changesUrl}}" name="changesUrl" disabled={{reportDisabled}}>
+                  </label>
+                </div>
+              </div>
+            {{/if}}
+						{{#if hasAction 'ModifiedSources'}}
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="display-block">
+										<span  class="control-label">Changed sources url</span>
+										<input class="form-control" value="{{component.changedSourcesUrl}}" name="changedSourcesUrl" disabled={{reportDisabled}}>
+									</label>
+								</div>
+							</div>
+						{{/if}}
+						{{#if hasAction 'ModificationsText'}}
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="display-block">
+										<span  class="control-label">Modification notice</span>
+										<textarea class="form-control" name="changesText" disabled={{reportDisabled}}>{{component.changesText}}</textarea>
+									</label>
+								</div>
+							</div>
+						{{/if}}
+          {{else}}
+            <div class="col-md-12">
+              <div class="alert alert-warning">
+                <p>
+                  <strong>PLEASE NOTE: </strong><br>
+                  Settings was changed by compliance. Please verify status to ensure
+                </p>
+              </div>
+            </div>
+          {{/unless}}
+          {{#if hasAction 'Sources'}}
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="display-block">
+                  <span  class="control-label">Sources url</span>
+                  <input class="form-control" value="{{component.sourcesUrl}}" name="sourcesUrl" disabled={{reportDisabled}}>
+                </label>
+              </div>
+            </div>
+          {{/if}}
+          {{#if hasAction 'DistributionRestriction'}}
+            <div class="col-md-12">
+              <div class="form-group">
+                <p>
+                  The grant of rights (use, modification, reproduction, etc.) under the license is condition upon compliance with the license obligations
+                </p>
+              </div>
+            </div>
+          {{/if}}
+          <div class="col-md-12">
+            <button class="btn btn-primary save_component" type="button" disabled={{reportDisabled}}>Save component</button>
+            <button class="btn btn-default toggle_view" type="button">Cancel</button>
+          </div>
+        </div>
+      </div>
+    {{/unless}}
+  </div>
+</template>

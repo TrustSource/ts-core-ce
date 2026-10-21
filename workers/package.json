@@ -1,0 +1,21 @@
+{
+  "name": "ts-app-workers",
+  "version": "1.0.2",
+  "description": "Analysis and webhook services the app runs in worker threads, outside the Meteor bundle",
+  "license": "AGPL-3.0-only",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  },
+  "dependencies": {
+    "ae-cvss-calculator": "1.0.12",
+    "axios": "1.20.0",
+    "moment": "2.31.0",
+    "mongodb": "7.3.0",
+    "semver": "7.8.4",
+    "semver-sort": "1.0.0",
+    "underscore": "1.13.8",
+    "uuid": "14.0.0"
+  }
+}

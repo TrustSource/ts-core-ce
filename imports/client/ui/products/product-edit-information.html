@@ -1,0 +1,91 @@
+<template name="productEditInformation">
+  <form id="productEditForm" method="post">
+    <div class="form-groups">
+      <div class="form-group col-sm-6">
+        <label for="identifier">Identifier *</label>
+        <input type="text" value="{{identifier}}" id="identifier" class="form-control" name="identifier">
+      </div>
+      <div class="form-group col-sm-6">
+        <label for="type">Type *</label>
+        <select class="form-control" name="type" id="type" required>
+          <option value="class" label="Class" selected="{{isSelected type 'class'}}">Class</option>
+          <option value="family" label="Family" selected="{{isSelected type 'family'}}">Family</option>
+          <option value="variant" label="Variant" selected="{{isSelected type 'variant'}}">Variant</option>
+          <option value="version" label="Version" selected="{{isSelected type 'version'}}">Version</option>
+          <option value="position" label="Position" selected="{{isSelected type 'position'}}">Position</option>
+        </select>
+      </div>
+      <div class="form-group col-sm-12">
+        <label for="name">Name *</label>
+        <input type="text" value="{{name}}" id="name" class="form-control" required name="name">
+      </div>
+      <div class="form-group col-xs-12">
+        <label for="description">Purpose</label>
+        <textarea id="description" class="form-control" name="description">{{description}}</textarea>
+      </div>
+      <div class="form-group col-xs-12">
+        <label for="features">Features</label>
+        <textarea id="features" class="form-control" name="features">{{features}}</textarea>
+      </div>
+      <div class="form-group col-xs-12">
+        {{#if loading}}
+          <button type="button" disabled="disabled" class="btn btn-block btn-primary">
+            <i class="fa fa-spinner fa-spin"></i> Save
+          </button>
+        {{else}}
+          <button type="submit" class="btn btn-block btn-primary">
+            Save
+          </button>
+        {{/if}}
+      </div>
+      <div class="form-group col-xs-12 pinner-b-20i text-left relative">
+        <div class="pull-right actions-on-top">
+          {{#if loading}}
+            <button type="button" disabled="disabled" class="btn btn-danger">
+              <i class="fa fa-spinner fa-spin"></i> Retire
+            </button>
+          {{else}}
+            {{#if retired}}
+              <button type="button" class="btn btn-info un_retire_product">
+                Revert
+              </button>
+            {{else}}
+              <button type="button" class="btn btn-danger retire_product">
+                Retire
+              </button>
+            {{/if}}
+          {{/if}}
+        </div>
+        {{#if retired}}
+          <span class="inline-block label-danger btn btn-block text-left-i" title="{{retiredReason}}">
+                <span class="text-left">
+                  <i class="fa fa-ban"></i> <span style="width: 150px" class="truncate"><small>{{retiredReason}}</small></span>
+                  <br>
+                  <span style="width: 165px" class="truncate"><small>by {{retiredByName}}</small></span>
+                  <br>
+                  <span style="width: 165px" class="truncate"><small class="inline-block">{{dateFormat date=retired dflt='-- --'}}</small></span>
+                </span>
+              </span>
+        {{else}}
+          {{#if retiredReason}}
+            <span class="inline-block label-info btn btn-block text-left-i" title="{{retiredReason}}">
+                  <span class="text-left">
+                      <i class="fa fa-repeat"></i> <span style="width: 150px" class="truncate"><small>{{retiredReason}}</small></span>
+                      <br>
+                      <span style="width: 165px" class="truncate"><small>by {{retiredByName}}</small></span>
+                  </span>
+                </span>
+          {{else}}
+            <span class="inline-block label-info btn btn-block text-left-i" title="{{retiredReason}}">
+                  <span class="text-left">
+                      <i class="fa fa-info-circle"></i> <span style="width: 150px" class="truncate"><small>This action is retiring</small></span>
+                      <br>
+                      <span style="width: 165px" class="truncate"><small>a part of product tree</small></span>
+                  </span>
+                </span>
+          {{/if}}
+        {{/if}}
+      </div>
+    </div>
+  </form>
+</template>

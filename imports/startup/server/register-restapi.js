@@ -1,0 +1,19 @@
+import '/imports/server/rest-api/projects.js';
+import '/imports/server/rest-api/scans.js';
+import '/imports/server/rest-api/modules.js';
+import '/imports/server/rest-api/authorization.js';
+import '/imports/server/rest-api/check.js';
+import '/imports/server/rest-api/companyFoss.js';
+import '/imports/server/rest-api/approves.js';
+import '/imports/server/rest-api/reports.js';
+import '/imports/server/rest-api/imports.js';
+import '/imports/server/rest-api/releases.js';
+import '/imports/server/rest-api/csaf-feed.js';
+import '/imports/server/rest-api/users.js';
+import '/imports/server/rest-api/tests.js';
+import '/imports/server/rest-api/risks.js';
+import '/imports/server/rest-api/products.js';
+import '/imports/server/storage/productFilesRoute.js';
+import '/imports/server/rest-api/appLinkRedirect.js';
+// order of imports is important: import catchall-route as last module
+import '/imports/server/rest-api/catchall-route.js';
