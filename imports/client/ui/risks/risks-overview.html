@@ -1,0 +1,45 @@
+<template name="risksOverview">
+
+  {{# pageHeader}}
+    <div class="risks-header">
+      <div class="risks-header-left">
+        <h2 class="font-light m-b-xs">Risk management overview</h2>
+        <small>Details about risks across whole company</small>
+      </div>
+      <div class="risks-header-actions">
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="approves-detail-tabs">
+    <ul class="nav nav-tabs">
+      <li class="active">
+        <a title="Risk management overview" href>
+          <span class="fa fa-chart-area"></span> Overview</a>
+      </li>
+      <li>
+        <a title="Risks management" href="{{pathFor route='risks' query=getRiskQueryParams}}">
+          <span class="fa fa-list-ul"></span> Risks</a>
+      </li>
+      <li>
+        <a title="Risk management tasks" href="{{pathFor route='risksTasks' query=getRiskQueryParams}}">
+          <span class="fa fa-check-square"></span> Tasks</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="content">
+    <div class="ts-panel">
+      <div class="panel-body pinner-tb-20">
+        {{#if hasRisksLoaded}}
+          {{#if hasAnyRisks}}
+            {{> risksPortfolio}}
+            {{> risksPortfolioNew}}
+            {{> risksPortfolioUnmitigated}}
+          {{else}}
+            {{> risksOverviewEmpty}}
+          {{/if}}
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,75 @@
+<template name="companyPsirt">
+  {{#panel title="PSIRT contacts"}}
+    <form class="form-horizontal psirt">
+      <div class="row">
+        {{#with psirt}}
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="registeredTradeName">Registered Trade Name</label>
+              <div class="col-sm-10 controls">
+                <input type="text" name="registeredTradeName" placeholder="" class="form-control"
+                       value="{{registeredTradeName}}"/>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="manufacturerName">Manufacturer Name</label>
+              <div class="col-sm-10 controls">
+                <input type="text" name="manufacturerName" placeholder="" class="form-control"
+                       value="{{manufacturerName}}"/>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="col-sm-4 control-label" for="manufacturerAddress">Manufacturer Address</label>
+              <div class="col-sm-8 controls">
+                <input type="text" name="manufacturerAddress" placeholder="" class="form-control"
+                       value="{{manufacturerAddress}}"/>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="col-sm-4 control-label" for="manufacturerWebsite">Manufacturer Website</label>
+              <div class="col-sm-8 controls">
+                <input type="text" name="manufacturerWebsite" placeholder="" class="form-control"
+                       value="{{manufacturerWebsite}}"/>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="col-sm-4 control-label" for="productSecurityContact">Product Security Contact</label>
+              <div class="col-sm-8 controls">
+                <input type="text" name="productSecurityContact" placeholder="" class="form-control"
+                       value="{{productSecurityContact}}"/>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="col-sm-4 control-label" for="productSecurityWeblink">Weblink</label>
+              <div class="col-sm-8 controls">
+                <input type="text" name="productSecurityWeblink" placeholder="" class="form-control"
+                       value="{{productSecurityWeblink}}"/>
+              </div>
+            </div>
+          </div>
+        {{/with}}
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-8">
+              <button type="submit" class="btn  btn-sm btn-primary">
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  {{/panel}}
+</template>

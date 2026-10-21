@@ -1,0 +1,84 @@
+<template name="licenseList">
+
+  {{#pageHeader}}
+    <div class="licenses-header">
+      <div class="licenses-header-left">
+        <h2 class="font-light m-b-none">
+          Licenses
+        </h2>
+        <small class="text-muted">
+          {{#if isLoading}}
+            searching ...
+          {{else}}
+            {{licensesCount}} Licenses known
+          {{/if}}
+        </small>
+      </div>
+      <div class="licenses-header-actions">
+        <div class="licenses-search">
+          <i class="fa fa-search licenses-search-icon"></i>
+          <input type="text" placeholder="Search licenses..." class="form-control input-sm" name="search"
+                 value="{{session 'licenseListFilter'}}">
+        </div>
+        {{> licenseCreate}}
+      </div>
+    </div>
+  {{/pageHeader}}
+
+  <div class="content licenses-content">
+    <div class="ts-panel">
+      <ul class="nav nav-tabs" id="license-tabs">
+        <li class="active"><a data-toggle="tab" href="#allLicenses">All</a></li>
+        <li><a data-toggle="tab" href="#topLicenseList">Top List</a></li>
+      </ul>
+
+      <div class="tab-content licenses-scroll">
+        {{> licenses id='allLicenses'}}
+        {{> licenses id='topLicenseList'}}
+      </div>
+      {{#if showPagination}}
+        {{> paginationList collection=collectionLength list=listLength uri=true}}
+      {{/if}}
+    </div>
+  </div>
+</template>
+
+<template name="licenses">
+  <div id="{{id}}" class="tab-pane active">
+    {{#if isActiveTab id}}
+      {{#each getLicenses}}
+        {{> license}}
+      {{/each}}
+      {{#if requestInProgress}}
+        <div class="panel-body collapsed">
+          <div class="row">
+            <div class="col-xs-10 truncate">
+              <div class="text-primary">
+                <i class="fa fa-spinner fa-spin"></i> Loading licenses, please wait...
+              </div>
+            </div>
+          </div>
+        </div>
+      {{/if}}
+    {{/if}}
+  </div>
+</template>
+
+<template name="license">
+  <div class="license-row" data-href="{{#if key}}{{pathFor 'licenseDetail' key=key query=licenseDetailQuery}}{{/if}}">
+    <div class="license-row-name truncate">
+      {{#if name}}
+        {{> highlight text=name query=query}}
+      {{else}}
+        {{> highlight text=key query=query}}
+      {{/if}}
+    </div>
+    <div class="license-row-rate">
+      {{rate}}
+    </div>
+    <div class="license-row-link">
+      <a href="{{url}}" target="_blank" title="show homepage"><i class="fa fa-fw fa-external-link"></i></a>
+    </div>
+  </div>
+</template>
+

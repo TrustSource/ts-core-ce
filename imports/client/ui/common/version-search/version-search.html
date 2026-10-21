@@ -1,0 +1,19 @@
+<template name="versionSearch">
+  <div class="version-search">
+    <div class="input-group input-group-sm version-search-group">
+      <span class="version-search-icon input-group-addon"><i class="fa fa-filter"></i></span>
+      <input type="text" class="form-control version-search-input"
+             value="{{term}}"
+             placeholder="{{__ 'FilterVersions'}}" aria-label="{{__ 'FilterVersions'}}"
+             autocomplete="off">
+      {{#if term}}
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default version-search-clear"
+                  title="{{__ 'ClearFilter'}}" aria-label="{{__ 'ClearFilter'}}">
+            <i class="fa fa-times"></i>
+          </button>
+        </span>
+      {{/if}}
+    </div>
+  </div>
+</template>

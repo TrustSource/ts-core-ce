@@ -1,0 +1,73 @@
+<template name="csafList">
+  {{#pageHeader}}
+    <div class="csaf-header">
+      <div class="csaf-header-left">
+        <h2 class="font-light m-b-xs">
+          CSAF
+        </h2>
+        <small>
+          These are transferred CSAF files for your company
+        </small>
+      </div>
+      <div class="csaf-header-actions">
+        <a href="{{pathFor route='csafCreate'}}" class="btn btn-xs" title="Create">
+          <i class="fa fa-plus"></i> <span class="btn-label">Create</span>
+        </a>
+        <a class="btn btn-xs" data-toggle="modal" data-target="#CSAFImportModal" title="Import CSAF">
+          <span class="fa fa-upload" aria-hidden="true"></span>
+          <span class="btn-label">Import</span>
+        </a>
+        {{#if isInRole 'account_admin,company_security_manager' companyId}}
+          <a href="{{pathFor route='companyApiCsaf'}}" class="btn btn-xs" title="CSAF feed keys">
+            <span class="fa fa-key" aria-hidden="true"></span>
+            <span class="btn-label">Feed keys</span>
+          </a>
+        {{/if}}
+        {{> csafStateFilter sessionVar="csafFilter"}}
+      </div>
+    </div>
+    {{> CSAFImportModal}}
+    {{> CSAFRemoveModal}}
+  {{/pageHeader}}
+
+  <div class="content csaf-list">
+    <div class="panel panel-default">
+        <div class="panel-body">
+          {{> reactiveTable settings=reactiveTableSettings}}
+        </div>
+    </div>
+  </div>
+</template>
+
+<template name="reactiveTableCSAFStatus">
+  {{#if status}}
+    <span class="test-status-icon {{status}}"></span> {{status}}
+  {{/if}}
+</template>
+
+<template name="reactiveTableCSAFActions">
+  {{#if isInRole 'company_security_manager' companyId}}
+    <button class="btn btn-success btn-sm csaf_upload" title="Publish">
+      <i class="fa fa-cloud-upload"></i>
+    </button>
+  {{/if}}
+  <div class="inline-block relative">
+    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+      <span class="fa fa-pencil"></span> <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-right">
+      <li><a href="{{pathFor route='csafDetailsMeta' data=getOptions}}">All fields</a></li>
+      <li><a href="{{pathFor route='csafDetailsJson' data=getOptions}}">JSON</a></li>
+      <li><a href="{{pathFor route='csafCreate' query=getCreateOptions.query}}">via "Create wizard"</a></li>
+    </ul>
+  </div>
+  {{#if isDraft}}
+    <button class="btn btn-warning btn-sm csaf_delete" title="Delete">
+      <i class="fa fa-trash-can"></i>
+    </button>
+  {{else}}
+    <button class="btn btn-warning btn-sm" title="Delete" disabled>
+      <i class="fa fa-trash-can"></i>
+    </button>
+  {{/if}}
+</template>

@@ -1,0 +1,25 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.4",
+  "version": 1,
+  "components": [
+    {
+      "type": "library",
+      "name": "test-cydx-nodeps-apache",
+      "version": "1.0.0",
+      "purl": "pkg:generic/test-cydx-nodeps-apache@1.0.0",
+      "licenses": [
+        { "license": { "id": "Apache-2.0" } }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "test-cydx-nodeps-mit",
+      "version": "2.0.0",
+      "purl": "pkg:generic/test-cydx-nodeps-mit@2.0.0",
+      "licenses": [
+        { "license": { "id": "MIT" } }
+      ]
+    }
+  ]
+}

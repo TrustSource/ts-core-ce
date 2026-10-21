@@ -1,0 +1,391 @@
+<template name="reportsList">
+
+  {{#pageHeader}}
+    <div class="reports-header">
+      <div class="reports-header-left">
+        <h2 class="font-light m-b-xs">Analyse [Reports]</h2>
+        <small>Please select report type</small>
+      </div>
+    </div>
+  {{/pageHeader}}
+
+  <div class="content">
+    <div class="row d-flex">
+      <div class="col-md-3 col-sm-6">
+        <div class="panel panel-default">
+          <a href="{{pathFor route='reportLicenses'}}">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="fa fa-gavel ts-big-icon"></span>
+                </div>
+                <div class="col-md-12">
+                  <h4 style="margin: 10px 0 20px">
+                    Licenses overview
+                  </h4>
+                </div>
+                <div class="col-md-12">
+                  <p>List of all licenses used in the project</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="panel panel-default">
+          <a href="{{pathFor route='reportVulnerability'}}">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="fa fa-shield-halved ts-big-icon"></span>
+                </div>
+                <div class="col-md-12">
+                  <h4 style="margin: 10px 0 20px">
+                    Vulnerability report
+                  </h4>
+                </div>
+                <div class="col-md-12">
+                  <p>Status of all project vulnerabilities</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="panel panel-default">
+          <a href="{{pathFor route='reportVersioning'}}">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="fa fa-hourglass-o ts-big-icon"></span>
+                </div>
+                <div class="col-md-12">
+                  <h4 style="margin: 10px 0 20px">
+                    Versioning report
+                  </h4>
+                </div>
+                <div class="col-md-12">
+                  <p>Status of all component version problems</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="panel panel-default">
+          <a href="{{pathFor route='reportEndoflife'}}">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="fa fa-hourglass-end ts-big-icon"></span>
+                </div>
+                <div class="col-md-12">
+                  <h4 style="margin: 10px 0 20px">
+                    End-of-life report
+                  </h4>
+                </div>
+                <div class="col-md-12">
+                  <p>Status of all component end-of-life problems</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="panel panel-default">
+          <a href="{{pathFor route='reportAlgorithms'}}">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="fa fa-key ts-big-icon"></span>
+                </div>
+                <div class="col-md-12">
+                  <h4 style="margin: 10px 0 20px">
+                    Algorithm report
+                  </h4>
+                </div>
+                <div class="col-md-12">
+                  <p>Status of all component algorithms</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      {{#if isInRole 'company_security_manager,compliance_manager,portfolio_manager' companyId}}
+        <div class="col-md-3 col-sm-6">
+          <div class="panel panel-default">
+            <a href="{{pathFor route='reportBadAlgorithms'}}">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <span class="fa fa-person-military-pointing ts-big-icon"></span>
+                  </div>
+                  <div class="col-md-12">
+                    <h4 style="margin: 10px 0 20px">
+                      All bad crypto
+                    </h4>
+                  </div>
+                  <div class="col-md-12">
+                    <p>Status of crypto policy violations</p>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      {{/if}}
+      <div class="col-md-3 col-sm-6">
+        <div class="panel panel-default">
+          <a href="{{pathFor route='reportObligations'}}">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="fa fa-check-square-o ts-big-icon"></span>
+                </div>
+                <div class="col-md-12">
+                  <h4 style="margin: 10px 0 20px">
+                    Obligation report
+                  </h4>
+                </div>
+                <div class="col-md-12">
+                  <p>Status of all project obligations</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      {{> reportsListIssue }}
+
+      <div class="col-md-3 col-sm-6">
+        <div class="panel panel-default">
+          <a href="{{pathFor route='reportSbomFiles'}}">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="fa fa-cubes ts-big-icon"></span>
+                </div>
+                <div class="col-md-12">
+                  <h4 style="margin: 10px 0 20px">
+                    Software bill of materials
+                  </h4>
+                </div>
+                <div class="col-md-12">
+                  <p>List of projects SBOM</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+			<div class="col-md-3 col-sm-6">
+				<div class="panel panel-default">
+					<a href="{{pathFor route='reportCredits'}}">
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-12">
+									<span class="fa fa-copyright ts-big-icon"></span>
+								</div>
+								<div class="col-md-12">
+									<h4 style="margin: 10px 0 20px">
+										Credits report
+									</h4>
+								</div>
+								<div class="col-md-12">
+									<p>List of projects credits</p>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+
+			<div class="col-md-3 col-sm-6">
+				<div class="panel panel-default">
+					<a href="{{pathFor route='reportModification'}}">
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-12">
+									<span class="fa fa-pencil ts-big-icon"></span>
+								</div>
+								<div class="col-md-12">
+									<h4 style="margin: 10px 0 20px">
+										Modification state
+									</h4>
+								</div>
+								<div class="col-md-12">
+									<p>List of modified components</p>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+
+      {{#if isInRole 'compliance_manager,manager,portfolio_manager' companyId}}
+        <div class="col-md-3 col-sm-6">
+          <div class="panel panel-default">
+            <a href="{{pathFor route='reportImpactComponent'}}">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <span class="fa fa-exclamation-triangle ts-big-icon"></span>
+                  </div>
+                  <div class="col-md-12">
+                    <h4 style="margin: 10px 0 20px">
+                      Component impact
+                    </h4>
+                  </div>
+                  <div class="col-md-12">
+                    <p>Projects impacted by component</p>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      {{/if}}
+
+      <div class="col-md-3 col-sm-6">
+        <div class="panel panel-default">
+          <a href="{{pathFor route='reportImpactCve'}}">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="fa fa-exclamation-triangle ts-big-icon"></span>
+                </div>
+                <div class="col-md-12">
+                  <h4 style="margin: 10px 0 20px">
+                    CVE impact
+                  </h4>
+                </div>
+                <div class="col-md-12">
+                  <p>Projects impacted by CVE</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-6">
+        <div class="panel panel-default">
+          <a href="{{pathFor route='reportImpactAlgorithm'}}">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="fa fa-exclamation-triangle ts-big-icon"></span>
+                </div>
+                <div class="col-md-12">
+                  <h4 style="margin: 10px 0 20px">
+                    Algorithm impact
+                  </h4>
+                </div>
+                <div class="col-md-12">
+                  <p>Projects impacted by algorithm</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-6">
+        <div class="panel panel-default">
+          <a href="{{pathFor route='reportNoticeFiles'}}">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="fa fa-paragraph-icon ts-big-icon"></span>
+                </div>
+                <div class="col-md-12">
+                  <h4 style="margin: 10px 0 20px">
+                    Notice files
+                  </h4>
+                </div>
+                <div class="col-md-12">
+                  <p>List of Notice files</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-6">
+        <div class="panel panel-default">
+          <a href="{{pathFor route='reportCots'}}">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="fa fa-money ts-big-icon"></span>
+                </div>
+                <div class="col-md-12">
+                  <h4 style="margin: 10px 0 20px">
+                    COTS overview
+                  </h4>
+                </div>
+                <div class="col-md-12">
+                  <p>List of all COTS components in project</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-6">
+        <div class="panel panel-default">
+          <a href="{{pathFor route='reportDependent'}}">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="fa fa-link ts-big-icon"></span>
+                </div>
+                <div class="col-md-12">
+                  <h4 style="margin: 10px 0 20px">
+                    Dependent projects
+                  </h4>
+                </div>
+                <div class="col-md-12">
+                  <p>List of all projects dependent on selected</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      {{#if possibleCriticalComponents}}
+        <div class="col-md-3 col-sm-6">
+          <div class="panel panel-default">
+            <a href="{{pathFor route='reportCriticalComponents'}}">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <span class="fa fa-boxes ts-big-icon"></span>
+                  </div>
+                  <div class="col-md-12">
+                    <h4 style="margin: 10px 0 20px">
+                      Components
+                    </h4>
+                  </div>
+                  <div class="col-md-12">
+                    <p>List of components with missing data</p>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      {{/if}}
+    </div>
+  </div>
+</template>

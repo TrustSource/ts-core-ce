@@ -1,0 +1,37 @@
+<template name="companyGeneralSettingsForm">
+  {{#panel title="General settings"}}
+    <form class="form-horizontal general_settings">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="col-sm-4 control-label" for="distributionEmail">Distribution email</label>
+            <div class="col-sm-8 controls">
+              <input type="text" name="distributionEmail" placeholder="Distribution email" class="form-control" value="{{distribution.email}}"/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="col-sm-4 control-label" for="currencyCode">Currency code</label>
+            <div class="col-sm-8 controls">
+              <input type="text" name="currencyCode" placeholder="EUR" class="form-control" value="{{currencyCode}}"/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-8">
+              <button type="submit" class="btn  btn-sm btn-primary">
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  {{/panel}}
+</template>

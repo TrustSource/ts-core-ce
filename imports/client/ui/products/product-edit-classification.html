@@ -1,0 +1,74 @@
+<template name="productEditClassification">
+  <form id="productEditClassificationForm" method="post">
+    <div class="form-groups">
+      <div class="form-group col-sm-12">
+        <label for="classification">Classified as *</label>
+        <select class="form-control" name="classification" id="classification" required>
+          <option value="STANDARD" label="STANDARD" selected="{{isSelected classification 'STANDARD'}}">STANDARD</option>
+          <option value="IMPORTANT_1" label="IMPORTANT Class 1" selected="{{isSelected classification 'IMPORTANT_1'}}">IMPORTANT Class 1</option>
+          <option value="IMPORTANT_2" label="IMPORTANT Class 2" selected="{{isSelected classification 'IMPORTANT_2'}}">IMPORTANT Class 2</option>
+          <option value="CRITICAL" label="CRITICAL" selected="{{isSelected classification 'CRITICAL'}}">CRITICAL</option>
+        </select>
+      </div>
+      <div class="form-group col-xs-12">
+        {{#if loading}}
+          <button type="button" disabled="disabled" class="btn btn-block btn-primary">
+            <i class="fa fa-spinner fa-spin"></i> Save
+          </button>
+        {{else}}
+          <button type="submit" class="btn btn-block btn-primary">
+            Save
+          </button>
+        {{/if}}
+      </div>
+      {{#if classification}}
+        <div class="form-group col-sm-12">
+          <h5 class="h5">Samples of areas for {{classification}}:</h5>
+          <ul class="">
+            {{#if isSelected classification 'STANDARD'}}
+              <li>Products with digital elements not listed as important or critical, e.g. photo editing or word processing software</li>
+              <li>Games and other consumer applications</li>
+              <li>Smart speakers without a general purpose virtual assistant</li>
+              <li>Hard drives, printers and other peripherals without security functionality</li>
+            {{/if}}
+            {{#if isSelected classification 'IMPORTANT_1'}}
+              <li>Identity management System (IDM like Keycloak) and privileged access management</li>
+              <li>Standalone or embedded browsers</li>
+              <li>Password Managers</li>
+              <li>Software that searches for, removes or quarantines malicious SW</li>
+              <li>VPN or Products using VPN</li>
+              <li>Network Management</li>
+              <li>SIEM</li>
+              <li>Public Key infrastructure & certificate issuance SW</li>
+              <li>Physical & virtual Network interfaces</li>
+              <li>Operating Systems</li>
+              <li>Routers modems intended for the connection to the internet and switches</li>
+              <li>Microprocessors & controllers with security related functionalities</li>
+              <li>Application specific integrated circuits and field programmable gate arrays with security related functionality</li>
+              <li>Smart home general purpose virtual assistants</li>
+              <li>Smart home products with security functionality, incl. door locks, cameras , baby monitoring and alarm systems</li>
+              <li>Internet connected Toys (see Dir 2009/48/EC) with social interactive</li>
+              <li>Personal wearable products that have a health monitoring purpose AND MDR does not apply</li>
+            {{/if}}
+            {{#if isSelected classification 'IMPORTANT_2'}}
+              <li>Hypervisor or container runtime that supports execution of virtualized workloads</li>
+              <li>Firewalling</li>
+              <li>Intrusion Prevention and Detection</li>
+              <li>Tamper-resistant microprocessors or microcontrollers</li>
+            {{/if}}
+            {{#if isSelected classification 'CRITICAL'}}
+              <li>Hardware with security boxes</li>
+              <li>Smart meter gateways within smart metering systems</li>
+              <li>Other devices for advanced security purposes incl. secure cryptoprocessing</li>
+              <li>Smartcards or similar devices, incl. secure elements</li>
+            {{/if}}
+          </ul>
+          <p class="help-block small">
+            Outside the scope of the CRA: medical devices (MDR / IVDR), motor vehicles, civil aviation and marine
+            equipment, which are covered by their own regulations.
+          </p>
+        </div>
+      {{/if}}
+    </div>
+  </form>
+</template>

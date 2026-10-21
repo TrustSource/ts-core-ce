@@ -1,0 +1,21 @@
+import './company-general.html';
+import './company-general-info.html';
+import './company-details-form.html';
+import './company-foss.html';
+import './company-foss-page.html';
+import './company-written-offer.html';
+import './company-written-offer-page.html';
+import './company-general-settings-form.html';
+import './company-psirt.html';
+import './company-psirt-page.html';
+
+import './company-general';
+import './company-general-info';
+import './company-details-form';
+import './company-foss';
+import './company-foss-page';
+import './company-written-offer';
+import './company-written-offer-page';
+import './company-general-settings-form';
+import './company-psirt';
+import './company-psirt-page';

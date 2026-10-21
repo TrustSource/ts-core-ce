@@ -1,0 +1,65 @@
+<template name="moduleApproveFinalize">
+  {{#pageHeader}}
+    <div class="row">
+      <div class="col-sm-12">
+
+        <h2 class="font-light m-b-xs">
+          {{#if isUnassignedProject}}
+            <span title="{{name}}">{{name}}</span>
+          {{else}}
+            <span class="truncate max-w-80" title="{{name}}">{{name}}</span>
+          {{/if}}
+        </h2>
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content wizard-content">
+    <div class="wizard">
+      <div class="steps">
+        <ul>
+          <li class="wizardStep">
+            <span class="badge">1</span>
+            Settings
+            <span class="chevron"></span>
+          </li>
+          <li class="wizardStep">
+            <span class="badge">2</span>
+            Select analysis
+            <span class="chevron"></span>
+          </li>
+          <li class="wizardStep">
+            <span class="badge">3</span>
+            Confirm statuses
+            <span class="chevron"></span>
+          </li>
+          <li class="wizardStep active">
+            <span class="badge badge-primary">4</span>
+            Finalization
+            <span class="chevron"></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="content pinner-t-5">
+    <div class="row">
+      <div class="col-lg-12 ts-stagger-item fadeIn">
+        <form id="createApproveForm" class="ts-panel">
+          <div class="panel-body">
+            <h3>Finalizing your approval request</h3>
+            {{> approveGenerationProgress approveData=approveData}}
+          </div>
+          <div class="panel-footer text-right">
+            <a class="btn btn-default" href="{{pathFor route='moduleDependencies' data=getModuleOptions}}">Return to
+              module</a>
+            {{#if approveData._id}}
+              <a class="btn btn-primary" href="{{pathFor route='approvesDetailsOverview' data=getApproveOptions}}">
+                Jump to Compliance Report
+              </a>
+            {{/if}}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>

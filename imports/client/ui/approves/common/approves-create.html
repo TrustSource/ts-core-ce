@@ -1,0 +1,44 @@
+<template name="approvesCreate">
+    <button class="btn btn-xs btn-primary" data-toggle="modal" data-target="#createApproveModal">
+      <span class="fa fa-plus" aria-hidden="true"></span> <span class="btn-label">Create</span>
+    </button>
+
+    <!-- Modal: createApprove -->
+    <div class="modal fade" id="createApproveModal" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="ts-accent-line"></div>
+          <div class="modal-header text-center">
+            <i class="fa fa-check-circle-o ts-big-icon text-success"></i>
+            <br/>
+            <h4 class="modal-title">{{__ 'CreateApprovalRequest'}}</h4>
+            <br/>
+          </div>
+          <form id="createApproveForm" class="form" autocomplete="off">
+            <div class="modal-body">
+              <div class="row">
+                <div class="form-group col-xs-12">
+                  <label for="approveProject">Project *</label>
+                  <select class="form-control current-project select2" required name="approveProject" id="approveProject">
+                    <option value=""></option>
+                    {{#each projectList}}
+                      <option value="{{_id}}">{{name}}</option>
+                    {{/each}}
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">{{__ 'Close'}}</button>
+              <button type="submit" name="action" value="draft" class="btn btn-default">
+                <span class="fa fa-hourglass-start" aria-hidden="true"></span> {{__ 'DryRun'}}
+              </button>
+              <button type="submit" name="action" value="approve" class="btn btn-primary">
+                <span class="fa fa-check-circle-o" aria-hidden="true"></span> {{__ 'CreateApprovalRequest'}}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+</template>

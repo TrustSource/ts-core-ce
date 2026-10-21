@@ -1,0 +1,167 @@
+// Buttons: Bootstrap 3 `.btn` overrides in the TrustSource palette.
+
+// Every disabled spelling Bootstrap supports (class, attribute, disabled
+// fieldset), in each interaction state, gets one flat colour.
+.ts-btn-disabled(@shade) {
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &,
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      background-color: @shade;
+      border-color: @shade;
+    }
+  }
+}
+
+// A button colour scheme: resting look, a shared look for hover / focus /
+// pressed / open-dropdown, no gradient while pressed, and the disabled shade.
+.ts-btn-scheme(@bg; @edge; @ink; @lit-bg; @lit-edge; @lit-ink; @off) {
+  background-color: @bg;
+  border-color: @edge;
+  color: @ink;
+
+  &:hover,
+  &:focus,
+  &.focus,
+  &:active,
+  &.active,
+  &.active:focus,
+  &.active.focus,
+  &:active:focus,
+  &:active.focus,
+  &:active:hover,
+  &.active:hover,
+  .open .dropdown-toggle&,
+  .open .dropdown-toggle&:hover,
+  .open .dropdown-toggle&:focus,
+  .open .dropdown-toggle&.focus {
+    background-color: @lit-bg;
+    border-color: @lit-edge;
+    color: @lit-ink;
+  }
+
+  &:active,
+  &.active,
+  .open .dropdown-toggle& {
+    background-image: none;
+  }
+
+  .ts-btn-disabled(@off);
+}
+
+// Solid buttons: white label on a brand colour that lightens on interaction.
+.ts-btn-solid(@tone; @lift: 6%) {
+  .ts-btn-scheme(@tone; @tone; @color-white; lighten(@tone, @lift); lighten(@tone, @lift); @color-white; darken(@tone, 6%));
+}
+
+// Shape shared by all buttons, and no focus ring or glow in any state.
+.btn {
+  font-family: inherit;
+  border-radius: 3px;
+
+  &:focus,
+  &.focus,
+  &:active:focus,
+  &:active.focus,
+  &.active:focus,
+  &.active.focus {
+    box-shadow: none;
+    outline: none;
+  }
+}
+
+// Primary (navy). The outline variant (check list counter) keeps a navy label;
+// it is emitted before the scheme's states so their focus colour still wins.
+.btn-primary {
+  &.btn-outline {
+    color: @ts-navy;
+
+    &:hover {
+      color: @color-white;
+    }
+  }
+
+  .ts-btn-solid(@ts-navy; 20%);
+}
+
+// Success (teal) differs from the other solid schemes: pressed buttons darken
+// instead of lighten, and `.active` is left out of the hover group.
+.btn-success {
+  background-color: @ts-teal;
+  border-color: @ts-teal;
+  color: @color-white;
+
+  &:hover,
+  &:focus,
+  &.focus,
+  &:active,
+  &.active:focus,
+  &.active.focus,
+  &:active:focus,
+  &:active.focus,
+  &:active:hover,
+  .open .dropdown-toggle&,
+  .open .dropdown-toggle&:hover,
+  .open .dropdown-toggle&:focus,
+  .open .dropdown-toggle&.focus {
+    background-color: lighten(@ts-teal, 6%);
+    border-color: lighten(@ts-teal, 6%);
+    color: @color-white;
+  }
+
+  &:active,
+  &.active,
+  .open .dropdown-toggle& {
+    background-color: darken(@ts-teal, 6%);
+    background-image: none;
+    border-color: darken(@ts-teal, 6%);
+  }
+
+  &.active:hover {
+    background-color: darken(@ts-teal, 4%);
+    border-color: darken(@ts-teal, 4%);
+  }
+
+  .ts-btn-disabled(darken(@ts-teal, 6%));
+}
+
+.btn-info {
+  .ts-btn-solid(@ts-blue);
+}
+
+// Neutral button: white face, border and label darken slightly on interaction.
+.btn-default {
+  .ts-btn-scheme(@color-white; @ts-border; @ts-text; @color-white; darken(@ts-border, 4%); darken(@ts-text, 4%); darken(@ts-surface, 6%));
+}
+
+.btn-warning {
+  .ts-btn-solid(@ts-amber);
+}
+
+.btn-danger {
+  .ts-btn-solid(@ts-red);
+}
+
+.btn-danger2 {
+  .ts-btn-solid(@ts-red-dark);
+}
+
+// Transparent face for outline buttons; kept after the schemes so it
+// replaces their resting background.
+.btn-outline {
+  background-color: transparent;
+  color: inherit;
+  transition: all .5s;
+}
+
+// Extra-small size used in table rows and toolbars.
+.btn-xs {
+  padding: 1px 7px;
+  font-size: 11px;
+  line-height: 1.5;
+  border-radius: 3px;
+}

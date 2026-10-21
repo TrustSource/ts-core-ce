@@ -1,0 +1,13 @@
+// Tooltips use the brand navy for the bubble and its arrow on every side
+@tooltip-bg: @ts-navy;
+
+.tooltip-inner {
+  background-color: @tooltip-bg;
+}
+
+.tooltip {
+  &.top .tooltip-arrow { border-top-color: @tooltip-bg; }
+  &.right .tooltip-arrow { border-right-color: @tooltip-bg; }
+  &.bottom .tooltip-arrow { border-bottom-color: @tooltip-bg; }
+  &.left .tooltip-arrow { border-left-color: @tooltip-bg; }
+}

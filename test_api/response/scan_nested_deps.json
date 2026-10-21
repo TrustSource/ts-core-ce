@@ -1,0 +1,4621 @@
+
+  {
+    "project": "CURL_TEST",
+    "module": "cgm-identity-hub",
+    "moduleId": "npm:cgm-identity-hub",
+    "dependencies": [
+      {
+        "name": "cgm-identity-hub",
+        "type": "npm",
+        "key": "npm:cgm-identity-hub",
+        "namespace": "",
+        "repoUrl": "",
+        "homepageUrl": "",
+        "description": "",
+        "checksum": "",
+        "private": false,
+        "versions": [
+          "0.0.0"
+        ],
+        "dependencies": [
+          {
+            "name": "@angular/animations",
+            "type": "npm",
+            "key": "npm:@angular/animations",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "21.2.18"
+            ],
+            "dependencies": [
+              {
+                "name": "tslib",
+                "type": "npm",
+                "key": "npm:tslib",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "2.8.1"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/tslib@2.8.1"
+                },
+                "package_files": [
+                  "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/tslib"
+                ],
+                "license_file": null,
+                "crypto_algorithms": []
+              }
+            ],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/%40angular/animations@21.2.18"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/@angular/animations"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "@angular/cdk",
+            "type": "npm",
+            "key": "npm:@angular/cdk",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "21.2.14"
+            ],
+            "dependencies": [
+              {
+                "name": "parse5",
+                "type": "npm",
+                "key": "npm:parse5",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "8.0.0"
+                ],
+                "dependencies": [
+                  {
+                    "name": "entities",
+                    "type": "npm",
+                    "key": "npm:entities",
+                    "namespace": "",
+                    "repoUrl": "",
+                    "homepageUrl": "",
+                    "description": "",
+                    "checksum": "",
+                    "private": false,
+                    "versions": [
+                      "6.0.1"
+                    ],
+                    "dependencies": [],
+                    "licenses": [],
+                    "meta": {
+                      "purl": "pkg:npm/entities@6.0.1"
+                    },
+                    "package_files": [
+                      "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/parse5/node_modules/entities"
+                    ],
+                    "license_file": null,
+                    "crypto_algorithms": []
+                  }
+                ],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/parse5@8.0.0"
+                },
+                "package_files": [
+                  "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/parse5"
+                ],
+                "license_file": null,
+                "crypto_algorithms": []
+              },
+              {
+                "name": "tslib",
+                "type": "npm",
+                "key": "npm:tslib",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "2.8.1"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/tslib@2.8.1"
+                },
+                "package_files": [],
+                "license_file": null,
+                "crypto_algorithms": []
+              }
+            ],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/%40angular/cdk@21.2.14"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/@angular/cdk"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "@angular/common",
+            "type": "npm",
+            "key": "npm:@angular/common",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "21.2.18"
+            ],
+            "dependencies": [
+              {
+                "name": "tslib",
+                "type": "npm",
+                "key": "npm:tslib",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "2.8.1"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/tslib@2.8.1"
+                },
+                "package_files": [],
+                "license_file": null,
+                "crypto_algorithms": []
+              }
+            ],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/%40angular/common@21.2.18"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/@angular/common"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "@angular/compiler",
+            "type": "npm",
+            "key": "npm:@angular/compiler",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "21.2.18"
+            ],
+            "dependencies": [
+              {
+                "name": "tslib",
+                "type": "npm",
+                "key": "npm:tslib",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "2.8.1"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/tslib@2.8.1"
+                },
+                "package_files": [],
+                "license_file": null,
+                "crypto_algorithms": []
+              }
+            ],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/%40angular/compiler@21.2.18"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/@angular/compiler"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "@angular/core",
+            "type": "npm",
+            "key": "npm:@angular/core",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "21.2.18"
+            ],
+            "dependencies": [
+              {
+                "name": "tslib",
+                "type": "npm",
+                "key": "npm:tslib",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "2.8.1"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/tslib@2.8.1"
+                },
+                "package_files": [],
+                "license_file": null,
+                "crypto_algorithms": []
+              }
+            ],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/%40angular/core@21.2.18"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/@angular/core"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "@angular/forms",
+            "type": "npm",
+            "key": "npm:@angular/forms",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "21.2.18"
+            ],
+            "dependencies": [
+              {
+                "name": "@standard-schema/spec",
+                "type": "npm",
+                "key": "npm:@standard-schema/spec",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "1.1.0"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/%40standard-schema/spec@1.1.0"
+                },
+                "package_files": [
+                  "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/@standard-schema/spec"
+                ],
+                "license_file": null,
+                "crypto_algorithms": []
+              },
+              {
+                "name": "tslib",
+                "type": "npm",
+                "key": "npm:tslib",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "2.8.1"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/tslib@2.8.1"
+                },
+                "package_files": [],
+                "license_file": null,
+                "crypto_algorithms": []
+              }
+            ],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/%40angular/forms@21.2.18"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/@angular/forms"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "@angular/material",
+            "type": "npm",
+            "key": "npm:@angular/material",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "21.2.14"
+            ],
+            "dependencies": [
+              {
+                "name": "tslib",
+                "type": "npm",
+                "key": "npm:tslib",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "2.8.1"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/tslib@2.8.1"
+                },
+                "package_files": [],
+                "license_file": null,
+                "crypto_algorithms": []
+              }
+            ],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/%40angular/material@21.2.14"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/@angular/material"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "@angular/material-date-fns-adapter",
+            "type": "npm",
+            "key": "npm:@angular/material-date-fns-adapter",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "21.2.14"
+            ],
+            "dependencies": [
+              {
+                "name": "tslib",
+                "type": "npm",
+                "key": "npm:tslib",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "2.8.1"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/tslib@2.8.1"
+                },
+                "package_files": [],
+                "license_file": null,
+                "crypto_algorithms": []
+              }
+            ],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/%40angular/material-date-fns-adapter@21.2.14"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/@angular/material-date-fns-adapter"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "@angular/platform-browser",
+            "type": "npm",
+            "key": "npm:@angular/platform-browser",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "21.2.18"
+            ],
+            "dependencies": [
+              {
+                "name": "tslib",
+                "type": "npm",
+                "key": "npm:tslib",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "2.8.1"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/tslib@2.8.1"
+                },
+                "package_files": [],
+                "license_file": null,
+                "crypto_algorithms": []
+              }
+            ],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/%40angular/platform-browser@21.2.18"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/@angular/platform-browser"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "@angular/platform-browser-dynamic",
+            "type": "npm",
+            "key": "npm:@angular/platform-browser-dynamic",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "21.2.18"
+            ],
+            "dependencies": [
+              {
+                "name": "tslib",
+                "type": "npm",
+                "key": "npm:tslib",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "2.8.1"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/tslib@2.8.1"
+                },
+                "package_files": [],
+                "license_file": null,
+                "crypto_algorithms": []
+              }
+            ],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/%40angular/platform-browser-dynamic@21.2.18"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/@angular/platform-browser-dynamic"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "@angular/router",
+            "type": "npm",
+            "key": "npm:@angular/router",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "21.2.18"
+            ],
+            "dependencies": [
+              {
+                "name": "tslib",
+                "type": "npm",
+                "key": "npm:tslib",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "2.8.1"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/tslib@2.8.1"
+                },
+                "package_files": [],
+                "license_file": null,
+                "crypto_algorithms": []
+              }
+            ],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/%40angular/router@21.2.18"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/@angular/router"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "@babel/code-frame",
+            "type": "npm",
+            "key": "npm:@babel/code-frame",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "7.29.7"
+            ],
+            "dependencies": [
+              {
+                "name": "@babel/helper-validator-identifier",
+                "type": "npm",
+                "key": "npm:@babel/helper-validator-identifier",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "7.29.7"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/%40babel/helper-validator-identifier@7.29.7"
+                },
+                "package_files": [
+                  "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/@babel/helper-validator-identifier"
+                ],
+                "license_file": null,
+                "crypto_algorithms": []
+              },
+              {
+                "name": "js-tokens",
+                "type": "npm",
+                "key": "npm:js-tokens",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "4.0.0"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/js-tokens@4.0.0"
+                },
+                "package_files": [
+                  "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/js-tokens"
+                ],
+                "license_file": null,
+                "crypto_algorithms": []
+              },
+              {
+                "name": "picocolors",
+                "type": "npm",
+                "key": "npm:picocolors",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "1.1.1"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/picocolors@1.1.1"
+                },
+                "package_files": [
+                  "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/picocolors"
+                ],
+                "license_file": null,
+                "crypto_algorithms": []
+              }
+            ],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/%40babel/code-frame@7.29.7"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/@babel/code-frame"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "@babel/helper-validator-identifier",
+            "type": "npm",
+            "key": "npm:@babel/helper-validator-identifier",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "7.29.7"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/%40babel/helper-validator-identifier@7.29.7"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "@babel/runtime",
+            "type": "npm",
+            "key": "npm:@babel/runtime",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "7.29.2"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/%40babel/runtime@7.29.2"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/@babel/runtime"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "@cgm-platform/ngx-via",
+            "type": "npm",
+            "key": "npm:@cgm-platform/ngx-via",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "21.4.0"
+            ],
+            "dependencies": [
+              {
+                "name": "tslib",
+                "type": "npm",
+                "key": "npm:tslib",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "2.8.1"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/tslib@2.8.1"
+                },
+                "package_files": [],
+                "license_file": null,
+                "crypto_algorithms": []
+              }
+            ],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/%40cgm-platform/ngx-via@21.4.0"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/@cgm-platform/ngx-via"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "@jsverse/transloco",
+            "type": "npm",
+            "key": "npm:@jsverse/transloco",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "8.4.0"
+            ],
+            "dependencies": [
+              {
+                "name": "@jsverse/transloco-utils",
+                "type": "npm",
+                "key": "npm:@jsverse/transloco-utils",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "8.4.0"
+                ],
+                "dependencies": [
+                  {
+                    "name": "cosmiconfig",
+                    "type": "npm",
+                    "key": "npm:cosmiconfig",
+                    "namespace": "",
+                    "repoUrl": "",
+                    "homepageUrl": "",
+                    "description": "",
+                    "checksum": "",
+                    "private": false,
+                    "versions": [
+                      "8.3.6"
+                    ],
+                    "dependencies": [
+                      {
+                        "name": "import-fresh",
+                        "type": "npm",
+                        "key": "npm:import-fresh",
+                        "namespace": "",
+                        "repoUrl": "",
+                        "homepageUrl": "",
+                        "description": "",
+                        "checksum": "",
+                        "private": false,
+                        "versions": [
+                          "3.3.1"
+                        ],
+                        "dependencies": [
+                          {
+                            "name": "parent-module",
+                            "type": "npm",
+                            "key": "npm:parent-module",
+                            "namespace": "",
+                            "repoUrl": "",
+                            "homepageUrl": "",
+                            "description": "",
+                            "checksum": "",
+                            "private": false,
+                            "versions": [
+                              "1.0.1"
+                            ],
+                            "dependencies": [
+                              {
+                                "name": "callsites",
+                                "type": "npm",
+                                "key": "npm:callsites",
+                                "namespace": "",
+                                "repoUrl": "",
+                                "homepageUrl": "",
+                                "description": "",
+                                "checksum": "",
+                                "private": false,
+                                "versions": [
+                                  "3.1.0"
+                                ],
+                                "dependencies": [],
+                                "licenses": [],
+                                "meta": {
+                                  "purl": "pkg:npm/callsites@3.1.0"
+                                },
+                                "package_files": [
+                                  "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/callsites"
+                                ],
+                                "license_file": null,
+                                "crypto_algorithms": []
+                              }
+                            ],
+                            "licenses": [],
+                            "meta": {
+                              "purl": "pkg:npm/parent-module@1.0.1"
+                            },
+                            "package_files": [
+                              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/parent-module"
+                            ],
+                            "license_file": null,
+                            "crypto_algorithms": []
+                          },
+                          {
+                            "name": "resolve-from",
+                            "type": "npm",
+                            "key": "npm:resolve-from",
+                            "namespace": "",
+                            "repoUrl": "",
+                            "homepageUrl": "",
+                            "description": "",
+                            "checksum": "",
+                            "private": false,
+                            "versions": [
+                              "4.0.0"
+                            ],
+                            "dependencies": [],
+                            "licenses": [],
+                            "meta": {
+                              "purl": "pkg:npm/resolve-from@4.0.0"
+                            },
+                            "package_files": [
+                              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/import-fresh/node_modules/resolve-from"
+                            ],
+                            "license_file": null,
+                            "crypto_algorithms": []
+                          }
+                        ],
+                        "licenses": [],
+                        "meta": {
+                          "purl": "pkg:npm/import-fresh@3.3.1"
+                        },
+                        "package_files": [
+                          "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/import-fresh"
+                        ],
+                        "license_file": null,
+                        "crypto_algorithms": []
+                      },
+                      {
+                        "name": "js-yaml",
+                        "type": "npm",
+                        "key": "npm:js-yaml",
+                        "namespace": "",
+                        "repoUrl": "",
+                        "homepageUrl": "",
+                        "description": "",
+                        "checksum": "",
+                        "private": false,
+                        "versions": [
+                          "4.3.0"
+                        ],
+                        "dependencies": [
+                          {
+                            "name": "argparse",
+                            "type": "npm",
+                            "key": "npm:argparse",
+                            "namespace": "",
+                            "repoUrl": "",
+                            "homepageUrl": "",
+                            "description": "",
+                            "checksum": "",
+                            "private": false,
+                            "versions": [
+                              "2.0.1"
+                            ],
+                            "dependencies": [],
+                            "licenses": [],
+                            "meta": {
+                              "purl": "pkg:npm/argparse@2.0.1"
+                            },
+                            "package_files": [
+                              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/argparse"
+                            ],
+                            "license_file": null,
+                            "crypto_algorithms": []
+                          }
+                        ],
+                        "licenses": [],
+                        "meta": {
+                          "purl": "pkg:npm/js-yaml@4.3.0"
+                        },
+                        "package_files": [
+                          "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/js-yaml"
+                        ],
+                        "license_file": null,
+                        "crypto_algorithms": []
+                      },
+                      {
+                        "name": "parse-json",
+                        "type": "npm",
+                        "key": "npm:parse-json",
+                        "namespace": "",
+                        "repoUrl": "",
+                        "homepageUrl": "",
+                        "description": "",
+                        "checksum": "",
+                        "private": false,
+                        "versions": [
+                          "5.2.0"
+                        ],
+                        "dependencies": [
+                          {
+                            "name": "@babel/code-frame",
+                            "type": "npm",
+                            "key": "npm:@babel/code-frame",
+                            "namespace": "",
+                            "repoUrl": "",
+                            "homepageUrl": "",
+                            "description": "",
+                            "checksum": "",
+                            "private": false,
+                            "versions": [
+                              "7.29.7"
+                            ],
+                            "dependencies": [],
+                            "licenses": [],
+                            "meta": {
+                              "purl": "pkg:npm/%40babel/code-frame@7.29.7"
+                            },
+                            "package_files": [],
+                            "license_file": null,
+                            "crypto_algorithms": []
+                          },
+                          {
+                            "name": "error-ex",
+                            "type": "npm",
+                            "key": "npm:error-ex",
+                            "namespace": "",
+                            "repoUrl": "",
+                            "homepageUrl": "",
+                            "description": "",
+                            "checksum": "",
+                            "private": false,
+                            "versions": [
+                              "1.3.4"
+                            ],
+                            "dependencies": [
+                              {
+                                "name": "is-arrayish",
+                                "type": "npm",
+                                "key": "npm:is-arrayish",
+                                "namespace": "",
+                                "repoUrl": "",
+                                "homepageUrl": "",
+                                "description": "",
+                                "checksum": "",
+                                "private": false,
+                                "versions": [
+                                  "0.2.1"
+                                ],
+                                "dependencies": [],
+                                "licenses": [],
+                                "meta": {
+                                  "purl": "pkg:npm/is-arrayish@0.2.1"
+                                },
+                                "package_files": [
+                                  "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/is-arrayish"
+                                ],
+                                "license_file": null,
+                                "crypto_algorithms": []
+                              }
+                            ],
+                            "licenses": [],
+                            "meta": {
+                              "purl": "pkg:npm/error-ex@1.3.4"
+                            },
+                            "package_files": [
+                              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/error-ex"
+                            ],
+                            "license_file": null,
+                            "crypto_algorithms": []
+                          },
+                          {
+                            "name": "lines-and-columns",
+                            "type": "npm",
+                            "key": "npm:lines-and-columns",
+                            "namespace": "",
+                            "repoUrl": "",
+                            "homepageUrl": "",
+                            "description": "",
+                            "checksum": "",
+                            "private": false,
+                            "versions": [
+                              "1.2.4"
+                            ],
+                            "dependencies": [],
+                            "licenses": [],
+                            "meta": {
+                              "purl": "pkg:npm/lines-and-columns@1.2.4"
+                            },
+                            "package_files": [
+                              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/parse-json/node_modules/lines-and-columns"
+                            ],
+                            "license_file": null,
+                            "crypto_algorithms": []
+                          }
+                        ],
+                        "licenses": [],
+                        "meta": {
+                          "purl": "pkg:npm/parse-json@5.2.0"
+                        },
+                        "package_files": [
+                          "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/parse-json"
+                        ],
+                        "license_file": null,
+                        "crypto_algorithms": []
+                      },
+                      {
+                        "name": "path-type",
+                        "type": "npm",
+                        "key": "npm:path-type",
+                        "namespace": "",
+                        "repoUrl": "",
+                        "homepageUrl": "",
+                        "description": "",
+                        "checksum": "",
+                        "private": false,
+                        "versions": [
+                          "4.0.0"
+                        ],
+                        "dependencies": [],
+                        "licenses": [],
+                        "meta": {
+                          "purl": "pkg:npm/path-type@4.0.0"
+                        },
+                        "package_files": [
+                          "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/path-type"
+                        ],
+                        "license_file": null,
+                        "crypto_algorithms": []
+                      }
+                    ],
+                    "licenses": [],
+                    "meta": {
+                      "purl": "pkg:npm/cosmiconfig@8.3.6"
+                    },
+                    "package_files": [
+                      "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/cosmiconfig"
+                    ],
+                    "license_file": null,
+                    "crypto_algorithms": []
+                  },
+                  {
+                    "name": "tslib",
+                    "type": "npm",
+                    "key": "npm:tslib",
+                    "namespace": "",
+                    "repoUrl": "",
+                    "homepageUrl": "",
+                    "description": "",
+                    "checksum": "",
+                    "private": false,
+                    "versions": [
+                      "2.8.1"
+                    ],
+                    "dependencies": [],
+                    "licenses": [],
+                    "meta": {
+                      "purl": "pkg:npm/tslib@2.8.1"
+                    },
+                    "package_files": [],
+                    "license_file": null,
+                    "crypto_algorithms": []
+                  }
+                ],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/%40jsverse/transloco-utils@8.4.0"
+                },
+                "package_files": [
+                  "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/@jsverse/transloco-utils"
+                ],
+                "license_file": null,
+                "crypto_algorithms": []
+              },
+              {
+                "name": "@jsverse/utils",
+                "type": "npm",
+                "key": "npm:@jsverse/utils",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "1.0.0-beta.5"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/%40jsverse/utils@1.0.0-beta.5"
+                },
+                "package_files": [
+                  "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/@jsverse/utils"
+                ],
+                "license_file": null,
+                "crypto_algorithms": []
+              },
+              {
+                "name": "tslib",
+                "type": "npm",
+                "key": "npm:tslib",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "2.8.1"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/tslib@2.8.1"
+                },
+                "package_files": [],
+                "license_file": null,
+                "crypto_algorithms": []
+              }
+            ],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/%40jsverse/transloco@8.4.0"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/@jsverse/transloco"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "@jsverse/transloco-utils",
+            "type": "npm",
+            "key": "npm:@jsverse/transloco-utils",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "8.4.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/%40jsverse/transloco-utils@8.4.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "@jsverse/utils",
+            "type": "npm",
+            "key": "npm:@jsverse/utils",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "1.0.0-beta.5"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/%40jsverse/utils@1.0.0-beta.5"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "@life/cgm-life-crypto-javascript",
+            "type": "npm",
+            "key": "npm:@life/cgm-life-crypto-javascript",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "3.2.1"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/%40life/cgm-life-crypto-javascript@3.2.1"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/@life/cgm-life-crypto-javascript"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "@ngrx/operators",
+            "type": "npm",
+            "key": "npm:@ngrx/operators",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "21.1.1"
+            ],
+            "dependencies": [
+              {
+                "name": "tslib",
+                "type": "npm",
+                "key": "npm:tslib",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "2.8.1"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/tslib@2.8.1"
+                },
+                "package_files": [],
+                "license_file": null,
+                "crypto_algorithms": []
+              }
+            ],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/%40ngrx/operators@21.1.1"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/@ngrx/operators"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "@ngrx/signals",
+            "type": "npm",
+            "key": "npm:@ngrx/signals",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "21.1.1"
+            ],
+            "dependencies": [
+              {
+                "name": "tslib",
+                "type": "npm",
+                "key": "npm:tslib",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "2.8.1"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/tslib@2.8.1"
+                },
+                "package_files": [],
+                "license_file": null,
+                "crypto_algorithms": []
+              }
+            ],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/%40ngrx/signals@21.1.1"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/@ngrx/signals"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "@rollup/rollup-linux-x64-gnu",
+            "type": "npm",
+            "key": "npm:@rollup/rollup-linux-x64-gnu",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "4.60.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/%40rollup/rollup-linux-x64-gnu@4.60.0"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/@rollup/rollup-linux-x64-gnu"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "@standard-schema/spec",
+            "type": "npm",
+            "key": "npm:@standard-schema/spec",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "1.1.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/%40standard-schema/spec@1.1.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "@types/pako",
+            "type": "npm",
+            "key": "npm:@types/pako",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "2.0.4"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/%40types/pako@2.0.4"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/@types/pako"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "@types/raf",
+            "type": "npm",
+            "key": "npm:@types/raf",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "3.4.3"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/%40types/raf@3.4.3"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/@types/raf"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "@types/trusted-types",
+            "type": "npm",
+            "key": "npm:@types/trusted-types",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "2.0.7"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/%40types/trusted-types@2.0.7"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/@types/trusted-types"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "angularx-qrcode",
+            "type": "npm",
+            "key": "npm:angularx-qrcode",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "21.0.5"
+            ],
+            "dependencies": [
+              {
+                "name": "qrcode",
+                "type": "npm",
+                "key": "npm:qrcode",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "1.5.4"
+                ],
+                "dependencies": [
+                  {
+                    "name": "dijkstrajs",
+                    "type": "npm",
+                    "key": "npm:dijkstrajs",
+                    "namespace": "",
+                    "repoUrl": "",
+                    "homepageUrl": "",
+                    "description": "",
+                    "checksum": "",
+                    "private": false,
+                    "versions": [
+                      "1.0.3"
+                    ],
+                    "dependencies": [],
+                    "licenses": [],
+                    "meta": {
+                      "purl": "pkg:npm/dijkstrajs@1.0.3"
+                    },
+                    "package_files": [
+                      "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/dijkstrajs"
+                    ],
+                    "license_file": null,
+                    "crypto_algorithms": []
+                  },
+                  {
+                    "name": "pngjs",
+                    "type": "npm",
+                    "key": "npm:pngjs",
+                    "namespace": "",
+                    "repoUrl": "",
+                    "homepageUrl": "",
+                    "description": "",
+                    "checksum": "",
+                    "private": false,
+                    "versions": [
+                      "5.0.0"
+                    ],
+                    "dependencies": [],
+                    "licenses": [],
+                    "meta": {
+                      "purl": "pkg:npm/pngjs@5.0.0"
+                    },
+                    "package_files": [
+                      "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/pngjs"
+                    ],
+                    "license_file": null,
+                    "crypto_algorithms": []
+                  },
+                  {
+                    "name": "yargs",
+                    "type": "npm",
+                    "key": "npm:yargs",
+                    "namespace": "",
+                    "repoUrl": "",
+                    "homepageUrl": "",
+                    "description": "",
+                    "checksum": "",
+                    "private": false,
+                    "versions": [
+                      "15.4.1"
+                    ],
+                    "dependencies": [
+                      {
+                        "name": "cliui",
+                        "type": "npm",
+                        "key": "npm:cliui",
+                        "namespace": "",
+                        "repoUrl": "",
+                        "homepageUrl": "",
+                        "description": "",
+                        "checksum": "",
+                        "private": false,
+                        "versions": [
+                          "6.0.0"
+                        ],
+                        "dependencies": [
+                          {
+                            "name": "string-width",
+                            "type": "npm",
+                            "key": "npm:string-width",
+                            "namespace": "",
+                            "repoUrl": "",
+                            "homepageUrl": "",
+                            "description": "",
+                            "checksum": "",
+                            "private": false,
+                            "versions": [
+                              "4.2.3"
+                            ],
+                            "dependencies": [
+                              {
+                                "name": "emoji-regex",
+                                "type": "npm",
+                                "key": "npm:emoji-regex",
+                                "namespace": "",
+                                "repoUrl": "",
+                                "homepageUrl": "",
+                                "description": "",
+                                "checksum": "",
+                                "private": false,
+                                "versions": [
+                                  "8.0.0"
+                                ],
+                                "dependencies": [],
+                                "licenses": [],
+                                "meta": {
+                                  "purl": "pkg:npm/emoji-regex@8.0.0"
+                                },
+                                "package_files": [
+                                  "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/wrap-ansi/node_modules/emoji-regex"
+                                ],
+                                "license_file": null,
+                                "crypto_algorithms": []
+                              },
+                              {
+                                "name": "is-fullwidth-code-point",
+                                "type": "npm",
+                                "key": "npm:is-fullwidth-code-point",
+                                "namespace": "",
+                                "repoUrl": "",
+                                "homepageUrl": "",
+                                "description": "",
+                                "checksum": "",
+                                "private": false,
+                                "versions": [
+                                  "3.0.0"
+                                ],
+                                "dependencies": [],
+                                "licenses": [],
+                                "meta": {
+                                  "purl": "pkg:npm/is-fullwidth-code-point@3.0.0"
+                                },
+                                "package_files": [
+                                  "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/wrap-ansi/node_modules/is-fullwidth-code-point"
+                                ],
+                                "license_file": null,
+                                "crypto_algorithms": []
+                              },
+                              {
+                                "name": "strip-ansi",
+                                "type": "npm",
+                                "key": "npm:strip-ansi",
+                                "namespace": "",
+                                "repoUrl": "",
+                                "homepageUrl": "",
+                                "description": "",
+                                "checksum": "",
+                                "private": false,
+                                "versions": [
+                                  "6.0.1"
+                                ],
+                                "dependencies": [
+                                  {
+                                    "name": "ansi-regex",
+                                    "type": "npm",
+                                    "key": "npm:ansi-regex",
+                                    "namespace": "",
+                                    "repoUrl": "",
+                                    "homepageUrl": "",
+                                    "description": "",
+                                    "checksum": "",
+                                    "private": false,
+                                    "versions": [
+                                      "5.0.1"
+                                    ],
+                                    "dependencies": [],
+                                    "licenses": [],
+                                    "meta": {
+                                      "purl": "pkg:npm/ansi-regex@5.0.1"
+                                    },
+                                    "package_files": [
+                                      "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/ansi-regex"
+                                    ],
+                                    "license_file": null,
+                                    "crypto_algorithms": []
+                                  }
+                                ],
+                                "licenses": [],
+                                "meta": {
+                                  "purl": "pkg:npm/strip-ansi@6.0.1"
+                                },
+                                "package_files": [
+                                  "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/strip-ansi"
+                                ],
+                                "license_file": null,
+                                "crypto_algorithms": []
+                              }
+                            ],
+                            "licenses": [],
+                            "meta": {
+                              "purl": "pkg:npm/string-width@4.2.3"
+                            },
+                            "package_files": [
+                              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/wrap-ansi/node_modules/string-width"
+                            ],
+                            "license_file": null,
+                            "crypto_algorithms": []
+                          },
+                          {
+                            "name": "strip-ansi",
+                            "type": "npm",
+                            "key": "npm:strip-ansi",
+                            "namespace": "",
+                            "repoUrl": "",
+                            "homepageUrl": "",
+                            "description": "",
+                            "checksum": "",
+                            "private": false,
+                            "versions": [
+                              "6.0.1"
+                            ],
+                            "dependencies": [],
+                            "licenses": [],
+                            "meta": {
+                              "purl": "pkg:npm/strip-ansi@6.0.1"
+                            },
+                            "package_files": [],
+                            "license_file": null,
+                            "crypto_algorithms": []
+                          },
+                          {
+                            "name": "wrap-ansi",
+                            "type": "npm",
+                            "key": "npm:wrap-ansi",
+                            "namespace": "",
+                            "repoUrl": "",
+                            "homepageUrl": "",
+                            "description": "",
+                            "checksum": "",
+                            "private": false,
+                            "versions": [
+                              "6.2.0"
+                            ],
+                            "dependencies": [
+                              {
+                                "name": "ansi-styles",
+                                "type": "npm",
+                                "key": "npm:ansi-styles",
+                                "namespace": "",
+                                "repoUrl": "",
+                                "homepageUrl": "",
+                                "description": "",
+                                "checksum": "",
+                                "private": false,
+                                "versions": [
+                                  "4.3.0"
+                                ],
+                                "dependencies": [
+                                  {
+                                    "name": "color-convert",
+                                    "type": "npm",
+                                    "key": "npm:color-convert",
+                                    "namespace": "",
+                                    "repoUrl": "",
+                                    "homepageUrl": "",
+                                    "description": "",
+                                    "checksum": "",
+                                    "private": false,
+                                    "versions": [
+                                      "2.0.1"
+                                    ],
+                                    "dependencies": [
+                                      {
+                                        "name": "color-name",
+                                        "type": "npm",
+                                        "key": "npm:color-name",
+                                        "namespace": "",
+                                        "repoUrl": "",
+                                        "homepageUrl": "",
+                                        "description": "",
+                                        "checksum": "",
+                                        "private": false,
+                                        "versions": [
+                                          "1.1.4"
+                                        ],
+                                        "dependencies": [],
+                                        "licenses": [],
+                                        "meta": {
+                                          "purl": "pkg:npm/color-name@1.1.4"
+                                        },
+                                        "package_files": [
+                                          "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/color-name"
+                                        ],
+                                        "license_file": null,
+                                        "crypto_algorithms": []
+                                      }
+                                    ],
+                                    "licenses": [],
+                                    "meta": {
+                                      "purl": "pkg:npm/color-convert@2.0.1"
+                                    },
+                                    "package_files": [
+                                      "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/color-convert"
+                                    ],
+                                    "license_file": null,
+                                    "crypto_algorithms": []
+                                  }
+                                ],
+                                "licenses": [],
+                                "meta": {
+                                  "purl": "pkg:npm/ansi-styles@4.3.0"
+                                },
+                                "package_files": [
+                                  "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/ansi-styles"
+                                ],
+                                "license_file": null,
+                                "crypto_algorithms": []
+                              },
+                              {
+                                "name": "string-width",
+                                "type": "npm",
+                                "key": "npm:string-width",
+                                "namespace": "",
+                                "repoUrl": "",
+                                "homepageUrl": "",
+                                "description": "",
+                                "checksum": "",
+                                "private": false,
+                                "versions": [
+                                  "4.2.3"
+                                ],
+                                "dependencies": [],
+                                "licenses": [],
+                                "meta": {
+                                  "purl": "pkg:npm/string-width@4.2.3"
+                                },
+                                "package_files": [],
+                                "license_file": null,
+                                "crypto_algorithms": []
+                              },
+                              {
+                                "name": "strip-ansi",
+                                "type": "npm",
+                                "key": "npm:strip-ansi",
+                                "namespace": "",
+                                "repoUrl": "",
+                                "homepageUrl": "",
+                                "description": "",
+                                "checksum": "",
+                                "private": false,
+                                "versions": [
+                                  "6.0.1"
+                                ],
+                                "dependencies": [],
+                                "licenses": [],
+                                "meta": {
+                                  "purl": "pkg:npm/strip-ansi@6.0.1"
+                                },
+                                "package_files": [],
+                                "license_file": null,
+                                "crypto_algorithms": []
+                              }
+                            ],
+                            "licenses": [],
+                            "meta": {
+                              "purl": "pkg:npm/wrap-ansi@6.2.0"
+                            },
+                            "package_files": [
+                              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/wrap-ansi"
+                            ],
+                            "license_file": null,
+                            "crypto_algorithms": []
+                          }
+                        ],
+                        "licenses": [],
+                        "meta": {
+                          "purl": "pkg:npm/cliui@6.0.0"
+                        },
+                        "package_files": [
+                          "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/qrcode/node_modules/cliui"
+                        ],
+                        "license_file": null,
+                        "crypto_algorithms": []
+                      },
+                      {
+                        "name": "decamelize",
+                        "type": "npm",
+                        "key": "npm:decamelize",
+                        "namespace": "",
+                        "repoUrl": "",
+                        "homepageUrl": "",
+                        "description": "",
+                        "checksum": "",
+                        "private": false,
+                        "versions": [
+                          "1.2.0"
+                        ],
+                        "dependencies": [],
+                        "licenses": [],
+                        "meta": {
+                          "purl": "pkg:npm/decamelize@1.2.0"
+                        },
+                        "package_files": [
+                          "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/decamelize"
+                        ],
+                        "license_file": null,
+                        "crypto_algorithms": []
+                      },
+                      {
+                        "name": "find-up",
+                        "type": "npm",
+                        "key": "npm:find-up",
+                        "namespace": "",
+                        "repoUrl": "",
+                        "homepageUrl": "",
+                        "description": "",
+                        "checksum": "",
+                        "private": false,
+                        "versions": [
+                          "4.1.0"
+                        ],
+                        "dependencies": [
+                          {
+                            "name": "locate-path",
+                            "type": "npm",
+                            "key": "npm:locate-path",
+                            "namespace": "",
+                            "repoUrl": "",
+                            "homepageUrl": "",
+                            "description": "",
+                            "checksum": "",
+                            "private": false,
+                            "versions": [
+                              "5.0.0"
+                            ],
+                            "dependencies": [
+                              {
+                                "name": "p-locate",
+                                "type": "npm",
+                                "key": "npm:p-locate",
+                                "namespace": "",
+                                "repoUrl": "",
+                                "homepageUrl": "",
+                                "description": "",
+                                "checksum": "",
+                                "private": false,
+                                "versions": [
+                                  "4.1.0"
+                                ],
+                                "dependencies": [
+                                  {
+                                    "name": "p-limit",
+                                    "type": "npm",
+                                    "key": "npm:p-limit",
+                                    "namespace": "",
+                                    "repoUrl": "",
+                                    "homepageUrl": "",
+                                    "description": "",
+                                    "checksum": "",
+                                    "private": false,
+                                    "versions": [
+                                      "2.3.0"
+                                    ],
+                                    "dependencies": [
+                                      {
+                                        "name": "p-try",
+                                        "type": "npm",
+                                        "key": "npm:p-try",
+                                        "namespace": "",
+                                        "repoUrl": "",
+                                        "homepageUrl": "",
+                                        "description": "",
+                                        "checksum": "",
+                                        "private": false,
+                                        "versions": [
+                                          "2.2.0"
+                                        ],
+                                        "dependencies": [],
+                                        "licenses": [],
+                                        "meta": {
+                                          "purl": "pkg:npm/p-try@2.2.0"
+                                        },
+                                        "package_files": [
+                                          "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/p-try"
+                                        ],
+                                        "license_file": null,
+                                        "crypto_algorithms": []
+                                      }
+                                    ],
+                                    "licenses": [],
+                                    "meta": {
+                                      "purl": "pkg:npm/p-limit@2.3.0"
+                                    },
+                                    "package_files": [
+                                      "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/p-locate/node_modules/p-limit"
+                                    ],
+                                    "license_file": null,
+                                    "crypto_algorithms": []
+                                  }
+                                ],
+                                "licenses": [],
+                                "meta": {
+                                  "purl": "pkg:npm/p-locate@4.1.0"
+                                },
+                                "package_files": [
+                                  "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/p-locate"
+                                ],
+                                "license_file": null,
+                                "crypto_algorithms": []
+                              }
+                            ],
+                            "licenses": [],
+                            "meta": {
+                              "purl": "pkg:npm/locate-path@5.0.0"
+                            },
+                            "package_files": [
+                              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/locate-path"
+                            ],
+                            "license_file": null,
+                            "crypto_algorithms": []
+                          },
+                          {
+                            "name": "path-exists",
+                            "type": "npm",
+                            "key": "npm:path-exists",
+                            "namespace": "",
+                            "repoUrl": "",
+                            "homepageUrl": "",
+                            "description": "",
+                            "checksum": "",
+                            "private": false,
+                            "versions": [
+                              "4.0.0"
+                            ],
+                            "dependencies": [],
+                            "licenses": [],
+                            "meta": {
+                              "purl": "pkg:npm/path-exists@4.0.0"
+                            },
+                            "package_files": [
+                              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/path-exists"
+                            ],
+                            "license_file": null,
+                            "crypto_algorithms": []
+                          }
+                        ],
+                        "licenses": [],
+                        "meta": {
+                          "purl": "pkg:npm/find-up@4.1.0"
+                        },
+                        "package_files": [
+                          "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/find-up"
+                        ],
+                        "license_file": null,
+                        "crypto_algorithms": []
+                      },
+                      {
+                        "name": "get-caller-file",
+                        "type": "npm",
+                        "key": "npm:get-caller-file",
+                        "namespace": "",
+                        "repoUrl": "",
+                        "homepageUrl": "",
+                        "description": "",
+                        "checksum": "",
+                        "private": false,
+                        "versions": [
+                          "2.0.5"
+                        ],
+                        "dependencies": [],
+                        "licenses": [],
+                        "meta": {
+                          "purl": "pkg:npm/get-caller-file@2.0.5"
+                        },
+                        "package_files": [
+                          "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/get-caller-file"
+                        ],
+                        "license_file": null,
+                        "crypto_algorithms": []
+                      },
+                      {
+                        "name": "require-directory",
+                        "type": "npm",
+                        "key": "npm:require-directory",
+                        "namespace": "",
+                        "repoUrl": "",
+                        "homepageUrl": "",
+                        "description": "",
+                        "checksum": "",
+                        "private": false,
+                        "versions": [
+                          "2.1.1"
+                        ],
+                        "dependencies": [],
+                        "licenses": [],
+                        "meta": {
+                          "purl": "pkg:npm/require-directory@2.1.1"
+                        },
+                        "package_files": [
+                          "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/require-directory"
+                        ],
+                        "license_file": null,
+                        "crypto_algorithms": []
+                      },
+                      {
+                        "name": "require-main-filename",
+                        "type": "npm",
+                        "key": "npm:require-main-filename",
+                        "namespace": "",
+                        "repoUrl": "",
+                        "homepageUrl": "",
+                        "description": "",
+                        "checksum": "",
+                        "private": false,
+                        "versions": [
+                          "2.0.0"
+                        ],
+                        "dependencies": [],
+                        "licenses": [],
+                        "meta": {
+                          "purl": "pkg:npm/require-main-filename@2.0.0"
+                        },
+                        "package_files": [
+                          "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/require-main-filename"
+                        ],
+                        "license_file": null,
+                        "crypto_algorithms": []
+                      },
+                      {
+                        "name": "set-blocking",
+                        "type": "npm",
+                        "key": "npm:set-blocking",
+                        "namespace": "",
+                        "repoUrl": "",
+                        "homepageUrl": "",
+                        "description": "",
+                        "checksum": "",
+                        "private": false,
+                        "versions": [
+                          "2.0.0"
+                        ],
+                        "dependencies": [],
+                        "licenses": [],
+                        "meta": {
+                          "purl": "pkg:npm/set-blocking@2.0.0"
+                        },
+                        "package_files": [
+                          "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/set-blocking"
+                        ],
+                        "license_file": null,
+                        "crypto_algorithms": []
+                      },
+                      {
+                        "name": "string-width",
+                        "type": "npm",
+                        "key": "npm:string-width",
+                        "namespace": "",
+                        "repoUrl": "",
+                        "homepageUrl": "",
+                        "description": "",
+                        "checksum": "",
+                        "private": false,
+                        "versions": [
+                          "4.2.3"
+                        ],
+                        "dependencies": [],
+                        "licenses": [],
+                        "meta": {
+                          "purl": "pkg:npm/string-width@4.2.3"
+                        },
+                        "package_files": [],
+                        "license_file": null,
+                        "crypto_algorithms": []
+                      },
+                      {
+                        "name": "which-module",
+                        "type": "npm",
+                        "key": "npm:which-module",
+                        "namespace": "",
+                        "repoUrl": "",
+                        "homepageUrl": "",
+                        "description": "",
+                        "checksum": "",
+                        "private": false,
+                        "versions": [
+                          "2.0.1"
+                        ],
+                        "dependencies": [],
+                        "licenses": [],
+                        "meta": {
+                          "purl": "pkg:npm/which-module@2.0.1"
+                        },
+                        "package_files": [
+                          "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/which-module"
+                        ],
+                        "license_file": null,
+                        "crypto_algorithms": []
+                      },
+                      {
+                        "name": "y18n",
+                        "type": "npm",
+                        "key": "npm:y18n",
+                        "namespace": "",
+                        "repoUrl": "",
+                        "homepageUrl": "",
+                        "description": "",
+                        "checksum": "",
+                        "private": false,
+                        "versions": [
+                          "4.0.3"
+                        ],
+                        "dependencies": [],
+                        "licenses": [],
+                        "meta": {
+                          "purl": "pkg:npm/y18n@4.0.3"
+                        },
+                        "package_files": [
+                          "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/qrcode/node_modules/y18n"
+                        ],
+                        "license_file": null,
+                        "crypto_algorithms": []
+                      },
+                      {
+                        "name": "yargs-parser",
+                        "type": "npm",
+                        "key": "npm:yargs-parser",
+                        "namespace": "",
+                        "repoUrl": "",
+                        "homepageUrl": "",
+                        "description": "",
+                        "checksum": "",
+                        "private": false,
+                        "versions": [
+                          "18.1.3"
+                        ],
+                        "dependencies": [
+                          {
+                            "name": "camelcase",
+                            "type": "npm",
+                            "key": "npm:camelcase",
+                            "namespace": "",
+                            "repoUrl": "",
+                            "homepageUrl": "",
+                            "description": "",
+                            "checksum": "",
+                            "private": false,
+                            "versions": [
+                              "5.3.1"
+                            ],
+                            "dependencies": [],
+                            "licenses": [],
+                            "meta": {
+                              "purl": "pkg:npm/camelcase@5.3.1"
+                            },
+                            "package_files": [
+                              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/camelcase"
+                            ],
+                            "license_file": null,
+                            "crypto_algorithms": []
+                          },
+                          {
+                            "name": "decamelize",
+                            "type": "npm",
+                            "key": "npm:decamelize",
+                            "namespace": "",
+                            "repoUrl": "",
+                            "homepageUrl": "",
+                            "description": "",
+                            "checksum": "",
+                            "private": false,
+                            "versions": [
+                              "1.2.0"
+                            ],
+                            "dependencies": [],
+                            "licenses": [],
+                            "meta": {
+                              "purl": "pkg:npm/decamelize@1.2.0"
+                            },
+                            "package_files": [],
+                            "license_file": null,
+                            "crypto_algorithms": []
+                          }
+                        ],
+                        "licenses": [],
+                        "meta": {
+                          "purl": "pkg:npm/yargs-parser@18.1.3"
+                        },
+                        "package_files": [
+                          "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/qrcode/node_modules/yargs-parser"
+                        ],
+                        "license_file": null,
+                        "crypto_algorithms": []
+                      }
+                    ],
+                    "licenses": [],
+                    "meta": {
+                      "purl": "pkg:npm/yargs@15.4.1"
+                    },
+                    "package_files": [
+                      "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/qrcode/node_modules/yargs"
+                    ],
+                    "license_file": null,
+                    "crypto_algorithms": []
+                  }
+                ],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/qrcode@1.5.4"
+                },
+                "package_files": [
+                  "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/qrcode"
+                ],
+                "license_file": null,
+                "crypto_algorithms": []
+              },
+              {
+                "name": "tslib",
+                "type": "npm",
+                "key": "npm:tslib",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "2.8.1"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/tslib@2.8.1"
+                },
+                "package_files": [],
+                "license_file": null,
+                "crypto_algorithms": []
+              }
+            ],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/angularx-qrcode@21.0.5"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/angularx-qrcode"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "ansi-regex",
+            "type": "npm",
+            "key": "npm:ansi-regex",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "5.0.1"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/ansi-regex@5.0.1"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "ansi-styles",
+            "type": "npm",
+            "key": "npm:ansi-styles",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "4.3.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/ansi-styles@4.3.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "argon2-browser",
+            "type": "npm",
+            "key": "npm:argon2-browser",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "1.18.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/argon2-browser@1.18.0"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/argon2-browser"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "argparse",
+            "type": "npm",
+            "key": "npm:argparse",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "2.0.1"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/argparse@2.0.1"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "base64-arraybuffer",
+            "type": "npm",
+            "key": "npm:base64-arraybuffer",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "1.0.2"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/base64-arraybuffer@1.0.2"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/base64-arraybuffer"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "callsites",
+            "type": "npm",
+            "key": "npm:callsites",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "3.1.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/callsites@3.1.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "camelcase",
+            "type": "npm",
+            "key": "npm:camelcase",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "5.3.1"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/camelcase@5.3.1"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "canvg",
+            "type": "npm",
+            "key": "npm:canvg",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "3.0.11"
+            ],
+            "dependencies": [
+              {
+                "name": "@babel/runtime",
+                "type": "npm",
+                "key": "npm:@babel/runtime",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "7.29.2"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/%40babel/runtime@7.29.2"
+                },
+                "package_files": [],
+                "license_file": null,
+                "crypto_algorithms": []
+              },
+              {
+                "name": "@types/raf",
+                "type": "npm",
+                "key": "npm:@types/raf",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "3.4.3"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/%40types/raf@3.4.3"
+                },
+                "package_files": [],
+                "license_file": null,
+                "crypto_algorithms": []
+              },
+              {
+                "name": "core-js",
+                "type": "npm",
+                "key": "npm:core-js",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "3.49.0"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "lifecycleScripts": true,
+                  "purl": "pkg:npm/core-js@3.49.0"
+                },
+                "package_files": [
+                  "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/core-js"
+                ],
+                "license_file": null,
+                "crypto_algorithms": []
+              },
+              {
+                "name": "raf",
+                "type": "npm",
+                "key": "npm:raf",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "3.4.1"
+                ],
+                "dependencies": [
+                  {
+                    "name": "performance-now",
+                    "type": "npm",
+                    "key": "npm:performance-now",
+                    "namespace": "",
+                    "repoUrl": "",
+                    "homepageUrl": "",
+                    "description": "",
+                    "checksum": "",
+                    "private": false,
+                    "versions": [
+                      "2.1.0"
+                    ],
+                    "dependencies": [],
+                    "licenses": [],
+                    "meta": {
+                      "purl": "pkg:npm/performance-now@2.1.0"
+                    },
+                    "package_files": [
+                      "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/performance-now"
+                    ],
+                    "license_file": null,
+                    "crypto_algorithms": []
+                  }
+                ],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/raf@3.4.1"
+                },
+                "package_files": [
+                  "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/raf"
+                ],
+                "license_file": null,
+                "crypto_algorithms": []
+              },
+              {
+                "name": "regenerator-runtime",
+                "type": "npm",
+                "key": "npm:regenerator-runtime",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "0.13.11"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/regenerator-runtime@0.13.11"
+                },
+                "package_files": [
+                  "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/regenerator-runtime"
+                ],
+                "license_file": null,
+                "crypto_algorithms": []
+              },
+              {
+                "name": "rgbcolor",
+                "type": "npm",
+                "key": "npm:rgbcolor",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "1.0.1"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/rgbcolor@1.0.1"
+                },
+                "package_files": [
+                  "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/rgbcolor"
+                ],
+                "license_file": null,
+                "crypto_algorithms": []
+              },
+              {
+                "name": "stackblur-canvas",
+                "type": "npm",
+                "key": "npm:stackblur-canvas",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "2.7.0"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/stackblur-canvas@2.7.0"
+                },
+                "package_files": [
+                  "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/stackblur-canvas"
+                ],
+                "license_file": null,
+                "crypto_algorithms": []
+              },
+              {
+                "name": "svg-pathdata",
+                "type": "npm",
+                "key": "npm:svg-pathdata",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "6.0.3"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/svg-pathdata@6.0.3"
+                },
+                "package_files": [
+                  "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/svg-pathdata"
+                ],
+                "license_file": null,
+                "crypto_algorithms": []
+              }
+            ],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/canvg@3.0.11"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/canvg"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "color-convert",
+            "type": "npm",
+            "key": "npm:color-convert",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "2.0.1"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/color-convert@2.0.1"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "color-name",
+            "type": "npm",
+            "key": "npm:color-name",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "1.1.4"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/color-name@1.1.4"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "core-js",
+            "type": "npm",
+            "key": "npm:core-js",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "3.49.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/core-js@3.49.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "cosmiconfig",
+            "type": "npm",
+            "key": "npm:cosmiconfig",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "8.3.6"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/cosmiconfig@8.3.6"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "css-line-break",
+            "type": "npm",
+            "key": "npm:css-line-break",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "2.1.0"
+            ],
+            "dependencies": [
+              {
+                "name": "utrie",
+                "type": "npm",
+                "key": "npm:utrie",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "1.0.2"
+                ],
+                "dependencies": [
+                  {
+                    "name": "base64-arraybuffer",
+                    "type": "npm",
+                    "key": "npm:base64-arraybuffer",
+                    "namespace": "",
+                    "repoUrl": "",
+                    "homepageUrl": "",
+                    "description": "",
+                    "checksum": "",
+                    "private": false,
+                    "versions": [
+                      "1.0.2"
+                    ],
+                    "dependencies": [],
+                    "licenses": [],
+                    "meta": {
+                      "purl": "pkg:npm/base64-arraybuffer@1.0.2"
+                    },
+                    "package_files": [],
+                    "license_file": null,
+                    "crypto_algorithms": []
+                  }
+                ],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/utrie@1.0.2"
+                },
+                "package_files": [
+                  "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/utrie"
+                ],
+                "license_file": null,
+                "crypto_algorithms": []
+              }
+            ],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/css-line-break@2.1.0"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/css-line-break"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "date-fns",
+            "type": "npm",
+            "key": "npm:date-fns",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "3.6.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/date-fns@3.6.0"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/date-fns"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "decamelize",
+            "type": "npm",
+            "key": "npm:decamelize",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "1.2.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/decamelize@1.2.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "dijkstrajs",
+            "type": "npm",
+            "key": "npm:dijkstrajs",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "1.0.3"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/dijkstrajs@1.0.3"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "dompurify",
+            "type": "npm",
+            "key": "npm:dompurify",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "3.3.3"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/dompurify@3.3.3"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/dompurify"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "error-ex",
+            "type": "npm",
+            "key": "npm:error-ex",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "1.3.4"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/error-ex@1.3.4"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "fast-png",
+            "type": "npm",
+            "key": "npm:fast-png",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "6.4.0"
+            ],
+            "dependencies": [
+              {
+                "name": "@types/pako",
+                "type": "npm",
+                "key": "npm:@types/pako",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "2.0.4"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/%40types/pako@2.0.4"
+                },
+                "package_files": [],
+                "license_file": null,
+                "crypto_algorithms": []
+              },
+              {
+                "name": "iobuffer",
+                "type": "npm",
+                "key": "npm:iobuffer",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "5.4.0"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/iobuffer@5.4.0"
+                },
+                "package_files": [
+                  "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/iobuffer"
+                ],
+                "license_file": null,
+                "crypto_algorithms": []
+              },
+              {
+                "name": "pako",
+                "type": "npm",
+                "key": "npm:pako",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "2.1.0"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/pako@2.1.0"
+                },
+                "package_files": [
+                  "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/pako"
+                ],
+                "license_file": null,
+                "crypto_algorithms": []
+              }
+            ],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/fast-png@6.4.0"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/fast-png"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "fflate",
+            "type": "npm",
+            "key": "npm:fflate",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "0.8.2"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/fflate@0.8.2"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/fflate"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "find-up",
+            "type": "npm",
+            "key": "npm:find-up",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "4.1.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/find-up@4.1.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "get-caller-file",
+            "type": "npm",
+            "key": "npm:get-caller-file",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "2.0.5"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/get-caller-file@2.0.5"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "html2canvas",
+            "type": "npm",
+            "key": "npm:html2canvas",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "1.4.1"
+            ],
+            "dependencies": [
+              {
+                "name": "css-line-break",
+                "type": "npm",
+                "key": "npm:css-line-break",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "2.1.0"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/css-line-break@2.1.0"
+                },
+                "package_files": [],
+                "license_file": null,
+                "crypto_algorithms": []
+              },
+              {
+                "name": "text-segmentation",
+                "type": "npm",
+                "key": "npm:text-segmentation",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "1.0.3"
+                ],
+                "dependencies": [
+                  {
+                    "name": "utrie",
+                    "type": "npm",
+                    "key": "npm:utrie",
+                    "namespace": "",
+                    "repoUrl": "",
+                    "homepageUrl": "",
+                    "description": "",
+                    "checksum": "",
+                    "private": false,
+                    "versions": [
+                      "1.0.2"
+                    ],
+                    "dependencies": [],
+                    "licenses": [],
+                    "meta": {
+                      "purl": "pkg:npm/utrie@1.0.2"
+                    },
+                    "package_files": [],
+                    "license_file": null,
+                    "crypto_algorithms": []
+                  }
+                ],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/text-segmentation@1.0.3"
+                },
+                "package_files": [
+                  "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/text-segmentation"
+                ],
+                "license_file": null,
+                "crypto_algorithms": []
+              }
+            ],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/html2canvas@1.4.1"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/html2canvas"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "import-fresh",
+            "type": "npm",
+            "key": "npm:import-fresh",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "3.3.1"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/import-fresh@3.3.1"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "resolve-from",
+            "type": "npm",
+            "key": "npm:resolve-from",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "4.0.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/resolve-from@4.0.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "iobuffer",
+            "type": "npm",
+            "key": "npm:iobuffer",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "5.4.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/iobuffer@5.4.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "is-arrayish",
+            "type": "npm",
+            "key": "npm:is-arrayish",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "0.2.1"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/is-arrayish@0.2.1"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "js-tokens",
+            "type": "npm",
+            "key": "npm:js-tokens",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "4.0.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/js-tokens@4.0.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "js-yaml",
+            "type": "npm",
+            "key": "npm:js-yaml",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "4.3.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/js-yaml@4.3.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "jspdf",
+            "type": "npm",
+            "key": "npm:jspdf",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "4.2.1"
+            ],
+            "dependencies": [
+              {
+                "name": "@babel/runtime",
+                "type": "npm",
+                "key": "npm:@babel/runtime",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "7.29.2"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/%40babel/runtime@7.29.2"
+                },
+                "package_files": [],
+                "license_file": null,
+                "crypto_algorithms": []
+              },
+              {
+                "name": "fast-png",
+                "type": "npm",
+                "key": "npm:fast-png",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "6.4.0"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/fast-png@6.4.0"
+                },
+                "package_files": [],
+                "license_file": null,
+                "crypto_algorithms": []
+              },
+              {
+                "name": "fflate",
+                "type": "npm",
+                "key": "npm:fflate",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "0.8.2"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/fflate@0.8.2"
+                },
+                "package_files": [],
+                "license_file": null,
+                "crypto_algorithms": []
+              }
+            ],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/jspdf@4.2.1"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/jspdf"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "libphonenumber-js",
+            "type": "npm",
+            "key": "npm:libphonenumber-js",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "1.13.9"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/libphonenumber-js@1.13.9"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/libphonenumber-js"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "lightningcss-linux-x64-gnu",
+            "type": "npm",
+            "key": "npm:lightningcss-linux-x64-gnu",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "1.32.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/lightningcss-linux-x64-gnu@1.32.0"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/lightningcss-linux-x64-gnu"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "locate-path",
+            "type": "npm",
+            "key": "npm:locate-path",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "5.0.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/locate-path@5.0.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "ngx-infinite-scroll",
+            "type": "npm",
+            "key": "npm:ngx-infinite-scroll",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "21.0.0"
+            ],
+            "dependencies": [
+              {
+                "name": "tslib",
+                "type": "npm",
+                "key": "npm:tslib",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "2.8.1"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/tslib@2.8.1"
+                },
+                "package_files": [],
+                "license_file": null,
+                "crypto_algorithms": []
+              }
+            ],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/ngx-infinite-scroll@21.0.0"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/ngx-infinite-scroll"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "p-locate",
+            "type": "npm",
+            "key": "npm:p-locate",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "4.1.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/p-locate@4.1.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "p-limit",
+            "type": "npm",
+            "key": "npm:p-limit",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "2.3.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/p-limit@2.3.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "p-try",
+            "type": "npm",
+            "key": "npm:p-try",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "2.2.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/p-try@2.2.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "pako",
+            "type": "npm",
+            "key": "npm:pako",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "2.1.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/pako@2.1.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "parent-module",
+            "type": "npm",
+            "key": "npm:parent-module",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "1.0.1"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/parent-module@1.0.1"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "parse-json",
+            "type": "npm",
+            "key": "npm:parse-json",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "5.2.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/parse-json@5.2.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "json-parse-even-better-errors",
+            "type": "npm",
+            "key": "npm:json-parse-even-better-errors",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "2.3.1"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/json-parse-even-better-errors@2.3.1"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/parse-json/node_modules/json-parse-even-better-errors"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "lines-and-columns",
+            "type": "npm",
+            "key": "npm:lines-and-columns",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "1.2.4"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/lines-and-columns@1.2.4"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "parse5",
+            "type": "npm",
+            "key": "npm:parse5",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "8.0.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/parse5@8.0.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "entities",
+            "type": "npm",
+            "key": "npm:entities",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "6.0.1"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/entities@6.0.1"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "path-exists",
+            "type": "npm",
+            "key": "npm:path-exists",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "4.0.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/path-exists@4.0.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "path-type",
+            "type": "npm",
+            "key": "npm:path-type",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "4.0.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/path-type@4.0.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "performance-now",
+            "type": "npm",
+            "key": "npm:performance-now",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "2.1.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/performance-now@2.1.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "picocolors",
+            "type": "npm",
+            "key": "npm:picocolors",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "1.1.1"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/picocolors@1.1.1"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "pngjs",
+            "type": "npm",
+            "key": "npm:pngjs",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "5.0.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/pngjs@5.0.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "qrcode",
+            "type": "npm",
+            "key": "npm:qrcode",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "1.5.4"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/qrcode@1.5.4"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "cliui",
+            "type": "npm",
+            "key": "npm:cliui",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "6.0.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/cliui@6.0.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "emoji-regex",
+            "type": "npm",
+            "key": "npm:emoji-regex",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "8.0.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/emoji-regex@8.0.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "is-fullwidth-code-point",
+            "type": "npm",
+            "key": "npm:is-fullwidth-code-point",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "3.0.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/is-fullwidth-code-point@3.0.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "string-width",
+            "type": "npm",
+            "key": "npm:string-width",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "4.2.3"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/string-width@4.2.3"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "y18n",
+            "type": "npm",
+            "key": "npm:y18n",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "4.0.3"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/y18n@4.0.3"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "yargs",
+            "type": "npm",
+            "key": "npm:yargs",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "15.4.1"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/yargs@15.4.1"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "yargs-parser",
+            "type": "npm",
+            "key": "npm:yargs-parser",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "18.1.3"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/yargs-parser@18.1.3"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "raf",
+            "type": "npm",
+            "key": "npm:raf",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "3.4.1"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/raf@3.4.1"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "regenerator-runtime",
+            "type": "npm",
+            "key": "npm:regenerator-runtime",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "0.13.11"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/regenerator-runtime@0.13.11"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "require-directory",
+            "type": "npm",
+            "key": "npm:require-directory",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "2.1.1"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/require-directory@2.1.1"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "require-main-filename",
+            "type": "npm",
+            "key": "npm:require-main-filename",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "2.0.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/require-main-filename@2.0.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "rgbcolor",
+            "type": "npm",
+            "key": "npm:rgbcolor",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "1.0.1"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/rgbcolor@1.0.1"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "rxjs",
+            "type": "npm",
+            "key": "npm:rxjs",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "7.8.2"
+            ],
+            "dependencies": [
+              {
+                "name": "tslib",
+                "type": "npm",
+                "key": "npm:tslib",
+                "namespace": "",
+                "repoUrl": "",
+                "homepageUrl": "",
+                "description": "",
+                "checksum": "",
+                "private": false,
+                "versions": [
+                  "2.8.1"
+                ],
+                "dependencies": [],
+                "licenses": [],
+                "meta": {
+                  "purl": "pkg:npm/tslib@2.8.1"
+                },
+                "package_files": [],
+                "license_file": null,
+                "crypto_algorithms": []
+              }
+            ],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/rxjs@7.8.2"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/rxjs"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "set-blocking",
+            "type": "npm",
+            "key": "npm:set-blocking",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "2.0.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/set-blocking@2.0.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "stackblur-canvas",
+            "type": "npm",
+            "key": "npm:stackblur-canvas",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "2.7.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/stackblur-canvas@2.7.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "strip-ansi",
+            "type": "npm",
+            "key": "npm:strip-ansi",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "6.0.1"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/strip-ansi@6.0.1"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "svg-pathdata",
+            "type": "npm",
+            "key": "npm:svg-pathdata",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "6.0.3"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/svg-pathdata@6.0.3"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "text-segmentation",
+            "type": "npm",
+            "key": "npm:text-segmentation",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "1.0.3"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/text-segmentation@1.0.3"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "tslib",
+            "type": "npm",
+            "key": "npm:tslib",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "2.8.1"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/tslib@2.8.1"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "typescript",
+            "type": "npm",
+            "key": "npm:typescript",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "5.9.3"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/typescript@5.9.3"
+            },
+            "package_files": [
+              "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal/node_modules/typescript"
+            ],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "utrie",
+            "type": "npm",
+            "key": "npm:utrie",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "1.0.2"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/utrie@1.0.2"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "which-module",
+            "type": "npm",
+            "key": "npm:which-module",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "2.0.1"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/which-module@2.0.1"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "wrap-ansi",
+            "type": "npm",
+            "key": "npm:wrap-ansi",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "6.2.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/wrap-ansi@6.2.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "emoji-regex",
+            "type": "npm",
+            "key": "npm:emoji-regex",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "8.0.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/emoji-regex@8.0.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "is-fullwidth-code-point",
+            "type": "npm",
+            "key": "npm:is-fullwidth-code-point",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "3.0.0"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/is-fullwidth-code-point@3.0.0"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          },
+          {
+            "name": "string-width",
+            "type": "npm",
+            "key": "npm:string-width",
+            "namespace": "",
+            "repoUrl": "",
+            "homepageUrl": "",
+            "description": "",
+            "checksum": "",
+            "private": false,
+            "versions": [
+              "4.2.3"
+            ],
+            "dependencies": [],
+            "licenses": [],
+            "meta": {
+              "purl": "pkg:npm/string-width@4.2.3"
+            },
+            "package_files": [],
+            "license_file": null,
+            "crypto_algorithms": []
+          }
+        ],
+        "licenses": [],
+        "meta": {
+          "lifecycleScripts": true,
+          "purl": "pkg:npm/cgm-identity-hub@0.0.0"
+        },
+        "package_files": [
+          "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal"
+        ],
+        "license_file": null,
+        "crypto_algorithms": []
+      }
+    ],
+    "source": "/builds/cgm-de-life-platform/life-pr/cgm-identity-portal",
+    "branch": "renovate/major-minor-dependencies",
+    "deepscans": {}
+  }
+

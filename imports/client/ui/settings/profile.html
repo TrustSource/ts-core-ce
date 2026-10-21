@@ -1,0 +1,319 @@
+<template name='profile'>
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">Manage Profile</h2>
+        <small>Configure your settings</small>
+      </div>
+      <div class="settings-header-actions">
+        {{#if isPasswordUser}}
+          {{#if twoFactorEnabled}}
+            <span class="label label-success" style="vertical-align: middle; margin-right: 5px;"><i class="fa fa-check"></i> 2FA</span>
+            <button type="button" class="btn btn-sm btn-danger disable-2fa" style="margin-right: 5px;">
+              <i class="fa fa-times-circle"></i> {{__ 'Disable2fa'}}
+            </button>
+          {{else}}
+            <button type="button" class="btn btn-sm btn-primary enable-2fa" style="margin-right: 5px;">
+              <i class="fa fa-shield"></i> {{__ 'Enable2fa'}}
+            </button>
+          {{/if}}
+        {{/if}}
+        <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#changePwd">
+          <span class="fa fa-key" aria-hidden="true"></span> Change your Password
+        </a>
+      </div>
+    </div>
+  {{/pageHeader}}
+
+  <!-- Modal Setup 2FA -->
+  <div class="modal fade" id="setup2fa" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="ts-accent-line"></div>
+        <div class="modal-header text-center">
+          <i class="fa fa-solid fa-shield-halved ts-big-icon text-success"></i>
+          <br/>
+          <h4 class="modal-title">{{__ 'TwoFactorAuthentication'}}</h4>
+        </div>
+        {{#if twofaSetupDone}}
+          <div class="modal-body text-center">
+            <div class="text-success" style="font-size: 48px; margin-bottom: 15px;">
+              <i class="fa fa-check-circle"></i>
+            </div>
+            <p>{{__ 'TwoFactorSetupComplete'}}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          </div>
+        {{else}}
+          <form id="verify2faForm">
+            <div class="modal-body">
+              <p class="text-center">{{__ 'ScanQrCode'}}</p>
+              <div class="text-center" style="margin: 20px 0;">
+                <div id="twofa-qrcode" style="display: inline-block; padding: 10px; background: #fff; border-radius: 4px;"></div>
+              </div>
+              {{#if twofaSecret}}
+                <div class="text-center" style="margin-bottom: 15px;">
+                  <small class="text-muted">{{__ 'ManualEntryKey'}}</small>
+                  <br/>
+                  <code class="twofa-secret-code" style="font-size: 14px; letter-spacing: 2px;">{{twofaSecret}}</code>
+                </div>
+              {{/if}}
+              <div class="form-group">
+                <label for="twofaVerifyCode">{{__ 'TwoFactorCode'}}</label>
+                <input type="text" id="twofaVerifyCode" name="twofaVerifyCode" class="form-control"
+                       placeholder="6-digit code" autocomplete="one-time-code" inputmode="numeric" maxlength="6">
+                <span class="help-block small">{{__ 'EnterCodeFromAuthenticatorApp'}}</span>
+              </div>
+              {{#if twofaSetupError}}
+                <div class="text-danger">{{twofaSetupError}}</div>
+              {{/if}}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">{{__ 'VerifyAndEnable'}}</button>
+            </div>
+          </form>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Change Password -->
+  <div class="modal fade" id="changePwd" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="ts-accent-line"></div>
+        <div class="modal-header text-center">
+          <i class="fa fa-solid fa-key ts-big-icon text-success"></i>
+          <br/>
+          <h4 class="modal-title">Change Password</h4>
+          <br/>
+          <div class="{{chgPasswordMsgType}}" id="form-messages">{{chgPasswordMsg}}</div>
+        </div>
+        <form id="changePasswordForm">
+          <input type="text" name="username" id="username" autocomplete="username" value="{{getLogin}}" style="display:none" aria-hidden="true" tabindex="-1">
+          <div class="modal-body">
+            <div class="row">
+              <div class="form-group col-xs-12">
+                <label for="oldPassword">Old Password</label>
+                <input type="password" value="" id="oldPassword" class="form-control"
+                       name="oldPassword" autocomplete="old-password">
+                <span class="help-block small">Please enter your old password</span>
+              </div>
+              <div class="form-group col-xs-12">
+                <label for="password">New Password</label>
+                <input type="password" value="" id="password" class="form-control" autocomplete="new-password" name="password">
+                <span
+                    class="help-block small">Password must be at least <b>12 characters</b> including one capital letter,
+                  one special character and one number.</span>
+              </div>
+              <div class="form-group col-xs-12">
+                <label for="rptPassword">Repeat new Password</label>
+                <input type="password" value="" id="rptPassword" class="form-control"
+                       name="rptPassword" autocomplete="new-password-repeat">
+                <span class="help-block small">Please repeat your password</span>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Change password</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    {{#with currentUser}}
+      {{> user}}
+    {{/with}}
+  </div>
+</template>
+
+<template name='user'>
+  {{#panel title="User"}}
+    <form class="main form">
+      <div class="form-group" {{errorClass 'url'}}>
+        <label class="control-label">Login / auth. email:</label>
+        <div class="controls">
+          <p class="form-control-static">
+            {{getLogin}}
+            <button type="button" class="btn btn-default btn-xs profile-logout">
+              <i class="fa fa-solid fa-arrow-right-from-bracket"></i> Logout
+            </button>
+          </p>
+        </div>
+
+        <label class="control-label">Roles:</label>
+        <div class="controls">
+          <p class="form-control-static">{{userRoles}}</p>
+        </div>
+
+        <label class="control-label" for="name">Name:</label>
+        <div class="controls {{errorClass 'name'}}">
+          <input name="name" id="name" type="text" value="{{profile.name}}" placeholder="Your name"
+                 class="form-control" aria-invalid="{{ariaInvalid 'name'}}" aria-describedby="profile-name-error"/>
+          <span class="help-block" id="profile-name-error">{{errorMessage 'name'}}</span>
+        </div>
+
+        <label class="control-label" for="email">Correspondence email:</label>
+        <div class="controls">
+          <input name="email" id="email" type="email" value="{{profile.email}}" placeholder="Your E-Mail"
+                 class="form-control"/>
+          <span class="help-block">{{errorMessage 'email'}}</span>
+        </div>
+
+        <label class="control-label" for="theme">Theme:</label>
+        <div class="controls">
+          <select class="form-control" id="theme" name="theme">
+            <option value="light" selected="{{isSelected profile.theme 'light'}}">Light</option>
+            <option value="dark" selected="{{isSelected profile.theme 'dark'}}">Dark</option>
+          </select>
+          <span class="help-block"></span>
+        </div>
+
+        <label class="control-label" for="lang">Language:</label>
+        <div class="controls">
+          <select class="form-control" id="lang" name="lang">
+            <option value="en" selected="{{isSelected profile.lang 'en'}}">En</option>
+          </select>
+          <span class="help-block"></span>
+        </div>
+      </div>
+      <button type="submit" class="btn  btn-sm btn-primary submit">Update</button>
+    </form>
+  {{/panel}}
+  {{#panel title="Personal access keys"}}
+    <form class="apikeys_form form">
+      <div class="pull-left">
+        {{#if requestInProgress}}
+          <button type="button" disabled="disabled" class="btn btn-sm btn-primary">
+            <i class="fa fa-spinner fa-spin"></i> Create new key
+          </button>
+        {{else}}
+          <button type="button" class="btn btn-sm btn-primary create_api_key"><i class="fa fa-plus-circle"></i> Create new key</button>
+        {{/if}}
+      </div>
+      {{#with getApiKeysByUser}}
+        {{> reactiveTable settings=reactiveTableSettings class="table table-striped table-hover"}}
+      {{/with}}
+    </form>
+  {{/panel}}
+  {{#panel title="Communication preferences"}}
+    <form class="communication_form form">
+      <div class="form-group">
+        <h5>Event notifications</h5>
+        <div>
+          <label>
+            <input type="checkbox" class="email-settings" value="EVENTS_ALL"
+              {{isNotificationChecked 'EVENTS_ALL'}}>
+            All events
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" class="email-settings" value="EVENTS_NEW"
+              {{isNotificationChecked 'EVENTS_NEW'}}>
+            New module analysis processed
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" class="email-settings" value="EVENTS_CHANGES"
+              {{isNotificationChecked 'EVENTS_CHANGES'}}>
+            Analysis result changed
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" class="email-settings" value="EVENTS_APPROVES"
+              {{isNotificationChecked 'EVENTS_APPROVES'}}>
+            Module new releases, approves or rejections
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" class="email-settings" value="EVENTS_BY_EMAIL"
+              {{isNotificationChecked 'EVENTS_BY_EMAIL'}}>
+            Send all events also by email
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <h5>Alarm notifications</h5>
+        <div>
+          <label>
+            <input type="checkbox" class="email-settings" value="ALARMS_ALL"
+              {{isNotificationChecked 'ALARMS_ALL'}}>
+            All alarms
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" class="email-settings" value="ALARMS_COMPLIANCE"
+              {{isNotificationChecked 'ALARMS_COMPLIANCE'}}>
+            Compliance issues in my project
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" class="email-settings" value="ALARMS_VULNERABILITY"
+              {{isNotificationChecked 'ALARMS_VULNERABILITY'}}>
+            New vulnerabilities in my project
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" class="email-settings" value="ALARMS_ISSUES"
+              {{isNotificationChecked 'ALARMS_ISSUES'}}>
+            {{app 'name'}} operational issues
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" class="email-settings" value="ALARMS_ENDOFLIFE"
+              {{isNotificationChecked 'ALARMS_ENDOFLIFE'}}>
+            End-of-life monthly digest
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" class="email-settings" value="ALARMS_BY_EMAIL"
+              {{isNotificationChecked 'ALARMS_BY_EMAIL'}}>
+            Send all alarms also by email
+          </label>
+        </div>
+      </div>
+
+      <button type="submit" class="btn  btn-sm btn-primary submit">Update</button>
+    </form>
+  {{/panel}}
+</template>
+
+<template name="reactiveTablePersonalApiKeyActions">
+  {{#if this.published}}
+    <button class="btn btn-info btn-sm copy-api-key inner-r-10" type="button">
+      <span class="fa fa-clipboard"></span>
+    </button>
+  {{else}}
+    <button class="btn btn-info btn-sm inner-r-10" type="button" disabled="disabled">
+      <span class="fa fa-clipboard"></span>
+    </button>
+  {{/if}}
+  {{#unless this.published}}
+    <button class="btn btn-primary btn-sm publish-api-key inner-r-10" type="button">
+      <span class="fa fa-unlock"></span>
+      Publish
+    </button>
+  {{/unless}}
+  {{#if this.published}}
+    <button class="btn btn-danger2 btn-sm unpublish-api-key inner-r-10" type="button">
+      <span class="fa fa-lock"></span>
+      Unpublish
+    </button>
+  {{/if}}
+</template>
+
+

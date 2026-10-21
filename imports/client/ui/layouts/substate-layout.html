@@ -1,0 +1,33 @@
+<template name="substateLayout">
+
+  <!-- Splash screen -->
+  <div id="splash">
+    {{>splash }}
+  </div>
+
+  <!-- Header -->
+  {{> header }}
+
+  <!-- Navigation -->
+  {{> navigation }}
+
+  <!-- Right toolbar -->
+  {{> rightBar}}
+
+  <!-- Guidance for the current screen -->
+  {{> guidePanel}}
+
+  <!-- Main Wrapper -->
+  <div id="wrapper">
+    <div class="content-area">
+      {{> yield}}
+
+      <div class="content">
+        <div class="ts-panel" role="tabpanel">
+          {{> yield "tabs"}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+</template>

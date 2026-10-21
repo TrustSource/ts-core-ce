@@ -1,0 +1,153 @@
+// Components lake search modes.
+
+.component-lake-content {
+  display: flex;
+  flex-direction: column;
+}
+
+// Mode views
+.component-lake-search-form {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 10px;
+  margin-bottom: 18px;
+  // Safety valve: on a viewport too narrow for the whole bar, scroll it
+  // horizontally rather than let it wrap onto a second line or overflow the
+  // page.
+  overflow-x: auto;
+  // Paints the bar as part of the page background rather than a transparent
+  // strip, so it does not visually merge with the results table header that
+  // sits directly beneath it.
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  background: @content-bg;
+}
+
+// The flex-fill chain styles every form that is a direct child of .content as a
+// page-filling column (globals/flex-fill.import.less, for the csaf-create
+// pattern). Our search bar is such a form and matched it by accident, which made
+// the sort group stack below the fields, stretched the bar to fill the page
+// height, and let it be squashed when results were tall. That rule is (0,3,2), so
+// this override must carry the same ancestry plus our own class to outrank it -
+// a bare .component-lake-search-form rule loses and silently does nothing.
+body.flex-fill-page .content-area > .content > form.component-lake-search-form {
+  flex: 0 0 auto;
+  flex-direction: row;
+}
+
+// Bootstrap gives .form-group a 15px bottom margin (forms.less:222). .form-inline
+// used to zero it, and dropping .form-inline removed that reset - which made each
+// wrapped control 15px taller than the bare buttons beside it, so align-items:
+// center pushed the inputs visibly higher. Reset it here rather than reinstating
+// .form-inline, whose other rules this flex bar does not want.
+.component-lake-search-form .form-group {
+  margin-bottom: 0;
+}
+
+.component-lake-search-left,
+.component-lake-search-right {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 10px;
+  // Keeps each group at its natural size instead of being squashed by the
+  // sibling group when the row is tight for space.
+  flex-shrink: 0;
+}
+
+.component-lake-search-left {
+  // Absorbs all free space on the row, pinning the left group hard against the
+  // left edge no matter what justify-content resolves to on the parent. Two
+  // earlier justify-content-based fixes did not hold; this one cannot be
+  // overridden by a competing alignment rule.
+  margin-right: auto;
+}
+
+// Pushes the sort group to the right edge of the bar, matching the COTS list
+// page where filters sit left and sorting sits right.
+.component-lake-search-right {
+  margin-left: auto;
+}
+
+.component-lake-bar-icon {
+  color: @color-text-secondary;
+  font-size: 16px;
+}
+
+.component-lake-search-input {
+  width: 320px;
+}
+
+.component-lake-sort-select {
+  width: 120px;
+}
+
+.component-lake-order-select {
+  width: 80px;
+}
+
+// Component manager criteria bar (widest of the three modes) - tightened so
+// Back, filter icon, Name, Key, three criteria selects, Search, Reset, sort
+// icon and both sort controls have a fighting chance of fitting on one line.
+.component-lake-manager-input {
+  width: 140px;
+}
+
+.component-lake-criteria-select {
+  width: 130px;
+}
+
+.component-lake-search-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.component-lake-results {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  .reactive-table-row-click();
+  // Scrolls the table body only, so the pagination bar stays visible instead of
+  // scrolling away with the rows.
+  .reactive-table-scroll();
+}
+
+.component-lake-results > .reactive-table-body {
+  .styled-scrollbar();
+}
+
+// Idle state prompt shown before the user has searched
+.component-lake-prompt {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.component-lake-prompt-icon {
+  font-size: 38px;
+  color: @color-text-secondary;
+  opacity: 0.5;
+  margin-bottom: 14px;
+}
+
+.component-lake-prompt-title {
+  margin: 0 0 6px;
+  font-weight: 600;
+}
+
+.component-lake-prompt-text {
+  margin-bottom: 0;
+  max-width: 460px;
+}

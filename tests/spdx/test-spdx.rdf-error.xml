@@ -1,0 +1,56 @@
+<rdf:RDF xmlns:spdx="http://spdx.org/rdf/terms#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://localhost:3000/spdx/can-utils-v-021080spdxjson-af2907e3-95af-44bc-8d2e-62a374165d8e" xmlns:doap="http://usefulinc.com/ns/doap#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <spdx:SpdxDocument rdf:about="http://localhost:3000/spdx/can-utils-v-021080spdxjson-af2907e3-95af-44bc-8d2e-62a374165d8e#SPDXRef-DOCUMENT">
+    <spdx:relationship>
+      <spdx:Relationship>
+        <spdx:relationshipType rdf:resource="http://spdx.org/rdf/terms#relationshipType_contains"/>
+        <spdx:relatedSpdxElement>
+          <spdx:Package rdf:about="http://localhost:3000/spdx/can-utils-v-021080spdxjson-af2907e3-95af-44bc-8d2e-62a374165d8e#SPDXRef--srv-fossology-repository-report">
+            <spdx:relationship>
+              <spdx:Relationship>
+                <spdx:relationshipType rdf:resource="http://spdx.org/rdf/terms#relationshipType_contains"/>
+                <spdx:relatedSpdxElement>
+                  <spdx:Package rdf:about="http://localhost:3000/spdx/can-utils-v-021080spdxjson-af2907e3-95af-44bc-8d2e-62a374165d8e#SPDXRef-bash-completion--.-.tar.gz">
+                    <spdx:name>bash-completion-2.11.tar.gz</spdx:name>
+                    <spdx:downloadLocation>http://spdx.org/rdf/terms#noassertion</spdx:downloadLocation>
+                    <spdx:licenseConcluded rdf:resource="http://spdx.org/licenses/Unlicense"/>
+                    <spdx:copyrightText>Copyright 2000-2023 bash-completion-2.11.tar.gz</spdx:copyrightText>
+                    <spdx:filesAnalyzed>false</spdx:filesAnalyzed>
+                    <spdx:licenseInfoFromFiles rdf:resource="http://spdx.org/licenses/Unlicense"/>
+                    <spdx:licenseDeclared rdf:resource="http://spdx.org/licenses/Unlicense"/>
+                  </spdx:Package>
+                </spdx:relatedSpdxElement>
+              </spdx:Relationship>
+            </spdx:relationship>
+            <spdx:name>/srv/fossology/repository/report</spdx:name>
+            <spdx:downloadLocation>true</spdx:downloadLocation>
+            <spdx:licenseConcluded rdf:resource="http://spdx.org/licenses/Unlicense"/>
+            <spdx:copyrightText>Copyright 2000-2023 /srv/fossology/repository/report</spdx:copyrightText>
+            <spdx:filesAnalyzed>false</spdx:filesAnalyzed>
+            <spdx:licenseInfoFromFiles rdf:resource="http://spdx.org/licenses/Unlicense"/>
+            <spdx:licenseDeclared rdf:resource="http://spdx.org/licenses/Unlicense"/>
+          </spdx:Package>
+        </spdx:relatedSpdxElement>
+      </spdx:Relationship>
+    </spdx:relationship>
+    <spdx:relationship>
+      <spdx:Relationship>
+        <spdx:relationshipType rdf:resource="http://spdx.org/rdf/terms#relationshipType_describes"/>
+        <spdx:relatedSpdxElement rdf:resource="http://localhost:3000/spdx/can-utils-v-021080spdxjson-af2907e3-95af-44bc-8d2e-62a374165d8e#SPDXRef--srv-fossology-repository-report"/>
+      </spdx:Relationship>
+    </spdx:relationship>
+    <spdx:dataLicense>
+      <spdx:License rdf:about="http://spdx.org/licenses/CC0-1.0">
+        <spdx:licenseId>CC0-1.0</spdx:licenseId>
+      </spdx:License>
+    </spdx:dataLicense>
+    <spdx:specVersion>SPDX-2.3</spdx:specVersion>
+    <spdx:creationInfo>
+      <spdx:CreationInfo>
+        <spdx:created>2024-10-24T07:42:04Z</spdx:created>
+        <spdx:creator>Organization: EACG</spdx:creator>
+        <spdx:licenseListVersion>2.5</spdx:licenseListVersion>
+        <spdx:creator>Tool: ECS 1.1.0</spdx:creator>
+      </spdx:CreationInfo>
+    </spdx:creationInfo>
+  </spdx:SpdxDocument>
+</rdf:RDF>

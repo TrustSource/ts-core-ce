@@ -1,0 +1,48 @@
+// Shared async loading / error states.
+//
+// Not lake-specific despite where these started: the component-lake search and
+// the component index detail preloader both render the same markup.
+
+.async-search-state {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.async-search-state-text {
+  margin-top: 14px;
+  max-width: 420px;
+}
+
+// The h1 shares @preloader-title-size / @preloader-title-line-height with.
+// ts-splash-title h1 (globals/splash.import.less) so the two stay the same size.
+// Set explicitly rather than reusing .ts-splash-title, because a bare h1
+// elsewhere in the app picks up a different size.
+.async-search-loading-title {
+  font-size: @preloader-title-size;
+  font-weight: 200;
+  line-height: @preloader-title-line-height;
+  margin: 10px 0;
+}
+
+.async-search-error-icon {
+  font-size: 42px;
+  color: @ts-amber;
+  margin-bottom: 10px;
+}
+
+.async-search-error-title {
+  margin: 0 0 4px;
+  font-weight: 600;
+}
+
+.async-search-error-actions {
+  margin-top: 18px;
+  display: flex;
+  gap: 10px;
+}
+

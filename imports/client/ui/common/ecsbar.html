@@ -1,0 +1,82 @@
+<template name="ecsbar">
+  <div class="row">
+    <div class="col-sm-4 text-right">
+      <span class="font-bold">{{title}}</span>
+    </div>
+    <div class="col-sm-8">
+      <div class="progress m-t-xs full progress-small">
+        <div style="width: {{data.okPercent}}%"
+             aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{data.okPercent}}"
+             role="progressbar" class="progress-bar progress-bar-success"
+             data-toggle="tooltip"
+             title="{{data.ok}} OK" data-original-title="{{data.ok}} OK">
+          <span class="sr-only">{{data.ok}} OK</span>
+        </div>
+        <div style="width: {{data.warningsPercent}}%"
+             aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{data.warningsPercent}}"
+             role="progressbar" class="progress-bar progress-bar-warning"
+             data-toggle="tooltip"
+             title="{{data.warnings}} Warnings" data-original-title="{{data.warnings}} Warnings">
+          <span class="sr-only">{{data.warnings}} Warnings</span>
+        </div>
+        <div style="width: {{data.violationsPercent}}%"
+             aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{data.violationsPercent}}"
+             role="progressbar" class="progress-bar progress-bar-danger"
+             data-toggle="tooltip"
+             title="{{data.violations}} Violations" data-original-title="{{data.violations}} Violations">
+          <span class="sr-only">{{data.violations}} Violations</span>
+        </div>
+      </div>
+    </div>
+    <!--<div class="col-sm-12 text-center">-->
+    <!--<span class="font-bold">{{data.okPercent}}% OK</span>-->
+    <!--</div>-->
+  </div>
+</template>
+
+<template name="ecsbars">
+  <div class="ecsbars">
+    {{#with statistics}}
+      {{> ecsbar title="Legal" data=legal }}
+      {{> ecsbar title="Vulnerabilities" data=vulnerability }}
+    {{/with}}
+  </div>
+</template>
+
+<template name="ecsbarLine">
+  <div class="row">
+    {{#unless noTitle}}
+      <div class="col-sm-12 text-center ecs-bar-title">
+        <span class="font-bold">{{title}}</span> - <span class="font-bold">{{getOkPercent data}}% OK</span>
+      </div>
+    {{/unless}}
+    <div class="col-sm-12">
+      <div class="progress m-t-xs full progress-large">
+        <div style="width: {{data.okPercent}}%; {{#if data.okPercent}}min-width:15%{{/if}}; {{#if data.total}}flex:auto{{/if}}"
+             aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{data.okPercent}}"
+             role="progressbar" class="progress-bar progress-bar-success"
+             data-toggle="tooltip"
+             title="{{data.ok}} OK" data-original-title="{{data.ok}} OK">
+          <span>{{data.ok}}</span>
+          <span class="sr-only">{{data.ok}} OK</span>
+        </div>
+        <div style="width: {{data.warningsPercent}}%; {{#if data.warningsPercent}}min-width:15%{{/if}}; {{#if data.total}}flex:auto{{/if}}"
+             aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{data.warningsPercent}}"
+             role="progressbar" class="progress-bar progress-bar-warning"
+             data-toggle="tooltip"
+             title="{{data.warnings}} Warnings" data-original-title="{{data.warnings}} Warnings">
+          <span>{{data.warnings}}</span>
+          <span class="sr-only">{{data.warnings}} Warnings</span>
+        </div>
+        <div style="width: {{data.violationsPercent}}%; {{#if data.violationsPercent}}min-width:15%{{/if}}; {{#if data.total}}flex:auto{{/if}}"
+             aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{data.violationsPercent}}"
+             role="progressbar" class="progress-bar progress-bar-danger"
+             data-toggle="tooltip"
+             title="{{data.violations}} Violations" data-original-title="{{data.violations}} Violations">
+          <span>{{data.violations}}</span>
+          <span class="sr-only">{{data.violations}} Violations</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

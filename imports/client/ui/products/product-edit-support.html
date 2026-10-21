@@ -1,0 +1,23 @@
+<template name="productEditSupport">
+  <div class="form-group col-sm-12">
+    <div class="pull-left">
+      <a class="btn btn-primary" data-toggle="modal" data-target="#productAddSupport" title="Add support contract">
+        <span class="fa fa-plus" aria-hidden="true"></span>
+        Add contract
+      </a>
+      <button type="button" class="btn btn-default generate_eol" title="Generate EoL info">
+        <span class="fa fa-hourglass-end" aria-hidden="true"></span>
+        Generate EoL info
+      </button>
+    </div>
+    {{> productAddSupport}}
+    <form autocomplete="off">
+      {{> reactiveTable settings=reactiveTableSettings}}
+    </form>
+  </div>
+</template>
+
+<template name="reactiveTableProductsSupportActions">
+  <button class="btn btn-warning btn-sm remove-item" type="button"><span class="fa fa-times" aria-hidden="true"></span></button>
+</template>
+

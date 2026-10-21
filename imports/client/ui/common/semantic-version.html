@@ -1,0 +1,11 @@
+<template name="semanticVersion">
+  {{#each versionsObject}}
+    {{#if version}}
+      <div class="semantic-digit">
+        <button type="button" class="btn btn-xs inc_version"><span class="fa fa-angle-up"></span></button>
+        <input class="form-control" name="version.{{type}}" value="{{version}}" disabled="disabled" type="text">
+        <!--<button type="button" class="btn btn-xs dec_version"><span class="fa fa-angle-down"></span></button>-->
+      </div>
+    {{/if}}
+  {{/each}}
+</template>

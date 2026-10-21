@@ -1,0 +1,46 @@
+<template name="companyIntegrationsGithub">
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">Github</h2>
+        <small>Configure Github integration settings</small>
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content">
+    <div class="panel">
+      <div class="panel-body">
+        <form class="form-horizontal github" autocomplete="off">
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="github-token">Access Token *</label>
+            <div class="col-sm-4 controls">
+              <input type="password" autocomplete="off" id="github-token" name="github-token"
+                     placeholder="Leave blank to keep current" class="form-control"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="github-repository">Repository</label>
+            <div class="col-sm-4 controls">
+              <input type="text" autocomplete="off" id="github-repository" name="github-repository" value="{{github.repository}}"
+                     placeholder="Repository (optional)" class="form-control"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="github-active">Active *</label>
+            <div class="col-sm-4 pinner-t-4">
+              <input type="checkbox" id="github-active" name="github-active" value="true" checked="{{github.active}}"
+                     placeholder="Active" class="i-checks"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-4">
+              <button type="submit" class="btn  btn-sm btn-primary update">
+                Update
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>

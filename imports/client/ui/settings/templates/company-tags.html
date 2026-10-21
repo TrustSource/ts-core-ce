@@ -1,0 +1,42 @@
+<template name='companyTags'>
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">Company tags</h2>
+        <small>Configure company specific tags list</small>
+      </div>
+      <div class="settings-header-actions">
+        {{> companyTagsCreate size='btn-xs'}}
+        {{#unless isRemovedList}}
+          <a href="{{pathFor route='companyTagsDeleted'}}" class="btn btn-primary btn-xs">
+            <span class="fa fa-external-link" aria-hidden="true"></span>
+            View removed tags
+          </a>
+        {{else}}
+          <a href="{{pathFor route='companyTags'}}" class="btn btn-primary btn-xs">
+            <span class="fa fa-external-link" aria-hidden="true"></span>
+            View active tags
+          </a>
+        {{/unless}}
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content">
+    <div class="ts-panel">
+      <div class="panel-body">
+        {{> companyTagsImport}}
+        {{> reactiveTable settings=reactiveTableSettings}}
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="reactiveTableTagsActions">
+  {{#unless isRemovedList}}
+    <button class="btn btn-danger2 btn-sm remove">Remove</button>
+  {{else}}
+    <button class="btn btn-default btn-sm reactivate">Re-activate</button>
+  {{/unless}}
+</template>
+
+

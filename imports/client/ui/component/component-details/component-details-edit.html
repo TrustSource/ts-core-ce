@@ -1,0 +1,300 @@
+<template name="componentDetailsEdit">
+
+  {{#if isComponentLoaded}}
+  {{> componentDetailsHeader}}
+
+  <div class="content component-detail">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel {{isEditField "info" "panel-danger"}}" id="info-panel">
+          <div class="panel-heading">
+            <h4 class="inner-b-0">
+              {{__ 'Information'}}
+            </h4>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-12">
+
+                <div class="form-horizontal">
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">{{__ 'Key'}}</label>
+                    <div class="col-sm-8 pinner-t-8">
+                      {{getKey}}
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">{{__ 'purlPackageURL'}}</label>
+                    <div class="col-sm-8 pinner-t-8">
+                      {{getPackageUrl}}
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">{{__ 'Category'}}</label>
+                    <div class="col-sm-8">
+                      {{> tagInput categorySettings}}
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="homepage">{{__ 'Homepage'}}</label>
+                    <div class="col-sm-8">
+                      <input type="text" id="homepage" class="form-control"
+                             placeholder="{{__ 'EnterHomepage'}}"
+                             value="{{getUrl 'homepage'}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="repository">{{__ 'Repository'}}</label>
+                    <div class="col-sm-8">
+                      <input type="text" id="repository" class="form-control"
+                             placeholder="{{__ 'EnterRepository'}}"
+                             value="{{getUrl 'repository'}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="issues">{{__ 'Issues'}}</label>
+                    <div class="col-sm-8">
+                      <input type="text" id="issues" class="form-control"
+                             placeholder="{{__ 'EnterIssuesPage'}}"
+                             value="{{getUrl 'issues'}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="notes">{{__ 'ReleaseNotes'}}</label>
+                    <div class="col-sm-8">
+                      <input type="text" id="notes" class="form-control"
+                             placeholder="{{__ 'EnterReleaseNotesPage'}}"
+                             value="{{getUrl 'notes'}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="provider">{{__ 'SponsoringOrganisation'}}</label>
+                    <div class="col-sm-8">
+                      <input type="text" id="provider" class="form-control"
+                             placeholder="{{__ 'EnterSponsoringOrganisation'}}"
+                             value="{{getField 'provider'}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="providerUrl">{{__ 'SponsoringOrganisation'}} {{__ 'url'}}</label>
+                    <div class="col-sm-8">
+                      <input type="text" id="providerUrl" class="form-control"
+                             placeholder="{{__ 'EnterLinkToASponsoringOrganisationHomepage'}}"
+                             value="{{getField 'providerUrl'}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="providerAddress">{{__ 'SponsoringOrganisation'}} {{__ 'address'}}</label>
+                    <div class="col-sm-8">
+                      <input type="text" id="providerAddress" class="form-control"
+                             placeholder="{{__ 'EnterSponsoringOrganisationAddress'}}"
+                             value="{{getField 'providerAddress'}}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="optionsLang">{{__ 'Language'}}</label>
+                    <div class="col-sm-8">
+                      <div class="radio-inline">
+                        <label>
+                          <input type="radio" name="optionsLang" value="unknown"
+                                 checked="{{equals getLanguage 'unknown'}}">
+                          {{__ 'unknown'}}
+                        </label>
+                      </div>
+                      {{#each allowedLanguages}}
+                        <div class="radio-inline">
+                          <label>
+                            <input type="radio" name="optionsLang" value="{{this}}"
+                                   checked="{{equals ../getLanguage this}}">
+                            {{this}}
+                          </label>
+                        </div>
+                      {{/each}}
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">{{__ 'CryptoAlgorithms'}}</label>
+                    <div class="col-sm-8">
+                      <ul class="pinner-l-20 inner-b-0">
+                        {{#each cryptoAlgorithmsListHtml getAlgorithms}}
+                          <li>{{algorithm}} {{strength}}</li>
+                        {{/each}}
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">AI / ML models</label>
+                    <div class="col-sm-8">
+                      <ul class="pinner-l-20 inner-b-0">
+                        {{#each getAiModels}}
+                          <li>{{name}}{{#if version}} {{version}}{{/if}}{{#if provider}} · {{provider}}{{/if}}{{#if task}} · {{task}}{{/if}}</li>
+                        {{/each}}
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">{{__ 'DeclaredLicenses'}}</label>
+                    <div class="col-sm-8">
+                      <select id="set-declared-licenses" class="form-control set-declared-licenses select2"
+                              multiple="multiple">
+                        {{#each getDeclaredLicensesList}}
+                          <option value="{{key}}" selected="{{selected}}" title="{{name}}">{{name}}</option>
+                        {{/each}}
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">{{__ 'EffectiveLicenses'}}</label>
+                    <div class="col-sm-8">
+                      <select id="set-effective-licenses" class="form-control set-effective-licenses select2"
+                              multiple="multiple">
+                        {{#each getEffectiveLicensesList}}
+                          <option value="{{key}}" selected="{{selected}}" title="{{name}}">{{name}}</option>
+                        {{/each}}
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">{{__ 'ConcludedLicenses'}}</label>
+                    <div class="col-sm-8">
+                      <select id="set-concluded-licenses" class="form-control set-concluded-licenses select2"
+                              multiple="multiple">
+                        {{#each getConcludedLicensesList}}
+                          <option value="{{key}}" selected="{{selected}}" title="{{name}}">{{name}}</option>
+                        {{/each}}
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">{{__ 'DeclaredCopyright'}}</label>
+                    <div class="col-sm-8">
+            					<textarea name="text" rows="3" class="form-control" id="declaredCopyright"
+                                placeholder="{{__ 'EnterDeclaredCopyrightHere'}}">{{getDeclaredCopyright}}</textarea>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">{{__ 'LastUpdate'}}</label>
+                    <div class="col-sm-8 pinner-t-8">
+                      {{dateFormat getUpdated}} {{__ 'by'}} {{getUpdatedBy}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="panel" id="description-panel">
+          <div class="panel-heading">
+            <h4 class="inner-b-0">
+              {{__ 'ShortDescription'}}
+            </h4>
+          </div>
+          <div class="panel-body">
+            <textarea name="text" rows="3" class="form-control" id="shortDescription"
+                      placeholder="{{__ 'EnterComponentShortDescriptionHere'}}">{{getShortDescription}}</textarea>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="panel" id="description-panel">
+          <div class="panel-heading">
+            <h4 class="inner-b-0">
+              {{__ 'Description'}}
+            </h4>
+          </div>
+          <div class="panel-body">
+            <textarea name="text" rows="3" class="form-control" id="description"
+                      placeholder="{{__ 'EnterComponentDescriptionHere'}}">{{getDescription}}</textarea>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="panel" id="comment-panel">
+          <div class="panel-heading">
+            <h4 class="inner-b-0">
+              {{__ 'Comment'}}
+            </h4>
+          </div>
+          <div class="panel-body">
+            <textarea name="text" rows="3" class="form-control" id="comment"
+                      placeholder="{{__ 'EnterACommentConcerning'}}">{{getCommentForTextArea }}</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{> componentCommercialTerms component=this.data collection='components'}}
+
+    <div class="panel component-version">
+      <div class="panel-heading">
+        <div class="row inner-b-5 bulk_create_versions">
+          <div class="col-sm-6">
+            <div class="version-heading-left">
+              <h4 class="inner-b-0">
+                {{__ 'Versions'}}
+                {{> versionCount filter=versionFilter matched=getVersionsMatching.length total=countVersions}}
+              </h4>
+              {{#if getVersions true}}
+                {{> versionSearch filter=versionFilter matched=getVersionsMatching.length
+                                  total=countVersions clearsSelection=true}}
+              {{/if}}
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <input class="form-control create-versions-list"
+                   placeholder="{{__ 'EnterCommaSeparatedVersions'}}">
+          </div>
+          <div class="col-sm-2">
+            <button class="btn btn-primary create-versions"
+                    type="button">{{__ 'CreateVersions'}}
+            </button>
+          </div>
+        </div>
+      </div>
+      {{#if getVersions true}}
+        <div class="panel-body">
+          <div class="row inner-b-5 bulk_update_versions">
+            <div class="col-sm-4 select-all-box">
+              <label class="checkbox">
+                <input type="checkbox" name="selectAll" class="mark-selected-all">
+              </label>
+              <select id="set-license-to-selected" class="form-control set-license-to-selected select2"
+                      multiple="multiple" disabled="{{noSelectedVersions}}">
+                {{#each getAllLicenses}}
+                  <option value="{{key}}" selected="{{selected}}" title="{{name}}">{{name}}</option>
+                {{/each}}
+              </select>
+            </div>
+            <div class="col-sm-3">
+              <input class="form-control set-license-url-to-selected" disabled="{{noSelectedVersions}}"
+                     placeholder="{{__ 'EnterUrlForLicenseText'}}">
+            </div>
+            <div class="col-sm-3">
+              <input class="form-control set-copyright-to-selected" disabled="{{noSelectedVersions}}"
+                     placeholder="{{__ 'EnterCopyrightTextForComponent'}}">
+            </div>
+            <div class="col-sm-2">
+              <button class="btn btn-primary set-changes-to-selected" disabled="{{noSelectedVersions}}"
+                      type="button">{{__ 'SetToSelected'}}
+              </button>
+            </div>
+          </div>
+          <table class="table table-condensed">
+            <tbody>
+            {{#each getVersionsMatching}}
+              {{> componentDetailsVersion}}
+            {{/each}}
+            </tbody>
+          </table>
+          {{#unless getVersionsMatching}}
+            {{> reactiveTableNoData}}
+          {{/unless}}
+        </div>
+      {{/if}}
+    </div>
+  </div>
+  {{/if}}
+</template>
+

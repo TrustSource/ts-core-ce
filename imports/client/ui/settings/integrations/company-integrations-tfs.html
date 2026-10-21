@@ -1,0 +1,55 @@
+<template name="companyIntegrationsTfs">
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">TFS</h2>
+        <small>Configure TFS / Azure DevOps integration settings</small>
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content">
+    <div class="panel">
+      <div class="panel-body">
+        <form class="form-horizontal tfs" autocomplete="off">
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="tfs-account">Account or URL:</label>
+            <div class="col-sm-4 controls">
+              <input type="text" autocomplete="off" id="tfs-account" name="tfs-account" value="{{tfs.account}}"
+                     placeholder="Account" class="form-control"/>
+            </div>
+            <label class="col-sm-4 control-label tfs-account-result"
+                   style="text-align: left;">{{tfsAccountResult}}</label>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="tfs-project">Project:</label>
+            <div class="col-sm-4 controls">
+              <input type="text" autocomplete="off" id="tfs-project" name="tfs-project" value="{{tfs.project}}"
+                     placeholder="Project" class="form-control"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="tfs-token">Access Token:</label>
+            <div class="col-sm-4 controls">
+              <input type="password" autocomplete="off" id="tfs-token" name="tfs-token"
+                     placeholder="Leave blank to keep current" class="form-control"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="tfs-active">Active:</label>
+            <div class="col-sm-4 pinner-t-4">
+              <input type="checkbox" id="tfs-active" name="tfs-active" value="true" checked="{{tfs.active}}"
+                     placeholder="Active" class="i-checks"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-4">
+              <button type="submit" class="btn  btn-sm btn-primary update">
+                Update
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>

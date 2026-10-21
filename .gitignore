@@ -1,0 +1,48 @@
+/node_modules
+/*.iml
+/build
+.idea
+.npm
+npm-debug.log
+.tsrc.json
+/.yarn/
+.tsrc.local.json
+.tsrc.preview.json
+# Settings and credentials (only the template is tracked)
+.env*
+!.env.example
+settings*.json
+*.pem
+*.key
+/workers/node_modules/
+.mcp.json
+.claude
+/.app.storage
+
+# security testing (local only, never commit)
+.test-cred
+/pentest/
+/package-lock.json
+
+# Local working notes (dev-team logs, design specs and plans)
+/docs/
+/.superpowers/
+
+# Instructions for AI coding assistants (local only)
+CLAUDE.md
+
+# macOS
+.DS_Store
+
+# Local copy of the online help (separate repo)
+/ohelp/
+
+# IDE
+.idea/
+
+# Backups (database dumps hold personal data and credentials; use tools/backup.sh,
+# which writes outside the checkout)
+*.archive
+ts-files.tar.gz
+/backups/
+/dump/

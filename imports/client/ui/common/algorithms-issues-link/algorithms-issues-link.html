@@ -1,0 +1,48 @@
+<template name="algorithmsIssuesLink">
+  {{#if noGithub}}
+    <a title="Copy to clipboard issue details" class="copy-information" role="button" tabindex="0" data-clipboard-text="{{description.text}}">
+      <span class="integration-icon integration-lg copy vam">
+          <i class="fa fa-clipboard"></i>
+      </span>
+      Copy details
+    </a>
+  {{else}}
+    <div>
+      <a class="show-github-modal" role="button" tabindex="0">
+        <span class="integration-icon github-disabled integration-lg "></span> Create issue
+      </a>
+      <div class="modal fade createIssue" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="ts-accent-line"></div>
+              <div class="modal-header text-center">
+                <i class="fa fa-check-square-o ts-big-icon text-success"></i>
+                <br/>
+                <h4 class="modal-title">Create new GitHub issue</h4>
+                <br/>
+                <div class="{{createIssueMsgType}}" id="form-messages">{{createIssueMsg}}</div>
+              </div>
+              <form class="createIssueForm">
+                <div class="modal-body text-left">
+                  <div class="form-group ">
+                    <label for="">Title</label>
+                    <input type="text" value="" name="modalTitle" class="form-control">
+                    <span class="help-block small">Specify the title of issue</span>
+                  </div>
+                  <div class="form-group ">
+                    <label for="">Description</label>
+                    <textarea value="" name="modalDescription" class="form-control" rows="5"></textarea>
+                    <span class="help-block small">Specify the description of issue</span>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary create-github">Create issue</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+  {{/if}}
+</template>

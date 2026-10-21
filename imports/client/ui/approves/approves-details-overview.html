@@ -1,0 +1,65 @@
+<template name="approvesDetailsOverview">
+  <div>
+    {{#if _id}}
+      {{#if stats.notice}}
+        <h3>{{__ 'Overview'}}</h3>
+        <div class="row inner-b-25">
+          <div class="col-sm-3">
+            <div class="panel panel-default text-center">
+              <p class="h2"><strong>{{modules.length}}</strong></p>
+              <p class="h5">{{__ 'Modules'}}</p>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="panel panel-default text-center">
+              <p class="h2"><strong>{{stats.changes.modified}}</strong></p>
+              <p class="h5">{{__ 'ComponentStatusChanges'}}</p>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="panel panel-default text-center">
+              <p class="h2"><strong>{{stats.tests.ok}}/{{stats.tests.total}}</strong></p>
+              <p class="h5">{{__ 'SWTestsPassed'}}</p>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="panel panel-default text-center">
+              <p class="h2"><strong>{{stats.vulnerability.mutedVulnerability}}/{{stats.vulnerability.vulnerability}}</strong></p>
+              <p class="h5">{{__ 'VulnerabilitiesResolved'}} </p>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="panel panel-default text-center">
+              <p class="h2"><strong>{{stats.notice.completedActivity}}/{{stats.notice.totalActivity}}</strong></p>
+              <p class="h5">{{__ 'LegalActionsTaken'}}</p>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="panel panel-default text-center">
+              <p class="h2"><strong>{{stats.versioning.totalProblems}}</strong></p>
+              <p class="h5">{{__ 'ComponentsOutdated'}}</p>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <a href="{{pathFor route='noticeFileDetails' data=getNoticeOptions}}" target="_blank">
+              <div class="panel panel-default text-center">
+                <p class="h2"><strong>{{stats.notice.completed}}%</strong></p>
+                <p class="h5">{{__ 'NoticeFileCompleted'}}</p>
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-3">
+            <div class="panel panel-default text-center">
+              <p class="h2"><strong>{{#if stats.capabilities.capabilities}}{{stats.capabilities.capabilities}}{{else}}0{{/if}}</strong></p>
+              <p class="h5">{{__ 'Capabilities'}}</p>
+            </div>
+          </div>
+        </div>
+      {{/if}}
+      <h3>{{__ 'Modules'}}</h3>
+      {{> reactiveTable settings=reactiveTableModules}}
+    {{else}}
+      {{>loadingSplash}}
+    {{/if}}
+  </div>
+</template>

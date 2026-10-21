@@ -1,0 +1,235 @@
+<template name="RiskAddModal">
+  <!-- Modal: RiskAddModal -->
+  <div class="modal fade" id="RiskAddModal" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="ts-accent-line"></div>
+        <div class="modal-header text-center">
+          <h4 class="modal-title">Risk capture</h4>
+        </div>
+        <form id="RiskAddForm" method="post">
+          <div class="modal-body">
+            <div class="row">
+              <div class="form-group col-xs-6">
+                <label for="addRisk">Name * <small class="text-muted">(3-200 characters)</small></label>
+                <input type="text" value="" id="addRisk" class="form-control" required tabindex="1"
+                       minlength="3" maxlength="200" name="addRisk"
+                       placeholder="e.g. SQL injection in login form">
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="origin">Origin</label>
+                <select name="origin" multiple class="form-control select2" tabindex="2" disabled="{{isFormDisabled}}">
+                  {{#each originValues}}
+                    <option value="{{value}}">
+                      {{label}}
+                    </option>
+                  {{/each}}
+                </select>
+              </div>
+              <div class="form-group">
+                <div class="col-xs-12 inner-b-20">
+                  <label for="impactDescription">Description</label>
+                  <textarea name="impactDescription" class="form-control" rows="4" tabindex="3" placeholder="describe the impact"></textarea>
+                </div>
+                <div class="col-xs-6">
+                  <div class="form-inline pinner-t-30">
+                    <div class="form-group pinner-r-10">
+                      <label class="control-label pointer" for="confidentiality" tabindex="4">
+                        <input type="checkbox" id="confidentiality" name="confidentiality" class="i-checks">
+                        <strong>Confidentiality</strong>
+                      </label>
+                    </div>
+                    <div class="form-group pinner-r-10">
+                      <label class="control-label pointer" for="integrity" tabindex="5">
+                        <input type="checkbox" id="integrity" name="integrity" class="i-checks">
+                        <strong>Integrity</strong>
+                      </label>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label pointer" for="availability" tabindex="6">
+                        <input type="checkbox" id="availability" name="availability" class="i-checks">
+                        <strong>Availability</strong>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <div class="form-group">
+                    <label for="impactClass">Impact class</label>
+                    <select name="impactClass" class="form-control select2" tabindex="7">
+                      {{#each impactClassValues}}
+                        <option value="{{this}}">
+                          {{this}}
+                        </option>
+                      {{/each}}
+                    </select>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <div class="form-group">
+                    <label for="state">State</label>
+                    <select name="state" class="form-control select2" tabindex="8">
+                      {{#each stateValues}}
+                        <option value="{{this}}">
+                          {{this}}
+                        </option>
+                      {{/each}}
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-xs-12">
+                {{#if simpleImpactView}}
+                  <button type="button" class="btn btn-default switch_impact" tabindex="9"><i class="fa fa-exchange inner-r-5"></i> Simple impact view</button>
+                {{else}}
+                  <button type="button" class="btn btn-default switch_impact" tabindex="9"><i class="fa fa-exchange inner-r-5"></i> Detailed impact view</button>
+                {{/if}}
+              </div>
+              {{#if simpleImpactView}}
+                <div class="simple_options">
+                  <div class="form-group col-xs-12">
+                    <div class="form-inline">
+                      <div class="row">
+                        <div class="col-xs-5 pinner-t-8">
+                          <label for="param_BV">Business value (BV)</label>
+                        </div>
+                        <div class="col-xs-3">
+                          <select name="param_BV_enum" class="form-control select2" tabindex="12">
+                            {{#each valueValues}}
+                              <option value="{{this}}">
+                                {{this}}
+                              </option>
+                            {{/each}}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-xs-12">
+                    <div class="form-inline">
+                      <div class="row">
+                        <div class="col-xs-5 pinner-t-8">
+                          <label for="param_EF">Exposure factor (EF)</label>
+                        </div>
+                        <div class="col-xs-3">
+                          <select name="param_EF_enum" class="form-control select2" tabindex="13">
+                            {{#each valueValues}}
+                              <option value="{{this}}">
+                                {{this}}
+                              </option>
+                            {{/each}}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group col-xs-12">
+                    <div class="form-inline">
+                      <div class="row">
+                        <div class="col-xs-5 pinner-t-8">
+                          <label for="param_ARO">Annual rate of occurrence (ARO)</label>
+                        </div>
+                        <div class="col-xs-3">
+                          <select name="param_ARO_enum" class="form-control select2" tabindex="14">
+                            {{#each annualRateValues}}
+                              <option value="{{value}}">
+                                {{label}}
+                              </option>
+                            {{/each}}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {{else}}
+                <div class="form-group col-xs-12">
+                  <div class="form-inline">
+                    <div class="row">
+                      <div class="col-xs-5 pinner-t-8">
+                        <label for="param_BV">Business value (BV) in {{currencyCode}}</label>
+                      </div>
+                      <div class="col-xs-3">
+                        <input type="text" placeholder="{{currencyCode}}" name="param_BV" tabindex="9" class="form-control w-100">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group col-xs-12">
+                  <div class="form-inline">
+                    <div class="row">
+                      <div class="col-xs-5 pinner-t-8">
+                        <label for="param_EF">Exposure factor (EF) in %</label>
+                      </div>
+                      <div class="col-xs-3">
+                        <input type="number" placeholder="%" name="param_EF" tabindex="10" class="form-control w-100">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group col-xs-12">
+                  <div class="form-inline">
+                    <div class="row">
+                      <div class="col-xs-6 pinner-t-8">
+                        <label for="param_SLE">Single loss expectancy (SLE = EF * BV)</label>
+                      </div>
+                      <div class="col-xs-2 text-right pinner-t-8">
+                        {{#if paramSLE}}<b>{{formatNumber paramSLE}}</b> {{currencyCode}}{{/if}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group col-xs-12">
+                  <div class="form-inline">
+                    <div class="row">
+                      <div class="col-xs-5 pinner-t-8">
+                        <label for="param_ARO">Annual rate of occurrence (ARO)</label>
+                      </div>
+                      <div class="col-xs-3">
+                        <input type="number" name="param_ARO" tabindex="11" class="form-control w-100" placeholder="per year, e.g. 2">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group col-xs-12">
+                  <div class="form-inline">
+                    <div class="row">
+                      <div class="col-xs-6 pinner-t-8">
+                        <label for="param_ALE">Annual loss expectancy (ALE = SLE * ARO)</label>
+                      </div>
+                      <div class="col-xs-2 text-right">
+                        {{#if paramALE}}<b>{{formatNumber paramALE}}</b> {{currencyCode}}{{/if}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {{/if}}
+              <div class="col-xs-12 inner-b-10 tm-section-heading">
+                <label>Threat model context</label>
+              </div>
+              {{> riskThreatModelFields}}
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" tabindex="17">Close</button>
+            {{#if loading}}
+              <button type="button" disabled="disabled" class="btn btn-primary" tabindex="15">
+                <i class="fa fa-spinner fa-spin"></i> Save
+              </button>
+              <button type="button" disabled="disabled" class="btn btn-primary" tabindex="16">
+                <i class="fa fa-spinner fa-spin"></i> Save and Create new one
+              </button>
+            {{else}}
+              <button type="submit" class="btn btn-primary without_next" tabindex="15">
+                Save
+              </button>
+              <button type="submit" class="btn btn-primary with_next" tabindex="16">
+                Save and Create new one
+              </button>
+            {{/if}}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>

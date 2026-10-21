@@ -1,0 +1,40 @@
+// --- Flex-fill: header stays, card grid scrolls ---
+// Chain: .content-area > .ts-page-header + div.content > div.row
+body.flex-fill-page .content-area > .content > .row.scanners-grid {
+  flex: 1 1 0%;
+  min-height: 0;
+  overflow-y: auto;
+  flex-wrap: wrap;
+}
+
+.scanners-grid .panel {
+  border: none;
+  box-shadow: none;
+}
+
+.scanner-logo {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+}
+
+.scanner-logo-holder {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.scanner-title {
+  margin: 10px 0 20px
+}
+
+.scanner-details {
+  margin: 10px 0 20px
+}
+
+.scanner-links-buffer {
+  min-height: 18px;
+}

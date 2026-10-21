@@ -1,0 +1,67 @@
+<template name="licenseEditNotFound">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Sorry License isn't available any more</div>
+  </div>
+</template>
+
+<template name="licenseEdit">
+  {{#pageHeader}}
+    <div class="license-detail-header">
+      <div class="license-detail-header-left">
+        <h2 class="font-light m-b-none">{{getName}} [{{getKey}}]</h2>
+        <small class="text-muted">Edit license</small>
+      </div>
+      <div class="license-detail-header-actions">
+        <a class="btn btn-default" href="{{pathFor 'licenseDetail' key=getKey}}">
+          <i class="fa fa-arrow-left"></i> Back
+        </a>
+      </div>
+    </div>
+  {{/pageHeader}}
+
+  <div class="content">
+    <div class="ts-panel">
+      <div class="panel-body">
+        <form id="licenseEditForm" autocomplete="off">
+          <div class="form-group">
+            <label for="licenseEditKey">License key</label>
+            <input type="text" id="licenseEditKey" class="form-control" value="{{getKey}}" readonly>
+          </div>
+          <div class="form-group">
+            <label for="licenseEditName">Name</label>
+            <input type="text" id="licenseEditName" name="licenseName" class="form-control" value="{{getName}}" maxlength="200">
+          </div>
+          <div class="form-group">
+            <label for="licenseEditUrl">URL</label>
+            <input type="url" id="licenseEditUrl" name="licenseUrl" class="form-control" value="{{getUrl}}" maxlength="2000">
+          </div>
+          <div class="form-group">
+            <label for="licenseEditAliases">Aliases</label>
+            <textarea id="licenseEditAliases" name="licenseAliases" class="form-control" rows="3">{{getAliases}}</textarea>
+            <span class="help-block small">One alias per line. License matching also recognises a license by these names.</span>
+          </div>
+          <div class="form-group">
+            <label for="licenseEditCopyright">Copyright</label>
+            <textarea id="licenseEditCopyright" name="licenseCopyright" class="form-control" rows="2">{{getCopyright}}</textarea>
+            <span class="help-block small">Used in Notice and SBOM files when a component carries no copyright of its own.</span>
+          </div>
+          <div class="form-group">
+            <label for="licenseEditText">License text</label>
+            <textarea id="licenseEditText" name="licenseText" class="form-control" rows="16">{{getText}}</textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+      </div>
+      {{#if hasCreatedOrUpdate}}
+        <div class="panel-footer">
+          {{#if getCreated}}
+            <span class="m-r-md"><strong>created: </strong>{{dateFormat getCreated 'll'}}</span>
+          {{/if}}
+          {{#if updated}}
+            <strong>updated: </strong>{{dateFormat updated 'll'}}
+          {{/if}}
+        </div>
+      {{/if}}
+    </div>
+  </div>
+</template>

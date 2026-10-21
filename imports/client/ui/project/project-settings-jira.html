@@ -1,0 +1,94 @@
+<template name="projectSettingsJira">
+  <form class="form-horizontal jira-project" autocomplete="off">
+    {{#with hasFieldRight 'project.issue.jira.switch' currentProject}}
+      {{#if read}}
+        <div class="form-group">
+          <div class="col-sm-12 controls text-center">
+            <div class="checkbox"
+                 style="display: inline-block!important; margin-left: 17px; margin-bottom: 5px!important;">
+              <span class="ios-toggle-label ios-toggle-label-md ios-toggle-label-dark">API</span>
+              <label style="padding-left: 0px;">
+                <input type="checkbox" checked="{{isType 'email'}}" id="jira-type" name="jira-type"
+                       value="true" class="ios-toggle always-on" disabled={{disabled}}>
+                <span class="checkbox-label checkbox-label-md" data-off="" data-on=""></span>
+              </label>
+              <span class="ios-toggle-label ios-toggle-label-md ios-toggle-label-dark">Email</span>
+            </div>
+          </div>
+        </div>
+      {{/if}}
+    {{/with}}
+    {{#with hasFieldRight 'project.issue.jira.settings' currentProject}}
+      {{#if read}}
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="jira-key">Project key:</label>
+          <div class="col-sm-4 controls">
+            <input type="text" autocomplete="off" id="jira-key" name="jira-key" value="{{currentProject.jira.key}}"
+                   placeholder="Project key" class="form-control"
+                   disabled="{{isMultyJiraUnavailable}}"/>
+          </div>
+        </div>
+        {{#unless isType 'email'}}
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="jira-url">Company url:</label>
+            <div class="col-sm-4 controls">
+              <input type="text" autocomplete="off" id="jira-url" name="jira-url" value="{{currentProject.jira.url}}"
+                     placeholder="Company url" class="form-control"
+                     disabled="{{isMultyJiraUnavailable}}"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="jira-user">User:</label>
+            <div class="col-sm-4 controls">
+              <input type="text" autocomplete="off" id="jira-user" name="jira-user" value="{{currentProject.jira.user}}"
+                     placeholder="User" class="form-control"
+                     disabled="{{isMultyJiraUnavailable}}"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="jira-passwd">Password:</label>
+            <div class="col-sm-4 controls">
+              <input type="password" autocomplete="off" id="jira-passwd" name="jira-passwd"
+                     placeholder="Leave blank to keep current" class="form-control"
+                     disabled="{{isMultyJiraUnavailable}}"/>
+            </div>
+          </div>
+        {{else}}
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="jira-url">Email address:</label>
+            <div class="col-sm-4 controls">
+              <input type="text" autocomplete="off" id="jira-email" name="jira-email"
+                     value="{{currentProject.jira.email}}"
+                     placeholder="Receiver email address" class="form-control"
+                     disabled="{{isMultyJiraUnavailable}}"/>
+            </div>
+          </div>
+        {{/unless}}
+      {{/if}}
+    {{/with}}
+    {{#with hasFieldRight 'project.issue.jira.active' currentProject}}
+      {{#if read}}
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="jira-active">Active:</label>
+          <div class="col-sm-4 pinner-t-8">
+            <input type="checkbox" id="jira-active" name="jira-active" value="true"
+                   checked="{{currentProject.jira.active}}"
+                   placeholder="Active" disabled="{{isMultyJiraUnavailable}}"/>
+          </div>
+        </div>
+      {{/if}}
+    {{/with}}
+    {{#with hasFieldRight 'project.issue.jira' currentProject}}
+      {{#unless disabled}}
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-4">
+            <button type="button" class="btn btn-primary"
+                    disabled="{{isMultyJiraUnavailable}}">
+              Update
+            </button>
+          </div>
+        </div>
+      {{/unless}}
+    {{/with}}
+  </form>
+</template>

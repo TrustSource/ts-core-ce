@@ -1,0 +1,139 @@
+<template name="algorithmsList">
+  <div class="ts-panel {{#if collapsed}}panel-collapse{{/if}}">
+    <div class="panel-heading">
+      {{> panelTools }}
+      {{title}}
+    </div>
+    <div class="panel-body {{#if collapsed}}collapsed{{/if}}" style="{{#if collapsed}}display:none{{/if}}">
+      <form id="addAlgorithmForm">
+        <div class="table-responsive ">
+          <table class="table table-condensed table-striped {{this.id}}">
+            <thead>
+            <tr>
+              <th rowspan="2">Algorithm [Strength]</th>
+              <th colspan="3">Import</th>
+              <th colspan="3">Export</th>
+              <th rowspan="2"></th>
+            </tr>
+            <tr>
+              <th class="algorithm-list-th">Strict</th>
+              <th class="algorithm-list-th">Weak</th>
+              <th class="algorithm-list-th">Irrelevant</th>
+              <th class="algorithm-list-th">Strict</th>
+              <th class="algorithm-list-th">Weak</th>
+              <th class="algorithm-list-th">Irrelevant</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#unless readonly}}
+              <tr>
+                <td>
+                  <select name="addAlgorithm" class="form-control select2">
+                    {{#each getAlgorithms}}
+                      <option value="{{Algorithm}}//{{Strength}}">
+                        {{Algorithm}} [{{Strength}}]
+                      </option>
+                    {{/each}}
+                  </select>
+                </td>
+                <td>
+                  <select name="importStrict" multiple="multiple" class="form-control select2">
+                    {{#each getCountries}}
+                      <option value="{{code}}">
+                        {{name}}
+                      </option>
+                    {{/each}}
+                  </select>
+                </td>
+                <td>
+                  <select name="importWeak" multiple="multiple" class="form-control select2">
+                    {{#each getCountries}}
+                      <option value="{{code}}">
+                        {{name}}
+                      </option>
+                    {{/each}}
+                  </select>
+                </td>
+                <td>
+                  <select name="importIrrelevant" multiple="multiple" class="form-control select2">
+                    {{#each getCountries}}
+                      <option value="{{code}}">
+                        {{name}}
+                      </option>
+                    {{/each}}
+                  </select>
+                </td>
+                <td>
+                  <select name="exportStrict" multiple="multiple" class="form-control select2">
+                    {{#each getCountries}}
+                      <option value="{{code}}">
+                        {{name}}
+                      </option>
+                    {{/each}}
+                  </select>
+                </td>
+                <td>
+                  <select name="exportWeak" multiple="multiple" class="form-control select2">
+                    {{#each getCountries}}
+                      <option value="{{code}}">
+                        {{name}}
+                      </option>
+                    {{/each}}
+                  </select>
+                </td>
+                <td>
+                  <select name="exportIrrelevant" multiple="multiple" class="form-control select2">
+                    {{#each getCountries}}
+                      <option value="{{code}}">
+                        {{name}}
+                      </option>
+                    {{/each}}
+                  </select>
+                </td>
+                <td>
+                  <button type="submit" class="btn btn-primary">Create</button>
+                </td>
+              </tr>
+            {{/unless}}
+            {{#each getList}}
+              <tr class="clickable-row select-component {{isFromProject}} {{isFromCompany}}"
+                  id="select-{{index}}">
+                <td>{{key}} [{{strength}}]</td>
+                <td>{{importStrict}}</td>
+                <td>{{importWeak}}</td>
+                <td>{{importIrrelevant}}</td>
+                <td>{{exportStrict}}</td>
+                <td>{{exportWeak}}</td>
+                <td>{{exportIrrelevant}}</td>
+                <td class="text-right">
+                  {{#if isFromProject}}
+                    <a href="{{pathFor route='projectSettings' data=getProjectOptions}}"
+                       target="_blank" class="label label-info pull-right">in Project</a>
+                  {{else}}
+                    {{#if isFromCompany}}
+                      <a href="{{pathFor route='companyEncryptionLists'}}" target="_blank"
+                         class="label label-info pull-right">in Company</a>
+                    {{else}}
+                      {{#unless ../readonly}}
+                        <button type="button" class="btn btn-danger btn-xs remove-algorithm">
+                          <i class="fa fa-trash-can"></i>
+                        </button>
+                      {{else}}
+                        <span
+                           class="label label-info pull-right">in Module</span>
+                      {{/unless}}
+                    {{/if}}
+                  {{/if}}
+                </td>
+              </tr>
+            {{/each}}
+            </tbody>
+          </table>
+          {{#if selectedLine}}
+            {{> mapHighlighter selected=selectedLine}}
+          {{/if}}
+        </div>
+      </form>
+    </div>
+  </div>
+</template>

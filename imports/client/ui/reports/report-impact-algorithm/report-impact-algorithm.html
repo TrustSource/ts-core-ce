@@ -1,0 +1,123 @@
+<template name="reportImpactAlgorithm">
+
+  {{# pageHeader title="Algorithm impact report" desc="List of all projects impacted by algorithm"  }}{{/pageHeader}}
+
+  <div class="content pinner-t-5">
+    <div class="panel-heading actions no-top clearfix">
+      <form class="pull-left form-inline" id="algorithmImpactForm">
+        <div class="form-group">
+          <h5 class="inner-r-10"><strong class="fa fa-filter"></strong></h5>
+        </div>
+        <div class="form-group" style="width:400px;">
+          <input class="form-control typeahead w100i" name="currentAlgorithm" type="text"
+                 placeholder="Select algorithm" autocomplete="off" spellcheck="off">
+        </div>
+        {{#unless requestInProgress}}
+          <button class="btn btn-primary check_for" title="Check algorithm" type="submit">
+            <i class="fa fa-play"></i> Check
+          </button>
+          <button class="btn btn-default reset_view" title="Reset filters" type="button">
+            <i class="fa fa-trash"></i>
+          </button>
+        {{else}}
+          <button class="btn btn-primary" disabled title="Check algorithm" type="submit">
+            <i class="fa fa-play"></i> Check
+          </button>
+          <button class="btn btn-default" disabled title="Reset filters" type="button">
+            <i class="fa fa-trash"></i>
+          </button>
+        {{/unless}}
+      </form>
+    </div>
+    {{#if beforeRequest}}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Please specify algorithm</h3>
+        </div>
+        <div class="panel-body">
+          <p>Algorithm is required to execute check in your portfolio</p>
+        </div>
+      </div>
+    {{else}}
+      {{#with algorithmDetails}}
+        <div>
+          {{#panel title="Algorithm details"}}
+            <span class="inline-block m-l-xs">{{#if isDenied}}<div class="label label-danger blacklisted-algorithm-label" title="Algorithm is Blacklisted by Company policy">B</div>{{/if}} {{Algorithm}} [{{Strength}}]</span>
+          {{/panel}}
+        </div>
+      {{/with}}
+      {{#if requestInProgress}}
+        {{#panel}}
+          <div class="text-primary">
+            <i class="fa fa-spinner fa-spin"></i> Loading report data for algorithm {{#with currentAlgorithm}}{{Algorithm}}{{/with}}, please
+            wait...
+          </div>
+        {{/panel}}
+      {{else}}
+        {{#if getProject}}
+          <div class="text-right inner-b-10">
+            <button class="btn btn-primary btn-xs export-as-pdf" type="button">
+              <span class="fa fa-file-pdf-o" aria-hidden="true"></span> Export as PDF
+            </button>
+          </div>
+          <div class="ts-panel obligation-list">
+            {{#each getProject}}
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-sm-6 text-left">
+                    <h4 style="word-wrap: break-word;" class="inner-t-0">
+                      <a href="{{pathFor route=actionRoute.route data=actionRoute.params}}"
+                         target="_blank">
+                        {{name}}
+                        <span class="fa fa-external-link inner-l-5"></span>
+                      </a>
+                    </h4>
+                    {{#with relatedUsers.defaultProjectManager.profile}}
+                      <p class="inner-b-5">
+                        Project manager: {{name}}
+                        <a href="mailto:{{email}}" target="_blank">{{email}} <span class="fa fa-external-link inner-l-5"></span></a>
+                      </p>
+                    {{/with}}
+                    {{#with relatedUsers.defaultComplianceManager.profile}}
+                      <p class="inner-b-5">
+                        Compliance manager: {{name}}
+                        <a href="mailto:{{email}}" target="_blank">{{email}} <span class="fa fa-external-link inner-l-5"></span></a>
+                      </p>
+                    {{/with}}
+                    {{#each modules}}
+                      {{> moduleAnalysisMetaLink module=this}}
+                    {{/each}}
+                  </div>
+                  <div class="col-sm-6">
+                    <p>
+                      {{#unless isUnasigned}}
+                        {{#if haveDescription description}}
+                          <p>{{description}}</p>
+                        {{else}}
+                          <p>No goals mentioned in project settings.</p>
+                        {{/if}}
+                      {{/unless}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            {{/each}}
+          </div>
+        {{else}}
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              <h3 class="panel-title">No impact</h3>
+            </div>
+            <div class="panel-body">
+              <p>No projects or modules are impacted by {{#with currentAlgorithm}}{{Algorithm}}{{/with}}</p>
+            </div>
+          </div>
+        {{/if}}
+      {{/if}}
+    {{/if}}
+  </div>
+</template>
+
+<template name="suggestionNoAlgorithms">
+  <p class="no-suggestions no-suggestions-pending">no algorithms found</p>
+</template>

@@ -1,0 +1,23 @@
+import './component-list.html';
+import './license-list.html';
+import './cve-list.html';
+import './module-settings.html';
+import './module-settings-custom-components.html';
+import './module-settings-legal.html';
+import './module-settings-cia.html';
+import './module-settings-versioning.html';
+import './module-settings-obligations.html';
+import './module-settings-capabilities.html';
+import './obligation-config-list.html';
+
+import './component-list';
+import './license-list';
+import './cve-list';
+import './module-settings';
+import './module-settings-custom-components';
+import './module-settings-legal';
+import './module-settings-cia';
+import './module-settings-versioning';
+import './module-settings-obligations';
+import './module-settings-capabilities';
+import './obligation-config-list';

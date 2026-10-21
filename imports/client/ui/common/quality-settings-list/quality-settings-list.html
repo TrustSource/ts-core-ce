@@ -1,0 +1,77 @@
+<template name="qualitySettingsList">
+  <div class="ts-panel {{#if collapsed}}panel-collapse{{/if}}">
+    <div class="panel-heading">
+      {{> panelTools }}
+      {{title}}
+    </div>
+    <div class="panel-body {{#if collapsed}}collapsed{{/if}}" style="{{#if collapsed}}display:none{{/if}}">
+      <p>
+        You may define tests that are required to complete / pass before a release may be requested.
+        Please update test results using <a target="_blank" href="https://docs.oasis-open.org/sarif/sarif/v2.1.0/sarif-v2.1.0.pdf" class="highlight">SARIF</a>-format through API <a target="_blank" href="{{pathFor route='apiDocLatest'}}" class="highlight">Read more ...</a>
+      </p>
+      <form id="addQualitySettingsForm">
+        <div class="table-responsive ">
+          <table class="table table-condensed table-striped {{this.id}}">
+            <thead>
+            <tr>
+              <th>Tool *</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#unless readonly}}
+              <tr>
+                <td>
+                  <select name="addTool" class="form-control select2">
+                    {{#each getTools}}
+                      <option value="{{_id}}">
+                        {{name}}
+                      </option>
+                    {{/each}}
+                  </select>
+                </td>
+                <td>
+                  <button type="submit" class="btn btn-primary">Add</button>
+                </td>
+              </tr>
+            {{/unless}}
+            {{#each getList}}
+              <tr class="select-component {{isFromProject}} {{isFromCompany}}"
+                  id="select-{{index}}">
+                <td>
+                  {{#with getTool name}}
+                    {{#if logoSmallLink}}
+                      <img src="{{logoSmallLink}}" alt="" class="test-tool-logo">
+                    {{/if}}
+                    {{name}}
+                  {{/with}}
+                </td>
+                <td class="text-right">
+                  {{#if isFromProject}}
+                    <a href="{{pathFor route='projectSettings' data=getProjectOptions}}"
+                       target="_blank" class="label label-info pull-right">in Project</a>
+                  {{else}}
+                    {{#if isFromCompany}}
+                      <a href="{{pathFor route='companyQualityLists'}}" target="_blank"
+                         class="label label-info pull-right">in Company</a>
+                    {{else}}
+                      {{#unless ../readonly}}
+                        <button type="button" class="btn btn-danger btn-xs remove-tool">
+                          <i class="fa fa-trash-can"></i>
+                        </button>
+                      {{else}}
+                        <span
+                           class="label label-info pull-right">in Module</span>
+                      {{/unless}}
+                    {{/if}}
+                  {{/if}}
+                </td>
+              </tr>
+            {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </form>
+    </div>
+  </div>
+</template>

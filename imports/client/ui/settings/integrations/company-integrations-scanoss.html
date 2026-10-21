@@ -1,0 +1,39 @@
+<template name="companyIntegrationsScanoss">
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">SCANOSS</h2>
+        <small>Configure SCANOSS integration settings</small>
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content">
+    <div class="panel">
+      <div class="panel-body">
+        <form class="form-horizontal scanoss" autocomplete="off">
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="scanoss-token">Access Token:</label>
+            <div class="col-sm-4 controls">
+              <input type="password" autocomplete="off" id="scanoss-token" name="scanoss-token"
+                     placeholder="Leave blank to keep current" class="form-control"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="scanoss-active">Active:</label>
+            <div class="col-sm-4 pinner-t-4">
+              <input type="checkbox" id="scanoss-active" name="scanoss-active" value="true" checked="{{scanoss.active}}"
+                     placeholder="Active" class="i-checks"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-4">
+              <button type="submit" class="btn  btn-sm btn-primary update">
+                Update
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>

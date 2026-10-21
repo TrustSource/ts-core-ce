@@ -1,0 +1,19 @@
+<template name="legalRequirementsHistoryEntry">
+  {{#if hasRequirements}}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h5>
+          {{dateFormat getUpdated}} by {{getUpdatedBy}}
+          <span class="pull-right">
+            <a href class="copy-requirements-settings">
+              <span class="fa fa-repeat"></span> Restore
+            </a>
+          </span>
+        </h5>
+      </div>
+      <div class="panel-body">
+        {{> legalRequirementsDescriptionDetails requirements=requirements}}
+      </div>
+    </div>
+  {{/if}}
+</template>

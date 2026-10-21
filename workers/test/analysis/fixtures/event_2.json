@@ -1,0 +1,8 @@
+{
+  "pathParameters": {
+    "companyId": "{{companyId}}",
+    "moduleId": "{{moduleId}}",
+    "userId": "{{userId}}",
+    "demo": false
+  }
+}

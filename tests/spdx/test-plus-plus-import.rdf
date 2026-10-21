@@ -1,0 +1,90 @@
+<rdf:RDF xmlns:spdx="http://spdx.org/rdf/terms#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="https://app.trustsource.io/spdx/test-plus-plus-0a1b2c3d-4e5f-6789-abcd-ef0123456789" xmlns:doap="http://usefulinc.com/ns/doap#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <spdx:SpdxDocument rdf:about="https://app.trustsource.io/spdx/test-plus-plus-0a1b2c3d-4e5f-6789-abcd-ef0123456789#SPDXRef-DOCUMENT">
+    <spdx:relationship>
+      <spdx:Relationship>
+        <spdx:relationshipType rdf:resource="http://spdx.org/rdf/terms#relationshipType_contains"/>
+        <spdx:relatedSpdxElement>
+          <spdx:Package rdf:about="https://app.trustsource.io/spdx/test-plus-plus-0a1b2c3d-4e5f-6789-abcd-ef0123456789#SPDXRef-test-plus-plus">
+            <spdx:relationship>
+              <spdx:Relationship>
+                <spdx:relationshipType rdf:resource="http://spdx.org/rdf/terms#relationshipType_contains"/>
+                <spdx:relatedSpdxElement>
+                  <spdx:Package rdf:about="https://app.trustsource.io/spdx/test-plus-plus-0a1b2c3d-4e5f-6789-abcd-ef0123456789#SPDXRef-apk:alpine:libstdc++">
+                    <spdx:name>libstdc++</spdx:name>
+                    <spdx:versionInfo>12.2.1</spdx:versionInfo>
+                    <spdx:downloadLocation>http://spdx.org/rdf/terms#noassertion</spdx:downloadLocation>
+                    <spdx:licenseConcluded rdf:resource="http://spdx.org/licenses/GPL-3.0-or-later"/>
+                    <spdx:copyrightText>Copyright 2000-2023 libstdc++</spdx:copyrightText>
+                    <spdx:filesAnalyzed>false</spdx:filesAnalyzed>
+                    <spdx:licenseInfoFromFiles rdf:resource="http://spdx.org/licenses/GPL-3.0-or-later"/>
+                    <spdx:licenseDeclared rdf:resource="http://spdx.org/licenses/GPL-3.0-or-later"/>
+                  </spdx:Package>
+                </spdx:relatedSpdxElement>
+              </spdx:Relationship>
+            </spdx:relationship>
+            <spdx:relationship>
+              <spdx:Relationship>
+                <spdx:relationshipType rdf:resource="http://spdx.org/rdf/terms#relationshipType_contains"/>
+                <spdx:relatedSpdxElement>
+                  <spdx:Package rdf:about="https://app.trustsource.io/spdx/test-plus-plus-0a1b2c3d-4e5f-6789-abcd-ef0123456789#SPDXRef-apk:alpine:gtk++">
+                    <spdx:name>gtk++</spdx:name>
+                    <spdx:versionInfo>3.24.0</spdx:versionInfo>
+                    <spdx:downloadLocation>http://spdx.org/rdf/terms#noassertion</spdx:downloadLocation>
+                    <spdx:licenseConcluded rdf:resource="http://spdx.org/licenses/LGPL-2.1-or-later"/>
+                    <spdx:copyrightText>Copyright 2000-2023 gtk++</spdx:copyrightText>
+                    <spdx:filesAnalyzed>false</spdx:filesAnalyzed>
+                    <spdx:licenseDeclared rdf:resource="http://spdx.org/licenses/LGPL-2.1-or-later"/>
+                  </spdx:Package>
+                </spdx:relatedSpdxElement>
+              </spdx:Relationship>
+            </spdx:relationship>
+            <spdx:relationship>
+              <spdx:Relationship>
+                <spdx:relationshipType rdf:resource="http://spdx.org/rdf/terms#relationshipType_contains"/>
+                <spdx:relatedSpdxElement>
+                  <spdx:Package rdf:about="https://app.trustsource.io/spdx/test-plus-plus-0a1b2c3d-4e5f-6789-abcd-ef0123456789#SPDXRef-npm:left-pad">
+                    <spdx:name>left-pad</spdx:name>
+                    <spdx:versionInfo>1.3.0</spdx:versionInfo>
+                    <spdx:downloadLocation>http://spdx.org/rdf/terms#noassertion</spdx:downloadLocation>
+                    <spdx:licenseConcluded rdf:resource="http://spdx.org/licenses/MIT"/>
+                    <spdx:copyrightText>Copyright 2000-2023 left-pad</spdx:copyrightText>
+                    <spdx:filesAnalyzed>false</spdx:filesAnalyzed>
+                    <spdx:licenseDeclared rdf:resource="http://spdx.org/licenses/MIT"/>
+                  </spdx:Package>
+                </spdx:relatedSpdxElement>
+              </spdx:Relationship>
+            </spdx:relationship>
+            <spdx:name>test-plus-plus</spdx:name>
+            <spdx:downloadLocation>http://spdx.org/rdf/terms#noassertion</spdx:downloadLocation>
+            <spdx:licenseConcluded rdf:resource="http://spdx.org/licenses/Unlicense"/>
+            <spdx:copyrightText>Copyright 2000-2023 test-plus-plus</spdx:copyrightText>
+            <spdx:filesAnalyzed>false</spdx:filesAnalyzed>
+            <spdx:licenseInfoFromFiles rdf:resource="http://spdx.org/licenses/Unlicense"/>
+            <spdx:licenseDeclared rdf:resource="http://spdx.org/licenses/Unlicense"/>
+          </spdx:Package>
+        </spdx:relatedSpdxElement>
+      </spdx:Relationship>
+    </spdx:relationship>
+    <spdx:relationship>
+      <spdx:Relationship>
+        <spdx:relationshipType rdf:resource="http://spdx.org/rdf/terms#relationshipType_describes"/>
+        <spdx:relatedSpdxElement rdf:resource="https://app.trustsource.io/spdx/test-plus-plus-0a1b2c3d-4e5f-6789-abcd-ef0123456789#SPDXRef-test-plus-plus"/>
+      </spdx:Relationship>
+    </spdx:relationship>
+    <spdx:name>test-plus-plus</spdx:name>
+    <spdx:dataLicense>
+      <spdx:License rdf:about="http://spdx.org/licenses/CC0-1.0">
+        <spdx:licenseId>CC0-1.0</spdx:licenseId>
+      </spdx:License>
+    </spdx:dataLicense>
+    <spdx:specVersion>SPDX-2.3</spdx:specVersion>
+    <spdx:creationInfo>
+      <spdx:CreationInfo>
+        <spdx:created>2026-06-03T17:30:00Z</spdx:created>
+        <spdx:creator>Organization: EACG</spdx:creator>
+        <spdx:licenseListVersion>2.5</spdx:licenseListVersion>
+        <spdx:creator>Tool: ECS 1.1.0</spdx:creator>
+      </spdx:CreationInfo>
+    </spdx:creationInfo>
+  </spdx:SpdxDocument>
+</rdf:RDF>

@@ -1,0 +1,37 @@
+<template name="dashboardPortfolio">
+  <div class="row">
+    <div class="{{class}}">
+      <div class="ts-panel {{#if isEmpty}}panel-collapse{{/if}}">
+        <div class="panel-heading">
+          {{> panelTools collapsed=isEmpty }}
+          {{__ 'CompanyPortfolioView'}}
+          <select class="form-control form-control-sm change-view">
+            <option value="" disabled="disabled" label="{{__ 'ViewType'}}">{{__ 'ViewType'}}</option>
+            <option value="components-summary" label="{{__ 'ComponentsSummary'}}">{{__ 'ComponentsSummary'}}</option>
+            <option value="licenses-summary" label="{{__ 'LicensesSummary'}}">{{__ 'LicensesSummary'}}</option>
+            <option value="components-vulnerability" label="{{__ 'ComponentsVulnerability'}}">{{__ 'ComponentsVulnerability'}}</option>
+            <option value="components-legal" label="{{__ 'ComponentsLegal'}}">{{__ 'ComponentsLegal'}}</option>
+            <option value="components-viability" label="{{__ 'ComponentsViability'}}">{{__ 'ComponentsViability'}}</option>
+            <option value="components-versioning" label="{{__ 'ComponentsVersioning'}}">{{__ 'ComponentsVersioning'}}</option>
+          </select>
+        </div>
+        <div class="panel-body" style="{{#if isEmpty}}display:none{{/if}}">
+          {{#if isProjectSpecific}}
+            <div class="pull-left">
+                <button class="btn btn-default reset-project">
+                  <span class="fa fa-chevron-left inner-r-5"></span>
+                  <span>{{__ 'BackToAll'}}</span>
+                </button>
+                <h4 class="inline-block m-l-md m-t-sm m-b-none portfolio-title truncate" title="{{getProjectSpecificName}}">
+                  <span class="fa fa-th-large"></span> {{getProjectSpecificName}}
+                </h4>
+            </div>
+          {{/if}}
+          <div class="portfolio-chart clearfix {{#if isProjectSpecific}}inner-b-40{{/if}}" style="height: 400px">
+            <canvas id="portfolio-chart" height="150"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

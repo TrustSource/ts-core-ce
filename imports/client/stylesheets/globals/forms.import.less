@@ -1,0 +1,39 @@
+// =============================================================================
+// Forms - checkbox/radio cursor and jquery-validation error styles
+// =============================================================================
+
+.checkbox,
+.radio {
+  input:hover {
+    cursor: pointer;
+  }
+}
+
+// --- Validation (classes and elements added by jquery-validation) ---
+
+// Invalid input gets a red border.
+.form-control.error {
+  border-color: @ts-red !important;
+}
+
+// Error message, rendered as label.error (default) or span.error inside a
+// label (forms that set errorElement: 'span').
+label {
+  &.error,
+  span.error {
+    margin: 5px 0 0;
+    font-weight: 400;
+    color: @ts-red;
+  }
+
+  span.error {
+    margin-left: 5px;
+  }
+
+  // Warning-triangle icon in front of the message.
+  &.error:before {
+    margin: 0 4px;
+    font-family: FontAwesome;
+    content: "\f071";
+  }
+}

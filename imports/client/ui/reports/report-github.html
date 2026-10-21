@@ -1,0 +1,60 @@
+<template name="reportGithub">
+  <div class="content">
+    {{#if getProjectGithubTasks}}
+      {{#if getProjectGithubTasksStatus}}
+        <div class="inner-b-20 clearfix">
+          {{#each getStatusStats}}
+            <div class="aui-lozenge jira-issue-status-lozenge-{{color}} text-center"
+                 style="width:{{getWidthOfStatus getStatusStats}}%;float:left;">
+              <p class="h2"><strong>{{count}}</strong></p>
+              <p>{{key}}</p>
+            </div>
+          {{/each}}
+        </div>
+      {{/if}}
+      <div class="ts-panel obligation-list">
+        {{#each getProjectGithubTasksStatus}}
+          <div class="panel-body ">
+            <div class="pull-left text-left">
+              <div class="label aui-lozenge jira-issue-status-lozenge-{{getIssueColor}}">{{state}}</div>
+              <h5>{{number}} {{title}} <a class="fa fa-external-link" href="{{html_url}}" target="_blank"></a></h5>
+              <small>Created: {{dateFormat created_at}} by {{user.login}}</small>
+            </div>
+            <div class="pull-right">
+              <div style="width: 500px;max-height: 90px; overflow-y: auto; overflow-x: hidden">
+                {{body}}
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    {{/if}}
+    {{#if selectProject}}
+      {{#panel}}
+        <div class="text-info">
+          <i class="fa fa-check-circle-o"></i> Please select the project to run a report on the upper right
+        </div>
+      {{/panel}}
+    {{/if}}
+    {{#if requestInProgress}}
+      {{#panel}}
+        <div class="text-primary">
+          <i class="fa fa-spinner fa-spin"></i> Loading report data for project {{getProjectName}}, please wait...
+        </div>
+      {{/panel}}
+    {{/if}}
+    {{#if noDataInProject}}
+      {{> reactiveTableNoData}}
+    {{/if}}
+    {{#if noConnection}}
+      {{#panel}}
+        <div class="text-warning">
+          <i class="fa fa-exclamation-circle"></i> Sorry, but for the selected project {{getProjectName}} request was not successful.
+          <a href="{{pathFor route='companyIntegrations'}}">
+            <i class="fa fa-cog"></i> Change integration settings
+          </a>
+        </div>
+      {{/panel}}
+    {{/if}}
+  </div>
+</template>

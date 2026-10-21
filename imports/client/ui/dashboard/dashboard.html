@@ -1,0 +1,114 @@
+<template name="dashboard">
+
+  <div class="content" id="dashboard" style="padding-top:0">
+    <div class="dashboard-welcome">
+      <div class="dashboard-welcome-icon">
+        <span class="fa fa-compass"></span>
+      </div>
+      <div class="dashboard-welcome-text">
+        <h4>{{__ 'WelcomeTo'}} {{app 'name'}}</h4>
+        <p>{{__ 'WelcomeToDashboardDesc'}}</p>
+      </div>
+      <div class="dashboard-welcome-actions">
+        {{!-- Same roles the server requires for loading and removing the demo --}}
+        {{#if isInRole 'manager,compliance_manager' companyId}}
+          {{#if hasDemoData}}
+            {{#if noGenerate}}
+              <button class="btn btn-default remove-demo">
+                <span class="fa fa-trash"></span> {{__ 'RemoveDemoProject'}}
+              </button>
+            {{else}}
+              <button class="btn btn-default disabled">
+                <span class="fa fa-spinner fa-spin"></span> {{__ 'RemoveDemoProject'}}
+              </button>
+            {{/if}}
+          {{else}}
+            {{#if demoProject}}
+              {{#if noGenerate}}
+                <button class="btn btn-default generate-project">{{__ 'LoadDemoProject'}}</button>
+              {{else}}
+                <button class="btn btn-default disabled">
+                  <span class="fa fa-spinner fa-spin"></span> {{__ 'LoadDemoProject'}}
+                </button>
+              {{/if}}
+            {{/if}}
+          {{/if}}
+        {{/if}}
+        <a href class="btn btn-primary show-intro"><span class="fa fa-play-circle"></span> {{__ 'TakeTour'}}</a>
+      </div>
+    </div>
+    {{#if hasModules}}
+      {{#if isInRole 'portfolio_manager' companyId}}
+        <div class="col-lg-12">
+          {{> dashboardPortfolio}}
+        </div>
+      {{/if}}
+      {{#if isInRole 'developer,compliance_manager,manager,account_admin' companyId}}
+        <div class="row">
+          <div class="col-lg-12">
+            {{> dashboardPinned}}
+          </div>
+          {{#if isInRole 'compliance_manager' companyId}}
+            <div class="col-lg-12">
+              {{> dashboardApproval}}
+            </div>
+          {{/if}}
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-lg-12 col-sm-12">
+                {{> portfolioOverview}}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-lg-6 col-sm-6">
+                {{> portfolioChanges}}
+              </div>
+              <div class="col-lg-6 col-sm-6">
+                {{> portfolioHistory}}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="row">
+              {{#if noGenerate}}
+                <div class="col-lg-12">
+                  {{> dashboardChart class="col-lg-6"}}
+                </div>
+              {{/if}}
+            </div>
+            <div class="row">
+              {{#if isInRole 'compliance_manager,manager' companyId}}
+                <div class="col-md-12">
+                  {{> dashboardActivity}}
+                </div>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+      {{else}}
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="alert alert-info">
+              <p class="text-left"><i class="fa fa-info-circle"></i> {{__ 'PLEASENOTE'}}</p>
+              <p class="text-left">
+                {{__ 'NoWidgetsAreAvailable'}}
+              </p>
+            </div>
+          </div>
+        </div>
+      {{/if}}
+    {{else}}
+      {{#if modulesLoaded}}
+        <div class="row">
+          {{#if isInRole 'compliance_manager,manager' companyId}}
+            <div class="col-lg-12">
+              {{> dashboardActivity}}
+            </div>
+          {{/if}}
+        </div>
+      {{/if}}
+    {{/if}}
+  </div>
+</template>

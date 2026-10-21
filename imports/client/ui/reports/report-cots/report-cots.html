@@ -1,0 +1,162 @@
+<template name="reportCots">
+
+  {{#pageHeader}}
+    <div class="reports-header">
+      <div class="reports-header-left">
+        <h2 class="font-light m-b-xs">COTS overview</h2>
+        <small>List of all COTS components in project</small>
+      </div>
+      <div class="reports-header-actions">
+        <select class="form-control current-project select2">
+          {{#each projectList}}
+            <option value="{{_id}}" selected="{{isActiveProject}}">{{name}}</option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+  {{/pageHeader}}
+
+  <div class="content">
+    {{#if getProjectCotsStatus}}
+      <div class="text-right inner-b-10">
+        <button class="btn btn-primary btn-xs export-as-pdf" type="button">
+          <span class="fa fa-file-pdf-o" aria-hidden="true"></span> Export as PDF
+        </button>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="panel panel-success text-center">
+            <p class="h2"><strong>{{counterComponents}}</strong></p>
+            <p class="h5">components</p>
+          </div>
+        </div>
+      </div>
+    {{/if}}
+    {{#if getProjectCots}}
+      <div class="ts-panel">
+        {{#each getProjectCots}}
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-sm-4 text-left">
+                <h5>{{key}} ({{version}})</h5>
+                {{#if meta}}
+                  {{#if meta.urls}}
+                    <p class="inner-b-0">
+                      {{#if meta.urls.homepage}}
+                        <a class="inner-r-5" href="{{ meta.urls.homepage}}" target="_blank" title="goto homepage">
+                          <i class="fa fa-fw fa-home"></i>
+                        </a>
+                      {{/if}}
+                      {{#if meta.urls.repository}}
+                        <a class="inner-r-5" href="{{ meta.urls.repository}}" target="_blank" title="goto repository">
+                          <i class="fa fa-fw fa-code-fork"></i>
+                        </a>
+                      {{/if}}
+                      {{#if meta.urls.issues}}
+                        <a class="inner-r-5" href="{{ meta.urls.issues}}" target="_blank" title="goto issues">
+                          <i class="fa fa-fw fa-bug"></i>
+                        </a>
+                      {{/if}}
+                      {{#if meta.urls.notes}}
+                        <a class="inner-r-5" href="{{ meta.urls.notes}}" target="_blank" title="goto release notes">
+                          <i class="fa fa-fw fa-sticky-note-o"></i>
+                        </a>
+                      {{/if}}
+                      {{#if meta.provider}}
+                        <a class="inner-r-5" href="{{ meta.providerUrl}}" target="_blank" title="{{meta.provider}} / {{ meta.providerUrl}} / {{meta.providerAddress}}">
+                          {{meta.provider}}
+                        </a>
+                      {{/if}}
+                    </p>
+                  {{/if}}
+                {{/if}}
+                {{#if moduleId}}
+                  <small>
+                    <a class="highlight" href="{{pathFor route='moduleDependencies' data=getModuleOptions.params
+                                                         query=getModuleOptions.query}}" target="_blank">
+                      Used in module {{moduleName}}
+                      <span class="fa fa-external-link"></span>
+                    </a>
+                  </small>
+                {{else}}
+                  <small>
+                    <a class="highlight" href="{{pathFor route='moduleDependencies' data=getModuleOptions.params}}" target="_blank">
+                      Used as module
+                      <span class="fa fa-external-link"></span>
+                    </a>
+                  </small>
+                {{/if}}
+              </div>
+              <div class="col-sm-8">
+                <table class="table-clear">
+                  {{#if commercialTerms.RS}}
+                    <tr>
+                      <td>
+                        Right to re-sell
+                        {{#if compare commercialTerms.RS 'unlimited'}}<b>unlimited</b>{{/if}}
+                        {{#if compare commercialTerms.RS 'limited'}}<b>limited</b>{{/if}}
+                        {{#if compare commercialTerms.RS 'no'}}<b>no</b>{{/if}}.
+                      </td>
+                    </tr>
+                  {{/if}}
+                  {{#if commercialTerms.D}}
+                    <tr>
+                      <td>
+                        Right to distribute
+                        {{#if compare commercialTerms.D 'unlimited'}}<b>unlimited</b>{{/if}}
+                        {{#if compare commercialTerms.D 'limited'}}<b>limited</b>{{/if}}
+                        {{#if compare commercialTerms.D 'no'}}<b>no</b>{{/if}}.
+                      </td>
+                    </tr>
+                  {{/if}}
+                  {{#if commercialTerms.SA}}
+                    <tr>
+                      <td>
+                        Right to host/operate as SaaS
+                        {{#if compare commercialTerms.SA 'unlimited'}}<b>unlimited</b>{{/if}}
+                        {{#if compare commercialTerms.SA 'limited'}}<b>limited</b>{{/if}}
+                        {{#if compare commercialTerms.SA 'no'}}<b>no</b>{{/if}}.
+                      </td>
+                    </tr>
+                  {{/if}}
+                  {{#if commercialTerms.M}}
+                    <tr>
+                      <td>
+                        Right to modify
+                        {{#if compare commercialTerms.M 'unlimited'}}<b>unlimited</b>{{/if}}
+                        {{#if compare commercialTerms.M 'limited'}}<b>limited</b>{{/if}}
+                        {{#if compare commercialTerms.M 'no'}}<b>no</b>{{/if}}.
+                      </td>
+                    </tr>
+                  {{/if}}
+                </table>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    {{/if}}
+    {{#if selectProject}}
+      {{#panel}}
+        <div class="text-info">
+          <i class="fa fa-check-circle-o"></i> Please select the project to run a report on the upper right
+        </div>
+      {{/panel}}
+    {{/if}}
+    {{#if requestInProgress}}
+      {{#panel}}
+        <div class="text-primary">
+          <i class="fa fa-spinner fa-spin"></i> Loading report data for project {{getProjectName}}, please wait...
+        </div>
+      {{/panel}}
+    {{/if}}
+    {{#if noDataInProject}}
+      <div class="text-right inner-b-10">
+        <button class="btn btn-primary btn-xs export-as-pdf" type="button">
+          <span class="fa fa-file-pdf-o" aria-hidden="true"></span> Export as PDF
+        </button>
+      </div>
+      {{> reactiveTableNoData}}
+    {{/if}}
+  </div>
+</template>

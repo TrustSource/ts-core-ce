@@ -1,0 +1,230 @@
+{
+  "components": [
+    {
+      "key": "im:nginx",
+      "name": "NGINX",
+      "description": "HTTP web server, reverse proxy, load balancer and mail proxy.",
+      "category": [
+        "network-server",
+        "http"
+      ],
+      "language": "C",
+      "urls": {
+        "homepage": "https://nginx.org/",
+        "repository": "https://github.com/nginx/nginx"
+      },
+      "versions": [
+        {
+          "version": "1.26.0",
+          "licenses": [
+            {
+              "key": "BSD-2-Clause",
+              "name": "BSD 2-Clause \"Simplified\" License",
+              "url": "https://opensource.org/licenses/BSD-2-Clause",
+              "qos": 3
+            }
+          ]
+        },
+        {
+          "version": "1.28.0",
+          "licenses": [
+            {
+              "key": "BSD-2-Clause",
+              "name": "BSD 2-Clause \"Simplified\" License",
+              "url": "https://opensource.org/licenses/BSD-2-Clause",
+              "qos": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "im:apache_http_server",
+      "name": "Apache HTTP Server",
+      "description": "Open-source HTTP server (httpd) for UNIX-like systems and Windows, extensible through modules.",
+      "category": [
+        "network-server",
+        "http"
+      ],
+      "language": "C",
+      "urls": {
+        "homepage": "https://httpd.apache.org/",
+        "repository": "https://github.com/apache/httpd"
+      },
+      "versions": [
+        {
+          "version": "2.4.62",
+          "licenses": [
+            {
+              "key": "Apache-2.0",
+              "name": "Apache License 2.0",
+              "url": "https://www.apache.org/licenses/LICENSE-2.0",
+              "qos": 3
+            }
+          ]
+        },
+        {
+          "version": "2.4.63",
+          "licenses": [
+            {
+              "key": "Apache-2.0",
+              "name": "Apache License 2.0",
+              "url": "https://www.apache.org/licenses/LICENSE-2.0",
+              "qos": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "im:mariadb",
+      "name": "MariaDB",
+      "description": "Community-developed relational database server, forked from MySQL.",
+      "category": [
+        "database",
+        "sql"
+      ],
+      "language": "C++",
+      "urls": {
+        "homepage": "https://mariadb.org/",
+        "repository": "https://github.com/MariaDB/server"
+      },
+      "versions": [
+        {
+          "version": "10.11.10",
+          "licenses": [
+            {
+              "key": "GPL-2.0-only",
+              "name": "GNU General Public License v2.0 only",
+              "url": "https://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html",
+              "qos": 3
+            }
+          ]
+        },
+        {
+          "version": "11.4.4",
+          "licenses": [
+            {
+              "key": "GPL-2.0-only",
+              "name": "GNU General Public License v2.0 only",
+              "url": "https://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html",
+              "qos": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "im:mongodb",
+      "name": "MongoDB",
+      "description": "Document-oriented database server (MongoDB Community Server).",
+      "category": [
+        "database"
+      ],
+      "language": "C++",
+      "urls": {
+        "homepage": "https://www.mongodb.com/",
+        "repository": "https://github.com/mongodb/mongo"
+      },
+      "versions": [
+        {
+          "version": "7.0.12",
+          "licenses": [
+            {
+              "key": "SSPL-1.0",
+              "name": "Server Side Public License, v 1",
+              "url": "https://www.mongodb.com/licensing/server-side-public-license",
+              "qos": 3
+            }
+          ]
+        },
+        {
+          "version": "8.0.4",
+          "licenses": [
+            {
+              "key": "SSPL-1.0",
+              "name": "Server Side Public License, v 1",
+              "url": "https://www.mongodb.com/licensing/server-side-public-license",
+              "qos": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "im:rabbitmq",
+      "name": "RabbitMQ",
+      "description": "Message broker supporting AMQP, MQTT and STOMP messaging.",
+      "category": [
+        "integration"
+      ],
+      "language": "Erlang",
+      "urls": {
+        "homepage": "https://www.rabbitmq.com/",
+        "repository": "https://github.com/rabbitmq/rabbitmq-server"
+      },
+      "versions": [
+        {
+          "version": "3.13.7",
+          "licenses": [
+            {
+              "key": "MPL-2.0",
+              "name": "Mozilla Public License 2.0",
+              "url": "https://www.mozilla.org/MPL/2.0/",
+              "qos": 3
+            }
+          ]
+        },
+        {
+          "version": "4.1.0",
+          "licenses": [
+            {
+              "key": "MPL-2.0",
+              "name": "Mozilla Public License 2.0",
+              "url": "https://www.mozilla.org/MPL/2.0/",
+              "qos": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "im:apache_kafka",
+      "name": "Apache Kafka",
+      "description": "Distributed event streaming platform for data pipelines and stream processing.",
+      "category": [
+        "big-data",
+        "integration"
+      ],
+      "language": "Java",
+      "urls": {
+        "homepage": "https://kafka.apache.org/",
+        "repository": "https://github.com/apache/kafka"
+      },
+      "versions": [
+        {
+          "version": "3.9.0",
+          "licenses": [
+            {
+              "key": "Apache-2.0",
+              "name": "Apache License 2.0",
+              "url": "https://www.apache.org/licenses/LICENSE-2.0",
+              "qos": 3
+            }
+          ]
+        },
+        {
+          "version": "4.0.0",
+          "licenses": [
+            {
+              "key": "Apache-2.0",
+              "name": "Apache License 2.0",
+              "url": "https://www.apache.org/licenses/LICENSE-2.0",
+              "qos": 3
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

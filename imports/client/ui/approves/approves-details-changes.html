@@ -1,0 +1,10 @@
+<template name="approvesDetailsChanges">
+  <div>
+    {{#if _id}}
+      <h3>{{__ 'StatusChanges'}}</h3>
+      {{> approvesChanges}}
+    {{else}}
+      {{>loadingSplash}}
+    {{/if}}
+  </div>
+</template>

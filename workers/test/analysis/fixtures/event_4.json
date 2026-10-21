@@ -1,0 +1,3005 @@
+{
+  "rawData": {
+    "company": {
+      "_id": "COMPANY_ID",
+      "created": "2022-01-19T16:23:21.245Z",
+      "accountType": "free"
+    },
+    "project": {
+      "_id": "PROJECT_ID",
+      "name": "Project 1",
+      "companyId": "COMPANY_ID",
+      "creationDate": "2022-01-19T17:10:29.582Z",
+      "relatedUsers": {
+        "defaultProjectManager": "USER_ID",
+        "defaultComplianceManager": null,
+        "members": []
+      }
+    },
+    "module": {
+      "_id": "MODULE_ID",
+      "companyId": "COMPANY_ID",
+      "name": "ts-node-client-sample",
+      "moduleIdentifier": "npm:ts-node-client-sample",
+      "projectId": "PROJECT_ID",
+      "viabilityConfig": {
+        "warningThreshold": 1,
+        "violationThreshold": 1,
+        "minConfidence": 1,
+        "noInfoLevel": 1
+      },
+      "versioningConfig": {
+        "jump": true,
+        "warningThreshold": 3,
+        "violationThreshold": 1
+      },
+      "componentConfig": {
+        "looseCoupled": [],
+        "unchanged": [],
+        "changedStatus": [],
+        "whitelist": [],
+        "blacklist": []
+      },
+      "properties": {
+        "privacy": "private",
+        "architecture": "sourceCode"
+      },
+      "relatedUsers": {
+        "defaultProjectManager": "USER_ID",
+        "defaultComplianceManager": null
+      },
+      "cveConfig": {
+        "whitelist": [
+          {
+            "key": "npm:pdfkit",
+            "version": "0.11.0",
+            "comment": "Fix has been provided By Jens Dieter Testheimer, 7/11/2022",
+            "cveKey": "CVE-2007-2405"
+          }
+        ]
+      },
+      "scanned": "2022-01-19T17:16:10.354Z"
+    },
+    "scan": {
+      "_id": "SCAN_ID",
+      "project": "ASCAMSO",
+      "module": "ts-node-client-sample",
+      "moduleId": "npm:ts-node-client-sample",
+      "dependencies": [
+        {
+          "name": "pdfmake",
+          "key": "npm:pdfmake",
+          "private": false,
+          "licenses": [],
+          "repoUrl": null,
+          "dependencies": [
+            {
+              "name": "linebreak",
+              "key": "npm:linebreak",
+              "private": false,
+              "licenses": [],
+              "repoUrl": null,
+              "dependencies": [
+                {
+                  "name": "brfs",
+                  "key": "npm:brfs",
+                  "private": false,
+                  "licenses": [],
+                  "repoUrl": null,
+                  "dependencies": [
+                    {
+                      "name": "quote-stream",
+                      "key": "npm:quote-stream",
+                      "private": false,
+                      "licenses": [],
+                      "repoUrl": null,
+                      "dependencies": [
+                        {
+                          "name": "buffer-equal",
+                          "key": "npm:buffer-equal",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [],
+                          "versions": [
+                            "0.0.1"
+                          ],
+                          "tags": [
+                            0
+                          ],
+                          "component": {
+                            "_id": "FZ84JdwG38abTNuRt"
+                          }
+                        },
+                        {
+                          "name": "minimist",
+                          "key": "npm:minimist",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [],
+                          "versions": [
+                            "1.2.6"
+                          ],
+                          "tags": [
+                            0
+                          ],
+                          "component": {
+                            "_id": "hQm9pPyBDXg9LfBx8"
+                          }
+                        },
+                        {
+                          "name": "through2",
+                          "key": "npm:through2",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [],
+                          "versions": [
+                            "2.0.5"
+                          ],
+                          "tags": [
+                            0
+                          ],
+                          "component": {
+                            "_id": "3RjQHkiMd7R7fu5TB"
+                          }
+                        }
+                      ],
+                      "versions": [
+                        "1.0.2"
+                      ],
+                      "tags": [
+                        3
+                      ],
+                      "component": {
+                        "_id": "cvKGCoTswuWfaEatj"
+                      }
+                    },
+                    {
+                      "name": "resolve",
+                      "key": "npm:resolve",
+                      "private": false,
+                      "licenses": [],
+                      "repoUrl": null,
+                      "dependencies": [
+                        {
+                          "name": "is-core-module",
+                          "key": "npm:is-core-module",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [
+                            {
+                              "name": "has",
+                              "key": "npm:has",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "1.0.3"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "JRB6Ej6yeWLxzSwjM"
+                              }
+                            }
+                          ],
+                          "versions": [
+                            "2.6.0"
+                          ],
+                          "tags": [
+                            1
+                          ],
+                          "component": {
+                            "_id": "YBQfsTCdu954pnfdy"
+                          }
+                        },
+                        {
+                          "name": "path-parse",
+                          "key": "npm:path-parse",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [],
+                          "versions": [
+                            "1.0.7"
+                          ],
+                          "tags": [
+                            0
+                          ],
+                          "component": {
+                            "_id": "MkYQJMxjTeZgzkS4T"
+                          }
+                        }
+                      ],
+                      "versions": [
+                        "1.20.0"
+                      ],
+                      "tags": [
+                        3
+                      ],
+                      "component": {
+                        "_id": "GgMhWfo5pGrkiJhtt"
+                      }
+                    },
+                    {
+                      "name": "static-module",
+                      "key": "npm:static-module",
+                      "private": false,
+                      "licenses": [],
+                      "repoUrl": null,
+                      "dependencies": [
+                        {
+                          "name": "acorn-node",
+                          "key": "npm:acorn-node",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [
+                            {
+                              "name": "acorn",
+                              "key": "npm:acorn",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "7.4.1"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "yzagW3R6YHRyxahMy"
+                              }
+                            },
+                            {
+                              "name": "acorn-walk",
+                              "key": "npm:acorn-walk",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "7.2.0"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "mia9ovTsQqAWyFDXK"
+                              }
+                            },
+                            {
+                              "name": "xtend",
+                              "key": "npm:xtend",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "4.0.2"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "5q2NHRtRSnQcxy6ma"
+                              }
+                            }
+                          ],
+                          "versions": [
+                            "1.8.2"
+                          ],
+                          "tags": [
+                            3
+                          ],
+                          "component": {
+                            "_id": "qeu2gbN8eYHM2JSpQ"
+                          }
+                        },
+                        {
+                          "name": "concat-stream",
+                          "key": "npm:concat-stream",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [
+                            {
+                              "name": "buffer-from",
+                              "key": "npm:buffer-from",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "1.1.1"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "K7KFDrd82krG5mZRY"
+                              }
+                            },
+                            {
+                              "name": "inherits",
+                              "key": "npm:inherits",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "2.0.4"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "wkb94GZK3RuTAQw9y"
+                              }
+                            },
+                            {
+                              "name": "readable-stream",
+                              "key": "npm:readable-stream",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "2.3.7"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "PoHKDgn5mRWXeozAv"
+                              }
+                            },
+                            {
+                              "name": "typedarray",
+                              "key": "npm:typedarray",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "0.0.6"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "FgaqSKRN2e632W6iZ"
+                              }
+                            }
+                          ],
+                          "versions": [
+                            "1.6.2"
+                          ],
+                          "tags": [
+                            4
+                          ],
+                          "component": {
+                            "_id": "dDp3GSxR9ZkpBXbLA"
+                          }
+                        },
+                        {
+                          "name": "convert-source-map",
+                          "key": "npm:convert-source-map",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [
+                            {
+                              "name": "safe-buffer",
+                              "key": "npm:safe-buffer",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "5.1.2"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "hQMu57Nb3gFTtyvre"
+                              }
+                            }
+                          ],
+                          "versions": [
+                            "1.7.0"
+                          ],
+                          "tags": [
+                            1
+                          ],
+                          "component": {
+                            "_id": "kqc957x6TGiMsjSae"
+                          }
+                        },
+                        {
+                          "name": "duplexer2",
+                          "key": "npm:duplexer2",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [
+                            {
+                              "name": "readable-stream",
+                              "key": "npm:readable-stream",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "2.3.7"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "PoHKDgn5mRWXeozAv"
+                              }
+                            }
+                          ],
+                          "versions": [
+                            "0.1.4"
+                          ],
+                          "tags": [
+                            1
+                          ],
+                          "component": {
+                            "_id": "h7Y56xamDMu9vJfb4"
+                          }
+                        },
+                        {
+                          "name": "escodegen",
+                          "key": "npm:escodegen",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [
+                            {
+                              "name": "esprima",
+                              "key": "npm:esprima",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "4.0.1"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "jvofp8PmQ4Smf6aTN"
+                              }
+                            },
+                            {
+                              "name": "estraverse",
+                              "key": "npm:estraverse",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "4.3.0"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "rbJRXSXHspwwZ6mfQ"
+                              }
+                            },
+                            {
+                              "name": "esutils",
+                              "key": "npm:esutils",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "2.0.3"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "3GNJQa7HCyCLdwuMX"
+                              }
+                            },
+                            {
+                              "name": "optionator",
+                              "key": "npm:optionator",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [
+                                {
+                                  "name": "deep-is",
+                                  "key": "npm:deep-is",
+                                  "private": false,
+                                  "licenses": [],
+                                  "repoUrl": null,
+                                  "dependencies": [],
+                                  "versions": [
+                                    "0.1.3"
+                                  ],
+                                  "tags": [
+                                    0
+                                  ],
+                                  "component": {
+                                    "_id": "yMghTCoyzF9dLcYr3"
+                                  }
+                                },
+                                {
+                                  "name": "fast-levenshtein",
+                                  "key": "npm:fast-levenshtein",
+                                  "private": false,
+                                  "licenses": [],
+                                  "repoUrl": null,
+                                  "dependencies": [],
+                                  "versions": [
+                                    "2.0.6"
+                                  ],
+                                  "tags": [
+                                    0
+                                  ],
+                                  "component": {
+                                    "_id": "EW9BsyqSrqPGQnyur"
+                                  }
+                                },
+                                {
+                                  "name": "levn",
+                                  "key": "npm:levn",
+                                  "private": false,
+                                  "licenses": [],
+                                  "repoUrl": null,
+                                  "dependencies": [
+                                    {
+                                      "name": "prelude-ls",
+                                      "key": "npm:prelude-ls",
+                                      "private": false,
+                                      "licenses": [],
+                                      "repoUrl": null,
+                                      "dependencies": [],
+                                      "versions": [
+                                        "1.1.2"
+                                      ],
+                                      "tags": [
+                                        0
+                                      ],
+                                      "component": {
+                                        "_id": "ERj7DjDPGvqxFDJqp"
+                                      }
+                                    },
+                                    {
+                                      "name": "type-check",
+                                      "key": "npm:type-check",
+                                      "private": false,
+                                      "licenses": [],
+                                      "repoUrl": null,
+                                      "dependencies": [],
+                                      "versions": [
+                                        "0.3.2"
+                                      ],
+                                      "tags": [
+                                        0
+                                      ],
+                                      "component": {
+                                        "_id": "fsc7XvpseH6uTahui"
+                                      }
+                                    }
+                                  ],
+                                  "versions": [
+                                    "0.3.0"
+                                  ],
+                                  "tags": [
+                                    2
+                                  ],
+                                  "component": {
+                                    "_id": "hAo5yYBfmG73zNatL"
+                                  }
+                                },
+                                {
+                                  "name": "prelude-ls",
+                                  "key": "npm:prelude-ls",
+                                  "private": false,
+                                  "licenses": [],
+                                  "repoUrl": null,
+                                  "dependencies": [],
+                                  "versions": [
+                                    "1.1.2"
+                                  ],
+                                  "tags": [
+                                    0
+                                  ],
+                                  "component": {
+                                    "_id": "ERj7DjDPGvqxFDJqp"
+                                  }
+                                },
+                                {
+                                  "name": "type-check",
+                                  "key": "npm:type-check",
+                                  "private": false,
+                                  "licenses": [],
+                                  "repoUrl": null,
+                                  "dependencies": [
+                                    {
+                                      "name": "prelude-ls",
+                                      "key": "npm:prelude-ls",
+                                      "private": false,
+                                      "licenses": [],
+                                      "repoUrl": null,
+                                      "dependencies": [],
+                                      "versions": [
+                                        "1.1.2"
+                                      ],
+                                      "tags": [
+                                        0
+                                      ],
+                                      "component": {
+                                        "_id": "ERj7DjDPGvqxFDJqp"
+                                      }
+                                    }
+                                  ],
+                                  "versions": [
+                                    "0.3.2"
+                                  ],
+                                  "tags": [
+                                    1
+                                  ],
+                                  "component": {
+                                    "_id": "fsc7XvpseH6uTahui"
+                                  }
+                                },
+                                {
+                                  "name": "word-wrap",
+                                  "key": "npm:word-wrap",
+                                  "private": false,
+                                  "licenses": [],
+                                  "repoUrl": null,
+                                  "dependencies": [],
+                                  "versions": [
+                                    "1.2.3"
+                                  ],
+                                  "tags": [
+                                    0
+                                  ],
+                                  "component": {
+                                    "_id": "frWdQJvXHiYKbrp9K"
+                                  }
+                                }
+                              ],
+                              "versions": [
+                                "0.8.3"
+                              ],
+                              "tags": [
+                                9
+                              ],
+                              "component": {
+                                "_id": "DXNToEkva32E2zcix"
+                              }
+                            },
+                            {
+                              "name": "source-map",
+                              "key": "npm:source-map",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "0.6.1"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "xrSz2L2TvHaYtmX4T"
+                              }
+                            }
+                          ],
+                          "versions": [
+                            "1.14.3"
+                          ],
+                          "tags": [
+                            14
+                          ],
+                          "component": {
+                            "_id": "M53hYa4eazPfMbRqC"
+                          }
+                        },
+                        {
+                          "name": "has",
+                          "key": "npm:has",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [
+                            {
+                              "name": "function-bind",
+                              "key": "npm:function-bind",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "1.1.1"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "AevWcWvcHPChByBdc"
+                              }
+                            }
+                          ],
+                          "versions": [
+                            "1.0.3"
+                          ],
+                          "tags": [
+                            1
+                          ],
+                          "component": {
+                            "_id": "JRB6Ej6yeWLxzSwjM"
+                          }
+                        },
+                        {
+                          "name": "magic-string",
+                          "key": "npm:magic-string",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [
+                            {
+                              "name": "sourcemap-codec",
+                              "key": "npm:sourcemap-codec",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "1.4.8"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "mFk9vMfoKjw6wYQYc"
+                              }
+                            }
+                          ],
+                          "versions": [
+                            "0.25.1"
+                          ],
+                          "tags": [
+                            1
+                          ],
+                          "component": {
+                            "_id": "yr8aQ6z5ixmD4Cazy"
+                          }
+                        },
+                        {
+                          "name": "merge-source-map",
+                          "key": "npm:merge-source-map",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [
+                            {
+                              "name": "source-map",
+                              "key": "npm:source-map",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "0.5.7"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "xrSz2L2TvHaYtmX4T"
+                              }
+                            }
+                          ],
+                          "versions": [
+                            "1.0.4"
+                          ],
+                          "tags": [
+                            1
+                          ],
+                          "component": {
+                            "_id": "AHbd3YnJicSKH4iGz"
+                          }
+                        },
+                        {
+                          "name": "object-inspect",
+                          "key": "npm:object-inspect",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [],
+                          "versions": [
+                            "1.11.0"
+                          ],
+                          "tags": [
+                            0
+                          ],
+                          "component": {
+                            "_id": "jjmMcEFMBCMrwsWKZ"
+                          }
+                        },
+                        {
+                          "name": "readable-stream",
+                          "key": "npm:readable-stream",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [],
+                          "versions": [
+                            "2.3.7"
+                          ],
+                          "tags": [
+                            0
+                          ],
+                          "component": {
+                            "_id": "PoHKDgn5mRWXeozAv"
+                          }
+                        },
+                        {
+                          "name": "scope-analyzer",
+                          "key": "npm:scope-analyzer",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [
+                            {
+                              "name": "array-from",
+                              "key": "npm:array-from",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "2.1.1"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "4pJBtfJWxzrh2hHWn"
+                              }
+                            },
+                            {
+                              "name": "dash-ast",
+                              "key": "npm:dash-ast",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "1.0.0"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "EqsvN595bRE8QAJxo"
+                              }
+                            },
+                            {
+                              "name": "es6-map",
+                              "key": "npm:es6-map",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [
+                                {
+                                  "name": "d",
+                                  "key": "npm:d",
+                                  "private": false,
+                                  "licenses": [],
+                                  "repoUrl": null,
+                                  "dependencies": [
+                                    {
+                                      "name": "es5-ext",
+                                      "key": "npm:es5-ext",
+                                      "private": false,
+                                      "licenses": [],
+                                      "repoUrl": null,
+                                      "dependencies": [],
+                                      "versions": [
+                                        "0.10.53"
+                                      ],
+                                      "tags": [
+                                        0
+                                      ],
+                                      "component": {
+                                        "_id": "2oh5LSW8GJGpWGqKn"
+                                      }
+                                    },
+                                    {
+                                      "name": "type",
+                                      "key": "npm:type",
+                                      "private": false,
+                                      "licenses": [],
+                                      "repoUrl": null,
+                                      "dependencies": [],
+                                      "versions": [
+                                        "1.2.0"
+                                      ],
+                                      "tags": [
+                                        0
+                                      ],
+                                      "component": {
+                                        "_id": "YztzL6AxLxcHLvRcJ"
+                                      }
+                                    }
+                                  ],
+                                  "versions": [
+                                    "1.0.1"
+                                  ],
+                                  "tags": [
+                                    2
+                                  ],
+                                  "component": {
+                                    "_id": "Lz3AFSjnNwuhHthfn"
+                                  }
+                                },
+                                {
+                                  "name": "es5-ext",
+                                  "key": "npm:es5-ext",
+                                  "private": false,
+                                  "licenses": [],
+                                  "repoUrl": null,
+                                  "dependencies": [
+                                    {
+                                      "name": "es6-iterator",
+                                      "key": "npm:es6-iterator",
+                                      "private": false,
+                                      "licenses": [],
+                                      "repoUrl": null,
+                                      "dependencies": [],
+                                      "versions": [
+                                        "2.0.3"
+                                      ],
+                                      "tags": [
+                                        0
+                                      ],
+                                      "component": {
+                                        "_id": "xPxASNKx2b8ybckDd"
+                                      }
+                                    },
+                                    {
+                                      "name": "es6-symbol",
+                                      "key": "npm:es6-symbol",
+                                      "private": false,
+                                      "licenses": [],
+                                      "repoUrl": null,
+                                      "dependencies": [],
+                                      "versions": [
+                                        "3.1.3"
+                                      ],
+                                      "tags": [
+                                        0
+                                      ],
+                                      "component": {
+                                        "_id": "WyTR65tYCtzi7EKiP"
+                                      }
+                                    },
+                                    {
+                                      "name": "next-tick",
+                                      "key": "npm:next-tick",
+                                      "private": false,
+                                      "licenses": [],
+                                      "repoUrl": null,
+                                      "dependencies": [],
+                                      "versions": [
+                                        "1.0.0"
+                                      ],
+                                      "tags": [
+                                        0
+                                      ],
+                                      "component": {
+                                        "_id": "QpzPuaAbJRH8g7SK7"
+                                      }
+                                    }
+                                  ],
+                                  "versions": [
+                                    "0.10.53"
+                                  ],
+                                  "tags": [
+                                    3
+                                  ],
+                                  "component": {
+                                    "_id": "2oh5LSW8GJGpWGqKn"
+                                  }
+                                },
+                                {
+                                  "name": "es6-iterator",
+                                  "key": "npm:es6-iterator",
+                                  "private": false,
+                                  "licenses": [],
+                                  "repoUrl": null,
+                                  "dependencies": [
+                                    {
+                                      "name": "d",
+                                      "key": "npm:d",
+                                      "private": false,
+                                      "licenses": [],
+                                      "repoUrl": null,
+                                      "dependencies": [],
+                                      "versions": [
+                                        "1.0.1"
+                                      ],
+                                      "tags": [
+                                        0
+                                      ],
+                                      "component": {
+                                        "_id": "Lz3AFSjnNwuhHthfn"
+                                      }
+                                    },
+                                    {
+                                      "name": "es5-ext",
+                                      "key": "npm:es5-ext",
+                                      "private": false,
+                                      "licenses": [],
+                                      "repoUrl": null,
+                                      "dependencies": [],
+                                      "versions": [
+                                        "0.10.53"
+                                      ],
+                                      "tags": [
+                                        0
+                                      ],
+                                      "component": {
+                                        "_id": "2oh5LSW8GJGpWGqKn"
+                                      }
+                                    },
+                                    {
+                                      "name": "es6-symbol",
+                                      "key": "npm:es6-symbol",
+                                      "private": false,
+                                      "licenses": [],
+                                      "repoUrl": null,
+                                      "dependencies": [],
+                                      "versions": [
+                                        "3.1.3"
+                                      ],
+                                      "tags": [
+                                        0
+                                      ],
+                                      "component": {
+                                        "_id": "WyTR65tYCtzi7EKiP"
+                                      }
+                                    }
+                                  ],
+                                  "versions": [
+                                    "2.0.3"
+                                  ],
+                                  "tags": [
+                                    3
+                                  ],
+                                  "component": {
+                                    "_id": "xPxASNKx2b8ybckDd"
+                                  }
+                                },
+                                {
+                                  "name": "es6-set",
+                                  "key": "npm:es6-set",
+                                  "private": false,
+                                  "licenses": [],
+                                  "repoUrl": null,
+                                  "dependencies": [],
+                                  "versions": [
+                                    "0.1.5"
+                                  ],
+                                  "tags": [
+                                    0
+                                  ],
+                                  "component": {
+                                    "_id": "Te7wZt2eABCTSjPnK"
+                                  }
+                                },
+                                {
+                                  "name": "es6-symbol",
+                                  "key": "npm:es6-symbol",
+                                  "private": false,
+                                  "licenses": [],
+                                  "repoUrl": null,
+                                  "dependencies": [],
+                                  "versions": [
+                                    "3.1.3"
+                                  ],
+                                  "tags": [
+                                    0
+                                  ],
+                                  "component": {
+                                    "_id": "WyTR65tYCtzi7EKiP"
+                                  }
+                                },
+                                {
+                                  "name": "event-emitter",
+                                  "key": "npm:event-emitter",
+                                  "private": false,
+                                  "licenses": [],
+                                  "repoUrl": null,
+                                  "dependencies": [
+                                    {
+                                      "name": "d",
+                                      "key": "npm:d",
+                                      "private": false,
+                                      "licenses": [],
+                                      "repoUrl": null,
+                                      "dependencies": [],
+                                      "versions": [
+                                        "1.0.1"
+                                      ],
+                                      "tags": [
+                                        0
+                                      ],
+                                      "component": {
+                                        "_id": "Lz3AFSjnNwuhHthfn"
+                                      }
+                                    },
+                                    {
+                                      "name": "es5-ext",
+                                      "key": "npm:es5-ext",
+                                      "private": false,
+                                      "licenses": [],
+                                      "repoUrl": null,
+                                      "dependencies": [],
+                                      "versions": [
+                                        "0.10.53"
+                                      ],
+                                      "tags": [
+                                        0
+                                      ],
+                                      "component": {
+                                        "_id": "2oh5LSW8GJGpWGqKn"
+                                      }
+                                    }
+                                  ],
+                                  "versions": [
+                                    "0.3.5"
+                                  ],
+                                  "tags": [
+                                    2
+                                  ],
+                                  "component": {
+                                    "_id": "dhmoM64d4cq6EYGJR"
+                                  }
+                                }
+                              ],
+                              "versions": [
+                                "0.1.5"
+                              ],
+                              "tags": [
+                                16
+                              ],
+                              "component": {
+                                "_id": "bnj5CPMexSNGLK7Xs"
+                              }
+                            },
+                            {
+                              "name": "es6-set",
+                              "key": "npm:es6-set",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [
+                                {
+                                  "name": "d",
+                                  "key": "npm:d",
+                                  "private": false,
+                                  "licenses": [],
+                                  "repoUrl": null,
+                                  "dependencies": [],
+                                  "versions": [
+                                    "1.0.1"
+                                  ],
+                                  "tags": [
+                                    0
+                                  ],
+                                  "component": {
+                                    "_id": "Lz3AFSjnNwuhHthfn"
+                                  }
+                                },
+                                {
+                                  "name": "es5-ext",
+                                  "key": "npm:es5-ext",
+                                  "private": false,
+                                  "licenses": [],
+                                  "repoUrl": null,
+                                  "dependencies": [],
+                                  "versions": [
+                                    "0.10.53"
+                                  ],
+                                  "tags": [
+                                    0
+                                  ],
+                                  "component": {
+                                    "_id": "2oh5LSW8GJGpWGqKn"
+                                  }
+                                },
+                                {
+                                  "name": "es6-iterator",
+                                  "key": "npm:es6-iterator",
+                                  "private": false,
+                                  "licenses": [],
+                                  "repoUrl": null,
+                                  "dependencies": [],
+                                  "versions": [
+                                    "2.0.3"
+                                  ],
+                                  "tags": [
+                                    0
+                                  ],
+                                  "component": {
+                                    "_id": "xPxASNKx2b8ybckDd"
+                                  }
+                                },
+                                {
+                                  "name": "es6-symbol",
+                                  "key": "npm:es6-symbol",
+                                  "private": false,
+                                  "licenses": [],
+                                  "repoUrl": null,
+                                  "dependencies": [
+                                    {
+                                      "name": "d",
+                                      "key": "npm:d",
+                                      "private": false,
+                                      "licenses": [],
+                                      "repoUrl": null,
+                                      "dependencies": [],
+                                      "versions": [
+                                        "1.0.1"
+                                      ],
+                                      "tags": [
+                                        0
+                                      ],
+                                      "component": {
+                                        "_id": "Lz3AFSjnNwuhHthfn"
+                                      }
+                                    },
+                                    {
+                                      "name": "es5-ext",
+                                      "key": "npm:es5-ext",
+                                      "private": false,
+                                      "licenses": [],
+                                      "repoUrl": null,
+                                      "dependencies": [],
+                                      "versions": [
+                                        "0.10.53"
+                                      ],
+                                      "tags": [
+                                        0
+                                      ],
+                                      "component": {
+                                        "_id": "2oh5LSW8GJGpWGqKn"
+                                      }
+                                    }
+                                  ],
+                                  "versions": [
+                                    "3.1.1"
+                                  ],
+                                  "tags": [
+                                    2
+                                  ],
+                                  "component": {
+                                    "_id": "WyTR65tYCtzi7EKiP"
+                                  }
+                                },
+                                {
+                                  "name": "event-emitter",
+                                  "key": "npm:event-emitter",
+                                  "private": false,
+                                  "licenses": [],
+                                  "repoUrl": null,
+                                  "dependencies": [],
+                                  "versions": [
+                                    "0.3.5"
+                                  ],
+                                  "tags": [
+                                    0
+                                  ],
+                                  "component": {
+                                    "_id": "dhmoM64d4cq6EYGJR"
+                                  }
+                                }
+                              ],
+                              "versions": [
+                                "0.1.5"
+                              ],
+                              "tags": [
+                                7
+                              ],
+                              "component": {
+                                "_id": "Te7wZt2eABCTSjPnK"
+                              }
+                            },
+                            {
+                              "name": "es6-symbol",
+                              "key": "npm:es6-symbol",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [
+                                {
+                                  "name": "d",
+                                  "key": "npm:d",
+                                  "private": false,
+                                  "licenses": [],
+                                  "repoUrl": null,
+                                  "dependencies": [],
+                                  "versions": [
+                                    "1.0.1"
+                                  ],
+                                  "tags": [
+                                    0
+                                  ],
+                                  "component": {
+                                    "_id": "Lz3AFSjnNwuhHthfn"
+                                  }
+                                },
+                                {
+                                  "name": "ext",
+                                  "key": "npm:ext",
+                                  "private": false,
+                                  "licenses": [],
+                                  "repoUrl": null,
+                                  "dependencies": [
+                                    {
+                                      "name": "type",
+                                      "key": "npm:type",
+                                      "private": false,
+                                      "licenses": [],
+                                      "repoUrl": null,
+                                      "dependencies": [],
+                                      "versions": [
+                                        "2.5.0"
+                                      ],
+                                      "tags": [
+                                        0
+                                      ],
+                                      "component": {
+                                        "_id": "YztzL6AxLxcHLvRcJ"
+                                      }
+                                    }
+                                  ],
+                                  "versions": [
+                                    "1.4.0"
+                                  ],
+                                  "tags": [
+                                    1
+                                  ],
+                                  "component": {
+                                    "_id": "Jwjo73p2KTTmhye7a"
+                                  }
+                                }
+                              ],
+                              "versions": [
+                                "3.1.3"
+                              ],
+                              "tags": [
+                                3
+                              ],
+                              "component": {
+                                "_id": "WyTR65tYCtzi7EKiP"
+                              }
+                            },
+                            {
+                              "name": "estree-is-function",
+                              "key": "npm:estree-is-function",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "1.0.0"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "nSppnvTB2RnMR538m"
+                              }
+                            },
+                            {
+                              "name": "get-assigned-identifiers",
+                              "key": "npm:get-assigned-identifiers",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "1.2.0"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "JknLFETRBFBrhuBKE"
+                              }
+                            }
+                          ],
+                          "versions": [
+                            "2.1.1"
+                          ],
+                          "tags": [
+                            33
+                          ],
+                          "component": {
+                            "_id": "vWbPfpvZM9Xdi3dJ9"
+                          }
+                        },
+                        {
+                          "name": "shallow-copy",
+                          "key": "npm:shallow-copy",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [],
+                          "versions": [
+                            "0.0.1"
+                          ],
+                          "tags": [
+                            0
+                          ],
+                          "component": {
+                            "_id": "FGvdX5FKFsxpBP3Qf"
+                          }
+                        },
+                        {
+                          "name": "static-eval",
+                          "key": "npm:static-eval",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [
+                            {
+                              "name": "escodegen",
+                              "key": "npm:escodegen",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "1.14.3"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "M53hYa4eazPfMbRqC"
+                              }
+                            }
+                          ],
+                          "versions": [
+                            "2.1.0"
+                          ],
+                          "tags": [
+                            1
+                          ],
+                          "component": {
+                            "_id": "beWJRXwCRQiodpMbf"
+                          }
+                        },
+                        {
+                          "name": "through2",
+                          "key": "npm:through2",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [],
+                          "versions": [
+                            "2.0.5"
+                          ],
+                          "tags": [
+                            0
+                          ],
+                          "component": {
+                            "_id": "3RjQHkiMd7R7fu5TB"
+                          }
+                        }
+                      ],
+                      "versions": [
+                        "3.0.4"
+                      ],
+                      "tags": [
+                        74
+                      ],
+                      "component": {
+                        "_id": "TpCoaQMg2xsScBh7A"
+                      }
+                    },
+                    {
+                      "name": "through2",
+                      "key": "npm:through2",
+                      "private": false,
+                      "licenses": [],
+                      "repoUrl": null,
+                      "dependencies": [
+                        {
+                          "name": "readable-stream",
+                          "key": "npm:readable-stream",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [],
+                          "versions": [
+                            "2.3.7"
+                          ],
+                          "tags": [
+                            0
+                          ],
+                          "component": {
+                            "_id": "PoHKDgn5mRWXeozAv"
+                          }
+                        },
+                        {
+                          "name": "xtend",
+                          "key": "npm:xtend",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [],
+                          "versions": [
+                            "4.0.2"
+                          ],
+                          "tags": [
+                            0
+                          ],
+                          "component": {
+                            "_id": "5q2NHRtRSnQcxy6ma"
+                          }
+                        }
+                      ],
+                      "versions": [
+                        "2.0.5"
+                      ],
+                      "tags": [
+                        2
+                      ],
+                      "component": {
+                        "_id": "3RjQHkiMd7R7fu5TB"
+                      }
+                    }
+                  ],
+                  "versions": [
+                    "2.0.2"
+                  ],
+                  "tags": [
+                    86
+                  ],
+                  "component": {
+                    "_id": "9NnMje9Q6B2fvndCm"
+                  }
+                },
+                {
+                  "name": "base64-js",
+                  "key": "npm:base64-js",
+                  "private": false,
+                  "licenses": [],
+                  "repoUrl": null,
+                  "dependencies": [],
+                  "versions": [
+                    "0.0.8"
+                  ],
+                  "tags": [
+                    0
+                  ],
+                  "component": {
+                    "_id": "By5xgn4W4AWR8Zc9W"
+                  }
+                },
+                {
+                  "name": "unicode-trie",
+                  "key": "npm:unicode-trie",
+                  "private": false,
+                  "licenses": [],
+                  "repoUrl": null,
+                  "dependencies": [
+                    {
+                      "name": "pako",
+                      "key": "npm:pako",
+                      "private": false,
+                      "licenses": [],
+                      "repoUrl": null,
+                      "dependencies": [],
+                      "versions": [
+                        "0.2.9"
+                      ],
+                      "tags": [
+                        0
+                      ],
+                      "component": {
+                        "_id": "tfGvJttFxTQ4EqWM2"
+                      }
+                    },
+                    {
+                      "name": "tiny-inflate",
+                      "key": "npm:tiny-inflate",
+                      "private": false,
+                      "licenses": [],
+                      "repoUrl": null,
+                      "dependencies": [],
+                      "versions": [
+                        "1.0.3"
+                      ],
+                      "tags": [
+                        0
+                      ],
+                      "component": {
+                        "_id": "ej9WpvRnqmaEoreCR"
+                      }
+                    }
+                  ],
+                  "versions": [
+                    "1.0.0"
+                  ],
+                  "tags": [
+                    2
+                  ],
+                  "component": {
+                    "_id": "2ie8E9inbpsH6JLfR"
+                  }
+                }
+              ],
+              "versions": [
+                "1.0.2"
+              ],
+              "tags": [
+                91
+              ],
+              "component": {
+                "_id": "44uqgEZC8wosarKMv"
+              }
+            },
+            {
+              "name": "pdfkit",
+              "key": "npm:pdfkit",
+              "private": false,
+              "licenses": [],
+              "repoUrl": null,
+              "dependencies": [
+                {
+                  "name": "crypto-js",
+                  "key": "npm:crypto-js",
+                  "private": false,
+                  "licenses": [],
+                  "repoUrl": null,
+                  "dependencies": [],
+                  "versions": [
+                    "3.3.0"
+                  ],
+                  "tags": [
+                    0
+                  ],
+                  "component": {
+                    "_id": "kBD7CxAag9NRkoH8u"
+                  }
+                },
+                {
+                  "name": "fontkit",
+                  "key": "npm:fontkit",
+                  "private": false,
+                  "licenses": [],
+                  "repoUrl": null,
+                  "dependencies": [
+                    {
+                      "name": "babel-runtime",
+                      "key": "npm:babel-runtime",
+                      "private": false,
+                      "licenses": [],
+                      "repoUrl": null,
+                      "dependencies": [
+                        {
+                          "name": "regenerator-runtime",
+                          "key": "npm:regenerator-runtime",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [],
+                          "versions": [
+                            "0.11.1"
+                          ],
+                          "tags": [
+                            0
+                          ],
+                          "component": {
+                            "_id": "3KvQ358D5RarahdQB"
+                          }
+                        },
+                        {
+                          "name": "core-js",
+                          "key": "npm:core-js",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [],
+                          "versions": [
+                            "2.6.12"
+                          ],
+                          "tags": [
+                            0
+                          ],
+                          "component": {
+                            "_id": "SGqWyDJS2ajiuWyLc"
+                          }
+                        }
+                      ],
+                      "versions": [
+                        "6.26.0"
+                      ],
+                      "tags": [
+                        2
+                      ],
+                      "component": {
+                        "_id": "MBKExLFaGgSn923LW"
+                      }
+                    },
+                    {
+                      "name": "brfs",
+                      "key": "npm:brfs",
+                      "private": false,
+                      "licenses": [],
+                      "repoUrl": null,
+                      "dependencies": [],
+                      "versions": [
+                        "2.0.2"
+                      ],
+                      "tags": [
+                        0
+                      ],
+                      "component": {
+                        "_id": "9NnMje9Q6B2fvndCm"
+                      }
+                    },
+                    {
+                      "name": "brotli",
+                      "key": "npm:brotli",
+                      "private": false,
+                      "licenses": [],
+                      "repoUrl": null,
+                      "dependencies": [
+                        {
+                          "name": "base64-js",
+                          "key": "npm:base64-js",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [],
+                          "versions": [
+                            "1.5.1"
+                          ],
+                          "tags": [
+                            0
+                          ],
+                          "component": {
+                            "_id": "By5xgn4W4AWR8Zc9W"
+                          }
+                        }
+                      ],
+                      "versions": [
+                        "1.3.2"
+                      ],
+                      "tags": [
+                        1
+                      ],
+                      "component": {
+                        "_id": "Cp5He4hC6ekHKmMqC"
+                      }
+                    },
+                    {
+                      "name": "browserify-optional",
+                      "key": "npm:browserify-optional",
+                      "private": false,
+                      "licenses": [],
+                      "repoUrl": null,
+                      "dependencies": [
+                        {
+                          "name": "ast-transform",
+                          "key": "npm:ast-transform",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [
+                            {
+                              "name": "escodegen",
+                              "key": "npm:escodegen",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [
+                                {
+                                  "name": "esprima",
+                                  "key": "npm:esprima",
+                                  "private": false,
+                                  "licenses": [],
+                                  "repoUrl": null,
+                                  "dependencies": [],
+                                  "versions": [
+                                    "1.0.4"
+                                  ],
+                                  "tags": [
+                                    0
+                                  ],
+                                  "component": {
+                                    "_id": "jvofp8PmQ4Smf6aTN"
+                                  }
+                                },
+                                {
+                                  "name": "estraverse",
+                                  "key": "npm:estraverse",
+                                  "private": false,
+                                  "licenses": [],
+                                  "repoUrl": null,
+                                  "dependencies": [],
+                                  "versions": [
+                                    "1.5.1"
+                                  ],
+                                  "tags": [
+                                    0
+                                  ],
+                                  "component": {
+                                    "_id": "rbJRXSXHspwwZ6mfQ"
+                                  }
+                                },
+                                {
+                                  "name": "esutils",
+                                  "key": "npm:esutils",
+                                  "private": false,
+                                  "licenses": [],
+                                  "repoUrl": null,
+                                  "dependencies": [],
+                                  "versions": [
+                                    "1.0.0"
+                                  ],
+                                  "tags": [
+                                    0
+                                  ],
+                                  "component": {
+                                    "_id": "3GNJQa7HCyCLdwuMX"
+                                  }
+                                },
+                                {
+                                  "name": "source-map",
+                                  "key": "npm:source-map",
+                                  "private": false,
+                                  "licenses": [],
+                                  "repoUrl": null,
+                                  "dependencies": [
+                                    {
+                                      "name": "amdefine",
+                                      "key": "npm:amdefine",
+                                      "private": false,
+                                      "licenses": [],
+                                      "repoUrl": null,
+                                      "dependencies": [],
+                                      "versions": [
+                                        "1.0.1"
+                                      ],
+                                      "tags": [
+                                        0
+                                      ],
+                                      "component": {
+                                        "_id": "EGg7u8ygh3AprrnBx"
+                                      }
+                                    }
+                                  ],
+                                  "versions": [
+                                    "0.1.43"
+                                  ],
+                                  "tags": [
+                                    1
+                                  ],
+                                  "component": {
+                                    "_id": "xrSz2L2TvHaYtmX4T"
+                                  }
+                                }
+                              ],
+                              "versions": [
+                                "1.2.0"
+                              ],
+                              "tags": [
+                                5
+                              ],
+                              "component": {
+                                "_id": "M53hYa4eazPfMbRqC"
+                              }
+                            },
+                            {
+                              "name": "esprima",
+                              "key": "npm:esprima",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "1.0.4"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "jvofp8PmQ4Smf6aTN"
+                              }
+                            },
+                            {
+                              "name": "through",
+                              "key": "npm:through",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "2.3.8"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "WiYkSdjNC6Gea8rX9"
+                              }
+                            }
+                          ],
+                          "versions": [
+                            "0.0.0"
+                          ],
+                          "tags": [
+                            8
+                          ],
+                          "component": {
+                            "_id": "uzwTEGp4haK3XuZ4A"
+                          }
+                        },
+                        {
+                          "name": "ast-types",
+                          "key": "npm:ast-types",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [],
+                          "versions": [
+                            "0.7.8"
+                          ],
+                          "tags": [
+                            0
+                          ],
+                          "component": {
+                            "_id": "bpF8YS36dgiQYF8my"
+                          }
+                        },
+                        {
+                          "name": "browser-resolve",
+                          "key": "npm:browser-resolve",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [
+                            {
+                              "name": "resolve",
+                              "key": "npm:resolve",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "1.1.7"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "GgMhWfo5pGrkiJhtt"
+                              }
+                            }
+                          ],
+                          "versions": [
+                            "1.11.3"
+                          ],
+                          "tags": [
+                            1
+                          ],
+                          "component": {
+                            "_id": "eFv4mWJiiAjv6T9jL"
+                          }
+                        }
+                      ],
+                      "versions": [
+                        "1.0.1"
+                      ],
+                      "tags": [
+                        12
+                      ],
+                      "component": {
+                        "_id": "nDSetNpjfHfErKYQY"
+                      }
+                    },
+                    {
+                      "name": "clone",
+                      "key": "npm:clone",
+                      "private": false,
+                      "licenses": [],
+                      "repoUrl": null,
+                      "dependencies": [],
+                      "versions": [
+                        "1.0.4"
+                      ],
+                      "tags": [
+                        0
+                      ],
+                      "component": {
+                        "_id": "jSKGeSSchDEwjAASn"
+                      }
+                    },
+                    {
+                      "name": "deep-equal",
+                      "key": "npm:deep-equal",
+                      "private": false,
+                      "licenses": [],
+                      "repoUrl": null,
+                      "dependencies": [
+                        {
+                          "name": "is-arguments",
+                          "key": "npm:is-arguments",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [
+                            {
+                              "name": "call-bind",
+                              "key": "npm:call-bind",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [
+                                {
+                                  "name": "function-bind",
+                                  "key": "npm:function-bind",
+                                  "private": false,
+                                  "licenses": [],
+                                  "repoUrl": null,
+                                  "dependencies": [],
+                                  "versions": [
+                                    "1.1.1"
+                                  ],
+                                  "tags": [
+                                    0
+                                  ],
+                                  "component": {
+                                    "_id": "AevWcWvcHPChByBdc"
+                                  }
+                                },
+                                {
+                                  "name": "get-intrinsic",
+                                  "key": "npm:get-intrinsic",
+                                  "private": false,
+                                  "licenses": [],
+                                  "repoUrl": null,
+                                  "dependencies": [
+                                    {
+                                      "name": "function-bind",
+                                      "key": "npm:function-bind",
+                                      "private": false,
+                                      "licenses": [],
+                                      "repoUrl": null,
+                                      "dependencies": [],
+                                      "versions": [
+                                        "1.1.1"
+                                      ],
+                                      "tags": [
+                                        0
+                                      ],
+                                      "component": {
+                                        "_id": "AevWcWvcHPChByBdc"
+                                      }
+                                    },
+                                    {
+                                      "name": "has",
+                                      "key": "npm:has",
+                                      "private": false,
+                                      "licenses": [],
+                                      "repoUrl": null,
+                                      "dependencies": [],
+                                      "versions": [
+                                        "1.0.3"
+                                      ],
+                                      "tags": [
+                                        0
+                                      ],
+                                      "component": {
+                                        "_id": "JRB6Ej6yeWLxzSwjM"
+                                      }
+                                    },
+                                    {
+                                      "name": "has-symbols",
+                                      "key": "npm:has-symbols",
+                                      "private": false,
+                                      "licenses": [],
+                                      "repoUrl": null,
+                                      "dependencies": [],
+                                      "versions": [
+                                        "1.0.2"
+                                      ],
+                                      "tags": [
+                                        0
+                                      ],
+                                      "component": {
+                                        "_id": "nbEmuJejJJgvWmTNm"
+                                      }
+                                    }
+                                  ],
+                                  "versions": [
+                                    "1.1.1"
+                                  ],
+                                  "tags": [
+                                    3
+                                  ],
+                                  "component": {
+                                    "_id": "4eYuci6DyCZaN2zQE"
+                                  }
+                                }
+                              ],
+                              "versions": [
+                                "1.0.2"
+                              ],
+                              "tags": [
+                                5
+                              ],
+                              "component": {
+                                "_id": "N3Xv2iF3ws9nkgPX6"
+                              }
+                            }
+                          ],
+                          "versions": [
+                            "1.1.0"
+                          ],
+                          "tags": [
+                            6
+                          ],
+                          "component": {
+                            "_id": "xkhtyovgzEFSwZ7Gk"
+                          }
+                        },
+                        {
+                          "name": "is-date-object",
+                          "key": "npm:is-date-object",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [],
+                          "versions": [
+                            "1.0.2"
+                          ],
+                          "tags": [
+                            0
+                          ],
+                          "component": {
+                            "_id": "xrJSfyniaXGnNCTBE"
+                          }
+                        },
+                        {
+                          "name": "is-regex",
+                          "key": "npm:is-regex",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [
+                            {
+                              "name": "call-bind",
+                              "key": "npm:call-bind",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "1.0.2"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "N3Xv2iF3ws9nkgPX6"
+                              }
+                            },
+                            {
+                              "name": "has-tostringtag",
+                              "key": "npm:has-tostringtag",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [
+                                {
+                                  "name": "has-symbols",
+                                  "key": "npm:has-symbols",
+                                  "private": false,
+                                  "licenses": [],
+                                  "repoUrl": null,
+                                  "dependencies": [],
+                                  "versions": [
+                                    "1.0.2"
+                                  ],
+                                  "tags": [
+                                    0
+                                  ],
+                                  "component": {
+                                    "_id": "nbEmuJejJJgvWmTNm"
+                                  }
+                                }
+                              ],
+                              "versions": [
+                                "1.0.0"
+                              ],
+                              "tags": [
+                                1
+                              ],
+                              "component": {
+                                "_id": "4NTBrBsvtjhaiWv8W"
+                              }
+                            }
+                          ],
+                          "versions": [
+                            "1.1.4"
+                          ],
+                          "tags": [
+                            3
+                          ],
+                          "component": {
+                            "_id": "zstjCKNzyq3czctbE"
+                          }
+                        },
+                        {
+                          "name": "object-is",
+                          "key": "npm:object-is",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [
+                            {
+                              "name": "call-bind",
+                              "key": "npm:call-bind",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "1.0.2"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "N3Xv2iF3ws9nkgPX6"
+                              }
+                            },
+                            {
+                              "name": "define-properties",
+                              "key": "npm:define-properties",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [
+                                {
+                                  "name": "object-keys",
+                                  "key": "npm:object-keys",
+                                  "private": false,
+                                  "licenses": [],
+                                  "repoUrl": null,
+                                  "dependencies": [],
+                                  "versions": [
+                                    "1.1.1"
+                                  ],
+                                  "tags": [
+                                    0
+                                  ],
+                                  "component": {
+                                    "_id": "uJR6dGHTwWYnXRSoG"
+                                  }
+                                }
+                              ],
+                              "versions": [
+                                "1.1.3"
+                              ],
+                              "tags": [
+                                1
+                              ],
+                              "component": {
+                                "_id": "kDzCJc7BnGP6hrMrR"
+                              }
+                            }
+                          ],
+                          "versions": [
+                            "1.1.5"
+                          ],
+                          "tags": [
+                            3
+                          ],
+                          "component": {
+                            "_id": "z75qGiYtSmazRmbwQ"
+                          }
+                        },
+                        {
+                          "name": "object-keys",
+                          "key": "npm:object-keys",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [],
+                          "versions": [
+                            "1.1.1"
+                          ],
+                          "tags": [
+                            0
+                          ],
+                          "component": {
+                            "_id": "uJR6dGHTwWYnXRSoG"
+                          }
+                        },
+                        {
+                          "name": "regexp.prototype.flags",
+                          "key": "npm:regexp.prototype.flags",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [
+                            {
+                              "name": "call-bind",
+                              "key": "npm:call-bind",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "1.0.2"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "N3Xv2iF3ws9nkgPX6"
+                              }
+                            },
+                            {
+                              "name": "define-properties",
+                              "key": "npm:define-properties",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "1.1.3"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "kDzCJc7BnGP6hrMrR"
+                              }
+                            }
+                          ],
+                          "versions": [
+                            "1.3.1"
+                          ],
+                          "tags": [
+                            2
+                          ],
+                          "component": {
+                            "_id": "AZbyMQENvxgkerxak"
+                          }
+                        }
+                      ],
+                      "versions": [
+                        "1.1.1"
+                      ],
+                      "tags": [
+                        20
+                      ],
+                      "component": {
+                        "_id": "GTANYTc25fYBYvPgb"
+                      }
+                    },
+                    {
+                      "name": "dfa",
+                      "key": "npm:dfa",
+                      "private": false,
+                      "licenses": [],
+                      "repoUrl": null,
+                      "dependencies": [],
+                      "versions": [
+                        "1.2.0"
+                      ],
+                      "tags": [
+                        0
+                      ],
+                      "component": {
+                        "_id": "xEGPjgrzZwCkf8cXe"
+                      }
+                    },
+                    {
+                      "name": "unicode-trie",
+                      "key": "npm:unicode-trie",
+                      "private": false,
+                      "licenses": [],
+                      "repoUrl": null,
+                      "dependencies": [
+                        {
+                          "name": "pako",
+                          "key": "npm:pako",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [],
+                          "versions": [
+                            "0.2.9"
+                          ],
+                          "tags": [
+                            0
+                          ],
+                          "component": {
+                            "_id": "tfGvJttFxTQ4EqWM2"
+                          }
+                        },
+                        {
+                          "name": "tiny-inflate",
+                          "key": "npm:tiny-inflate",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [],
+                          "versions": [
+                            "1.0.3"
+                          ],
+                          "tags": [
+                            0
+                          ],
+                          "component": {
+                            "_id": "ej9WpvRnqmaEoreCR"
+                          }
+                        }
+                      ],
+                      "versions": [
+                        "0.3.1"
+                      ],
+                      "tags": [
+                        2
+                      ],
+                      "component": {
+                        "_id": "2ie8E9inbpsH6JLfR"
+                      }
+                    },
+                    {
+                      "name": "restructure",
+                      "key": "npm:restructure",
+                      "private": false,
+                      "licenses": [],
+                      "repoUrl": null,
+                      "dependencies": [
+                        {
+                          "name": "browserify-optional",
+                          "key": "npm:browserify-optional",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [],
+                          "versions": [
+                            "1.0.1"
+                          ],
+                          "tags": [
+                            0
+                          ],
+                          "component": {
+                            "_id": "nDSetNpjfHfErKYQY"
+                          }
+                        }
+                      ],
+                      "versions": [
+                        "0.5.4"
+                      ],
+                      "tags": [
+                        1
+                      ],
+                      "component": {
+                        "_id": "SuWe44psM4rywKDkC"
+                      }
+                    },
+                    {
+                      "name": "tiny-inflate",
+                      "key": "npm:tiny-inflate",
+                      "private": false,
+                      "licenses": [],
+                      "repoUrl": null,
+                      "dependencies": [],
+                      "versions": [
+                        "1.0.3"
+                      ],
+                      "tags": [
+                        0
+                      ],
+                      "component": {
+                        "_id": "ej9WpvRnqmaEoreCR"
+                      }
+                    },
+                    {
+                      "name": "unicode-properties",
+                      "key": "npm:unicode-properties",
+                      "private": false,
+                      "licenses": [],
+                      "repoUrl": null,
+                      "dependencies": [
+                        {
+                          "name": "base64-js",
+                          "key": "npm:base64-js",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [],
+                          "versions": [
+                            "1.5.1"
+                          ],
+                          "tags": [
+                            0
+                          ],
+                          "component": {
+                            "_id": "By5xgn4W4AWR8Zc9W"
+                          }
+                        },
+                        {
+                          "name": "unicode-trie",
+                          "key": "npm:unicode-trie",
+                          "private": false,
+                          "licenses": [],
+                          "repoUrl": null,
+                          "dependencies": [
+                            {
+                              "name": "pako",
+                              "key": "npm:pako",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "0.2.9"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "tfGvJttFxTQ4EqWM2"
+                              }
+                            },
+                            {
+                              "name": "tiny-inflate",
+                              "key": "npm:tiny-inflate",
+                              "private": false,
+                              "licenses": [],
+                              "repoUrl": null,
+                              "dependencies": [],
+                              "versions": [
+                                "1.0.3"
+                              ],
+                              "tags": [
+                                0
+                              ],
+                              "component": {
+                                "_id": "ej9WpvRnqmaEoreCR"
+                              }
+                            }
+                          ],
+                          "versions": [
+                            "2.0.0"
+                          ],
+                          "tags": [
+                            2
+                          ],
+                          "component": {
+                            "_id": "2ie8E9inbpsH6JLfR"
+                          }
+                        }
+                      ],
+                      "versions": [
+                        "1.3.1"
+                      ],
+                      "tags": [
+                        4
+                      ],
+                      "component": {
+                        "_id": "GqybF7sYrAomWA2sW"
+                      }
+                    }
+                  ],
+                  "versions": [
+                    "1.8.1"
+                  ],
+                  "tags": [
+                    53
+                  ],
+                  "component": {
+                    "_id": "BnuRHWFzACSKeKXYt"
+                  }
+                },
+                {
+                  "name": "linebreak",
+                  "key": "npm:linebreak",
+                  "private": false,
+                  "licenses": [],
+                  "repoUrl": null,
+                  "dependencies": [],
+                  "versions": [
+                    "1.0.2"
+                  ],
+                  "tags": [
+                    0
+                  ],
+                  "component": {
+                    "_id": "44uqgEZC8wosarKMv"
+                  }
+                },
+                {
+                  "name": "png-js",
+                  "key": "npm:png-js",
+                  "private": false,
+                  "licenses": [],
+                  "repoUrl": null,
+                  "dependencies": [],
+                  "versions": [
+                    "1.0.0"
+                  ],
+                  "tags": [
+                    0
+                  ],
+                  "component": {
+                    "_id": "9q6BETTbwL7NCQJWj"
+                  }
+                }
+              ],
+              "versions": [
+                "0.11.0"
+              ],
+              "tags": [
+                57
+              ],
+              "component": {
+                "_id": "Sm5MYbrntbgsaqYHe"
+              }
+            },
+            {
+              "name": "iconv-lite",
+              "key": "npm:iconv-lite",
+              "private": false,
+              "licenses": [],
+              "repoUrl": null,
+              "dependencies": [
+                {
+                  "name": "safer-buffer",
+                  "key": "npm:safer-buffer",
+                  "private": false,
+                  "licenses": [],
+                  "repoUrl": null,
+                  "dependencies": [],
+                  "versions": [
+                    "2.1.2"
+                  ],
+                  "tags": [
+                    0
+                  ],
+                  "component": {
+                    "_id": "3Db3chd6bdCuzaLGc"
+                  }
+                }
+              ],
+              "versions": [
+                "0.6.2"
+              ],
+              "tags": [
+                1
+              ],
+              "component": {
+                "_id": "hyTYwfM55i9LPKpt5"
+              }
+            },
+            {
+              "name": "svg-to-pdfkit",
+              "key": "npm:svg-to-pdfkit",
+              "private": false,
+              "licenses": [],
+              "repoUrl": null,
+              "dependencies": [
+                {
+                  "name": "pdfkit",
+                  "key": "npm:pdfkit",
+                  "private": false,
+                  "licenses": [],
+                  "repoUrl": null,
+                  "dependencies": [],
+                  "versions": [
+                    "0.11.0"
+                  ],
+                  "tags": [
+                    0
+                  ],
+                  "component": {
+                    "_id": "Sm5MYbrntbgsaqYHe"
+                  }
+                }
+              ],
+              "versions": [
+                "0.1.8"
+              ],
+              "tags": [
+                1
+              ],
+              "component": {
+                "_id": "HYep3ii86NDkfvMtX"
+              }
+            },
+            {
+              "name": "xmldoc",
+              "key": "npm:xmldoc",
+              "private": false,
+              "licenses": [],
+              "repoUrl": null,
+              "dependencies": [
+                {
+                  "name": "sax",
+                  "key": "npm:sax",
+                  "private": false,
+                  "licenses": [],
+                  "repoUrl": null,
+                  "dependencies": [],
+                  "versions": [
+                    "1.2.1"
+                  ],
+                  "tags": [
+                    0
+                  ],
+                  "component": {
+                    "_id": "gbSTvcqmu2s9KLCfW"
+                  }
+                }
+              ],
+              "versions": [
+                "1.1.2"
+              ],
+              "tags": [
+                1
+              ],
+              "component": {
+                "_id": "mJBcoxTrZKnb3idhj"
+              }
+            }
+          ],
+          "versions": [
+            "0.1.70"
+          ],
+          "tags": [
+            156
+          ],
+          "scanLink": 2,
+          "component": {
+            "_id": "stT97u932XjJPhWsn"
+          }
+        }
+      ],
+      "companyId": "COMPANY_ID",
+      "user": "test@trustrouce.io",
+      "submitted": "2022-01-12T08:24:45.528Z"
+    },
+    "user": {
+      "_id": "USER_ID",
+      "createdAt": "2015-02-05T18:19:03.595Z",
+      "emails": [
+        {
+          "address": "test@trustrouce.io",
+          "verified": true
+        }
+      ],
+      "profile": {
+        "name": "Admin",
+        "companyId": "COMPANY_ID",
+        "email": "test@trustrouce.io",
+        "notifications": [
+          "EVENTS_ALL",
+          "ALARMS_ALL"
+        ],
+        "login": "test@trustrouce.io"
+      },
+      "roles": {
+        "COMPANY_ID": [
+          "developer",
+          "compliance_manager",
+          "portfolio_manager",
+          "manager",
+          "account_admin",
+          "enterprise_admin",
+          "component_manager",
+          "legal_manager",
+          "admin"
+        ]
+      }
+    },
+    "analysis": {
+      "_id": "ANALYSIS_ID",
+      "date": "2021-01-12T18:35:04.561Z",
+      "scanId": "SCAN_ID",
+      "companyId": "COMPANY_ID",
+      "moduleId": "MODULE_ID",
+      "components": [
+        {
+          "key": "npm:ts-node-client-sample",
+          "versions": [
+            {
+              "version": "1.0.5",
+              "paths": [
+                {
+                  "path": "/",
+                  "licenses": [
+                    {
+                      "key": "Apache-2.0",
+                      "status": {
+                        "status": "violations",
+                        "violations": "CA_2",
+                        "obligations": "O00; O01; O42"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "key": "npm:apache-2.0",
+          "versions": [
+            {
+              "version": "1.0.7",
+              "paths": [
+                {
+                  "path": "/apache-2.0:1.0.7",
+                  "licenses": [
+                    {
+                      "key": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0 AND GPL-2.0+ AND GPL-3.0 AND GPL-3.0+ AND LGPL-2.0 AND LGPL-2.0+ AND LGPL-2.1 AND LGPL-2.1+ AND LGPL-3.0 AND LGPL-3.0+ AND MIT",
+                      "status": {
+                        "status": "ok"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "key": "bower:bootstrap",
+          "versions": [
+            {
+              "version": "4.5.2",
+              "paths": [
+                {
+                  "path": "/bootstrap:4.5.2",
+                  "licenses": [
+                    {
+                      "key": "MIT",
+                      "status": {
+                        "status": "ok",
+                        "obligations": "O00; O01"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "status": "ok"
+        }
+      ],
+      "licenses": [
+        {
+          "key": "Apache-2.0",
+          "name": "Apache License 2.0",
+          "components": [
+            {
+              "componentKey": "npm:ts-node-client-sample",
+              "version": "1.0.5",
+              "path": "/",
+              "status": {
+                "status": "violations",
+                "violations": "CA_2",
+                "obligations": "O00; O01; O42"
+              },
+              "requireWhitelist": null,
+              "privateLicense": false
+            }
+          ],
+          "status": "violations"
+        },
+        {
+          "key": "MIT",
+          "name": "MIT License",
+          "components": [
+            {
+              "componentKey": "bower:bootstrap",
+              "version": "4.5.2",
+              "path": "/bootstrap:4.5.2",
+              "status": {
+                "status": "ok",
+                "obligations": "O00; O01"
+              },
+              "requireWhitelist": null,
+              "privateLicense": false
+            }
+          ],
+          "status": "ok"
+        },
+        {
+          "key": "unknown",
+          "name": "unknown",
+          "components": [
+            {
+              "componentKey": "npm:apache-2.0",
+              "version": "1.0.7",
+              "path": "/apache-2.0:1.0.7",
+              "status": {
+                "status": "ok"
+              }
+            }
+          ],
+          "status": "warnings"
+        }
+      ],
+      "statistics": {
+        "licenses": 3,
+        "components": 3,
+        "legal": {
+          "warnings": 1,
+          "violations": 1
+        },
+        "vulnerability": {
+          "warnings": 0,
+          "violations": 0
+        },
+        "viability": {
+          "warnings": 0,
+          "violations": 0
+        },
+        "versioning": {
+          "warnings": 0,
+          "violations": 0
+        },
+        "integrity": {
+          "warnings": 0,
+          "violations": 0
+        }
+      },
+      "moduleRequirements": {
+        "CA": "CA_license",
+        "OM": "OM_SaaS",
+        "IP_protect": "IP_protect_y",
+        "IP_enforce": "IP_enforce_3"
+      },
+      "ciaRequirements": null,
+      "viabilityConfig": {},
+      "versioningConfig": {},
+      "release": null,
+      "tag": null,
+      "binaryLinks": [],
+      "branch": null,
+      "demo": null,
+      "latest": true
+    }
+  }
+}

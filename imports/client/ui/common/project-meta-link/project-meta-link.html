@@ -1,0 +1,14 @@
+<template name="projectMetaLink">
+  {{#with project}}
+    <div>
+      <a href="{{pathFor route=actionRoute.route data=actionRoute.params query=actionRoute.query}}"
+         target="_blank">
+        <span class="fa fa-external-link inner-r-5"></span>
+        {{name}}
+        {{#if version}}
+          <span class="inner-l-10">Version: {{version}}</span>
+        {{/if}}
+      </a>
+    </div>
+  {{/with}}
+</template>

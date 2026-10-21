@@ -1,0 +1,381 @@
+// Guide side panel and guided tour (imports/client/ui/common/guide/).
+// Replaces intro.js and its theme overrides.
+
+@guide-panel-width: 340px;
+@guide-panel-header-height: 44px;
+@z-guide-panel: 1000; // under the right bar (@z-right-bar), like the header
+@z-tour: 3000;        // above everything, splash included
+@tour-dim: fade(@color-black, 49%);
+@tour-dot: #8c8f94;      // 3.2:1 on the tooltip (WCAG 1.4.11)
+@tour-dot-dark: #7a7a7a; // 3.4:1 on the dark tooltip
+
+// --- Side panel ---------------------------------------------------------------
+
+#guide-panel {
+  position: fixed;
+  top: ~"calc(@{header-height} + @{content-gap})";
+  right: ~"calc(@{right-bar-width} + @{content-gap})";
+  bottom: @content-gap;
+  z-index: @z-guide-panel;
+  display: flex;
+  flex-direction: column;
+  width: @guide-panel-width;
+  overflow: hidden;
+  background: @shell-bg;
+  border-radius: @content-radius;
+  box-shadow: -2px 0 8px fade(@color-black, 6%);
+  // Off screen and out of the tab order while closed; visibility switches only
+  // after the slide-out has finished.
+  visibility: hidden;
+  transform: translateX(~"calc(100% + @{right-bar-width} + @{content-gap})");
+  transition: transform @ts-shell-slide, visibility 0s linear 0.4s;
+
+  @media @ts-shell-mobile {
+    right: @content-gap;
+    width: auto;
+    left: @content-gap;
+  }
+}
+
+.show-guide-panel {
+  #guide-panel {
+    visibility: visible;
+    transform: translateX(0);
+    transition: transform @ts-shell-slide, visibility 0s;
+  }
+
+  #wrapper {
+    margin-right: ~"calc(@{right-bar-width} + @{guide-panel-width} + @{content-gap} * 2)";
+
+    @media @ts-shell-mobile {
+      margin-right: 0;
+    }
+  }
+}
+
+.guide-panel-header {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  height: @guide-panel-header-height;
+  padding: 0 12px;
+  background: @ts-navy;
+  color: @color-white;
+}
+
+.guide-panel-title {
+  font-size: 13px;
+  font-weight: 600;
+
+  i {
+    margin-right: 4px;
+  }
+}
+
+.guide-panel-close {
+  padding: 0 4px;
+  background: none;
+  border: none;
+  color: @color-white;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.8;
+
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
+}
+
+.guide-panel-body {
+  flex: 1;
+  padding: 14px 14px 20px;
+  overflow-y: auto;
+  .styled-scrollbar();
+}
+
+.guide-panel-heading {
+  margin: 0 0 6px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.guide-panel-summary,
+.guide-panel-empty {
+  color: @color-text-secondary;
+}
+
+.guide-start-tour {
+  margin: 4px 0 14px;
+}
+
+// buttons.import.less drops the focus ring on .btn:focus; give keyboard users
+// one back on the Start tour button and the tour's Cancel/Back/Next.
+.btn.guide-start-tour:focus-visible,
+.ts-tour-tooltip .btn:focus-visible {
+  outline: 2px solid @ts-teal;
+  outline-offset: 2px;
+}
+
+.guide-steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.guide-step + .guide-step {
+  margin-top: 4px;
+}
+
+.guide-step-show {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  padding: 8px;
+  text-align: left;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: inherit;
+  cursor: pointer;
+
+  // Light enough tint to keep the secondary step text at 4.5:1.
+  &:hover,
+  &:focus {
+    background: fade(@ts-navy, 3%);
+    border-color: fade(@ts-navy, 12%);
+  }
+}
+
+.guide-step-number {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: fade(@ts-teal, 15%);
+  color: darken(@ts-teal, 15%);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.guide-step-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.guide-step-title {
+  font-weight: 600;
+}
+
+.guide-step-text {
+  color: @color-text-secondary;
+  font-size: 12px;
+}
+
+.guide-step-missing {
+  color: @color-text-secondary;
+  font-size: 11px;
+  font-style: italic;
+}
+
+.guide-panel-help {
+  margin: 16px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid @ts-border;
+}
+
+// Outline set by the panel when a step is clicked. Drawn inside the element:
+// several targets sit in containers with overflow hidden (the sidebar), which
+// would clip an outline drawn outside.
+.ts-guide-highlight {
+  outline: 3px solid @ts-amber !important;
+  outline-offset: -3px;
+  animation: ts-guide-pulse 2s ease-out;
+}
+
+@keyframes ts-guide-pulse {
+  0% { outline-color: fade(@ts-amber, 0%); }
+  15% { outline-color: @ts-amber; }
+  80% { outline-color: @ts-amber; }
+  100% { outline-color: fade(@ts-amber, 0%); }
+}
+
+// --- Tour -------------------------------------------------------------------
+
+.ts-tour {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: @z-tour;
+}
+
+// Catches clicks so the page cannot be used mid-tour. Transparent while a
+// spotlight does the dimming; dims by itself for a centred step.
+.ts-tour-blocker {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.ts-tour-no-target .ts-tour-blocker {
+  background: @tour-dim;
+}
+
+.ts-tour-spotlight {
+  position: fixed;
+  border-radius: 6px;
+  box-shadow: 0 0 0 9999px @tour-dim, 0 0 0 2px fade(@color-white, 70%) inset;
+  pointer-events: none;
+  transition: top 0.25s ease, left 0.25s ease, width 0.25s ease, height 0.25s ease;
+}
+
+.ts-tour-tooltip {
+  position: fixed;
+  width: 340px;
+  max-width: ~"calc(100vw - 16px)";
+  padding: 14px 16px 12px;
+  background: @shell-bg;
+  border-radius: 8px;
+  box-shadow: 0 6px 24px fade(@color-black, 25%);
+  color: @ts-text;
+}
+
+.ts-tour-header {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.ts-tour-number {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: @ts-red-dark;
+  color: @color-white;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ts-tour-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.ts-tour-text {
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.ts-tour-bullets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.ts-tour-bullet {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: @tour-dot;
+  cursor: pointer;
+
+  // Wider as well as coloured, so the current step does not rely on hue alone.
+  &.active {
+    width: 16px;
+    border-radius: 4px;
+    background: @ts-teal;
+  }
+
+  &:focus-visible {
+    outline: 2px solid @ts-teal;
+    outline-offset: 2px;
+  }
+}
+
+.ts-tour-footer {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.ts-tour-spacer {
+  flex: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #guide-panel,
+  .show-guide-panel #guide-panel,
+  .ts-tour-spotlight {
+    transition: none;
+  }
+
+  .ts-guide-highlight {
+    animation: none;
+  }
+}
+
+// --- Dark theme ---------------------------------------------------------------
+
+.theme-dark {
+  #guide-panel,
+  .ts-tour-tooltip {
+    background: @color-bg-lighter;
+    color: @color-text-content;
+  }
+
+  .guide-panel-header {
+    background: @color-bg-nav;
+  }
+
+  .guide-panel-summary,
+  .guide-panel-empty,
+  .guide-step-text,
+  .guide-step-missing {
+    color: @color-text-muted-dark;
+  }
+
+  .guide-step-show:hover,
+  .guide-step-show:focus {
+    background: fade(@color-white, 3%);
+    border-color: fade(@color-white, 10%);
+  }
+
+  .guide-step-number {
+    background: fade(@color-link-primary, 18%);
+    color: @color-link-primary;
+  }
+
+  .guide-panel-help {
+    border-top-color: @color-bg-lightest;
+  }
+
+  .ts-tour-bullet {
+    background: @tour-dot-dark;
+
+    &.active {
+      background: @color-link-primary;
+    }
+  }
+}

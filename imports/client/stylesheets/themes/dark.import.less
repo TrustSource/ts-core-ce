@@ -1,0 +1,1443 @@
+@color-bg-primary: #121212;
+@color-bg-lighter: #292929;
+@color-bg-lightest: #373737;
+@color-bg-grey: #858585;
+@color-bg-white: #FFFFFF;
+@color-border-primary: #2D2D2D;
+@color-text-primary: #FFFFFF;
+@color-text-reverse: #121212;
+@color-link-primary: #60BFAD;
+@color-accent-primary: #324E80;
+@color-accent-secondary: #2A3F64;
+@color-bg-canvas: #DDDDDD;
+
+@color-bg-nav: #1f1f1f;
+@color-border-nav: #616161;
+@color-text-nav: #ffffff;
+@color-sborder-nav: #1c1c1c;
+
+@color-bg-subnav: #333333;
+@color-border-subnav: #4a4a4a;
+@color-text-subnav: #b3b3b4;
+@color-atext-subnav: #f8f8fa;
+@color-fcontrol-subnav: #505050;
+@color-ifcontrol-subnav: #404040;
+
+@color-bg-content: #1a1d21;
+@color-border-content: #35373b;
+@color-text-content: #c6d2d3;
+// Muted body text on the dark modal/panel backgrounds: ~5.1:1 on #292929.
+@color-text-muted-dark: #999999;
+@color-atext-content: #d1d2d3;
+@color-fcontrol-content: #222529;
+@color-tfcontrol-subnav: #757678;
+@color-itfcontrol-subnav: #3e4144;
+
+@color-bg-alert: #222529;
+@color-text-alert: #d1d2d3;
+@color-descr-alert: #adacab;
+
+
+.theme-dark{
+  background-color: @color-bg-nav;
+  color: @color-text-subnav;
+
+  .ecs-dependencies-box .ecs-dependencies-with-details.ts-panel > .panel-heading {
+    color: #e0e0e0;
+  }
+
+  // --- Shell: header, left nav, right bar ---
+  #header{
+    background-color: @color-bg-nav;
+  }
+  #logo.light-version{
+    background-color: @color-bg-nav;
+  }
+  .header-link{
+    background-color: @color-bg-nav;
+    color: @color-text-nav;
+    &:hover {
+      background-color: @color-bg-lighter;
+    }
+  }
+  .breadcrumb{
+    background-color: @color-bg-nav;
+    color: @color-text-subnav;
+  }
+  #navigation{
+    background-color: @color-bg-nav;
+    color: @color-text-subnav;
+  }
+  #side-menu{
+    background-color: @color-bg-nav;
+    li{
+      a {
+        color: @color-text-nav;
+      }
+      &:hover,
+      &.active{
+        background-color: @color-bg-subnav;
+      }
+    }
+    li.active a,
+    li:hover a{
+      background: @color-bg-subnav;
+      color: @color-link-primary;
+    }
+    &.nav > li > a:hover,
+    &.nav > li > a:focus{
+      background-color: @color-bg-subnav;
+    }
+  }
+  .sidebar-link.active,
+  .nav > .active > a:hover,
+  .nav > .active > a:focus{
+    background: @color-bg-lighter!important;
+    color: @color-link-primary!important;
+  }
+  .sidebar-dropdown .sidebar-link{
+    background: @color-bg-primary;
+  }
+  .nav-footer{
+    border-top-color: @color-border-nav;
+    small {
+      color: @color-text-subnav;
+      strong {
+        color: @color-text-nav;
+      }
+    }
+  }
+  .nav-user-name,
+  .nav-user-role,
+  .nav-user-company {
+    color: @color-text-subnav;
+  }
+
+  // --- Right bar ---
+  #right-bar{
+    background: @color-bg-nav;
+  }
+  .right-bar-link{
+    color: @color-text-subnav;
+    &:hover,
+    &:focus{
+      color: @color-link-primary;
+      background: fade(@color-link-primary, 10%);
+    }
+  }
+  .right-bar-nav .active .right-bar-link,
+  .right-bar-nav li.active .right-bar-link{
+    color: @color-link-primary;
+    background: fade(@color-link-primary, 12%);
+  }
+
+  // --- Scrollbar ---
+  @scrollbar-thumb-dark: rgba(255, 255, 255, 0.15);
+  @scrollbar-thumb-dark-hover: rgba(255, 255, 255, 0.25);
+
+  .content-area,
+  .fixed-sidebar& #menu,
+  #side-menu,
+  .ecs-dependencies {
+    &::-webkit-scrollbar-thumb {
+      background: @scrollbar-thumb-dark;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: @scrollbar-thumb-dark-hover;
+    }
+    scrollbar-color: @scrollbar-thumb-dark transparent;
+  }
+
+  // --- Wrapper & content area ---
+  #wrapper{
+    background: @color-bg-content;
+  }
+  .content-area{
+    background: @color-bg-content;
+  }
+
+  // --- Sticky page header ---
+  .ts-page-header {
+    background: @color-bg-primary;
+
+    h2, h2.font-light {
+      color: @color-text-primary;
+    }
+    small {
+      color: @color-text-subnav;
+    }
+    .ts-panel.top-full-panel > .panel-body {
+      background: transparent;
+    }
+  }
+
+  // --- Sticky pagination dark bg ---
+  .ts-panel > .panel-body > .reactiveTableServerSide > .pagination-full,
+  .ts-panel > .panel-body > .reactiveTableServerSide > .pagination-compact {
+    background: @color-bg-alert;
+    border-top-color: @color-border-primary;
+  }
+
+  // --- Sticky action toolbars (risk edit, vulnerability report) ---
+  // Light rules hardcode #f4f4f2 in ecs/features.import.less
+  .sticky-risk-actions,
+  .sticky-vuln-actions {
+    background: @color-bg-content;
+    border-bottom-color: @color-border-primary;
+  }
+
+  // --- Header attention popup ---
+  .navbar-attention {
+    background: @color-bg-subnav;
+    color: @color-text-subnav;
+  }
+
+  .pagination-compact {
+    border-top-color: @color-border-primary;
+    color: @color-text-subnav;
+
+    .compact-prev,
+    .compact-next {
+      border-color: @color-border-primary;
+      color: @color-text-subnav;
+
+      &:hover {
+        border-color: @color-link-primary;
+        color: @color-link-primary;
+      }
+    }
+
+    .form-control {
+      border-color: @color-border-primary;
+      background: @color-bg-lighter;
+      color: @color-text-primary;
+    }
+  }
+
+  // --- Links ---
+  a:not(.btn) {
+    color: @color-link-primary;
+  }
+
+  // --- Navbar dropdowns ---
+  .navbar-nav .open > a{
+    background: @color-bg-primary;
+  }
+  .navbar-nav > li > a:hover,
+  .navbar-nav > li > a:focus,
+  .navbar-nav .open > a:hover,
+  .navbar-nav .open > a:focus{
+    background: @color-bg-primary;
+    border-bottom: 3px solid @color-link-primary;
+  }
+  .nav > li.active {
+    background: transparent;
+    border-bottom: 3px solid @color-link-primary;
+  }
+  .nav-tabs > li.active > a,
+  .nav-tabs > li.active > a:hover,
+  .nav-tabs > li.active > a:focus{
+    background: @color-bg-primary;
+    border-color: @color-bg-lightest;
+    color: @color-text-primary;
+  }
+
+  // --- Dropdowns ---
+  .dropdown-menu {
+    background: @color-bg-content;
+    border-color: @color-border-content;
+    color: @color-text-content;
+  }
+  .dropdown-menu > li > a{
+    color: @color-text-content;
+  }
+  .dropdown-menu > li > a:hover,
+  .dropdown-menu > li > a:focus{
+    background: @color-bg-content;
+    border-color: @color-border-content;
+    color: @color-link-primary;
+  }
+  // Overflow dropdown sub-template buttons (Add component / Resolve via Notice
+  // file / Follow) render as .btn inside the menu; the light rule colours them
+  // #333, which is unreadable on the dark menu. Match the plain dropdown items.
+  .module-actions-overflow .dropdown-menu {
+    > li > .btn,
+    > li > a.btn {
+      color: @color-text-content;
+
+      &:hover,
+      &:focus {
+        background: @color-bg-content;
+        color: @color-link-primary;
+      }
+    }
+  }
+
+  // --- Forms ---
+  .form-control,
+  .select2-search input,
+  .select2-results .select2-no-results,
+  .select2-results .select2-searching,
+  .select2-results .select2-selection-limit,
+  pre{
+    background: @color-fcontrol-content;
+    border-color: @color-border-content!important;
+    color: @color-text-subnav;
+  }
+  .input-group-file > input[readonly]{
+    background: @color-fcontrol-content!important;
+    border-color: @color-border-content!important;
+    color: @color-text-subnav!important;
+  }
+  // Category / algorithms tag-input widget (packages/tag-input) hardcodes light
+  // colors as inline styles, which outrank normal theme CSS - so the container,
+  // tag chip and remove link need !important to theme in dark mode. Matches the
+  // .form-control + select2 chip treatment above.
+  .tag-input-container {
+    background: @color-fcontrol-content!important;
+    border-color: @color-border-content!important;
+
+    // Focus ring to match .form-control:focus - the inner field has inline
+    // outline:none, so highlight the container border when it holds focus.
+    &:focus-within {
+      border-color: @color-link-primary!important;
+      box-shadow: 0 0 0 3px rgba(96, 191, 173, 0.15);
+    }
+  }
+  .tag-input-field {
+    background: transparent;
+    color: @color-text-subnav;
+
+    &::placeholder {
+      color: @color-text-subnav;
+    }
+  }
+  .tag-input-tag {
+    background: @color-bg-primary!important;
+    border: 1px solid @color-bg-lightest;
+    color: @color-text-primary;
+  }
+  .tag-input-remove {
+    color: @color-text-subnav!important;
+  }
+  .select2-container .select2-choice,
+  .select2-container .select2-choices,
+  .select2-container--default .select2-selection--single,
+  .select2-container--default .select2-selection--multiple{
+    background: @color-fcontrol-content;
+    border-color: @color-border-content!important;
+    color: @color-text-subnav;
+  }
+  .select2-container--default .select2-selection--single .select2-selection__rendered{
+    color: @color-text-subnav;
+  }
+  .select2-container.select2-container-disabled .select2-choice,
+  .select2-container.select2-container-disabled .select2-choices,
+  .select2-container--default.select2-container--disabled .select2-selection--single,
+  .select2-container--default.select2-container--disabled .select2-selection--multiple{
+    background: @color-fcontrol-content;
+    border-color: @color-border-content!important;
+    color: @color-text-subnav;
+  }
+  .select2-container-multi .select2-choices .select2-search-choice,
+  .select2-container--default .select2-selection--multiple .select2-selection__choice{
+    background: @color-bg-primary;
+    border-color: @color-bg-lightest;
+    color: @color-text-primary;
+  }
+  .select2-drop,
+  .select2-dropdown{
+    background: @color-bg-primary;
+    border-color: @color-bg-lightest;
+    color: @color-text-primary;
+  }
+  .select2-container--default .select2-results__option--highlighted[aria-selected]{
+    background-color: @color-bg-lighter;
+  }
+  // Teal focus ring to match .form-control:focus and the tag-input widget -
+  // applied when the select2 is focused or its dropdown is open.
+  .select2-container--default.select2-container--focus .select2-selection--single,
+  .select2-container--default.select2-container--focus .select2-selection--multiple,
+  .select2-container--default.select2-container--open .select2-selection--single,
+  .select2-container--default.select2-container--open .select2-selection--multiple{
+    border-color: @color-link-primary!important;
+    box-shadow: 0 0 0 3px rgba(96, 191, 173, 0.15);
+  }
+  .input-group-addon{
+    background: @color-fcontrol-content;
+    border-color: @color-border-content!important;
+    color: @color-text-subnav;
+  }
+
+  // --- User icon ---
+  .header-user-link {
+    color: @color-text-nav;
+    &:hover,
+    &:focus {
+      color: @color-link-primary;
+    }
+  }
+  .header-user-role {
+    color: @color-text-subnav;
+  }
+  .header-user-icon {
+    color: @color-link-primary;
+  }
+
+  // --- Splash ---
+  .splash{
+    background: @color-bg-content;
+    color: @color-text-alert;
+  }
+  .splash-holder{
+    background: @color-bg-content;
+    color: @color-text-alert;
+  }
+
+  // --- Labels ---
+  .badge-beta {
+    background: @color-link-primary;
+    color: #fff;
+  }
+  .label-default{
+    background: @color-bg-alert;
+    border-color: @color-descr-alert;
+    color: @color-text-alert;
+  }
+  a.label-info{
+    color: @color-text-primary;
+  }
+
+  // --- Small logo ---
+  .small-logo{
+    .text-primary{
+      color: @color-text-primary;
+    }
+  }
+
+  // --- Panels ---
+  .top-full-panel{
+    .panel-body{
+      border: none
+    }
+  }
+  .ts-panel .panel-body{
+    background: @color-bg-alert;
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    & > .text-info,
+    & > .text-primary{
+      color: @color-text-primary;
+    }
+  }
+  .panel-danger > .panel-heading,
+  .panel-default > .panel-heading,
+  .panel-warning > .panel-heading{
+    background: @color-bg-subnav;
+    color: @color-text-subnav;
+  }
+  .ts-panel > .panel-footer,
+  .intro-dependency-pages .panel-footer{
+    background: @color-bg-lighter;
+    border-color: @color-bg-lightest;
+  }
+  .ts-panel.panel-collapse > .panel-heading,
+  .ts-panel .ts-panel-built{
+    background: @color-bg-lighter;
+    border-color: @color-bg-lightest;
+  }
+  .panel,
+  .panel.panel-default{
+    background: @color-bg-lighter;
+    border-color: @color-bg-lightest;
+  }
+  .panel-heading .pull-right a{
+    color: @color-text-primary;
+  }
+
+  // --- Tables ---
+  .table .table{
+    background-color: @color-bg-primary;
+  }
+  .table-striped > tbody > tr:nth-of-type(odd),
+  .table-hover > tbody > tr:hover {
+    background-color: @color-bg-primary;
+  }
+  .table > thead > tr > td.active, .table > tbody > tr > td.active, .table > tfoot > tr > td.active,
+  .table > thead > tr > th.active, .table > tbody > tr > th.active, .table > tfoot > tr > th.active,
+  .table > thead > tr.active > td, .table > tbody > tr.active > td, .table > tfoot > tr.active > td,
+  .table > thead > tr.active > th, .table > tbody > tr.active > th, .table > tfoot > tr.active > th{
+    background-color: @color-bg-primary;
+  }
+
+  // --- Modern table overrides ---
+  .reactive-table,
+  .table {
+    > thead > tr > th {
+      color: @color-text-subnav;
+      border-bottom-color: @color-link-primary !important;
+    }
+    > tbody > tr {
+      > td {
+        border-bottom-color: @color-border-primary;
+      }
+      &:hover {
+        background-color: rgba(96, 191, 173, 0.08);
+      }
+    }
+    > tbody > tr.active > td,
+    > tbody > tr.selected > td {
+      background-color: rgba(96, 191, 173, 0.1);
+      border-left-color: @color-link-primary;
+    }
+    &.table-striped > tbody > tr:nth-of-type(odd) {
+      background-color: transparent;
+    }
+  }
+
+  .reactiveTableServerSide {
+    .search-field,
+    .sort-field {
+      background: @color-fcontrol-content;
+      border-color: @color-border-content !important;
+      color: @color-text-subnav;
+
+      &:focus {
+        border-color: @color-link-primary !important;
+        box-shadow: 0 0 0 3px rgba(96, 191, 173, 0.15);
+      }
+    }
+
+    // Sticky pagination dark bg
+    > .pagination-full,
+    > .pagination-compact {
+      color: @color-text-subnav;
+      background: @color-bg-alert;
+      border-top-color: @color-border-primary;
+    }
+  }
+
+  .reactive-table-options .reactive-table-filter .form-control {
+    &:focus {
+      border-color: @color-link-primary;
+      box-shadow: 0 0 0 3px rgba(96, 191, 173, 0.15);
+    }
+  }
+
+  // Pagination (prev/next arrows + page input). The light rules in
+  // tables-modern (e.g. .reactive-table-navigation .page-number .form-control)
+  // carry higher specificity than the generic dark .form-control rule and win
+  // under body.flex-fill-page, so re-scope under .theme-dark at matching/higher
+  // specificity. Focus on the page input is already covered by .form-control:focus.
+  .reactive-table-navigation {
+    .previous-page,
+    .next-page {
+      background: transparent;
+      border-color: @color-border-content;
+      color: @color-text-content;
+
+      &:hover {
+        background-color: fade(@color-link-primary, 6%);
+        border-color: @color-link-primary;
+        color: @color-link-primary;
+      }
+    }
+
+    // Both the editable page input (.page-number) and the non-editable
+    // "Show 50" span styled as a .form-control (.rows-per-page) need the dark
+    // treatment. The light tables-modern rules (e.g.
+    // .reactive-table-navigation .rows-per-page .form-control) sit at (0,3,0),
+    // outranking the generic dark .form-control rule (0,2,0); these selectors
+    // match at (0,4,0) so they win under body.flex-fill-page.
+    .page-number .form-control,
+    .rows-per-page .form-control {
+      background: @color-fcontrol-content;
+      border-color: @color-border-content !important;
+      color: @color-text-subnav;
+    }
+  }
+
+  // Filter funnel icon: the light rule (tables-modern) sets color:@ts-text
+  // (dark) at specificity (0,4,0), outranking the generic dark .input-group-addon
+  // rule (0,3,0). Match its transparent/borderless layout but use a light tone so
+  // the icon stays visible on the dark background.
+  .reactive-table-options .reactive-table-filter .input-group .input-group-addon {
+    background: transparent;
+    border: none;
+    color: @color-text-subnav;
+  }
+
+  .reactive-table td,
+  .table td {
+    .btn-primary {
+      background-color: transparent;
+      border-color: @color-link-primary;
+      color: @color-link-primary;
+
+      &:hover,
+      &:focus {
+        background-color: @color-link-primary;
+        color: @color-text-reverse;
+      }
+    }
+  }
+
+  // --- Form controls dark ---
+  .form-control:focus {
+    border-color: @color-link-primary !important;
+    box-shadow: 0 0 0 3px rgba(96, 191, 173, 0.15);
+  }
+  select.form-control {
+    // .theme-dark .form-control uses the `background` shorthand, which resets
+    // repeat/position/size set by the base select.form-control rule. Re-declare
+    // the longhands here (mirrors tables-modern.import.less) so the arrow does
+    // not tile across the whole select.
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23b3b3b4' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+  }
+  .input-group .input-group-addon {
+    background: @color-fcontrol-content;
+    border-color: @color-border-content !important;
+    color: @color-text-subnav;
+  }
+
+  // --- Scan detail dark ---
+  .scanDetail .ts-page-header {
+    h2.font-light > span {
+      background: fade(#fff, 12%);
+      color: fade(#fff, 80%);
+    }
+    p {
+      color: fade(#fff, 50%);
+    }
+  }
+
+  // Scan detail sidebar dark override
+  .scanDetailSideInfo {
+    .ts-panel {
+      > .panel-heading {
+        color: @color-text-primary;
+      }
+      > .panel-body {
+        border-left-color: @color-link-primary;
+      }
+    }
+    .dl-horizontal dt {
+      color: @color-text-subnav;
+    }
+    .scan-aside-breadcrumb {
+      background: rgba(96, 191, 173, 0.08);
+      border-color: rgba(96, 191, 173, 0.15);
+    }
+  }
+
+  // Scan-detail panels render white - scan.less line ~412 forces
+  // `.scanContent .ts-panel { background: @color-white }` (covers both the
+  // tree panel and the side-info panel); no dark bg override existed.
+  .scanContent .ts-panel,
+  .ecs-dependencies-with-details.ts-panel,
+  .ecs-licenses.ts-panel,
+  .ecs-tests.ts-panel {
+    background: @color-bg-content;
+  }
+
+  // scan.less colours this panel's heading @ts-navy (#063d50) at
+  // specificity 0,3,0 (`.ecs-tests.ts-panel > .panel-heading`), which is all but
+  // invisible on the dark panel background - measured #063d50 on #1a1d21. The
+  // sibling `.ecs-dependencies-with-details` heading is already light, so only
+  // this one is affected. 0,4,0 here, so it wins.
+  .ecs-tests.ts-panel > .panel-heading {
+    color: @color-text-primary;
+  }
+
+  // Dependencies panel heading dark
+  .scanContent .ts-panel > .panel-heading {
+    color: @color-text-primary;
+    border-bottom-color: @color-link-primary;
+  }
+
+  // Check page heading ("License Check") - check.less sets color:@ts-navy
+  // (specificity 0,3,0); match it to fix the low-contrast title.
+  .checkContent .ts-panel > .panel-heading {
+    color: @color-text-primary;
+    border-bottom-color: @color-link-primary;
+  }
+
+  // Tree dark overrides
+  #tree {
+    .list-group-item,
+    .node-tree {
+      &:not(.node-disabled):hover {
+        background-color: rgba(96, 191, 173, 0.08);
+        border-left-color: @color-link-primary;
+      }
+      &.node-selected {
+        background-color: rgba(96, 191, 173, 0.12) !important;
+        color: @color-link-primary !important;
+        border-left-color: @color-link-primary;
+      }
+      .badge {
+        background: @color-link-primary;
+        color: @color-text-reverse;
+      }
+      &.dependency-root {
+        background: @color-accent-secondary;
+        border-left-color: @color-accent-secondary;
+      }
+      &.dependency-active {
+        background: rgba(96, 191, 173, 0.12);
+        color: @color-link-primary;
+        border-left-color: @color-link-primary;
+      }
+    }
+    .list-group-item:nth-child(even):not(.node-selected):not(.dependency-root):not(:hover) {
+      background-color: rgba(255, 255, 255, 0.02);
+    }
+  }
+
+  // --- Modals ---
+  .modal-footer,
+  .modal-header,
+  .modal-content{
+    background-color: @color-bg-lighter;
+    border-bottom-color: @color-bg-lightest;
+  }
+
+  // modal.import.less colours every modal subtitle `lighten(@ts-text, 20%)`,
+  // which resolves to #13466f - a navy that measures ~1.5:1 against the dark
+  // modal header (#292929) and is effectively unreadable. The light rule
+  // `.modal-header small` is 0,1,1, so 0,2,1 here wins. Deliberately dimmer
+  // than the title (@color-text-subnav) so the two stay distinguishable, while
+  // still clearing 4.5:1 on this background.
+  .modal-header small {
+    color: @color-text-muted-dark;
+  }
+
+  // --- Swagger / Canvas ---
+  #swagger-ui,
+  canvas{
+    background-color: @color-bg-canvas;
+    padding: 5px;
+  }
+  .paketmanager img{
+    background: @color-bg-canvas;
+  }
+
+  // The generic dark `canvas` rule above gives every canvas a light backdrop so
+  // D3/line charts stay readable; a disc-shaped chart needs none - a light square
+  // behind the disc looks broken on the dark panel. Keep those transparent.
+  #chart-progress-modules canvas,
+  #sunburst-chart {
+    background: transparent;
+    padding: 0;
+  }
+
+  // --- Dependencies ---
+  .node-tree:not(.node-disabled):hover {
+    background-color: @color-bg-grey;
+  }
+  .dependency-active{
+    color: @color-link-primary;
+  }
+  .ecs-dependency{
+    background: @color-bg-lighter;
+  }
+  .aside-section-content,
+  .ecs-aside-head,
+  .ecs-aside-nav{
+    background: @color-bg-lighter;
+    border-color: @color-bg-lightest;
+  }
+  // Manual license resolution. The light hint colour
+  // @color-text-secondary (#6b7280) sits at ~2.6:1 on @color-bg-lighter
+  // (#292929) and fails; Bootstrap's own .text-muted (#777) is ~3.2:1 and fails
+  // too, which is why the hint carries its own class in the first place.
+  // One selector deeper than the light rule, so it wins without !important.
+  .license-resolve-hint{
+    color: @color-text-muted-dark;
+  }
+  // select2 appends its dropdown to <body>, which is where .theme-dark lives,
+  // so the option hint has to be overridden outside the aside as well.
+  .license-catalog-option .license-catalog-option-hint{
+    color: @color-text-muted-dark;
+  }
+  .ecs-aside-head{
+    color: @color-text-primary;
+  }
+  // .module-aside-head (dependency aside title bar) hard-codes
+  // `background:#fff !important` in module.import.less - must use !important
+  // + higher specificity to win.
+  .module-aside-head{
+    background: @color-bg-content !important;
+    border-bottom-color: @color-link-primary !important;
+
+    h5{
+      color: @color-text-primary;
+    }
+  }
+  .ecs-aside-head .ecs-aside-close{
+    background: @color-bg-primary;
+  }
+  .dependency-root{
+    background: #2a3f64;
+    color: #FFFFFF;
+  }
+  // .dependency-active had light-theme values (#cccccc/#000) inside the dark
+  // file - use the dark teal-on-translucent treatment (consistent with the
+  // tree/list active styling).
+  .dependency-active{
+    background: rgba(96, 191, 173, 0.12);
+    color: @color-link-primary;
+  }
+  // The dependency LIST active row renders as
+  // `.ecs-dependencies .ecs-dependency.dependency-active`; module.import.less
+  // (specificity 0,3,0, color:@ts-navy) out-specifies the generic
+  // .dependency-active above (0,2,0), so dark navy text showed on the tint.
+  // Match the light rule's specificity to win the cascade.
+  .ecs-dependencies .ecs-dependency.dependency-active{
+    background-color: rgba(96, 191, 173, 0.12);
+    border-left-color: @color-link-primary;
+    color: @color-link-primary;
+  }
+
+  // --- Pagination ---
+  .pagination > li > a,
+  .pagination > li > span{
+    background: @color-bg-primary;
+    border-color: @color-bg-lightest;
+    color: @color-text-primary;
+  }
+  .pagination > li > a:hover,
+  .pagination > li > span:hover,
+  .pagination > li > a:focus,
+  .pagination > li > span:focus {
+    background: @color-bg-lighter;
+    border-color: @color-link-primary;
+    color: @color-link-primary;
+  }
+  .pagination > .active > a,
+  .pagination > .active > span,
+  .pagination > .active > a:hover,
+  .pagination > .active > span:hover,
+  .pagination > .active > a:focus,
+  .pagination > .active > span:focus{
+    background: @color-bg-lighter;
+    border-color: @color-link-primary;
+    color: @color-link-primary;
+  }
+
+  // --- Buttons ---
+  .btn-default,
+  .inc_version{
+    background: @color-bg-primary;
+    border-color: @color-bg-lightest;
+    color: @color-text-primary;
+  }
+  .btn-default:hover,
+  .btn-default:focus,
+  .btn-default:active,
+  .btn-default.active,
+  .open .dropdown-toggle.btn-default,
+  .inc_version:hover {
+    background: @color-bg-primary;
+    border-color: @color-bg-lightest;
+    color: @color-link-primary;
+  }
+  .btn-default.disabled,
+  .btn-default.disabled:hover,
+  .btn-default.disabled:focus,
+  .btn-default.disabled:active,
+  .btn-default.disabled.active,
+  .btn-default[disabled],
+  .btn-default[disabled]:hover,
+  .btn-default[disabled]:focus,
+  .btn-default[disabled]:active,
+  .btn-default.active[disabled],
+  fieldset[disabled] .btn-default,
+  fieldset[disabled] .btn-default:hover,
+  fieldset[disabled] .btn-default:focus,
+  fieldset[disabled] .btn-default:active,
+  fieldset[disabled] .btn-default.active {
+    background: @color-bg-primary;
+    border-color: @color-bg-lightest;
+    color: @color-text-primary;
+  }
+  .btn-primary {
+    background: @color-accent-secondary;
+    border-color: @color-bg-primary;
+    color: @color-text-primary;
+  }
+  .btn-primary:hover,
+  .btn-primary:focus,
+  .btn-primary:active,
+  .btn-primary.active,
+  .open .dropdown-toggle.btn-primary {
+    background: @color-accent-primary;
+    border-color: @color-bg-primary;
+    color: @color-text-primary;
+  }
+  .btn-primary.disabled,
+  .btn-primary.disabled:hover,
+  .btn-primary.disabled:focus,
+  .btn-primary.disabled:active,
+  .btn-primary.disabled.active,
+  .btn-primary[disabled],
+  .btn-primary[disabled]:hover,
+  .btn-primary[disabled]:focus,
+  .btn-primary[disabled]:active,
+  .btn-primary.active[disabled],
+  fieldset[disabled] .btn-primary,
+  fieldset[disabled] .btn-primary:hover,
+  fieldset[disabled] .btn-primary:focus,
+  fieldset[disabled] .btn-primary:active,
+  fieldset[disabled] .btn-primary.active {
+    background: @color-bg-primary;
+    border-color: @color-bg-lightest;
+    color: @color-text-primary;
+  }
+
+  // v3 detail-page header actions sit on a dark navy bar and use a single ghost
+  // button style (set in tables-modern). The dark .btn-primary fill above
+  // otherwise leaks in and singles out individual export buttons (e.g. PDF),
+  // which reads as "primary" though PDF/CycloneDX/SPDX are equal exports.
+  // Re-assert the consistent ghost style here at higher specificity.
+  .v3-header-actions,
+  .license-detail-header-actions,
+  .approves-detail-header-actions {
+    > .btn,
+    > a.btn,
+    > .dropdown > .btn,
+    > span > .btn,
+    > span > a.btn,
+    .btn-group .btn {
+      background: fade(@color-white, 12%);
+      border-color: fade(@color-white, 25%);
+      color: @color-white;
+
+      &:hover,
+      &:focus,
+      &:active,
+      &.active {
+        background: fade(@color-white, 22%);
+        border-color: fade(@color-white, 40%);
+        color: @color-white;
+      }
+    }
+  }
+
+  // --- Slider ---
+  .noUi-handle{
+    background: @color-link-primary;
+    border-color: @color-bg-lightest;
+  }
+  .noUi-handle:before,
+  .noUi-handle:after {
+    background: @color-text-primary;
+  }
+  .noUi-pips,
+  .noUi-value-sub {
+    color: @color-text-primary;
+  }
+
+  // --- Sweet alerts ---
+  .sweet-alert{
+    background: @color-bg-primary;
+    border: 1px solid @color-bg-white;
+    color: @color-text-primary;
+    p,
+    h2{
+      color: @color-text-primary;
+    }
+  }
+  .sweet-alert button.cancel{
+    color: @color-text-reverse;
+  }
+  .sweet-alert input{
+    color: #000;
+  }
+
+  // --- Notices ---
+  .notice-view-left,
+  .notice-view-right{
+    background: @color-bg-content;
+    border-color: @color-border-content;
+    color: @color-text-content;
+  }
+
+  // --- SBOM file details ---
+  // The two-column scrollable shell (features.import.less:1412) hard-codes a
+  // white background + light @ts-border (#e0e1e3) with no dark override, so
+  // the left column showed white in dark mode. Mirror the notices block above.
+  .sbom-view-left,
+  .sbom-view-right{
+    background: @color-bg-content;
+    border-color: @color-border-content;
+    color: @color-text-content;
+
+    // Component-card separators. .panel-clear-style > .panel-heading / .panel-body
+    // (features.import.less:806) carry border-bottom: 1px solid @ts-border
+    // (#e0e1e3) at (0,2,0) with no dark override, so the dividers between cards
+    // rendered too light. These selectors land at (0,4,0) and are scoped to the
+    // SBOM shells so notice pages (which share .panel-clear-style) are
+    // untouched.
+    .panel-clear-style > .panel-heading,
+    .panel-clear-style > .panel-body{
+      border-bottom-color: @color-border-content;
+    }
+    // Expanded edit form: keep field labels legible on the dark card body.
+    // (.form-control inputs already inherit the generic dark .form-control rule;
+    // the card body background comes from the generic dark .panel rule.)
+    .edit_component .control-label{
+      color: @color-text-subnav;
+    }
+  }
+  // Right-column stats header divider is set by the light rule
+  // .sbom-view-right .notice-view-right-stats (features.import.less:1431) at
+  // (0,2,0) using @ts-border; match at (0,3,0) so the divider is dark.
+  .sbom-view-right .notice-view-right-stats{
+    border-bottom-color: @color-border-content;
+  }
+
+  .ios-toggle-label.ios-toggle-label-dark{
+    color: @color-text-primary;
+  }
+
+  // --- Wizard ---
+  .wizard > .steps {
+    background: @color-bg-lighter;
+    border-color: @color-bg-lightest;
+    color: @color-text-primary;
+  }
+  .wizard > .steps > ul li.active {
+    color: @color-link-primary;
+    background: @color-bg-primary;
+  }
+  .wizard > .steps > ul li:hover {
+    color: @color-link-primary;
+    background: @color-bg-primary;
+  }
+  .wizard > .steps > ul li,
+  .wizard > .steps > ul li {
+    color: @color-text-primary;
+    background: @color-bg-lightest;
+  }
+  .wizard ul li.complete {
+    color: @color-text-primary;
+    background: @color-bg-primary;
+  }
+  .wizard ul li .chevron {
+    border-left: 14px solid @color-bg-lightest;
+  }
+  .wizard ul li .chevron:before {
+    border-left: 14px solid @color-bg-lightest;
+  }
+  .wizard ul li:hover .chevron:before {
+    border-left: 14px solid @color-bg-primary;
+  }
+  .wizard ul li.complete .chevron:before {
+    border-left: 14px solid @color-bg-lightest;
+  }
+  .wizard ul li.active .chevron:before {
+    border-left: 14px solid @color-bg-primary;
+  }
+  .wizard ul li.active:hover .chevron:before,
+  .wizard ul li.complete:hover .chevron:before {
+    border-left: 14px solid @color-bg-primary;
+  }
+  .wizard .badge {
+    color: @color-text-alert;
+    background-color: @color-bg-lighter;
+  }
+  .wizard .badge-success {
+    background-color: @color-link-primary
+  }
+  .wizard .badge-info {
+    background-color: @color-link-primary;
+  }
+
+  // --- Alerts ---
+  .alert,
+  .alert-info,
+  .alert-success,
+  .alert-warning,
+  .alert-danger{
+    background: @color-bg-lighter;
+    border-color: @color-border-content;
+    color: @color-text-content;
+
+    p,
+    small,
+    .text-muted,
+    .help-block {
+      color: @color-text-content;
+    }
+
+    a:not(.btn) {
+      color: @color-link-primary;
+    }
+  }
+
+  // --- Toasts ---
+  #toast-container > .toast-info,
+  #toast-container > .toast-success,
+  #toast-container > .toast-warning,
+  #toast-container > .toast-error {
+    background: @color-descr-alert;
+    background-image: none!important;
+    color: @color-text-primary;
+  }
+
+  // --- Module stats ---
+  .module-stat .module-stat-value{
+    color: @color-text-content;
+  }
+
+  .module-stats-dropdown-content {
+    background: @color-bg-lighter;
+    border-color: @color-border-primary;
+  }
+
+  // --- Linked Module Widget ---
+  .linked-module-stats {
+    background: @color-bg-lighter;
+    border-color: @color-border-primary;
+    border-left-color: @color-link-primary;
+    box-shadow: 0 1px 3px fade(@color-black, 30%);
+
+    &:hover {
+      box-shadow: 0 2px 6px fade(@color-black, 40%);
+    }
+
+    .linked-module-counters {
+      border-bottom-color: @color-border-primary;
+
+      .linked-module-counter {
+        color: @color-text-subnav;
+
+        strong {
+          color: @color-text-primary;
+        }
+      }
+    }
+
+    .linked-module-stats-table .stats-label {
+      color: @color-text-subnav;
+    }
+
+    .linked-module-na {
+      background: @color-bg-primary;
+    }
+
+    .linked-module-meta {
+      border-top-color: @color-border-primary;
+    }
+  }
+
+  // --- Loading ---
+  .loading-title {
+    color: #FFFFFF;
+  }
+  .loading-spinner,
+  .route-loading-spinner {
+    border-color: #444;
+    border-top-color: #60BFAD;
+  }
+
+  // --- Integration ---
+  .integration-icon.copy .fa{
+    color: inherit;
+  }
+
+  // --- Confidence ---
+  .confidence-label {
+    color: #FFFFFF;
+  }
+  .confidence-label:after{
+    background: #121212;
+  }
+  .aside-section-content,
+  .ecs-aside-head,
+  .ecs-aside-nav{
+    .confidence-label:after{
+      background: #292929;
+    }
+  }
+
+  // --- Projects panel ---
+  .projects-panel,
+  .modules-panel {
+    background: @color-bg-lighter;
+  }
+
+  // --- Scrollable tabs ---
+  .nav-tabs-scrollable {
+    &::before {
+      background: linear-gradient(to right, @color-bg-alert 0%, transparent 100%);
+    }
+    &::after {
+      background: linear-gradient(to left, @color-bg-alert 0%, transparent 100%);
+    }
+    .nav-tabs-arrow {
+      background: @color-bg-alert;
+      border-color: @color-bg-lightest;
+      color: @color-text-subnav;
+
+      &:hover {
+        color: @color-link-primary;
+        background: @color-bg-lighter;
+      }
+    }
+  }
+
+  // --- Empty-state widget ---
+  .page-empty-state {
+    background: @color-bg-lighter;
+    border-color: @color-bg-lightest;
+
+    .page-empty-state-title,
+    .page-empty-state-list > li > div > strong {
+      color: @color-text-primary;
+    }
+
+    .page-empty-state-text,
+    .page-empty-state-list > li > div > small {
+      color: @color-text-subnav;
+    }
+
+    .page-empty-state-list {
+      border-top-color: @color-bg-lightest;
+
+      > li {
+        border-bottom-color: @color-bg-lightest;
+      }
+    }
+  }
+
+  // ===========================================================================
+  // Dark-theme QA pass - fill remaining component gaps
+  // ===========================================================================
+
+  // Products tree - active node (light rule forces navy text on pale green)
+  .product-tree .product-tree-item.active {
+    background-color: rgba(96, 191, 173, 0.12) !important;
+    color: @color-link-primary !important;
+    border-left-color: @color-link-primary;
+
+    &:hover {
+      background-color: rgba(96, 191, 173, 0.18) !important;
+    }
+  }
+  .product-tree .product-tree-item:nth-child(even):not(.active):not(:hover) {
+    background-color: rgba(255, 255, 255, 0.02);
+  }
+
+  // Scans detail tree - harden selected/hover so scan.less's !important
+  // (#tree .list-group-item.node-selected) cannot win the cascade
+  #tree .list-group-item.node-selected.node-selected,
+  #tree .node-tree.node-selected.node-selected {
+    background-color: rgba(96, 191, 173, 0.14) !important;
+    color: @color-link-primary !important;
+    border-left-color: @color-link-primary !important;
+  }
+  #tree .list-group-item.node-selected:not(.node-disabled):hover,
+  #tree .node-tree.node-selected:not(.node-disabled):hover {
+    background-color: rgba(96, 191, 173, 0.2) !important;
+  }
+
+  // Empty / track progress bars (light track was @ts-canvas #f4f4f2)
+  .progress {
+    background-color: @color-bg-lighter;
+  }
+
+  // Approval-creation progress - same trap: base .progress-bar fill is the
+  // light #f4f4f2, a white block on the dark track. Teal while running, green
+  // when done, red on failure. -success/-danger keep overriding the base fill.
+  .approve-progress {
+    .progress-bar {
+      background-color: @color-link-primary;
+      color: @color-text-primary;
+    }
+    .progress-bar-success {
+      background-color: @color-ok;
+    }
+    .progress-bar-danger {
+      background-color: @ts-red;
+    }
+    .approve-progress-track {
+      background-color: @color-border-content;
+    }
+
+    .approve-progress-banner-success {
+      background-color: @color-bg-content;
+      border-color: @color-ok;
+    }
+
+    .approve-progress-banner-danger {
+      background-color: @color-bg-content;
+      border-color: @ts-red;
+    }
+  }
+
+  // Dependency view - right-side detail aside (light #e0e1e3 border, white bg)
+  .ecs-dependencies-aside,
+  .ecs-aside-content {
+    background: @color-bg-content;
+    border-color: @color-border-content;
+  }
+
+  // Reactive-table pagination footer (panel-footer pagination not under
+  // .reactiveTableServerSide - existing dark rule didn't reach it)
+  .panel-footer.pagination-full,
+  .panel-footer.pagination-compact,
+  .pagination-full,
+  .pagination-compact {
+    background: @color-bg-alert;
+    color: @color-text-subnav;
+    border-top-color: @color-border-primary;
+  }
+
+  // Breadcrumb - links/separator inherited dark light-theme @ts-text
+  .breadcrumb-box .breadcrumb > li > a,
+  .breadcrumb > li > a {
+    color: @color-text-subnav;
+
+    &:hover {
+      color: @color-link-primary;
+    }
+  }
+  .breadcrumb > li + li:before {
+    color: @color-text-subnav;
+  }
+  .breadcrumb > .active {
+    color: @color-text-primary;
+  }
+
+  // Licenses list - white panel/tab card behind the rows
+  .licenses-content .ts-panel,
+  .licenses-content .tab-content,
+  .licenses-content .panel,
+  .licenses-content .panel-body {
+    background: @color-bg-content;
+    border-color: @color-border-content;
+  }
+
+  // Components lake search modes
+  .async-search-error-title {
+    color: @color-text-primary;
+  }
+
+  .async-search-loading-title {
+    color: @color-text-primary;
+  }
+
+  .async-search-state-text {
+    color: @color-text-subnav;
+  }
+
+  .component-lake-bar-icon {
+    color: @color-text-subnav;
+  }
+
+  .version-search-icon {
+    color: @color-text-subnav;
+  }
+
+  .component-lake-search-form {
+    background: @color-bg-content;
+  }
+
+  .component-lake-prompt-title {
+    color: @color-text-primary;
+  }
+
+  .component-lake-prompt-text {
+    color: @color-text-subnav;
+  }
+
+  // maven-logo.svg is black wordmark on transparent, so it all but disappears on
+  // a dark background. Swap in a light-ink copy of the same artwork wherever the
+  // logo is rendered - the getPkgMgrIcon helper (component lists, dependency
+  // views) points at this one file.
+  img[src$="/images/maven-logo.svg"] {
+    content: url('/images/maven-logo-dark.svg');
+  }
+
+  // The Alpine mark is a dark navy that reads as a smudge at icon size on dark.
+  img[src$="/images/alpinelinux-logo.svg"] {
+    filter: brightness(1.9) saturate(0.85);
+  }
+
+  .component-version-loading {
+    background: fade(@color-bg-content, 88%);
+  }
+
+  // CWE badges. The light fill is a 9%-opacity teal over white; on
+  // the dark content background it disappears, so the tint is lifted and the
+  // text moved to the theme's own teal accent.
+  .test-cwe-badge {
+    border-color: fade(@color-link-primary, 40%);
+    background-color: fade(@color-link-primary, 14%);
+    color: @color-link-primary;
+
+    &:hover,
+    &:focus {
+      background-color: fade(@color-link-primary, 26%);
+      color: lighten(@color-link-primary, 10%);
+    }
+  }
+
+  .test-cwe-badge-count {
+    border-left-color: fade(@color-link-primary, 40%);
+  }
+
+  .test-cwe-summary {
+    border-bottom-color: @color-border-primary;
+  }
+
+  .test-cwe-summary-label {
+    color: @color-text-subnav;
+  }
+
+  // --- Auto-created risks: provenance strip ---
+  // The light rules hardcode @ts-surface / @ts-border, which read as a white
+  // card on the dark panel.
+  .risk-source-strip {
+    background: @color-bg-lighter;
+    border-color: @color-border-content;
+    border-left-color: @color-link-primary;
+  }
+
+  .risk-source-strip-help,
+  .risk-source-refs-gone,
+  .risk-source-file-empty {
+    color: @color-text-subnav;
+  }
+
+  // #e0b04a on #292929 = 8.2:1; the light #8a6d3b is 2.3:1 there.
+  .risk-source-strip-note {
+    color: #e0b04a;
+  }
+
+  .risk-source-level-note:before {
+    background: @color-text-subnav;
+  }
+
+  // The light instance-scoped darkening is (0,2,0) and would otherwise tie with
+  // the generic .theme-dark .test-cwe-badge rule above; state it explicitly.
+  .risk-source-strip .test-cwe-badge {
+    color: @color-link-primary;
+  }
+
+  .ios-toggle.ios-toggle-focusable:focus + .checkbox-label {
+    outline-color: @color-link-primary;
+  }
+
+  // The dashed border carries the distinction, so only the colour
+  // needs restating here.
+  .test-cwe-unclassified {
+    color: @color-text-subnav;
+  }
+}

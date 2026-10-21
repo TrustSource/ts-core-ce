@@ -1,0 +1,39 @@
+<template name="cotsComponentsList">
+
+  {{#pageHeader}}
+    <div class="cots-header">
+      <div class="cots-header-left">
+        <h2 class="font-light m-b-xs">
+          COTS components {{#if session 'cotsModuleListFilter'}}
+          <small class="text-danger">{{__ 'filtered'}}</small>{{/if}}
+        </h2>
+        <small>{{#if countComponents}}{{countComponents}} {{__ 'componentsCurrentlyManagedBySystem'}}{{else}}{{__ 'componentsCurrentlyManagedBySystem'}}{{/if}}</small>
+      </div>
+      <div class="cots-header-actions">
+        {{#if isInRole 'company_component_manager' companyId}}
+          {{> cotsManagementComponentCreate}}
+          <a href="{{pathFor route='cotsManagementModules'}}" class="btn btn-default btn-xs">
+            <span class="fa fa-external-link" aria-hidden="true"></span>
+            {{__ 'ViewUsedAsModules'}}
+          </a>
+        {{/if}}
+      </div>
+    </div>
+  {{/pageHeader}}
+
+  <div class="content cots-content">
+    {{> componentListFilter type="cotsСomponents"}}
+    <div class="panel panel-default">
+      <div class="panel-body">
+        {{#if isLoading}}
+          <div class="text-center inner-t-20 inner-b-20">
+            <div class="loading-spinner loading-spinner-sm"></div>
+            <p class="text-muted m-t-sm">Loading components...</p>
+          </div>
+        {{else}}
+          {{> reactiveTable settings=reactiveTableSettings}}
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</template>

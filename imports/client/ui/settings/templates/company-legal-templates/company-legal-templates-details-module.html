@@ -1,0 +1,60 @@
+<template name="companyLegalTemplatesDetailsModule">
+  <div class="clearfix">
+    <div class="pull-right actions actions-wizard" style="position:relative">
+      <a href class="btn btn-default btn-xs view-wizard {{wizardBtnClass true}}">
+        <span class="fa fa-magic"></span> Start wizard
+      </a>
+      <a href class="btn btn-default btn-xs view-all {{wizardBtnClass }}">
+        <span class="fa fa-list"></span> View all
+      </a>
+    </div>
+  </div>
+  {{#if wizardView}}
+    <h3>Legal settings wizard</h3>
+    {{> wizard id="legalWizard" steps=stepsQuestionnaire clearOnDestroy=true nextButton='Next' backButton='Back'
+        confirmButton='Finish' stepsTemplate='questionnaireSteps'}}
+  {{else}}
+    {{# autoForm
+        id="updateFormCompanyModuleTemplateRequirements"
+        docId=this._id
+        collection=getModules
+        schema=getRequirementsSchema
+        doc=getRequirements
+        type="normal"
+    }}
+      <div class="row">
+        <div class="col-md-6">
+          <h3>Trade Secret Aspects</h3>
+          <div class="row">
+            <div class="col-md-12">{{> afQuickField name='TS' }}</div>
+            <div class="col-md-12 inner-b-20">
+              <i>
+                Some licenses force you to open source or at least publish your derivative works. This might be a threat to your trade secrets or intellectual property. If you <strong>switch on</strong> Trade secret protection, licenses requiring you to release or publish your work will be flagged as violations, if switched off, the obligations will only shown as warnings unless satisfied
+              </i>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h3>Licensing Strategy</h3>
+          <div class="row">
+            <div class="col-md-12">{{> afQuickField name='LS' }}</div>
+            <div class="col-md-12 inner-b-20">
+              <i>
+                There are several licenses, which do not allow you to sublicense the components. Thus you must make sure, the OS components are named (e.g. Bill of materials) and provided aside your privately licensed code. However, in case you are planning to provide this module as open source or operate it as part of a service that is not licensed at all, you <strong>may skip</strong> these warnings.
+              </i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <h3>Distribution of the module</h3>
+          <div class="row">
+            <div class="col-md-12">{{> afQuickField name='D' }}</div>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Update legal requirements</button>
+    {{/ autoForm}}
+  {{/if}}
+</template>

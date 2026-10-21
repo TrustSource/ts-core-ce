@@ -1,0 +1,22 @@
+<template name="companyApiCsaf">
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">CSAF feed keys</h2>
+        <small>Issue access keys that expose published CSAF documents by TLP level</small>
+      </div>
+      <div class="settings-header-actions">
+        {{#if isInRole 'account_admin,company_security_manager' companyId}}
+          <a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#createCsafKey">
+            <span class="fa fa-plus-circle" aria-hidden="true"></span> Create key
+          </a>
+        {{/if}}
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content">
+    {{#if isInRole 'account_admin,company_security_manager' companyId}}
+      {{> companyCsafKeys}}
+    {{/if}}
+  </div>
+</template>

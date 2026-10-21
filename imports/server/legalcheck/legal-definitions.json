@@ -1,0 +1,473 @@
+{
+  "model": "LicenseConstraints_v4.5",
+  "obligations": [
+    {
+      "key": "O1",
+      "name": "Retain copy right notice",
+      "description": "You must ensure, the Copyright Notice will be retained."
+    },
+    {
+      "key": "O2",
+      "name": "Retain list of conditions",
+      "description": "You must retain the list of conditions (license) unchanged. "
+    },
+    {
+      "key": "O3",
+      "name": "Retain warranty disclaimer",
+      "description": "Please ensure that you retained the Warranty Disclaimer!"
+    },
+    {
+      "key": "O4",
+      "name": "Provide copy of license text",
+      "description": "You are obliged to provide a copy of the license text."
+    },
+    {
+      "key": "O5",
+      "name": "Reproduce copyright notice",
+      "description": "Ensure that the Copyright notice will be reproced."
+    },
+    {
+      "key": "O6",
+      "name": "Reproduce list of conditions",
+      "description": "Ensure the license will be reproduced."
+    },
+    {
+      "key": "O7",
+      "name": "Reproduce warranty disclaimer",
+      "description": "Ensure the Warranty Disclaimer will be reproduced."
+    },
+    {
+      "key": "O8",
+      "name": "Provide source code",
+      "description": "You must provide access to the source code."
+    },
+    {
+      "key": "O9",
+      "name": "Provide source code (saa s)",
+      "description": "This license requires you to provide your source code even when operated as SaaS."
+    },
+    {
+      "key": "O10",
+      "name": "Provide written offer",
+      "description": "You must accompany any distribution with the written offer to supply the source code free of charge."
+    },
+    {
+      "key": "O11",
+      "name": "Attribute authors",
+      "description": "This license requires you under these circumstances to attribute the authors."
+    },
+    {
+      "key": "O20",
+      "name": "Copyleft",
+      "description": "This license infects linked sources, so that all directly linked code must be released under this license. "
+    },
+    {
+      "key": "O21",
+      "name": "Indicate changes (general)",
+      "description": "The license requires you to indicate that you changed the original code."
+    },
+    {
+      "key": "O22",
+      "name": "Technical restriction",
+      "description": "You are not allowed to prevent the user from executing the rights granted by this license by any means."
+    },
+    {
+      "key": "O23",
+      "name": "Describe changes",
+      "description": "The license requires you to describe the changes you have made."
+    },
+    {
+      "key": "O25",
+      "name": "Indicate changes (filelevel)",
+      "description": "The license requires you to indicate within the files you have changed, that you changed them."
+    },
+    {
+      "key": "O26",
+      "name": "Provide copyright disclaimer",
+      "description": "The license requires you to provide a Disclaimer, in which you waive your copyrights."
+    },
+    {
+      "key": "O27",
+      "name": "Provide compile instructions",
+      "description": "The license requires you to provide compile instructions, so that a 3rd party will be able to re-build the solution."
+    },
+    {
+      "key": "O28",
+      "name": "Contributions under same license",
+      "description": "The license requires you to provide your contributions under the same license."
+    }
+  ],
+  "rules": [
+    {
+      "key": "CA_1",
+      "type": "violation",
+      "message": "This license does not allow commercial use. HINT: Either drop component or provide as free solution.",
+      "setting": [
+        [
+          "Module.CA_usage"
+        ]
+      ],
+      "require": [
+        [
+          "R8"
+        ]
+      ]
+    },
+    {
+      "key": "CA_2",
+      "type": "violation",
+      "message": "This license does not allow commercialisation under a license. HINT Drop the component or choose another compensation model",
+      "setting": [
+        [
+          "Module.CA_license"
+        ]
+      ],
+      "require": [
+        [
+          "R8"
+        ],
+        [
+          "R9"
+        ]
+      ]
+    },
+    {
+      "key": "CA_3",
+      "type": "violation",
+      "message": "This license does not allow charging support fees. HINT Either drop component or change commercial model",
+      "setting": [
+        [
+          "Module.CA_support"
+        ]
+      ],
+      "require": [
+        [
+          "R8"
+        ]
+      ]
+    },
+    {
+      "key": "CA_4",
+      "type": "violation",
+      "message": "This license does not allow the desired way of commercialisation. HINT Either drop component or change commercial model.",
+      "setting": [
+        [
+          "Module.CA_other"
+        ]
+      ],
+      "require": [
+        [
+          "R8"
+        ]
+      ]
+    },
+    {
+      "key": "IP_1",
+      "type": "warning",
+      "message": "Please note, this license does not eliminate the risk of patent claims by contributors. HINT Either accept/ignore or select alternative component with more suitable regulations",
+      "setting": [
+        [
+          "Module.IP_protect_y"
+        ]
+      ],
+      "require": [
+        [
+          "R6"
+        ]
+      ]
+    },
+    {
+      "key": "IP_2",
+      "type": "warning",
+      "message": "Please note, this license bears the risk of termination, if you will be enforcing your rights against third parties. HINT: Try to substitute the component or unbundle it (as infrastructure) or remove the protection requirement.",
+      "setting": [
+        [
+          "Module.IP_enforce_2"
+        ]
+      ],
+      "require": [
+        [
+          "!T03"
+        ]
+      ]
+    },
+    {
+      "key": "IP_4",
+      "type": "violation",
+      "message": "ATTENTION! You activated IP protection towards third parties. This license will terminate, if you would be enforcing your rights against third parties. HINT: Check to extract / isolate the part you want to protect or defend in a separately licensed part.",
+      "setting": [
+        [
+          "Module.IP_enforce_3"
+        ]
+      ],
+      "require": [
+        [
+          "!T03"
+        ]
+      ]
+    },
+    {
+      "key": "IP_3",
+      "type": "warning",
+      "message": "Please note: You activated IP protection towards third parties, but this license bears the risk of termination, if you will enforce such rights. HINT: Check to extract / isolate the part you want to protect or defend in a separately licensed part.",
+      "setting": [
+        [
+          "Module.IP_enforce_3"
+        ]
+      ],
+      "require": [
+        [
+          "!T02"
+        ],
+        [
+          "!T03"
+        ]
+      ]
+    },
+    {
+      "key": "TS_2",
+      "type": "warning",
+      "message": "This license requires you to make your code public, even when operated as SaaS. This exposes a threat to your aim to protect your trade secrets",
+      "setting": [
+        [
+          "Module.TS_y"
+        ],
+        [
+          "Module.OM_SaaS"
+        ]
+      ],
+      "require": [
+        [
+          "!O9"
+        ]
+      ]
+    },
+    {
+      "key": "TS_1",
+      "type": "violation",
+      "message": "This license requires you to make your changes public. This exposes a threat to your aim to protect your trade secrets",
+      "setting": [
+        [
+          "Module.TS_y"
+        ],
+        [
+          "!Module.OM_SaaS"
+        ],
+        [
+          "Component.modified"
+        ]
+      ],
+      "require": [
+        [
+          "!O8__D"
+        ]
+      ]
+    },
+    {
+      "key": "TS_3",
+      "type": "violation",
+      "message": "This license requires you to make your source code public. This exposes a threat to your aim to protect your trade secrets",
+      "setting": [
+        [
+          "Module.TS_y"
+        ],
+        [
+          "!Module.OM_SaaS"
+        ],
+        [
+          "!Component.modified"
+        ]
+      ],
+      "require": [
+        [
+          "!O8__C"
+        ]
+      ]
+    },
+    {
+      "key": "TS_4",
+      "type": "deadly obligation",
+      "message": "This license requires you to make your source code public even when operating as SaaS. This exposes a threat to your aim to protect your trade secrets.",
+      "setting": [
+        [
+          "Module.TS_y"
+        ],
+        [
+          "Module.OM_SaaS"
+        ],
+        [
+          "Component.modified"
+        ]
+      ],
+      "require": [
+        [
+          "!O9__D"
+        ]
+      ]
+    },
+    {
+      "key": "LS_1",
+      "type": "violation",
+      "message": "This license requires you to retain the original license. HINT: resolution is possible by dropping or un-bundling (use as infrastructure module) the component and a proper definition of your terms and conditions.",
+      "setting": [
+        [
+          "Module.LS_pl"
+        ]
+      ],
+      "require": [
+        [
+          "R5"
+        ],
+        [
+          "!O20"
+        ]
+      ]
+    },
+    {
+      "key": "LS_2",
+      "type": "warning",
+      "message": "Please note that this license does not fit your licensing strategy. The component must remain under its own license.",
+      "setting": [
+        [
+          "Module.LS_os"
+        ]
+      ],
+      "require": [
+        [
+          "R5"
+        ],
+        [
+          "!O11"
+        ]
+      ]
+    },
+    {
+      "key": "LS_3",
+      "type": "warning",
+      "message": "Ensure that this component is exposed as a requirement / addon but not part of your licensed solution.",
+      "setting": [
+        [
+          "Module.LS_both"
+        ]
+      ],
+      "require": [
+        [
+          "R5"
+        ],
+        [
+          "!O11"
+        ]
+      ]
+    },
+    {
+      "key": "MOD_1",
+      "type": "violation",
+      "message": "This license does not allow you to modify the component. HINT: Either undo your changes or drop the component.",
+      "setting": [
+        [
+          "Component.modified"
+        ]
+      ],
+      "require": [
+        [
+          "R3"
+        ]
+      ]
+    },
+    {
+      "key": "DS",
+      "type": "violation",
+      "message": "This license does not allow you to distribute the licensed component",
+      "setting": [
+        [
+          "Module.D_op"
+        ],
+        [
+          "Module.D_ipoa"
+        ],
+        [
+          "Module.D_cslib"
+        ],
+        [
+          "Module.D_xa"
+        ]
+      ],
+      "require": [
+        [
+          "R4"
+        ]
+      ]
+    },
+    {
+      "key": "OM_1",
+      "type": "warning",
+      "message": "PLEASE NOTE: This license will automatically terminate, if you will not comply with all obligations!",
+      "setting": [
+        [
+          "Module.OM_mop",
+          "Module.OM_sw",
+          "Module.OM_dis"
+        ]
+      ],
+      "require": [
+        [
+          "!T02"
+        ]
+      ]
+    },
+    {
+      "key": "OM_2",
+      "type": "violation",
+      "message": "This license does not grant you the right to reproduce the component as required by your operating model.",
+      "setting": [
+        [
+          "Module.OM_mop",
+          "Module.OM_sw",
+          "Module.OM_dis"
+        ]
+      ],
+      "require": [
+        [
+          "R2"
+        ]
+      ]
+    },
+    {
+      "key": "OM_3",
+      "type": "violation",
+      "message": "This license does not grant you the right to operate the component in a SaaS operating model.",
+      "setting": [
+        [
+          "Module.OM_SaaS"
+        ]
+      ],
+      "require": [
+        [
+          "R12"
+        ]
+      ]
+    },
+    {
+      "key": "ALW_1",
+      "type": "warning",
+      "message": "Ensure, you will not use the trademark of this component to promote your work.",
+      "setting": [],
+      "require": [
+        [
+          "R7"
+        ]
+      ]
+    },
+    {
+      "key": "ALW_2",
+      "type": "violation",
+      "message": "This license does not grant you the right to use the component. The only way to heal this, is to drop the component.",
+      "setting": [],
+      "require": [
+        [
+          "R1"
+        ]
+      ]
+    }
+  ]
+}

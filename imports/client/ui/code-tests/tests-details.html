@@ -1,0 +1,233 @@
+<template name="testsDetails">
+  {{# pageHeader}}
+    <div class="row">
+      <div class="col-md-7">
+        <h2 class="font-light m-b-xs">
+          {{__ 'TestDetails'}}
+        </h2>
+        <small>
+          {{__ 'TestDetailsDescription'}}
+        </small>
+      </div>
+    </div>
+  {{/pageHeader}}
+  {{#with testData}}
+    <div class="test-detail-wrapper">
+    <div class="panel panel-default test-detail-panel">
+        {{#with (tool.driver)}}
+          <div class="panel-heading test-detail-heading">
+            <span>
+              {{#with getTool name }}
+                {{#if logoSmallLink}}
+                  <img src="{{logoSmallLink}}" alt="" class="test-tool-logo">
+                {{/if}}
+              {{/with}} {{name}} {{version}}
+            </span>
+            <div class="scan-side-actions">
+              <div class="btn-group btn-group-xs m-r-sm">
+                <button class="btn group-toggle-btn {{#if isGroupByRule}}btn-primary{{else}}btn-default{{/if}}" data-mode="rule">
+                  By Rule</button>
+                <button class="btn group-toggle-btn {{#if isGroupByFile}}btn-primary{{else}}btn-default{{/if}}" data-mode="file">
+                  By File</button>
+              </div>
+              <span class="label label-default">{{../results.length}}</span>
+            </div>
+          </div>
+        {{/with}}
+        <!-- Shown for an unclassified document too, not only one that already has
+             weaknesses: "nothing here carries a CWE" is exactly the state the
+             Assign action exists for, and gating the strip on documentCwes hid
+             it precisely then (issue #112). -->
+        {{#if hasCweSummary}}
+          <div class="test-cwe-summary">
+            <!-- Hardcoded, like the fifteen strings around it. The i18n call that
+                 stood here named a key neither locale file defines, so
+                 universe:i18n printed the key back and the string only looked
+                 translated (de.i18n.yml holds no translations at all). "CWEs" is
+                 what the tests list column and the dialog call these ids. -->
+            <span class="test-cwe-summary-label">CWEs</span>
+            {{#each documentCwes}}
+              <a href="{{cweLakeUrl cwe}}" class="test-cwe-badge {{#if assigned}}test-cwe-badge-assigned{{/if}}"
+                 target="_blank" rel="noopener noreferrer"
+                 title="{{cwe}} - {{countLabel}}{{#if assigned}}, assigned here rather than reported by the tool{{/if}} - open in Vulnerability Lake">
+                {{cwe}} <span class="test-cwe-badge-count">{{count}}</span>
+              </a>
+            {{/each}}
+            {{#if unclassifiedRuleCount}}
+              <span class="test-cwe-unclassified"
+                    title="Rules that produced findings but carry no CWE. Open a group to assign one.">
+                {{unclassifiedRuleLabel}}
+              </span>
+            {{/if}}
+          </div>
+        {{/if}}
+        <div class="panel-body test-detail-results">
+          {{#each resultsGrouped}}
+            <div class="panel panel-default">
+              <div class="panel-heading collapse-action pointer {{defaultHeadingClass ../results.length}}">
+                <h3 class="panel-title">
+                  {{#if isFileGroup}}
+                    <span class="fa fa-file-o m-r-xs text-muted"></span>
+                  {{else}}
+                    {{#with getRule ruleId}}
+                      {{#if helpUri}}
+                        <a href="{{helpUri}}" class="help-url m-r-sm"
+                           title="View rule details" target="_blank">
+                          <span class="fa fa-external-link"></span>
+                        </a>
+                      {{/if}}
+                    {{/with}}
+                  {{/if}}
+                  <span class="collapse-action-target">{{ruleId}}</span> <span class="label label-default">{{list.length}}</span>
+                  {{#each groupCwes}}
+                    <a href="{{cweLakeUrl cwe}}" class="test-cwe-badge test-cwe-badge-sm {{#if assigned}}test-cwe-badge-assigned{{/if}}"
+                       target="_blank" rel="noopener noreferrer"
+                       title="{{cwe}}{{#if assigned}} - assigned here rather than reported by the tool{{/if}} - open in Vulnerability Lake">{{cwe}}</a>
+                  {{/each}}
+                </h3>
+                <span class="test-finding-actions">
+                  {{#if canAssignGroupCwe}}
+                    <!-- Edit or Assign follows whether an ASSIGNMENT exists, not
+                         whether the group has CWEs: groupCwes also holds what the
+                         tool published, so a tool-classified rule offered "Edit"
+                         and then opened an empty dialog whose save filed a second
+                         assignment (issue #112). -->
+                    <a href class="test-assign-cwe"
+                       title="{{#if hasAssignedGroupCwe}}Edit the CWEs assigned to this rule{{else}}Assign one or more CWEs to this rule{{/if}}">
+                      <span class="fa fa-tag"></span> {{#if hasAssignedGroupCwe}}Edit assigned CWEs{{else}}Assign CWEs{{/if}}
+                    </a>
+                  {{/if}}
+                  <a href class="test-create-issue" title="Create GitHub issue">
+                    <span class="integration-icon github-disabled integration-lg"></span> Create issue
+                  </a>
+                  {{#if canCreateRisk}}
+                    <a href class="test-create-risk" title="Create Risk">
+                      <span class="fa fa-shield"></span> Create risk
+                    </a>
+                  {{/if}}
+                </span>
+                <span class="fa fa-chevron-down collapse-chevron"></span>
+              </div>
+              <div class="panel-body {{defaultPanelClass ../results.length}}">
+                {{#each list}}
+                  {{#each findingLocations}}
+                    <div class="test-finding">
+                      <div class="test-finding-file">
+                        <!-- `..` is the result, `../..` the group; the group was
+                             passed before, so By File (grouped by path, not rule)
+                             could resolve no rule and painted every finding red -->
+                        <span class="test-status-icon {{getTestStatus ..}}" title="{{getTestStatusTitle ..}}"></span>
+                        {{#if isFileGroupItem}}
+                          <strong title="{{../ruleId}}">{{../ruleId}}</strong>
+                        {{else}}
+                          <strong class="truncate" title="{{#with physicalLocation}}{{artifactLocation.uri}}{{else}}No file location reported{{/with}}">{{#with physicalLocation}}{{artifactLocation.uri}}{{else}}<em class="text-muted">No file location reported</em>{{/with}}</strong>
+                          {{#each logicalLocations}}
+                            <span class="text-muted" title="{{fullyQualifiedName}}">{{fullyQualifiedName}}</span>
+                          {{/each}}
+                        {{/if}}
+                      </div>
+                      <div class="test-finding-message">
+                        <small>{{getTestMessage ..}}</small>
+                      </div>
+                      {{#with physicalLocation}}
+                        {{#with region}}
+                          <div class="test-finding-snippet">
+                            <span class="pre-stiled-line">{{startLine}}</span>
+                            <code class="truncate max-w-70">{{snippet.text}}</code>
+                          </div>
+                        {{/with}}
+                      {{/with}}
+                    </div>
+                  {{/each}}
+                {{/each}}
+              </div>
+            </div>
+          {{/each}}
+          {{#unless results}}
+            <div class="text-info">
+              <i class="fa fa-info"></i> {{__ 'NoResultsAvailable'}}
+            </div>
+          {{/unless}}
+        </div>
+      </div>
+    </div>
+  {{/with}}
+  <div class="modal fade" id="testCreateIssueModal" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="ts-accent-line"></div>
+        <div class="modal-header text-center">
+          <i class="fa fa-check-square-o ts-big-icon text-success"></i>
+          <br/>
+          <h4 class="modal-title">Create new GitHub issue</h4>
+        </div>
+        <form id="testCreateIssueForm">
+          <div class="modal-body text-left">
+            <div class="form-group">
+              <label>Title</label>
+              <input type="text" name="modalTitle" class="form-control">
+              <span class="help-block small">Specify the title of issue</span>
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <textarea name="modalDescription" class="form-control" rows="5"></textarea>
+              <span class="help-block small">Specify the description of issue</span>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Create issue</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Assign CWEs to a rule the tool left unclassified.
+       No tabindex="-1": it would keep the select2 search input from taking
+       keyboard focus. The assignment applies to every document of this company
+       that ran the same rule, which the copy says out loud.
+       The title is filled in when the modal opens: it is moved to <body> on
+       show, and it has two states - assigning and editing what is assigned. -->
+  <div class="modal fade" id="assignCweModal" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="ts-accent-line"></div>
+        <div class="modal-header text-center">
+          <i class="fa fa-tag ts-big-icon text-success"></i>
+          <br/>
+          <h4 class="modal-title" id="assignCweModalTitle">Assign CWEs to this rule</h4>
+        </div>
+        <form id="assignCweForm">
+          <div class="modal-body text-left">
+            <div class="form-group">
+              <label>Rule</label>
+              <!-- Filled in when the modal opens: it is moved to <body> on show,
+                   so the context it describes is set from the click handler
+                   rather than through a helper. -->
+              <p class="form-control-static"><code id="assignCweRuleId"></code>
+                <span class="text-muted" id="assignCweTool"></span></p>
+            </div>
+            <div class="form-group">
+              <label>CWEs</label>
+              <select name="assignCwes" class="form-control" multiple="multiple"></select>
+              <span class="help-block small">
+                Enter one or more CWE ids, e.g. <code>CWE-79</code>, for the weakness this
+                rule finds. This applies to every finding of this rule across your company,
+                on documents already imported as well as future ones, and is recorded as
+                your assignment rather than as something the tool reported.
+              </span>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="assignCweRemove" class="btn btn-default pull-left hidden">
+              Withdraw assignment
+            </button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {{> RiskAddModal id="moduleCmpRisksSettings" docId=moduleId}}
+</template>

@@ -1,0 +1,87 @@
+<template name="approveGenerationProgress">
+  <div class="row approve-progress" role="status" aria-live="polite">
+    <div class="col-md-6 col-md-offset-3">
+
+      <!-- Optional overall bar -->
+      <div class="approve-progress-overall">
+        <div class="approve-progress-overall-caption text-muted">
+          {{#if overallDeterminate}}{{overallCaption}}{{else}}Starting …{{/if}}
+        </div>
+        <div class="progress m-t-xs full progress-small" role="progressbar"
+             aria-valuemin="0" aria-valuemax="100" {{overallBarAttrs}}>
+          <div class="{{overallBarClass}}" style="width: {{#if overallDeterminate}}{{overallPercent}}{{else}}100{{/if}}%;">
+            <span class="sr-only">{{#if overallDeterminate}}{{overallPercent}}{{else}}Starting{{/if}}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Per-stage rows (contract order: report, notice, sbom) -->
+      {{#each stageRows}}
+        <div class="approve-progress-stage approve-progress-stage-{{state}}">
+          <div class="approve-progress-stage-head">
+            <span class="{{stageIcon}} approve-progress-stage-icon" aria-hidden="true"></span>
+            <span class="approve-progress-stage-label">{{label}}</span>
+            <span class="approve-progress-stage-status">
+              {{#if showStageLink}}
+                <a class="highlight" target="_blank"
+                   aria-label="{{stageLinkAriaLabel}}"
+                   href="{{pathFor route=linkRoute data=linkOptions}}">{{stageLinkText}}</a>
+              {{else}}
+                {{stageStatusText}}
+              {{/if}}
+            </span>
+          </div>
+          <div class="progress progress-small m-t-xs full" role="progressbar"
+               aria-valuemin="0" aria-valuemax="100" {{stageBarAttrs}}>
+            <div class="{{stageBarClass}}" style="width: {{stageBarWidth}}%;">
+              <span class="sr-only">{{label}} {{stageStatusText}}</span>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+
+      <!-- Terminal banner area (empty until done / failed) -->
+      {{#if isDone}}
+        <div class="approve-progress-banner approve-progress-banner-success m-t-lg">
+          <h5 class="m-t-none">
+            <span class="fa fa-check-circle text-success" aria-hidden="true"></span>
+            Great! You made it!
+          </h5>
+          {{#if getDry}}
+            <p class="m-t-md">
+              You may now switch to the topic <b>APPROVALS</b> in the <b>INTERNAL</b> section to see, what your Compliance manager would have seen.
+              Use the button below or the navigation, and you will find the approval request.
+              To see details open the corresponding compliance report.
+            </p>
+          {{else}}
+            <p class="m-t-md">
+              The approval request has been forwarded to the group of compliance managers in your organisation.
+              If a default compliance manager has been assigned, he will get a notification about the request to review.
+              To see the details of your request, go to <b>INTERNAL > APPROVALS</b> or use the button in the lower right corner.
+              <br>
+              You also may want to work on the Notice File, which you will find under <b>OUTBOUND > NOTICE FILE</b> or return to your project.
+            </p>
+          {{/if}}
+        </div>
+      {{/if}}
+
+      {{#if isFailed}}
+        <div class="approve-progress-banner approve-progress-banner-danger m-t-lg">
+          <h5 class="m-t-none">
+            <span class="fa fa-times-circle text-danger" aria-hidden="true"></span>
+            Report generation did not finish
+          </h5>
+          <p class="m-t-md">Some reports could not be generated.</p>
+          {{#if generationError}}
+            <p class="approve-progress-error text-danger">Details: {{generationError}}</p>
+          {{/if}}
+          <p class="m-t-md">
+            The approval request itself was created and is still available. You can open any reports that were
+            generated above, jump to the Compliance Report, or contact support if this keeps happening.
+          </p>
+        </div>
+      {{/if}}
+
+    </div>
+  </div>
+</template>

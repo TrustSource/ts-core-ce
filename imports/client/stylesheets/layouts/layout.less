@@ -1,0 +1,39 @@
+
+.breadcrumb-box {
+  max-width: 60%;
+  display: inline-block;
+
+  .breadcrumb {
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    color: @ts-text;
+  }
+
+  .breadcrumb > li > a {
+    color: @ts-text;
+
+    &:hover {
+      color: @ts-navy;
+      text-decoration: underline;
+    }
+  }
+
+  .breadcrumb > li + li:before {
+    color: lighten(@ts-text, 40%);
+  }
+}
+
+@media (max-width: 768px) {
+  .breadcrumb-box {
+    display: none;
+  }
+}
+#wrapper {
+  .breadcrumb-box .breadcrumb {
+    padding: 15px 25px 10px 25px;
+    min-width: 320px;
+  }
+  .ts-page-header {
+    padding-top: 0;
+  }
+}

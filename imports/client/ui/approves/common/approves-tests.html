@@ -1,0 +1,61 @@
+<template name="approvesTests">
+  {{#if getTests}}
+    <div class="ts-panel obligation-list">
+      <div class="panel-body">
+        <div class="inner-b-20">
+          {{#each objectToArray getStats}}
+            <div class="panel panel-default inner-b-0">
+              {{#with getModuleInfo key}}
+                <div class="panel-heading collapse-action pointer">
+                  <div class="row">
+                    <div class="col-xs-6">
+                      <h5 class="inner-t-8">
+                        {{name}} {{version}}
+                      </h5>
+                    </div>
+                    <div class="col-xs-6">
+                      {{#with getModuleStats _id}}
+                        {{> ecsbarLine noTitle="true" data=this}}
+                      {{/with}}
+                    </div>
+                  </div>
+                </div>
+              {{/with}}
+              <div class="panel-body pinner-b-10i">
+                <div class="pinner-l-20">
+                  {{#each objectToArray (value.tools)}}
+                    <div class="row inner-b-8">
+                      <div class="col-xs-6">
+                        <h2 class="panel-title inner-t-8">
+                          {{#with getTool key }}
+                            {{#if logoSmallLink}}
+                              <img src="{{logoSmallLink}}" alt="" class="test-tool-logo">
+                            {{/if}}
+                            {{name}} {{version}}
+                          {{/with}}
+                        </h2>
+                      </div>
+                      <div class="col-xs-6">
+                        {{#with getToolStats value}}
+                          {{> ecsbarLine noTitle="true" data=this}}
+                        {{/with}}
+                      </div>
+                    </div>
+                  {{/each}}
+                </div>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+        <div class="clearfix">
+          <div class="pull-left">
+            {{> testsStateFilter sessionVar="testsFilter"}}
+          </div>
+          {{> reactiveTable settings=reactiveTableSettings}}
+        </div>
+      </div>
+    </div>
+  {{else}}
+    {{> reactiveTableNoData}}
+  {{/if}}
+</template>

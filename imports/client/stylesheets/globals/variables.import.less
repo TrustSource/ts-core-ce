@@ -1,0 +1,24 @@
+// =============================================================================
+// Centralized Variables
+// Single source of truth for colors, z-indices, and key values
+// =============================================================================
+
+// --- Semantic color aliases ---
+@color-table-hover: rgba(42, 148, 162, 0.04);
+@color-text-secondary: #6b7280;
+@color-white: #fff;
+@color-black: #000;
+
+// --- Z-index scale (matches layout hierarchy) ---
+@z-header-fixed: 1000;
+@z-sidebar-fixed: 1001;
+@z-footer-fixed: 1001;
+@z-right-bar: 1002;
+@z-splash: 2000;
+
+// --- Preloader title size ---
+// Shared by .ts-splash-title h1 (19 in-app preloaders, globals/splash.import.less)
+// and the components lake search loading state (component/component-lake.less),
+// so the two cannot drift apart.
+@preloader-title-size: 20px;
+@preloader-title-line-height: 22px;

@@ -1,0 +1,231 @@
+<template name="AlgorithmsSettingsAddModal">
+  <!-- Modal: AlgorithmsSettingsAddModal -->
+  <div class="modal fade" id="AlgorithmsSettingsAddModal" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="ts-accent-line"></div>
+        <div class="modal-header text-center">
+          <h4 class="modal-title">{{#if isEditMode}}{{__ 'EditCryptoAsset'}}{{else}}{{__ 'AlgorithmEvaluation'}}{{/if}}</h4>
+        </div>
+        <form id="AlgorithmsSettingsAddForm" method="post">
+          <div class="modal-body">
+            <div class="row">
+              <div class="form-group col-xs-12">
+                <label for="addAlgorithm">{{__ 'Name'}} *</label>
+                <input type="text" name="addAlgorithm" id="addAlgorithm" class="form-control"
+                  list="addAlgorithmOptions" autocomplete="off" required>
+                <datalist id="addAlgorithmOptions">
+                  {{#each getAlgorithms}}
+                    <option value="{{Algorithm}}"></option>
+                  {{/each}}
+                </datalist>
+              </div>
+              <div class="form-group col-xs-12">
+                <label for="assetType">{{__ 'AssetType'}}</label>
+                <select name="assetType" id="assetType" class="form-control select2">
+                  {{#each assetTypeValues}}
+                    <option value="{{this}}">{{this}}</option>
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+            <div class="row crypto-asset-group" data-asset-group="algorithm">
+              <div class="form-group col-xs-12">
+                <label for="primitive">{{__ 'Primitive'}}</label>
+                <select name="primitive" id="primitive" class="form-control select2">
+                  {{#each primitiveValues}}
+                    <option value="{{this}}">
+                      {{this}}
+                    </option>
+                  {{/each}}
+                </select>
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="parameterSetIdentifier">{{__ 'ParameterSetIdentifier'}}</label>
+                <input type="text" id="parameterSetIdentifier" name="parameterSetIdentifier" class="form-control">
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="curve">{{__ 'EllipticCurve'}}</label>
+                <input type="text" name="curve" id="curve" class="form-control">
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="mode">{{__ 'Mode'}}</label>
+                <select name="mode" id="mode" class="form-control select2">
+                  {{#each modeValues}}
+                    <option value="{{this}}">
+                      {{this}}
+                    </option>
+                  {{/each}}
+                </select>
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="padding">{{__ 'Padding'}}</label>
+                <select name="padding" id="padding" class="form-control select2">
+                  {{#each paddingValues}}
+                    <option value="{{this}}">
+                      {{this}}
+                    </option>
+                  {{/each}}
+                </select>
+              </div>
+              <div class="form-group col-xs-12">
+                <label for="cryptoFunctions">{{__ 'CryptographicFunctions'}}</label>
+                <select name="cryptoFunctions" id="cryptoFunctions" multiple="multiple" class="form-control select2">
+                  {{#each cryptoFunctionsValues}}
+                    <option value="{{this}}">
+                      {{this}}
+                    </option>
+                  {{/each}}
+                </select>
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="executionEnvironment">{{__ 'ExecutionEnvironment'}}</label>
+                <select name="executionEnvironment" id="executionEnvironment" class="form-control select2">
+                  {{#each executionEnvironmentValues}}
+                    <option value="{{this}}">
+                      {{this}}
+                    </option>
+                  {{/each}}
+                </select>
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="implementationPlatform">{{__ 'ImplementationPlatform'}}</label>
+                <select name="implementationPlatform" id="implementationPlatform" class="form-control select2">
+                  {{#each implementationPlatformValues}}
+                    <option value="{{this}}">
+                      {{this}}
+                    </option>
+                  {{/each}}
+                </select>
+              </div>
+              <div class="form-group col-xs-12">
+                <label for="certificationLevel">{{__ 'CertificationLevel'}}</label>
+                <select name="certificationLevel" id="certificationLevel" multiple="multiple" class="form-control select2">
+                  {{#each certificationLevelValues}}
+                    <option value="{{this}}">
+                      {{this}}
+                    </option>
+                  {{/each}}
+                </select>
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="classicalSecurityLevel">{{__ 'ClassicalSecurityLevel'}}</label>
+                <input type="number" id="classicalSecurityLevel" min="0" name="classicalSecurityLevel" class="form-control">
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="nistQuantumSecurityLevel">{{__ 'NistQsl'}}</label>
+                <input type="number" id="nistQuantumSecurityLevel" min="0" max="6" name="nistQuantumSecurityLevel" class="form-control">
+              </div>
+            </div>
+            <div class="row crypto-asset-group" data-asset-group="certificate" style="display:none">
+              <div class="form-group col-xs-6">
+                <label for="cert_subjectName">{{__ 'SubjectName'}}</label>
+                <input type="text" id="cert_subjectName" name="subjectName" class="form-control">
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="cert_issuerName">{{__ 'IssuerName'}}</label>
+                <input type="text" id="cert_issuerName" name="issuerName" class="form-control">
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="cert_notValidBefore">{{__ 'NotValidBefore'}}</label>
+                <input type="text" id="cert_notValidBefore" name="notValidBefore" class="form-control" placeholder="ISO 8601">
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="cert_notValidAfter">{{__ 'NotValidAfter'}}</label>
+                <input type="text" id="cert_notValidAfter" name="notValidAfter" class="form-control" placeholder="ISO 8601">
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="cert_certificateFormat">{{__ 'CertificateFormat'}}</label>
+                <input type="text" id="cert_certificateFormat" name="certificateFormat" class="form-control" placeholder="X.509">
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="cert_certificateFileExtension">{{__ 'FileExtension'}}</label>
+                <input type="text" id="cert_certificateFileExtension" name="certificateFileExtension" class="form-control" placeholder="pem / der / crt">
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="cert_serialNumber">{{__ 'SerialNumber'}}</label>
+                <input type="text" id="cert_serialNumber" name="serialNumber" class="form-control">
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="cert_certificateState">{{__ 'State'}}</label>
+                <select name="certificateState" id="cert_certificateState" multiple="multiple" class="form-control select2">
+                  {{#each certificateStateValues}}
+                    <option value="{{this}}">{{this}}</option>
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+            <div class="row crypto-asset-group" data-asset-group="protocol" style="display:none">
+              <div class="form-group col-xs-6">
+                <label for="proto_type">{{__ 'ProtocolType'}}</label>
+                <select name="type" id="proto_type" class="form-control select2">
+                  {{#each protocolTypeValues}}
+                    <option value="{{this}}">{{this}}</option>
+                  {{/each}}
+                </select>
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="proto_version">{{__ 'Version'}}</label>
+                <input type="text" id="proto_version" name="version" class="form-control" placeholder="e.g. 1.3">
+              </div>
+            </div>
+            <div class="row crypto-asset-group" data-asset-group="related-crypto-material" style="display:none">
+              <div class="form-group col-xs-6">
+                <label for="mat_type">{{__ 'MaterialType'}}</label>
+                <select name="materialType" id="mat_type" class="form-control select2">
+                  {{#each relatedMaterialTypeValues}}
+                    <option value="{{this}}">{{this}}</option>
+                  {{/each}}
+                </select>
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="mat_state">{{__ 'State'}}</label>
+                <select name="materialState" id="mat_state" class="form-control select2">
+                  {{#each relatedMaterialStateValues}}
+                    <option value="{{this}}">{{this}}</option>
+                  {{/each}}
+                </select>
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="mat_size">{{__ 'Size'}}</label>
+                <input type="number" min="0" id="mat_size" name="materialSize" class="form-control">
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="mat_format">{{__ 'Format'}}</label>
+                <input type="text" id="mat_format" name="materialFormat" class="form-control" placeholder="e.g. raw / pem">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-12">
+                <label for="comment">{{__ 'Comment'}}</label>
+                <textarea type="text" id="comment" name="comment" class="form-control"></textarea>
+              </div>
+              <div class="form-group col-xs-12">
+                <label class="control-label" for="used">
+                  <input type="checkbox" id="used" name="used" class="i-checks">
+                  <strong>{{__ 'InUse'}}</strong>
+                </label>
+              </div>
+              <div class="form-group col-xs-12">
+                <label for="origin">{{__ 'Origin'}}</label>
+                <input type="text" name="origin" id="origin" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">{{__ 'Close'}}</button>
+            {{#if loading}}
+              <button type="button" disabled="disabled" class="btn btn-primary">
+                <i class="fa fa-spinner fa-spin"></i> {{#if isEditMode}}{{__ 'Save'}}{{else}}{{__ 'Add'}}{{/if}}
+              </button>
+            {{else}}
+              <button type="submit" class="btn btn-primary">
+                {{#if isEditMode}}{{__ 'Save'}}{{else}}{{__ 'Add'}}{{/if}}
+              </button>
+            {{/if}}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>

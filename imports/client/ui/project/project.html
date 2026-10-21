@@ -1,0 +1,81 @@
+<template name="project">
+  <div class="module-details">
+    <div class="ts-panel">
+      <div class="panel-body">
+        {{#if isNotUnassigned}}
+          {{#if getStatistics}}
+            <div class="ribbon-wrapper">
+              <div class="ribbon {{getStatistics.getState}}">{{ecsText getStatistics.getState }}</div>
+            </div>
+          {{/if}}
+        {{else}}
+          <div class="ribbon-wrapper">
+            <div class="ribbon {{getUnassignedState}}">{{ecsText getUnassignedState}}</div>
+          </div>
+        {{/if}}
+        <div class="row vertical-align">
+          <div class="col-md-12">
+            <h4 class="pull-left card-name-line">
+              {{>projectApprovedStatus projectId=_id class="size-md"}}
+              <span class="card-name truncate" title="{{name}}">{{name}}</span>
+              {{>leanixLink leanix=leanix}}
+            </h4>
+          </div>
+        </div>
+        <div style="min-height:31px;">
+          {{#if isNotUnassigned}}
+            {{>pinAction type='project' item=this}}
+            {{>followAction type='project' item=this}}
+            <a class="btn btn-primary btn-sm module-settings"
+               href="{{pathFor route='projectSettings' data=getProjectOptions}}">
+              <span class="fa fa-cogs" aria-hidden="true"></span>
+              Settings
+            </a>
+          {{/if}}
+        </div>
+        <div class="row module-description">
+          <div class="col-md-12">
+            <p>{{> reactiveTableProjectsTags}}</p>
+            <p>{{description}}</p>
+          </div>
+        </div>
+        <div class="ecsbars-box">
+          {{#if isNotUnassigned}}
+            {{#if getStatistics}}
+              {{> ecsbars }}
+            {{/if}}
+          {{/if}}
+        </div>
+      </div>
+      <div class="panel-footer module-footer">
+        <div class="row">
+          {{#if isNotUnassigned}}
+            <div class="col-md-4 border-right">
+              <div class="module-stat">
+                <a href="" class="module-stat-label">
+                  Modules: <span class="module-stat-value">{{moduleCount}}</span>
+                </a>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="module-stat">
+                <a href="{{pathFor route='moduleDetail' hash='#moduleScan'}}" class="module-stat-label">
+                  Last analysis:
+                  <span class="module-stat-value">{{dateFormat analyzed 'll'}}</span>
+                </a>
+              </div>
+            </div>
+          {{else}}
+            <div class="col-md-12">
+              <div class="module-stat">
+                <a href="" class="module-stat-label">
+                  Modules: <span class="module-stat-value">{{moduleCount}}</span>
+                </a>
+              </div>
+            </div>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

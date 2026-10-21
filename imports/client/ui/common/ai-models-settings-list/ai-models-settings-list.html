@@ -1,0 +1,63 @@
+<template name="aiModelsSettingsList">
+  <div class="ts-panel">
+    <div class="panel-heading">
+      List of AI artifacts as detected
+    </div>
+    <div class="panel-body">
+      {{#if foundAiModels.length}}
+        {{#each foundAiModels}}
+          <span class="label label-default inner-b-5 inline-block">{{name}}{{#if version}} [{{version}}]{{/if}}{{#if task}} · {{task}}{{/if}}</span>
+        {{/each}}
+      {{else}}
+        <p>No machine-learning-model components or AI artifacts identified</p>
+      {{/if}}
+    </div>
+  </div>
+
+  <div class="ts-panel">
+    <div class="panel-heading">
+      {{title}}
+    </div>
+    <div class="panel-body">
+      {{#if isInRole 'compliance_manager,manager,developer' companyId}}
+        <div class="pull-left inner-b-10">
+          <a class="btn btn-primary add-ai-model" data-toggle="modal" data-target="#AiModelsSettingsAddModal" title="Add AI artifact">
+            <span class="fa fa-plus" aria-hidden="true"></span>
+            Add AI artifact
+          </a>
+          {{> AiModelsSettingsAddModal}}
+          <div class="inline-block relative">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              <span class="fa fa-file-code-o" aria-hidden="true"></span> Export as CycloneDX <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="export-as-cyclonedx-aibom" id="AIBOM">AIBOM</a></li>
+              <li><a class="export-as-cyclonedx-full" id="FULL">Full BOM (components + crypto + AI)</a></li>
+            </ul>
+          </div>
+        </div>
+      {{/if}}
+      {{#if this.data}}
+        <form autocomplete="off">
+          {{> reactiveTable settings=reactiveTableSettings}}
+        </form>
+      {{/if}}
+    </div>
+  </div>
+</template>
+
+<template name="reactiveTableAiModelsSettingsActions">
+  <div class="text-right">
+    {{#if isFromModule}}
+      <a href="{{pathFor route='moduleSettings' data=getModuleOptions}}"
+         target="_blank" class="label label-info pull-right">in Module</a>
+    {{else}}
+      <button type="button" class="btn btn-default btn-xs edit-ai-model" title="{{__ 'Edit'}}">
+        <i class="fa fa-pencil"></i>
+      </button>
+      <button type="button" class="btn btn-danger btn-xs remove-ai-model">
+        <i class="fa fa-trash-can"></i>
+      </button>
+    {{/if}}
+  </div>
+</template>

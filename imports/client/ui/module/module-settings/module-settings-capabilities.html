@@ -1,0 +1,18 @@
+<template name="moduleSettingsCapabilities">
+  <div id="capabilities" class="tab-pane">
+    <div class="panel-body no-bottom-errors">
+      <h3 class="m-t-lg">Capabilities</h3>
+      <div class="row">
+        <div class="col-lg-12">
+          {{> capabilitiesList
+            title="Associate capabilities with this module"
+            id="moduleCapabilitiesSettings"
+            data=getCapabilitiesList
+            docId=currentModule._id
+            readonly=false
+          }}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

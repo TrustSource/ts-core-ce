@@ -1,0 +1,146 @@
+<template name="moduleListFilter">
+  {{#unless layoutDependency}}
+    <div class="panel-heading actions no-top clearfix">
+      <div class="pull-left">
+        {{#if selectAllPossible}}
+          <label class="checkbox-inline mark-selected-all inner-l-5">
+            <input type="checkbox" name="selectAll">
+            <span>&nbsp;</span>
+          </label>
+          <div class="btn-group btn-group-sm">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" disabled="{{selectActionsDisabled}}">
+              Always allow <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href class="mark-selected-module-whitelisted">Add to module</a></li>
+              <li><a href class="unmark-selected-module-whitelisted">Remove from module</a></li>
+              {{#if isProjectAvailable}}
+                <li role="separator" class="divider"></li>
+                <li><a href class="mark-selected-project-whitelisted">Add to project</a></li>
+                <li><a href class="unmark-selected-project-whitelisted">Remove from project</a></li>
+              {{/if}}
+              {{#if isCompanyAvailable}}
+                <li role="separator" class="divider"></li>
+                <li><a href class="mark-selected-company-whitelisted">Add to company</a></li>
+                <li><a href class="unmark-selected-company-whitelisted">Remove from company</a></li>
+              {{/if}}
+            </ul>
+          </div>
+          <div class="btn-group btn-group-sm">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" disabled="{{selectActionsDisabled}}">
+              Always deny  <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href class="mark-selected-module-blacklisted">Add to module</a></li>
+              <li><a href class="unmark-selected-module-blacklisted">Remove from module</a></li>
+              {{#if isProjectAvailable}}
+                <li role="separator" class="divider"></li>
+                <li><a href class="mark-selected-project-blacklisted">Add to project</a></li>
+                <li><a href class="unmark-selected-project-blacklisted">Remove from project</a></li>
+              {{/if}}
+              {{#if isCompanyAvailable}}
+                <li role="separator" class="divider"></li>
+                <li><a href class="mark-selected-company-blacklisted">Add to company</a></li>
+                <li><a href class="unmark-selected-company-blacklisted">Remove from company</a></li>
+              {{/if}}
+            </ul>
+          </div>
+        {{/if}}
+      </div>
+      <div class="pull-right form-inline">
+        {{> stateFilter sessionVar="moduleDetailFilter"}}
+      </div>
+    </div>
+  {{else}}
+    <div class="panel-heading actions no-top clearfix">
+      <div class="pull-left">
+        {{#if selectAllPossible}}
+          <label class="checkbox-inline mark-selected-all inner-l-0" title="Select all in current page">
+            <input type="checkbox" name="selectAll">
+            <span>&nbsp;</span>
+          </label>
+          <div class="btn-group btn-group-sm">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" disabled="{{selectActionsDisabled}}">
+              Allow/deny <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><strong class="pinner-l-10">Always allow</strong></li>
+              <li><a href class="mark-selected-module-whitelisted">Add to module</a></li>
+              <li><a href class="unmark-selected-module-whitelisted">Remove from module</a></li>
+              {{#if isProjectAvailable}}
+                <li><a href class="mark-selected-project-whitelisted">Add to project</a></li>
+                <li><a href class="unmark-selected-project-whitelisted">Remove from project</a></li>
+              {{/if}}
+              {{#if isCompanyAvailable}}
+                <li><a href class="mark-selected-company-whitelisted">Add to company</a></li>
+                <li><a href class="unmark-selected-company-whitelisted">Remove from company</a></li>
+              {{/if}}
+              <li role="separator" class="divider"></li>
+              <li><strong class="pinner-l-10">Always deny</strong></li>
+              <li><a href class="mark-selected-module-blacklisted">Add to module</a></li>
+              <li><a href class="unmark-selected-module-blacklisted">Remove from module</a></li>
+              {{#if isProjectAvailable}}
+                <li><a href class="mark-selected-project-blacklisted">Add to project</a></li>
+                <li><a href class="unmark-selected-project-blacklisted">Remove from project</a></li>
+              {{/if}}
+              {{#if isCompanyAvailable}}
+                <li><a href class="mark-selected-company-blacklisted">Add to company</a></li>
+                <li><a href class="unmark-selected-company-blacklisted">Remove from company</a></li>
+              {{/if}}
+            </ul>
+          </div>
+          <div class="btn-group btn-group-sm">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" disabled="{{selectActionsDisabled}}">
+              Mark as <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href class="mark-selected-unchanged">Unchanged</a></li>
+              <li><a href class="mark-selected-loosecoupled">Loose coupled</a></li>
+            </ul>
+          </div>
+        {{/if}}
+      </div>
+      {{#unless treeView}}
+        <div class="pull-right form-inline">
+        <div class="dropdown inline-block filter-type-dropdown">
+          <button class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" title="Filter list by status">
+            {{#if isFilterType 'legal'}}
+              <i class="fa fa-gavel"></i> Legal
+            {{else if isFilterType 'vulnerability'}}
+              <i class="fa fa-shield-halved"></i> Vulnerability
+            {{else if isFilterType 'viability'}}
+              <i class="fa fa-heartbeat"></i> Viability
+            {{else if isFilterType 'versioning'}}
+              <i class="fa fa-hourglass-o"></i> Versioning
+            {{else if isFilterType 'endoflife'}}
+              <i class="fa fa-hourglass-end"></i> End of Life
+            {{else if isFilterType 'encryption'}}
+              <i class="fas fa-person-military-pointing"></i> Encryption
+            {{else if isFilterType 'multy-legal'}}
+              <i class="fa fa-gavel"></i> Multi-Legal
+            {{else}}
+              <i class="fa fa-star-o"></i> Overall
+            {{/if}}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li class="{{#unless getFilterTypeValue}}active{{/unless}}"><a href="#" class="set-filter-type" data-type=""><i class="fa fa-star-o"></i> Overall</a></li>
+            <li class="{{#if isFilterType 'legal'}}active{{/if}}"><a href="#" class="set-filter-type" data-type="legal"><i class="fa fa-gavel"></i> Legal</a></li>
+            <li class="{{#if isFilterType 'vulnerability'}}active{{/if}}"><a href="#" class="set-filter-type" data-type="vulnerability"><i class="fa fa-shield-halved"></i> Vulnerability</a></li>
+            <li class="{{#if isFilterType 'viability'}}active{{/if}}"><a href="#" class="set-filter-type" data-type="viability"><i class="fa fa-heartbeat"></i> Viability</a></li>
+            <li class="{{#if isFilterType 'versioning'}}active{{/if}}"><a href="#" class="set-filter-type" data-type="versioning"><i class="fa fa-hourglass-o"></i> Versioning</a></li>
+            <li class="{{#if isFilterType 'endoflife'}}active{{/if}}"><a href="#" class="set-filter-type" data-type="endoflife"><i class="fa fa-hourglass-end"></i> End of Life</a></li>
+            <li class="{{#if isFilterType 'encryption'}}active{{/if}}"><a href="#" class="set-filter-type" data-type="encryption"><i class="fas fa-person-military-pointing"></i> Encryption</a></li>
+            <li class="{{#if isFilterType 'multy-legal'}}active{{/if}}"><a href="#" class="set-filter-type" data-type="multy-legal"><i class="fa fa-gavel"></i> Multi-Legal</a></li>
+          </ul>
+        </div>
+        {{> stateFilter sessionVar="moduleDetailFilter"}}
+      </div>
+      {{/unless}}
+    </div>
+  {{/unless}}
+</template>

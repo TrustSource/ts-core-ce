@@ -1,0 +1,68 @@
+# Meteor packages used by this project, one per line.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+# Meteor core packages
+accounts-2fa@3.1.0
+accounts-password@3.3.1
+blaze-html-templates
+check@1.5.0
+dynamic-import@0.7.4
+ecmascript@0.19.1
+ejson@1.2.0
+email@3.2.0
+# es5-shim@4.8.1  # removed - not needed for Node 22 / modern browsers
+fetch@0.2.0
+jquery@3.0.0
+less
+logging@1.3.6
+meteor-base@1.5.2
+# mobile-experience@1.1.2  # removed - Cordova mobile wrapper, not used
+mongo@2.5.1
+random@1.2.2
+reactive-var@1.0.13
+reload@1.3.2
+session@1.2.3
+shell-server@0.7.0
+spacebars
+standard-minifier-js@3.2.0
+tracker@1.3.4
+underscore@1.6.4
+
+# Atmosphere packages (no local fork)
+alanning:roles
+aldeed:autoform@8.0.0
+matb33:collection-hooks
+meteortesting:mocha
+momentjs:moment
+ostrio:files
+universe:i18n
+vlasky:galvanized-iron-router
+
+# Local package forks (in /packages/)
+aldeed:autoform-bs-datepicker
+aldeed:autoform-select2
+aldeed:collection2
+aldeed:simple-schema
+aslagle:reactive-table
+chrismbeckett:toastr
+forwarder:autoform-wizard
+fourq:typeahead
+harrison:papa-parse
+hwillson:stub-collections
+# juliancwirko:postcss  # removed - project uses LESS, not PostCSS
+kevohagan:sweetalert
+meteorhacks:search-source
+# mizzao:bootboxjs  # removed - dialog library, never called in app code
+muqube:autoform-nouislider
+my:force-ssl
+natestrauser:animate-css
+natestrauser:select2
+olexandrbig:bootstrap-treeview
+rajit:bootstrap3-datepicker
+sergeyt:typeahead
+simply:reactive-local-storage
+stricker:tag-input
+twbs:bootstrap-noglyph
+communitypackages:autoform-bootstrap3

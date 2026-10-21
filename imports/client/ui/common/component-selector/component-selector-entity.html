@@ -1,0 +1,56 @@
+<template name="componentSelectorEntity">
+  <div class="panel-compact clearfix component-list">
+    {{#if isComponentBlacklisted}}
+      <div class="label label-danger blacklisted-label"
+           title="All or some versions for this component are Blacklisted in Company">
+        B
+      </div>
+    {{/if}}
+    <div class="col-md-4 truncate">
+      <a href="{{pathFor 'componentDetail'}}" target="_blank">
+        <h5>
+          {{#if getName}}
+            {{getName}}
+          {{else}}
+            {{#if getKey}}
+              {{getKey}}
+            {{else}}
+              {{../_id}}
+            {{/if}}
+          {{/if}}
+        </h5>
+      </a>
+      {{#if getCategory}}
+        <p class="inner-b-0">
+          <span class="fa fa-tags"></span> {{getCategoryString}}
+        </p>
+      {{/if}}
+    </div>
+    <div class="col-md-4">&nbsp;{{getDescription}}</div>
+    <div class="col-md-3">
+      <div class="row">
+        <div class="col-xs-4">
+          &nbsp;
+        </div>
+        <div class="col-xs-4 text-center">{{{getPkgMgrIcon getKey}}}</div>
+        <div class="col-xs-4">
+          {{#if getUrl 'homepage'}}
+            <a href="{{getUrl 'homepage'}}" target="_blank" title="goto homepage"><i
+              class="fa fa-fw fa-home"></i></a>
+          {{/if}}
+          {{#if getUrl 'repository'}}
+            <a href="{{getUrl 'repository'}}" target="_blank" title="goto repository"><i
+              class="fa fa-fw fa-code-fork"></i></a>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1">
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-primary pick_component" type="button"><i class="fa fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

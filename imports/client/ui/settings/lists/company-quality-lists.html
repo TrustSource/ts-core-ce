@@ -1,0 +1,27 @@
+<template name='companyQualityLists'>
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">Quality</h2>
+        <small>Define test requirements</small>
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content">
+    <div class="ts-panel">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-lg-12">
+            {{> qualitySettingsList
+              title="Define test requirements"
+              id="companyQualitySettings"
+              data=getQualitySettingsList
+              docId=this._id
+              readonly=false
+            }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

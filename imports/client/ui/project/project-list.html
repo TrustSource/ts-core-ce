@@ -1,0 +1,251 @@
+<template name="projectList">
+
+  {{#pageHeader}}
+    <div class="projects-header">
+      <div class="projects-header-left">
+        <h2 class="font-light m-b-xs">
+          Projects
+        </h2>
+        <small>
+          Projects are a means to group building artifacts (modules) together.
+          {{#if hasProjectCounters}}
+            <span class="text-danger">
+              {{getProjectCounters}}
+            </span>
+          {{/if}}
+        </small>
+      </div>
+      <div class="projects-header-actions">
+        <a class="btn btn-xs" data-toggle="modal" data-target="#createProject" title="Create new project">
+          <span class="fa fa-plus-circle" aria-hidden="true"></span>
+          <span class="btn-label">Create</span>
+        </a>
+        {{#if isInRole 'manager,compliance_manager' companyId}}
+          {{#if noGenerate}}
+            <a class="btn btn-xs generate-project" title="Add demo project with sample module">
+              <span class="fa fa-magic" aria-hidden="true"></span>
+              <span class="btn-label">Generate</span>
+            </a>
+          {{else}}
+            <a class="btn btn-xs disabled">
+              <span class="fa fa-spinner fa-spin" aria-hidden="true"></span>
+              <span class="btn-label">Generate</span>
+            </a>
+          {{/if}}
+          {{#if hasDemo}}
+            {{#if noGenerate}}
+              <a class="btn btn-xs remove-demo" title="Remove all demo projects and modules">
+                <span class="fa fa-trash" aria-hidden="true"></span>
+                <span class="btn-label">Remove demo</span>
+              </a>
+            {{else}}
+              <a class="btn btn-xs disabled">
+                <span class="fa fa-spinner fa-spin" aria-hidden="true"></span>
+                <span class="btn-label">Remove demo</span>
+              </a>
+            {{/if}}
+          {{/if}}
+        {{/if}}
+      </div>
+    </div>
+
+    {{#if isInRole 'manager,compliance_manager' companyId}}
+      <!-- Modal: createProject -->
+      <div class="modal fade" id="createProject" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="ts-accent-line"></div>
+            <div class="modal-header text-center">
+              <i class="fa fa-plus-circle ts-big-icon text-success"></i>
+              <br/>
+              <h4 class="modal-title">Create new project</h4>
+              <br/>
+              <div class="{{createProjectMsgType}}" id="form-messages">{{createProjectMsg}}</div>
+            </div>
+            <form id="createProjectForm">
+              <div class="modal-body">
+                <div class="row">
+                  <div class="form-group col-xs-12">
+                    <label for="projectName">Project name</label>
+                    <input type="text" value="" id="projectName" class="form-control" name="projectName">
+                    <span class="help-block small">Specify the name of the new project</span>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Create project</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    {{/if}}
+  {{/pageHeader}}
+    <div class="content">
+      <div class="ts-panel projects-panel">
+        <div class="panel-body">
+          <div class="list-filter-bar">
+            <div class="input-group input-group-sm">
+              <span class="input-group-addon"><span class="fa fa-filter"></span></span>
+              {{! No reactive `value=` here on purpose. The filter re-renders this bar on every
+                  keystroke, and a reactive value would rewind the box to whatever the throttled
+                  handler last committed - dropping or duplicating characters mid-word. The
+                  initial value is restored once in onRendered instead. }}
+              <input type="text" name="search" class="form-control input-sm" placeholder="Filter">
+            </div>
+            <div class="input-group input-group-sm dropdown">
+              <span class="input-group-addon"><span class="fa fa-bookmark"></span></span>
+              <button class="form-control dropdown-toggle list-dropdown-btn" data-toggle="dropdown">
+                <span class="list-dropdown-label">{{currentStateFilterLabel}}</span>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li class="{{#unless hasFilters}}active{{/unless}}"><a href="#" class="change-state-filter" data-value="all">All states</a></li>
+                <li class="{{#if isStateActive 'ok'}}active{{/if}}"><a href="#" class="change-state-filter" data-value="ok">OK</a></li>
+                <li class="{{#if isStateActive 'warnings'}}active{{/if}}"><a href="#" class="change-state-filter" data-value="warnings">Warnings</a></li>
+                <li class="{{#if isStateActive 'violations'}}active{{/if}}"><a href="#" class="change-state-filter" data-value="violations">Violations</a></li>
+              </ul>
+            </div>
+            <div class="input-group input-group-sm projects-tags-filter">
+              <span class="input-group-addon"><span class="fa fa-tags"></span></span>
+              {{#if getCompanyTags}}
+                <select multiple="multiple" name="tags" class="form-control select2" placeholder="Tags">
+                  {{#each getCompanyTags}}
+                    <option value="{{_id}}" selected="{{isActiveProject}}">{{name}}</option>
+                  {{/each}}
+                </select>
+              {{/if}}
+              {{#if hasNoCompanyTags}}
+                <a href="{{pathFor route='companyTags'}}" class="form-control list-dropdown-btn">
+                  <span class="list-dropdown-label">No tags</span>
+                </a>
+              {{/if}}
+              {{#if inProgressGetCompanyTags}}
+                <span class="fa fa-spinner fa-spin pinner-t-8"></span>
+              {{/if}}
+            </div>
+            <div class="list-filter-bar-actions">
+              {{#if isCardView}}
+                <button class="btn btn-default sorting" title="Toggle sort order">
+                  {{#if isDescSorting}}
+                    <span class="fa fa-sort-alpha-desc"></span>
+                  {{else}}
+                    <span class="fa fa-sort-alpha-asc"></span>
+                  {{/if}}
+                </button>
+              {{/if}}
+              <div class="btn-group" role="group">
+                <a href class="btn btn-default change-presentation-grid {{#if isCardView}}active{{/if}}" title="Grid view">
+                  <i class="fa fa-th"></i>
+                  <span class="projects-view-label">Grid</span>
+                </a>
+                <a href class="btn btn-default change-presentation-table {{#unless isCardView}}active{{/unless}}" title="Table view">
+                  <i class="fa fa-list"></i>
+                  <span class="projects-view-label">Table</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          {{#if projects}}
+            {{#if isCardView}}
+              <div class="modules">
+                <div class="row">
+                  {{#each projects}}
+                    <div class="col-lg-4 col-sm-6 col-md-4">
+                      {{> project}}
+                    </div>
+                  {{/each}}
+                </div>
+              </div>
+            {{else}}
+              <div class="table-responsive">
+                {{> reactiveTable settings=reactiveTableSettings}}
+              </div>
+            {{/if}}
+          {{else}}
+            {{> reactiveTableNoData}}
+          {{/if}}
+        </div>
+      </div>
+    </div>
+</template>
+
+<template name="reactiveTableLegalStats">
+  {{#if getStatistics analysisId}}
+    {{#with getStatistics analysisId}}
+      {{#if legal.total}}
+        {{> ecsbarLine noTitle="true" data=legal}}
+      {{else}}
+        {{> reactiveTableNoStats}}
+      {{/if}}
+    {{/with}}
+  {{/if}}
+</template>
+
+<template name="reactiveTableVulnerabilityStats">
+  {{#if getStatistics analysisId}}
+    {{#with getStatistics analysisId}}
+      {{#if vulnerability.total}}
+        {{> ecsbarLine noTitle="true" data=vulnerability}}
+      {{else}}
+        {{> reactiveTableNoStats}}
+      {{/if}}
+    {{/with}}
+  {{/if}}
+</template>
+
+<template name="reactiveTableQualityStats">
+  {{#if getStatistics}}
+    {{#with getStatistics}}
+      {{#if total}}
+        {{> ecsbarLine noTitle="true" data=this}}
+      {{else}}
+        {{> reactiveTableNoStats}}
+      {{/if}}
+    {{/with}}
+  {{/if}}
+</template>
+
+<template name="reactiveTableProjectsActions">
+  {{#if isNotUnassigned}}
+    <a class="btn btn-default btn-sm" title="Settings"
+       href="{{pathFor route='projectSettings' projectId=_id}}">
+      <span class="fa fa-cogs" aria-hidden="true"></span>
+    </a>
+    {{>pinAction type='project' item=this iconOnly=true}}
+    {{>followAction type='project' item=this iconOnly=true}}
+  {{/if}}
+</template>
+
+<template name="reactiveTableProjectsName">
+  <span style="white-space:nowrap">
+    {{>projectApprovedStatus projectId=_id}}
+    <span class="truncate max-w-400px" title="{{name}}"> {{name}}</span>
+  </span>
+</template>
+
+<template name="reactiveTableProjectsTags">
+  {{#each tags}}
+    <span class="label label-default">{{name}}</span>
+  {{/each}}
+</template>
+
+<template name="reactiveTableProjectsReleases">
+  {{#unless isUnassigned}}
+    <a href="{{pathFor route='releasesList' query=getReleaseQuery}}" target="_blank" class="relative">
+      {{#if releaseCounter}}
+        {{#with releaseCounter}}
+          {{count}}
+        {{/with}}
+      {{else}}
+        {{#if isLoading}}
+          <div class="small-loading">
+            <div class="loading-spinner loading-spinner-sm"></div>
+          </div>
+        {{/if}}
+      {{/if}}
+      <span class="fa fa-external-link"></span>
+    </a>
+  {{/unless}}
+</template>

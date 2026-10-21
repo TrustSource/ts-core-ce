@@ -1,0 +1,115 @@
+<template name="componentMultyLicense">
+  {{#if isInRole 'compliance_manager,manager' companyId}}
+    <a class="btn btn-primary btn-sm showComponentMultyLicense"
+       title="Total {{licenses.length}} licenses available">
+      <span class="fa fa-gavel" aria-hidden="true"></span> Change selected license</a>
+    {{#if modalVisible}}
+      <!-- Modal: componentMultyLicense -->
+      <div class="modal fade" id="componentMultyLicense" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="ts-accent-line"></div>
+            <div class="modal-header text-center">
+              <i class="fa fa-puzzle-piece ts-big-icon text-success"></i>
+              <br/>
+              <h4 class="modal-title">Select license for component </h4>
+              <div class="alert alert-info">
+                <p class="text-left"><i class="fa fa-info-circle"></i> PLEASE NOTE</p>
+                <p class="text-left">
+                  Licenses selected manually will not appear in the component or legal views until you have executed a new analysis run!
+                  The views actually are representations of an analysis result.
+                </p>
+              </div>
+              <div class="{{componentMultyLicenseMsgType}}"
+                   id="form-messages">{{componentMultyLicenseMsg}}</div>
+            </div>
+            <form class="componentMultyLicenseForm" id="componentMultyLicenseForm">
+              <div class="modal-body">
+                {{#each licenses}}
+                  <div class="inner-b-10 relative">
+                    <table class="table-clear">
+                      <tr>
+                        <td style="width:140px;" class="pinner-l-10">
+                          <div class="radio absolute-radio" title="Set active">
+                            <label>
+                              <span></span>
+                              <input type="radio" name="selectedLicense" checked="{{isSelected}}" value="{{getKey}}">
+                            </label>
+                          </div>
+                          {{#with licenseStatus}}
+                            {{{ecsLabel computedStatus.status computedStatus.label}}}
+                          {{/with}}
+                        </td>
+                        <td><strong>{{getName}}</strong></td>
+                      </tr>
+                    </table>
+                    {{#if isUnknown}}
+                      <div class="pinner-l-10">
+                        <table class="table-clear">
+                          <tr>
+                            <td style="width:140px" class="text-right pinner-r-10">{{{ecsLabel 'warnings' 'Please note'}}}</td>
+                            <td>{{isUnknown}}</td>
+                          </tr>
+                        </table>
+                      </div>
+                    {{else}}
+                      {{#unless isPrivateLicense licenseStatus.computedStatus}}
+                        <div class="pinner-l-10">
+                          <table class="table-clear">
+                            {{#if licenseStatus.violations}}
+                              {{#each describeViolations licenseStatus.violations}}
+                                <tr>
+                                  <td style="width:140px" class="text-right pinner-r-10">{{{ecsLabel getType.key getType.text}}}</td>
+                                  <td>{{message}}</td>
+                                </tr>
+                              {{/each}}
+                            {{/if}}
+                            {{#if licenseStatus.obligations}}
+                              {{#each describeObligations licenseStatus.obligations}}
+                                <tr>
+                                  <td style="width:140px" class="text-right pinner-r-10">{{{ecsLabel 'warnings' 'Obligation'}}}</td>
+                                  <td>{{description}}</td>
+                                </tr>
+                              {{/each}}
+                            {{/if}}
+                            {{#if licenseStatus.reason}}
+                              <tr>
+                                <td style="width:140px" class="text-right pinner-r-10">{{{ecsLabel 'warnings' 'Reason'}}}</td>
+                                <td>{{licenseStatus.reason}}</td>
+                              </tr>
+                            {{/if}}
+                            {{#if licenseStatus.resolvedViolations}}
+                              {{#each describeViolations licenseStatus.resolvedViolations}}
+                                <tr>
+                                  <td style="width:140px" class="text-right pinner-r-10">{{{ecsLabel 'ok' getType.text}}}</td>
+                                  <td>{{message}}</td>
+                                </tr>
+                              {{/each}}
+                            {{/if}}
+                            {{#if licenseStatus.resolvedObligations}}
+                              {{#each describeObligations licenseStatus.resolvedObligations}}
+                                <tr>
+                                  <td style="width:140px" class="text-right pinner-r-10">{{{ecsLabel 'ok' 'Obligation'}}}</td>
+                                  <td>{{description}}</td>
+                                </tr>
+                              {{/each}}
+                            {{/if}}
+                          </table>
+                        </div>
+                      {{/unless}}
+                    {{/if}}
+                  </div>
+                {{/each}}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                </button>
+                <button type="submit" class="btn btn-primary">Update</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    {{/if}}
+  {{/if}}
+</template>

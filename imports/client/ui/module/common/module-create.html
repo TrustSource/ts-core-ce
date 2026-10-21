@@ -1,0 +1,146 @@
+<template name="moduleCreate">
+  <a class="btn btn-primary btn-xs showNextModal" data-toggle="modal" data-target="#createModule" title="Add/link module">
+    <span class="fa fa-solid fa-cube" aria-hidden="true"></span> Add/link</a>
+  <!-- Modal: createModule -->
+  {{#if modalVisible}}
+    <div class="modal fade" id="createModule" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="ts-accent-line"></div>
+          <div class="modal-header text-center">
+            <i class="fa fa-solid fa-cube ts-big-icon text-success"></i>
+            <br/>
+            <h4 class="modal-title">Add/link module</h4>
+            <br/>
+            <div class="{{createModuleMsgType}}"
+                 id="form-messages">{{createModuleMsg}}</div>
+          </div>
+          <form id="createModuleForm" class="errors-text-hidden">
+            <div class="modal-body">
+              <div class="row">
+                <div class="form-group col-xs-12">
+                  <label for="moduleCustomName">Module type</label>
+                  <select id="moduleType" class="form-control" name="moduleType">
+                    <option value="custom" selected="{{createCustomModule}}">Create custom module</option>
+                    <option value="link" selected="{{createLinkedModule}}">Link company project</option>
+                    <option value="external" selected="{{createInfrastructureComponent}}">COTS or Infrastructure component</option>
+                  </select>
+                  <span class="help-block small">Specify the type of the new module</span>
+                </div>
+              </div>
+              {{#if createCustomModule}}
+                <div class="row">
+                  <div class="form-group col-xs-12">
+                    <label for="moduleCustomName">Module name *</label>
+                    <input type="text" value="" id="moduleCustomName" class="form-control"
+                           name="moduleCustomName" required>
+                    <span class="help-block small">Specify the name of the new module</span>
+                  </div>
+                </div>
+              {{else if createInfrastructureComponent}}
+                <div class="row">
+                  {{#unless isCustomModule}}
+                    <div class="form-group col-xs-6">
+                      <label for="moduleName">Select pre-defined module *</label>
+                      {{> componentTypeahead}}
+                      <a href class="help-block small text-success highlight toggle-custom-fields">
+                        Not finding what you are looking for?
+                      </a>
+                    </div>
+                    <div class="form-group col-xs-6">
+                      <label for="moduleVersion">Module version *</label>
+                      {{> versionTypeahead}}
+                    </div>
+                  {{else}}
+                    <div class="form-group col-xs-12">
+                      <div class="alert alert-info">
+                        <p><i class="fa fa-info-circle"></i> <strong>Specify the details of the component. The module is
+                          created from them, without a catalog entry.</strong></p>
+                      </div>
+                    </div>
+                    <div class="form-group col-xs-6">
+                      <label for="moduleName">Module name *</label>
+                      <input type="text" value="" id="moduleName" class="form-control"
+                             name="moduleName" required>
+                      <a href class="help-block small text-success highlight toggle-custom-fields">
+                        Select pre-defined module
+                      </a>
+                    </div>
+                    <div class="form-group col-xs-6">
+                      <label for="moduleVersion">Module version *</label>
+                      <input type="text" value="" id="moduleVersion" required
+                             class="form-control" name="moduleVersion">
+                      <span class="help-block small">Specify the version of the new module</span>
+                    </div>
+                  {{/unless}}
+                </div>
+                {{#unless isCustomModule}}
+                  <div class="row">
+                    <div class="form-group col-xs-6">
+                      <label for="moduleArchitectureType">Type of architecture</label>
+                      <select id="moduleArchitectureType"
+                              class="form-control select2" name="moduleArchitectureType">
+                        <option value="FEU" selected="selected">Frontend-UI-Module</option>
+                        <option value="FEE">Frontend-Endpoint</option>
+                        <option value="FES">Frontend-Service</option>
+                        <option value="BES">Backend-Service</option>
+                        <option value="BEE">Backend-Endpoint</option>
+                        <option value="SC">System component</option>
+                        <option value="IS">Infrastructure Service</option>
+                        <option value="DC">Distributable Component</option>
+                      </select>
+                      <span
+                          class="help-block small">Specify the architecture of the new infrastructure module</span>
+                    </div>
+                    <div class="form-group col-xs-6">
+                      <label for="moduleOpenSource">Is open source module</label>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" value="opensource"
+                                 name="moduleOpenSource" id="moduleOpenSource">
+                          Yes
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                {{/unless}}
+              {{else}}
+                <div class="row">
+                  <div class="form-group col-xs-12">
+                    <label for="moduleName">Select version of available projects</label>
+                    <select type="text" value="" id="" class="form-control select2 infrastructure-templates" name="moduleTemplate">
+                      {{#each approvedProjects}}
+                        <optgroup label="{{optgroup}}">
+                          {{#each options}}
+                            <option value="{{value}}">{{label}}</option>
+                          {{/each}}
+                        </optgroup>
+                      {{/each}}
+                    </select>
+                  </div>
+                </div>
+              {{/if}}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close
+              </button>
+              {{#if loading}}
+                {{#unless isCustomModule}}
+                  <button type="button" disabled="disabled" class="btn btn-primary"><i class="fa fa-spinner fa-spin"></i> Create module</button>
+                {{else}}
+                  <button type="button" disabled="disabled" class="btn btn-primary"><i class="fa fa-spinner fa-spin"></i> Create module</button>
+                {{/unless}}
+              {{else}}
+                {{#unless isCustomModule}}
+                  <button type="submit" class="btn btn-primary">Create module</button>
+                {{else}}
+                  <button type="submit" class="btn btn-primary">Create module</button>
+                {{/unless}}
+              {{/if}}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+</template>

@@ -1,0 +1,13 @@
+<template name="scanDetailAnalysisLink">
+  {{#if actionRoute}}
+    <a href="{{pathFor route=actionRoute.route data=actionRoute.params query=actionRoute.query}}"
+       class="btn btn-primary {{size}}" title="View analysis results" target="_blank">
+      <span class="fa fa-external-link" aria-hidden="true"></span> Analysis
+    </a>
+  {{else}}
+    <button disabled="disabled"
+       class="btn btn-primary {{size}}" title="No analysis available">
+      <span class="fa fa-external-link" aria-hidden="true"></span> Analysis N/A
+    </button>
+  {{/if}}
+</template>

@@ -1,0 +1,199 @@
+<template name='companyGeneralSettings'>
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">General settings</h2>
+        <small>Please select a settings group</small>
+      </div>
+    </div>
+  {{/pageHeader}}
+
+  <div class="content">
+    <div class="row">
+      {{#if isInRole 'account_admin' companyId}}
+        <div class="col-md-4 col-sm-6">
+          <div class="panel panel-default">
+            <a href="{{pathFor route='companyGeneralInfo'}}">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-12"><span class="fa fa-cog ts-big-icon"></span></div>
+                  <div class="col-md-12"><h4 style="margin: 10px 0 20px">General info</h4></div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      {{/if}}
+      {{#if isInRole 'account_admin,compliance_manager' companyId}}
+        <div class="col-md-4 col-sm-6">
+          <div class="panel panel-default">
+            <a href="{{pathFor route='companyFossSettings'}}">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-12"><span class="fa fa-leaf ts-big-icon"></span></div>
+                  <div class="col-md-12"><h4 style="margin: 10px 0 20px">FOSS liaison</h4></div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      {{/if}}
+      {{#if isInRole 'account_admin,company_security_manager' companyId}}
+        <div class="col-md-4 col-sm-6">
+          <div class="panel panel-default">
+            <a href="{{pathFor route='companyPsirtSettings'}}">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-12"><span class="fa fa-shield ts-big-icon"></span></div>
+                  <div class="col-md-12"><h4 style="margin: 10px 0 20px">PSIRT contacts</h4></div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      {{/if}}
+      {{#if isInRole 'account_admin,compliance_manager' companyId}}
+        <div class="col-md-4 col-sm-6">
+          <div class="panel panel-default">
+            <a href="{{pathFor route='companyWrittenOfferSettings'}}">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-12"><span class="fa fa-file-text-o ts-big-icon"></span></div>
+                  <div class="col-md-12"><h4 style="margin: 10px 0 20px">Written offer</h4></div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      {{/if}}
+
+      {{#if isInRole (settingsRoles 'licenseLists') companyId}}
+        <div class="col-md-4 col-sm-6">
+          <div class="panel panel-default">
+            <a href="{{pathFor route='companyLicenseLists'}}">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-12"><span class="fa fa-gavel ts-big-icon"></span></div>
+                  <div class="col-md-12"><h4 style="margin: 10px 0 20px">License allow/deny</h4></div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      {{/if}}
+      {{#if isInRole (settingsRoles 'componentLists') companyId}}
+        <div class="col-md-4 col-sm-6">
+          <div class="panel panel-default">
+            <a href="{{pathFor route='companyComponentLists'}}">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-12"><span class="fa fa-puzzle-piece ts-big-icon"></span></div>
+                  <div class="col-md-12"><h4 style="margin: 10px 0 20px">Component allow/deny</h4></div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      {{/if}}
+      {{#if isInRole 'account_admin,compliance_manager,company_security_manager' companyId}}
+        <div class="col-md-4 col-sm-6">
+          <div class="panel panel-default">
+            <a href="{{pathFor route='companyEncryptionLists'}}">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-12"><span class="fa fa-lock ts-big-icon"></span></div>
+                  <div class="col-md-12"><h4 style="margin: 10px 0 20px">Encryption</h4></div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      {{/if}}
+      {{#if isInRole 'account_admin,company_security_manager,compliance_manager' companyId}}
+        <div class="col-md-4 col-sm-6">
+          <div class="panel panel-default">
+            <a href="{{pathFor route='companyQualityLists'}}">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-12"><span class="fa fa-check-square-o ts-big-icon"></span></div>
+                  <div class="col-md-12"><h4 style="margin: 10px 0 20px">Quality</h4></div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      {{/if}}
+
+      {{#if isInRole 'account_admin,portfolio_manager,manager,company_security_manager,compliance_manager' companyId}}
+        <div class="col-md-4 col-sm-6">
+          <div class="panel panel-default">
+            <a href="{{pathFor route='companyTags'}}">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-12"><span class="fa fa-tags ts-big-icon"></span></div>
+                  <div class="col-md-12"><h4 style="margin: 10px 0 20px">Company tags</h4></div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      {{/if}}
+      {{#if isInRole 'account_admin,compliance_manager' companyId}}
+        <div class="col-md-4 col-sm-6">
+          <div class="panel panel-default">
+            <a href="{{pathFor route='companyPrivateLicenses'}}">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-12"><span class="fa fa-balance-scale ts-big-icon"></span></div>
+                  <div class="col-md-12"><h4 style="margin: 10px 0 20px">Private licenses</h4></div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      {{/if}}
+      {{#if isInRole (settingsRoles 'legalTemplates') companyId}}
+        <div class="col-md-4 col-sm-6">
+          <div class="panel panel-default">
+            <a href="{{pathFor route='companyLegalTemplates'}}">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-12"><span class="fa fa-file-contract ts-big-icon"></span></div>
+                  <div class="col-md-12"><h4 style="margin: 10px 0 20px">Legal templates</h4></div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      {{/if}}
+      {{#if isInRole (settingsRoles 'privateAlgorithms') companyId}}
+        <div class="col-md-4 col-sm-6">
+          <div class="panel panel-default">
+            <a href="{{pathFor route='companyPrivateAlgorithms'}}">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-12"><span class="fa fa-key ts-big-icon"></span></div>
+                  <div class="col-md-12"><h4 style="margin: 10px 0 20px">Private algorithms</h4></div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      {{/if}}
+      {{#if isInRole (settingsRoles 'manualVulnerabilities') companyId}}
+        <div class="col-md-4 col-sm-6">
+          <div class="panel panel-default">
+            <a href="{{pathFor route='companyManualVulnerabilities'}}">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-12"><span class="fa fa-shield-halved ts-big-icon"></span></div>
+                  <div class="col-md-12"><h4 style="margin: 10px 0 20px">Manual vulnerability</h4></div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      {{/if}}
+    </div>
+  </div>
+</template>

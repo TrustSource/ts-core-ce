@@ -1,0 +1,74 @@
+<template name="ciaRequirementsDescription">
+  {{#if requirements.CR}}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h5>
+          Project CIA requirements
+          <span class="pull-right"><a href="{{pathFor route=getRouteName data=getRouteOptions}}"><span class="fa fa-cogs"></span></a></span>
+        </h5>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-4">
+            {{#if requirements.CR}}
+              <p>
+                Confidentiality Requirement is {{#if compare requirements.CR 'X'}}<b>not defined</b>{{/if}}
+                {{#if compare requirements.CR 'L'}}<b>low</b>{{/if}}
+                {{#if compare requirements.CR 'M'}}<b>medium</b>{{/if}}
+                {{#if compare requirements.CR 'H'}}<b>high</b>{{/if}}
+              </p>
+            {{/if}}
+          </div>
+          <div class="col-md-4">
+            {{#if requirements.IR}}
+              <p>
+                Integrity Requirement is {{#if compare requirements.IR 'X'}}<b>not defined</b>{{/if}}
+                {{#if compare requirements.IR 'L'}}<b>low</b>{{/if}}
+                {{#if compare requirements.IR 'M'}}<b>medium</b>{{/if}}
+                {{#if compare requirements.IR 'H'}}<b>high</b>{{/if}}
+              </p>
+            {{/if}}
+          </div>
+          <div class="col-md-4">
+            {{#if requirements.AR}}
+              <p>
+                Availability Requirement is {{#if compare requirements.AR 'X'}}<b>not defined</b>{{/if}}
+                {{#if compare requirements.AR 'L'}}<b>low</b>{{/if}}
+                {{#if compare requirements.AR 'M'}}<b>medium</b>{{/if}}
+                {{#if compare requirements.AR 'H'}}<b>high</b>{{/if}}
+              </p>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+  {{else}}
+    {{#if moduleError}}
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h5>
+            Project CIA requirements
+            <span class="pull-right"><a href="{{pathFor route=getRouteName data=getRouteOptions}}"><span class="fa fa-cogs"></span></a></span>
+          </h5>
+        </div>
+        <div class="panel-body">
+          <p><i class="fa fa-info-circle"></i> PLEASE NOTE: Even if you completed the module settings, the Risk settings on project level will still require completion to allow a complete analysis.
+            You may click <a href="{{pathFor route=getRouteName data=getRouteOptions}}" class="highlight">here</a> to complete them now.</p>
+        </div>
+      </div>
+    {{else}}
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h5>
+            Project CIA requirements
+            <span class="pull-right"><a href="{{pathFor route=getRouteName data=getRouteOptions}}"><span class="fa fa-cogs"></span></a></span>
+          </h5>
+        </div>
+        <div class="panel-body">
+          <p><i class="fa fa-info-circle"></i> PLEASE NOTE: The legal settings require completion.
+            You may click <a href="{{pathFor route=getRouteName data=getRouteOptions}}" class="highlight">here</a> to complete them now.</p>
+        </div>
+      </div>
+    {{/if}}
+  {{/if}}
+</template>

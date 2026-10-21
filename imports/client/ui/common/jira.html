@@ -1,0 +1,60 @@
+<template name="jiraLink">
+  {{#unless noJira}}
+    <div>
+      {{#if jiraId}}
+        <!--<a class="integration-icon jira integration-lg create-jira" target="_blank" title="Jira connection" href="{{jiraApp}}/browse/{{jiraId}}"></a>-->
+
+        {{#unless isType 'email'}}
+          <a class="view-jira" href="{{jiraApp}}/browse/{{jiraId}}" target="_blank">
+            <span class="integration-icon jira integration-lg "></span> {{jiraTaskStatus}}
+          </a>
+        {{else}}
+          <!-- An emailed issue has no Jira URL to open and no click handler, so
+               this is a status read-out, not a control. It used to be an <a> with
+               a bare href, which only ever reloaded the page. -->
+          <span class="view-jira">
+            <span class="integration-icon jira integration-lg "></span> {{#if isEmailed}}CREATED{{else}}UNKNOWN{{/if}}
+          </span>
+        {{/unless}}
+        <a class="fa fa-remove remove-jira" role="button" tabindex="0" title="Remove Jira issue" aria-label="Remove Jira issue"></a>
+      {{else}}
+        <a class="show-jira-modal" role="button" tabindex="0" aria-label="Create issue in Jira">
+          <span class="integration-icon jira-disabled integration-lg "></span> Create issue
+        </a>
+        <!-- Modal: createIssue -->
+        <div class="modal fade createIssue" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="ts-accent-line"></div>
+              <div class="modal-header text-center">
+                <i class="fa fa-check-square-o ts-big-icon text-success"></i>
+                <br/>
+                <h4 class="modal-title">Create new Jira issue</h4>
+                <br/>
+                <div class="{{createIssueMsgType}}" id="form-messages">{{createIssueMsg}}</div>
+              </div>
+              <form class="createIssueForm">
+                <div class="modal-body text-left">
+                  <div class="form-group ">
+                    <label for="">Title</label>
+                    <input type="text" value="" name="modalTitle" class="form-control">
+                    <span class="help-block small">Specify the title of issue</span>
+                  </div>
+                  <div class="form-group ">
+                    <label for="">Description</label>
+                    <textarea value="" name="modalDescription" class="form-control" rows="5"></textarea>
+                    <span class="help-block small">Specify the description of issue</span>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary create-jira">Create issue</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      {{/if}}
+    </div>
+  {{/unless}}
+</template>

@@ -1,0 +1,14 @@
+<template name="SPDXExportTab">
+  <div id="SPDXExportTab" class="tab-pane">        <!-- Export SPDX -->
+    <div class="panel-body">
+      {{#if hasAccessRight 'module.SPDXExportTab.export' 'x' currentModule}}
+        <a class="btn btn-primary pull-left" id="SPDXExportTabGenerate">
+          <span class="fa fa-download" aria-hidden="true"></span>
+          Generate
+        </a>
+      {{/if}}
+
+      {{> reactiveTable settings=reactiveTableSettings}}
+    </div>
+  </div>
+</template>

@@ -1,0 +1,36 @@
+<template name="reportSbomFiles">
+
+
+  {{#pageHeader}}
+    <div class="reports-header">
+      <div class="reports-header-left">
+        <h2 class="font-light m-b-xs">
+          SBOM files
+        </h2>
+        <small>Software Bill of Materials reports for your projects and modules</small>
+      </div>
+      <div class="reports-header-actions">
+        {{> reportSbomFileCreate}}
+      </div>
+    </div>
+  {{/pageHeader}}
+
+  <div class="content sbom-list">
+    <div class="panel panel-default">
+        <div class="panel-body">
+          {{#if subsReady}}
+            {{> reactiveTable settings=reactiveTableSettings}}
+          {{else}}
+            <div class="text-center p-lg">
+              <div class="loading-spinner"></div>
+            </div>
+          {{/if}}
+        </div>
+    </div>
+  </div>
+</template>
+<template name="reactiveTableSbomFilesActions">
+  <div class="text-right">
+    <a href class="btn btn-danger2 btn-sm delete-sbom-file"><i class="fa fa-trash"></i><span class="hidden-xs hidden-sm"> Remove</span></a>
+  </div>
+</template>

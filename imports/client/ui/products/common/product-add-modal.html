@@ -1,0 +1,69 @@
+<template name="productAddModal">
+  <!-- Modal: productAddModal -->
+  <div class="modal fade" id="productAddModal" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="ts-accent-line"></div>
+        <div class="modal-header text-center">
+          <h4 class="modal-title">Add product</h4>
+        </div>
+        <form id="productAddForm" method="post">
+          <div class="modal-body">
+            <div class="row">
+              <div class="form-group col-sm-12">
+                <label for="parentId">Parent</label>
+                <select class="form-control select2" name="parentId" id="parentId">
+                  <option value=""></option>
+                  {{#each productList}}
+                    <option value="{{identifier}}" label="{{name}} [{{type}}]" selected="{{isSelected identifier}}">{{name}} [{{type}}]</option>
+                  {{/each}}
+                </select>
+              </div>
+              <div class="form-group col-sm-6">
+                <label for="identifier">Identifier *</label>
+                <input type="text" value="" id="identifier" class="form-control" name="identifier">
+              </div>
+              <div class="form-group col-sm-6">
+                <label for="type">Type *</label>
+                <select class="form-control" name="type" id="type" required>
+                  <option value="class" label="Class">Class</option>
+                  <option value="family" label="Family">Family</option>
+                  <option value="variant" label="Variant">Variant</option>
+                  <option value="version" label="Version">Version</option>
+                  <option value="position" label="Position">Position</option>
+                </select>
+              </div>
+              <div class="form-group col-sm-12">
+                <label for="name">Name *</label>
+                <input type="text" value="" id="name" class="form-control" required name="name">
+              </div>
+              <div class="form-group col-xs-12">
+                <label for="description">Purpose</label>
+                <textarea id="description" class="form-control" name="description"></textarea>
+              </div>
+              <div class="form-group col-xs-12 inner-b-5">
+                <label class="control-label checkbox-inline">
+                  <input type="checkbox" id="draft" name="draft">
+                  <strong>Draft</strong>
+                </label>
+                <span class="help-block small">Allows you to run a test. You will be able to remove all test data at once</span>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            {{#if loading}}
+              <button type="button" disabled="disabled" class="btn btn-primary">
+                <i class="fa fa-spinner fa-spin"></i> Add
+              </button>
+            {{else}}
+              <button type="submit" class="btn btn-primary">
+                Add
+              </button>
+            {{/if}}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>

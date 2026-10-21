@@ -1,0 +1,29 @@
+<template name="InlineItemNavigation">
+  <nav aria-label="Item navigation" class="inline-block vat">
+    <ul class="pagination pagination-like-btn toggle-page inner-0">
+      <li>
+        <a href aria-label="First" class="go-first">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li>
+        <a href aria-label="Previous" class="{{hasPrev}}">
+          <span aria-hidden="true">&lsaquo;</span>
+        </a>
+      </li>
+      <li class="active" aria-label="Current item">
+        <a href data-page="{{currentPage}}" class="page">{{currentPage}} / {{total}}</a>
+      </li>
+      <li>
+        <a href aria-label="Next" class="{{hasNext}}">
+          <span aria-hidden="true">&rsaquo;</span>
+        </a>
+      </li>
+      <li>
+        <a href aria-label="Last" class="go-last">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</template>

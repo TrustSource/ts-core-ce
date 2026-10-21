@@ -1,0 +1,40 @@
+<template name="companyCryptoAlgorithms">
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">Crypto algorithms</h2>
+        <small>Configure crypto algorithms denied for your company</small>
+      </div>
+      {{#if isInRole 'account_admin,company_security_manager,compliance_manager' companyId}}
+        <div class="settings-header-actions">
+          <a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#AlgorithmsSettingsPolicyAddModal" title="Add algorithm">
+            <span class="fa fa-plus" aria-hidden="true"></span>
+            Deny algorithm
+          </a>
+          {{> AlgorithmsSettingsPolicyAddModal}}
+        </div>
+      {{/if}}
+    </div>
+  {{/pageHeader}}
+  <div class="content">
+    {{#if isInRole 'account_admin,company_security_manager,compliance_manager' companyId}}
+      <div class="panel panel-default">
+        <div class="panel-body">
+          {{#if hasList}}
+            {{> reactiveTable settings=reactiveTableSettings}}
+          {{else}}
+            {{> reactiveTableNoData}}
+          {{/if}}
+        </div>
+      </div>
+    {{/if}}
+  </div>
+</template>
+
+<template name="reactiveTableCompanyCryptoAlgorithmsActions">
+  <div class="text-right">
+    <button type="button" class="btn btn-danger btn-sm remove-algorithm">
+      <i class="fa fa-trash-can"></i>
+    </button>
+  </div>
+</template>

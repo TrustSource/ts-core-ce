@@ -1,0 +1,81 @@
+name: Roles & Permissions Overview
+
+# Keeps ROLES_AND_PERMISSIONS.md in sync with the permission matrix defined in
+# imports/lib/userExtUtils.js.
+#
+#  - On pull requests that touch the source or the generator, the doc is
+#    verified (--check) and the job FAILS if it is stale, so reviewers see that
+#    it must be regenerated and committed.
+#  - On push to main, the doc is regenerated and committed back
+#    automatically if it drifted.
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'imports/lib/userExtUtils.js'
+      - 'tools/generate-roles-overview.js'
+      - '.github/workflows/roles-overview.yml'
+  pull_request:
+    paths:
+      - 'imports/lib/userExtUtils.js'
+      - 'tools/generate-roles-overview.js'
+      - '.github/workflows/roles-overview.yml'
+  workflow_dispatch: {}
+
+concurrency:
+  group: roles-overview-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # On PRs: fail if the committed doc does not match the source.
+  verify:
+    name: Verify overview is up to date
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+
+      - name: Check ROLES_AND_PERMISSIONS.md
+        run: node tools/generate-roles-overview.js --check
+
+  # On push to main: regenerate and commit back if it changed.
+  update:
+    name: Regenerate and commit overview
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+
+      - name: Regenerate ROLES_AND_PERMISSIONS.md
+        run: node tools/generate-roles-overview.js
+
+      - name: Commit if changed
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- ROLES_AND_PERMISSIONS.md; then
+            echo "ROLES_AND_PERMISSIONS.md already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ROLES_AND_PERMISSIONS.md
+          git commit -m "docs: regenerate ROLES_AND_PERMISSIONS.md from userExtUtils.js"
+          git push

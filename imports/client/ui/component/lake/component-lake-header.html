@@ -1,0 +1,27 @@
+<template name="componentLakeHeader">
+  {{#pageHeader}}
+    <div class="components-header">
+      <div class="components-header-left">
+        <h2 class="font-light m-b-xs">
+          {{#if modeTitle}}{{modeTitle}}{{else}}{{__ 'ComponentsLake'}}{{/if}} {{#if session 'componentListFilter'}}
+          <small class="text-danger">{{__ 'filtered'}}</small>{{/if}}
+        </h2>
+        <small>
+          {{#if modeDescription}}
+            {{modeDescription}}
+          {{else}}
+            {{countComponents}} {{__ 'componentsCurrentlyManagedBySystem'}}
+          {{/if}}
+        </small>
+      </div>
+      <div class="components-header-actions">
+        {{#if isInRole 'company_component_manager' companyId}}
+          <a href="{{pathFor route='reportCriticalComponents'}}" class="btn btn-default btn-sm">
+            <span class="fa fa-boxes"></span> Critical components
+          </a>
+        {{/if}}
+        {{> componentDetailsCreate}}
+      </div>
+    </div>
+  {{/pageHeader}}
+</template>

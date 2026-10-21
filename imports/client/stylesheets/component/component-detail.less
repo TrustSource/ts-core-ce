@@ -1,0 +1,122 @@
+.component-detail .img-responsive {
+  display: block;
+  width: auto;
+  max-height: 20px;
+
+  .component-version {
+    .panel-body {
+      border-bottom: none;
+    }
+    pre {
+      font-size: small;
+      max-height: 20em;
+    }
+  }
+}
+
+.comp-edit-version.danger {
+  color: red;
+}
+
+.comp-vulnerability .row.vulnerabiliy:not(:first-child) {
+  margin-top: 15px;
+}
+/* Component index detail: the versions list stays put while its per-version
+   vulnerability lookups run, covered rather than unmounted - re-rendering the
+   rows would restart the very lookups being waited on. */
+.component-version-body {
+  position: relative;
+}
+
+.component-version-loading {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  // Above Bootstrap's .pagination > .active > a, which is position:relative with
+  // z-index 3 and would otherwise punch through the cover.
+  z-index: 10;
+  background: fade(@color-white, 88%);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  .async-search-state {
+    padding-top: 40px;
+    position: sticky;
+    top: 40px;
+  }
+}
+
+/* The details cell is padding-free (pinner-0i), so whatever ends up last in it -
+   a source archive link, a checksum, the artifact chips - sat flush on the row's
+   bottom edge and outside its hover highlight. */
+.component-version-body td > p:last-child {
+  padding-bottom: 5px;
+}
+
+/* Bootstrap labels are display:inline, so their vertical padding paints outside
+   the line box without adding to it, and a trailing row of chips bled past the
+   row however much padding the cell had. */
+.component-version-artifacts .label {
+  display: inline-block;
+}
+
+/* Version filter. The four read-only detail pages carry it in the
+   panel heading beside the "Versions" title; the four component-manager edit
+   pages drop it into their existing Bootstrap grid row, where the column owns
+   the width instead. */
+.version-panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+
+  > h4 {
+    margin: 0;
+  }
+
+  .version-search {
+    width: 260px;
+    max-width: 100%;
+  }
+}
+
+/* Component-manager edit screens: the title and the filter share one grid
+   column so the box sits right beside the count instead of starting at the
+   next column boundary with a gap between them. */
+.version-heading-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  > h4 {
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .version-search {
+    flex: 1;
+    min-width: 0;
+    max-width: 260px;
+  }
+}
+
+.version-search-icon {
+  color: @color-text-secondary;
+}
+
+/* The heading stacks below the single 768px breakpoint, where a fixed-width
+   filter would overflow it. */
+@media (max-width: 768px) {
+  .version-panel-heading {
+    align-items: stretch;
+    flex-direction: column;
+
+    .version-search {
+      width: 100%;
+    }
+  }
+}

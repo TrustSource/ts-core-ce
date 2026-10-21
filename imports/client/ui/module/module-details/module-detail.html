@@ -1,0 +1,257 @@
+<template name="moduleDetail">
+  {{#unless _id}}
+    <div class="content component-detail">
+      {{#if hasError}}
+        <div class="panel panel-primary not-found-error">
+          <div class="panel-heading">Sorry, it looks like you are not allowed to access this content. Please contact your administrator, if you think this should be different.</div>
+        </div>
+      {{else}}
+        {{>loadingSplash}}
+      {{/if}}
+    </div>
+  {{else}}
+    {{#pageHeader headerClass=getStatistics.getState bodyClass=(classUnless 'attention' settingsValid)}}
+      <div class="module-header">
+        <div class="module-header-left">
+          <h2 class="font-light m-b-xs">
+            {{>projectApprovedStatus moduleId=_id projectId=projectId class="size-lg hide-disabled"}}
+            <span class="truncate max-w-80" title="{{name}}">{{#if isLinkedProject}}<span class="fa fa-link" style="font-size: 0.7em; vertical-align: middle; margin-right: 4px;"></span>{{/if}}{{name}}{{#if version}} ({{version}}){{/if}}</span>
+            {{#if getRelease}}
+              <sup><small>{{getRelease}}</small></sup>
+            {{/if}}
+            {{>leanixLink leanix=leanix}}
+            {{#if properties.architectureType}}
+              <span class="label label-default" style="position: relative;top: -3px;">{{getArchitectureType
+                properties.architectureType}}</span>
+            {{/if}}
+            {{#if isInfrastructureModule}}
+              {{#if isInfrastructureTemplate}}
+                <span class="label label-default" style="position: relative;top: -3px;"><i
+                  class="fa fa-info-circle"></i> Infrastructure Module</span>
+              {{else}}
+                <span class="label label-default" style="position: relative;top: -3px;"><i
+                  class="fa fa-info-circle"></i> COTS Module</span>
+              {{/if}}
+            {{/if}}
+            {{#if archived}}<span class="fa fa-archive" title="Archived"></span>{{/if}}
+          </h2>
+
+          {{!-- Analysis execution dropdown --}}
+          {{#if moduleAnalysis}}
+            <div class="module-analysis-line">
+              <small>
+                <span class="dropdown module-execution-dropdown">
+                  <a class="dropdown-toggle module-execution-toggle" data-toggle="dropdown" href="#">
+                    Analysis from {{currentAnalysisLabel}}<span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    {{#each moduleAnalysis}}
+                      <li class="{{#if isCurrentAnalysis _id}}active{{/if}}">
+                        <a href="#" class="change-analysis-item" data-analysis="{{_id}}">
+                          {{dateFormat date 'lll'}}{{#if release}} - {{release}}{{/if}}
+                        </a>
+                      </li>
+                    {{/each}}
+                  </ul>
+                </span>
+                {{#if getCurrentAnalysisFilterValue}}
+                  <a href="#" class="module-analysis-filter-badge clear-analysis-filter" title="Click to remove filter">
+                    <span class="fa {{getCurrentAnalysisFilterType}}"></span>
+                    <span>{{getCurrentAnalysisFilterValue}}</span>
+                    <span class="fa fa-times m-l-xs"></span>
+                  </a>
+                {{/if}}
+                {{#unless isInfrastructureModule}}
+                  {{#if hasBranchesOrTags}}
+                  <a href="#" class="view-analysis-filter module-analysis-action-icon" title="Find by branch or tag">
+                    <span class="fa fa-search"></span>
+                  </a>
+                  {{/if}}
+                  {{#if isInRole 'compliance_manager,manager' companyId}}
+                    <a href="#" class="module-analysis-action-icon" data-toggle="modal" data-target="#freezeModule" title="Attach a name to the selected analysis">
+                      <span class="fa fa-plus"></span>
+                    </a>
+                  {{/if}}
+                  <a href="{{pathFor route='scanDetail' data=scanOptions}}" class="module-analysis-action-icon" title="View scan details" target="_blank">
+                    <span class="fa fa-external-link"></span>
+                  </a>
+                {{/unless}}
+              </small>
+              {{#if viewAnalysisFilter}}
+                <div class="analysis-filter-drop-container">
+                  <div class="analysis-filter-drop">
+                    <select value="" id="changeFilter" class="form-control select2" name="moduleAnalysisFilter">
+                      <option></option>
+                      <optgroup label="Branch">
+                        {{#each moduleAnalysisBranches}}
+                          <option value="branch##{{this}}" selected="{{isCurrentAnalysisFilter this}}">
+                            {{this}}
+                          </option>
+                        {{/each}}
+                      </optgroup>
+                      <optgroup label="Tag">
+                        {{#each moduleAnalysisTags}}
+                          <option value="tag##{{this}}" selected="{{isCurrentAnalysisFilter this}}">
+                            {{this}}
+                          </option>
+                        {{/each}}
+                      </optgroup>
+                    </select>
+                  </div>
+                </div>
+              {{/if}}
+            </div>
+          {{/if}}
+
+        </div>
+
+        <div class="module-header-actions intro-dependency-actions">
+          {{#if isInRole 'manager,compliance_manager' companyId}}
+            {{#unless isInfrastructureModule}}
+              <a class="btn btn-xs module-settings {{settingsWarningClass}}"
+                 title="{{settingsWarningTitle}}">
+                <span class="fa fa-cogs" aria-hidden="true"></span>
+                Settings
+              </a>
+              <a class="btn btn-xs module-action-inline" data-toggle="modal" data-target="#vulnerabilityEnvironmentalVectorModal" title="Set environmental settings">
+                <span class="fa fa-server" aria-hidden="true"></span>
+                Env. settings
+              </a>
+              <span class="module-action-inline">{{> componentCreate size='btn-xs'}}</span>
+              <button class="btn btn-xs module-analyze" {{analyseButtonDisabledAttr}}>
+                <span class="fa fa-play" aria-hidden="true"></span>
+                {{analyseButtonText}} {{>analysisRequired item=this}}
+              </button>
+              <div class="dropdown">
+                <button type="button" class="btn btn-xs dropdown-toggle"
+                        data-toggle="dropdown">
+                  <span class="fa fa-list"></span> Reports <span class="caret m-l-xs"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li>
+                    <a href="{{pathFor route='reportVulnerability' query=getVulnReportOptions}}" target="_blank">
+                      <span class="fa fa-shield-halved" aria-hidden="true"></span> Vulnerability</a>
+                  </li>
+                  <li>
+                    <a href="{{pathFor route='risks' query=getVulnReportOptions}}" target="_blank">
+                      <span class="fa fa-flag-checkered" aria-hidden="true"></span> Risks</a>
+                  </li>
+                  <li>
+                    <a href="{{pathFor route='reportObligations' query=getVulnReportOptions}}" target="_blank">
+                      <span class="fa fa-check-square-o" aria-hidden="true"></span> Obligations</a>
+                  </li>
+                  <li>
+                    <a href="{{pathFor route='reportCredits' query=getVulnReportOptions}}" target="_blank">
+                      <span class="fa fa-copyright" aria-hidden="true"></span> Credits</a>
+                  </li>
+                </ul>
+              </div>
+              <span class="module-action-inline">{{> moduleResolveByNotice size='btn-xs' analysis=analysis}}</span>
+              {{#if isInRole 'manager,compliance_manager' companyId}}
+                {{#unless isUnassignedProject}}
+                  <a class="btn btn-xs module-action-inline" href="{{pathFor route='moduleApprove' data=getModuleOptions}}">
+                    <span class="fa fa-check-circle-o" aria-hidden="true"></span> Initiate approval</a>
+                {{/unless}}
+              {{/if}}
+              <span class="module-action-inline">{{>followAction type='module' item=this}}</span>
+              {{!-- Stats dropdown (open on hover) --}}
+              <div class="dropdown module-stats-dropdown intro-dependency-stats">
+                <button class="btn btn-xs dropdown-toggle" data-toggle="dropdown">
+                  <span class="fa fa-bar-chart"></span> Stats <span class="caret"></span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right module-stats-dropdown-content">
+                  <label>Overview:</label>
+                  {{> yield "chart"}}
+                </div>
+              </div>
+              <a href class="btn btn-xs show-intro module-action-inline" title="Take a tour">
+                <span class="fa fa-info-circle"></span> Take tour
+              </a>
+              {{!-- Overflow dropdown: visible only when inline actions are hidden --}}
+              <div class="dropdown module-actions-overflow">
+                <button type="button" class="btn btn-xs dropdown-toggle"
+                        data-toggle="dropdown">
+                  <span class="fa fa-ellipsis-h"></span> <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li>
+                    <a data-toggle="modal" data-target="#vulnerabilityEnvironmentalVectorModal">
+                      <span class="fa fa-server"></span> Env. settings</a>
+                  </li>
+                  <li class="module-more-add-component">
+                    {{> componentCreate size='btn-xs'}}
+                  </li>
+                  <li>{{> moduleResolveByNotice size='btn-xs' analysis=analysis}}</li>
+                  {{#if isInRole 'manager,compliance_manager' companyId}}
+                    {{#unless isUnassignedProject}}
+                      <li>
+                        <a href="{{pathFor route='moduleApprove' data=getModuleOptions}}">
+                          <span class="fa fa-check-circle-o"></span> Initiate approval</a>
+                      </li>
+                    {{/unless}}
+                  {{/if}}
+                  <li>{{>followAction type='module' item=this}}</li>
+                  <li>
+                    <a href class="show-intro">
+                      <span class="fa fa-info-circle"></span> Take tour</a>
+                  </li>
+                </ul>
+              </div>
+            {{else}}
+              <a class="btn btn-xs module-settings">
+                <span class="fa fa-cogs" aria-hidden="true"></span>
+                Settings
+              </a>
+              <button class="btn btn-xs module-update-stats">
+                <span class="fa fa-play" aria-hidden="true"></span>
+                Analyse {{>analysisRequired item=this}}
+              </button>
+              {{>followAction type='module' item=this}}
+            {{/unless}}
+          {{/if}}
+        </div>
+      </div>
+    {{/pageHeader}}
+
+    {{> vulnerabilityEnvironmentalVectorModal _id=_id kind='module' trackDB=true}}
+
+    {{!-- Tabs bar below the header --}}
+    {{#unless isInfrastructureModule}}
+      <div class="module-tabs-bar intro-dependency-views">
+        <div class="nav-tabs-scrollable">
+          <button class="nav-tabs-arrow nav-tabs-arrow-left" type="button"><i class="fa fa-chevron-left"></i></button>
+          <button class="nav-tabs-arrow nav-tabs-arrow-right" type="button"><i class="fa fa-chevron-right"></i></button>
+        <ul class="nav nav-tabs">
+          <li class="{{activeTab 'moduleDependencies'}}">
+            <a class="reset-active-view"
+               href="{{pathFor route='moduleDependencies' data=getModuleOptions query=getModuleQuery}}">
+              <span class="fa fa-list"></span> List</a>
+          </li>
+          <li class="{{activeTab 'moduleTree'}}">
+            <a class="set-active-view" data-view="moduleTree"
+               href="{{pathFor route='moduleDependencies' data=getModuleOptions query=getModuleQuery}}">
+              <span class="fa fa-sitemap"></span> Tree</a>
+          </li>
+          <li class="{{activeTab 'moduleGraphs'}}">
+            <a class="set-active-view" data-view="moduleGraphs"
+               href="{{pathFor route='moduleDependencies' data=getModuleOptions query=getModuleQuery}}">
+              <span class="fa fa-solid fa-share-nodes"></span> Graph</a>
+          </li>
+          <li class="{{activeTab 'moduleLicenses'}}">
+            <a class="reset-active-view"
+               href="{{pathFor route='moduleLicenses' data=getModuleOptions query=getModuleQuery}}">
+              <span class="fa fa-gavel"></span> Legal</a>
+          </li>
+          <li class="{{activeTab 'moduleTests'}}">
+            <a class="set-active-view" data-view="moduleTests"
+               href="{{pathFor route='moduleDependencies' data=getModuleOptions query=getModuleQuery}}">
+              <span class="fa fa-circle-play"></span> Quality</a>
+          </li>
+        </ul>
+        </div>
+      </div>
+    {{/unless}}
+
+    {{> moduleFreeze}}
+  {{/unless}}
+</template>

@@ -1,0 +1,16 @@
+<template name="csafDetailsHistory">
+  <div class="relative">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h5>History</h5>
+      </div>
+      <div class="panel-body scrollable_middle">
+        {{#if _id}}
+          {{> reactiveTableServerSide filters=filters sortings=sortings fields=fields method=method options=options}}
+        {{else}}
+          {{>loadingSplash}}
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</template>

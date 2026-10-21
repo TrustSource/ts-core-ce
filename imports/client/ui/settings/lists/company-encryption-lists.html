@@ -1,0 +1,29 @@
+<template name='companyEncryptionLists'>
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">Encryption</h2>
+        <small>Export controls management</small>
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content">
+    <div class="ts-panel">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-lg-12">
+            {{> algorithmsList
+              title="Export controls management"
+              id="compCmpAlgorithms"
+              data=this.algorithmsConfig
+              docId=this._id
+              collection=getCompany
+              attribute="algorithmsConfig"
+              readonly=false
+            }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

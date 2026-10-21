@@ -1,0 +1,15 @@
+<template name='companyWrittenOfferSettings'>
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">Written offer</h2>
+        <small>Configure the written offer text shared with downstream consumers</small>
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content">
+    {{#if isInRole 'account_admin' companyId}}
+      {{> companyWrittenOffer}}
+    {{/if}}
+  </div>
+</template>

@@ -1,0 +1,64 @@
+<template name="companyApiKeys">
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">API keys</h2>
+        <small>Create new and manage available API keys</small>
+      </div>
+      <div class="settings-header-actions">
+        {{> companyApiKeysCreate}}
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content">
+    {{#if isInRole 'account_admin' companyId}}
+      <div class="panel">
+        <div class="panel-body">
+          {{#with getApiKeys}}
+            {{> reactiveTable settings=reactiveTableSettings class="table table-striped table-hover"}}
+          {{else}}
+            {{> reactiveTableNoData}}
+          {{/with}}
+        </div>
+      </div>
+    {{/if}}
+  </div>
+</template>
+
+<template name="reactiveTablePAKCheck">
+  {{#if userId}}
+    <div class="icheckbox_square-green checked cursor-default" title="is Personal access key"></div>
+  {{else}}
+    <div class="icheckbox_square-green cursor-default" title="is not Personal access key"></div>
+  {{/if}}
+</template>
+
+<template name="reactiveTableApiKeyActions">
+  {{#if this.published}}
+    <button class="btn btn-info btn-sm copy-api-key inner-r-10" type="button" data-id="{{this.id}}">
+      <span class="fa fa-clipboard"></span>
+    </button>
+  {{else}}
+    <button class="btn btn-info btn-sm inner-r-10" type="button" disabled="disabled">
+      <span class="fa fa-clipboard"></span>
+    </button>
+  {{/if}}
+  {{#unless this.published}}
+    <button class="btn btn-primary btn-sm publish-api-key inner-r-10" type="button">
+      <span class="fa fa-unlock"></span>
+      Publish
+    </button>
+    {{#unless this.deleted}}
+      <button class="btn btn-danger2 btn-sm delete-api-key inner-r-10" type="button">
+        <span class="fa fa-trash-o"></span>
+        Delete
+      </button>
+    {{/unless}}
+  {{/unless}}
+  {{#if this.published}}
+    <button class="btn btn-danger2 btn-sm unpublish-api-key inner-r-10" type="button">
+      <span class="fa fa-lock"></span>
+      Unpublish
+    </button>
+  {{/if}}
+</template>

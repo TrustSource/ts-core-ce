@@ -1,0 +1,9 @@
+<template name="reactiveTableFilter">
+  <div id="{{id}}" class="input-group {{class}}">
+    <span class="input-group-addon">
+      <i class="fa fa-filter"></i>
+    </span>
+    <input class="reactive-table-input form-control" type="text" value="{{filter}}"
+           placeholder="{{#if label}}{{label}}{{else}}{{i18n 'reactiveTable.filter'}}{{/if}}">
+  </div>
+</template>

@@ -1,0 +1,124 @@
+<template name="moduleTests">
+  <div class="ts-panel ecs-tests">
+    <div class="panel-heading module-deps-heading">
+      <span>Quality</span>
+    </div>
+    {{#if hasTestsStats}}
+      <div class="inner-b-20">
+        <div class="panel panel-default">
+          <div class="panel-body pinner-b-10i">
+            {{#each testsStats}}
+              <div class="row inner-b-8">
+                <div class="col-xs-6">
+                  <h2 class="panel-title inner-t-8">
+                    {{#with getTool key }}
+                      {{#if logoSmallLink}}
+                        <img src="{{logoSmallLink}}" alt="" class="test-tool-logo">
+                      {{/if}}
+                      {{name}} {{version}}
+                    {{/with}}
+                  </h2>
+                </div>
+                <div class="col-xs-6">
+                  {{#with getToolStats value}}
+                    {{> ecsbarLine noTitle="true" data=this}}
+                  {{/with}}
+                </div>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    {{/if}}
+    <div class="pull-left">
+      <a class="btn btn-primary" data-toggle="modal" data-target="#TestImportModal" title="Import test">
+        <span class="fa fa-upload" aria-hidden="true"></span>
+        Import
+      </a>
+      {{> TestImportModal}}
+      {{> testsStateFilter sessionVar="testsFilter"}}
+    </div>
+    {{> reactiveTable settings=reactiveTableSettings}}
+  </div>
+</template>
+
+<template name="reactiveTableModuleTestsTool">
+  {{#with getTool tool}}
+    {{#if logoSmallLink}}
+      <img src="{{logoSmallLink}}" alt="" class="test-tool-logo">
+    {{/if}}
+    {{name}}
+  {{/with}}
+</template>
+<template name="reactiveTableModuleTestsProject">
+  {{#if moduleId}}
+    <a href="{{pathFor route='projectModules' data=getOptions}}"
+       class="highlight-i truncate" title="Project"><i class="fa fa-external-link"></i> {{projectName}}</a>
+  {{else}}
+    {{#if projectName}}<span class="truncate" title="Project">{{projectName}}</span>{{/if}}
+  {{/if}}
+</template>
+<template name="reactiveTableModuleTestsModule">
+  {{#if moduleId}}
+    <a href="{{pathFor route='moduleDependencies' data=getOptions}}"
+       class="highlight-i truncate" title="Module"><i class="fa fa-external-link"></i> {{moduleName}}</a>
+  {{else}}
+    {{#if moduleName}}<span class="truncate" title="Module">{{moduleName}}</span>{{/if}}
+  {{/if}}
+</template>
+<template name="reactiveTableModuleTestsScan">
+  {{#if scanId}}
+    <a href="{{pathFor route='scanDetail' data=getOptions}}"
+       class="highlight-i truncate" title="Scan"><i class="fa fa-external-link"></i></a>
+  {{/if}}
+</template>
+<template name="reactiveTableModuleTestsAnalysis">
+  {{#if analysisId}}
+    <a href="{{pathFor route='moduleDependencies' data=getOptions query=getQuery}}"
+       class="highlight-i truncate" title="Analysis"><i class="fa fa-external-link"></i></a>
+  {{/if}}
+</template>
+<template name="reactiveTableModuleTestsStatus">
+  {{#if status}}
+    <span class="test-status-icon {{status}}"></span> {{status}}
+  {{/if}}
+</template>
+<template name="reactiveTableModuleTestsStatusDetails">
+  {{#with testFindings}}
+    {{#if total}}
+      {{total}} {{findingsLabel}}:
+      <span class="test-status-icon error"></span> <span title="reported by {{violationRules}} of the tool's rules">{{violations}} violations</span>,
+      <span class="test-status-icon warning"></span> <span title="reported by {{warningRules}} of the tool's rules">{{warnings}} warnings</span>,
+      <span class="test-status-icon note"></span> <span title="reported by {{noteRules}} of the tool's rules">{{notes}} notes</span>
+    {{else}}
+      No findings
+    {{/if}}
+    {{#if catalogSize}}
+      <span class="text-muted" title="Rules the tool declared for this run. Not the number of rules it applied to the scanned files - SARIF does not report that figure.">({{catalogSize}} rules in tool catalog)</span>
+    {{/if}}
+  {{/with}}
+</template>
+
+<!-- Weaknesses reported by one SARIF document. Reads the
+     denormalised rules.byCwe written at import; documents imported before that
+     field existed record none, while the document's own details page still
+     derives their CWEs from the stored run - so an empty cell says which of the
+     two it is rather than showing a bare "-" for both.
+     A weakness someone assigned to an unclassified rule is overlaid on top and
+     marked as such, on every document including those (issue #112). -->
+<template name="reactiveTableModuleTestsCwes">
+  {{#if testCwes.length}}
+    {{#each testCwes}}
+      <a href="{{cweLakeUrl cwe}}" class="test-cwe-badge test-cwe-badge-sm {{#if assigned}}test-cwe-badge-assigned{{/if}}"
+         target="_blank" rel="noopener noreferrer"
+         title="{{cwe}} - {{countLabel}}{{#if assigned}}, assigned here rather than reported by the tool{{/if}} - open in Vulnerability Lake">{{cwe}}</a>
+    {{/each}}
+    {{#if moreCwes}}
+      <span class="text-muted small" title="{{moreCwesTitle}}">+{{moreCwes}}</span>
+    {{/if}}
+  {{else}}
+    {{#with emptyCwes}}
+      <span class="text-muted {{className}}" title="{{title}}">-</span>
+    {{/with}}
+  {{/if}}
+</template>

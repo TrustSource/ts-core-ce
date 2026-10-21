@@ -1,0 +1,58 @@
+<template name="portfolioHistory">
+
+  <div class="ts-panel">
+    <div class="panel-heading">
+      {{> panelTools }}
+      {{historyTitle}}
+    </div>
+    <div class="panel-body list">
+      <div class="list-item-container ecs-history">
+        {{> historyLine title=(__ "Modules") id="db-history-modules"}}
+        {{> historyLine title=(__ "Components") id="db-history-components"}}
+        {{> historyLine title=(__ "Licenses") id="db-history-licenses"}}
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="historyLine">
+  <div class="list-item">
+    <div class="pull-left font-uppercase font-bold">{{title}}</div>
+    <div id={{id}} sparkBarColor="#2a94a2" class="pull-right small-chart m-t-sm"></div>
+  </div>
+</template>
+
+<template name="portfolioChanges">
+
+  {{#panel title=deltaTitle}}
+    <!--<div class="pull-right">-->
+    <!--<a href="#" class="btn btn-xs btn-default">{{__ 'Week'}}</a>-->
+    <!--<a href="#" class="btn btn-xs btn-default">{{__ 'Month'}}</a>-->
+    <!--</div>-->
+    {{#with deltaStatistics}}
+      <div class="row">
+        {{> deltaChange title=(__ "Modules") data=modules}}
+      </div>
+      <div class="row">
+        {{> deltaChange title=(__ "Components") data=components}}
+      </div>
+      <div class="row">
+        {{> deltaChange title=(__ "Licenses") data=licenses}}
+      </div>
+    {{/with}}
+  {{/panel}}
+
+</template>
+
+<template name="deltaChange">
+  <div class="row ecs-history-delta">
+    <div class="col-xs-6 text-right">
+      <span class="font-uppercase font-bold">{{title}}</span>
+    </div>
+    <div class="col-xs-6 text-right">
+      <span>{{data}}{{{upDownIcon data}}}</span>
+    </div>
+  </div>
+</template>
+
+

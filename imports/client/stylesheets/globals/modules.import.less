@@ -1,0 +1,80 @@
+.modules > .row {
+  display: flex;
+  flex-wrap: wrap;
+
+  // Module cards: .module-details IS the col-* element
+  > .module-details {
+    float: none;
+    display: flex;
+    flex-direction: column;
+
+    > .ts-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      > .panel-body {
+        flex: 1;
+      }
+    }
+  }
+
+  // Project cards: .module-details is inside a col-* wrapper
+  > [class*="col-"]:not(.module-details) {
+    float: none;
+    display: flex;
+
+    > .module-details {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      > .ts-panel {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+
+        > .panel-body {
+          flex: 1;
+        }
+      }
+    }
+  }
+}
+
+.modules .module-label {
+  font-weight: 600;
+}
+
+.modules .ts-panel .panel-body {
+  border-bottom: none;
+}
+
+.modules .ts-panel:last-child .panel-body {
+  border-bottom: 1px solid @ts-border;
+}
+
+.modules .ts-panel:last-child .panel-body {
+  border-bottom: 1px solid @ts-border;
+}
+
+.modules .ts-panel h4 a {
+  color: @ts-text;
+}
+
+.modules .module-people img {
+  width: 28px;
+  height: 28px;
+  margin-left: 2px;
+  margin-bottom: 4px;
+}
+
+.modules .module-info {
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .modules .module-info {
+    text-align: left;
+  }
+}

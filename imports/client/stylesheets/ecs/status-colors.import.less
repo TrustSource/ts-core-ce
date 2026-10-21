@@ -1,0 +1,161 @@
+// Status colors, panel states, landing page, badge-beta
+// Extracted from ecs.import.less
+
+/* Panels */
+.pointer {
+  cursor: pointer;
+}
+
+.pointer:hover {
+  color: @ts-teal;
+}
+
+.disabled {
+  cursor: not-allowed;
+  color: #777;
+}
+.disabled-icon {
+  cursor: help;
+  color: #ccc;
+}
+.multi-license {
+  cursor: not-allowed;
+  color: #777;
+}
+
+.relative {
+  position: relative;
+}
+
+.active-spinner {
+  position: absolute;
+  left: 4px;
+  top: 6px;
+  font-size: 18px;
+}
+
+.ts-panel.ok .panel-body {
+  border-top: 2px solid @color-ok;
+}
+
+.ts-panel.warnings .panel-body {
+  border-top: 2px solid @color-warnings;
+}
+
+.ts-panel.violations .panel-body {
+  border-top: 2px solid @color-violations;
+}
+.text-violations {
+  color: @color-violations;
+}
+
+.ts-panel.ok .prevent-top-border .panel-body {
+  border-top: 1px solid @ts-border;
+}
+
+.ts-panel.warnings .prevent-top-border .panel-body {
+  border-top: 1px solid @ts-border;
+}
+
+.ts-panel.violations .prevent-top-border .panel-body {
+  border-top: 1px solid @ts-border;
+}
+
+.top-full-panel.ok > .panel-body {
+  border-top: 6px solid @color-ok;
+}
+
+.top-full-panel.warnings > .panel-body {
+  border-top: 6px solid @color-warnings;
+}
+
+.top-full-panel.violations > .panel-body {
+  border-top: 6px solid @color-violations;
+}
+
+.panel-body.ok {
+  border-left: 2px solid @color-ok;
+}
+
+.panel-body.warnings {
+  border-left: 2px solid @color-warnings;
+}
+
+.panel-body.violations {
+  border-left: 2px solid @color-violations;
+}
+.panel-heading.ok {
+  border-left: 2px solid @color-ok;
+}
+
+.panel-heading.warnings {
+  border-left: 2px solid @color-warnings;
+}
+
+.panel-heading.violations {
+  border-left: 2px solid @color-violations;
+}
+.side-border-panel.ok {
+  border-left: 6px solid @color-ok;
+}
+
+.side-border-panel.warnings {
+  border-left: 6px solid @color-warnings;
+}
+
+.side-border-panel.violations {
+  border-left: 6px solid @color-violations;
+}
+
+.panel-body.attention {
+  background-color: desaturate(lighten(@color-warnings, 15%), 15%);
+}
+
+.label.ok, .ecs-label.ok, .ribbon.ok {
+  background-color: @color-ok;
+}
+
+.label.disabled, .ecs-label.disabled, .ribbon.disabled,
+.label.multi-license{
+  background-color: @ts-canvas;
+}
+
+.label.warnings, .ecs-label.warnings, .ribbon.warnings {
+  background-color: @color-warnings;
+}
+
+.label.violations, .ecs-label.violations, .ribbon.violations {
+  background-color: @color-violations;
+}
+.status-color.ok{
+  background-color: @color-ok;
+  color: #ffffff;
+}
+.status-color.warnings{
+  background-color: @color-warnings;
+  color: #000000;
+}
+.status-color.disabled{
+  color: #ffffff;
+}
+.status-color.violations{
+  background-color: @color-violations;
+  color: #ffffff;
+}
+
+.badge-beta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: @color-link-primary;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  position: relative;
+  top: -1px;
+  margin-left: 4px;
+}

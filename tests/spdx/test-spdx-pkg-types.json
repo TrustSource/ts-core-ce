@@ -1,0 +1,102 @@
+{
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "spdxVersion": "SPDX-2.3",
+  "creationInfo": {
+    "created": "2025-03-25T10:00:00Z",
+    "creators": ["Tool: test-generator-1.0"],
+    "licenseListVersion": "3.22"
+  },
+  "name": "pkg-types-test",
+  "dataLicense": "CC0-1.0",
+  "documentNamespace": "https://example.org/pkg-types-test-1.0",
+  "documentDescribes": ["SPDXRef-Package"],
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-Package",
+      "name": "pkg-types-test",
+      "versionInfo": "1.0.0",
+      "downloadLocation": "https://example.org/pkg-types-test-1.0.0.tar.gz",
+      "licenseDeclared": "MIT",
+      "licenseConcluded": "MIT",
+      "copyrightText": "Copyright 2025 Test",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:npm/pkg-types-test@1.0.0"
+        }
+      ],
+      "packages": [
+        {
+          "SPDXID": "SPDXRef-gin",
+          "name": "gin",
+          "versionInfo": "1.9.1",
+          "downloadLocation": "https://github.com/gin-gonic/gin",
+          "licenseDeclared": "MIT",
+          "licenseConcluded": "MIT",
+          "copyrightText": "NOASSERTION",
+          "externalRefs": [{"referenceCategory": "PACKAGE-MANAGER", "referenceType": "purl", "referenceLocator": "pkg:golang/github.com/gin-gonic/gin@1.9.1"}]
+        },
+        {
+          "SPDXID": "SPDXRef-serde",
+          "name": "serde",
+          "versionInfo": "1.0.193",
+          "downloadLocation": "https://crates.io/crates/serde",
+          "licenseDeclared": "MIT",
+          "licenseConcluded": "MIT",
+          "copyrightText": "NOASSERTION",
+          "externalRefs": [{"referenceCategory": "PACKAGE-MANAGER", "referenceType": "purl", "referenceLocator": "pkg:cargo/serde@1.0.193"}]
+        },
+        {
+          "SPDXID": "SPDXRef-checkout",
+          "name": "checkout",
+          "versionInfo": "4.1.1",
+          "downloadLocation": "https://github.com/actions/checkout",
+          "licenseDeclared": "MIT",
+          "licenseConcluded": "MIT",
+          "copyrightText": "NOASSERTION",
+          "externalRefs": [{"referenceCategory": "PACKAGE-MANAGER", "referenceType": "purl", "referenceLocator": "pkg:github/actions/checkout@4.1.1"}]
+        },
+        {
+          "SPDXID": "SPDXRef-openssl",
+          "name": "openssl",
+          "versionInfo": "3.2.0",
+          "downloadLocation": "https://www.openssl.org/source/",
+          "licenseDeclared": "Apache-2.0",
+          "licenseConcluded": "Apache-2.0",
+          "copyrightText": "NOASSERTION",
+          "externalRefs": [{"referenceCategory": "PACKAGE-MANAGER", "referenceType": "purl", "referenceLocator": "pkg:generic/openssl@3.2.0"}]
+        },
+        {
+          "SPDXID": "SPDXRef-gitlab-runner",
+          "name": "gitlab-runner",
+          "versionInfo": "16.7.0",
+          "downloadLocation": "https://gitlab.com/gitlab-org/gitlab-runner",
+          "licenseDeclared": "MIT",
+          "licenseConcluded": "MIT",
+          "copyrightText": "NOASSERTION",
+          "externalRefs": [{"referenceCategory": "PACKAGE-MANAGER", "referenceType": "purl", "referenceLocator": "pkg:gitlab/gitlab-org/gitlab-runner@16.7.0"}]
+        },
+        {
+          "SPDXID": "SPDXRef-curl",
+          "name": "curl",
+          "versionInfo": "8.5.0",
+          "downloadLocation": "https://curl.se/download.html",
+          "licenseDeclared": "MIT",
+          "licenseConcluded": "MIT",
+          "copyrightText": "NOASSERTION",
+          "externalRefs": [{"referenceCategory": "PACKAGE-MANAGER", "referenceType": "purl", "referenceLocator": "pkg:rpm/fedora/curl@8.5.0"}]
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {"spdxElementId": "SPDXRef-DOCUMENT", "relationshipType": "DESCRIBES", "relatedSpdxElement": "SPDXRef-Package"},
+    {"spdxElementId": "SPDXRef-Package", "relationshipType": "DEPENDS_ON", "relatedSpdxElement": "SPDXRef-gin"},
+    {"spdxElementId": "SPDXRef-Package", "relationshipType": "DEPENDS_ON", "relatedSpdxElement": "SPDXRef-serde"},
+    {"spdxElementId": "SPDXRef-Package", "relationshipType": "DEPENDS_ON", "relatedSpdxElement": "SPDXRef-checkout"},
+    {"spdxElementId": "SPDXRef-Package", "relationshipType": "DEPENDS_ON", "relatedSpdxElement": "SPDXRef-openssl"},
+    {"spdxElementId": "SPDXRef-Package", "relationshipType": "DEPENDS_ON", "relatedSpdxElement": "SPDXRef-gitlab-runner"},
+    {"spdxElementId": "SPDXRef-Package", "relationshipType": "DEPENDS_ON", "relatedSpdxElement": "SPDXRef-curl"}
+  ]
+}

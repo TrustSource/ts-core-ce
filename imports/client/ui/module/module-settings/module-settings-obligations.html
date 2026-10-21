@@ -1,0 +1,114 @@
+<template name="moduleSettingsObligations">
+  <div id="obligations" class="tab-pane">
+    <div class="panel-body no-bottom-errors">
+      <div class="clearfix">
+        <div class="pull-right actions actions-wizard" style="position:relative">
+          {{#if hasAccessRight 'module.obligationConfig.import' 'x' currentModule}}
+            <div class="inline-block relative">
+              {{#if getObligationSettings.length}}
+                <button type="button" class="btn btn-default btn-xs dropdown-toggle"
+                        data-toggle="dropdown">
+                  <span class="fa fa-copy"></span> Import settings from Module <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <input type="text" class="drop-filter form-control import_filter" placeholder="Search by name"
+                           value="{{getImportFilter}}"/>
+                  </li>
+                  {{#each filterList getObligationSettings getImportFilter}}
+                    <li><a class="copy-obligation-settings" id="{{_id}}">{{name}}</a></li>
+                  {{/each}}
+                </ul>
+              {{/if}}
+            </div>
+          {{/if}}
+          {{#if hasAccessRight 'module.obligationConfig.propagate' 'x' currentModule}}
+            <div class="inline-block relative">
+              {{#if otherModules.length}}
+                <button type="button" class="btn btn-default btn-xs dropdown-toggle"
+                        data-toggle="dropdown">
+                  <span class="fa fa-share"></span> Propagate settings to...<span
+                        class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li>
+                    <input type="text" class="drop-filter form-control project_filter" placeholder="Search by name"
+                           value="{{getProjectFilter}}"/>
+                  </li>
+                  {{#if isInRole 'portfolio_manager' companyId}}
+                    <li><a class="propagate-all-obligation-settings">All {{otherModules.length}} modules</a></li>
+                  {{/if}}
+                  <li><a class="propagate-all-my-obligation-settings">All my {{myModulesCount}} modules</a></li>
+                  {{#if isInRole 'portfolio_manager' companyId}}
+                    <li><a class="propagate-project-obligation-settings">All {{projectModulesCount}} project modules</a>
+                    </li>
+                  {{/if}}
+                  <li><a class="propagate-my-project-obligation-settings">All my {{myProjectModulesCount}} project
+                    modules</a></li>
+                  {{#each filterList otherModules getProjectFilter}}
+                    <li><a class="propagate-obligation-settings" id="{{_id}}">{{name}}</a></li>
+                  {{/each}}
+                </ul>
+              {{/if}}
+            </div>
+          {{/if}}
+        </div>
+      </div>
+      {{#if hasAccessRight 'module.obligationConfig.project' 'r' currentModule}}
+        {{#if getProject}}
+          {{#if getProjectObligationConfig}}
+            <div class="inner-t-10">
+              {{#unless noProjectObligationConfig}}
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h5>
+                      Project obligations
+                    </h5>
+                  </div>
+                  <div class="panel-body pinner-5i">
+                    {{> obligationConfigList
+                      title="List of completed obligations of project"
+                      id="prjObligationConfig"
+                      data=getProjectObligationConfig
+                      schema=getObligationSchema
+                      docId=currentModule.projectId
+                      collection=getProjects
+                      attribute="obligationConfig"
+                      readonly=true
+                    }}
+                  </div>
+                </div>
+              {{else}}
+                <div class="panel panel-danger">
+                  <div class="panel-heading">
+                    <h5>
+                      Project obligations
+                    </h5>
+                  </div>
+                  <div class="panel-body">
+                    <p><i class="fa fa-info-circle"></i> PLEASE NOTE: The obligations settings of project is empty.
+                      You may click <a href="{{pathFor route=getProjectRouteName data=getProjectRouteRouteOptions}}" class="highlight">here</a> to complete them now.</p>
+                  </div>
+                </div>
+              {{/unless}}
+            </div>
+          {{/if}}
+        {{/if}}
+      {{/if}}
+      {{#with hasFieldRight 'module.obligationConfig.list' currentModule}}
+        {{#if read}}
+          {{> obligationConfigList
+            title="List of completed obligations of module"
+            id="moduleObligationConfig"
+            data=getObligation
+            schema=getObligationSchema
+            docId=currentModule._id
+            collection=getModules
+            attribute="obligationConfig"
+            readonly=disabled
+          }}
+        {{/if}}
+      {{/with}}
+    </div>
+  </div>
+</template>

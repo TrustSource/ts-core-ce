@@ -1,0 +1,16 @@
+<template name="csafStateFilter">
+  <div class="btn-group {{optionClass}}" data-toggle="buttons">
+    <label class="btn btn-success {{activeList showOks}}" style="width: 90px">
+      <input type="checkbox" autocomplete="off" checked={{showOks}} class="showOks">
+      <span class="{{activeTab showOks}}">Published</span>
+    </label>
+    <label class="btn btn-warning {{activeList showWarnings}}" style="width: 110px">
+      <input type="checkbox" autocomplete="off" checked={{showWarnings}} class="showWarnings">
+      <span class="{{activeTab showWarnings}}">Draft</span>
+    </label>
+    <label class="btn btn-danger {{activeList showDangers}}" style="width: 130px">
+      <input type="checkbox" autocomplete="off" checked={{showDangers}} class="showDangers">
+      <span class="{{activeTab showDangers}}">Failed</span>
+    </label>
+  </div>
+</template>

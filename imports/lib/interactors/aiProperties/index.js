@@ -1,0 +1,5 @@
+export {default as AiPropertiesCreate} from './create'
+export {default as AiPropertiesUpdate} from './update'
+export {default as AiPropertiesRemove} from './remove'
+export {default as AiPropertiesFind} from './find'
+export {default as AiPropertiesPersistImported} from './persistImported'

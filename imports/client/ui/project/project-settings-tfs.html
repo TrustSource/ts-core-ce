@@ -1,0 +1,60 @@
+<template name="projectSettingsTfs">
+  <form class="form-horizontal tfs-project">
+    {{#with hasFieldRight 'project.issue.tfs.settings' currentProject}}
+      {{#if read}}
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="tfs-account">Account or URL:</label>
+          <div class="col-sm-4 controls">
+            <input type="text" autocomplete="off" id="tfs-account" name="tfs-account"
+                   value="{{currentProject.tfs.account}}"
+                   placeholder="Account" class="form-control"
+                   disabled="{{isMultyTfsUnavailable}}"/>
+          </div>
+          <label class="col-sm-4 control-label tfs-account-result"
+                 style="text-align: left;">{{tfsAccountResult}}</label>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="tfs-project">Project:</label>
+          <div class="col-sm-4 controls">
+            <input type="text" autocomplete="off" id="tfs-project" name="tfs-project"
+                   value="{{currentProject.tfs.project}}"
+                   placeholder="Project key" class="form-control"
+                   disabled="{{isMultyTfsUnavailable}}"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="tfs-token">Access Token:</label>
+          <div class="col-sm-4 controls">
+            <input type="password" autocomplete="off" id="tfs-token" name="tfs-token"
+                   placeholder="Leave blank to keep current" class="form-control"
+                   disabled="{{isMultyTfsUnavailable}}"/>
+          </div>
+        </div>
+      {{/if}}
+    {{/with}}
+    {{#with hasFieldRight 'project.issue.tfs.active' currentProject}}
+      {{#if read}}
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="tfs-active">Active:</label>
+          <div class="col-sm-4 pinner-t-8">
+            <input type="checkbox" id="tfs-active" name="tfs-active" value="true"
+                   checked="{{currentProject.tfs.active}}"
+                   placeholder="Active" disabled="{{isMultyTfsUnavailable}}"/>
+          </div>
+        </div>
+      {{/if}}
+    {{/with}}
+    {{#with hasFieldRight 'project.issue.tfs' currentProject}}
+      {{#unless disabled}}
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-4">
+            <button type="button" class="btn btn-primary"
+                    disabled="{{isMultyTfsUnavailable}}">
+              Update
+            </button>
+          </div>
+        </div>
+      {{/unless}}
+    {{/with}}
+  </form>
+</template>

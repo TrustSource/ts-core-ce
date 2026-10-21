@@ -1,0 +1,45 @@
+<template name="CSAFRemoveModal">
+  <!-- Modal: CSAFRemoveModal -->
+  <div class="modal fade" id="CSAFRemoveModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="ts-accent-line"></div>
+        <div class="modal-header text-center">
+          <h4 class="modal-title">Remove CSAF</h4>
+        </div>
+        <form id="CSAFRemoveForm" method="post">
+          <div class="modal-body">
+            <div class="row">
+              <p>Are you sure you want to remove <b>{{removeTargetName}}</b>?</p>
+              <p>Optionally you may initiate following actions for VEX files:</p>
+              <div class="relative">
+                <input type="checkbox" class="i-checks check-with-label" id="task1" name="task1" value="true">
+                <label for="task1" class="control-label label-with-check" style="font-weight: 400">
+                  unmute the vulnerabilities covered in this document
+                </label>
+              </div>
+              <div class="relative">
+                <input type="checkbox" class="i-checks check-with-label" id="task2" name="task2" value="true">
+                <label for="task2" class="control-label label-with-check" style="font-weight: 400">
+                  re-open risks from vulnerability assignment
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            {{#if loading}}
+              <button type="button" disabled="disabled" class="btn btn-primary">
+                <i class="fa fa-spinner fa-spin"></i> Yes, remove it!
+              </button>
+            {{else}}
+              <button type="submit" class="btn btn-primary">
+                Yes, remove it!
+              </button>
+            {{/if}}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>

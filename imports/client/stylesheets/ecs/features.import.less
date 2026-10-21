@@ -1,0 +1,2219 @@
+// Feature-specific styles: toggles, forms, dependencies, approvals, notices,
+// vulnerability details, typeahead, tests, breadcrumbs, responsive
+// Extracted from ecs.import.less
+
+.check-status{
+  font-size: 2em;
+  margin:0;
+  &.ok{
+    color:@color-ok
+  }
+  &.warnings{
+    color:@color-warnings
+  }
+  .fa-square-o,.fa-check-square-o{
+    display: none;
+  }
+  &.ok .fa-check-square-o{
+    display:inline-block;
+  }
+  &.warnings .fa-square-o{
+    display:inline-block;
+  }
+}
+
+.start-intro{
+  margin: -5px 0 10px 0;
+}
+
+.start-intro-dependency{
+  position: absolute;
+  top: 2px;
+  right: 20px;
+}
+
+.icon-inner-top:before{
+  position: relative;
+  top:2px;
+}
+
+.width-alerts{
+  width: 100px;
+}
+
+.highlight{
+  text-decoration: underline;
+  color: @ts-teal;
+  &:hover{
+    color: @ts-teal;
+    text-decoration: none;
+  }
+}
+.highlight-i{
+  text-decoration: underline;
+  color: @ts-teal!important;
+  &:hover{
+    color: @ts-teal!important;
+    text-decoration: none;
+  }
+}
+
+.not-approved{
+  color:@color-violations
+}
+
+.wrapAutoformArray{
+  .autoform-array-item-body{
+    & > .form-group{
+      width:100%;
+      & > .control-label{
+        display: none;
+      }
+    }
+    .panel-body .form-group{
+      width:100%
+    }
+  }
+}
+
+/* .ios-toggle styles for UI:checkbox */
+.ios-toggle,
+.checkbox-label:before,
+.checkbox-label:after{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  /*transition*/
+  transition:.25s ease-in-out;
+  outline:none;
+}
+.ios-toggle,
+.ios-toggle:active{
+  position:absolute;
+  top:-5000px;
+  height:0;
+  width:0;
+  opacity:0;
+  border:none;
+  display: none;
+  outline:none;
+}
+.checkbox-label{
+  display:inline-block;
+  position:relative;
+  padding:10px;
+  margin-bottom:20px;
+  font-size:12px;
+  line-height:16px;
+  width:65px;
+  height:36px;
+  /*border-radius*/
+  border-radius:18px;
+  background:#f8f8f8;
+  cursor:pointer;
+  float: left;
+}
+.checkbox-label:before{
+  content:'';
+  display:block;
+  position:absolute;
+  z-index:1;
+  line-height:34px;
+  text-indent:40px;
+  height:36px;
+  width:36px;
+  /*border-radius*/
+  border-radius:100%;
+  top:0px;
+  left:0px;
+  right:auto;
+  background:white;
+  /*box-shadow*/
+  box-shadow:0 3px 3px fade(@color-black, 20%),0 0 0 2px #dddddd;
+}
+.checkbox-label:after{
+  content:attr(data-off);
+  display:block;
+  position:absolute;
+  z-index:0;
+  top:0;
+  left:-80px;
+  padding:10px;
+  height:100%;
+  width:80px;
+  text-align:right;
+  color:#bfbfbf;
+  white-space:nowrap;
+}
+.checkbox-label-md{
+  padding:10px;
+  margin-bottom:0;
+  width:54px;
+  height:25px;
+  &:before{
+    line-height:20px;
+    text-indent:20px;
+    height:25px;
+    width:25px;
+  }
+  &:after{
+    padding:5px 10px;
+  }
+}
+.ios-toggle:checked + .checkbox-label.checkbox-label-md:before{
+  left:29px;
+}
+.ios-toggle:checked + .checkbox-label.checkbox-label-md:after{
+  content:attr(data-on);
+  left:48px;
+}
+.ios-toggle-label {
+  display:inline-block;
+  padding:10px;
+  height:100%;
+  text-align:right;
+  color:#bfbfbf;
+  white-space:nowrap;
+  vertical-align: top;
+  &.ios-toggle-label-md{
+    padding:2px 6px;
+  }
+  &.ios-toggle-label-dark{
+    color: #040f18
+  }
+}
+.ios-toggle.always-on + .checkbox-label, .ios-toggle:checked + .checkbox-label{
+  box-shadow:inset 0 0 0 20px @ts-teal,0 0 0 2px @ts-teal;
+}
+.ios-toggle.reverse-styles + .checkbox-label{
+  box-shadow:inset 0 0 0 20px @ts-teal,0 0 0 2px @ts-teal;
+}
+.ios-toggle.reverse-styles:checked + .checkbox-label{
+  box-shadow:0 3px 3px fade(@color-black, 20%),0 0 0 2px #dddddd;
+}
+.ios-toggle:checked + .checkbox-label:before{
+  left:29px;
+  box-shadow:0 0 0 2px transparent,0 3px 3px fade(@color-black, 30%);
+}
+.ios-toggle:checked + .checkbox-label:after{
+  content:attr(data-on);
+  left:60px;
+  width:36px;
+}
+.ios-toggle.disabled,
+.ios-toggle.disabled + .checkbox-label,
+.ios-toggle.disabled + .checkbox-label + span{
+  cursor: not-allowed;
+}
+
+.bg-violations {
+  background-color: @color-violations;
+}
+.bg-warnings {
+  background-color: @color-warnings;
+}
+.bg-ok {
+  background-color: @color-ok;
+}
+.bg-primary {
+  background-color: @ts-navy;
+}
+.label-primary{
+  background-color: @ts-navy;
+}
+.label-orange{
+  background-color: #f35f34;
+}
+.label-default {
+  background-color: @color-white;
+  color: #040f18;
+  border: 1px solid @ts-border
+}
+.badge-default{
+  background-color: @color-white;
+  color: #040f18;
+}
+.white {
+  color: #ffffff;
+}
+
+.collapse-form{
+  .form-group{
+    width: 50%;
+    float: left;
+    label{
+      display: block;
+      width: 80%;
+      min-height: 40px;
+      padding: 0 12px 0 0;
+    }
+    input,select,textarea{
+      width: 80%;
+      display: block;
+      height: 34px;
+      padding: 6px 12px;
+      font-size: 14px;
+      line-height: 1.42857143;
+      color: #555;
+      background-color: @color-white;
+      background-image: none;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-shadow: inset 0 1px 1px fade(@color-black, 7.5%);
+      transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    }
+    textarea{
+      height: 70px;
+    }
+  }
+}
+
+.table-clear{
+  border: none;
+  vertical-align: top;
+  .label{
+    margin-top: 0;
+  }
+  tr{
+    vertical-align: top;
+  }
+}
+.absolute-radio{
+  position: absolute;
+  left: -5px;
+  top: 1px;
+  margin: 0;
+}
+
+.obligation-comment-holder{
+  width:50%;
+  max-width:400px;
+}
+.obligation-comment{
+  resize: vertical;
+}
+.inline{
+  display: inline;
+}
+
+.visible-fhd-inline-block{
+  display: none;
+}
+@media (min-width: 1900px) {
+  .visible-fhd-inline-block {
+    display: inline-block;
+  }
+}
+.ecs-dependencies-with-details,
+.ecs-dependencies-aside{
+  float: left;
+  margin-bottom: 0;
+}
+.ecs-dependencies-aside{
+  height: 100%;
+  width: 32%;
+  position: relative;
+  &.full-width{
+    width: 100%;
+  }
+}
+.ecs-dependencies-with-details{
+  width: 67%;
+  margin-right: 1%;
+}
+
+@media (min-width: 1024px) and (max-width:1250px) {
+  .ecs-dependencies-aside{
+    width: 45%;
+  }
+  .ecs-dependencies-with-details{
+    width: 54%;
+  }
+}
+@media (min-width: 1400px) {
+  .ecs-dependencies-aside{
+    width: 40%;
+  }
+  .ecs-dependencies-with-details{
+    width: 59%;
+  }
+}
+@media (min-width: 1670px) {
+  .ecs-dependencies-aside{
+    width: 50%;
+  }
+  .ecs-dependencies-with-details{
+    width: 49%;
+  }
+}
+.ecs-aside-nav{
+  background: @color-white;
+  border: 1px solid @ts-border;
+  border-radius: 2px;
+  position: absolute;
+  left: 0;
+  top:0;
+  height: 100%;
+  width: 40px;
+  padding-top: 43px;
+  overflow: hidden;
+  .aside-action{
+    width: 100%;
+    display: block;
+    padding: 5px 10px;
+    border-bottom: 1px solid @ts-border;
+    font-size: 1.3em;
+    text-align: center;
+  }
+}
+.ecs-aside-head{
+  z-index: 2;
+  position: absolute;
+  background: #cccccc;
+  color: #000;
+  border: 1px solid @ts-border;
+  left:0;
+  top:0;
+  padding: 5px 90px 5px 10px;
+  width: 100%;
+  height: 43px;
+  .ecs-aside-head-actions{
+    display: block;
+    position: absolute;
+    right: 0;
+    top:0;
+    width: auto;
+  }
+  .ecs-aside-close,
+  .ecs-aside-more{
+    width: 40px;
+    height: 100%;
+    padding: 9px 10px 7px 10px;
+    border-left: 1px solid @ts-border;
+    font-size: 1.3em;
+    text-align: center;
+    float: left;
+  }
+  .ecs-aside-close{
+    background: #ffffff;
+  }
+  .truncate{
+    width: 100%;
+    margin: 8px 0;
+    font-weight:700;
+  }
+}
+.ecs-aside-content-slim{
+  height: 100%;
+  overflow-y: auto;
+  padding-left: 10px;
+  padding-top:53px;
+  padding-bottom:20px;
+  padding-right: 10px;
+  border: 1px solid @ts-border;
+}
+.ecs-aside-content{
+  height: 100%;
+  overflow-y: auto;
+  padding-left: 50px;
+  padding-top: 10px;
+  padding-bottom:20px;
+  padding-right: 10px;
+  border: 1px solid @ts-border;
+}
+.ecs-dependencies{
+  .styled-scrollbar();
+}
+.ecs-tests{
+  border: none;
+}
+.ecs-dependency{
+  display: block;
+  padding: 5px 10px 5px 10px;
+  cursor: pointer;
+  position: relative;
+  background: @color-white;
+  border-bottom: 1px solid @ts-border;
+  margin-bottom: 1px;
+}
+.dependency-name{
+  display: inline;
+  position: relative;
+  top: 2px;
+  .d-line{
+    display: inline;
+  }
+  .d-name{
+    max-width:39%;
+  }
+  .d-path{
+    max-width:47%;
+  }
+  .d-version{
+    max-width:15%;
+  }
+  .d-spdx{
+    max-width:16%;
+  }
+  .d-name,
+  .d-path,
+  .d-version,
+  .d-spdx,
+  .d-multy{
+    padding-top: 1px;
+    position: relative;
+    display: inline-block;
+    line-height: 1.3em;
+  }
+}
+.dependency-folder{
+  display: none;
+}
+.dependency-root{
+  background: #39394D;
+  color: #FFFFFF;
+  .dependency-folder{
+    display: block;
+  }
+}
+.dependency-root .d-line{
+  border-bottom: 3px double;
+}
+.dependency-active{
+  background: #cccccc;
+  color: #000;
+  .truncate{
+    font-weight: 700;
+  }
+}
+.dependency-folder{
+  position: absolute;
+  left: 7px;
+  top: 8px;
+}
+.dependency-status{
+  margin-left: 10px;
+}
+.dependency-status,
+.dependency-params,
+.dependency-info{
+  display: inline-block;
+}
+.dependency-params{
+  position: relative;
+}
+.ecs-graphs{
+  padding: 10px;
+  border: 1px solid @ts-border;
+}
+.left-ok {
+  border-left: 6px solid @color-ok;
+}
+
+.left-warnings {
+  border-left: 6px solid @color-warnings;
+}
+
+.left-deadly {
+  border-left: 6px solid @color-violations;
+}
+
+.left-violations {
+  border-left: 6px solid @color-violations;
+}
+
+.left-disabled{
+  border-left: 6px solid @ts-border;
+}
+
+.bot-grey {
+  border-bottom: 2px solid @ts-border;
+}
+
+.bot-ok {
+  border-bottom: 2px solid @color-ok;
+}
+
+.bot-warnings {
+  border-bottom: 2px solid @color-warnings;
+}
+
+.bot-disabled{
+  border-bottom: 2px solid @ts-border;
+}
+
+.bot-deadly {
+  border-bottom: 2px solid @color-violations;
+}
+
+.bot-violations {
+  border-bottom: 2px solid @color-violations;
+}
+
+.noUi-connect{
+  background: @color-ok
+}
+
+.noUi-pips,
+.noUi-value-sub {
+  color: @color-black;
+}
+
+.top-grey {
+  border-top: 2px solid @ts-border;
+}
+
+.top-ok {
+  border-top: 2px solid @color-ok;
+}
+
+.top-warnings {
+  border-top: 2px solid @color-warnings;
+}
+
+.top-deadly {
+  border-top: 2px solid @color-violations;
+}
+
+.top-disabled {
+  border-top: 2px solid @ts-border;
+}
+
+.top-violations {
+  border-top: 2px solid @color-violations;
+}
+
+.dependency-label{
+  text-transform: capitalize;
+}
+.aside-section{
+  margin: 0;
+}
+.aside-section-inner{
+  margin: 0 0 20px;
+}
+.aside-section-title{
+  padding: 5px 0;
+  position: relative;
+  margin: 0;
+  .section-expand{
+    padding: 5px 10px;
+    position: absolute;
+    top: 0;
+    right:0;
+    cursor: pointer;
+  }
+}
+.aside-section-content{
+  background: @color-white;
+  padding: 5px;
+  border-left: 1px solid @ts-border;
+  border-right: 1px solid @ts-border;
+  border-bottom: 1px solid @ts-border;
+}
+.aside-section-clear {
+  background: transparent;
+}
+.fa-1p5x {
+  font-size: 1.5em;
+  line-height: 1.4em;
+ }
+
+.viability-inline-block{
+  display: block;
+  margin: 0;
+}
+@media (min-width: 1400px) {
+  .viability-inline-block{
+    display: inline-block;
+  }
+}
+
+.card-name-line{
+  width:100%;
+  display: block;
+  margin-top: 0;
+}
+.card-name{
+  max-width: 80%;
+  display: inline-block;
+}
+
+.disable-notification{
+  text-align: center;
+  padding: 4px 0 0;
+  display: block;
+}
+.disable-notification-compact{
+  padding: 0;
+  display: block;
+  position: absolute;
+  width: 100%;
+  top:-1px;
+  font-size: 0.7em;
+  left: 0;
+  text-align: center;
+}
+.disable-notification{
+  top: 1px;
+  font-size: 0.9em;
+}
+.block{
+  display: block;
+}
+.progress-bar-disabled{
+  background: @ts-border;
+}
+
+.approval-widget-box{
+  overflow-y: auto;
+  max-height: 500px;
+  border: 1px solid #dddddd;
+  padding: 10px 20px 10px 10px;
+}
+.approval {
+  padding: 0;
+}
+.approval-heading{
+  padding-bottom: 5px;
+}
+.approval-body{
+  padding-left: 15px;
+  padding-bottom: 10px;
+  padding-right: 0;
+}
+.approval-release {
+ border: 1px solid @ts-border;
+ padding: 5px;
+}
+.fa-paragraph-icon:before{
+  content: '§';
+  font-weight: bold;
+}
+.content-side{
+  padding: 25px 40px 0 0;
+}
+.notice-detail-columns {
+  display: flex;
+  flex: 1 1 0%;
+  min-height: 0;
+  padding: 10px 15px 0;
+
+  > [class*="col-"] {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+}
+
+body.flex-fill-page .content > .notice-detail-columns {
+  flex: 1 1 0%;
+  min-height: 0;
+}
+
+.notice-view-left,
+.notice-view-right{
+  background: #ffffff;
+  border: 1px solid @ts-border;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0%;
+  min-height: 0;
+}
+.notice-view-left{
+  overflow-y: auto;
+}
+.notice-view-right{
+  overflow: hidden;
+
+  .notice-view-right-stats {
+    height: auto;
+    width: auto;
+    padding: 15px;
+    position: static;
+    border-bottom: 1px solid @ts-border;
+    flex-shrink: 0;
+  }
+
+  .notice-view-right-scroll {
+    overflow-y: auto;
+    flex: 1 1 0%;
+    min-height: 0;
+    height: auto;
+  }
+}
+.todo-counters{
+  .todo-counters-number{
+    margin-bottom: 0;
+    font-weight: 700;
+    font-size: 1.2em;
+  }
+  .todo-counters-text{
+    margin-bottom: 0;
+    font-size: 0.8em;
+  }
+  .panel{
+    margin-bottom: 0;
+  }
+}
+.notice-complete{
+  display: inline-block;
+  vertical-align: bottom;
+  font-size: 14px;
+}
+.panel-clear-style{
+  background: transparent;
+  border-radius: 0;
+  & > .panel-heading{
+    border-bottom: 1px solid @ts-border;
+  }
+  & > .panel-body{
+    border-bottom: 1px solid @ts-border;
+  }
+}
+.panel-body-thin-border{
+  border: 1px solid @ts-border;
+}
+.semantic-version-title{
+  position: relative;
+  top: -2px;
+}
+.semantic-version{
+  display: inline-block;
+  vertical-align: middle;
+}
+.vam{
+  vertical-align: middle;
+}
+.semantic-digit{
+  display: inline-block;
+  width: 35px;
+  .form-control{
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 40px;
+    text-align: center;
+    border-radius: 0;
+  }
+  .btn{
+    width: 100%;
+    display: block;
+    border-radius: 0;
+  }
+}
+.notice-icon-holder{
+  width: 18px;
+  text-align: center;
+}
+.tree-title-line{
+  position: relative;
+  width: 90%;
+}
+.label-text-span{
+  position: relative;
+  font-weight: 400;
+  width: 90%;
+  cursor: pointer;
+  &.fix-top-3{
+    top: -3px;
+  }
+}
+.rfix-top-3{
+  top: -3px;
+  position: relative;
+}
+.hover-highlight{
+  color: inherit;
+  cursor: pointer;
+  &:hover{
+    color: @ts-teal;
+  }
+}
+.display-block{
+  display: block;
+}
+
+#tree{
+  .node-tree a {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
+    white-space: nowrap;
+    max-width: 70%;
+  }
+}
+
+.analysis-filter-drop-container{
+  display: block;
+  width: 100%;
+  position: relative;
+  margin-top: 0;
+  height:0;
+  z-index: 9;
+}
+.analysis-filter-drop{
+  display: block;
+  width: 100%;
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+.analysis-filter-label-container{
+  display: block;
+  width: 100%;
+  position: relative;
+  margin: 0;
+  height:0;
+  text-align: right;
+}
+.analysis-filter-label{
+  display: block;
+  width: auto;
+  position: absolute;
+  top: -13px;
+  left: 0;
+}
+
+.select-all-box{
+  padding-left: 40px;
+  position: relative;
+  .checkbox{
+    position: absolute;
+  }
+  .form-control{
+    margin-left: 4px;
+  }
+}
+
+.breadcrumb > li {
+  display: inline-block;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: top;
+  white-space: nowrap
+}
+
+.unknown-license-notice{
+  position: absolute;
+  top: 49px;
+  right: 0;
+  width: 100%;
+  z-index:2;
+  .panel{
+    max-height: 300px;
+    overflow-y:  auto;
+  }
+}
+
+.layout-bumper{
+  display: block;
+  width: 100%;
+  height: 20px;
+}
+.breadcrumb {
+  padding: 18px 15px;
+  margin-bottom: 0;
+  list-style: none;
+  background-color: @color-white;
+  border-radius: 4px;
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.project-approved-status {
+  cursor: help;
+  color: @ts-teal;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+.project-approved-status-disabled{
+  cursor: help;
+  color: #ccc;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+.project-approved-status-disabled.hide-disabled{
+  display: none;
+}
+.project-approved-status-check{
+  color: #ffffff;
+  font-size: 0.5em;
+  position: absolute;
+  left: 39%;
+  top: 56%;
+  transform: translate(-50%, -50%);
+}
+.size-lg .project-approved-status-check{
+  left: 40%;
+  top: 58%;
+}
+.size-md .project-approved-status-check{
+  left: 50%;
+  top: 50%;
+}
+.project-approved-status-circle{
+}
+.splash-holder{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background: white;
+  color: gray;
+}
+.treeview{
+  .search-result{
+    color: #31708f!important;
+    background-color: #d9edf7!important;
+  }
+  .node-selected{
+    color: #d9edf7!important;
+    background-color: #31708f!important;
+  }
+}
+.failed-file-notice{
+  position: absolute;
+  width: 100%;
+  height: 120%;
+  background: rgba(215, 219, 230, 0.9);
+  text-align: center;
+  display: block;
+  top: 0;
+  font-weight: 700;
+  font-size: 1.3em;
+  line-height: 1.1em;
+}
+.reactive-table-navigation .form-inline input[type=number] {
+  width: 60px;
+}
+.month-range{
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  .month-range-label{
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 40px;
+    text-align: center;
+    border-radius: 0;
+    width: 100px;
+    display: inline-block;
+  }
+  .btn{
+    width: 30px;
+    display: inline-block;
+    border-radius: 0;
+  }
+}
+
+.pinned-widget-box {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding: 10px;
+  margin: -20px;
+  .module-details {
+    width: 310px;
+    margin-right: 10px;
+    display: inline-block;
+  }
+  .module-details:last-child {
+    margin-right: 0;
+  }
+  .module-details .ts-panel{
+    margin-bottom: 0;
+    white-space: normal;
+  }
+}
+
+.errors-text-hidden{
+  .form-group{
+    position: relative;
+    label.error{
+      display: none!important;
+    }
+  }
+}
+
+.blacklisted-label{
+  position: absolute;
+  left: 10px;
+  top: 20px;
+  padding: 5px;
+  cursor: help;
+}
+.blacklisted-algorithm-label{
+  padding: 5px;
+  cursor: help;
+  margin-right: 3px;
+}
+
+.approves-list .reactive-table-options.approves-table-filters {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: auto;
+  margin-bottom: 12px;
+
+  .approves-view-type-filter {
+    flex-shrink: 0;
+
+    .input-group {
+      display: flex;
+      align-items: center;
+    }
+
+    .input-group-addon {
+      background: transparent;
+      border: none;
+      color: @ts-text;
+      padding: 0 10px 0 0;
+      margin-right: 8px;
+    }
+
+    .form-control {
+      border-radius: 8px !important;
+      border: 1px solid @ts-border;
+      padding: 8px 14px;
+      height: auto;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+      &:focus {
+        border-color: @ts-teal;
+        box-shadow: 0 0 0 3px fade(@ts-teal, 10%);
+        outline: none;
+      }
+    }
+  }
+
+  .reactive-table-filter {
+    flex: 1;
+    width: auto;
+    margin-bottom: 0;
+  }
+}
+
+.vam{
+  vertical-align: middle;
+}
+
+.dropdown-menu.company-select > li > a{
+  padding: 3px 5px
+}
+
+// One loading indicator, centred over the area being loaded, on no background: the
+// overlay only positions it and keeps the content underneath from being clicked.
+.loading {
+  position: absolute;
+  z-index: 2000;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.loading-title {
+  text-align: center;
+  max-width: 500px;
+  margin: 15% auto;
+  padding: 20px;
+  color: gray;
+}
+
+// Holds the table area open while a request is in flight, so the centred indicator above
+// stays centred instead of collapsing to the top of an empty table.
+.reactive-table-loading-spacer {
+  min-height: 300px;
+}
+
+.loading-title h1 {
+  font-size: 26px;
+}
+
+.portfolio-title{
+  position: relative;
+  top: -1px;
+  max-width: 400px;
+}
+
+.cve-details-table{
+  font-size: 1.2em;
+  line-height: 1.5em;
+}
+
+.ic-details{
+  .ecs-dependencies-aside{
+    width: 100%;
+  }
+}
+
+.cisa-icon{
+  position: relative;
+  top: 3px;
+  font-size: 16px;
+  width: 21px;
+  height: 21px;
+  border-radius: 100%;
+  background: @color-warnings;
+  text-align: center;
+  line-height: 21px;
+  &.top-0{
+    top: 0
+  }
+  &.cisa-huge{
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    position: relative;
+    font-size: 60px;
+    top: -12px;
+    &:before{
+      position: relative;
+      left: 2px;
+    }
+  }
+}
+.bump-icon{
+  position: relative;
+  top: 3px;
+  font-size: 16px;
+  width: 21px;
+  height: 21px;
+  border-radius: 100%;
+  background: @ts-teal;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 21px;
+  margin-left: 0px;
+  &.top-0{
+    top: 0
+  }
+  &.cisa-huge{
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    position: relative;
+    font-size: 60px;
+    top: -12px;
+    &:before{
+      position: relative;
+      left: 2px;
+    }
+  }
+}
+
+.small-loading{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-small{
+  font-size: 0.8em;
+}
+
+.scan-aside-breadcrumb{
+  padding: 10px;
+  margin: -20px -20px 10px -20px;
+  background: fade(@color-black, 30%);
+  display: block;
+  width: calc(100% + 40px);
+  max-width: calc(100% + 40px);
+  border-radius: 0;
+  color: #FFFFFF;
+  overflow: hidden;
+  text-overflow: initial;
+  vertical-align: middle;
+  white-space: normal;
+  > li + li:before{
+    color: #FFFFFF;
+    padding: 0 2px;
+  }
+}
+
+.pre-unstiled {
+  white-space: pre-line;
+  border: none;
+  background: transparent;
+  padding: 0;
+  word-break: break-word;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.label-with-check{
+  padding-left: 20px;
+  padding-bottom: 5px;
+  cursor: pointer;
+}
+.check-with-label{
+  position: absolute;
+  cursor: pointer;
+}
+
+.algorithm-list-th{
+  width: 200px
+}
+.sbom-detail-columns {
+  display: flex;
+  flex: 1 1 0%;
+  min-height: 0;
+  padding: 10px 15px 0;
+
+  > [class*="col-"] {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+}
+
+.sbom-view-left,
+.sbom-view-right{
+  background: #ffffff;
+  border: 1px solid @ts-border;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0%;
+  min-height: 0;
+}
+.sbom-view-left{
+  overflow-y: auto;
+}
+.sbom-detail-columns .reactive-table-navigation {
+  flex-shrink: 0;
+  padding: 10px 15px;
+}
+.sbom-view-right{
+  overflow: hidden;
+
+  .notice-view-right-stats {
+    height: auto;
+    width: auto;
+    padding: 15px;
+    position: static;
+    border-bottom: 1px solid @ts-border;
+    flex-shrink: 0;
+  }
+
+  .notice-view-right-scroll {
+    overflow-y: auto;
+    flex: 1 1 0%;
+    min-height: 0;
+    height: auto;
+  }
+}
+
+.sbom-complete{
+  display: inline-block;
+  vertical-align: bottom;
+  font-size: 14px;
+}
+.cleared-padding{
+  padding-top: 15px;
+  padding-right: 10px;
+}
+.btn-on-block{
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  z-index: 10;
+}
+.cve-impact-project{
+  font-weight: 700;
+}
+.cve-impact-module{
+  font-weight: 400;
+  padding-left: 10px;
+}
+.cve-impact-comment{
+  font-weight: 400;
+  padding-left: 20px;
+  font-size: 0.8em;
+}
+.notification-dot{
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  background: @ts-red;
+}
+.label-offset-top{
+  position: relative;
+  top:-4px;
+}
+.grey-filter{
+  filter: grayscale(1);
+}
+.grey-filter:hover{
+  filter: grayscale(0);
+}
+.no-resize{
+  resize: none;
+}
+.editable-json{
+  resize: none;
+  height: 100%!important;
+}
+.autoform-array-item .form-group{
+  width: 80%;
+}
+body.stop-scrolling {
+  overflow: initial!important;
+}
+
+.pre-stiled{
+  display: block;
+  unicode-bidi: embed;
+  font-family: monospace;
+  white-space: pre;
+}
+.pre-stiled-line{
+  display: inline-block;
+  unicode-bidi: embed;
+  font-family: monospace;
+  white-space: pre;
+}
+.multy-gavel.wide{
+  width:22px!important;
+}
+.multy-gavel{
+  width:11px!important;
+  height:11px;
+  display:inline-block;
+  position: relative;
+}
+.multy-gavel .gavel-1,
+.multy-gavel .gavel-2,
+.multy-gavel .gavel-3{
+  position: absolute;
+}
+.multy-gavel .gavel-1{
+  left: 6px;
+  top: 2px;
+}
+.multy-gavel .gavel-2{
+  right: 6px;
+  top: 2px;
+  transform: rotate(-90deg);
+}
+
+.typeahead,
+.tt-query,
+.tt-hint {
+  width: 100%;
+  padding: 8px 12px;
+  line-height: 30px;
+  outline: none;
+}
+
+.typeahead {
+  background-color: @color-white;
+}
+
+.tt-hint {
+  color: #999
+}
+
+.tt-dropdown-menu {
+  width: 100%;
+  margin: 2px 0;
+  padding: 8px 0;
+  background-color: @color-white;
+  border: 1px solid #ccc;
+  border: 1px solid fade(@color-black, 20%);
+  box-shadow: 0 5px 10px fade(@color-black, 20%);
+}
+
+.no-suggestions,
+.no-suggestion-item{
+  padding: 3px 20px;
+  line-height: 20px;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.no-suggestions-pending{
+  opacity: 1;
+  animation: 3s ease-out 0s 1 fadeIn;
+}
+
+.no-suggestion-item:hover {
+  cursor: pointer;
+  color: @color-white;
+  background-color: #0097cf;
+}
+
+.no-suggestion-item.tt-cursor {
+  color: @color-white;
+  background-color: #0097cf;
+
+}
+
+.no-suggestion-item p {
+  margin: 0;
+}
+
+.twitter-typeahead{
+  width: 100%;
+}
+.input-group .twitter-typeahead{
+  display: table-cell!important
+}
+
+.trust_logo{
+  width: auto;
+  max-height: 47px;
+  position: relative;
+  top: -15px;
+  left: 23px;
+}
+
+.small_list{
+  font-size: 0.7em;
+  padding-left: 15px;
+  li{
+    width: 50%;
+    float: left;
+    padding-right: 30px;
+  }
+}
+
+.index-padding{
+  position: relative;
+  padding-left: 40px;
+  .index-box{
+    position: absolute;
+    left: 5px;
+    top:3px;
+  }
+}
+
+.info_link{
+  position: absolute;
+  right: 5px;
+  top: -20px;
+  font-size: 2.5em;
+  color: @ts-teal;
+}
+
+.test-tool-logo{
+  width: 20px;
+  height: auto;
+  display: inline-block;
+  vertical-align: middle;
+}
+.panel-default:has(.test-detail-heading){
+  border: none;
+  box-shadow: none;
+}
+.test-detail-wrapper {
+  padding: 5px;
+}
+body.flex-fill-page .content-area > .test-detail-wrapper,
+body.flex-fill-page .content-area > .content > .test-detail-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+body.flex-fill-page .test-detail-wrapper > .test-detail-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  margin-bottom: 0;
+}
+body.flex-fill-page .test-detail-results{
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+.panel-heading.test-detail-heading{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  padding: 0 11px;
+  height: 50px;
+  background: @color-white;
+  border-bottom: 2px solid @ts-teal;
+
+  .scan-side-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+.test-status-icon{
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  margin-right: 2px;
+  vertical-align: middle;
+  background: #FFFFFF;
+  position: relative;
+  top: -2px;
+}
+.test-status-icon.FAILED,
+.test-status-icon.error{
+  background: #f36262;
+}
+.test-status-icon.DRAFT,
+.test-status-icon.UNFINISHED,
+.test-status-icon.warning{
+  background: #fec667;
+}
+.test-status-icon.PUBLISHED,
+.test-status-icon.PASSED,
+.test-status-icon.note{
+  background: #247e8a;
+}
+// A result the tool did not report as a failure - SARIF `kind` of pass,
+// informational, notApplicable, review or open - or one whose level no counter
+// has a bucket for. It contributes nothing to the violation/warning/note
+// figures in the header, so it must not be painted in one of their colours
+// either: red for those was the icons contradicting the counts.
+.test-status-icon.not-a-finding{
+  background: #a9b0b6;
+}
+.collapse-chevron{
+  transition: transform 0.2s ease;
+  margin-top: 4px;
+  color: #999;
+}
+.collapsed .collapse-chevron{
+  transform: rotate(-90deg);
+}
+.test-finding-actions {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: auto;
+  margin-right: 8px;
+  gap: 12px;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .integration-icon {
+    top: 0;
+  }
+}
+.test-detail-results .panel-heading.collapse-action {
+  display: flex;
+  align-items: center;
+
+  .panel-title {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .collapse-chevron {
+    float: none;
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+}
+.test-finding {
+  padding: 6px 0;
+  border-bottom: 1px solid #f0f0f0;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+.test-finding-file {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+
+  strong {
+    flex-shrink: 1;
+    min-width: 0;
+  }
+  .text-muted {
+    flex-shrink: 2;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+.test-finding-message {
+  padding-left: 16px;
+  color: @color-text-secondary;
+  word-wrap: break-word;
+}
+.test-finding-snippet {
+  padding-left: 16px;
+  margin-top: 2px;
+}
+.custom-active-radio label.btn.active:not(.custom-x){
+  background: #247e8a;
+  color: @color-white;
+}
+.scanner-logo-small{
+  max-width: 16px;
+  width: 100%;
+  display: inline-block;
+}
+.cursor-default{
+  cursor: default !important;
+}
+.panel-right-actions{
+  position: absolute;
+  top: 7px;
+  right: 20px;
+}
+.remove-btn-over-panel{
+  z-index: 2;
+  position: relative;
+}
+
+.checkbox-default{
+  height: 16px;
+  width: 16px;
+  position: relative;
+  top: 3px;
+  margin: 0!important;
+}
+
+.sticky-vuln-actions{
+  position: sticky;
+  top: 46px;
+  background: #f4f4f2;
+  z-index: 1;
+  padding: 10px 0 !important;
+}
+
+.navbar-attention{
+  font-size:10px;
+  display:none;
+  line-height:1em;
+  vertical-align: middle;
+  top: -11px;
+  position: absolute;
+  right: 100%;
+  left: auto;
+  padding: 15px 9px;
+  width: 250px;
+  background: #f4f4f2;
+  z-index: 1;
+}
+li:has(.navbar-attention-hover):hover .navbar-attention,
+.navbar-attention:hover{
+  display:inline-block;
+}
+
+// Section divider heading inside the risk capture modal (threat model block)
+.tm-section-heading {
+  margin-top: 10px;
+  padding-top: 15px;
+  // semi-transparent so it reads on both light and dark theme
+  border-top: 1px solid rgba(107, 116, 128, 0.25);
+
+  label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: @color-text-secondary;
+    margin-bottom: 0;
+  }
+}
+
+.sticky-risk-actions{
+  position: sticky;
+  top: 45px;
+  background: #f4f4f2;
+  z-index: 1;
+  padding: 10px 0 !important;
+  margin-left: -21px;
+  margin-right: -21px;
+  margin-top: -40px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid @ts-border;
+}
+
+.reactive-table-slim-filter .reactive-table-options{
+  width: 40%!important;
+}
+.reactive-table-slim-filter .reactive-table-options .reactive-table-filter{
+  width: 100%!important;
+}
+
+.reactive-table-slim-filter {
+  .reactive-table-row-click();
+}
+
+.risk-task-filters {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.risk-task-controls .reactive-table-options {
+  width: auto !important;
+  overflow: hidden;
+  margin-bottom: 10px;
+
+  .reactive-table-filter {
+    width: 100% !important;
+  }
+}
+
+// --- ios-toggle: keyboard-reachable variant ---
+// The shipped .ios-toggle is `display: none`, so every toggle in the product is
+// unreachable by keyboard and has no focus indicator. New controls opt in via
+// this class; the three shipped toggles are left alone so the change stays
+// reviewable. The input keeps zero visual footprint but stays in the tab order,
+// and the ring is drawn on the visible .checkbox-label instead. Clip rather than
+// the shipped top:-5000px so focusing it cannot scroll the panel.
+.ios-toggle.ios-toggle-focusable {
+  display: block;
+  position: absolute;
+  top: auto;
+  left: auto;
+  height: 1px;
+  width: 1px;
+  margin: 0;
+  opacity: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+}
+
+.ios-toggle.ios-toggle-focusable:focus + .checkbox-label {
+  outline: 2px solid @ts-teal;
+  outline-offset: 3px;
+}
+
+// Replaces the inline style repeated on every shipped toggle caption. Identical
+// geometry, so the new control lines up with requireWhitelist and endoflife.
+.ios-toggle-caption {
+  display: inline-block;
+  float: left;
+  margin: 9px 0 0 30px;
+}
+
+// --- Project settings: SARIF risk creation toggle ---
+// The section chrome (heading, teal underline, collapse chevron) comes from the
+// shared .ts-panel / .panel-heading pattern this block sits in, the same one
+// qualitySettingsList uses directly above it on the Quality tab - so there is
+// no heading or divider rule of our own to keep in step with it.
+.project-autocwe {
+  // The toggle is the last thing in the panel body; without this the floated
+  // .checkbox-label leaves the body with no height under it.
+  //
+  // flow-root, NOT overflow:hidden. Both clear the float, but overflow also
+  // establishes a clipping region - and `.checkbox-label:after` (the off/on
+  // text) sits at left:-80px, while the pill is only ~20px inside the box.
+  // overflow:hidden therefore cut the `off` label down to "ff" on every
+  // ios-toggle in the product, this one included.
+  .checkbox {
+    display: flow-root;
+    margin-bottom: 0;
+  }
+
+  // The shipped pattern gives no visual cue when the input is disabled, because
+  // the input itself is invisible.
+  .ios-toggle[disabled] + .checkbox-label,
+  .ios-toggle[disabled] + .checkbox-label + .ios-toggle-caption {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.project-autocwe-spinner {
+  // Rendered as a sibling of the <label>, not inside it, so its aria-label cannot
+  // join the toggle's accessible name. .checkbox-label and .ios-toggle-caption both
+  // float, so the spinner has to float too to stay on the caption row.
+  float: left;
+  margin: 9px 0 0 8px;
+}
+
+// --- A GROUP of ios-toggles, each with its own help text ---
+// The generalisation of the single-toggle .project-autocwe block above, for a
+// panel that stacks several. .checkbox-label floats, so without the clearfix
+// three stacked toggles collapse into each other and each help paragraph wraps
+// around the pill above it - the containment is inherent to the shipped
+// .ios-toggle pattern, not decoration.
+//
+// A separate class rather than a second selector on .project-autocwe, so the
+// shipped auto-CWE toggle is untouched. Every declaration is colourless, so there is
+// no dark-theme counterpart to add.
+.ios-toggle-block {
+  // The help paragraph sits ABOVE its switch (matching the auto-CWE toggle on the
+  // Quality tab), so the gap BETWEEN switches has to hang off the checkbox
+  // rather than off the help text - otherwise each paragraph ends up nearer the
+  // switch above it than the one it describes.
+  // flow-root, not overflow:hidden - see the note on .project-autocwe above:
+  // overflow would clip the off-state label, which renders left of the pill.
+  .checkbox {
+    display: flow-root;
+    margin: 0 0 22px;
+  }
+
+  // The checkbox below carries the gap between switches, so the pill only needs
+  // to clear the caption row.
+  .checkbox .checkbox-label {
+    margin-bottom: 4px;
+  }
+
+  // The shipped pattern gives no visual cue when the input is disabled, because
+  // the input itself is invisible.
+  .ios-toggle[disabled] + .checkbox-label,
+  .ios-toggle[disabled] + .checkbox-label + .ios-toggle-caption {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  // Deliberately NOT dimmed alongside the disabled switch below: the help text
+  // is what explains why the control is read-only.
+  .ios-toggle-help {
+    margin: 0 0 6px;
+  }
+}
+
+.ios-toggle-spinner {
+  // Same geometry and the same reason as .project-autocwe-spinner: a sibling of
+  // the <label> so its aria-label cannot join the toggle's accessible name, and
+  // floated so it stays on the caption row.
+  float: left;
+  margin: 9px 0 0 8px;
+}
+
+// --- Risk detail: auto-created risk provenance + source references ---
+.risk-source-strip {
+  margin: 0 0 15px;
+  padding: 10px 12px;
+  border: 1px solid @ts-border;
+  border-left: 3px solid @ts-teal;
+  border-radius: 3px;
+  background: @ts-surface;
+}
+
+.risk-source-strip-head {
+  margin: 0;
+}
+
+.risk-source-strip-eyebrow {
+  display: inline-block;
+  margin-right: 8px;
+  color: @color-text-secondary;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.risk-source-strip-tool {
+  margin-left: 4px;
+  font-weight: 600;
+}
+
+.risk-source-strip-counts,
+.risk-source-strip-help,
+.risk-source-strip-note {
+  margin: 4px 0 0;
+}
+
+.risk-source-strip-help {
+  color: @color-text-secondary;
+  font-size: 12px;
+}
+
+// #8a6d3b, not .text-warning: this must hold its contrast without depending on a
+// Bootstrap token the dark theme does not override. 5.1:1 on @ts-surface.
+.risk-source-strip-note {
+  color: #8a6d3b;
+  font-size: 12px;
+
+  .fa {
+    margin-right: 4px;
+  }
+}
+
+// The shared CWE chip is #2a94a2 on a 9% teal tint = 3.29:1, below AA for its
+// 11px text. Darkened for this instance only; see Concerns for the shared fix.
+.risk-source-strip .test-cwe-badge {
+  color: #1c6874;
+}
+
+// --- Occurrence table ---
+.risk-source-gone-title {
+  margin: 0 0 6px;
+  font-weight: 600;
+
+  .fa {
+    margin-right: 6px;
+  }
+}
+
+.risk-source-gone-body {
+  margin: 0 0 10px;
+}
+
+.risk-source-truncated .fa {
+  margin-right: 6px;
+}
+
+.risk-source-refs-gone {
+  margin: 0;
+  padding: 20px 0;
+  color: @color-text-secondary;
+}
+
+// table-layout: fixed is what makes the ellipsis work in a cell. Without it the
+// File column widens to the longest path and pushes Findings off the panel.
+.risk-source-refs-table {
+  table-layout: fixed;
+  margin-bottom: 0;
+
+  > thead > tr > th,
+  > tbody > tr > td {
+    vertical-align: top;
+  }
+
+  .risk-source-col-level {
+    width: 120px;
+  }
+
+  .risk-source-col-rule {
+    width: 32%;
+  }
+
+  .risk-source-col-count {
+    width: 90px;
+    text-align: right;
+  }
+}
+
+.risk-source-rule,
+.risk-source-file,
+.risk-source-file-empty {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.risk-source-file-empty {
+  color: @color-text-secondary;
+  font-style: italic;
+}
+
+// Level is carried by the WORD; the square is a redundant cue, so no contrast
+// requirement rests on these three hues.
+.risk-source-level:before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 6px;
+  border-radius: 2px;
+  vertical-align: baseline;
+}
+
+.risk-source-level-error:before   { background: @color-violations; }
+.risk-source-level-warning:before { background: @ts-amber; }
+.risk-source-level-note:before    { background: @color-text-secondary; }
+
+// The /risks panel carries .reactive-table-slim-filter, which paints EVERY
+// descendant reactive table's rows as clickable rows. Occurrence rows are
+// evidence, not links. (0,4,0) so it wins regardless of source order.
+.reactive-table-slim-filter .risk-source-refs .reactive-table tbody tr {
+  cursor: default;
+
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+// Vulnerability-lake filter bar: flex layout so the search input fills the
+// available width on large screens instead of being capped at a fixed pixel
+// width. The parent div historically used `pull-left form-inline` (float +
+// inline-block); we override to flex while preserving spacing.
+// `.pull-left` carries `float: left !important` from Bootstrap, so we must
+// also use !important to neutralize it.
+#vulnerabilityListFilter > .pull-left.form-inline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  float: none !important;
+  width: 100%;
+  max-width: 50%;  // cap so the input doesn't sprawl across very wide screens
+
+  > .form-group {
+    margin: 0;
+  }
+}
+#vulnerabilityListFilter .vl-filter-grow {
+  flex: 1 1 0;
+  min-width: 0;  // allow shrinking below intrinsic input width
+}
+// `.form-inline .form-control` is `width: auto` in Bootstrap 3; force the
+// growable input to fill its flex wrapper.
+#vulnerabilityListFilter .vl-filter-grow .form-control {
+  width: 100%;
+  max-width: none;
+}
+// Mode dropdown fills its 200px form-group wrapper.
+#vulnerabilityListFilter .vl-simple-mode {
+  width: 100%;
+}
+
+@media (max-width: 1400px) {
+  .navbar-nav > li > a{
+    padding: 15px 9px;
+  }
+  .footer{
+    font-size: 8.5px;
+  }
+  .breadcrumb > li{
+    font-size: 11px;
+  }
+  .layout-bumper{
+    height: 30px;
+  }
+  .start-intro {
+    margin-top: 0;
+  }
+  .form-inline .form-group{
+    width:auto!important;
+  }
+  .scanner-logo-holder{
+    height: 100px;
+  }
+  .scanner-logo{
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+  }
+  .h-auto{
+    height: auto;
+  }
+  .reactive-table-options.col-sm-8.pull-right{
+    width: 40%;
+  }
+  .reactive-table-options.col-sm-8.pull-right .reactive-table-filter{
+    width: 100%;
+  }
+  td.accessUrl{
+    word-break: break-all;
+  }
+  .search-by-tags .select2-input{
+    width:100%!important;
+  }
+  .search-by-assigned{
+    width:120px!important;
+  }
+  .search-by-type .btn{
+    width: 60px!important;
+  }
+  .col-actions-big,
+  .col-actions{
+    width: auto!important;
+  }
+  .plan .btn{
+    padding: 4px 6px;
+    font-size: 11px;
+  }
+  .ecs-bar-title{
+    font-size: 10px;
+  }
+  .ecs-dependencies-with-details,
+  .ecs-dependencies-box{
+    width: 100%!important;
+  }
+  .ecs-dependencies-aside{
+    display: none;
+  }
+  .sm-flexible-btns label span{
+    display: none;
+  }
+  .sm-flexible-btns label{
+    width: auto!important;
+  }
+  .sm-flexible-btns label:before{
+    content: "*";
+    color:transparent;
+    display: inline-block;
+  }
+  .sm-flexible-btns label.active:after {
+    position: absolute;
+    right: 1px;
+    bottom: 1px;
+    display: inline-block;
+    font: normal normal normal 14px / 1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: "\f058";
+  }
+  #vulnerabilityListFilter,
+  #componentListFilter{
+    padding-left: 0;
+    padding-right: 0;
+  }
+  #vulnerabilityListFilter .form-control,
+  #componentListFilter .form-control{
+    max-width: 200px;
+  }
+  // The growable filter input opts out of the 200px cap - flex layout keeps
+  // it from overflowing the bar without a hard pixel ceiling.
+  #vulnerabilityListFilter .vl-filter-grow .form-control {
+    max-width: none;
+  }
+  .intro-dependency-stats > label{
+    display: none;
+  }
+  .filter-sm-offset{
+    margin-top: 5px;
+    display: inline-block;
+  }
+}

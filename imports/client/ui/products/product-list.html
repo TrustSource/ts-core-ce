@@ -1,0 +1,133 @@
+<template name="productList">
+  {{#pageHeader}}
+    <div class="products-header">
+      <div class="products-header-left">
+        <h2 class="font-light m-b-xs">Products</h2>
+        <small>Product structure of your company</small>
+      </div>
+      <div class="products-header-actions">
+        <div class="dropdown">
+          <a class="btn" data-toggle="dropdown">
+            <span class="fa fa-chart-bar"></span> Stats <span class="caret"></span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right products-stats-dropdown">
+            <div class="products-stats-row">
+              <span class="products-stats-value text-success">{{productsCount}}</span>
+              <span class="products-stats-label">products</span>
+            </div>
+            <div class="products-stats-row">
+              <span class="products-stats-value">{{rootCount}}</span>
+              <span class="products-stats-label">root entries</span>
+            </div>
+            <div class="products-stats-row">
+              <span class="products-stats-value text-danger">{{retiredCount}}</span>
+              <span class="products-stats-label">retired entries</span>
+            </div>
+          </div>
+        </div>
+        <a class="btn" data-toggle="modal" data-target="#productAddModal" title="Add product">
+          <span class="fa fa-plus"></span> Add
+        </a>
+        {{> productAddModal}}
+        <a class="btn" data-toggle="modal" data-target="#productImportModal" title="Import products">
+          <span class="fa fa-upload"></span> Import
+        </a>
+        {{> productImportModal}}
+        <a class="btn export-products" title="Export products">
+          <span class="fa fa-download"></span> Export
+        </a>
+      </div>
+    </div>
+  {{/pageHeader}}
+
+  <div class="content">
+    {{#if productsCount}}
+      <div class="row">
+        <div class="col-sm-6 col-lg-5">
+          <div class="panel panel-default product-tree-panel relative inner-b-0">
+            <div class="panel-heading product-panel-heading">
+              <div class="pull-right panel-right-actions">
+                <div class="actions-visibility inline-block">
+                  <a class="btn btn-default show-all">
+                    <span class="fa fa-fw fa-eye" aria-hidden="true"></span>
+                    <span class="product-tree-btn-label">Show all</span>
+                  </a>
+                  <a class="btn btn-default hide-retired hidden">
+                    <span class="fa fa-fw fa-eye-slash" aria-hidden="true"></span>
+                    <span class="product-tree-btn-label">Hide retired</span>
+                  </a>
+                </div>
+                <div class="actions inline-block">
+                  <a class="btn btn-default expand-all">
+                    <span class="fa fa-fw fa-expand" aria-hidden="true"></span>
+                    <span class="product-tree-btn-label">Expand all</span>
+                  </a>
+                  <a class="btn btn-default collapse-all hidden">
+                    <span class="fa fa-fw fa-compress" aria-hidden="true"></span>
+                    <span class="product-tree-btn-label">Collapse all</span>
+                  </a>
+                </div>
+              </div>
+              <h5>Tree of Products</h5>
+            </div>
+            <div class="panel-body">
+              <div class="scrollable_middle">
+                <div class="product-tree">
+                  {{#each tree}}
+                    {{> productListItem}}
+                  {{/each}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-7">
+          {{#if currentProduct}}
+            <div class="panel panel-default product-edit-panel relative inner-b-0">
+              {{#with currentProduct}}
+                {{> productEdit}}
+              {{/with}}
+            </div>
+          {{else}}
+            <div class="alert alert-info">
+              <p>
+                <strong>Select product. </strong><br>
+                Please select product from list to view details.
+              </p>
+            </div>
+          {{/if}}
+        </div>
+      </div>
+    {{else}}
+      {{> reactiveTableNoData}}
+    {{/if}}
+    {{#if isInRole 'manager,compliance_manager,company_security_manager,account_admin' companyId}}
+      {{#if draftCount}}
+        <div class="alert alert-warning inner-b-20 inner-t-20">
+          <button class="btn btn-danger2 btn-lg pull-right remove-drafts">Remove drafts</button>
+          <p><i class="fa fa-warning"></i> <strong>Remove all draft products:</strong></p>
+          <p>
+            All draft data will be removed from your company
+          </p>
+        </div>
+      {{/if}}
+    {{/if}}
+  </div>
+</template>
+<template name="productListItem">
+  <div class="product-tree-item {{isActiveProductClass}}" style="padding-left: {{indentPadding}}px">
+    <div class="product-tree-item-content {{#if retired}}product-retired{{/if}}">
+      {{#if getChildrenCount}}{{#if isFolderOpened}}<i class="fa fa-minus inner-r-5 pointer open_folder"></i>{{else}}
+        <i class="fa fa-plus inner-r-5 pointer open_folder"></i>{{/if}}
+      {{else}}<i class="w-18px inline-block"></i>{{/if}} <span class="open_details pointer">{{name}}</span> <span
+      class="pull-right label label-default open_details {{#if retired}}product-retired{{/if}}">{{type}}</span>
+    </div>
+  </div>
+  {{#if getChildrenCount}}
+    {{#if isFolderOpened}}
+      {{#each getProductsByParent}}
+        {{> productListItem}}
+      {{/each}}
+    {{/if}}
+  {{/if}}
+</template>

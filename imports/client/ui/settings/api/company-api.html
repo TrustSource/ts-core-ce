@@ -1,0 +1,77 @@
+<template name="companyApi">
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">Scanners & API keys</h2>
+        <small>Configure Scanners & API settings of your company</small>
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content">
+    <div class="row">
+      <div class="col-md-4 col-sm-6">
+        <div class="panel panel-default">
+          <a href="{{pathFor route='companyApiKeys'}}">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="fa fa-terminal ts-big-icon"></span>
+                </div>
+                <div class="col-md-12">
+                  <h4 style="margin: 10px 0 20px">
+                    API keys
+                  </h4>
+                </div>
+                <div class="col-md-12">
+                  <p>List of all general keys</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6">
+        <div class="panel panel-default">
+          <a href="{{pathFor route='companyApiReleases'}}">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="fa fa-tags ts-big-icon"></span>
+                </div>
+                <div class="col-md-12">
+                  <h4 style="margin: 10px 0 20px">
+                    Release keys
+                  </h4>
+                </div>
+                <div class="col-md-12">
+                  <p>List of all release keys</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6">
+        <div class="panel panel-default">
+          <a href="{{pathFor route='companyApiCsaf'}}">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <span class="fa fa-shield ts-big-icon"></span>
+                </div>
+                <div class="col-md-12">
+                  <h4 style="margin: 10px 0 20px">
+                    CSAF feed keys
+                  </h4>
+                </div>
+                <div class="col-md-12">
+                  <p>TLP-scoped keys for the CSAF document feed</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

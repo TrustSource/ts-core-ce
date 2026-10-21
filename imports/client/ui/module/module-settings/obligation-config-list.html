@@ -1,0 +1,76 @@
+<template name="obligationConfigList">
+  {{#unless readonly}}
+    {{#autoForm schema=this.schema id=this.id type="normal" doc=getDataForForm}}
+      <div class="row">
+        <fieldset>
+          <div class="col-sm-4">{{> afQuickField name='obligationKey' label='Obligation' options=obligationOptions}}</div>
+          <div class="col-sm-8">{{> afQuickField name='key' placeholder='Component key'}}</div>
+          <div class="col-sm-12">{{> afQuickField name='comment' placeholder='your comment'}}</div>
+        </fieldset>
+      </div>
+      <div class="text-danger" id="form-messages">{{getErrorMsg}}</div>
+      <button type="submit" class="btn btn-primary">{{getSubmitLabel}}</button>
+      {{#if getCancelRequired}}
+        <button id="cancel" class="btn btn-default">Cancel</button>
+        <button id="delete" class="btn btn-danger2">
+          {{#if isInRole 'compliance_manager' companyId}}
+            {{#if isNotApproved}}
+              Reject
+            {{else}}
+              Remove
+            {{/if}}
+          {{else}}
+            Remove
+          {{/if}}
+        </button>
+      {{/if}}
+      {{#if getList}}
+        <div class="pull-right">
+          <small>Select a table row to edit license</small>
+        </div>
+      {{/if}}
+    {{/autoForm}}
+  {{/unless}}
+  <div class="row">&nbsp;</div>
+  {{#if getList}}
+    <div class="table-responsive ">
+      <table class="table table-condensed table-striped {{this.id}}">
+        <thead>
+        <tr>
+          <th>Obligation</th>
+          <th>Comment</th>
+          <th>Component</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each getList}}
+          <tr class="clickable-row select-component {{isNotApproved}} {{isFromProject}} {{isFromUser}} {{isFromCompany}}"
+              id="select-{{index}}">
+            <td>{{#with getObligation obligationKey}}{{name}}{{/with}}</td>
+            <td>{{comment}}
+              {{#if isFromProject}}
+                <a href="{{pathFor route='projectSettings' data=getProjectOptions}}" target="_blank"
+                   class="label label-info pull-right">in Project</a>
+              {{/if}}
+              {{#if isFromUser}}
+                <a href="{{pathFor route='profileLists'}}" target="_blank"
+                   class="label label-info pull-right">in User</a>
+              {{/if}}
+              {{#if isFromCompany}}
+                <a href="{{pathFor route='companyLegalTemplates'}}" target="_blank"
+                   class="label label-info pull-right">in Company</a>
+              {{/if}}
+              {{#if isNotApproved}}
+                <span class="label label-danger pull-right">Not approved</span>
+              {{/if}}
+            </td>
+            <td>{{key}}</td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+    </div>
+  {{else}}
+    {{> reactiveTableNoData}}
+  {{/if}}
+</template>

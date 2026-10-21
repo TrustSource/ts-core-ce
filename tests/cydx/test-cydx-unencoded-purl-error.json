@@ -1,0 +1,28 @@
+{
+  "metadata": {
+    "timestamp": "2024-10-24T09:18:52.455Z",
+    "component": {
+      "type": "application",
+      "bom-ref": "pkg:npm/purl-edge-cases@1.0.0",
+      "name": "purl-edge-cases",
+      "version": "1.0.0",
+      "purl": "pkg:npm/purl-edge-cases@1.0.0"
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "spring-core@5.3.23+build",
+      "name": "spring-core",
+      "version": "5.3.23+build.20221005",
+      "purl": "pkg:maven/org.springframework/spring-core@5.3.23+build.20221005",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ]
+    }
+  ]
+}

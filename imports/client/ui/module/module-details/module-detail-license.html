@@ -1,0 +1,68 @@
+<template name="moduleLicense">
+
+  <div class="panel-body collapsed panel-{{getOptimizedKey}}">
+
+    <table class="table-header table table-condensed context-license">
+      <tr>
+        <td width="20">
+          {{#unless isUnknown}}
+            <label class="">
+              <input type="checkbox" value="{{getKey}}" name="licenses" style="vertical-align: bottom;">
+            </label>
+          {{/unless}}
+        </td>
+        <td class="expand-table"><i class="fa fa-fw fa-chevron-right ts-panel-toggle"></i></td>
+        <td class="licenseName">
+          <span class="module-aside-status-dot bg-{{status}} dep-status-dot"></span>
+          {{#unless isUnknown}}
+            <a href="{{pathFor route='moduleLicenseDetail' data=getModuleLicenseOptions}}">
+              <h4 style="display:inline">{{getName}}</h4></a>
+          {{else}}
+            <h4 style="display:inline">License not detected</h4>
+          {{/unless}}
+        </td>
+        <td width="200">
+          {{#if notOk}}
+            {{> jiraLink jira=hasJiraConnection description=getProblemDescription details=this module=module}}
+            {{> tfsLink tfs=hasTfsConnection description=getProblemDescription details=this module=module}}
+            {{> copyIssueDetails description=getProblemDescription}}
+          {{/if}}
+        </td>
+        <td width="170" class="text-right">
+          {{#if privateLicense}}
+            {{{ecsLabel 'ok' 'Private license'}}}
+          {{else}}
+            {{#if notWhitelisted}}
+              {{{ecsLabel 'violations' getLabelForNotWhitelisted}}}
+            {{else}}
+              {{{ecsLabel status label}}}
+            {{/if}}
+          {{/if}}
+        </td>
+      </tr>
+    </table>
+
+    <div class="table-collapse table-responsive license-table-collapse">
+      <div class="pinner-l-40">
+        {{#if showDetails}}
+          {{#each getLicenseComponents}}
+            {{> moduleComponent}}
+          {{/each}}
+          {{#if loading}}
+            <p class="inner-t-20">
+              <a class="btn btn-default btn-lg btn-block">
+                <div class="loading-spinner loading-spinner-sm"></div>
+              </a>
+            </p>
+          {{else}}
+            {{#if hasMore}}
+              <p class="inner-t-20"><a class="js-load-more btn btn-primary btn-lg btn-block">Load 10 more</a></p>
+            {{/if}}
+          {{/if}}
+
+        {{/if}}
+      </div>
+    </div>
+  </div>
+
+</template>

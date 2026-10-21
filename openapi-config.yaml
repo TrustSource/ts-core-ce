@@ -1,0 +1,4 @@
+summaryOnly: true
+produceImpactScore: true
+files:
+  - ./public/api-v2/openapi.yaml

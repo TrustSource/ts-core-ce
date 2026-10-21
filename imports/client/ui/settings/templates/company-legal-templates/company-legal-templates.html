@@ -1,0 +1,26 @@
+<template name="companyLegalTemplates">
+
+
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">Company legal settings templates</h2>
+        <small>Configure legal settings templates for your company</small>
+      </div>
+      <div class="settings-header-actions">
+        {{> companyLegalTemplatesCreate}}
+      </div>
+    </div>
+  {{/pageHeader}}
+
+  <div class="content">
+    <div class="panel panel-default">
+        <div class="panel-body">
+          {{> reactiveTable settings=reactiveTableSettings}}
+        </div>
+    </div>
+  </div>
+</template>
+<template name="reactiveTableCompanyLegalTemplatesActions">
+  <a href class="btn btn-danger2 btn-sm delete-template"><i class="fa fa-trash"></i><span class="hidden-xs hidden-sm"> Remove</span></a>
+</template>

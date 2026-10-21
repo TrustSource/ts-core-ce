@@ -1,0 +1,72 @@
+<template name="approvesViability">
+  {{#if getProjectComponents}}
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="panel panel-default text-center">
+          <p class="h2"><strong>{{counterComponents}}</strong></p>
+          <p class="h5">{{__ 'components'}}</p>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="panel panel-default text-center">
+          <p class="h2"><strong>{{counterModules}}</strong></p>
+          <p class="h5">{{__ 'modules'}}</p>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="panel panel-default text-center">
+          <p class="h2"><strong>{{counterWithoutViability}}</strong></p>
+          <p class="h5">{{__ 'componentsWithoutInformation'}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="ts-panel obligation-list">
+      {{#each getProjectComponents}}
+        <div class="panel-body {{status}}">
+          <div class="row">
+            <div class="col-sm-4 text-left">
+              <h5>{{getName}}</h5>
+              <small>Have {{getPluralized 'appearance' counter}}</small>
+            </div>
+            <div class="col-sm-8">
+              {{#with getViability}}
+                {{#if error}}
+                  {{error}}
+                {{else}}
+                  <span title="Stars" data-toggle="tooltip">{{starsCnt}} <i class="fa fa-star"></i></span>&nbsp;&nbsp;&nbsp;
+                  <span title="Code forks" data-toggle="tooltip">{{forksCnt}} <i class="fa fa-code-fork"></i></span>&nbsp;&nbsp;&nbsp;
+                  <span title="Open issues & pull requests" data-toggle="tooltip">{{openIssuesCnt}} <i
+                    class="fa fa-bug"></i></span>&nbsp;&nbsp;&nbsp;
+                  <span title="Last update" data-toggle="tooltip">{{dateFormat changed_at 'll'}} <i
+                    class="fa fa-pencil"></i></span>&nbsp;&nbsp;&nbsp;
+                  <span title="Last visit" data-toggle="tooltip">{{dateFormat lastVisit 'fromNow'}} <i
+                    class="fa fa-refresh"></i></span>&nbsp;&nbsp;&nbsp;
+                  <span style="display:none"
+                        id="sparkline-{{../data._id}}">{{__ 'CommitsDuringLastYear'}}&nbsp;<span></span></span>
+                {{/if}}
+              {{/with}}
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  {{else}}
+    {{#unless noDataInProject}}
+      {{#panel}}
+        <div class="text-primary">
+          <i class="fa fa-spinner fa-spin"></i> {{__ 'LoadingReportData'}}
+        </div>
+      {{/panel}}
+    {{/unless}}
+  {{/if}}
+  {{#if requestInProgress}}
+    {{#panel}}
+        <div class="text-primary">
+          <i class="fa fa-spinner fa-spin"></i> {{__ 'LoadingReportData'}}
+        </div>
+    {{/panel}}
+  {{/if}}
+  {{#if noDataInProject}}
+    {{> reactiveTableNoData}}
+  {{/if}}
+</template>

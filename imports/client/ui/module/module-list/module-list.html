@@ -1,0 +1,234 @@
+<template name="moduleList">
+
+  <!-- this contains instance of Project -->
+  {{#pageHeader}}
+    <div class="modules-header">
+      <div class="modules-header-left">
+        <h2 class="font-light m-b-xs">
+          {{#if isUnassignedProject}}
+            <span title="{{name}}">{{name}}</span>
+          {{else}}
+            {{>projectApprovedStatus projectId=_id class="size-lg hide-disabled"}}
+            <span class="truncate max-w-80" title="{{name}}">{{name}}</span>
+            {{>leanixLink leanix=leanix}}
+          {{/if}}
+        </h2>
+        <small>
+          {{#unless isUnassignedProject}}
+            {{> projectVersion}}
+          {{else}}
+            All Modules
+          {{/unless}}
+          {{#if hasModuleCounters}}
+            <span class="text-danger">
+              {{getModuleCounters}}
+            </span>
+          {{/if}}
+        </small>
+      </div>
+      <div class="modules-header-actions">
+        {{#if isInRole 'manager,compliance_manager' companyId}}
+          {{#unless isUnassignedProject}}
+            <a class="btn btn-xs" data-toggle="modal" data-target="#ModuleImportModal" title="Import module">
+              <span class="fa fa-upload" aria-hidden="true"></span>
+              <span class="btn-label">Import</span>
+            </a>
+            {{> ModuleImportModal}}
+          {{/unless}}
+        {{/if}}
+
+        {{#unless isUnassignedProject}}
+          <a class="btn btn-xs"
+             href="{{pathFor route='projectSettings' data=getProjectOptions}}" title="Project settings">
+            <span class="fa fa-cogs" aria-hidden="true"></span>
+            <span class="btn-label">Settings</span>
+          </a>
+        {{/unless}}
+
+        {{#if isInRole 'manager,compliance_manager' companyId}}
+          {{#unless isUnassignedProject}}
+            {{> moduleCreate}}
+          {{/unless}}
+          <a class="btn btn-xs module-analyze-all" title="Analyze all modules">
+            <span class="fa fa-play" aria-hidden="true"></span>
+            <span class="btn-label">Analyze all</span>
+          </a>
+        {{/if}}
+        {{#unless isUnassignedProject}}
+          <div class="dropdown inline-block">
+            <button type="button" class="btn btn-xs dropdown-toggle"
+                    data-toggle="dropdown">
+              <span class="fa fa-list"></span> <span class="btn-label">Reports</span> <span class="caret m-l-xs"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="{{pathFor route='reportLicenses' query=getProjectOptions}}" target="_blank">
+                  <span class="fa fa-gavel" aria-hidden="true"></span> Licenses</a>
+              </li>
+              <li>
+                <a href="{{pathFor route='reportVersioning' query=getProjectOptions}}" target="_blank">
+                  <span class="fa fa-hourglass-o" aria-hidden="true"></span> Versioning</a>
+              </li>
+              <li>
+                <a href="{{pathFor route='reportAlgorithms' query=getProjectOptions}}" target="_blank">
+                  <span class="fa fa-key" aria-hidden="true"></span> Algorithms</a>
+              </li>
+              <li>
+                <a href="{{pathFor route='reportVulnerability' query=getProjectOptions}}" target="_blank">
+                  <span class="fa fa-shield-halved" aria-hidden="true"></span> Vulnerability</a>
+              </li>
+              <li>
+                <a href="{{pathFor route='risks' query=getProjectOptions}}" target="_blank">
+                  <span class="fa fa-flag-checkered" aria-hidden="true"></span> Risks</a>
+              </li>
+              <li>
+                <a href="{{pathFor route='reportObligations' query=getProjectOptions}}" target="_blank">
+                  <span class="fa fa-check-square-o" aria-hidden="true"></span> Obligations</a>
+              </li>
+              <li>
+                <a href="{{pathFor route='reportCredits' query=getProjectOptions}}" target="_blank">
+                  <span class="fa fa-copyright" aria-hidden="true"></span> Credits</a>
+              </li>
+              <li>
+                <a href="{{pathFor route='reportModification' query=getProjectOptions}}" target="_blank">
+                  <span class="fa fa-pencil" aria-hidden="true"></span> Modifications</a>
+              </li>
+            </ul>
+          </div>
+          {{#if isInRole 'manager,compliance_manager' companyId}}
+            {{#unless isUnassignedProject}}
+              <a class="btn btn-xs" href="{{pathFor route='projectApprove' data=getProjectOptions}}">
+                <span class="fa fa-check-circle-o" aria-hidden="true"></span> <span class="btn-label">Approve</span></a>
+            {{/unless}}
+          {{/if}}
+          {{>followAction type='project' item=this}}
+        {{/unless}}
+      </div>
+    </div>
+  {{/pageHeader}}
+
+    <div class="content">
+      <div class="ts-panel modules-panel">
+        <div class="panel-body">
+          <div class="list-filter-bar">
+            <div class="input-group input-group-sm">
+              <span class="input-group-addon"><span class="fa fa-filter"></span></span>
+              <input type="text" name="search" class="form-control input-sm" value="{{session 'moduleListFilter'}}" placeholder="Filter">
+            </div>
+            <div class="input-group input-group-sm dropdown">
+              <span class="input-group-addon"><span class="fa fa-bookmark"></span></span>
+              <button class="form-control dropdown-toggle list-dropdown-btn" data-toggle="dropdown">
+                <span class="list-dropdown-label">{{currentStateFilterLabel}}</span>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li class="{{#unless hasFilters}}active{{/unless}}"><a href="#" class="change-state-filter" data-value="all">All states</a></li>
+                <li class="{{#if isStateActive 'ok'}}active{{/if}}"><a href="#" class="change-state-filter" data-value="ok">OK</a></li>
+                <li class="{{#if isStateActive 'warnings'}}active{{/if}}"><a href="#" class="change-state-filter" data-value="warnings">Warnings</a></li>
+                <li class="{{#if isStateActive 'violations'}}active{{/if}}"><a href="#" class="change-state-filter" data-value="violations">Violations</a></li>
+              </ul>
+            </div>
+            <div class="input-group input-group-sm projects-tags-filter">
+              <span class="input-group-addon"><span class="fa fa-tags"></span></span>
+              {{#if getCompanyTags}}
+                <select multiple="multiple" name="tags" class="form-control select2" placeholder="Tags">
+                  {{#each getCompanyTags}}
+                    <option value="{{_id}}" selected="{{isActiveProject}}">{{name}}</option>
+                  {{/each}}
+                </select>
+              {{/if}}
+              {{#if hasNoCompanyTags}}
+                <a href="{{pathFor route='companyTags'}}" class="form-control list-dropdown-btn">
+                  <span class="list-dropdown-label">No tags</span>
+                </a>
+              {{/if}}
+              {{#if inProgressGetCompanyTags}}
+                <span class="fa fa-spinner fa-spin"></span>
+              {{/if}}
+            </div>
+            <div class="list-filter-bar-actions">
+              {{#if isCardView}}
+                <button class="btn btn-default sorting" title="Toggle sort order">
+                  {{#if isDescSorting}}
+                    <span class="fa fa-sort-alpha-desc"></span>
+                  {{else}}
+                    <span class="fa fa-sort-alpha-asc"></span>
+                  {{/if}}
+                </button>
+              {{/if}}
+              {{#if moduleListArchived}}
+                <button class="btn btn-default change-archived-filter" title="Hide archived">
+                  <span class="fa fa-eye-slash"></span>
+                </button>
+              {{else}}
+                <button class="btn btn-default change-archived-filter" title="Show archived">
+                  <span class="fa fa-archive"></span>
+                </button>
+              {{/if}}
+              <div class="btn-group" role="group">
+                <a href class="btn btn-default change-presentation-grid {{#if isCardView}}active{{/if}}" title="Grid view">
+                  <i class="fa fa-th"></i>
+                  <span class="projects-view-label">Grid</span>
+                </a>
+                <a href class="btn btn-default change-presentation-table {{#unless isCardView}}active{{/unless}}" title="Table view">
+                  <i class="fa fa-list"></i>
+                  <span class="projects-view-label">Table</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          {{#if hasModules}}
+            {{#if isCardView}}
+              <div class="modules">
+                <div class="row">
+                  {{#each chunkedModules 3}}
+                    {{#if getFromChunk 0}}
+                      {{> module getFromChunk 0}}
+                    {{/if}}
+                    {{#if getFromChunk 1}}
+                      {{> module getFromChunk 1}}
+                    {{/if}}
+                    {{#if getFromChunk 2}}
+                      {{> module getFromChunk 2}}
+                    {{/if}}
+                  {{/each}}
+                </div>
+              </div>
+            {{else}}
+              <div class="table-responsive">
+                {{> reactiveTable settings=reactiveTableSettings}}
+              </div>
+            {{/if}}
+          {{else}}
+            {{> reactiveTableNoData}}
+          {{/if}}
+        </div>
+      </div>
+    </div>
+
+</template>
+
+<template name="reactiveTableModulesActions">
+  <a href="{{pathFor route='moduleSettings' moduleId=_id projectId=getProjectId}}" class="btn btn-sm module-settings {{classUnless 'btn-danger2' settingsValid}} {{classIf
+      'btn-default' settingsValid}}" title="Settings">
+    <span class="fa fa-cogs" aria-hidden="true"></span>
+  </a>
+  {{>followAction type='module' item=this iconOnly=true}}
+</template>
+
+<template name="reactiveTableModulesName">
+  <span style="white-space:nowrap">
+    {{>projectApprovedStatus moduleId=_id projectId=projectId}}
+    <span class="truncate max-w-400px" title="{{name}}">
+      {{#if isLinkedProject}}<span class="fa fa-link"></span>{{/if}} {{name}} {{#if getVersion}}({{getVersion}}){{/if}}
+      {{>analysisRequired item=this}}
+      {{#if archived}}<span class="fa fa-archive" title="Archived"></span>{{/if}}
+    </span>
+  </span>
+</template>
+
+<template name="reactiveTableModulesReleases">
+  <a href="{{pathFor route='releasesList' query=getReleaseQuery}}" target="_blank">
+    <span class="fa fa-external-link"></span>
+  </a>
+</template>

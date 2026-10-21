@@ -1,0 +1,19 @@
+<template name="ModuleImportTab">
+  <div id="ModuleImportTab" class="tab-pane">        <!-- Import module -->
+    <div class="panel-body">
+      {{#if hasAccessRight 'project.ModuleImportTab.import' 'x' currentProject}}
+        <a class="btn btn-primary pull-left" data-toggle="modal" data-target="#ModuleImportModal">
+          <span class="fa fa-upload" aria-hidden="true"></span>
+          Import
+        </a>
+      {{/if}}
+      {{#if hasImports}}
+        {{> reactiveTable settings=reactiveTableSettingsImports}}
+      {{/if}}
+      {{#if hasSPDX}}
+        {{> reactiveTable settings=reactiveTableSettings}}
+      {{/if}}
+    </div>
+  </div>
+  {{> ModuleImportModal }}
+</template>

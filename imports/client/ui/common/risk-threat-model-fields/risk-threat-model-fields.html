@@ -1,0 +1,73 @@
+<template name="riskThreatModelFields">
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="form-group col-xs-12">
+        <label for="tmStride">STRIDE categories</label>
+        <select name="tmStride" id="tmStride" multiple class="form-control select2-tm" {{disabledAttr}}>
+          {{#each strideOptions}}
+            <option value="{{value}}" selected="{{selected}}">
+              {{value}}
+            </option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-12">
+        <label for="tmCwes">CWEs</label>
+        <select name="tmCwes" id="tmCwes" multiple class="form-control select2-tm-tags" {{disabledAttr}}>
+          {{#each cweOptions}}
+            <option value="{{this}}" selected="selected">
+              {{this}}
+            </option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-6">
+        <label for="tmEnisaCategory">ENISA category</label>
+        <input type="text" value="{{tmc.enisaCategory}}" id="tmEnisaCategory" class="form-control" maxlength="200"
+               name="tmEnisaCategory" placeholder="e.g. Nefarious activity / Abuse" {{disabledAttr}}>
+      </div>
+      <div class="form-group col-xs-6">
+        <label for="tmEnisaThreat">ENISA threat</label>
+        <input type="text" value="{{tmc.enisaThreat}}" id="tmEnisaThreat" class="form-control" maxlength="300"
+               name="tmEnisaThreat" placeholder="e.g. Web-application / injection attacks (SQLi, XSS)" {{disabledAttr}}>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-4">
+        <label for="tmAffectedElementType">Affected element type</label>
+        <input type="text" value="{{tmc.affectedElementType}}" id="tmAffectedElementType" class="form-control" maxlength="100"
+               name="tmAffectedElementType" placeholder="e.g. process" {{disabledAttr}}>
+      </div>
+      <div class="form-group col-xs-4">
+        <label for="tmMethod">TM method</label>
+        <input type="text" value="{{tmc.tmMethod}}" id="tmMethod" class="form-control" maxlength="200"
+               name="tmMethod" placeholder="e.g. STRIDE-per-Element" {{disabledAttr}}>
+      </div>
+      <div class="form-group col-xs-4">
+        <div class="pinner-t-30">
+          <label class="control-label pointer" for="tmTrustBoundaryCrossing">
+            <input type="checkbox" id="tmTrustBoundaryCrossing" name="tmTrustBoundaryCrossing" class="i-checks"
+                   checked="{{trustBoundaryChecked}}" {{disabledAttr}}>
+            <strong>Trust boundary crossing</strong>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-6">
+        <label for="tmRunId">TM run ID</label>
+        <input type="text" value="{{tmc.tmRunId}}" id="tmRunId" class="form-control" maxlength="200"
+               name="tmRunId" placeholder="e.g. tm-run-2026-06-04-001" {{disabledAttr}}>
+      </div>
+      <div class="form-group col-xs-6">
+        <label for="tmOtmThreatId">OTM threat ID</label>
+        <input type="text" value="{{tmc.otmThreatId}}" id="tmOtmThreatId" class="form-control" maxlength="200"
+               name="tmOtmThreatId" placeholder="e.g. t-sqli-login" {{disabledAttr}}>
+      </div>
+    </div>
+  </div>
+</template>

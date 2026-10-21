@@ -1,0 +1,598 @@
+<template name="projectSettings">
+
+  {{#pageHeader headerClass=getStatistics.getState}}
+    <div class="projects-header">
+      <div class="projects-header-left">
+        <h2 class="font-light m-b-xs">
+          <span class="truncate max-w-80" title="{{name}}">{{name}}</span>
+          {{>leanixLink leanix=leanix}}
+        </h2>
+        <small>Edit Project</small>
+      </div>
+      <div class="projects-header-actions">
+        {{>followAction type='project' item=this}}
+      </div>
+    </div>
+  {{/pageHeader}}
+
+  <div class="content">
+    <div class="ts-panel">
+
+      <form name="simpleForm" novalidate id="simpleForm" action="#" method="post">
+
+        <div class="nav-tabs-scrollable">
+          <button class="nav-tabs-arrow nav-tabs-arrow-left" type="button"><i class="fa fa-chevron-left"></i></button>
+          <button class="nav-tabs-arrow nav-tabs-arrow-right" type="button"><i class="fa fa-chevron-right"></i></button>
+          <ul class="nav nav-tabs">
+            {{#if hasAccessRight 'project.general' 'r' currentProject}}
+              <li class="active"><a data-toggle="tab" href="#general">General</a></li>
+            {{/if}}
+            {{#if hasAccessRight 'project.legal' 'r' currentProject}}
+              <li id="legal-tab"><a data-toggle="tab" href="#legal">Legal</a></li>
+            {{/if}}
+            {{#if hasAccessRight 'project.quality' 'r' currentProject}}
+              <li id="quality-tab"><a data-toggle="tab" href="#quality">Quality</a></li>
+            {{/if}}
+            {{#if hasAccessRight 'project.encryption' 'r' currentProject}}
+              <li id="encryption-tab"><a data-toggle="tab" href="#encryption">Crypto management</a></li>
+            {{/if}}
+            {{#if hasAccessRight 'project.cia' 'r' currentProject}}
+              <li id="risk-tab"><a data-toggle="tab" href="#risk">CIA</a></li>
+            {{/if}}
+            {{#if hasAccessRight 'project.endoflife' 'r' currentProject}}
+              <li id="endoflife-tab"><a data-toggle="tab" href="#endoflife">End-of-life</a></li>
+            {{/if}}
+            {{#if hasAccessRight 'project.wblist' 'r' currentProject}}
+              <li><a data-toggle="tab" href="#wblist">Allow/Deny</a></li>
+            {{/if}}
+            {{#if hasAccessRight 'project.obligationConfig' 'r' currentProject}}
+              <li id="obligations-tab"><a data-toggle="tab" href="#obligations">Resolved obligations</a></li>
+            {{/if}}
+            {{#if hasAccessRight 'project.issue' 'r' currentProject}}
+              <li><a data-toggle="tab" href="#issue">Issue Integration</a></li>
+            {{/if}}
+            {{#if canManageWebhooks}}
+              <li><a data-toggle="tab" href="#webhooks">Webhooks and Channels</a></li>
+            {{/if}}
+            {{#if hasAccessRight 'project.ModuleImportTab' 'r' currentProject}}
+              <li><a data-toggle="tab" href="#ModuleImportTab">Imports</a></li>
+            {{/if}}
+            {{#if hasAccessRight 'project.danger' 'r' currentProject}}
+              <li><a data-toggle="tab" href="#danger">Danger Operations</a></li>
+            {{/if}}
+          </ul>
+        </div>
+
+        <div class="tab-content">
+          {{#if hasAccessRight 'project.general' 'r' currentProject}}
+            <div id="general" class="tab-pane active">        <!-- General settings -->
+              <div class="panel-body">
+                {{#autoForm id="updateProjectForm" collection=getProjects
+                            schema=getProjectSchema type="update" doc=currentProject
+                            class="form-horizontal"
+                }}
+                  <fieldset>
+                    {{#with hasFieldRight 'project.general.name' currentProject}}
+                      {{#if read}}
+                        {{> afQuickField name='name' template="bootstrap3-horizontal"
+                                label-class="col-md-3" input-col-class="col-md-9" disabled=disabled}}
+                      {{/if}}
+                    {{/with}}
+                    {{#with hasFieldRight 'project.general.description' currentProject}}
+                      {{#if read}}
+                        <button class="btn btn-default pull-right action-upload-architecture" type="button"
+                                disabled={{architectureUploadDisabled}} {{architectureUploadAriaAttrs}}>
+                          <span class="{{architectureUploadIconClass}}" aria-hidden="true"></span>
+                          Upload file
+                        </button>
+                        <input type="file" accept=".md,.markdown"
+                               aria-label="Upload architecture.md file to replace Application goals"
+                               class="architecture-file-input"
+                               style="opacity: 0; position: absolute; width: 1px; height: 1px; overflow: hidden;">
+                        {{> afQuickField name='description' template="bootstrap3-horizontal"
+                                label-class="col-md-3" input-col-class="col-md-6" disabled=disabled}}
+                      {{/if}}
+                    {{/with}}
+                    {{#with hasFieldRight 'project.general.tags' currentProject}}
+                      {{#if read}}
+                        {{#if getCompanyTags}}
+                          <button class="btn btn-default pull-right action-propagate-settings" data-details="tags"
+                                  data-multy="true" type="button" disabled={{disabled}}>
+                            <span class="fa fa-copy"></span>
+                            Propagate to modules
+                          </button>
+                          {{> afQuickField name='tags' template="bootstrap3-horizontal" label-class="col-md-3"
+                                  input-col-class="col-md-6" options=getCompanyTags disabled=disabled}}
+                        {{/if}}
+                        {{#if hasNoCompanyTags}}
+                          <div class="form-group">
+                            <label class="col-md-3 control-label">Tags</label>
+                            <div class="col-md-9">
+                              <a href="{{pathFor route='companyTags'}}"
+                                 style="padding: 2px 14px 0;display: inline-block;margin: 0 0;">
+                                No tags in company. View company tags.
+                              </a>
+                            </div>
+                          </div>
+                        {{/if}}
+                        {{#if inProgressGetCompanyTags}}
+                          <div class="form-group">
+                            <label class="col-md-3 control-label">Tags</label>
+                            <div class="col-md-9"><span
+                                    style="padding: 7px 0;display: inline-block;margin: 0 0;"><span
+                                    class="fa fa-spinner fa-spin fa-2x"></span></span></div>
+                          </div>
+                        {{/if}}
+                      {{/if}}
+                    {{/with}}
+                    {{#with hasFieldRight 'project.general.relatedUsers.defaultProjectManager' currentProject}}
+                      {{#if read}}
+                        {{#if getUsersManagers}}
+                          <button class="btn btn-default pull-right action-propagate"
+                                  data-details="defaultProjectManager" disabled={{disabled}}
+                                  type="button">
+                            <span class="fa fa-copy"></span>
+                            Propagate to modules
+                          </button>
+                          {{> afQuickField name='relatedUsers.defaultProjectManager' template="bootstrap3-horizontal" label-class="col-md-3"
+                                  input-col-class="col-md-6" options=getUsersManagers disabled=disabled}}
+                        {{/if}}
+                        {{#if hasNoUsersManagers}}
+                          <div class="form-group">
+                            <label class="col-md-3 control-label">Default project manager</label>
+                            <div class="col-md-9">
+                              <a href="{{pathFor route='companyUsers'}}"
+                                 style="padding: 7px 0;display: inline-block;margin: 0 0;">
+                                No project manager in company. View company users.
+                              </a>
+                            </div>
+                          </div>
+                        {{/if}}
+                        {{#if inProgressGetUsersManagers}}
+                          <div class="form-group">
+                            <label class="col-md-3 control-label">Default project manager</label>
+                            <div class="col-md-9"><span
+                                    style="padding: 7px 0;display: inline-block;margin: 0 0;"><span
+                                    class="fa fa-spinner fa-spin fa-2x"></span></span></div>
+                          </div>
+                        {{/if}}
+                      {{/if}}
+                    {{/with}}
+                    {{#with hasFieldRight 'project.general.relatedUsers.defaultComplianceManager' currentProject}}
+                      {{#if read}}
+                        {{#if getUsersComplianceManagers}}
+                          <button class="btn btn-default pull-right action-propagate"
+                                  data-details="defaultComplianceManager" type="button" disabled={{disabled}}>
+                            <span class="fa fa-copy"></span>
+                            Propagate to modules
+                          </button>
+                          {{> afQuickField name='relatedUsers.defaultComplianceManager' template="bootstrap3-horizontal" label-class="col-md-3"
+                                  input-col-class="col-md-6" options=getUsersComplianceManagers disabled=disabled}}
+                        {{else}}
+                          {{#if hasNoUsersComplianceManagers}}
+                            <div class="form-group">
+                              <label class="col-md-3 control-label">Default compliance manager</label>
+                              <div class="col-md-9">
+                                <a href="{{pathFor route='companyUsers'}}"
+                                   style="padding: 7px 0;display: inline-block;margin: 0 0;">
+                                  No compliance manager in company. View company users.
+                                </a>
+                              </div>
+                            </div>
+                          {{else}}
+                            {{#if inProgressGetUsersComplianceManagers}}
+                              <div class="form-group">
+                                <label class="col-md-3 control-label">Default compliance manager</label>
+                                <div class="col-md-9"><span
+                                        style="padding: 7px 0;display: inline-block;margin: 0 0;"><span
+                                        class="fa fa-spinner fa-spin fa-2x"></span></span></div>
+                              </div>
+                            {{/if}}
+                          {{/if}}
+                        {{/if}}
+                      {{/if}}
+                    {{/with}}
+                    {{#with hasFieldRight 'project.general.relatedUsers.members' currentProject}}
+                      {{#if read}}
+                        {{#if getUsers}}
+                          <button class="btn btn-default pull-right action-propagate" data-details="members"
+                                  data-multy="true" type="button" disabled={{disabled}}>
+                            <span class="fa fa-copy"></span>
+                            Propagate to modules
+                          </button>
+                          {{> afQuickField name='relatedUsers.members' template="bootstrap3-horizontal" label-class="col-md-3"
+                                  input-col-class="col-md-6" options=getUsers disabled=disabled }}
+                        {{/if}}
+                        {{#if hasNoUsers}}
+                          <div class="form-group">
+                            <label class="col-md-3 control-label">Members</label>
+                            <div class="col-md-9">
+                              <a href="{{pathFor route='companyUsers'}}"
+                                 style="padding: 7px 0;display: inline-block;margin: 0 0;">
+                                No users in company. View company users.
+                              </a>
+                            </div>
+                          </div>
+                        {{/if}}
+                        {{#if inProgressGetUsers}}
+                          <div class="form-group">
+                            <label class="col-md-3 control-label">Members</label>
+                            <div class="col-md-9"><span
+                                    style="padding: 7px 0;display: inline-block;margin: 0 0;"><span
+                                    class="fa fa-spinner fa-spin fa-2x"></span></span></div>
+                          </div>
+                        {{/if}}
+                      {{/if}}
+                    {{/with}}
+                    {{#with hasFieldRight 'project.general.relatedUsers.members' currentProject}}
+                      {{#if read}}
+                        {{#if getLeanixProjects}}
+                          {{> afQuickField name='leanix' template="bootstrap3-horizontal" label-class="col-md-3"
+                                  input-col-class="col-md-9" options=getLeanixProjects disabled=disabled}}
+                        {{/if}}
+                        {{#unless hasLeanix}}
+                          <div class="form-group">
+                            <label class="col-md-3 control-label">Link with LeanIX</label>
+                            <div class="col-md-9"><a href="{{pathFor route='companyIntegrations'}}"
+                                                     style="padding: 7px 0;display: inline-block;margin: 0 0;">Update
+                              LeanIX settings</a></div>
+                          </div>
+                        {{/unless}}
+                        {{#if hasLeanixAndNotLeanixProjects}}
+                          <div class="form-group">
+                            <label class="col-md-3 control-label">Link with LeanIX</label>
+                            <div class="col-md-9"><span
+                                    style="padding: 7px 0;display: inline-block;margin: 0 0;"><span
+                                    class="fa fa-spinner fa-spin fa-2x"></span></span></div>
+                          </div>
+                        {{/if}}
+                      {{/if}}
+                    {{/with}}
+                    {{#with hasFieldRight 'project.general.name' currentProject}}
+                      {{#if read}}
+                        {{> afQuickField name='confidenceMinScore' template="bootstrap3-horizontal"
+                          label-class="col-md-3" input-col-class="col-md-9" disabled=disabled}}
+                      {{/if}}
+                    {{/with}}
+                  </fieldset>
+                  {{#if hasAccessRight 'project.general' 'w' currentProject}}
+                    <div class="row">
+                      <div class="col-md-9 col-md-offset-3">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                      </div>
+                    </div>
+                  {{/if}}
+                {{/autoForm}}
+              </div>
+            </div>
+          {{/if}}
+
+          {{#if hasAccessRight 'project.legal' 'r' currentProject}}
+            {{> projectSettingsLegal}}
+          {{/if}}
+
+          {{#if hasAccessRight 'project.obligationConfig' 'r' currentProject}}
+            {{> projectSettingsObligations}}
+          {{/if}}
+
+          {{#if hasAccessRight 'project.cia' 'r' currentProject}}
+            {{> projectSettingsCIA}}
+          {{/if}}
+
+          {{#if hasAccessRight 'project.encryption' 'r' currentProject}}
+            <div id="encryption" class="tab-pane">
+              <div class="panel-body">
+                <h3>Crypto management</h3>
+                <div class="row">
+                  <div class="col-lg-12">
+                    {{> algorithmsSettingsList
+                      title="List of Algorithms as managed"
+                      id="projCmpAlgorithmsSettings"
+                      data=getAlgorithmSettingsList
+                      foundAlgorithms=getFoundAlgorithmsList
+                      docId=currentProject._id
+                      readonly=false
+                    }}
+                  </div>
+                  <div class="col-lg-12">
+                    {{> algorithmsList
+                      title="Export controls management"
+                      id="projCmpAlgorithms"
+                      data=getAlgorithmList
+                      docId=currentProject._id
+                      collection=getProjects
+                      attribute="algorithmsConfig"
+                      readonly=false
+                    }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {{/if}}
+
+          {{#if hasAccessRight 'project.quality' 'r' currentProject}}
+            <div id="quality" class="tab-pane">
+              <div class="panel-body">
+                <h3>Quality</h3>
+                <div class="row">
+                  <div class="col-lg-12">
+                    {{> qualitySettingsList
+                      title="Define test requirements"
+                      id="projCmpQualitySettings"
+                      data=getQualitySettingsList
+                      docId=currentProject._id
+                      readonly=false
+                    }}
+                  </div>
+                </div>
+                {{!-- The risk-register toggle lives on this tab, not General: what it
+                      acts on is the SARIF documents configured directly above it. It is
+                      also deliberately outside any autoForm - updateProjectForm's write
+                      path goes through isModificationAllowed(), which has no branch for a
+                      single-field update and survives today only via the unbounded
+                      relatedUsers branch. This toggle uses its own method instead. --}}
+                <div class="row">
+                  <div class="col-lg-12">
+                    {{!-- Same ts-panel / panel-heading / panel-body structure as
+                          qualitySettingsList above, so the two sections on this tab
+                          carry one heading treatment and one collapse affordance.
+                          panelTools is self-contained (it walks to the closest
+                          .ts-panel in jQuery), so it needs no state here. --}}
+                    <div class="ts-panel project-autocwe">
+                      <div class="panel-heading">
+                        {{> panelTools}}
+                        Risk register
+                      </div>
+                      <div class="panel-body">
+                        <p id="projectAutoCreateCweRisksHelp">
+                          When this is on, each SARIF document imported for a module in this project
+                          creates or updates one risk per weakness (CWE) and per tool in the risk register.
+                          Documents already imported are not back-filled, so import a test on the
+                          module's Quality tab to see risks appear. Switching it off stops new risks
+                          being created; risks already created stay in the register.
+                        </p>
+                        <div class="checkbox">
+                          <label>
+                            <input type="checkbox" checked="{{getProject.autoCreateCweRisks}}"
+                                   name="autoCreateCweRisks" value="true" id="projectAutoCreateCweRisks"
+                                   class="ios-toggle ios-toggle-focusable"
+                                   disabled={{autoCweToggleDisabled}}
+                                   aria-describedby="projectAutoCreateCweRisksHelp">
+                            <span for="projectAutoCreateCweRisks" class="checkbox-label"
+                                  data-off="off" data-on="on"></span>
+                            <span class="ios-toggle-caption">Enable risk creation from SARIF weaknesses (CWE)</span>
+                          </label>
+                          {{!-- Outside the <label> deliberately: inside it, the spinner's
+                                aria-label is concatenated into the toggle's accessible name
+                                and renames the control to "... Saving" mid-write. It floats
+                                (see features.import.less) so it still shares the caption row. --}}
+                          {{#if autoCweSaving}}
+                            <span class="fa fa-spinner fa-spin project-autocwe-spinner"
+                                  role="status" aria-label="Saving"></span>
+                          {{/if}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {{/if}}
+
+
+          {{#if hasAccessRight 'project.endoflife' 'r' currentProject}}
+            <div id="endoflife" class="tab-pane no-bottom-errors">
+              <div class="panel-body">
+                <h3>Component end-of-life</h3>
+                {{> crawlerDataNotice check='endoflife'}}
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="inner-lr-40">
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <div class="checkbox">
+                            <label>
+                              <input type="checkbox" checked="{{endoflifePolicy.enabled}}" name="endoflifeConfigEnabled"
+                                     value="true" id="projectEndoflifeConfigEnabled" class="ios-toggle" disabled={{disabled}}>
+                              <span for="projectEndoflifeConfigEnabled" class="checkbox-label" data-off="off" data-on="on"></span>
+                              <span style="display: inline-block;margin: 9px 0 0 30px;float: left;">Enable end-of-life analysis for all modules</span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      {{#if endoflifePolicy.enabled}}
+                        {{# autoForm
+                          id="updateProjectFormEndoflifeConfig"
+                          docId=this._id
+                          collection=getProjects
+                          schema=getEndoflifeSchema
+                          doc=endoflifePolicy
+                          type="normal"
+                        }}
+                          <h3>End-of-life thresholds</h3>
+                          <div class="row inner-b-50">
+                            <div class="col-md-5">
+                              {{> afQuickField name='warningThreshold' disabled=disabled}}
+                            </div>
+                            <div
+                              class="col-md-5 col-md-offset-1">
+                              {{> afQuickField name='violationThreshold' disabled=disabled}}
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-xs-12">
+                              <button type="submit" class="btn btn-primary">Update</button>
+                              <span class="text-danger m-l-sm">
+                                {{#if afFieldIsInvalid name='warningThreshold'}}
+                                  {{afFieldMessage name='warningThreshold'}}
+                                {{/if}}
+                              </span>
+                            </div>
+                          </div>
+                        {{/ autoForm}}
+                      {{/if}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {{/if}}
+
+          {{#if hasAccessRight 'project.wblist' 'r' currentProject}}
+            <div id="wblist" class="tab-pane">                   <!-- Allow/Deny -->
+              <div class="panel-body">
+                <h3>Licenses</h3>
+                <div class="row">
+                  {{#with hasFieldRight 'project.wblist.enforce' currentProject}}
+                    {{#if read}}
+                      <div class="col-lg-12">
+                        <div class="checkbox">
+                          <label>
+                            <input type="checkbox" checked="{{getProject.requireWhitelist}}" name="requireWhitelist"
+                                   value="true" id="projectRequireWhitelist"
+                                   class="ios-toggle {{cantEditRequireWhitelist}}" disabled={{disabled}}>
+                            <span for="projectRequireWhitelist" class="checkbox-label" data-off="off"
+                                  data-on="on"></span>
+                            <span style="display: inline-block;margin: 9px 0 0 30px;float: left;">Enforce Allow list (all licenses not explicitly on
+                              the allow list will be marked as violation / 'not allowed')</span>
+                          </label>
+                        </div>
+                      </div>
+                    {{/if}}
+                  {{/with}}
+                </div>
+                <div class="row">
+                  {{#with hasFieldRight 'project.wblist.whitelist_license' currentProject}}
+                    {{#if read}}
+                      <div class="col-lg-6">
+                        {{> moduleLicenseList
+                                title="Always allow license"
+                                id="prjLicWhitelst"
+                                data=getWhitelistedLicenses
+                                assocData=getBlacklistedLicenses
+                                schema=getProjectLicenseEntrySchema
+                                docId=currentProject._id
+                                collection=getProjects
+                                attribute="licenseConfig.whitelist"
+                                readonly=disabled}}
+                      </div>
+                    {{/if}}
+                  {{/with}}
+                  {{#with hasFieldRight 'project.wblist.blacklist_license' currentProject}}
+                    {{#if read}}
+                      <div class="col-lg-6">
+                        {{> moduleLicenseList
+                                title="Always deny license"
+                                id="prjLicBlacklist"
+                                data=getBlacklistedLicenses
+                                assocData=getWhitelistedLicenses
+                                schema=getProjectLicenseEntrySchema
+                                docId=currentProject._id
+                                collection=getProjects
+                                attribute="licenseConfig.blacklist"
+                                readonly=disabled}}
+                      </div>
+                    {{/if}}
+                  {{/with}}
+                </div>
+                <h3>Components</h3>
+                <div class="row">
+                  {{#with hasFieldRight 'project.wblist.whitelist_component' currentProject}}
+                    {{#if read}}
+                      <div class="col-lg-6">
+                        {{> componentlist
+                                title="Always allow component"
+                                id="prjCmpWhitelst"
+                                data=getWhitelistedComponents
+                                assocData=getBlacklistedComponents
+                                schema=getProjectComponentEntrySchema
+                                docId=currentProject._id
+                                collection=getProjects
+                                attribute="componentConfig.whitelist"
+                                tooltip=getComponentWhitelistTooltip
+                                readonly=disabled
+                        }}
+                      </div>
+                    {{/if}}
+                  {{/with}}
+                  {{#with hasFieldRight 'project.wblist.blacklist_component' currentProject}}
+                    {{#if read}}
+                      <div class="col-lg-6">
+                        {{> componentlist
+                                title="Always deny component"
+                                id="prjCmpBlacklist"
+                                data=getBlacklistedComponents
+                                assocData=getWhitelistedComponents
+                                schema=getProjectComponentEntrySchema
+                                docId=currentProject._id
+                                collection=getProjects
+                                attribute="componentConfig.blacklist"
+                                tooltip=getComponentBlacklistTooltip
+                                readonly=disabled
+                        }}
+                      </div>
+                    {{/if}}
+                  {{/with}}
+                </div>
+              </div>
+            </div>
+          {{/if}}
+
+          {{#if hasAccessRight 'project.issue' 'r' currentProject}}
+            {{> projectSettingsIssue }}
+          {{/if}}
+
+          {{#if canManageWebhooks}}
+            {{> projectSettingsWebhooks }}
+          {{/if}}
+
+          {{#if hasAccessRight 'project.ModuleImportTab' 'r' currentProject}}
+            {{> ModuleImportTab }}
+          {{/if}}
+
+          {{#if hasAccessRight 'project.danger' 'r' currentProject}}
+            <div id="danger" class="tab-pane">                   <!-- Danger -->
+              <div class="panel-body violations">
+                <div class="row alert alert-warning">
+                  <i class="fa fa-bolt"></i> Here starts the Danger Zone
+                </div>
+                <div class="panel-body row">
+                  {{#if hasAccessRight 'project.danger.delete' 'x' currentProject}}
+                    {{#if moduleCount}}
+                      <div class="col-xs-10">
+                        <p><strong>Delete this project</strong></p>
+                        <div class="alert alert-info">
+                          <p><i class="fa fa-info-circle"></i> Info</p>
+                          <p>This project has assigned modules. If you really want to delete this
+                            project, please unassign all related modules first or
+                            <a href class="highlight force_delete">click here and all modules will be removed</a></p>
+                        </div>
+                      </div>
+                      <div class="col-xs-2">
+                        <button style='min-width: 100px;' class="btn btn-danger2 pull-right"
+                                disabled="true">
+                          <span class="fa fa-trash-o"></span> Delete project
+                        </button>
+                      </div>
+                    {{else}}
+                      <div class="col-xs-10">
+                        <p><strong>Delete this project</strong></p>
+                        <p>Once you delete a project, there is no going back. Please be certain.</p>
+                      </div>
+                      <div class="col-xs-2">
+                        <button style='min-width: 100px;' class="btn btn-danger2 pull-right"
+                                id="project-delete">
+                          <span class="fa fa-trash-o"></span> Delete project
+                        </button>
+                      </div>
+                    {{/if}}
+                  {{/if}}
+                </div>
+              </div>
+            </div>
+          {{/if}}
+        </div>
+      </form>
+    </div>
+  </div>
+</template>

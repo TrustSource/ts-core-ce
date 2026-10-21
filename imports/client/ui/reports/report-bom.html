@@ -1,0 +1,136 @@
+<template name="reportBOM">
+
+  {{#pageHeader}}
+    <div class="reports-header">
+      <div class="reports-header-left">
+        <h2 class="font-light m-b-xs">Software bill of materials</h2>
+        <small>List of all components used in project</small>
+      </div>
+      <div class="reports-header-actions">
+        <select class="form-control current-project select2">
+          {{#each projectList}}
+            <optgroup label="{{name}}">
+              <option value="{{_id}}" selected="{{isActiveProject}}">All module of {{name}}</option>
+              {{#each listModules}}
+                <option value="{{../_id}}_m_{{_id}}" selected="{{isActiveModule}}">{{name}}</option>
+              {{/each}}
+            </optgroup>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+  {{/pageHeader}}
+
+  <div class="content">
+    {{#if getProjectBOMStats}}
+      <div class="text-right inner-b-10">
+        <button class="btn btn-primary btn-xs export-as-pdf" type="button">
+          <span class="fa fa-file-pdf-o" aria-hidden="true"></span> Export as PDF
+        </button>
+        <div class="btn-group">
+          <button class="btn btn-primary btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="fa fa-file-code-o" aria-hidden="true"></span> Export as CycloneDX <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="export-as-cyclonedx" data-variant="SBOM">SBOM (components)</a></li>
+            <li><a class="export-as-cyclonedx" data-variant="CBOM">CBOM (cryptography)</a></li>
+            <li><a class="export-as-cyclonedx" data-variant="AIBOM">AIBOM (AI / ML)</a></li>
+            <li><a class="export-as-cyclonedx" data-variant="FULL">Full BOM (components + crypto + AI)</a></li>
+          </ul>
+        </div>
+        <button class="btn btn-primary btn-xs export-as-spdx" type="button">
+          <span class="fa fa-file-o" aria-hidden="true"></span> Export as SPDX
+        </button>
+      </div>
+      {{#with getProjectBOMStats}}
+        <div class="row">
+          {{#if selectedModule}}
+            <div class="col-sm-6">
+              <div class="panel panel-default text-center">
+                <p class="h2"><strong>{{modules}}</strong></p>
+                <p class="h5">modules</p>
+              </div>
+            </div>
+          {{/if}}
+          <div class="{{#if selectedModule}}col-sm-6{{else}}col-sm-12{{/if}}">
+            <div class="panel panel-success text-center">
+              <p class="h2"><strong>{{components}}</strong></p>
+              <p class="h5">different components</p>
+            </div>
+          </div>
+        </div>
+      {{/with  }}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h5>Project Goals</h5>
+        </div>
+        <div class="panel-body">
+          {{#if haveDescription currentProject.description}}
+            <p>{{currentProject.description}}</p>
+          {{else}}
+            <p>No project goal was provided.</p>
+          {{/if}}
+        </div>
+      </div>
+      {{#with getProjectStatus}}
+        {{#if modules.length}}
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h5>Used modules</h5>
+            </div>
+            <div class="panel-body">
+              {{#each modules}}
+                {{> moduleAnalysisMetaLink module=this}}
+              {{/each}}
+            </div>
+          </div>
+        {{/if}}
+      {{/with}}
+    {{/if}}
+    {{#if getProjectBOM}}
+      <div class="ts-panel obligation-list">
+        {{#each getProjectBOM}}
+          <div class="panel-body pinner-tb-10">
+            <div class="row">
+              <div class="col-sm-6 index-padding text-left">
+                <div class="index-box">
+                  {{incIndex @index}}
+                </div>
+                <h5> <i class="fa fa-puzzle-piece" style="width: 20px; text-align: center"></i> {{name}} {{#if version}}({{version}}){{/if}}</h5>
+              </div>
+              <div class="col-sm-6">
+                {{#if license}}
+                  <h5><i class="fa fa-gavel" style="width: 20px; text-align: center"></i> {{license}} <a href="{{getCorrentLicenseUrl}}" target="_blank"><i class="fa fa-external-link"></i></a></h5>
+                {{else}}
+                  <h5><i class="fa fa-gavel" style="width: 20px; text-align: center"></i> License not detected</h5>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    {{/if}}
+    {{#if selectProject}}
+      {{#panel}}
+        <div class="text-info">
+          <i class="fa fa-check-circle-o"></i> Please select the project to run a report on the upper right
+        </div>
+      {{/panel}}
+    {{/if}}
+    {{#if requestInProgress}}
+      {{#panel}}
+        <div class="text-primary">
+          <i class="fa fa-spinner fa-spin"></i> Loading report data for project {{getProjectName}}, please wait...
+        </div>
+      {{/panel}}
+    {{/if}}
+    {{#if noDataInProject}}
+      <div class="text-right inner-b-10">
+        <button class="btn btn-primary btn-xs export-as-pdf" type="button">
+          <span class="fa fa-file-pdf-o" aria-hidden="true"></span> Export as PDF
+        </button>
+      </div>
+      {{> reactiveTableNoData}}
+    {{/if}}
+  </div>
+</template>

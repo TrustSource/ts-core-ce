@@ -1,0 +1,23 @@
+<template name="risksTasksStateFilter">
+  <div class="btn-group {{optionClass}}" data-toggle="buttons">
+    <label class="btn btn-warning {{activeList showWarnings}}" style="width: 120px">
+      <input type="checkbox" autocomplete="off" checked={{showWarnings}} class="showWarnings">
+      <span class="{{activeTab showWarnings}}">Backlog</span>
+    </label>
+    <label class="btn btn-default {{activeList showDrafts}}" style="width: 120px">
+      <input type="checkbox" autocomplete="off" checked={{showDrafts}} class="showDrafts">
+      <span class="{{activeTab showDrafts}}">In progress</span>
+    </label>
+    <label class="btn btn-success {{activeList showOks}}" style="width: 120px">
+      <input type="checkbox" autocomplete="off" checked={{showOks}} class="showOks">
+      <span class="{{activeTab showOks}}">Completed</span>
+    </label>
+  </div>
+  <div class="w-200px inline-block pinner-t-1 vam">
+    <select class="form-control view_type" name="viewType">
+      <option label="My tasks" value="My" selected="{{isActiveType 'My'}}">My tasks</option>
+      <option label="Unassigned" value="Unassigned" selected="{{isActiveType 'Unassigned'}}">{{__ 'Unassigned'}}</option>
+      <option class="All tasks" value="" selected="{{isActiveType ''}}">All tasks</option>
+    </select>
+  </div>
+</template>

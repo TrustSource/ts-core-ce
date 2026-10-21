@@ -1,0 +1,249 @@
+<template name="checkComponent">
+
+  {{#pageHeader}}
+    <div class="check-header">
+      <div class="check-header-left">
+        <h2 class="font-light m-b-xs">{{__ 'Check'}}</h2>
+        <small>Assess component compliance, vulnerabilities and legal obligations</small>
+      </div>
+      <div class="check-header-actions">
+        <div class="btn-group btn-group-sm" role="group">
+          <a class="btn btn-xs btn-default {{activeTab 'checkLicense'}}" title="{{__ 'Legal'}}"
+             href="{{pathFor route='checkLicense'}}">
+            <span class="fa fa-gavel"></span> <span class="btn-label">{{__ 'License'}}</span>
+          </a>
+          <a class="btn btn-xs btn-default {{activeTab 'checkComponent'}}" title="{{__ 'Component'}}"
+             href="{{pathFor route='checkComponent'}}">
+            <span class="fa fa-puzzle-piece"></span> <span class="btn-label">{{__ 'Component'}}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  {{/pageHeader}}
+
+  <div class="content checkContent">
+    <div class="ts-panel">
+      <div class="panel-heading">
+        <span>{{__ 'Component'}} {{__ 'Check'}}</span>
+      </div>
+      <div class="panel-body">
+        <form class="form leanix" id="checkComponent" autocomplete="off">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                {{#if projects}}
+                  <div class="input-group">
+                    <span class="input-group-addon">{{__ 'Project'}} *</span>
+                    <select value="" id="currentProject"
+                            class="form-control select2"
+                            name="currentProject">
+                      <option value="">
+                        --{{__ 'SelectProject'}}--
+                      </option>
+                      {{#each projects}}
+                        <option value="{{_id}}" selected="{{isCurrentProject _id}}">
+                          {{name}}
+                        </option>
+                      {{/each}}
+                    </select>
+                  </div>
+                {{else}}
+                  <div class="pinner-t-8">
+                    {{__ 'NoProjectsAvailable'}}
+                  </div>
+                {{/if}}
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                {{#if modules}}
+                  <div class="input-group">
+                    <span class="input-group-addon">{{__ 'Module'}} *</span>
+                    <select value="" id="currentModule"
+                            class="form-control select2"
+                            name="currentModule">
+                      <option value="">
+                        --{{__ 'SelectModule'}}--
+                      </option>
+                      {{#each modules}}
+                        <option value="{{_id}}" selected="{{isCurrentModule _id}}">
+                          {{name}}
+                        </option>
+                      {{/each}}
+                    </select>
+                  </div>
+                {{else}}
+                  <div class="pinner-t-8">
+                    {{__ 'NoModulesAvailableOrSelectProject'}}
+                  </div>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">{{__ 'Component'}} *</span>
+                  <input class="form-control typeahead" name="currentComponent" type="text"
+                         placeholder="Select component" autocomplete="off" spellcheck="off">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                {{#if versions}}
+                  <div class="input-group">
+                    <span class="input-group-addon">{{__ 'Version'}} *</span>
+                    <select value="" id="currentVersion"
+                            class="form-control select2"
+                            name="currentVersion">
+                      <option value="">
+                        --{{__ 'SelectVersion'}}--
+                      </option>
+                      {{#each versions}}
+                        <option value="{{version}}" selected="{{isCurrentVersion version}}">
+                          {{version}} {{#if getLicenses}}({{getLicenses}}){{/if}}
+                        </option>
+                      {{/each}}
+                    </select>
+                  </div>
+                {{else}}
+                  <div class="pinner-t-8">
+                    {{__ 'SelectComponentToViewVersions'}}
+                  </div>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <button class="btn btn-primary" type="submit" disabled="{{actionIsDisabled}}">
+                <span class="fa fa-play"></span> {{__ 'CheckComponent'}}
+              </button>
+            </div>
+            {{#if noSettingsInProject}}
+              <div class="col-sm-12">
+                <div class="check-warning">
+                  <a href="{{pathFor route='projectSettings' data=getProjectOptions}}" target="_blank">
+                    <i class="fa fa-info-circle"></i> {{__ 'SorryThis'}} <b>{{__ 'project'}}</b> {{__ 'canNotBeSelectedSettingsAreIncomplete'}}
+                    {{__ 'PleaseCompleteLegalRequirementsFirst'}} <span class="fa fa-cog"></span>
+                  </a>
+                </div>
+              </div>
+            {{/if}}
+            {{#if noSettingsInModule}}
+              <div class="col-sm-12">
+                <div class="check-warning">
+                  <a href="{{pathFor route='moduleSettings' data=getModuleOptions}}" target="_blank">
+                    <i class="fa fa-info-circle"></i> {{__ 'SorryThis'}} <b>{{__ 'module'}}</b> {{__ 'canNotBeSelectedSettingsAreIncomplete'}}
+                    {{__ 'PleaseCompleteLegalRequirementsFirst'}} <span class="fa fa-cog"></span>
+                  </a>
+                </div>
+              </div>
+            {{/if}}
+            {{#unless inputDataReady}}
+              <div class="col-sm-12">
+                <div class="check-hint">
+                  <i class="fa fa-check-circle-o"></i> {{__ 'PleaseSelectThe'}} <b>{{listOfRequired}}</b> {{__ 'toPerformTheAssessment'}}
+                </div>
+              </div>
+            {{/unless}}
+          </div>
+        </form>
+      </div>
+    </div>
+
+    {{#if requestInProgress}}
+      <div class="ts-panel">
+        <div class="panel-body">
+          <div class="text-primary">
+            <i class="fa fa-spinner fa-spin"></i> {{__ 'LoadingResultsForRequest'}}
+          </div>
+        </div>
+      </div>
+    {{/if}}
+    {{#unless requestInProgress}}
+      {{#if actualResults}}
+        <div class="ts-panel">
+          <div class="panel-heading">
+            <span>{{__ 'Component'}} check results</span>
+          </div>
+          <div class="panel-body">
+            {{#with checkResults}}
+              {{#if vulnerabilities}}
+                <h5 class="aside-section-title bot-grey">
+                  <span class="fa fa-shield-halved"></span> <span>{{__ 'Vulnerabilities'}}</span>
+                </h5>
+                <div class="aside-section-content inner-b-20">
+                  {{#each vulnerabilities}}
+                    <div class="inner-b-5">
+                      <a href="{{link}}" target="_blank" class="inline">
+                        {{{cvssLabel status cvssColor score}}}
+                        <b>{{name}}</b>
+                        <span class="fa fa-external-link icon-inner-top"></span>
+                      </a>
+                    </div>
+                  {{/each}}
+                </div>
+              {{else}}
+                <h5 class="aside-section-title bot-ok">
+                  <span class="fa fa-shield-halved"></span> <span>{{__ 'Vulnerabilities'}}</span>
+                </h5>
+                <div class="aside-section-content inner-b-20">
+                  <div>
+                    <span>{{__ 'NoVulnerabilitiesKnown'}}</span>
+                  </div>
+                </div>
+              {{/if}}
+            {{/with}}
+            <div class="row">
+              <div class="col-md-6">
+                {{#with checkResults.not_changed}}
+                  <div class="inner-b-10">
+                    <h5><i class="fa fa-puzzle-piece"></i> {{__ 'ComponentWas'}} <b>{{__ 'not'}}</b> {{__ 'modified'}}</h5>
+                  </div>
+                  {{> legalDetails license=checkResults.license legal=this options=getModuleOptions}}
+                {{/with}}
+              </div>
+              <div class="col-md-6">
+                {{#with checkResults.changed}}
+                  <div class="inner-b-10">
+                    <h5><i class="fa fa-puzzle-piece"></i> {{__ 'ComponentWasModified'}}</h5>
+                  </div>
+                  {{> legalDetails license=checkResults.license legal=this options=getModuleOptions}}
+                {{/with}}
+              </div>
+            </div>
+          </div>
+        </div>
+      {{/if}}
+      {{#if checkResultsError}}
+        <div class="alert alert-danger">
+          <p>
+            <strong>{{__ 'SorryDetailedInformationNotAvailable'}} </strong><br>
+            {{checkResultsError}}. {{__ 'InCaseYouNeedInformationUrgently'}}
+            <a href="{{app 'supportUrl'}}" target="_blank" rel="noopener noreferrer" class="highlight">{{__ 'ReportAnIssue'}}</a>.
+            {{__ 'ThankYouForYourPatience'}}
+          </p>
+        </div>
+      {{/if}}
+    {{/unless}}
+  </div>
+</template>
+
+<!-- Meteor template to display typeahead suggestions -->
+<!-- City, state, and value come from the Typeahead.compile() context -->
+<template name="componentSuggestion">
+  <p class="no-suggestion-item truncate" style="width:100%">{{value}}</p>
+</template>
+
+<!-- Meteor template to display when there are no records found -->
+<template name="suggestionNoRecords">
+  <p class="no-suggestions no-suggestions-pending">{{__ 'noRecordsFound'}}</p>
+</template>
+
+<!-- Meteor template to display when there are no records found -->
+<template name="suggestionNoComponents">
+  <p class="no-suggestions no-suggestions-pending">{{__ 'noComponentsFound'}}</p>
+</template>

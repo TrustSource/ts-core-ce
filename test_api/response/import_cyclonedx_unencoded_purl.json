@@ -1,0 +1,123 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:4f671687-395b-41f5-a30f-a58921a69b80",
+  "version": 1,
+  "metadata": {
+    "component": {
+      "type": "application",
+      "name": "purl-edge-cases",
+      "version": "1.0.0",
+      "purl": "pkg:npm/purl-edge-cases@1.0.0",
+      "bom-ref": "purl-edge-cases@1.0.0"
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "spring-core",
+      "version": "5.3.23+build.20221005",
+      "description": "Spring Framework core with un-encoded + in version",
+      "purl": "pkg:maven/org.springframework/spring-core@5.3.23+build.20221005",
+      "bom-ref": "spring-core@5.3.23+build",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "guava",
+      "version": "31.1-jre",
+      "description": "Google Guava with hyphen in version",
+      "purl": "pkg:maven/com.google.guava/guava@31.1-jre",
+      "bom-ref": "guava@31.1-jre",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "commons-lang3",
+      "version": "3.12.0",
+      "description": "Apache Commons Lang with namespace",
+      "purl": "pkg:maven/org.apache.commons/commons-lang3@3.12.0",
+      "bom-ref": "commons-lang3@3.12.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "my-lib",
+      "version": "1.0 beta",
+      "description": "Library with space in version (non-compliant purl)",
+      "purl": "pkg:npm/my-lib@1.0 beta",
+      "bom-ref": "my-lib@1.0-beta",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "no-purl-lib",
+      "version": "2.0.0",
+      "description": "Library without purl field",
+      "bom-ref": "no-purl-lib@2.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "purl-edge-cases@1.0.0",
+      "dependsOn": [
+        "spring-core@5.3.23+build",
+        "guava@31.1-jre",
+        "commons-lang3@3.12.0",
+        "my-lib@1.0-beta",
+        "no-purl-lib@2.0.0"
+      ]
+    },
+    {
+      "ref": "spring-core@5.3.23+build",
+      "dependsOn": []
+    },
+    {
+      "ref": "guava@31.1-jre",
+      "dependsOn": []
+    },
+    {
+      "ref": "commons-lang3@3.12.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "my-lib@1.0-beta",
+      "dependsOn": []
+    },
+    {
+      "ref": "no-purl-lib@2.0.0",
+      "dependsOn": []
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+<template name="moduleSettingsVersioning">
+  <div id="versioning" class="tab-pane">
+    <div class="panel-body inner-lr-40 no-bottom-errors">
+      {{> crawlerDataNotice check='versioning'}}
+      <div class="pull-right actions actions-wizard relative">
+        {{#if hasAccessRight 'module.versioning.import' 'x' currentModule}}
+          <div class="inline-block relative">
+            {{#if getVersioningSettingsModules.length}}
+              <button type="button" class="btn btn-default btn-xs dropdown-toggle"
+                      data-toggle="dropdown">
+                <span class="fa fa-copy"></span> Import settings from Module <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <input type="text" class="drop-filter form-control import_filter" placeholder="Search by name"
+                         value="{{getImportFilter}}"/>
+                </li>
+                {{#each filterList getVersioningSettingsModules getImportFilter}}
+                  <li><a class="copy-versioning-settings" id="{{_id}}">{{name}}</a></li>
+                {{/each}}
+              </ul>
+            {{/if}}
+          </div>
+        {{/if}}
+      </div>
+      <h3>Versioning analysis</h3>
+      {{#with hasFieldRight 'module.versioning.versioningConfig.enabled' currentModule}}
+        {{#if read}}
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" checked="{{getVersioningConfig.enabled}}" name="versioningConfigEnabled"
+                         value="true" id="companyVersioningConfigEnabled" class="ios-toggle" disabled={{disabled}}>
+                  <span for="companyVersioningConfigEnabled" class="checkbox-label" data-off="off" data-on="on"></span>
+                  <span style="display: inline-block;margin: 9px 0 0 30px;float: left;">Enable versioning analysis for module</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        {{/if}}
+      {{/with}}
+      {{#if getVersioningConfig.enabled}}
+        {{#if hasAccessRight 'module.versioning' 'w' currentModule}}
+          {{# autoForm
+            id="updateModuleFormVersioningConfig"
+            docId=this._id
+            collection=getModules
+            schema=getModuleVersioningConfigSchema
+            doc=getVersioningConfig
+            type="normal"
+          }}
+            {{#with hasFieldRight 'module.versioning.jump' currentModule}}
+              <div class="row">
+                <div class="col-md-12">
+                  {{#with hasFieldRight 'module.versioning.jump' currentModule}}
+                    {{#if read}}
+                      {{> afQuickField name='jump'}}
+                    {{/if}}
+                  {{/with}}
+                </div>
+              </div>
+            {{/with}}
+            <h3>Versioning thresholds</h3>
+            <div class="row">
+              <div class="col-xs-9 text-danger" style="padding-top: 15px">
+                <!-- for the moment, warningThreshold and violationThreshold should contain same text -->
+                {{#if afFieldIsInvalid name='warningThreshold'}}
+                  {{afFieldMessage name='warningThreshold'}}
+                {{/if}}
+              </div>
+            </div>
+            <div class="row inner-b-50">
+              <div class="col-md-5">
+                {{#with hasFieldRight 'module.versioning.warningThreshold' currentModule}}
+                  {{#if read}}
+                    {{> afQuickField name='warningThreshold' disabled=disabled}}
+                  {{/if}}
+                {{/with}}
+              </div>
+              <div
+                class="col-md-5 col-md-offset-1">
+                {{#with hasFieldRight 'module.versioning.violationThreshold' currentModule}}
+                  {{#if read}}
+                    {{> afQuickField name='violationThreshold' disabled=disabled}}
+                  {{/if}}
+                {{/with}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-3">
+                <button type="submit" class="btn btn-primary">Update</button>
+              </div>
+            </div>
+          {{/ autoForm}}
+        {{else}}
+          {{# autoForm
+            id="updateModuleFormVersioningConfigDisplay"
+            docId=this._id
+            collection=getModules
+            schema=getModuleVersioningConfigSchema
+            doc=getVersioningConfig
+            type="normal"
+          }}
+            {{#with hasFieldRight 'module.versioning.jump' currentModule}}
+              <div class="row">
+                <div class="col-md-12">
+                  {{#with hasFieldRight 'module.versioning.jump' currentModule}}
+                    {{#if read}}
+                      {{> afQuickField name='jump' disabled=disabled}}
+                    {{/if}}
+                  {{/with}}
+                </div>
+              </div>
+            {{/with}}
+            <h3>Versioning thresholds</h3>
+            <div class="row inner-b-50">
+              <div class="col-md-5">
+                {{#with hasFieldRight 'module.versioning.warningThreshold' currentModule}}
+                  {{#if read}}
+                    {{> afQuickField name='warningThreshold' disabled=disabled}}
+                  {{/if}}
+                {{/with}}
+              </div>
+              <div
+                class="col-md-5 col-md-offset-1">
+                {{#with hasFieldRight 'module.versioning.violationThreshold' currentModule}}
+                  {{#if read}}
+                    {{> afQuickField name='violationThreshold' disabled=disabled}}
+                  {{/if}}
+                {{/with}}
+              </div>
+            </div>
+          {{/ autoForm}}
+        {{/if}}
+      {{/if}}
+    </div>
+  </div>
+</template>

@@ -1,0 +1,149 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:3e671687-395b-41f5-a30f-a58921a69b79",
+  "version": 1,
+  "metadata": {
+    "component": {
+      "type": "application",
+      "name": "test-app",
+      "version": "1.0.0",
+      "purl": "pkg:npm/test-app@1.0.0",
+      "bom-ref": "test-app@1.0.0"
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "lodash",
+      "version": "4.17.21",
+      "description": "Lodash modular utilities.",
+      "purl": "pkg:npm/lodash@4.17.21",
+      "bom-ref": "lodash@4.17.21",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "https://lodash.com/"
+        },
+        {
+          "type": "vcs",
+          "url": "https://github.com/lodash/lodash.git"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "express",
+      "version": "4.18.2",
+      "description": "Fast, unopinionated, minimalist web framework for node.",
+      "purl": "pkg:npm/express@4.18.2",
+      "bom-ref": "express@4.18.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "website",
+          "url": "http://expressjs.com/"
+        },
+        {
+          "type": "vcs",
+          "url": "https://github.com/expressjs/express.git"
+        },
+        {
+          "type": "issue-tracker",
+          "url": "https://github.com/expressjs/express/issues"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "body-parser",
+      "version": "1.20.1",
+      "description": "Node.js body parsing middleware",
+      "purl": "pkg:npm/body-parser@1.20.1",
+      "bom-ref": "body-parser@1.20.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "debug",
+      "version": "2.6.9",
+      "description": "Lightweight debugging utility",
+      "purl": "pkg:npm/debug@2.6.9",
+      "bom-ref": "debug@2.6.9",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "accepts",
+      "version": "1.3.8",
+      "description": "Higher-level content negotiation",
+      "purl": "pkg:npm/accepts@1.3.8",
+      "bom-ref": "accepts@1.3.8",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "test-app@1.0.0",
+      "dependsOn": [
+        "lodash@4.17.21",
+        "express@4.18.2"
+      ]
+    },
+    {
+      "ref": "express@4.18.2",
+      "dependsOn": [
+        "body-parser@1.20.1",
+        "debug@2.6.9",
+        "accepts@1.3.8"
+      ]
+    },
+    {
+      "ref": "lodash@4.17.21",
+      "dependsOn": []
+    },
+    {
+      "ref": "body-parser@1.20.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "debug@2.6.9",
+      "dependsOn": []
+    },
+    {
+      "ref": "accepts@1.3.8",
+      "dependsOn": []
+    }
+  ]
+}

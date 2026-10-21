@@ -1,0 +1,53 @@
+<template name="portfolioOverview">
+
+  {{#panel title=(__ "CurrentModulesCompliance")}}
+    {{#with modulesStatus}}
+      <div class="clearfix">
+        {{> statusBar title=(__ "Modules") data=modules id="db-module"}}
+      </div>
+      <div class="clearfix">
+        {{> statusBar title=(__ "UniqueComponents") data=components id="db-component"}}
+      </div>
+      <div class="clearfix">
+        {{> statusBar title=(__ "Licenses") data=licenses id="db-license"}}
+      </div>
+    {{/with}}
+  {{/panel}}
+
+</template>
+
+<template name="statusBar">
+  <div class="row ecs-status-bar">
+    <div class="col-md-12 text-right" id="{{id}}-all">
+      <span class="font-uppercase font-bold">{{data.total}} {{title}}</span>
+    </div>
+    <div class="col-md-12">
+      <div class="progress m-t-xs full progress-small">
+        <div id="{{id}}-violation"
+             style="width: {{data.violationsPercent}}%"
+             aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{data.violationsPercent}}"
+             role="progressbar" class="progress-bar progress-bar-danger"
+             data-toggle="tooltip"
+             title="{{data.violations}} {{__ 'Violations'}}">
+          <span class="sr-only">{{data.violations}} {{__ 'Violations'}}</span>
+        </div>
+        <div id="{{id}}-warning"
+             style="width: {{data.warningsPercent}}%"
+             aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{data.warningsPercent}}"
+             role="progressbar" class="progress-bar progress-bar-warning"
+             data-toggle="tooltip"
+             title="{{data.warnings}} {{__ 'Warnings'}}">
+          <span class="sr-only">{{data.warnings}} {{__ 'Warnings'}}</span>
+        </div>
+        <div id="{{id}}-ok"
+             style="width: {{data.okPercent}}%"
+             aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{data.okPercent}}"
+             role="progressbar" class="progress-bar progress-bar-success"
+             data-toggle="tooltip"
+             title="{{data.ok}} {{__ 'OK'}}">
+          <span class="sr-only">{{data.ok}} {{__ 'OK'}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,41 @@
+<template name="testsList">
+  {{#pageHeader}}
+    <div class="tests-header">
+      <div class="tests-header-left">
+        <h2 class="font-light m-b-xs">
+          {{__ 'Tests'}}
+        </h2>
+        <small>
+          {{__ 'ModuleTestsDescription'}}
+        </small>
+      </div>
+      <div class="tests-header-actions">
+        <a class="btn btn-xs" data-toggle="modal" data-target="#TestImportModal" title="{{__ 'ImportTest'}}">
+          <span class="fa fa-upload" aria-hidden="true"></span>
+          <span class="btn-label">{{__ 'Import'}}</span>
+        </a>
+        {{> testsStateFilter sessionVar="testsFilter"}}
+      </div>
+    </div>
+    {{> TestImportModal}}
+  {{/pageHeader}}
+
+  <div class="content">
+    <div class="row tests">
+      <div class="col-lg-12">
+        <div class="ts-panel">
+          <div class="panel-body">
+            {{> reactiveTable settings=reactiveTableSettings}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="reactiveTableTestsActions">
+  <a href="{{pathFor route='testsDetails' data=getOptions}}"
+     class="btn btn-primary btn-sm" title="{{__ 'View'}}">
+    <i class="fa fa-eye"></i>
+  </a>
+</template>

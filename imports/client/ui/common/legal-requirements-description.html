@@ -1,0 +1,49 @@
+<template name="legalRequirementsDescription">
+  {{#if hasRequirements}}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h5>
+          {{#unless modalPresentation}}
+            Legal requirements
+          {{else}}
+            The following obligations were summarized due to the given legal conditions
+          {{/unless}}
+          {{#unless modalPresentation}}
+            <span class="pull-right"><a href="{{pathFor route=getRouteName data=getRouteOptions}}"><span class="fa fa-cogs"></span></a></span>
+          {{/unless}}
+        </h5>
+      </div>
+      <div class="panel-body">
+        {{> legalRequirementsDescriptionDetails requirements=requirements}}
+      </div>
+    </div>
+  {{else}}
+    {{#if moduleError}}
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h5>
+            Legal requirements
+            <span class="pull-right"><a href="{{pathFor route=getRouteName data=getRouteOptions}}"><span class="fa fa-cogs"></span></a></span>
+          </h5>
+        </div>
+        <div class="panel-body">
+          <p><i class="fa fa-info-circle"></i> PLEASE NOTE: Even if you completed the module settings, the legal settings on project level will still require completion to allow a complete analysis.
+            You may click <a href="{{pathFor route=getRouteName data=getRouteOptions}}" class="highlight">here</a> to complete them now.</p>
+        </div>
+      </div>
+    {{else}}
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h5>
+            Legal requirements
+            <span class="pull-right"><a href="{{pathFor route=getRouteName data=getRouteOptions}}"><span class="fa fa-cogs"></span></a></span>
+          </h5>
+        </div>
+        <div class="panel-body">
+          <p><i class="fa fa-info-circle"></i> PLEASE NOTE: The legal settings require completion.
+            You may click <a href="{{pathFor route=getRouteName data=getRouteOptions}}" class="highlight">here</a> to complete them now.</p>
+        </div>
+      </div>
+    {{/if}}
+  {{/if}}
+</template>

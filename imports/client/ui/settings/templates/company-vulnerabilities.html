@@ -1,0 +1,26 @@
+<template name='companyManualVulnerabilities'>
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">Company manual vulnerabilities</h2>
+        <small>Configure company specific manual vulnerabilities lists settings</small>
+      </div>
+      <div class="settings-header-actions">
+        {{> companyManualVulnerabilitiesCreate size='btn-xs'}}
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content vulnerabilities-content">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        {{> reactiveTable settings=reactiveTableSettings}}
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="reactiveTableManualVulnerabilitiesActions">
+  <button class="btn btn-danger2 btn-sm remove">Remove</button>
+</template>
+
+

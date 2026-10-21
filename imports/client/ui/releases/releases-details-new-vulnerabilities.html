@@ -1,0 +1,10 @@
+<template name="releasesDetailsNewVulnerabilities">
+  <div>
+    {{#if _id}}
+      <h3>New vulnerabilities</h3>
+      {{> releasesNewVulnerability}}
+    {{else}}
+      {{>loadingSplash}}
+    {{/if}}
+  </div>
+</template>

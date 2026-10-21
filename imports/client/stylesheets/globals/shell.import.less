@@ -1,0 +1,299 @@
+// =============================================================================
+// Shell - logo, header bar, left side menu, sidebar toggling, base links
+// =============================================================================
+
+@side-menu-active-bg: #f8f8f8;
+@header-user-max-width: 180px;
+
+// --- Logo block (left end of the header, as wide as the sidebar) ---
+#logo {
+  float: left;
+  width: @ts-sidebar-width;
+  height: 56px;
+  padding: 18px;
+  padding-right: 10px;
+  background-color: @ts-navy;
+  text-align: center;
+
+  // The app always renders the light variant on the white shell.
+  &.light-version {
+    background-color: @shell-bg;
+    text-align: left;
+  }
+}
+
+// Shown in place of #logo on narrow screens (see the media query below).
+.small-logo {
+  display: none;
+  padding-top: 18px;
+  font-size: 14px;
+  font-weight: 800;
+  text-align: center;
+}
+
+// --- Header bar ---
+
+// Hamburger button that toggles the sidebar.
+.header-link {
+  float: left;
+  padding: 18px 26px 17px;
+  font-size: 14px;
+  background: @shell-bg;
+  cursor: pointer;
+
+  &:hover {
+    background: darken(@shell-bg, 3%);
+  }
+}
+
+// Right-hand group: superuser warning + user link.
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  float: right;
+  height: 56px;
+  margin: 0;
+  padding: 0 12px 0 0;
+}
+
+// The header row is a single non-wrapping flex line, so a long breadcrumb
+// truncates instead of pushing the user block onto a second line (where it
+// would overlap the page header's action buttons at medium widths).
+#header > nav[role="navigation"] {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  height: @header-height;
+
+  > .breadcrumb-box {
+    // min-width: 0 lets the breadcrumb shrink below its content and ellipsize.
+    flex: 0 1 auto;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  > .navbar-right {
+    flex: 0 0 auto;
+    float: none;
+    margin-left: auto;
+  }
+}
+
+#header .breadcrumb-box .breadcrumb {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// Signed-in user: name and roles stacked, avatar icon to the right.
+.header-user-link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  color: @ts-text;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: @ts-navy;
+    text-decoration: none;
+  }
+}
+
+.header-user-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  max-width: @header-user-max-width;
+  text-align: right;
+}
+
+.header-user-icon {
+  font-size: 28px;
+  color: @ts-teal;
+}
+
+// Name and role lines share the single-line ellipsis behaviour.
+.header-user-name,
+.header-user-role {
+  max-width: @header-user-max-width;
+  overflow: hidden;
+  line-height: 1.3;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.header-user-name {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.header-user-role {
+  font-size: 10px;
+  color: #999;
+}
+
+// Superuser icon; its explanation pops up on hover.
+.header-superuser-warning {
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+
+  &:hover .navbar-attention {
+    display: inline-block;
+  }
+}
+
+// --- Left sidebar ---
+#navigation {
+  height: 100%;
+  min-height: 100%;
+  overflow-y: auto;
+}
+
+// Company switcher block at the top of the sidebar.
+.stats-label {
+  line-height: 1.2;
+
+  small {
+    font-size: 80%;
+    line-height: 1;
+  }
+}
+
+#side-menu {
+  background: @shell-bg;
+
+  li {
+    border: none;
+
+    a {
+      padding: 15px 20px;
+      font-weight: 600;
+      color: @ts-text;
+      text-transform: uppercase;
+    }
+
+    &.active {
+      background: @side-menu-active-bg;
+    }
+
+    &.active a,
+    &:hover a {
+      color: @ts-navy;
+    }
+  }
+
+  &.nav > li > a {
+    &:hover,
+    &:focus {
+      background: @side-menu-active-bg;
+    }
+  }
+}
+
+// Sidebar visibility, driven by body classes toggled from the layout JS:
+// hidden on demand (hide-sidebar) or by default on small screens (page-small),
+// and brought back on small screens with show-sidebar.
+body {
+  &.hide-sidebar,
+  &.page-small {
+    #menu {
+      margin-left: -@ts-sidebar-width;
+    }
+
+    #wrapper {
+      margin-left: 0;
+    }
+  }
+
+  &.page-small.show-sidebar {
+    #menu {
+      margin-left: 0;
+    }
+
+    #wrapper {
+      margin-left: @ts-sidebar-width;
+    }
+  }
+}
+
+// --- Base elements and helpers ---
+a {
+  color: @ts-navy;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    color: @ts-navy;
+    text-decoration: none;
+  }
+}
+
+.arrow {
+  float: right;
+}
+
+.panel-title {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.no-borders {
+  border: none !important;
+}
+
+// Flat surfaces: no Bootstrap shadows on inputs, open dropdown buttons,
+// panels, popovers and progress bars.
+.form-control,
+.form-control:focus,
+.open .btn.dropdown-toggle,
+.panel,
+.popover,
+.progress {
+  box-shadow: none;
+}
+
+.has-error,
+.has-success,
+.has-warning {
+  .form-control:focus {
+    box-shadow: none;
+  }
+}
+
+.progress-bar {
+  box-shadow: none;
+  transition: none;
+}
+
+// --- Small screens: compact header, breadcrumb on its own line ---
+@media (max-width: 768px) {
+  #logo,
+  .navbar-right {
+    display: none;
+  }
+
+  .small-logo {
+    display: block;
+    float: left;
+  }
+
+  #ts-breadcrumb {
+    float: none !important;
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 320px) {
+  #wrapper {
+    overflow: hidden;
+  }
+}

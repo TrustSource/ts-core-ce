@@ -1,0 +1,405 @@
+// Page-specific v3-design overrides: CSAF, releases, approves, licenses
+// Extracted from ecs.import.less
+
+/* CSAF list page - v3-design table pattern */
+.csaf-list {
+  .reactive-table-row-click();
+
+  .reactive-table tbody tr .col-actions .btn,
+  .reactive-table tbody tr .col-actions-fixed .btn {
+    margin-top: -5px;
+    margin-bottom: -5px;
+  }
+}
+
+body.flex-fill-page .csaf-list {
+  flex: 1 1 0%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+
+  > .panel {
+    border: none;
+    box-shadow: none;
+    flex: 1 1 0%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+
+    > .panel-body {
+      flex: 1 1 0%;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      .reactive-table-scroll();
+    }
+  }
+}
+
+// SBOM detail - two-column scrollable panels
+body.flex-fill-page .content > .sbom-detail-columns {
+  flex: 1 1 0%;
+  min-height: 0;
+}
+
+// Real, status-driven approval-creation progress (replaces the old fake
+// timer animation). Scoped under .approve-progress so nothing leaks.
+.approve-progress {
+  .approve-progress-overall {
+    margin-bottom: 20px;
+
+    .approve-progress-overall-caption {
+      font-size: 12px;
+    }
+  }
+
+  .approve-progress-stage {
+    margin-bottom: 16px;
+
+    .approve-progress-stage-head {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .approve-progress-stage-icon {
+      flex: 0 0 auto;
+      width: 16px;
+      text-align: center;
+    }
+
+    .approve-progress-stage-label {
+      flex: 1 1 auto;
+      min-width: 0;
+      font-weight: 600;
+    }
+
+    .approve-progress-stage-status {
+      flex: 0 0 auto;
+      color: @color-text-secondary;
+      font-size: 13px;
+
+      a.highlight {
+        font-size: 13px;
+      }
+    }
+  }
+
+  // "Not applicable" track: a flat muted full bar (no fill colour).
+  .approve-progress-track {
+    background-color: @ts-border;
+  }
+
+  .approve-progress-banner {
+    border-radius: 4px;
+    padding: 16px 20px;
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .approve-progress-banner-success {
+    background-color: lighten(@color-ok, 50%);
+    border: 1px solid lighten(@color-ok, 35%);
+  }
+
+  .approve-progress-banner-danger {
+    background-color: lighten(@ts-red, 42%);
+    border: 1px solid lighten(@ts-red, 28%);
+  }
+
+  .approve-progress-error {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-size: 12px;
+    word-break: break-word;
+  }
+
+  // 768px - full-width column, let the stage head wrap so the View link stays
+  // tappable; never horizontally scroll.
+  @media (max-width: 768px) {
+    .approve-progress-stage-head {
+      .approve-progress-stage-label {
+        flex: 1 1 100%;
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .approve-progress {
+    .progress-bar-striped,
+    .progress-bar.active {
+      animation: none;
+      background-image: none;
+    }
+
+    .fa-spin {
+      animation: none;
+    }
+  }
+}
+
+// Releases and Approves list pages - v3-design table pattern
+.releases-list,
+.approves-list {
+  .reactive-table-row-click();
+
+  .reactive-table tbody tr .col-actions .btn,
+  .reactive-table tbody tr .col-actions-big .btn {
+    margin-top: -5px;
+    margin-bottom: -5px;
+  }
+}
+
+body.flex-fill-page .releases-list,
+body.flex-fill-page .approves-list {
+  flex: 1 1 0%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+
+  > .panel {
+    border: none;
+    box-shadow: none;
+    flex: 1 1 0%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+
+    > .panel-body {
+      flex: 1 1 0%;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      .reactive-table-scroll();
+
+      > .table-responsive {
+        flex: 1 1 0%;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        .reactive-table-scroll();
+      }
+    }
+  }
+}
+
+// Select2 in header actions - constrain width
+.releases-header-actions,
+.approves-header-actions {
+  .select2 {
+    min-width: 200px;
+    max-width: 300px;
+  }
+}
+
+// Approves detail page - title + actions side by side, tabs below
+.approves-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.approves-detail-header-left {
+  flex: 1;
+  min-width: 0;
+
+  h2 {
+    font-size: 24px;
+    margin-top: 0;
+
+    small {
+      display: inline;
+    }
+  }
+
+  > small {
+    display: block;
+  }
+}
+
+.approves-detail-header-actions {
+  flex-shrink: 0;
+}
+
+.approves-detail-dropdown {
+  padding: 8px 0;
+  min-width: 200px;
+
+  > li > span {
+    display: block;
+    padding: 4px 16px;
+    color: #333;
+    white-space: nowrap;
+  }
+}
+
+.notice-warning-dropdown {
+  min-width: 350px;
+  max-width: 500px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 12px 16px;
+
+  h6 {
+    margin-top: 0;
+    margin-bottom: 8px;
+  }
+
+  ul {
+    padding-left: 18px;
+    margin-bottom: 0;
+
+    li {
+      font-size: 12px;
+      padding: 2px 0;
+    }
+  }
+}
+
+// Licenses list - compact rows
+.license-row {
+  display: flex;
+  align-items: center;
+  padding: 6px 15px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+
+  &:hover {
+    background-color: @color-table-hover;
+  }
+}
+
+.license-row-name {
+  flex: 1 1 0%;
+  min-width: 0;
+}
+
+// License texts are stored with real newlines and rendered escaped (the highlight helper
+// deliberately escapes, so markup in the value cannot be injected). Preserve the line
+// breaks here instead of injecting <br/> into the value.
+.license-text {
+  white-space: pre-wrap;
+}
+
+.license-row-rate {
+  width: 60px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.license-row-link {
+  width: 40px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.theme-dark .license-row {
+  border-bottom-color: @color-border-primary;
+}
+
+.licenses-search {
+  position: relative;
+  flex: 0 0 250px;
+
+  .licenses-search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 12px;
+  }
+
+  input.form-control {
+    padding-left: 30px;
+    border-radius: 15px;
+    border-color: #ddd;
+    background-color: #fff;
+
+    &:focus {
+      border-color: @ts-teal;
+      box-shadow: 0 0 0 2px fade(@ts-teal, 10%);
+    }
+  }
+}
+
+.theme-dark .licenses-search {
+  .licenses-search-icon {
+    color: @color-text-subnav;
+  }
+
+  input.form-control {
+    background-color: @color-bg-lighter;
+    border-color: @color-border-primary;
+    color: @color-text-primary;
+  }
+}
+
+// Licenses list - scrollable middle
+body.flex-fill-page .licenses-content > .ts-panel {
+  flex: 1 1 0%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+
+  > .nav-tabs {
+    flex-shrink: 0;
+  }
+
+  > .tab-content {
+    flex: 1 1 0%;
+    min-height: 0;
+    overflow-y: auto;
+    background-color: #fff;
+  }
+}
+
+// Must out-specify the light rule `body.flex-fill-page .licenses-content >
+// .ts-panel > .tab-content { background-color:#fff }` (specificity 0,4,1 - the
+// `body` element selector beat the old `.theme-dark …` 0,4,0 rule).
+body.flex-fill-page.theme-dark .licenses-content > .ts-panel > .tab-content {
+  background-color: @color-bg-lighter;
+}
+
+.approves-detail-tabs {
+  padding: 8px 15px 0;
+}
+
+// Binary links modal (scan, approval, release) - long links such as image
+// digests crop to one line so the table stays inside the modal
+#binaryLinks .reactive-table {
+  table-layout: fixed;
+
+  > thead > tr > th {
+    &.created {
+      width: 120px;
+    }
+    &.userName {
+      width: 140px;
+    }
+    &.comment {
+      width: 30%;
+    }
+    &.actions {
+      width: 100px;
+    }
+  }
+
+  > tbody > tr > td {
+    overflow-wrap: anywhere;
+
+    &.col-binary-link {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}

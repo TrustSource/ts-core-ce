@@ -1,0 +1,24 @@
+{
+  "format" : "TrustSourceProducts",
+  "version" : 1,
+  "products": [
+    {
+      "type" : "class",
+      "identifier" : "1",
+      "name" : "Fridge"
+    },
+    {
+      "type" : "family",
+      "identifier" : "1A",
+      "name" : "Dual-sided"
+    }
+  ],
+  "relations": [
+    {
+      "identifier" : "1",
+      "contains": [
+        "1A"
+      ]
+    }
+  ]
+}

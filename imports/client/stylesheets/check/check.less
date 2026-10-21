@@ -1,0 +1,64 @@
+// =============================================================================
+// Check page styles (license check, component check)
+// =============================================================================
+
+// --- Flex-fill: header stays, content scrolls ---
+// Selector must match/exceed the flex-fill chain
+// (body.flex-fill-page .content-area > .content) which uses `overflow: hidden`;
+// a lower-specificity `overflow-y: auto` rule loses and clips the panels.
+body.flex-fill-page .content-area > .content.checkContent {
+  overflow-y: auto;
+}
+
+// --- Content panels ---
+.checkContent {
+  .ts-panel {
+    border: none;
+    box-shadow: none;
+    border-radius: 8px;
+    overflow: visible;
+    margin-bottom: 15px;
+
+    > .panel-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 600;
+      color: @ts-navy;
+      padding: 10px 16px;
+      letter-spacing: 0.3px;
+      border-bottom: 2px solid @ts-teal;
+    }
+  }
+
+  // --- Fix typeahead input height to match select2 dropdowns ---
+  .twitter-typeahead {
+    width: 100%;
+
+    .tt-input,
+    .tt-hint {
+      height: 34px;
+      padding: 6px 12px;
+    }
+  }
+
+  .check-warning {
+    margin-top: 10px;
+
+    a {
+      color: @ts-amber;
+      font-size: 13px;
+
+      &:hover {
+        opacity: 0.85;
+      }
+    }
+  }
+
+  .check-hint {
+    margin-top: 10px;
+    color: @ts-red-dark;
+    font-size: 13px;
+  }
+}

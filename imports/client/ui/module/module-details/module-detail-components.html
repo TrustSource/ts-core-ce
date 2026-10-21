@@ -1,0 +1,140 @@
+<template name="moduleComponents">
+  <div class="ts-panel ecs-components">
+    {{#unless isInfrastructureModule}}
+      {{>moduleListFilter options=moduleListFilterOptions}}
+      {{#each getComponents.filtered}}
+        {{> moduleComponent}}
+      {{/each}}
+      {{#if requestInProgress}}
+        {{#panel}}
+            <div class="text-primary">
+              <i class="fa fa-spinner fa-spin"></i> Loading data for module, please wait...
+            </div>
+        {{/panel}}
+      {{/if}}
+      {{> paginationList collection=getComponents.all list=getComponents.filtered}}
+    {{else}}
+      {{#unless crawlerInfo}}
+        <div class="alert alert-info">
+          <p>
+            <strong>Sorry, detailed information not available yet. </strong><br>
+            Component has been scheduled for autoscan and
+            information will be provided soon. In case you need information urgently,
+            please <a href="{{app 'supportUrl'}}" target="_blank" rel="noopener noreferrer">report an issue</a>.
+            Thank you for your patience.
+          </p>
+        </div>
+      {{else}}
+        {{#if getDescription}}
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h5>Module description</h5>
+            </div>
+            <div class="panel-body">
+              {{getDescription}}
+            </div>
+          </div>
+        {{/if}}
+        <div class="panel panel-danger">
+          <div class="panel-heading">
+            <h5>Vulnerabilities information</h5>
+          </div>
+          <div class="panel-body">
+            {{#if getVulnerabilityDetails}}
+              {{#each getVulnerabilityDetails}}
+                <div>
+                  <span class="inner-r-10">{{{ecsLabel status "Vulnerability"}}}</span>
+                  <a href="{{link}}" target="_blank" class="inline">
+                    {{name}}
+                    <span class="fa fa-external-link icon-inner-top"></span>
+                  </a>
+                  {{description}}
+                </div>
+              {{/each}}
+            {{else}}
+              <p>No vulnerabilities known</p>
+            {{/if}}
+          </div>
+        </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h5>Viability information</h5>
+          </div>
+          <div class="panel-body">
+            <span title="Stars" data-toggle="tooltip">{{getViabilityDetails.info.stargazers_count}} <i class="fa fa-star"></i></span>&nbsp;&nbsp;&nbsp;
+            <span title="Code forks" data-toggle="tooltip">{{getViabilityDetails.info.forks_count}} <i class="fa fa-code-fork"></i></span>&nbsp;&nbsp;&nbsp;
+            <span title="Open issues & pull requests" data-toggle="tooltip">{{getViabilityDetails.info.open_issues_count}} <i
+                class="fa fa-bug"></i></span>&nbsp;&nbsp;&nbsp;
+            <span title="Last update" data-toggle="tooltip">{{dateFormat getViabilityDetails.info.updated_at 'll'}} <i
+                class="fa fa-pencil"></i></span>&nbsp;&nbsp;&nbsp;
+            <span title="Last visit" data-toggle="tooltip">{{dateFormat getViabilityDetails.lastVisit 'fromNow'}} <i
+                class="fa fa-refresh"></i></span>&nbsp;&nbsp;&nbsp;
+            <span style="display:none"
+                  id="sparkline-{{../data._id}}">Commits during last year:&nbsp;<span></span></span>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h5>License info</h5>
+          </div>
+          <div class="panel-body">
+            <h3 class="text-center">
+              {{getLicenseDetails.name}}
+              <a href="{{getLicenseDetails.url}}" target="_blank">
+                <small><i class="fa fa-external-link"></i></small>
+              </a>
+            </h3>
+            <blockquote style="max-height: 300px;overflow-y: auto;font-size: 0.9em">
+              {{getLicenseDetails.text}}
+            </blockquote>
+          </div>
+        </div>
+      {{/unless}}
+    {{/unless}}
+  </div>
+</template>
+
+<template name="moduleComponentsChart">
+  <div class="ecsbars">
+    <div class="row">
+      <div class="col-md-6">
+        {{> ecsbarLine title="Components" data=components }}
+      </div>
+      {{#with statistics}}
+        <div class="col-md-6">
+          {{> ecsbarLine title="Vulnerabilities" data=vulnerability }}
+        </div>
+      {{/with}}
+    </div>
+    {{#with statistics}}
+      <div class="row">
+        <div class="col-md-6">
+          {{#unless isVersioningDisabled}}
+            {{> ecsbarLine title="Versioning" data=versioning}}
+          {{else}}
+            <div class="row">
+              <div class="col-sm-12 text-center">
+                <span class="font-bold">Versioning</span>
+              </div>
+              <div class="col-sm-12">
+                <a href="{{pathFor route='moduleSettings' data=getModuleOptions}}" class="relative block">
+                  <div class="progress m-t-xs full progress-large">
+                    <div style="width: 100%"
+                         aria-valuemax="100" aria-valuemin="0" aria-valuenow="100"
+                         role="progressbar" class="progress-bar progress-bar-disabled"
+                         data-toggle="tooltip"
+                         title="disabled" data-original-title="disabled">
+                    </div>
+                  </div>
+                  <small class="disable-notification-compact disabled disable-notification">
+                    disabled
+                  </small>
+                </a>
+              </div>
+            </div>
+          {{/unless}}
+        </div>
+      </div>
+    {{/with}}
+  </div>
+</template>

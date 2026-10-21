@@ -1,0 +1,92 @@
+<template name="riskAddCountermeasure">
+  <a class="btn btn-primary" data-toggle="modal" data-target="#RiskAddCountermeasureModal" title="Add countermeasure">
+    <span class="fa fa-plus" aria-hidden="true"></span>
+    Add countermeasure
+  </a>
+  <!-- Modal: RiskAddCountermeasure -->
+  <div class="modal fade" id="RiskAddCountermeasureModal" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="ts-accent-line"></div>
+        <div class="modal-header text-center">
+          <h4 class="modal-title">Add countermeasure</h4>
+        </div>
+        <form id="RiskAddCountermeasureForm" method="post">
+          <div class="modal-body">
+            <div class="row">
+              <div class="form-group col-xs-6">
+                <label for="countermeasure">Name * <small class="text-muted">(3-200 characters)</small></label>
+                <input type="text" value="" id="countermeasure" class="form-control" required tabindex="1"
+                       minlength="3" maxlength="200" name="countermeasure"
+                       placeholder="e.g. Use parameterised queries for all DB access">
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="status">Status</label>
+                <select name="status" class="form-control select2" tabindex="2" disabled="{{isFormDisabled}}">
+                  {{#each getStatuses}}
+                    <option value="{{this}}">
+                      {{this}}
+                    </option>
+                  {{/each}}
+                </select>
+              </div>
+              <div class="form-group col-xs-12">
+                <label for="comment">Comment</label>
+                <textarea type="text" value="" id="comment" class="form-control" tabindex="3"
+                       name="comment" placeholder="e.g. Prevents SQL injection"></textarea>
+              </div>
+              <div class="form-group col-xs-12">
+                <label for="responsible">Responsible</label>
+                <select name="responsible" multiple class="form-control select2" tabindex="4" disabled="{{isFormDisabled}}">
+                  {{#each getUsers}}
+                    <option value="{{value}}">
+                      {{label}}
+                    </option>
+                  {{/each}}
+                </select>
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="riskReduction">Risk reduction (%)</label>
+                <input type="number" min="0" max="100" value="" id="riskReduction" class="form-control" tabindex="5"
+                       name="riskReduction" placeholder="e.g. 90">
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="standardRef">Standard reference</label>
+                <input type="text" value="" id="standardRef" class="form-control" tabindex="6"
+                       maxlength="200" name="standardRef" placeholder="e.g. OWASP-ASVS V5.3.4">
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="validationMethod">Validation method</label>
+                <input type="text" value="" id="validationMethod" class="form-control" tabindex="7"
+                       maxlength="200" name="validationMethod" placeholder="e.g. test-suite: tests/security/sqli_test.py">
+              </div>
+              <div class="form-group col-xs-6">
+                <label for="otmMitigationId">OTM mitigation ID</label>
+                <input type="text" value="" id="otmMitigationId" class="form-control" tabindex="8"
+                       maxlength="200" name="otmMitigationId" placeholder="e.g. m-prepared-statements">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" tabindex="11">Close</button>
+            {{#if loading}}
+              <button type="button" disabled="disabled" class="btn btn-primary" tabindex="9">
+                <i class="fa fa-spinner fa-spin"></i> Save
+              </button>
+              <button type="button" disabled="disabled" class="btn btn-primary" tabindex="10">
+                <i class="fa fa-spinner fa-spin"></i> Save and Create new one
+              </button>
+            {{else}}
+              <button type="submit" class="btn btn-primary without_next" tabindex="9">
+                Save
+              </button>
+              <button type="submit" class="btn btn-primary with_next" tabindex="10">
+                Save and Create new one
+              </button>
+            {{/if}}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>

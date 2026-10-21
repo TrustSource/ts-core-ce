@@ -1,0 +1,43 @@
+<template name='companyWebhooks'>
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">Company webhooks and channels</h2>
+        <small>Configure company specific webhooks or channels for available notifications</small>
+      </div>
+      <div class="settings-header-actions">
+        {{> companyWebhooksCreate size='btn-xs'}}
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content">
+    <div class="ts-panel">
+      <div class="panel-body">
+        {{> reactiveTable settings=reactiveTableSettings}}
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="reactiveTableWebhooksActions">
+  <button class="btn btn-info btn-sm copy-webhook-secret inner-r-5" type="button"
+          title="Copy the signing secret: verify X-TrustSource-Signature with it">
+    <span class="fa fa-key"></span>
+  </button>
+  <button class="btn btn-danger2 btn-sm remove">Remove</button>
+</template>
+
+<!-- Both cells below are shared with projectSettingsWebhooks. They exist so the
+     values reach the DOM through Blaze, which escapes them, instead of through a
+     hand-built Spacebars.SafeString, which does not. -->
+<template name="reactiveTableWebhookUrlCell">
+  <span class="truncate w-200px" title="{{urlDisplay}}">{{urlDisplay}}</span>
+</template>
+
+<template name="reactiveTableWebhookHeadersCell">
+  {{#if headerList.length}}
+    <span class="label label-default" title="{{headersTitle}}">{{headerList.length}}</span>
+  {{/if}}
+</template>
+
+

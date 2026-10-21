@@ -1,0 +1,65 @@
+<template name="updatesItem">
+  <div class="panel">
+    <div class="panel-body" id="{{getId}}">
+      {{#if getDate}}
+        <span class="pull-right ">{{dateFormat date=getDate}}</span>
+      {{/if}}
+      <h3 class="inner-t-0">
+        <a href="#{{getId}}">
+          {{version}}
+        </a>
+      </h3>
+      {{#if listNew}}
+        <div class="clearfix m-t-sm">
+          <div class="m-b-sm">
+            <span class="label label-warning">New</span>
+          </div>
+          {{#each listNew}}
+            <div class="clearfix m-b-sm">
+              <p class="m-b-xs">
+                {{description}}
+              </p>
+              {{#if link}}
+                <a href="{{link}}" target="_blank" class="highlight">View details</a>
+              {{/if}}
+            </div>
+          {{/each}}
+        </div>
+      {{/if}}
+      {{#if listImprovement}}
+        <div class="clearfix m-t-sm">
+          <div class="m-b-sm">
+            <span class="label label-success m-b-md">Improvement</span>
+          </div>
+          {{#each listImprovement}}
+            <div class="clearfix m-b-sm">
+              <p class="m-b-xs">
+                {{description}}
+              </p>
+              {{#if link}}
+                <a href="{{link}}" target="_blank" class="highlight">View details</a>
+              {{/if}}
+            </div>
+          {{/each}}
+        </div>
+      {{/if}}
+      {{#if listFix}}
+        <div class="clearfix m-t-sm">
+          <div class="m-b-sm">
+            <span class="label label-primary m-b-md">Fix</span>
+          </div>
+          {{#each listFix}}
+            <div class="clearfix m-b-sm">
+              <p class="m-b-xs">
+                {{description}}
+              </p>
+              {{#if link}}
+                <a href="{{link}}" target="_blank" class="highlight">View details</a>
+              {{/if}}
+            </div>
+          {{/each}}
+        </div>
+      {{/if}}
+    </div>
+  </div>
+</template>

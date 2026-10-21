@@ -1,0 +1,44 @@
+<template name='companyComponentLists'>
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">Component allow/deny</h2>
+        <small>Configure company component allow/deny lists</small>
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content">
+    <div class="ts-panel">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-lg-6">
+            {{> componentlist
+              title="Always allow component"
+              id="userCmpWhitelst"
+              data=getWhitelistedComponents
+              assocData=getBlacklistedComponents
+              schema=getCompanyComponentEntrySchema
+              docId=this._id
+              collection=getCompany
+              attribute="componentConfig.whitelist"
+              tooltip=getComponentWhitelistTooltip
+            }}
+          </div>
+          <div class="col-lg-6">
+            {{> componentlist
+              title="Always deny component"
+              id="userCmpBlacklist"
+              data=getBlacklistedComponents
+              assocData=getWhitelistedComponents
+              schema=getCompanyComponentEntrySchema
+              docId=this._id
+              collection=getCompany
+              attribute="componentConfig.blacklist"
+              tooltip=getComponentBlacklistTooltip
+            }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

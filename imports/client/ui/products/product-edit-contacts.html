@@ -1,0 +1,43 @@
+<template name="productEditContacts">
+  <form id="productEditContactsForm" method="post">
+    <div class="form-groups">
+      {{#with contacts}}
+        <div class="form-group col-sm-12">
+          <label for="registeredTradeName">Registered Trade Name</label>
+          <input type="text" value="{{registeredTradeName}}" id="registeredTradeName" class="form-control" name="registeredTradeName">
+        </div>
+        <div class="form-group col-sm-4">
+          <label for="manufacturerName">Manufacturer Name</label>
+          <input type="text" value="{{manufacturerName}}" id="manufacturerName" class="form-control" name="manufacturerName">
+        </div>
+        <div class="form-group col-sm-4">
+          <label for="manufacturerAddress">Manufacturer Address</label>
+          <input type="text" value="{{manufacturerAddress}}" id="manufacturerAddress" class="form-control" name="manufacturerAddress">
+        </div>
+        <div class="form-group col-sm-4">
+          <label for="manufacturerWebsite">Manufacturer Website</label>
+          <input type="text" value="{{manufacturerWebsite}}" id="manufacturerWebsite" class="form-control" name="manufacturerWebsite">
+        </div>
+        <div class="form-group col-sm-8">
+          <label for="productSecurityContact">Product Security Contact</label>
+          <input type="text" value="{{productSecurityContact}}" id="productSecurityContact" class="form-control" name="productSecurityContact">
+        </div>
+        <div class="form-group col-sm-4">
+          <label for="productSecurityWeblink">Weblink</label>
+          <input type="text" value="{{productSecurityWeblink}}" id="productSecurityWeblink" class="form-control" name="productSecurityWeblink">
+        </div>
+      {{/with}}
+      <div class="form-group col-xs-12">
+        {{#if loading}}
+          <button type="button" disabled="disabled" class="btn btn-block btn-primary">
+            <i class="fa fa-spinner fa-spin"></i> Save
+          </button>
+        {{else}}
+          <button type="submit" class="btn btn-block btn-primary">
+            Save
+          </button>
+        {{/if}}
+      </div>
+    </div>
+  </form>
+</template>

@@ -1,0 +1,45 @@
+<template name="guidePanel">
+  <aside id="guide-panel" aria-labelledby="guide-panel-title" aria-hidden="{{#if isOpen}}false{{else}}true{{/if}}">
+    <div class="guide-panel-header">
+      <span class="guide-panel-title" id="guide-panel-title">
+        <i class="fa fa-regular fa-compass" aria-hidden="true"></i> Guide
+      </span>
+      <button type="button" class="guide-panel-close" title="Close guide" aria-label="Close guide">&times;</button>
+    </div>
+    <div class="guide-panel-body">
+      {{#with guide}}
+        <h3 class="guide-panel-heading">{{title}}</h3>
+        <p class="guide-panel-summary">{{summary}}</p>
+        <button type="button" class="btn btn-primary btn-sm guide-start-tour">
+          <span class="fa fa-play-circle" aria-hidden="true"></span> Start tour
+        </button>
+        <ol class="guide-steps">
+          {{#each step in steps}}
+            <li class="guide-step">
+              <button type="button" class="guide-step-show" data-selector="{{step.selector}}"
+                      title="Show on the page">
+                <span class="guide-step-number">{{plusOne @index}}</span>
+                <span class="guide-step-content">
+                  <span class="guide-step-title">{{step.title}}</span>
+                  <span class="guide-step-text">{{step.text}}</span>
+                  {{#if isMissing step.selector}}
+                    <span class="guide-step-missing">Not shown on this view.</span>
+                  {{/if}}
+                </span>
+              </button>
+            </li>
+          {{/each}}
+        </ol>
+      {{else}}
+        <p class="guide-panel-empty">There is no guide for this screen yet.</p>
+      {{/with}}
+      {{#if helpUrl}}
+        <p class="guide-panel-help">
+          <a href="{{helpUrl}}" target="_blank" rel="noopener noreferrer">
+            <i class="fa fa-regular fa-circle-question" aria-hidden="true"></i> Documentation and help
+          </a>
+        </p>
+      {{/if}}
+    </div>
+  </aside>
+</template>

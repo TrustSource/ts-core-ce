@@ -1,0 +1,49 @@
+// Bootstrap modal dialogs: soft card, light header/footer, roomy body
+@dialog-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.2);
+
+.modal-dialog {
+  margin-top: 80px;
+}
+
+.modal-content {
+  border: none;
+  border-radius: 5px;
+  box-shadow: @dialog-shadow;
+}
+
+.modal-header,
+.modal-footer {
+  background: @ts-surface;
+}
+
+.modal-header {
+  padding: 40px 30px;
+
+  small {
+    color: lighten(@ts-text, 20%);
+  }
+}
+
+.modal-title {
+  font-size: 30px;
+  font-weight: 300;
+}
+
+.modal-body {
+  padding: 20px 30px;
+}
+
+// Backdrop pinned to the viewport and dimmed less than Bootstrap's default
+.modal-backdrop {
+  position: fixed;
+  bottom: 0;
+
+  &.in {
+    opacity: 0.4;
+  }
+}
+
+// Bootstrap adds scrollbar padding to the body on open; the layout does not need it
+body.modal-open {
+  padding-right: 0 !important;
+}

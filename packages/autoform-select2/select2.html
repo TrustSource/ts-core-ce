@@ -1,0 +1,18 @@
+<template name="afSelect2">
+  <select {{this.atts}}>
+    {{#if hasBlankOption}}
+      <option value=""></option>
+    {{/if}}
+    {{#each items}}
+      {{#if optgroup}}
+        <optgroup label="{{optgroup}}">
+          {{#each options}}
+            <option value="{{value}}" selected="{{selected}}">{{label}}</option>
+          {{/each}}
+        </optgroup>
+      {{else}}
+        <option value="{{value}}" selected="{{selected}}">{{label}}</option>
+      {{/if}}
+    {{/each}}
+  </select>
+</template>

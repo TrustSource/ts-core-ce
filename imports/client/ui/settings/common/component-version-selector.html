@@ -1,0 +1,94 @@
+<template name="componentVersionSelector">
+  <div class="clearfix">
+    <label for="registeredComponent">Select one component*</label>
+    <input type="text" placeholder="Enter search expression here" class="form-control component_filter" name="search"
+           value="{{searchSource}}">
+    {{#if components}}
+      <div class="panel-body component-list" style="max-height: 200px;overflow-y: auto">
+        {{#each components}}
+          <div class="row">
+            <div class="col-xs-7">
+              <div class="row">
+                <div class="col-xs-6 truncate" title="{{getName}}">
+                  <a href="{{pathFor 'componentDetail'}}" target="_blank"><strong>{{getName}}</strong></a>
+                </div>
+                <div class="col-xs-3">{{{getPkgMgrIcon getKey}}}</div>
+                <div class="col-xs-3">
+                  {{#if getUrl 'homepage'}}
+                    <a href="{{getUrl 'homepage'}}" target="_blank" title="goto homepage"><i
+                        class="fa fa-fw fa-external-link"></i></a>
+                  {{else}}
+                    &nbsp;
+                  {{/if}}
+                  &nbsp;
+                  {{#if getUrl 'repository'}}
+                    <a href="{{getUrl 'repository'}}" target="_blank" title="goto repository"><i
+                        class="fa fa-fw fa-code-fork"></i></a>
+                  {{else}}
+                    &nbsp;
+                  {{/if}}
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-5">
+              {{#each getVersions}}
+                <div class="col-md-12" style="margin-bottom: 3px">
+                  <div class="pull-left text-right" style="padding-top:8px">
+                    {{getVersion}}
+                  </div>
+                  <div class="pull-right">
+                    <button class="btn {{selectedClass}} select_component" type="button">{{selectedText}}</button>
+                  </div>
+                </div>
+              {{/each}}
+            </div>
+          </div>
+          <hr>
+        {{/each}}
+      </div>
+    {{else}}
+      <span class="help-block">No components found</span>
+    {{/if}}
+    {{#with customComponent}}
+      <div class="panel panel-success" style="padding: 10px 20px">
+        <div class="row">
+          <div class="col-xs-7">
+            <div class="row">
+              <div class="col-xs-6 truncate" title="{{name}}">
+                <a href="{{pathFor 'componentDetail'}}" target="_blank"><strong>{{name}}</strong></a>
+              </div>
+              <div class="col-xs-3">{{{getPkgMgrIcon key}}}</div>
+              <div class="col-xs-3">
+                {{#if homepageUrl}}
+                  <a href="{{homepageUrl}}" target="_blank" title="goto homepage"><i
+                      class="fa fa-fw fa-external-link"></i></a>
+                {{else}}
+                  &nbsp;
+                {{/if}}
+                &nbsp;
+                {{#if repoUrl}}
+                  <a href="{{repoUrl}}" target="_blank" title="goto repository"><i
+                      class="fa fa-fw fa-code-fork"></i></a>
+                {{else}}
+                  &nbsp;
+                {{/if}}
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-5">
+            {{#with versions}}
+              <div class="col-md-12" style="margin-bottom: 3px">
+                <div class="pull-left text-right" style="padding-top:8px">
+                  {{this}}
+                </div>
+                <div class="pull-right">
+                  <button class="btn btn-danger remove_component" type="button">Remove</button>
+                </div>
+              </div>
+            {{/with}}
+          </div>
+        </div>
+      </div>
+    {{/with}}
+  </div>
+</template>

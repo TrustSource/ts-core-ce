@@ -1,0 +1,24 @@
+<template name="loginsHistoryNoLogins">
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">Users with no logins</h2>
+        <small>By login history for last 60 days</small>
+      </div>
+      <div class="settings-header-actions">
+        <a href="{{pathFor route='loginsHistory'}}" class="btn btn-default">
+          All logins history
+        </a>
+        <button type="button" class="btn btn-default export-csv"><span class="fa fa-download"></span> Export as CSV</button>
+        <button type="button" class="btn btn-default copy-information" data-clipboard-text="{{getCopyText}}"><span class="fa fa-copy"></span> Copy to clipboard</button>
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content logs-content">
+    <div class="panel">
+      <div class="panel-body">
+        {{> reactiveTable settings=reactiveTableSettings}}
+      </div>
+    </div>
+  </div>
+</template>

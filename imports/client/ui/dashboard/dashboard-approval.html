@@ -1,0 +1,61 @@
+<template name="dashboardApproval">
+  <div class="row">
+    <div class="col-lg-12">
+      {{#panel title="Incoming approval requests" titleBadge=getReleasesCount collapsed=isEmpty}}
+        {{#if getReleases.length}}
+          <div class="approval-widget-box">
+            {{#each projectData in getReleases}}
+              <div class="approval">
+                <div class="approval-heading">
+                  <span class="fa fa-cubes"></span> <b>{{projectData.project.getName}}</b>
+                </div>
+                <div class="approval-body clearfix">
+                  <div class="row">
+                    {{#if sortedReleases projectData}}
+                      <div class="col-md-12  m-b-xs">
+                        <div class="row">
+                          {{#each release in sortedReleases projectData}}
+                            <div class="col-md-12">
+                              {{#unless release.approved}}
+                                {{> releaseLine release=release isProject=true entry=projectData.project}}
+                              {{/unless}}
+                            </div>
+                          {{/each}}
+                        </div>
+                      </div>
+                    {{/if}}
+                    {{#each moduleData in projectData.modules}}
+                      <div class="col-md-12">
+                        <div class="approval">
+                          <div class="approval-heading">
+                            <span class="fa fa-cube"></span> <b>{{moduleData.module.getName}}</b>
+                          </div>
+                          <div class="approval-body clearfix">
+                            <div class="row">
+                              {{#each release in sortedReleases moduleData}}
+                                <div class="col-md-12">
+                                  {{#unless release.approved}}
+                                    {{> releaseLine release=release project=false entry=moduleData.module}}
+                                  {{/unless}}
+                                </div>
+                              {{/each}}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    {{/each}}
+                  </div>
+                </div>
+              </div>
+            {{/each}}
+          </div>
+        {{else}}
+          <div class="alert alert-info">
+            <p><i class="fa fa-info-circle"></i> <strong>{{__ 'Note'}}</strong></p>
+            <p>{{__ 'NoIncomingApproval'}}</p>
+          </div>
+        {{/if}}
+      {{/panel}}
+    </div>
+  </div>
+</template>

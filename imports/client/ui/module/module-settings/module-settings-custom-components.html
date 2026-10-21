@@ -1,0 +1,55 @@
+<template name="moduleSettingsCustomComponents">
+  <div id="customComponents" class="tab-pane">
+    <div class="panel-body">
+      <div class="">
+        <div class="pull-right">
+          {{#if hasAccessRight 'module.customComponents.settings' 'w' currentModule}}
+            {{> componentCreate size=''}}
+          {{/if}}
+        </div>
+        <h3>
+          Module custom components
+        </h3>
+        <div class="row">&nbsp;</div>
+        <div class="row">
+          <div class="col-lg-12">
+            {{#if customComponents}}
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th class="col-md-2">Name</th>
+                  <th class="col-md-2">Version</th>
+                  <th class="col-md-4">License</th>
+                  <th class="col-md-4 text-right">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each customComponents}}
+                  <tr>
+                    <td class="col-md-2">{{name}}</td>
+                    <td class="col-md-2">
+                      {{#with versions}}
+                        {{this}}
+                      {{/with}}
+                    </td>
+                    <td class="col-md-4">
+                      {{getLicense}}
+                    </td>
+                    <td class="col-md-4 text-right">
+                      {{#if hasAccessRight 'module.customComponents.settings' 'd' currentModule}}
+                        <a href class="btn btn-danger2 btn-sm delete_custom">Remove</a>
+                      {{/if}}
+                    </td>
+                  </tr>
+                {{/each}}
+                </tbody>
+              </table>
+            {{else}}
+              {{> reactiveTableNoData}}
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

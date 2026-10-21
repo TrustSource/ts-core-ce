@@ -1,0 +1,32 @@
+<template name="copyrightTrademarks">
+  {{#pageHeader}}
+    <div class="copyright-header">
+      <div class="copyright-header-left">
+        <h2 class="font-light m-b-xs">{{__ 'CopyrightTrademarks'}}</h2>
+        <small>Tools and trademarks used in {{app 'name'}}</small>
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content">
+    <div class="copyright-intro">
+      <span class="fa fa-info-circle copyright-intro-icon"></span>
+      <div>
+        <p>{{app 'name'}} {{__ 'AimsToSimplify'}}</p>
+        <p>{{__ 'TheFollowingIsAListOfTools'}}</p>
+        <p class="m-b-none">{{__ 'TheUseOfTheLogoTrademark'}}</p>
+      </div>
+    </div>
+    {{#each getList}}
+      <div class="panel">
+        <div class="panel-body" id="{{name}}">
+          <h3 class="inner-t-0"><a href="#{{name}}"><span class="fa fa-anchor inner-r-5 text-small"></span></a> {{name}}</h3>
+          <p>{{description}}</p>
+          <p>{{usage}}</p>
+          {{#if link}}
+            <a href="{{link}}" target="_blank" class="highlight view-file">{{__ 'View'}}</a>
+          {{/if}}
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</template>

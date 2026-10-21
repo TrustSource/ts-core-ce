@@ -1,0 +1,19 @@
+<template name="componentSelectorFilter">
+  <div id="componentSelectorFilter" class="panel-heading actions no-top clearfix">
+    <div class="pull-left form-inline list_filter">
+      <div class="form-group">
+        <h5 class="inner-r-10"><strong class="fa fa-filter"></strong></h5>
+      </div>
+      <div class="form-group" style="width:180px;">
+        <input type="text" placeholder="By name" class="form-control w-100"
+               value="{{searchSource}}" name="name">
+      </div>
+      <button class="btn btn-default reset_filter" title="Reset filters">
+        <i class="fa fa-trash"></i>
+      </button>
+    </div>
+    <div class="pull-right form-inline">
+      {{> componentListSorting type=type}}
+    </div>
+  </div>
+</template>

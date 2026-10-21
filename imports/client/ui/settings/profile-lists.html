@@ -1,0 +1,78 @@
+<template name='profileLists'>
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">User allow/deny lists</h2>
+        <small>Configure your allow/deny lists settings</small>
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content">
+    <div class="ts-panel">
+      <div class="panel-body">
+        <h3>Components</h3>
+        <div class="row">
+          <div class="col-lg-6">
+            {{> componentlist
+                title="Always allow component"
+                id="userCmpWhitelst"
+                data=getWhitelistedComponents
+                assocData=getBlacklistedComponents
+                schema=getUserComponentEntrySchema
+                docId=this._id
+                collection=getUser
+                attribute="componentConfig.whitelist"
+                tooltip=getComponentWhitelistTooltip
+                userUpdate=true
+            }}
+          </div>
+          <div class="col-lg-6">
+            {{> componentlist
+                title="Always deny component"
+                id="userCmpBlacklist"
+                data=getBlacklistedComponents
+                assocData=getWhitelistedComponents
+                schema=getUserComponentEntrySchema
+                docId=this._id
+                collection=getUser
+                attribute="componentConfig.blacklist"
+                tooltip=getComponentBlacklistTooltip
+                userUpdate=true
+            }}
+          </div>
+        </div>
+        <h3>Licenses</h3>
+        <div class="row">
+          <div class="col-lg-6">
+            {{> moduleLicenseList
+                title="Always allow license"
+                id="userLicWhitelst"
+                data=getWhitelistedLicenses
+                assocData=getBlacklistedLicenses
+                schema=getUserLicenseEntrySchema
+                docId=this._id
+                collection=getUser
+                attribute="licenseConfig.whitelist"
+                userUpdate=true
+            }}
+          </div>
+          <div class="col-lg-6">
+            {{> moduleLicenseList
+                title="Always deny license"
+                id="userLicBlacklist"
+                data=getBlacklistedLicenses
+                assocData=getWhitelistedLicenses
+                schema=getUserLicenseEntrySchema
+                docId=this._id
+                collection=getUser
+                attribute="licenseConfig.blacklist"
+                userUpdate=true
+            }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+

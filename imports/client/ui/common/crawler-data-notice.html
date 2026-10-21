@@ -1,0 +1,17 @@
+<template name="crawlerDataNotice">
+  {{! TrustSource CE has no crawler for repository activity, registry releases or
+      end-of-life dates (crawlerInfo), so these checks only see what scans report. }}
+  <div class="alert alert-info">
+    <i class="fa fa-info-circle"></i>
+    {{#if isCheck 'viability'}}
+      This installation has no source for repository activity data, so most components do not reach the
+      minimum confidence level and are not rated.
+    {{else if isCheck 'versioning'}}
+      This installation has no source for registry release data. The check only knows the versions seen in
+      scans, so it cannot tell how far a component lags behind its latest release.
+    {{else}}
+      This installation has no source for end-of-life dates, so every component is reported as supported
+      unless its end-of-life data is added by other means.
+    {{/if}}
+  </div>
+</template>

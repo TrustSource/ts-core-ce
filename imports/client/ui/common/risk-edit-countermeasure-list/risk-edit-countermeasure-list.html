@@ -1,0 +1,17 @@
+<template name="riskEditCountermeasureList">
+  <div class="pull-left">
+    {{> riskAddCountermeasure}}
+    {{> riskEditCountermeasure}}
+  </div>
+  <div class="reactive-table-scroll-x">
+    {{> reactiveTable settings=reactiveTableSettings}}
+  </div>
+</template>
+
+<template name="reactiveTableCountermeasureActions">
+  <div class="text-right">
+    <button type="button" class="btn btn-danger btn-xs remove-item">
+      <i class="fa fa-trash-can"></i>
+    </button>
+  </div>
+</template>

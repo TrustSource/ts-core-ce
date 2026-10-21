@@ -1,0 +1,79 @@
+<template name="csafAcknowledgment">
+  {{#if hasData}}
+    <div class="panel panel-default csaf-acknowledgment">
+      <div class="panel-body">
+        <div class="col-xs-12">
+          <div class="form-group inner-b-5i">
+            <label for="acknowledgments_organization">Contributing organization</label>
+            <input type="text" data-path="organization"
+                   value="{{getValue 'organization'}}" id="acknowledgments_organization"
+                   name="acknowledgments_organization"
+                   class="form-control" disabled="{{isEditDisabled}}">
+            <span class="help-block small">Contains the name of a contributing organization being recognized.</span>
+          </div>
+          <div class="form-group inner-b-5i">
+            <label for="acknowledgments_summary">Summary of the acknowledgment</label>
+            <input type="text" data-path="summary"
+                   value="{{getValue 'summary'}}" id="acknowledgments_summary"
+                   name="acknowledgments_summary"
+                   class="form-control" disabled="{{isEditDisabled}}" minlength="1">
+            <span class="help-block small">SHOULD represent any contextual details the document producers wish to make known about the acknowledgment or acknowledged parties.</span>
+          </div>
+          <div class="form-group inner-b-5i">
+            <label for="acknowledgments_names" class="block">List of acknowledged names
+              <button class="btn btn-xs btn-primary pull-right add_acknowledgment_item" disabled="{{isEditDisabled}}"
+                      data-path="names"
+                      data-default-item="acknowledgmentsNames"
+                      type="button"><span class="fa fa-plus" aria-hidden="true"></span></button>
+            </label>
+            {{#each (getValue 'names')}}
+              <div class="input-group inner-b-10">
+                <input type="text" value="{{this}}"
+                       id="acknowledgments_names_{{@index}}"
+                       data-path="names.{{@index}}"
+                       name="acknowledgments_names__{{@index}}"
+                       class="form-control inner-b-10" disabled="{{isEditDisabled}}">
+                <span class="input-group-btn">
+                  <button class="btn btn-warning pull-right remove_acknowledgment_item" type="button"
+                          disabled="{{isEditDisabled}}"
+                          data-path="names"
+                          data-index="{{@index}}">
+                    <span class="fa fa-times" aria-hidden="true"></span>
+                  </button>
+                </span>
+              </div>
+            {{/each}}
+            <span
+              class="help-block small">Contains the names of contributors being recognized.</span>
+          </div>
+          <div class="form-group inner-b-5i">
+            <label for="acknowledgments_urls" class="block">List of URLs
+              <button class="btn btn-xs btn-primary pull-right add_acknowledgment_item" disabled="{{isEditDisabled}}"
+                      data-path="urls"
+                      data-default-item="acknowledgmentsUrls"
+                      type="button"><span class="fa fa-plus" aria-hidden="true"></span></button>
+            </label>
+            {{#each (getValue 'urls')}}
+              <div class="input-group inner-b-10">
+                <input type="text" value="{{this}}"
+                       id="acknowledgments_urls_{{@index}}"
+                       data-path="urls.{{@index}}"
+                       name="acknowledgments_urls_{{@index}}"
+                       class="form-control" disabled="{{isEditDisabled}}">
+                <span class="input-group-btn">
+                  <button class="btn btn-warning pull-right remove_acknowledgment_item" type="button"
+                          disabled="{{isEditDisabled}}"
+                          data-path="urls"
+                          data-index="{{@index}}">
+                    <span class="fa fa-times" aria-hidden="true"></span>
+                  </button>
+                </span>
+              </div>
+            {{/each}}
+            <span class="help-block small">Specifies a list of URLs or location of the reference to be acknowledged.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+</template>

@@ -1,0 +1,81 @@
+<template name="productEdit">
+  <div class="panel-heading product-panel-heading">
+    <h5 title="{{getBreadcramb}} {{name}}">{{getBreadcrumb}} {{#if draft}}<span class="label label-warning">Draft</span>{{/if}} <b>{{name}}</b></h5>
+  </div>
+  <div class="panel-body">
+    <div class="scrollable_middle_right">
+      <div class="form-group col-sm-12">
+        <div class="nav-tabs-scrollable">
+          <button class="nav-tabs-arrow nav-tabs-arrow-left" type="button"><i class="fa fa-chevron-left"></i></button>
+          <button class="nav-tabs-arrow nav-tabs-arrow-right" type="button"><i class="fa fa-chevron-right"></i></button>
+        <ul class="nav nav-tabs" id="product-tabs" role="group">
+          <li class="{{activeTab 'productGeneral'}}">
+            <a class="set-active-view" data-toggle="tab" data-view="productGeneral" title="General information" href>
+              <span class="fa fa-info"></span> <span class="">Information</span>
+            </a>
+          </li>
+          <li class="{{activeTab 'productSolutions'}}">
+            <a class="set-active-view" data-toggle="tab" data-view="productSolutions" title="Linked solutions" href>
+              <span class="fa fa-chain"></span> <span class="">Solutions</span>
+            </a>
+          </li>
+          <li class="{{activeTab 'productClassification'}}">
+            <a class="set-active-view" data-toggle="tab" data-view="productClassification" title="Classification" href>
+              <span class="fa fa-tags"></span> <span class="">Classification</span>
+            </a>
+          </li>
+          <li class="{{activeTab 'productPhotos'}}">
+            <a class="set-active-view" data-toggle="tab" data-view="productPhotos" title="Photos" href>
+              <span class="fa fa-photo"></span> <span class="">Photos</span>
+            </a>
+          </li>
+          <li class="{{activeTab 'productDocuments'}}">
+            <a class="set-active-view" data-toggle="tab" data-view="productDocuments" title="Documents" href>
+              <span class="fa fa-files-o"></span> <span class="">Documents</span>
+            </a>
+          </li>
+          <li class="{{activeTab 'productContacts'}}">
+            <a class="set-active-view" data-toggle="tab" data-view="productContacts" title="Contacts" href>
+              <span class="fa fa-contact-card"></span> <span class="">Contacts</span>
+            </a>
+          </li>
+          <li class="{{activeTab 'productSupport'}}">
+            <a class="set-active-view" data-toggle="tab" data-view="productSupport" title="Support" href>
+              <span class="fa fa-support"></span> <span class="">Support</span>
+            </a>
+          </li>
+          <li class="{{activeTab 'productMisuse'}}">
+            <a class="set-active-view" data-toggle="tab" data-view="productMisuse" title="Misuse" href>
+              <span class="fa fa-ban"></span> <span class="">Misuse</span>
+            </a>
+          </li>
+        </ul>
+        </div>
+      </div>
+      {{#if activeView 'productGeneral'}}
+        {{> productEditInformation}}
+      {{/if}}
+      {{#if activeView 'productSolutions'}}
+        {{> productEditSolutions}}
+      {{/if}}
+      {{#if activeView 'productClassification'}}
+        {{> productEditClassification}}
+      {{/if}}
+      {{#if activeView 'productContacts'}}
+        {{> productEditContacts}}
+      {{/if}}
+      {{#if activeView 'productSupport'}}
+        {{> productEditSupport}}
+      {{/if}}
+      {{#if activeView 'productMisuse'}}
+        {{> productEditMisuse}}
+      {{/if}}
+      {{#if activeView 'productPhotos'}}
+        {{> productEditPhotos}}
+      {{/if}}
+      {{#if activeView 'productDocuments'}}
+        {{> productEditDocuments}}
+      {{/if}}
+    </div>
+  </div>
+</template>

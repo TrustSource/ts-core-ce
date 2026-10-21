@@ -1,0 +1,53 @@
+<template name="riskSettingsList">
+  {{#if isInRole 'compliance_manager,manager' companyId}}
+    <div class="pull-left">
+      {{#unless this.readonly}}
+        <a class="btn btn-primary" data-toggle="modal" data-target="#RiskAddModal" title="Add risk">
+          <span class="fa fa-plus" aria-hidden="true"></span>
+          Add risk
+        </a>
+      {{/unless}}
+      {{> risksStateFilter sessionVar=filterSessionVar}}
+      {{> RiskAddModal}}
+    </div>
+  {{/if}}
+  {{#if this.data}}
+    <form autocomplete="off">
+      <div class="reactive-table-scroll-x">
+        {{> reactiveTable settings=reactiveTableSettings}}
+      </div>
+    </form>
+  {{else}}
+    {{> reactiveTableNoData}}
+  {{/if}}
+</template>
+
+<template name="reactiveTableRiskCheckActions">
+  {{#if getCheck}}
+    <div class="icheckbox_square-green checked cursor-default"></div>
+  {{else}}
+    <div class="icheckbox_square-green cursor-default"></div>
+  {{/if}}
+</template>
+
+<template name="reactiveTableRiskSettingsActions">
+  <div class="text-right">
+    {{#if isFromModule}}
+      <a href="{{pathFor route='risks' query=getModuleOptions}}" class="label label-info pull-right">in Module</a>
+    {{else}}
+      {{#if isFromProject}}
+        <a href="{{pathFor route='risks' query=getProjectOptions}}" class="label label-info pull-right">in Project</a>
+      {{else}}
+        {{#unless isReadonly}}
+          <button type="button" class="btn btn-danger btn-xs remove-risk">
+            <i class="fa fa-trash-can"></i>
+          </button>
+        {{else}}
+          <a href="{{pathFor route='risks' query=getRiskDetailsOptions}}" target="_blank" class="btn btn-primary btn-xs">
+            <i class="fa fa-external-link"></i>
+          </a>
+        {{/unless}}
+      {{/if}}
+    {{/if}}
+  </div>
+</template>

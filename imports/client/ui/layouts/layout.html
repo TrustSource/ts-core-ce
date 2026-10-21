@@ -1,0 +1,30 @@
+<template name="layout">
+
+  <!-- Splash screen -->
+  <div id="splash">
+    {{>splash }}
+  </div>
+
+  <!-- Header -->
+  {{> header }}
+
+  <!-- Navigation -->
+  {{> navigation }}
+
+  <!-- Right toolbar -->
+  {{> rightBar}}
+
+  <!-- Guidance for the current screen -->
+  {{> guidePanel}}
+
+  <!-- Main Wrapper -->
+  <div id="wrapper">
+    <div class="content-area">
+      {{> yield}}
+
+      <!--Notify users on policy changes-->
+      {{> policyNotification}}
+    </div>
+  </div>
+
+</template>

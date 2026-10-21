@@ -1,0 +1,80 @@
+<template name="componentCreate">
+  {{#if isInRole 'developer,compliance_manager,manager' companyId}}
+    <a class="btn btn-primary {{size}}" data-toggle="modal" data-target="#createComponent">
+      <span class="fa fa-puzzle-piece" aria-hidden="true"></span> Add component</a>
+
+    <!-- Modal: createComponent -->
+    <div class="modal fade" id="createComponent" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="ts-accent-line"></div>
+          <div class="modal-header text-center">
+            <i class="fa fa-puzzle-piece ts-big-icon text-success"></i>
+            <br/>
+            <h4 class="modal-title">Add component</h4>
+            <div class="alert alert-info">
+              <p class="text-left"><i class="fa fa-info-circle"></i> PLEASE NOTE</p>
+              <p class="text-left">
+                Components added manually will not appear in the component or legal views until you have executed a new analysis run!
+                The views actually are representations of an analysis result.
+              </p>
+            </div>
+            <div class="{{createComponentMsgType}}"
+                 id="form-messages">{{createComponentMsg}}</div>
+          </div>
+          <form id="createComponentForm">
+            <div class="modal-body">
+              {{> componentSelector}}
+              {{#with customComponent}}
+                <div class="panel panel-success" style="padding: 10px 20px">
+                  <div class="row">
+                    <div class="col-xs-2">
+                      <strong>Selected:</strong>
+                    </div>
+                    <div class="col-xs-7">
+                      <div class="row">
+                        <div class="col-xs-6 truncate" title="{{name}}">
+                          <a href="{{pathFor 'componentDetail'}}" target="_blank"><strong>{{name}}</strong></a>
+                        </div>
+                        <div class="col-xs-3">{{{getPkgMgrIcon key}}}</div>
+                        <div class="col-xs-3">
+                          {{#if homepageUrl}}
+                            <a href="{{homepageUrl}}" target="_blank" title="goto homepage"><i
+                                class="fa fa-fw fa-external-link"></i></a>
+                          {{else}}
+                            &nbsp;
+                          {{/if}}
+                          &nbsp;
+                          {{#if repoUrl}}
+                            <a href="{{repoUrl}}" target="_blank" title="goto repository"><i
+                                class="fa fa-fw fa-code-fork"></i></a>
+                          {{else}}
+                            &nbsp;
+                          {{/if}}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-3">
+                      {{#with versions}}
+                        <div class="col-md-12" style="margin-bottom: 3px">
+                          <div class="pull-left text-right">
+                            {{this}}
+                          </div>
+                        </div>
+                      {{/with}}
+                    </div>
+                  </div>
+                </div>
+              {{/with}}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close
+              </button>
+              <button type="submit" class="btn btn-primary">Add component</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+</template>

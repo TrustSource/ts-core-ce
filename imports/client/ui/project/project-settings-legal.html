@@ -1,0 +1,325 @@
+<template name="projectSettingsLegal">
+  <div id="legal" class="tab-pane"> <!-- Legal Requirements -->
+    <div class="panel-body no-bottom-errors">
+      <div class="clearfix">
+        <div class="pull-right actions actions-wizard" style="position:relative">
+          {{#if historyView}}
+            {{#if hasAccessRight 'project.legal.settings' 'w' currentProject}}
+              <a href class="btn btn-default btn-xs close-history m-b-md">
+                <span class="fa fa-times"></span> Close history
+              </a>
+            {{/if}}
+          {{else}}
+            {{#if hasAccessRight 'project.legal.settings' 'w' currentProject}}
+              <a href class="btn btn-default btn-xs view-history">
+                <span class="fa fa-repeat"></span> View history
+              </a>
+            {{/if}}
+            {{#if hasAccessRight 'project.legal.wizard' 'x' currentProject}}
+              <a href class="btn btn-default btn-xs view-wizard {{wizardBtnClass true}}">
+                <span class="fa fa-magic"></span> Start wizard
+              </a>
+              <a href class="btn btn-default btn-xs view-all {{wizardBtnClass }}">
+                <span class="fa fa-list"></span> View all
+              </a>
+            {{/if}}
+            {{#if hasAccessRight 'project.legal.import_template' 'x' currentProject}}
+              <div class="inline-block relative">
+                {{#if getLegalTemplatesSettings.length}}
+                  <button type="button" class="btn btn-default btn-xs dropdown-toggle"
+                          data-toggle="dropdown">
+                    <span class="fa fa-copy"></span> Import settings from Template <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-right ">
+                    {{#each getLegalTemplatesSettings}}
+                      <li><a class="copy-legal-template-settings" id="{{_id}}">{{name}}</a></li>
+                    {{/each}}
+                  </ul>
+                {{/if}}
+              </div>
+            {{/if}}
+            {{#if hasAccessRight 'project.legal.import' 'x' currentProject}}
+              <div class="inline-block relative">
+                {{#if getLegalSettings.length}}
+                  <button type="button" class="btn btn-default btn-xs dropdown-toggle"
+                          data-toggle="dropdown">
+                    <span class="fa fa-copy"></span> Import settings from Project <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-right ">
+                    <li>
+                      <input type="text" class="drop-filter form-control import_filter" placeholder="Search by name"
+                             value="{{getImportFilter}}"/>
+                    </li>
+                    {{#each filterList getLegalSettings getImportFilter}}
+                      <li><a class="copy-legal-settings" id="{{_id}}">{{name}}</a></li>
+                    {{/each}}
+                  </ul>
+                {{/if}}
+              </div>
+            {{/if}}
+            {{#if hasAccessRight 'project.legal.propagate' 'x' currentProject}}
+              <div class="inline-block relative">
+                {{#unless wizardView}}
+                  {{#if otherProjects.length}}
+                    <button type="button" class="btn btn-default btn-xs dropdown-toggle"
+                            data-toggle="dropdown">
+                      <span class="fa fa-share"></span> Propagate settings to...<span
+                            class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                      <li>
+                        <input type="text" class="drop-filter form-control project_filter" placeholder="Search by name"
+                               value="{{getProjectFilter}}"/>
+                      </li>
+                      {{#if isInRole 'portfolio_manager' companyId}}
+                        <li><a class="propagate-all-legal-settings">All {{otherProjects.length}} projects</a></li>
+                      {{/if}}
+                      <li><a class="propagate-all-my-legal-settings">All my {{myProjects.length}} projects</a></li>
+                      {{#each filterList otherProjects getProjectFilter}}
+                        <li><a class="propagate-legal-settings" id="{{_id}}">{{name}}</a></li>
+                      {{/each}}
+                    </ul>
+                  {{/if}}
+                {{/unless}}
+              </div>
+            {{/if}}
+          {{/if}}
+        </div>
+      </div>
+      {{#if hasAccessRight 'project.legal.settings' 'w' currentProject}}
+        {{#if historyView}}
+          {{#each historyRequirements}}
+            {{> legalRequirementsHistoryEntry requirements=requirements details=this projectId=projectId}}
+          {{/each}}
+          {{#unless historyRequirements.length}}
+            {{> reactiveTableNoData}}
+          {{/unless}}
+        {{else}}
+          {{#if wizardView}}
+            <h3>Legal settings wizard</h3>
+            {{> wizard id="legalWizard" steps=stepsQuestionnaire clearOnDestroy=true nextButton='Next' backButton='Back'
+                    confirmButton='Finish' stepsTemplate='questionnaireSteps'}}
+          {{else}}
+            {{# autoForm
+                    id="updateFormRequirements"
+                    docId=this._id
+                    collection=getProjects
+                    schema=getRequirementsSchema
+                    doc=getRequirements
+                    type="normal"
+            }}
+              <div class="row">
+                <div class="col-md-6">
+                  <h3>Commercial Aspects</h3>
+                  <div class="row">
+                    <div class="col-md-12">{{> afQuickField name='CA'}}</div>
+                    <div class="col-md-12 inner-b-20">
+                      <i>
+                        If you are not sure, which one to choose, select <strong>usage fee</strong>. This will be the most
+                        restrictive, but you may be sure to be on the safe side.
+                      </i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <h3>Operating Model</h3>
+                  <div class="row">
+                    <div class="col-md-12">{{> afQuickField name='OM'}}</div>
+                    <div class="col-md-12 inner-b-20">
+                      <i>
+                        If you are not sure, which model to choose, we recommend to select the <strong>embedded
+                        model</strong>, as it will be the most restrictive option. This will give you less options but
+                        puts
+                        you on the safe side.
+                      </i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <h3>Intellectual Property Aspects</h3>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-md-12">{{> afQuickField name='IP_protect'}}</div>
+                        <div class="col-md-12 inner-b-20">
+                          <i>
+                            Some licenses come without explicit grants from all contributors, thus the license grants you
+                            a
+                            usage right but does not protect from additional claims from contributors. If you <strong>switch
+                            on</strong> this protection, it will flag corresponding licenses as violations
+                          </i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-md-12">{{> afQuickField name='IP_enforce'}}</div>
+                        <div class="col-md-12 inner-b-20">
+                          <i>
+                            Some licenses will terminate their grants in case you are seeking to defend your rights in
+                            front
+                            of a court. If such a situation seems likely to you, e.g. customer overusing purchased sets
+                            but
+                            not willing to pay their bill, you might consider to <strong>activate</strong> Outbound
+                            protection. It will flag all licenses terminating when seeking to defend your rights as
+                            violations.
+                          </i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Update</button>
+            {{/ autoForm}}
+          {{/if}}
+        {{/if}}
+      {{else}}
+        {{# autoForm
+                id="updateFormRequirementsDisplay"
+                docId=this._id
+                collection=getProjects
+                schema=getRequirementsSchema
+                doc=getRequirements
+                type="normal"
+        }}
+          <div class="row">
+            <div class="col-md-6">
+              <h3>Commercial Aspects</h3>
+              <div class="row">
+                <div class="col-md-12">{{> afQuickField name='CA' disabled=true}}</div>
+                <div class="col-md-12 inner-b-20">
+                  <i>
+                    If you are not sure, which one to choose, select <strong>usage fee</strong>. This will be the most
+                    restrictive, but you may be sure to be on the safe side.
+                  </i>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <h3>Operating Model</h3>
+              <div class="row">
+                <div class="col-md-12">{{> afQuickField name='OM' disabled=true}}</div>
+                <div class="col-md-12 inner-b-20">
+                  <i>
+                    If you are not sure, which model to choose, we recommend to select the <strong>embedded
+                    model</strong>, as it will be the most restrictive option. This will give you less options but
+                    puts
+                    you on the safe side.
+                  </i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h3>Intellectual Property Aspects</h3>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-12">{{> afQuickField name='IP_protect' disabled=true}}</div>
+                    <div class="col-md-12 inner-b-20">
+                      <i>
+                        Some licenses come without explicit grants from all contributors, thus the license grants you
+                        a
+                        usage right but does not protect from additional claims from contributors. If you <strong>switch
+                        on</strong> this protection, it will flag corresponding licenses as violations
+                      </i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-12">{{> afQuickField name='IP_enforce' disabled=true}}</div>
+                    <div class="col-md-12 inner-b-20">
+                      <i>
+                        Some licenses will terminate their grants in case you are seeking to defend your rights in
+                        front
+                        of a court. If such a situation seems likely to you, e.g. customer overusing purchased sets
+                        but
+                        not willing to pay their bill, you might consider to <strong>activate</strong> Outbound
+                        protection. It will flag all licenses terminating when seeking to defend your rights as
+                        violations.
+                      </i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/ autoForm}}
+      {{/if}}
+    </div>
+  </div>
+</template>
+
+<template name="questionnaireStepOne">
+  {{# autoForm  id="questionnaire-step-one-form" type="normal"
+                docId=this._id
+                collection=getModules
+                doc=step.data
+                schema=step.schema
+  }}
+    <div class="row">
+      <div class="col-md-12">{{> afQuickField name='CA' }}</div>
+      <div class="col-md-12 inner-b-20">
+        <i>
+          If you are not sure, which one to choose, select <strong>usage fee</strong>. This will be the most
+          restrictive, but you may be sure to be on the safe side.
+        </i>
+      </div>
+    </div>
+    {{> questionnaireButtons}}
+  {{/ autoForm}}
+</template>
+<template name="questionnaireStepTwo">
+  {{# autoForm id="questionnaire-step-two-form" type="normal"
+               docId=this._id
+               collection=getModules
+               doc=step.data
+               schema=step.schema
+  }}
+    <div class="row">
+      <div class="col-md-12">{{> afQuickField name='OM' }}</div>
+      <div class="col-md-12 inner-b-20">
+        <i>
+          If you are not sure, which model to choose, we recommend to select the <strong>embedded model</strong>, as it
+          will be the most restrictive option. This will give you less options but puts you on the safe side.
+        </i>
+      </div>
+    </div>
+    {{> questionnaireButtons}}
+  {{/ autoForm}}
+</template>
+<template name="questionnaireStepThree">
+  {{# autoForm id="questionnaire-step-three-form" type="normal"
+               docId=this._id
+               collection=getModules
+               doc=step.data
+               schema=step.schema
+  }}
+    <div class="row">
+      <div class="col-md-12">{{> afQuickField name='IP_protect' }}</div>
+      <div class="col-md-12 inner-b-20">
+        <i>
+          Some licenses come without explicit grants from all contributors, thus the license grants you a usage right
+          but does not protect from additional claims from contributors. If you <strong>switch on</strong> this
+          protection, it will flag corresponding licenses as violations
+        </i>
+      </div>
+      <div class="col-md-12">{{> afQuickField name='IP_enforce' }}</div>
+      <div class="col-md-12 inner-b-20">
+        <i>
+          Some licenses will terminate their grants in case you are seeking to defend your rights in front of a court.
+          If such a situation seems likely to you, e.g. customer overusing purchased sets but not willing to pay their
+          bill, you might consider to <strong>activate</strong> Outbound protection. It will flag all licenses
+          terminating when seeking to defend your rights as violations.
+        </i>
+      </div>
+    </div>
+    {{> questionnaireButtons}}
+  {{/ autoForm}}
+</template>
+

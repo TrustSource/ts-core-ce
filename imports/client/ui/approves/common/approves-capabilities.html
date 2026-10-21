@@ -1,0 +1,13 @@
+<template name="approvesCapabilities">
+  {{#if getCapabilities}}
+    <div class="ts-panel obligation-list">
+      <div class="panel-body">
+        <div class="clearfix">
+          {{> reactiveTable settings=reactiveTableSettings}}
+        </div>
+      </div>
+    </div>
+  {{else}}
+    {{> reactiveTableNoData}}
+  {{/if}}
+</template>

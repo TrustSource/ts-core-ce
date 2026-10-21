@@ -1,0 +1,54 @@
+<template name="noticeFileDetailsBinary">
+    <a class="btn btn-primary {{size}}" data-toggle="modal" data-target="#binaryLinks" title="Manage binary links">
+      <span class="fa fa-link" aria-hidden="true"></span> Manage binary links</a>
+
+    <!-- Modal: binaryLinks -->
+    <div class="modal fade" id="binaryLinks" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="ts-accent-line"></div>
+          <div class="modal-header text-center">
+            <i class="fa fa-link ts-big-icon text-success"></i>
+            <br/>
+            <h4 class="modal-title">Binary links</h4>
+            <br/>
+          </div>
+          <div class="modal-body">
+           {{#unless approved}}
+              <form id="addBinaryLinkForm">
+                <div class="row inner-b-10">
+                  <div class="col-md-6">
+                    <label for="binaryName">Link</label>
+                    <input type="text" id="binaryName" name="binaryName" class="form-control"
+                           placeholder="Add binary link">
+                  </div>
+                  <div class="col-md-4">
+                    <label for="binaryComment">Comment</label>
+                    <textarea id="binaryComment" name="binaryComment" class="form-control"
+                              placeholder="Enter publishing comment" rows="1"></textarea>
+                  </div>
+                  <div class="col-md-2 text-right">
+                    <label for="">&nbsp;</label>
+                    <div>
+                      <button type="submit" class="btn btn-primary">Add link</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <hr>
+            {{/unless}}
+            {{> reactiveTable settings=reactiveTableSettings}}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</template>
+
+<template name="reactiveTableNoticeBinaryActions">
+  {{#unless isApproved}}
+    <button class="btn btn-danger2 btn-sm remove-link">Remove</button>
+  {{/unless}}
+</template>

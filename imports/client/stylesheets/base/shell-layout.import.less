@@ -1,0 +1,261 @@
+// Application shell: header bar, left sidebar, right icon bar and the
+// rounded, scrollable content area between them.
+
+// Shell geometry (sidebar width: @ts-sidebar-width in base/tokens.import.less)
+@right-bar-width: 48px;
+@header-height: 62px;
+@content-gap: 8px;
+@content-radius: 10px;
+@ts-shell-slide: 0.4s ease 0s;
+@ts-shell-mobile: ~"(max-width: 768px)";
+
+// Shell surfaces
+@shell-bg: @color-white;
+@content-bg: @ts-canvas;
+@ts-font-stack: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+// Thin, low-contrast scrollbars for the sidebar and content panes
+@scrollbar-size: 6px;
+@scrollbar-track: transparent;
+@scrollbar-thumb: fade(@color-black, 15%);
+@scrollbar-thumb-hover: fade(@color-black, 25%);
+
+.styled-scrollbar() {
+  scrollbar-width: thin;
+  scrollbar-color: @scrollbar-thumb @scrollbar-track;
+
+  &::-webkit-scrollbar {
+    width: @scrollbar-size;
+    height: @scrollbar-size;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: @scrollbar-track;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: @scrollbar-thumb;
+
+    &:hover {
+      background: @scrollbar-thumb-hover;
+    }
+  }
+}
+
+// The document itself never scrolls; the content area does
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+  color: @ts-text;
+  background-color: @shell-bg;
+  font-family: @ts-font-stack;
+  font-size: 13px;
+}
+
+// Top bar
+#header {
+  position: relative;
+  display: block;
+  height: @header-height;
+  margin: 0;
+  padding: 0;
+  background-color: @shell-bg;
+}
+
+// Left sidebar: scrollable menu above a fixed footer
+#menu {
+  position: absolute;
+  top: @header-height;
+  bottom: 0;
+  left: 0;
+  float: left;
+  display: flex;
+  flex-direction: column;
+  width: @ts-sidebar-width;
+  background: @shell-bg;
+  transition: all @ts-shell-slide;
+}
+
+#navigation {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+#side-menu {
+  flex: 1;
+  padding-top: 4px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  .styled-scrollbar();
+}
+
+.nav-footer {
+  padding: 10px 12px;
+  text-align: center;
+  border-top: 1px solid @ts-border;
+
+  small {
+    display: block;
+    color: #999;
+    font-size: 10px;
+    line-height: 1.5;
+
+    strong {
+      color: #777;
+      font-weight: 600;
+    }
+  }
+}
+
+// Main column between the two sidebars
+#wrapper {
+  position: absolute;
+  top: @header-height;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 0 @right-bar-width 0 @ts-sidebar-width;
+  padding: @content-gap;
+  overflow: hidden;
+  background: @shell-bg;
+  transition: margin @ts-shell-slide;
+
+  @media @ts-shell-mobile {
+    margin-right: 0;
+    padding-bottom: 70px;
+  }
+}
+
+.content-area {
+  position: relative;
+  height: 100%;
+  padding-top: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: @content-bg;
+  border-radius: @content-radius;
+  .styled-scrollbar();
+}
+
+.content {
+  min-width: 320px;
+  padding: 10px;
+
+  @media @ts-shell-mobile {
+    padding: 15px;
+  }
+}
+
+// Brand stripe above the auth pages
+.ts-accent-line {
+  height: 6px;
+  background: @ts-surface linear-gradient(to right, @ts-navy, @ts-navy 25%, @ts-slate 25%, @ts-slate 35%, @ts-blue 35%, @ts-blue 45%, @ts-teal 45%, @ts-teal 55%, @ts-amber 55%, @ts-amber 65%, @ts-orange 65%, @ts-orange 75%, @ts-red 85%, @ts-red 85%, @ts-red-dark 85%, @ts-red-dark 100%) no-repeat ~"50% 100% / 100% 6px";
+}
+
+// Pinned shell (body classes set by the layout templates)
+.fixed-navbar {
+  #header {
+    position: fixed;
+    z-index: @z-header-fixed;
+    width: 100%;
+  }
+
+  #right-bar {
+    position: fixed;
+    top: @header-height;
+  }
+}
+
+.fixed-sidebar {
+  #menu {
+    position: fixed;
+    z-index: @z-sidebar-fixed;
+    width: @ts-sidebar-width;
+    overflow-x: hidden;
+    overflow-y: auto;
+    .styled-scrollbar();
+  }
+
+  &.show-sidebar #menu {
+    width: @ts-sidebar-width;
+  }
+}
+
+// Right icon bar (help, docs, messages, logout)
+#right-bar {
+  position: absolute;
+  top: @header-height;
+  right: 0;
+  bottom: 0;
+  z-index: @z-right-bar;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: @right-bar-width;
+  background: @shell-bg;
+
+  @media @ts-shell-mobile {
+    display: none;
+  }
+}
+
+.right-bar-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 8px 0;
+  list-style: none;
+
+  .notification-dot {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: @ts-red;
+  }
+}
+
+.right-bar-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  color: #777;
+  font-size: 22px;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+
+  &:hover,
+  &:focus {
+    color: @ts-navy;
+    background: fade(@ts-navy, 6%);
+    text-decoration: none;
+  }
+}
+
+.right-bar-nav .active .right-bar-link,
+.right-bar-nav li.active .right-bar-link {
+  color: @ts-navy;
+  background: fade(@ts-navy, 8%);
+}
+
+.right-bar-spacer {
+  flex: 1;
+}

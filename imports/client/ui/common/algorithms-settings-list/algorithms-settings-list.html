@@ -1,0 +1,100 @@
+<template name="algorithmsSettingsList">
+  {{#if foundAlgorithms}}
+    <div class="ts-panel {{#if collapsed}}panel-collapse{{/if}}">
+      <div class="panel-heading">
+        {{> panelTools }}
+        List of Algorithms as detected
+      </div>
+
+      <div class="panel-body {{#if collapsed}}collapsed{{/if}}" style="{{#if collapsed}}display:none{{/if}}">
+        {{#if foundAlgorithms}}
+          {{#each uniqueFoundAlgorithms}}
+            <span class="label label-default inner-b-5 inline-block">{{#if isDenied}}<div class="label label-danger blacklisted-algorithm-label" title="Algorithm is Blacklisted by Company policy">B</div>{{/if}} {{algorithm}}{{#if strengthLabel}} [{{strengthLabel}}]{{/if}}</span>
+          {{/each}}
+        {{/if}}
+      </div>
+    </div>
+  {{else}}
+    <div class="ts-panel {{#if collapsed}}panel-collapse{{/if}}">
+      <div class="panel-heading">
+        {{> panelTools }}
+        List of Algorithms as detected
+      </div>
+
+      <div class="panel-body {{#if collapsed}}collapsed{{/if}}" style="{{#if collapsed}}display:none{{/if}}">
+        <p>
+          No crypto algorithms or components containing crypto algorithms identified
+        </p>
+      </div>
+    </div>
+  {{/if}}
+  <div class="ts-panel {{#if collapsed}}panel-collapse{{/if}}">
+    <div class="panel-heading">
+      {{> panelTools }}
+      {{title}}
+    </div>
+
+    <div class="panel-body {{#if collapsed}}collapsed{{/if}}" style="{{#if collapsed}}display:none{{/if}}">
+      {{#if isInRole 'compliance_manager,manager' companyId}}
+        <div class="pull-left">
+          <a class="btn btn-primary add-algorithm" data-toggle="modal" data-target="#AlgorithmsSettingsAddModal" title="{{__ 'AddAlgorithm'}}">
+            <span class="fa fa-plus" aria-hidden="true"></span>
+            {{__ 'AddAlgorithm'}}
+          </a>
+          {{> AlgorithmsSettingsAddModal}}
+          <div class="inline-block relative">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              <span class="fa fa-file-code-o" aria-hidden="true"></span> Export as CycloneDX <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="export-as-cyclonedx-cbom" id="CBOM">CBOM</a></li>
+              <li><a class="export-as-cyclonedx-full" id="FULL">Full BOM (components + crypto + AI)</a></li>
+            </ul>
+          </div>
+        </div>
+      {{/if}}
+      {{#if this.data}}
+        <form autocomplete="off">
+          {{> reactiveTable settings=reactiveTableSettings}}
+        </form>
+      {{/if}}
+    </div>
+  </div>
+</template>
+
+<template name="reactiveTableAlgorithmsSettingsCheck">
+  {{#if getCheck}}
+    <div class="icheckbox_square-green checked cursor-default"></div>
+  {{else}}
+    <div class="icheckbox_square-green cursor-default"></div>
+  {{/if}}
+</template>
+
+<template name="reactiveTableAlgorithmsSettingsActions">
+  <div class="text-right">
+    {{#if isFromModule}}
+      <a href="{{pathFor route='moduleSettings' data=getModuleOptions}}"
+         target="_blank" class="label label-info pull-right">in Module</a>
+    {{else}}
+      {{#if isFromProject}}
+        <a href="{{pathFor route='projectSettings' data=getProjectOptions}}" target="_blank"
+           class="label label-info pull-right">in Project</a>
+      {{else}}
+        {{#if hasAccessRight 'module.encryption' 'w' currentModule}}
+          <button type="button" class="btn btn-default btn-xs edit-algorithm" title="{{__ 'Edit'}}">
+            <i class="fa fa-pencil"></i>
+          </button>
+          <button type="button" class="btn btn-danger btn-xs remove-algorithm">
+            <i class="fa fa-trash-can"></i>
+          </button>
+        {{/if}}
+      {{/if}}
+    {{/if}}
+  </div>
+</template>
+
+<template name="reactiveTableAlgorithmsBlacklistedStatus">
+  {{#if isDenied}}
+    <div class="label label-danger blacklisted-algorithm-label" title="Algorithm is Blacklisted by Company policy">B</div>
+  {{/if}}
+</template>

@@ -1,0 +1,25 @@
+<template name="companyLogs">
+  {{#pageHeader}}
+    <div class="settings-header">
+      <div class="settings-header-left">
+        <h2 class="font-light m-b-xs">Audit logs</h2>
+        <small>All logs of company</small>
+      </div>
+      <div class="settings-header-actions">
+        <a href="{{pathFor route='loginsHistory'}}" class="btn btn-default">
+          Logins history
+        </a>
+        <button type="button" class="btn btn-default export-csv"><span class="fa fa-download"></span> Export as CSV</button>
+        <button type="button" class="btn btn-default copy-information" data-clipboard-text="{{getCopyText}}"><span class="fa fa-copy"></span> Copy to clipboard</button>
+      </div>
+    </div>
+  {{/pageHeader}}
+  <div class="content logs-content">
+    <div class="panel">
+      <div class="panel-body">
+        {{> reactiveTableServerSide filters=filters sortings=sortings fields=fields method=method options=options}}
+      </div>
+    </div>
+  </div>
+</template>
+
