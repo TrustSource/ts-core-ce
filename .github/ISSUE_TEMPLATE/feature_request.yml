@@ -1,0 +1,30 @@
+name: Feature request
+description: Suggest a feature or a change.
+labels: ["feature"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Features are planned in quarterly sprints, see ROADMAP.md. Requests are reviewed every sprint.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem do you want to solve?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would you like to see?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: What do you do today instead?
+  - type: checkboxes
+    id: pr
+    attributes:
+      label: Pull request
+      options:
+        - label: I would like to build this myself.
