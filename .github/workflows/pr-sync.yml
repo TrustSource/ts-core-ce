@@ -1,0 +1,81 @@
+name: Sync and Raise PR
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 1-7 3,6,9,12 0'  # First Sunday of March, June, Sept, Dec
+
+jobs:
+  sync_and_raise_PR:
+    # This workflow is synced to the destination repo too; only run it from the source repo
+    if: github.repository == 'eacg-gmbh/ts-core-ce'
+    runs-on: ubuntu-latest
+    env:
+      PRIVATE_REPO: eacg-gmbh/ts-core-ce
+      DEST_REPO: TrustSource/ts-core-ce
+      DEST_BRANCH: main
+    steps:
+      - name: Checkout main Branch from Source Repo
+        uses: actions/checkout@v5
+        with:
+          ref: main
+          path: source-repo
+
+      - name: Clone Destination Repo
+        run: |
+          git clone https://x-access-token:${{ secrets.FFFFRA_PAT }}@github.com/${{ env.DEST_REPO }} dest-repo
+          git -C dest-repo fetch --tags --force
+
+      - name: Generate Unique Branch Name
+        id: gen_branch
+        env:
+          GH_TOKEN: ${{ secrets.FFFFRA_PAT }}
+        run: |
+          gh auth setup-git
+          gh api repos/${DEST_REPO}/branches --paginate --jq '.[].name' > "$RUNNER_TEMP/public-branches.txt"
+          grep -qx main "$RUNNER_TEMP/public-branches.txt" || { echo "Could not list public branches" >&2; exit 1; }
+          VERSION=$(node source-repo/tools/sync/backsync.js branch-name "$(jq -r '.version' source-repo/package.json)" "$RUNNER_TEMP/public-branches.txt")
+          if git -C dest-repo rev-parse -q --verify "refs/tags/$VERSION" > /dev/null; then
+            echo "Tag $VERSION already exists in the public repo: bump package.json first" >&2
+            exit 1
+          fi
+          echo "branch_name=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Check back-sync
+        env:
+          GH_TOKEN: ${{ secrets.FFFFRA_PAT }}
+        run: |
+          OPEN=$(gh pr list -R "$PRIVATE_REPO" --head back-sync --state open --json number -q 'length')
+          if [ "$OPEN" != "0" ]; then
+            echo "A back-sync PR is open: merge it first" >&2
+            exit 1
+          fi
+          MERGED=$(gh pr list -R "$PRIVATE_REPO" --head back-sync --state merged --limit 1 --json body -q '.[0].body // ""')
+          MERGED_HEAD=$(BODY="$MERGED" node -e "const {parsePublicHead} = require('./source-repo/tools/sync/backsync.js'); const h = parsePublicHead(process.env.BODY); if (h) process.stdout.write(h);")
+          ARGS=()
+          if [ -n "$MERGED_HEAD" ]; then ARGS+=(--merged-head "$MERGED_HEAD"); fi
+          node source-repo/tools/sync/backsync.js guard dest-repo "${ARGS[@]}"
+
+      - name: Sync and Commit
+        run: |
+          cd dest-repo
+          git checkout ${{ env.DEST_BRANCH }}
+          git checkout -b ${{ steps.gen_branch.outputs.branch_name }}
+          rsync -av --delete --exclude='.git' ../source-repo/ ./
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git add .
+          git commit -m "Automated sync for ${{ steps.gen_branch.outputs.branch_name }}" || \
+          git commit --allow-empty -m "Forced sync for ${{ steps.gen_branch.outputs.branch_name }}"
+          git push origin ${{ steps.gen_branch.outputs.branch_name }}
+
+      - name: Create Pull Request
+        env:
+          GH_TOKEN: ${{ secrets.FFFFRA_PAT }}
+        run: |
+          gh pr create \
+            -R ${{ env.DEST_REPO }} \
+            -B ${{ env.DEST_BRANCH }} \
+            -H ${{ steps.gen_branch.outputs.branch_name }} \
+            --title "Automated Sync: ${{ steps.gen_branch.outputs.branch_name }} → ${{ env.DEST_BRANCH }}" \
+            --body "Automated PR created by GitHub Actions."

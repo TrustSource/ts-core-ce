@@ -1,0 +1,36 @@
+name: Scan and upload to trustsource.io
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  scan:
+    # This workflow is synced to the public repo too; only run it from the private repo
+    if: github.repository == 'eacg-gmbh/ts-core-ce'
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        include:
+          - node-version: 24.x
+
+    steps:
+      - uses: actions/checkout@v5
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v5
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: 'https://registry.npmjs.org'
+      - name: Install dependencies
+        run: yarn
+      - name: Get version
+        id: get_version
+        run: |
+          echo VERSION=$(jq -r '.version' package.json) >> $GITHUB_OUTPUT
+      - name: Scan dependencies
+        env:
+          VERSION: ${{ steps.get_version.outputs.VERSION }}
+          TS_TOKEN: ${{ secrets.TS_TOKEN }}
+        run: npx ts-node-client --branch main --tag "$VERSION" --project "TrustSource CE" --url https://api.trustsource.io/ --apiKey "$TS_TOKEN"

@@ -2,7 +2,7 @@
 FROM ubuntu:24.04
 
 # Default Meteor version if not defined at build time; see ../build.sh
-ARG METEOR_VERSION=3.5.2
+ARG METEOR_VERSION=3.5.4
 
 ENV SCRIPTS_FOLDER=/docker
 ENV APP_SOURCE_FOLDER=/opt/src
