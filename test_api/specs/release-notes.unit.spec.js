@@ -8,7 +8,7 @@ const {RELEASE_NOTES, UPDATE_CHECK_URL, releaseNotesToInsert, currentVersion, up
 
 describe('RELEASE_NOTES', () => {
   it('starts with 1.0, the initial release', () => {
-    expect(RELEASE_NOTES.map((n) => n.version)).toEqual(['1.0', '1.0.1', '1.0.2', '1.0.3', '1.0.4']);
+    expect(RELEASE_NOTES.map((n) => n.version)).toEqual(['1.0', '1.0.1', '1.0.2', '1.0.3', '1.0.4', '1.0.5']);
     expect(RELEASE_NOTES[0].listNew).toEqual([{description: 'Initial release'}]);
   });
 
@@ -125,8 +125,38 @@ describe('1.0.4 release note', () => {
     });
   });
 
+  it('is published before 1.0.5', () => {
+    const next = RELEASE_NOTES.find((n) => n.version === '1.0.5');
+    expect(new Date(note.published) < new Date(next.published)).toBe(true);
+  });
+});
+
+describe('1.0.5 release note', () => {
+  const note = RELEASE_NOTES.find((n) => n.version === '1.0.5');
+  const texts = (list) => ((note && note[list]) || []).map((item) => item.description);
+  const readVersion = (file) => JSON.parse(fs.readFileSync(path.join(__dirname, '../..', file), 'utf8')).version;
+
+  it('exists with its own fixed id, published after 1.0.4', () => {
+    expect(note).toBeDefined();
+    expect(note._id).toBe('ce-release-1-0-5');
+    const previous = RELEASE_NOTES.find((n) => n.version === '1.0.4');
+    expect(new Date(note.published) > new Date(previous.published)).toBe(true);
+  });
+
+  it('is a single dependency security fix', () => {
+    expect(texts('listFix')).toEqual(['Update dependencies to fix security advisories in follow-redirects, qs and minimatch']);
+    expect(texts('listNew')).toEqual([]);
+    expect(texts('listImprovement')).toEqual([]);
+  });
+
+  it('uses no em-dash or en-dash', () => {
+    ['listNew', 'listImprovement', 'listFix'].forEach((list) => {
+      texts(list).forEach((t) => expect(t).not.toMatch(/[\u2013\u2014]/));
+    });
+  });
+
   it('matches the app and workers package versions', () => {
-    expect(readVersion('package.json')).toBe('1.0.4');
+    expect(readVersion('package.json')).toBe('1.0.5');
     expect(readVersion('workers/package.json')).toBe(readVersion('package.json'));
     expect(currentVersion()).toBe(readVersion('package.json'));
   });
@@ -162,7 +192,7 @@ describe('releaseNotesToInsert', () => {
 
 describe('currentVersion', () => {
   it('is the version of the most recently published release note', () => {
-    expect(currentVersion()).toBe('1.0.4');
+    expect(currentVersion()).toBe('1.0.5');
   });
 });
 

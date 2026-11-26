@@ -1,6 +1,6 @@
 {
   "name": "trustsource-ce",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "TrustSource Community Edition",
   "directories": {
     "test": "tests"
@@ -55,7 +55,7 @@
     "@eslint/js": "10.0.1",
     "@microsoft/eslint-formatter-sarif": "3.1.0",
     "chai": "4.5.0",
-    "eslint": "10.1.0",
+    "eslint": "10.15.0",
     "eslint-plugin-meteor": "7.3.0",
     "eslint-plugin-sonarjs": "4.0.2",
     "globals": "17.4.0",
@@ -89,7 +89,7 @@
   },
   "resolutions": {
     "underscore": "1.13.8",
-    "qs": "6.16.0",
+    "qs": "6.16.1",
     "tough-cookie": "5.1.2",
     "form-data": "4.0.6",
     "nanoid": "5.1.16",
@@ -99,7 +99,14 @@
     "js-yaml": "4.3.2",
     "@babel/core": "7.29.7",
     "moment": "2.31.0",
-    "pbkdf2": "3.1.7"
+    "pbkdf2": "3.1.7",
+    "follow-redirects": "1.16.3",
+    "**/@jest/reporters/glob/minimatch": "11.0.9",
+    "**/jest-config/glob/minimatch": "11.0.9",
+    "**/jest-runtime/glob/minimatch": "11.0.9",
+    "**/test-exclude/glob/minimatch": "11.0.9",
+    "**/test-exclude/minimatch": "11.0.9",
+    "**/eslint-plugin-sonarjs/minimatch": "11.0.9"
   },
   "author": "EACG GmbH",
   "license": "AGPL-3.0-only",
