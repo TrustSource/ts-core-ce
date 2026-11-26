@@ -1,0 +1,161 @@
+name: Back-sync
+
+on:
+  workflow_dispatch:
+    inputs:
+      skip:
+        description: 'Public commits already ported to private by hand (comma-separated full shas)'
+        type: string
+        required: false
+  schedule:
+    - cron: '0 3 * * *'  # Daily
+
+concurrency: back-sync
+
+permissions:
+  contents: read
+
+jobs:
+  back-sync:
+    # This workflow is synced to the public repo too; only run it from the private repo
+    if: github.repository == 'eacg-gmbh/ts-core-ce'
+    runs-on: ubuntu-latest
+    # Everything on the private repo uses github.token: its pushes and PRs start no workflows,
+    # so no public code runs in private before review. FFFFRA_PAT only clones the public repo
+    # and pushes its backsync-base tag (through the clone's remote).
+    permissions:
+      contents: write
+      pull-requests: write
+    env:
+      PRIVATE_REPO: eacg-gmbh/ts-core-ce
+      PUBLIC_REPO: TrustSource/ts-core-ce
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Checkout main Branch from Private Repo
+        uses: actions/checkout@v5
+        with:
+          ref: main
+          fetch-depth: 0
+          path: private-repo
+
+      - name: Clone Public Repo
+        env:
+          PUBLIC_TOKEN: ${{ secrets.FFFFRA_PAT }}
+        run: |
+          git clone "https://x-access-token:${PUBLIC_TOKEN}@github.com/${PUBLIC_REPO}" public-repo
+          git -C public-repo fetch --tags --force
+
+      - name: Find the Last Merged Back-sync
+        id: merged
+        run: |
+          MERGED=$(gh pr list -R "$PRIVATE_REPO" --head back-sync --state merged --limit 1 --json body -q '.[0].body // ""')
+          MERGED_HEAD=$(BODY="$MERGED" node -e "const {parsePublicHead} = require('./private-repo/tools/sync/backsync.js'); const h = parsePublicHead(process.env.BODY); if (h) process.stdout.write(h);")
+          echo "merged_head=$MERGED_HEAD" >> "$GITHUB_OUTPUT"
+          echo "Last merged back-sync head: ${MERGED_HEAD:-none}"
+
+      - name: List Pending Public Commits
+        id: pending
+        env:
+          MERGED_HEAD: ${{ steps.merged.outputs.merged_head }}
+        run: |
+          # Skipped shas are not excluded here: count must still include skipped shas so apply runs and closes the PR
+          ARGS=()
+          if [ -n "$MERGED_HEAD" ]; then ARGS+=(--merged-head "$MERGED_HEAD"); fi
+          node private-repo/tools/sync/backsync.js pending public-repo "${ARGS[@]}" > "$RUNNER_TEMP/pending.json"
+          cat "$RUNNER_TEMP/pending.json"
+          # Left out by their sync subject or bot commits: listed so a spoofed sync is visible
+          jq -r '.forwardSync[] | "- Treated as forward sync, not back-synced: \(.sha) `\(.subject | gsub("`"; ""))`"' "$RUNNER_TEMP/pending.json" >> "$GITHUB_STEP_SUMMARY"
+          echo "base=$(jq -r '.base' "$RUNNER_TEMP/pending.json")" >> "$GITHUB_OUTPUT"
+          echo "head=$(jq -r '.head' "$RUNNER_TEMP/pending.json")" >> "$GITHUB_OUTPUT"
+          echo "count=$(jq -r '.pending | length' "$RUNNER_TEMP/pending.json")" >> "$GITHUB_OUTPUT"
+
+      - name: Move the backsync-base Marker
+        id: marker
+        env:
+          BASE: ${{ steps.pending.outputs.base }}
+          HEAD_SHA: ${{ steps.pending.outputs.head }}
+          COUNT: ${{ steps.pending.outputs.count }}
+        run: |
+          cd public-repo
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          TARGET="$BASE"
+          if [ "$COUNT" = "0" ]; then
+            # Nothing left to bring back, so an open back-sync PR is stale
+            OPEN=$(gh pr list -R "$PRIVATE_REPO" --head back-sync --state open --json number -q 'length')
+            if [ "$OPEN" != "0" ]; then
+              gh pr close back-sync -R "$PRIVATE_REPO" --comment "No public commits are pending: this back-sync PR is stale"
+            fi
+            TARGET="$HEAD_SHA"
+          fi
+          CURRENT=$(git rev-parse --verify "refs/tags/backsync-base^{commit}")
+          if [ "$TARGET" != "$CURRENT" ]; then
+            git tag -f backsync-base "$TARGET"
+            git push -f origin refs/tags/backsync-base
+          fi
+          if [ "$COUNT" = "0" ]; then
+            echo "No pending public commits"
+            echo "done=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Apply Pending Commits
+        id: apply
+        if: steps.marker.outputs.done != 'true'
+        env:
+          MERGED_HEAD: ${{ steps.merged.outputs.merged_head }}
+          SKIP: ${{ inputs.skip }}
+        run: |
+          cd private-repo
+          git checkout -B back-sync origin/main
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          ARGS=()
+          if [ -n "$MERGED_HEAD" ]; then ARGS+=(--merged-head "$MERGED_HEAD"); fi
+          if [ -n "$SKIP" ]; then ARGS+=(--skip "$SKIP"); fi
+          set +e
+          node tools/sync/backsync.js apply ../public-repo . "${ARGS[@]}" > "$RUNNER_TEMP/apply.json"
+          APPLY_EXIT=$?
+          set -e
+          cat "$RUNNER_TEMP/apply.json"
+          # An unexpected error leaves no valid JSON: stop before any push or PR change
+          if ! jq -e '(.body | type) == "string"' "$RUNNER_TEMP/apply.json" > /dev/null; then
+            echo "apply produced no valid result (exit $APPLY_EXIT)"
+            exit 1
+          fi
+          echo "exit=$APPLY_EXIT" >> "$GITHUB_OUTPUT"
+          jq -r '.unusedSkip[] | "- Skip sha not pending, ignored: \(.)"' "$RUNNER_TEMP/apply.json" >> "$GITHUB_STEP_SUMMARY"
+          jq -r '.failed[] as $s | "- Failed: \($s) (\(.reasons[$s]))"' "$RUNNER_TEMP/apply.json" >> "$GITHUB_STEP_SUMMARY"
+          if jq -e '(.applied | length) == 0 and (.failed | length) > 0' "$RUNNER_TEMP/apply.json" > /dev/null; then
+            # Nothing applied: leave the back-sync branch and the PR as they are
+            echo "No public commit could be applied, see the step summary"
+            exit 1
+          fi
+          if jq -e '(.applied | length) == 0 and (.failed | length) == 0' "$RUNNER_TEMP/apply.json" > /dev/null; then
+            # Every pending commit was skipped: nothing to propose
+            echo "All pending public commits are already in private"
+            OPEN=$(gh pr list -R "$PRIVATE_REPO" --head back-sync --state open --json number -q 'length')
+            if [ "$OPEN" != "0" ]; then
+              gh pr close back-sync -R "$PRIVATE_REPO" --comment "All public commits are already in private"
+            fi
+            cd ../public-repo
+            git tag -f backsync-base "$(jq -r '.head' "$RUNNER_TEMP/apply.json")"
+            git push -f origin refs/tags/backsync-base
+            echo "empty=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          jq -er '.body' "$RUNNER_TEMP/apply.json" > "$RUNNER_TEMP/body.md"
+          git push -f origin back-sync
+
+      - name: Create or Update the Pull Request
+        if: steps.marker.outputs.done != 'true' && steps.apply.outputs.empty != 'true'
+        run: |
+          OPEN=$(gh pr list -R "$PRIVATE_REPO" --head back-sync --state open --json number -q 'length')
+          if [ "$OPEN" != "0" ]; then
+            gh pr edit back-sync -R "$PRIVATE_REPO" --body-file "$RUNNER_TEMP/body.md"
+          else
+            gh pr create -R "$PRIVATE_REPO" -B main -H back-sync --title "Back-sync from public" --body-file "$RUNNER_TEMP/body.md"
+          fi
+
+      - name: Fail When a Patch Did Not Apply
+        if: steps.marker.outputs.done != 'true' && steps.apply.outputs.exit != '0'
+        run: exit "${{ steps.apply.outputs.exit }}"

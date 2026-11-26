@@ -44,7 +44,8 @@ describe('no hosted-service address in documents, reports or UI', () => {
   ];
 
   it.each(FILES)('%s', (file) => {
-    const src = read(file);
+    // The Community Edition online help is the one allowed link to trustsource.io.
+    const src = read(file).replace("helpUrl: 'https://help.trustsource.io/ce/'", '');
     expect(src).not.toMatch(/trustsource\.io/);
     expect(src).not.toMatch(/Product and Service Security|TrustSource-CSAF|ECS 1\.1\.0|Organization: 'EACG'/);
   });

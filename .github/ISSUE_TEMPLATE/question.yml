@@ -1,0 +1,27 @@
+name: Question
+description: Ask how something works.
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please look at the CE documentation first: https://help.trustsource.io/ce/
+
+        Issues are public. Before you post logs or screenshots, remove secrets and personal
+        data: passwords, API keys, `TS_ENCRYPTION_KEY`, the contents of `.env`, email
+        addresses, and names of projects and components that are confidential.
+  - type: input
+    id: version
+    attributes:
+      label: TrustSource CE version
+      description: Shown at the bottom of the left sidebar.
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+    validations:
+      required: true
+  - type: textarea
+    id: tried
+    attributes:
+      label: What have you tried?

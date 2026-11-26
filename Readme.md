@@ -188,18 +188,27 @@ which is a shortcut for
 meteor build --server-only --architecture os.linux.x86_64 --directory ../build
 ```
 
+# Versions
+
+The major number counts years (2026 = 1, 2027 = 2, 2028 = 3). The minor number counts
+sprints within the year, starting at 0. The patch number counts fixes between sprints. A
+new major does not by itself mean breaking changes: they are called out in the release
+notes, which the Updates page shows. See the [roadmap](ROADMAP.md) for what is planned.
+
+# Support
+
+Support is best effort and runs through GitHub issues: see [SUPPORT.md](SUPPORT.md). Planned
+features are in [ROADMAP.md](ROADMAP.md).
+
 # Contributing
 
-Issues and pull requests are welcome at https://github.com/TrustSource/ts-core-ce.
-Before opening a pull request, run `yarn lint`, the unit specs
-(`npx jest --testPathPatterns 'test_api/specs/.*unit\.spec\.js$'`) and `yarn test:workers`.
-By contributing you agree that your contribution is licensed under the AGPL-3.0.
+Issues and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the
+checks to run before you open a pull request. By contributing you agree that your
+contribution is licensed under the AGPL-3.0.
 
 # Security
 
-Please do not report security issues in public issues. Use GitHub's private
-vulnerability reporting on https://github.com/TrustSource/ts-core-ce
-(Security > Report a vulnerability).
+Please do not report security issues in public issues. See [SECURITY.md](SECURITY.md).
 
 # License
 

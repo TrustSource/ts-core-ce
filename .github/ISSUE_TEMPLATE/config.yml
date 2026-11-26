@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: CE documentation
+    url: https://help.trustsource.io/ce/
+    about: The manual, with a troubleshooting section.

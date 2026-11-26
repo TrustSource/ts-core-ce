@@ -1,6 +1,6 @@
 {
   "name": "trustsource-ce",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "TrustSource Community Edition",
   "directories": {
     "test": "tests"

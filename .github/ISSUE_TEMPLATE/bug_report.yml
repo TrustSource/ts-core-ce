@@ -1,0 +1,64 @@
+name: Bug report
+description: Something does not work as described.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Issues are public. Before you post logs or screenshots, remove secrets and personal
+        data: passwords, API keys, `TS_ENCRYPTION_KEY`, the contents of `.env`, email
+        addresses, and names of projects and components that are confidential.
+
+        Security problems do not belong here. Use private vulnerability reporting, see SECURITY.md.
+  - type: input
+    id: version
+    attributes:
+      label: TrustSource CE version
+      description: Shown at the bottom of the left sidebar, for example 1.0.3.
+    validations:
+      required: true
+  - type: textarea
+    id: setup
+    attributes:
+      label: How you run it
+      description: The reference Docker Compose setup, your own Docker setup or from source. Add the host CPU architecture (amd64 or ARM) and whether a reverse proxy is in front.
+    validations:
+      required: true
+  - type: input
+    id: page
+    attributes:
+      label: Page or feature
+      description: Where the problem occurs.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. ...
+        2. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual result
+    validations:
+      required: true
+  - type: textarea
+    id: error
+    attributes:
+      label: Error message
+      description: As shown in the app (text or screenshot).
+  - type: textarea
+    id: logs
+    attributes:
+      label: Log lines
+      description: The relevant lines from `docker compose logs ts_core` (and `ts_legalcheck` for license check problems).
+      render: shell
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and OS
+      description: For problems in the user interface.
