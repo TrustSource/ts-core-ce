@@ -46,6 +46,12 @@ const RELEASE_NOTES = [
     version: '1.0.4',
     published: '2026-10-29T00:00:00.000Z',
     listImprovement: [{description: 'Update to Meteor 3.5.4'}]
+  },
+  {
+    _id: 'ce-release-1-0-5',
+    version: '1.0.5',
+    published: '2026-11-26T00:00:00.000Z',
+    listFix: [{description: 'Update dependencies to fix security advisories in follow-redirects, qs and minimatch'}]
   }
 ];
 
